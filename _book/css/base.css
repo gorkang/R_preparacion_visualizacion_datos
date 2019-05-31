@@ -1,0 +1,24 @@
+.ejercicio {
+   font-size: 1.2em;
+   color: darkgrey;
+   padding-left: 20px;
+   background-color: #d9edf7 !important;
+   border-color: #bce8f1 !important;
+}
+
+.bibliografia {
+   font-size: .9em;
+   color: black;
+   background-color: #fff5e6;
+   border-radius: 10px;
+   padding-top: 1px;
+   padding-bottom: 10px;
+   padding-left: 20px;
+   padding-right: 10px;
+}
+
+.badCode {
+color: red;
+background-color: #d9edf7;
+border-color: #bce8f1;
+}

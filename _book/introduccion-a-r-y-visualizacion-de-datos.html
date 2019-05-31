@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 1 Introducción a R y visualización de datos | R para preparación y visualización de datos</title>
+  <meta name="description" content="Capítulo 1 Introducción a R y visualización de datos | R para preparación y visualización de datos" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 1 Introducción a R y visualización de datos | R para preparación y visualización de datos" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 1 Introducción a R y visualización de datos | R para preparación y visualización de datos" />
+  
+  
+  
+
+<meta name="author" content="Gorka Navarrete, ORCID: 0000-0001-7678-8656" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="preparando-sistema.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/base.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introducción</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i>Objetivos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#como-empezar"><i class="fa fa-check"></i>Como empezar</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bibliografia"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html"><i class="fa fa-check"></i>Preparando nuestro sistema</a><ul>
+<li class="chapter" data-level="0.1" data-path="preparando-sistema.html"><a href="preparando-sistema.html#empezando-en-a-b-c"><i class="fa fa-check"></i><b>0.1</b> Empezando en A-B-C</a><ul>
+<li><a href="preparando-sistema.html#a-instalar-r"><strong>(A)</strong> Instalar R</a></li>
+<li><a href="preparando-sistema.html#b-instalar-rstudio"><strong>(B)</strong> Instalar RStudio</a></li>
+<li><a href="preparando-sistema.html#c-paquetes-para-el-workshop"><strong>(C)</strong> Paquetes para el workshop</a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="preparando-sistema.html"><a href="preparando-sistema.html#algo-mas-sobre-la-instalacion-de-paquetes"><i class="fa fa-check"></i><b>0.2</b> Algo más sobre la instalación de paquetes</a><ul>
+<li class="chapter" data-level="0.2.1" data-path="preparando-sistema.html"><a href="preparando-sistema.html#cargar-paquetes"><i class="fa fa-check"></i><b>0.2.1</b> Cargar paquetes</a></li>
+<li class="chapter" data-level="0.2.2" data-path="preparando-sistema.html"><a href="preparando-sistema.html#todo-en-uno"><i class="fa fa-check"></i><b>0.2.2</b> Todo en uno</a></li>
+<li class="chapter" data-level="0.2.3" data-path="preparando-sistema.html"><a href="preparando-sistema.html#instalar-paquetes-de-github"><i class="fa fa-check"></i><b>0.2.3</b> Instalar paquetes de Github</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#bibliografia-1"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html"><i class="fa fa-check"></i><b>1</b> Introducción a R y visualización de datos</a><ul>
+<li class="chapter" data-level="" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#paquetes-para-este-capitulo"><i class="fa fa-check"></i>Paquetes para este capítulo</a></li>
+<li class="chapter" data-level="1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#introduccion-1"><i class="fa fa-check"></i><b>1.1</b> Introducción</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#porque-la-visualizacion-de-datos-es-importante---ejemplo-del-mundo-real"><i class="fa fa-check"></i><b>1.1.1</b> Porque la visualización de datos es importante - ejemplo del mundo real</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#por-que-r"><i class="fa fa-check"></i><b>1.1.2</b> Por qué R?</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#bienvenida-al-tidyverse"><i class="fa fa-check"></i><b>1.1.3</b> Bienvenida al tidyverse</a><ul>
+<li class="chapter" data-level="1.1.3.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#tidyverse-vs-base-r"><i class="fa fa-check"></i><b>1.1.3.1</b> Tidyverse vs Base R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#visualizacion-de-datos"><i class="fa fa-check"></i><b>1.2</b> Visualización de datos</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#primeros-pasos---con-training-wheels"><i class="fa fa-check"></i><b>1.2.1</b> Primeros pasos - con training wheels</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#aprendamos-con-garrick"><i class="fa fa-check"></i><b>1.2.2</b> Aprendamos con Garrick</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#primeros-pasos"><i class="fa fa-check"></i><b>1.2.3</b> Primeros pasos</a></li>
+<li class="chapter" data-level="1.2.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#aesthetic-mappings"><i class="fa fa-check"></i><b>1.2.4</b> Aesthetic mappings</a><ul>
+<li class="chapter" data-level="1.2.4.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#color"><i class="fa fa-check"></i><b>1.2.4.1</b> Color</a></li>
+<li class="chapter" data-level="1.2.4.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#shape"><i class="fa fa-check"></i><b>1.2.4.2</b> Shape</a></li>
+<li class="chapter" data-level="1.2.4.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#linetype"><i class="fa fa-check"></i><b>1.2.4.3</b> Linetype</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.5" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geoms"><i class="fa fa-check"></i><b>1.2.5</b> Geoms</a><ul>
+<li class="chapter" data-level="1.2.5.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios-con-geoms"><i class="fa fa-check"></i><b>1.2.5.1</b> Ejercicios con Geoms</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.6" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#facets"><i class="fa fa-check"></i><b>1.2.6</b> Facets</a></li>
+<li class="chapter" data-level="1.2.7" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#transformaciones-estadisticas"><i class="fa fa-check"></i><b>1.2.7</b> Transformaciones estadísticas</a></li>
+<li class="chapter" data-level="1.2.8" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#personalizacion-de-graficas"><i class="fa fa-check"></i><b>1.2.8</b> Personalización de gráficas</a><ul>
+<li class="chapter" data-level="1.2.8.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#coords"><i class="fa fa-check"></i><b>1.2.8.1</b> Coords</a></li>
+<li class="chapter" data-level="1.2.8.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#scales"><i class="fa fa-check"></i><b>1.2.8.2</b> Scales</a></li>
+<li class="chapter" data-level="1.2.8.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#colors-and-fill-scales"><i class="fa fa-check"></i><b>1.2.8.3</b> Colors and fill scales</a></li>
+<li class="chapter" data-level="1.2.8.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#usando-estilos"><i class="fa fa-check"></i><b>1.2.8.4</b> Usando estilos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios"><i class="fa fa-check"></i><b>1.3</b> Ejercicios</a></li>
+<li class="chapter" data-level="" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#bibliografia-2"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R para preparación y visualización de datos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduccion-a-r-y-visualizacion-de-datos" class="section level1">
+<h1><span class="header-section-number">Capítulo 1</span> Introducción a R y visualización de datos</h1>
+<hr />
+<div id="paquetes-para-este-capitulo" class="section level4 unnumbered">
+<h4>Paquetes para este capítulo</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;cowplot&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;cowplot&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;cowplot&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;esquisse&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;esquisse&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;esquisse&#39;</span>)  
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;ggplot2&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;ggplot2&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;ggplot2&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;ggthemes&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;ggthemes&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;ggthemes&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;ggridges&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;ggridges&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;ggridges&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;hrbrthemes&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;hrbrthemes&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;hrbrthemes&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;gapminder&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;gapminder&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;gapminder&#39;</span>)  
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tidyverse&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tidyverse&#39;</span>)</code></pre>
+<hr />
+</div>
+<div id="introduccion-1" class="section level2">
+<h2><span class="header-section-number">1.1</span> Introducción</h2>
+<p><em>“These 13 datasets (the Datasaurus, plus 12 others) each have the same summary statistics (x/y mean, x/y standard deviation, and Pearson’s correlation) to two decimal places, while being drastically different in appearance.”</em> (Matejka, J., &amp; Fitzmaurice, G., 2017)</p>
+<div class="figure">
+<img src="data/images/DinoSequentialSmaller.gif" alt="SOURCE: https://www.autodeskresearch.com/publications/samestats" />
+<p class="caption">SOURCE: <a href="https://www.autodeskresearch.com/publications/samestats" class="uri">https://www.autodeskresearch.com/publications/samestats</a></p>
+</div>
+<div id="porque-la-visualizacion-de-datos-es-importante---ejemplo-del-mundo-real" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Porque la visualización de datos es importante - ejemplo del mundo real</h3>
+<p>Experimento sobre cálculo de probabilidades en un contexto real. Hay un examen con 70 temas. Las personas estudian un subconjunto de esos temas (e.g. 50 de 70). En el examen, les van a preguntar por 5 de esos temas, seleccionados al azar.</p>
+<p>Comparamos las siguientes dos preguntas:</p>
+<ul>
+<li>¿Cuál es la probabilidad de que salga uno de los temas que has estudiado?</li>
+<li>¿Cuál es la probabilidad de que no salga ninguno de los temas que has estudiado?</li>
+</ul>
+<p>Hacemos un analisis preliminar, y vemos que nuestra manipulación ha tenido un efecto considerable:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Leemos datos</span>
+DF =<span class="st"> </span><span class="kw">read_csv</span>(
+  here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;files&quot;</span>, <span class="st">&quot;01-visualizacion-importante.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Question_p_of =</span> <span class="kw">as.factor</span>(Question_p_of))
+
+<span class="co"># Promedio por condicion</span>
+DF_descriptives =<span class="st"> </span>DF <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Question_p_of) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Error_promedio =</span> <span class="kw">mean</span>(Error),
+            <span class="dt">SD =</span> <span class="kw">sd</span>(Error, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+            <span class="dt">N =</span> <span class="kw">n</span>())
+DF_descriptives</code></pre>
+<pre><code>## # A tibble: 2 x 4
+##   Question_p_of Error_promedio    SD     N
+##   &lt;fct&gt;                  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1 0                       4.02  35.8    31
+## 2 1                     -30.7   20.0    31</code></pre>
+<p>Hay una diferencia notable entre condiciones. Pasamos de un error promedio del -30.7% a tan solo 4%, simplemente cambiando la pregunta. Hagamos un sencillo análisis de regresión para ver si la diferencia es significativa, y cuanta varianza explica nuestro modelo.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Modelo de regresion</span>
+modelo_regresion =<span class="st"> </span><span class="kw">lm</span>(Error <span class="op">~</span><span class="st"> </span>Question_p_of, DF)
+
+<span class="co"># Resultados</span>
+<span class="kw">summary</span>(modelo_regresion)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Error ~ Question_p_of, data = DF)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -53.516 -15.758  -2.758  25.984  70.742 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       4.016      5.212   0.771    0.444    
+## Question_p_of1  -34.758      7.370  -4.716 1.48e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 29.02 on 60 degrees of freedom
+## Multiple R-squared:  0.2704, Adjusted R-squared:  0.2583 
+## F-statistic: 22.24 on 1 and 60 DF,  p-value: 1.479e-05</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Supuesto de normalidad de residuales</span>
+<span class="kw">hist</span>(modelo_regresion<span class="op">$</span>residuals)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/visualizacion-importante-01b-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shapiro.test</span>(modelo_regresion<span class="op">$</span>residuals)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  modelo_regresion$residuals
+## W = 0.96215, p-value = 0.0532</code></pre>
+<p>Todo es hermoso. Tenemos un efecto claramente significativo de la pregunta (y con un R2-ajustado de .258, no está nada mal), y además, nuestro modelo no incumple el supuesto de normalidad de residuos (por los pelos!). Preparamos un plot con promedios y barras con error standard para nuestro paper:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot para publicación</span>
+plot_inicial =<span class="st"> </span><span class="kw">ggplot</span>(DF, <span class="kw">aes</span>(Question_p_of, Error, <span class="dt">fill =</span> Question_p_of)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(
+    <span class="dt">fun.y =</span> mean,
+    <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>,
+    <span class="dt">size =</span> <span class="dv">4</span>,
+    <span class="dt">color =</span> <span class="st">&quot;darkgrey&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="dt">fun.data =</span> mean_se, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">width =</span> <span class="fl">.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">50</span>, <span class="dv">50</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>()
+
+plot_inicial</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/visualizacion-importante-01c-1.png" width="1152" /></p>
+<p>Solo por curiosidad, veamos boxplots de los dos grupos… mmmm… hay algo extraño:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Boxplots por condición</span>
+<span class="kw">ggplot</span>(DF, <span class="kw">aes</span>(Question_p_of, Error, <span class="dt">color =</span> Question_p_of, <span class="dt">group =</span> Question_p_of)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">50</span>, <span class="dv">50</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;What is the probability of x?&quot;</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/visualizacion-importante-02-1.png" width="1152" /></p>
+<p>Volvermos a extraer descriptivos… pero esta vez incluimos la mediana.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Promedio y mediana por condicion</span>
+DF <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Question_p_of) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Error_promedio =</span> <span class="kw">mean</span>(Error),
+            <span class="dt">Error_mediana =</span> <span class="kw">median</span>(Error),
+            <span class="dt">SD =</span> <span class="kw">sd</span>(Error, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+            <span class="dt">N =</span> <span class="kw">n</span>())</code></pre>
+<pre><code>## # A tibble: 2 x 5
+##   Question_p_of Error_promedio Error_mediana    SD     N
+##   &lt;fct&gt;                  &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1 0                       4.02            25  35.8    31
+## 2 1                     -30.7            -37  20.0    31</code></pre>
+<p>Que esta pasando? Veamos las respuestas de todos los participantes, junto con la distribución de los datos, más la media y mediana por condición.</p>
+<pre class="sourceCode r"><code class="sourceCode r">plot_final =<span class="st"> </span><span class="kw">ggplot</span>(DF, <span class="kw">aes</span>(Question_p_of, Error, <span class="dt">color =</span> Question_p_of, <span class="dt">group =</span> Question_p_of)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">alpha =</span> <span class="fl">.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(
+    <span class="dt">fun.y =</span> median,
+    <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>,
+    <span class="dt">size =</span> <span class="dv">3</span>,
+    <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,
+    <span class="dt">shape =</span> <span class="dv">0</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(
+    <span class="dt">fun.y =</span> mean,
+    <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>,
+    <span class="dt">size =</span> <span class="dv">3</span>,
+    <span class="dt">color =</span> <span class="st">&quot;darkgrey&quot;</span>,
+    <span class="dt">shape =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">50</span>, <span class="dv">50</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;What is the probability of x?&quot;</span>)
+
+plot_final</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/visualizacion-importante-04-1.png" width="1152" /></p>
+<p><strong>TLDR</strong>: La manera en la visualizamos la información determina las conclusiones a las que llegamos.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Visualizamos el grafico inicial y el final, uno al lado del otro</span>
+cowplot<span class="op">::</span><span class="kw">plot_grid</span>(plot_inicial, plot_final)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/visualizacion-importante-05-1.png" width="1152" /></p>
+<hr />
+</div>
+<div id="por-que-r" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Por qué R?</h3>
+<p>R es <a href="http://r4stats.com/articles/popularity/">uno de los programas para data science mas populares</a>, especialmente usado en la academia. El numero de paquetes que ofrecen funcionalidades de todo tipo no ha dejado de crecer. En 2019 el numero de paquetes en <a href="https://cran.r-project.org/web/packages/index.html">R-cran</a> ha superado los 14,000, y el ritmo de crecimiento nos acerca a la singularidad… ;)</p>
+<div class="figure">
+<img src="data/images/number-of-submitted-packages-to-CRAN.png" alt="SOURCE: https://gist.github.com/daroczig/3cf06d6db4be2bbe3368" />
+<p class="caption">SOURCE: <a href="https://gist.github.com/daroczig/3cf06d6db4be2bbe3368" class="uri">https://gist.github.com/daroczig/3cf06d6db4be2bbe3368</a></p>
+</div>
+<!-- (https://gist.githubusercontent.com/daroczig/3cf06d6db4be2bbe3368/raw/b66b0531fb1b86d3e04a003b2e105ad4f147900e/number-of-submitted-packages-to-CRAN.png)   -->
+<hr />
+<p>Además de lo anterior, R es un programa de codigo abierto (esencial para poder hacer buena ciencia), con una <a href="https://community.rstudio.com/">comunidad de usuarios</a> muy acogedora.</p>
+<p>Sus funciones de visualización son muy potentes (ver la <a href="https://www.r-graph-gallery.com/">r-graph-gallery</a> para algunos ejemplos), siendo usadas como herramienta principal en algunos medios como la <a href="https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535">BBC</a>.</p>
+</div>
+<div id="bienvenida-al-tidyverse" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> Bienvenida al tidyverse</h3>
+<p>El <a href="https://www.tidyverse.org/">tidyverse</a> es un conjunto de paquetes que nos permitirán hacer de manera (habitualmente) intuitiva muchas tareas de preparación y visualización de datos.</p>
+<div id="tidyverse-vs-base-r" class="section level4">
+<h4><span class="header-section-number">1.1.3.1</span> Tidyverse vs Base R</h4>
+<p>Muchas de las funciones que existen en el Tidyverse tienen un <a href="https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html">equivalente en base-R</a> (la instalación por defecto de R). El Tidyverse tiene ventajas y desventajas. La ventaja fundamental es que el codigo resulta (habitualmente) más facil de leer, los nombres de las funciones son mas intuitivos, y las maneras de hacer las cosas tienen a ser consistentes. La desventaja fundamental es que <a href="http://www.tinyverse.org/">incrementamos el numero de dependencias</a> (paquetes) de nuestro codigo.</p>
+<p>Veamos un ejemplo extraido de <a href="https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html">aqui</a>.</p>
+<p><em>Filter rows with conditions evaluated within groups: iris flowers with maximum “Petal.Width” for each “Species”:</em></p>
+<div id="base-r" class="section level5">
+<h5><span class="header-section-number">1.1.3.1.1</span> Base-R</h5>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># First operate in the data.frame by group (split-apply)</span>
+  widest_petals &lt;-<span class="st"> </span><span class="kw">by</span>(iris, 
+                      <span class="dt">INDICES =</span> iris<span class="op">$</span>Species, 
+                      <span class="dt">FUN =</span> <span class="cf">function</span>(x){
+                        x[x<span class="op">$</span>Petal.Width <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(x<span class="op">$</span>Petal.Width), ] 
+                      })
+  
+  <span class="co"># Then combine the results into a data.frame</span>
+  <span class="kw">do.call</span>(rbind, widest_petals)</code></pre>
+<pre><code>##               Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+## setosa                 5.0         3.5          1.6         0.6     setosa
+## versicolor             5.9         3.2          4.8         1.8 versicolor
+## virginica.101          6.3         3.3          6.0         2.5  virginica
+## virginica.110          7.2         3.6          6.1         2.5  virginica
+## virginica.145          6.7         3.3          5.7         2.5  virginica</code></pre>
+</div>
+<div id="tidyverse" class="section level5">
+<h5><span class="header-section-number">1.1.3.1.2</span> Tidyverse</h5>
+<pre class="sourceCode r"><code class="sourceCode r">  iris <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">filter</span>(Petal.Width <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(Petal.Width))</code></pre>
+<pre><code>## # A tibble: 5 x 5
+## # Groups:   Species [3]
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
+##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
+## 1          5           3.5          1.6         0.6 setosa    
+## 2          5.9         3.2          4.8         1.8 versicolor
+## 3          6.3         3.3          6           2.5 virginica 
+## 4          7.2         3.6          6.1         2.5 virginica 
+## 5          6.7         3.3          5.7         2.5 virginica</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="visualizacion-de-datos" class="section level2">
+<h2><span class="header-section-number">1.2</span> Visualización de datos</h2>
+<p><a href="https://ggplot2.tidyverse.org/">ggplot2</a> es el paquete por excelencia para visualizacion de datos. Su potencia va asociada a un nivel de complejidad considerable, hasta el punto que hay <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">Cheat sheets oficiales</a>, <a href="https://www.computerworld.com/article/2935394/my-ggplot2-cheat-sheet-search-by-task.html">Cheat sheets buscables</a>, y decenas de miles de preguntas en <a href="https://stackoverflow.com/questions/tagged/ggplot2">Stack Overflow</a>.</p>
+<div id="primeros-pasos---con-training-wheels" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Primeros pasos - con training wheels</h3>
+<p>Para empezar a usar ggplot sin tener que preocuparnos de su complejidad, podemos usar la funcion <code>esquisse:::esquisser()</code> del paquete <a href="https://github.com/dreamRs/esquisse">esquisse</a>. Esta nos permite usar la potencia de ggplot para explorar una base de datos de manera muy sencilla.</p>
+<div class="figure">
+<img src="data/images/esquisse.gif" alt="SOURCE: https://www.williamrchase.com/slides/intro_r_anthropology_2018#93" />
+<p class="caption">SOURCE: <a href="https://www.williamrchase.com/slides/intro_r_anthropology_2018#93" class="uri">https://www.williamrchase.com/slides/intro_r_anthropology_2018#93</a></p>
+</div>
+<!-- (https://www.williamrchase.com/slides/slide_img/esquisse.gif)   -->
+<hr />
+<p>La manera facil (1, 2, 3), usando <a href="https://github.com/dreamRs/esquisse">esquisse</a>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 1) Asegurate que hemos instalado el paquete esquisse</span>
+  <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;esquisse&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;esquisse&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;esquisse&#39;</span>)
+
+<span class="co"># 2) Carga el dataframe que desees. En este caso, &quot;iris&quot;</span>
+  <span class="kw">data</span>(iris)
+
+<span class="co"># 3) Lanza el wizard esquisser</span>
+  esquisse<span class="op">:::</span><span class="kw">esquisser</span>()</code></pre>
+</div>
+<div id="aprendamos-con-garrick" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Aprendamos con Garrick</h3>
+<p><a href="https://www.garrickadenbuie.com/">Garrick Aden-Buie</a> (<span class="citation">@grrrck</span>) ha creado una excelente <a href="https://pkg.garrickadenbuie.com/gentle-ggplot2/">introducción a ggplot2 y la gramática de gráficos</a>. Vamos a usarla para familiarizarnos con algunas de las funcionalidades de ggplot.<br />
+<!-- https://github.com/gadenbuie/gentle-ggplot2  --></p>
+<p><strong>Antes</strong> de LANZAR LA PRESENTACION <a href="https://pkg.garrickadenbuie.com/gentle-ggplot2/">introducción a ggplot2 y la gramática de gráficos</a>, asegurate que tienes instalados los paquetes <code>tidyverse</code> y <code>gapminder</code>, y crea el DF <code>pop_simple</code> usando el codigo de abajo.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tidyverse&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tidyverse&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;gapminder&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;gapminder&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;gapminder&#39;</span>)  
+
+pop_simple &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;China&quot;</span>, <span class="st">&quot;United States&quot;</span>), 
+         year <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1997</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(country, year, pop) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pop =</span> pop <span class="op">/</span><span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="dv">6</span>)</code></pre>
+</div>
+<div id="primeros-pasos" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Primeros pasos</h3>
+<p>En esta sección vamos a ver algunos de los componentes que usaremos cuando visualicemos datos. Los ingredientes esenciales son:</p>
+<ul>
+<li>Aesthetic mappings (aes): Variables, colores, rellenos, formas, …</li>
+<li>Geoms (geom_): puntos, lineas, boxplots, …</li>
+<li>Facets (facet_): facet_wrap() y facet_grid()</li>
+<li>Transformaciones estadísticas: stat_summary, ..prop.., …</li>
+</ul>
+<p>Muchos de los ejemplos que usamos en esta sección vienen de <a href="https://r4ds.had.co.nz/data-visualisation.html">R for data science</a>:</p>
+</div>
+<div id="aesthetic-mappings" class="section level3">
+<h3><span class="header-section-number">1.2.4</span> Aesthetic mappings</h3>
+<p>En aes() vamos a indicar las variables que queremos en los ejes x e y, el color de los puntos o lineas, el relleno de las barras, la forma de los puntos, el tipo de linea, la agrupación de los datos, etc.</p>
+<ul>
+<li>x: x = displ</li>
+<li>y: y = hwy</li>
+<li>color: color = class; color = “red”; color = “#FAA627”</li>
+<li>fill: fill = class; fill = “red”; fill = “#FAA627”</li>
+<li>shape: shape = class; shape = 0 <a href="https://r4ds.had.co.nz/data-visualisation.html#fig:shapes">ver codigo de las distintas formas</a></li>
+<li>linetype: linetype = class; linetype = “dashed”</li>
+<li>group: group = class</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, 
+       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> class)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/aes-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, 
+       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> class)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># geom_point() +</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/aes-2.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg,
+       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> class)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>) </code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/aes-3.png" width="1152" /></p>
+<div id="color" class="section level4">
+<h4><span class="header-section-number">1.2.4.1</span> Color</h4>
+<p><a href="http://colorbrewer2.org" class="uri">http://colorbrewer2.org</a>
+<a href="https://www.rapidtables.com/web/color/RGB_Color.html#color-picker" class="uri">https://www.rapidtables.com/web/color/RGB_Color.html#color-picker</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Grafico inicial</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, 
+       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/color-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Color &quot;rojo&quot; para los puntos</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, 
+       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/color-2.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Color en funcion de la variable &#39;class&#39;</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, 
+       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> class)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/color-3.png" width="1152" /></p>
+<p>Imagina que queremos asignar colores manualmente.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, 
+       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;pink&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;grey&quot;</span>, <span class="st">&quot;yellow&quot;</span>))) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>()
+
+<span class="co"># Error: Aesthetics must be either length 1 or the same as the data (234): colour</span></code></pre>
+<p>Tenemos que indicar que el color depende de ‘class’, y despues usar scale_color_manual()</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, 
+       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> class)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;pink&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;grey&quot;</span>, <span class="st">&quot;yellow&quot;</span>))</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/color-01b-1.png" width="1152" /></p>
+</div>
+<div id="shape" class="section level4">
+<h4><span class="header-section-number">1.2.4.2</span> Shape</h4>
+<p>Codigos para las distintas formas:</p>
+<div class="figure">
+<img src="data/images/shapes-1.png" alt="SOURCE: https://r4ds.had.co.nz/data-visualisation.html#aesthetic-mappings" />
+<p class="caption">SOURCE: <a href="https://r4ds.had.co.nz/data-visualisation.html#aesthetic-mappings" class="uri">https://r4ds.had.co.nz/data-visualisation.html#aesthetic-mappings</a></p>
+</div>
+<!-- (https://d33wubrfki0l68.cloudfront.net/2705b59d57362a103f0dad04b0ccfdeff9a101d2/3dc1b/visualize_files/figure-html/shapes-1.png) -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">shape =</span> class)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
+<pre><code>## Warning: The shape palette can deal with a maximum of 6 discrete values
+## because more than 6 becomes difficult to discriminate; you have 7.
+## Consider specifying shapes manually if you must have them.</code></pre>
+<pre><code>## Warning: Removed 62 rows containing missing values (geom_point).</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/shape-1.png" width="1152" /></p>
+</div>
+<div id="linetype" class="section level4">
+<h4><span class="header-section-number">1.2.4.3</span> Linetype</h4>
+<p>Codigos para los distintos estilos de linea:</p>
+<div class="figure">
+<img src="data/images/ggplot2-linetype-identity.png" alt="SOURCE: http://sape.inf.usi.ch/quick-reference/ggplot2/linetype" />
+<p class="caption">SOURCE: <a href="http://sape.inf.usi.ch/quick-reference/ggplot2/linetype" class="uri">http://sape.inf.usi.ch/quick-reference/ggplot2/linetype</a></p>
+</div>
+<!-- (http://sape.inf.usi.ch/sites/default/files/ggplot2-linetype-identity.png) -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(class <span class="op">!=</span><span class="st"> &quot;subcompact&quot;</span>), 
+       <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">linetype =</span> class, <span class="dt">color =</span> class)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>) </code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/linetype-1.png" width="1152" /></p>
+<p>Alguna de estas graficas dará un error?</p>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> class)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>)
+    
+  <span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> class, <span class="dt">linetype =</span> class)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>)
+
+  <span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> class)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="dt">linetype =</span> class)
+  <span class="co">#Error in rep(value[[k]], length.out = n) : attempt to replicate an object of type &#39;builtin&#39;</span>
+    
+  <span class="co"># SOLUCION 1</span>
+  <span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> class)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="kw">aes</span>(<span class="dt">linetype =</span> class))
+
+  <span class="co"># SOLUCION 2</span>
+  <span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> class, <span class="dt">linetype =</span> class)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>)
+  
+  <span class="co"># SOLUCION 3</span>
+  <span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> class)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>)</code></pre>
+</div>
+</div>
+<div id="geoms" class="section level3">
+<h3><span class="header-section-number">1.2.5</span> Geoms</h3>
+<p>La importancia de mostrar los datos individuales y/o la distribución de los datos:</p>
+<div class="figure">
+<img src="data/images/BoxViolinSmaller.gif" alt="SOURCE: https://www.autodeskresearch.com/publications/samestats" />
+<p class="caption">SOURCE: <a href="https://www.autodeskresearch.com/publications/samestats" class="uri">https://www.autodeskresearch.com/publications/samestats</a></p>
+</div>
+<p><a href="https://github.com/widged/data-for-good/wiki/Visualisation-::-Choosing-a-chart">Como elegir una gráfica</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Points and smooth</span>
+  <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_point</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_smooth</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-2.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Matices</span>
+    <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy, <span class="dt">color =</span> class)) <span class="op">+</span>
+<span class="st">      </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">      </span><span class="kw">geom_smooth</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-3.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span>
+<span class="st">      </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> class)) <span class="op">+</span>
+<span class="st">      </span><span class="kw">geom_smooth</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-4.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-5.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Boxplots y violins</span>
+  <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> manufacturer, <span class="dt">y =</span> hwy, <span class="dt">group =</span> manufacturer)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">.2</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_flip</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-6.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> manufacturer, <span class="dt">y =</span> hwy, <span class="dt">group =</span> manufacturer)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_violin</span>(<span class="dt">alpha =</span> <span class="fl">.2</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_flip</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-7.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> manufacturer, <span class="dt">y =</span> hwy, <span class="dt">group =</span> manufacturer)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_violin</span>(<span class="dt">alpha =</span> <span class="fl">.2</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_flip</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-8.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Histogram</span>
+  <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> manufacturer)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_flip</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-9.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Dotplot</span>
+  <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> manufacturer)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_dotplot</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_flip</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-10.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Density</span>
+    <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">geom_density</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-11.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, <span class="dt">color =</span> manufacturer, <span class="dt">fill =</span> manufacturer)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">.2</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-12.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, <span class="dt">color =</span> manufacturer, <span class="dt">fill =</span> manufacturer)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">geom_density</span>(<span class="dt">position =</span> <span class="st">&quot;stack&quot;</span>, <span class="dt">alpha =</span> <span class="fl">.2</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-13.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, <span class="dt">color =</span> manufacturer, <span class="dt">fill =</span> manufacturer)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">geom_density</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>, <span class="dt">alpha =</span> <span class="fl">.2</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-14.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># GGridges</span>
+    <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, manufacturer, <span class="dt">fill =</span> manufacturer)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">alpha =</span> <span class="fl">.2</span>) </code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-15.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">       <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, manufacturer, <span class="dt">fill =</span> manufacturer)) <span class="op">+</span>
+<span class="st">         </span><span class="co"># ggridges::geom_density_ridges(alpha = .2) +</span>
+<span class="st">         </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">stat =</span> <span class="st">&quot;binline&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">scale =</span> <span class="fl">0.95</span>, <span class="dt">draw_baseline =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">         </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">jittered_points =</span> <span class="ot">TRUE</span>, <span class="dt">position =</span> <span class="st">&quot;raincloud&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.7</span>, <span class="dt">scale =</span> <span class="fl">0.9</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-16.png" width="1152" /></p>
+<div id="ejercicios-con-geoms" class="section level4">
+<h4><span class="header-section-number">1.2.5.1</span> Ejercicios con Geoms</h4>
+<p>Crea los siguientes plots:</p>
+<p><img src="bookdown-workshop-R_files/figure-html/geoms-ejercicios-1.png" width="1152" /></p>
+<p>Crea los siguientes plots:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> clarity))</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/unnamed-chunk-2-1.png" width="1152" /></p>
+</div>
+</div>
+<div id="facets" class="section level3">
+<h3><span class="header-section-number">1.2.6</span> Facets</h3>
+<pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Width, <span class="dt">y =</span> Petal.Length, <span class="dt">color =</span> Species)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(<span class="op">~</span><span class="st"> </span>Species)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/facets-1.png" width="1152" /></p>
+</div>
+<div id="transformaciones-estadisticas" class="section level3">
+<h3><span class="header-section-number">1.2.7</span> Transformaciones estadísticas</h3>
+<p>VER: <a href="https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations" class="uri">https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut))</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/transformaciones-estadisticas-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> ..prop.., <span class="dt">group =</span> <span class="dv">1</span>))</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/transformaciones-estadisticas-2.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_summary</span>(
+    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> depth),
+    <span class="dt">fun.ymin =</span> min,
+    <span class="dt">fun.ymax =</span> max,
+    <span class="dt">fun.y =</span> median
+  ) </code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/transformaciones-estadisticas-3.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(Petal.Length, Petal.Width, <span class="dt">color =</span> Species)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.4</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">data =</span> iris <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                 </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                 </span><span class="kw">summarise</span>(<span class="dt">Petal.Length =</span> <span class="kw">mean</span>(Petal.Length),
+                           <span class="dt">Petal.Width  =</span> <span class="kw">mean</span>(Petal.Width)),
+               <span class="dt">fun.y =</span> mean,
+               <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>,
+               <span class="dt">size =</span> <span class="dv">4</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/transformaciones-estadisticas-4.png" width="1152" /></p>
+</div>
+<div id="personalizacion-de-graficas" class="section level3">
+<h3><span class="header-section-number">1.2.8</span> Personalización de gráficas</h3>
+<div id="coords" class="section level4">
+<h4><span class="header-section-number">1.2.8.1</span> Coords</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># coord_flip()</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-coord-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># coord_polar()</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_polar</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-coord-2.png" width="1152" /></p>
+</div>
+<div id="scales" class="section level4">
+<h4><span class="header-section-number">1.2.8.2</span> Scales</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">25000</span>, <span class="dv">2000</span>))</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-axis-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut)) <span class="op">+</span>
+<span class="st">  </span>hrbrthemes<span class="op">::</span><span class="kw">scale_y_comma</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">25000</span>, <span class="dv">2000</span>))</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-axis-2.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">dollar_format</span>(<span class="dt">prefix=</span><span class="st">&quot;$&quot;</span>, <span class="dt">suffix =</span> <span class="st">&quot;M&quot;</span>))</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-axis-3.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_log10</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-axis-4.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_reverse</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-axis-5.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> ..prop.., <span class="dt">group =</span> <span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-axis-6.png" width="1152" /></p>
+</div>
+<div id="colors-and-fill-scales" class="section level4">
+<h4><span class="header-section-number">1.2.8.3</span> Colors and fill scales</h4>
+<pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Width, <span class="dt">y =</span> Petal.Length, <span class="dt">color =</span> Species)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Blues&quot;</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-color-fill-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Width, <span class="dt">y =</span> Petal.Length, <span class="dt">color =</span> Species)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_grey</span>(<span class="dt">start =</span> <span class="fl">0.2</span>, <span class="dt">end =</span> <span class="fl">0.8</span>, <span class="dt">na.value =</span> <span class="st">&quot;red&quot;</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-color-fill-2.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Width, <span class="dt">y =</span> Petal.Length, <span class="dt">color =</span> Petal.Width)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;blue&quot;</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-color-fill-3.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Width, <span class="dt">y =</span> Petal.Length, <span class="dt">color =</span> Petal.Width)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_colour_gradientn</span>(<span class="dt">colours =</span> <span class="kw">terrain.colors</span>(<span class="dv">3</span>))</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-color-fill-4.png" width="1152" /></p>
+</div>
+<div id="usando-estilos" class="section level4">
+<h4><span class="header-section-number">1.2.8.4</span> Usando estilos</h4>
+<p><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="uri">https://ggplot2.tidyverse.org/reference/ggtheme.html</a></p>
+<p><a href="https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html" class="uri">https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;ggplot2&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;ggplot2&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;ggplot2&#39;</span>)
+
+<span class="co"># Create a base graph</span>
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Width, <span class="dt">y =</span> Petal.Length, <span class="dt">color =</span> Species)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;A ggplot simple graph&#39;</span>,
+       <span class="dt">subtitle =</span> <span class="st">&#39;Simple tweaks to improve plots, or not&#39;</span>,
+       <span class="dt">x =</span> <span class="st">&#39;&#39;</span>,
+       <span class="dt">y =</span> <span class="st">&#39;&#39;</span>,
+       <span class="dt">caption =</span> <span class="st">&#39;https://github.com/gorkang / @gorkang&#39;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_gray</span>() <span class="co"># This is the default. Needed here because of the Bookdown theme</span>
+
+p</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-01-1.png" width="1152" /></p>
+<p>Usando el tema fivethirtyeight</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if (!require(&#39;hrbrthemes&#39;)) install.packages(&#39;hrbrthemes&#39;); library(&#39;hrbrthemes&#39;)</span>
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;ggthemes&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;ggthemes&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;ggthemes&#39;</span>)
+
+p <span class="op">+</span>
+<span class="st">  </span>ggthemes<span class="op">::</span><span class="kw">scale_color_fivethirtyeight</span>() <span class="op">+</span>
+<span class="st">  </span>ggthemes<span class="op">::</span><span class="kw">theme_fivethirtyeight</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-02-1.png" width="1152" /></p>
+<p>Usando el tema economist</p>
+<pre class="sourceCode r"><code class="sourceCode r">p <span class="op">+</span>
+<span class="st">  </span>ggthemes<span class="op">::</span><span class="kw">scale_color_economist</span>() <span class="op">+</span>
+<span class="st">  </span>ggthemes<span class="op">::</span><span class="kw">theme_economist</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/personalizacion-graficas-03-1.png" width="1152" /></p>
+</div>
+</div>
+</div>
+<div id="ejercicios" class="section level2">
+<h2><span class="header-section-number">1.3</span> Ejercicios</h2>
+<p><strong>Datasets</strong>:</p>
+<ul>
+<li><a href="https://github.com/fivethirtyeight/data">fivethirtyeight</a><br />
+</li>
+<li><a href="https://github.com/owid/owid-datasets">Our World in Data</a><br />
+</li>
+<li><a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a></li>
+</ul>
+</div>
+<div id="bibliografia-2" class="section level2 bibliografia unnumbered">
+<h2>Bibliografía</h2>
+<ul>
+<li><p>Matejka, J., &amp; Fitzmaurice, G. (2017, May). Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing. In Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (pp. 1290-1294). ACM.</p></li>
+<li><p><a href="https://bbc.github.io/rcookbook/" class="uri">https://bbc.github.io/rcookbook/</a></p></li>
+<li><p><a href="https://github.com/bbc/bbplot" class="uri">https://github.com/bbc/bbplot</a></p></li>
+<li><p><a href="https://github.com/dreamRs/esquisse" class="uri">https://github.com/dreamRs/esquisse</a></p></li>
+<li><p>Garrick Aden-Buie. A Gentle Guide to the Grammar of Graphics with ggplot2: <a href="https://github.com/gadenbuie/gentle-ggplot2" class="uri">https://github.com/gadenbuie/gentle-ggplot2</a></p></li>
+<li><p>Michael Toth. You Need to Start Branding Your Graphs. Here’s How, with ggplot!: <a href="https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html" class="uri">https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html</a></p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="preparando-sistema.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+---
+title: "R para preparación y visualización de datos"
+subtitle: "Doctorado en Neurociencia Social y Cognición"
+author: "Gorka Navarrete, ORCID: [0000-0001-7678-8656](http://orcid.org/0000-0001-7678-8656)"
+# description: "R para preparación y visualización de datos - Doctorado en Neurociencia y Cognición - Facultad de Psicología - UAI"
+# url: 'https\://bookdown.org/john/awesome/'
+# github-repo: "john/awesome"
+# cover-image: "images/cover.png"
+# apple-touch-icon: "touch-icon.png"
+# apple-touch-icon-size: 120
+# favicon: "favicon.ico"
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  # bookdown::gitbook: default
+  bookdown::gitbook:
+    css: css/base.css
+    config:
+      search: yes
+      sharing:
+        facebook: no
+        twitter: yes
+        google: no
+        linkedin: no
+        weibo: no
+        instapaper: no
+        vk: no
+        all: []
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(
+  fig.width = 12,
+  fig.height = 8,
+  # fig.path = 'Figs/',
+  # echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  cache = TRUE
+)
+```
+
+# Introducción {-}
+
+El seminario estará centrado en el uso de R para la preparación y visualización de datos, además de la generación de reportes reproducibles. 
+
+R es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizandonos en el trabajo abierto, colaborativo y reproducible.
+
+
+## Objetivos {-}
+
+Dar las herramientas básicas a los alumnos para que puedan trabajar de manera autónoma con R y RStudio para el proceso de importación, transformación, visualización y reporte de datos. 
+
+Al finalizar el curso los alumnos serán capaces de:
+Importar archivos de datos, transformar los datos, crear nuevas variables.
+Realizar análisis de datos exploratorios, visualizar distribuciones y comparar grupos.
+Generar reportes reproducibles con RMarkdown.
+
+
+## Como empezar {-}
+
+Si ya has completado los pasos indicados en [Preparando nuesto sistema](#preparando-sistema), puedes lanzar el siguiente codigo en tu ordenador para descargar los materiales del curso:  
+
+```{r como-empezar, eval=FALSE}
+
+if (!require('usethis')) install.packages('usethis'); library('usethis')
+
+usethis::use_course()
+
+```
+
+
+
+## Bibliografía {.bibliografia -}
+
+Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O'Reilly Media, Inc. https://r4ds.had.co.nz/  
+
+Xie, Y., Allaire, J. J., & Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. https://bookdown.org/yihui/rmarkdown/  
+
+Yihui Xie (2018). bookdown: Authoring Books and Technical Documents with R Markdown https://bookdown.org/yihui/bookdown/markdown-syntax.html  
+
+Bryan, J., & Hester, J. What They Forgot to Teach You About R. https://whattheyforgot.org/  

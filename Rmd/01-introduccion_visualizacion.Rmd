@@ -1,0 +1,778 @@
+# Introducción a R y visualización de datos
+
+---  
+
+#### Paquetes para este capítulo {-}
+
+```{r paquetes-01, message=FALSE, warning=FALSE}
+
+if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
+if (!require('esquisse')) install.packages('esquisse'); library('esquisse')  
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('ggthemes')) install.packages('ggthemes'); library('ggthemes')
+if (!require('ggridges')) install.packages('ggridges'); library('ggridges')
+if (!require('hrbrthemes')) install.packages('hrbrthemes'); library('hrbrthemes')
+if (!require('gapminder')) install.packages('gapminder'); library('gapminder')  
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
+
+```  
+
+---  
+
+## Introducción
+
+
+*"These 13 datasets (the Datasaurus, plus 12 others) each have the same summary statistics (x/y mean, x/y standard deviation, and Pearson's correlation) to two decimal places, while being drastically different in appearance."* (Matejka, J., & Fitzmaurice, G., 2017)  
+
+
+![SOURCE: https://www.autodeskresearch.com/publications/samestats](`r here::here("data", "images", "DinoSequentialSmaller.gif")`)
+
+
+### Porque la visualización de datos es importante - ejemplo del mundo real
+
+Experimento sobre cálculo de probabilidades en un contexto real. Hay un examen con 70 temas. Las personas estudian un subconjunto de esos temas (e.g. 50 de 70). En el examen, les van a preguntar por 5 de esos temas, seleccionados al azar.
+
+Comparamos las siguientes dos preguntas:
+
++ ¿Cuál es la probabilidad de que salga uno de los temas que has estudiado?
++ ¿Cuál es la probabilidad de que no salga ninguno de los temas que has estudiado?
+
+Hacemos un analisis preliminar, y vemos que nuestra manipulación ha tenido un efecto considerable:  
+
+```{r visualizacion-importante-01, message=FALSE, warning=FALSE, cache=TRUE}
+
+# Leemos datos
+DF = read_csv(
+  here::here("data", "files", "01-visualizacion-importante.csv")) %>% 
+  mutate(Question_p_of = as.factor(Question_p_of))
+
+# Promedio por condicion
+DF_descriptives = DF %>% 
+  group_by(Question_p_of) %>% 
+  summarise(Error_promedio = mean(Error),
+            SD = sd(Error, na.rm = TRUE),
+            N = n())
+DF_descriptives
+```
+
+Hay una diferencia notable entre condiciones. Pasamos de un error promedio del -30.7% a tan solo 4%, simplemente cambiando la pregunta. Hagamos un sencillo análisis de regresión para ver si la diferencia es significativa, y cuanta varianza explica nuestro modelo.  
+
+```{r visualizacion-importante-01b, message=FALSE, warning=FALSE, cache=TRUE}
+
+# Modelo de regresion
+modelo_regresion = lm(Error ~ Question_p_of, DF)
+
+# Resultados
+summary(modelo_regresion)
+
+# Supuesto de normalidad de residuales
+hist(modelo_regresion$residuals)
+shapiro.test(modelo_regresion$residuals)
+
+```
+
+Todo es hermoso. Tenemos un efecto claramente significativo de la pregunta (y con un R2-ajustado de .258, no está nada mal), y además, nuestro modelo no incumple el supuesto de normalidad de residuos (por los pelos!). Preparamos un plot con promedios y barras con error standard para nuestro paper:  
+
+```{r visualizacion-importante-01c, message=FALSE, warning=FALSE, cache=TRUE}
+
+# Plot para publicación
+plot_inicial = ggplot(DF, aes(Question_p_of, Error, fill = Question_p_of)) +
+  stat_summary(
+    fun.y = mean,
+    geom = "point",
+    size = 4,
+    color = "darkgrey") +
+  stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge", color = "black", width = .2) +
+  scale_y_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +
+  theme_minimal()
+
+plot_inicial
+
+```
+
+Solo por curiosidad, veamos boxplots de los dos grupos... mmmm... hay algo extraño:  
+
+```{r visualizacion-importante-02, message=FALSE, warning=FALSE, cache=TRUE}
+  
+# Boxplots por condición
+ggplot(DF, aes(Question_p_of, Error, color = Question_p_of, group = Question_p_of)) +
+  geom_boxplot(alpha = .5) +
+  theme_minimal() +
+  scale_y_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +
+  labs(x = "What is the probability of x?")
+
+```
+
+Volvermos a extraer descriptivos... pero esta vez incluimos la mediana.  
+
+```{r visualizacion-importante-03, message=FALSE, warning=FALSE}
+
+# Promedio y mediana por condicion
+DF %>% 
+  group_by(Question_p_of) %>% 
+  summarise(Error_promedio = mean(Error),
+            Error_mediana = median(Error),
+            SD = sd(Error, na.rm = TRUE),
+            N = n())
+
+```
+
+Que esta pasando? Veamos las respuestas de todos los participantes, junto con la distribución de los datos, más la media y mediana por condición.  
+
+```{r visualizacion-importante-04, message=FALSE, warning=FALSE, cache=TRUE}
+
+plot_final = ggplot(DF, aes(Question_p_of, Error, color = Question_p_of, group = Question_p_of)) +
+  geom_jitter(size = 2) +
+  geom_violin(alpha = .2) +
+  stat_summary(
+    fun.y = median,
+    geom = "point",
+    size = 3,
+    color = "black",
+    shape = 0) +
+  stat_summary(
+    fun.y = mean,
+    geom = "point",
+    size = 3,
+    color = "darkgrey",
+    shape = 1) +
+  theme_minimal() +
+  scale_y_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +
+  labs(x = "What is the probability of x?")
+
+plot_final
+
+```
+
+
+**TLDR**: La manera en la visualizamos la información determina las conclusiones a las que llegamos.   
+
+```{r visualizacion-importante-05, message=FALSE, warning=FALSE, fig.width=12, cache=TRUE}
+
+# Visualizamos el grafico inicial y el final, uno al lado del otro
+cowplot::plot_grid(plot_inicial, plot_final)
+
+```
+
+
+---  
+
+### Por qué R? 
+
+R es [uno de los programas para data science mas populares](http://r4stats.com/articles/popularity/), especialmente usado en la academia. El numero de paquetes que ofrecen funcionalidades de todo tipo no ha dejado de crecer. En 2019 el numero de paquetes en [R-cran](https://cran.r-project.org/web/packages/index.html) ha superado los 14,000, y el ritmo de crecimiento nos acerca a la singularidad... ;)  
+
+![SOURCE: https://gist.github.com/daroczig/3cf06d6db4be2bbe3368](`r here::here("data", "images", "number-of-submitted-packages-to-CRAN.png")`)
+
+<!-- (https://gist.githubusercontent.com/daroczig/3cf06d6db4be2bbe3368/raw/b66b0531fb1b86d3e04a003b2e105ad4f147900e/number-of-submitted-packages-to-CRAN.png)   -->
+
+---  
+
+Además de lo anterior, R es un programa de codigo abierto (esencial para poder hacer buena ciencia), con una [comunidad de usuarios](https://community.rstudio.com/) muy acogedora.   
+
+Sus funciones de visualización son muy potentes (ver la [r-graph-gallery](https://www.r-graph-gallery.com/) para algunos ejemplos), siendo usadas como herramienta principal en algunos medios como la [BBC](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535).  
+
+
+
+### Bienvenida al tidyverse
+
+El [tidyverse](https://www.tidyverse.org/) es un conjunto de paquetes que nos permitirán hacer de manera (habitualmente) intuitiva muchas tareas de preparación y visualización de datos.    
+
+
+
+#### Tidyverse vs Base R
+
+Muchas de las funciones que existen en el Tidyverse tienen un [equivalente en base-R](https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html) (la instalación por defecto de R). El Tidyverse tiene ventajas y desventajas. La ventaja fundamental es que el codigo resulta (habitualmente) más facil de leer, los nombres de las funciones son mas intuitivos, y las maneras de hacer las cosas tienen a ser consistentes. La desventaja fundamental es que [incrementamos el numero de dependencias](http://www.tinyverse.org/) (paquetes) de nuestro codigo.  
+
+
+Veamos un ejemplo extraido de [aqui](https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html).  
+
+*Filter rows with conditions evaluated within groups: iris flowers with maximum “Petal.Width” for each “Species”:*  
+
+##### Base-R
+```{r tidyverse-vs-base-R-01}
+  # First operate in the data.frame by group (split-apply)
+  widest_petals <- by(iris, 
+                      INDICES = iris$Species, 
+                      FUN = function(x){
+                        x[x$Petal.Width == max(x$Petal.Width), ] 
+                      })
+  
+  # Then combine the results into a data.frame
+  do.call(rbind, widest_petals)
+```
+
+##### Tidyverse
+```{r tidyverse-vs-base-R-02}
+  iris %>% 
+    group_by(Species) %>% 
+    filter(Petal.Width == max(Petal.Width))
+
+```
+
+
+    
+## Visualización de datos
+
+[ggplot2](https://ggplot2.tidyverse.org/) es el paquete por excelencia para visualizacion de datos. Su potencia va asociada a un nivel de complejidad considerable, hasta el punto que hay [Cheat sheets oficiales](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf), [Cheat sheets buscables](https://www.computerworld.com/article/2935394/my-ggplot2-cheat-sheet-search-by-task.html), y decenas de miles de preguntas en [Stack Overflow](https://stackoverflow.com/questions/tagged/ggplot2).  
+
+
+### Primeros pasos - con training wheels
+
+Para empezar a usar ggplot sin tener que preocuparnos de su complejidad, podemos usar la funcion `esquisse:::esquisser()` del paquete [esquisse](https://github.com/dreamRs/esquisse). Esta nos permite usar la potencia de ggplot para explorar una base de datos de manera muy sencilla.   
+
+![SOURCE: https://www.williamrchase.com/slides/intro_r_anthropology_2018#93](`r here::here("data", "images", "esquisse.gif")`)  
+
+<!-- (https://www.williamrchase.com/slides/slide_img/esquisse.gif)   -->  
+
+---  
+
+
+La manera facil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquisse):  
+
+```{r visualizacion_0, message=FALSE, warning=FALSE, eval=FALSE}
+
+# 1) Asegurate que hemos instalado el paquete esquisse
+  if (!require('esquisse')) install.packages('esquisse'); library('esquisse')
+
+# 2) Carga el dataframe que desees. En este caso, "iris"
+  data(iris)
+
+# 3) Lanza el wizard esquisser
+  esquisse:::esquisser()
+
+```
+
+### Aprendamos con Garrick 
+
+[Garrick Aden-Buie](https://www.garrickadenbuie.com/) (@grrrck) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/). Vamos a usarla para familiarizarnos con algunas de las funcionalidades de ggplot.  
+<!-- https://github.com/gadenbuie/gentle-ggplot2  -->
+
+
+**Antes** de LANZAR LA PRESENTACION [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/), asegurate que tienes instalados los paquetes `tidyverse` y `gapminder`, y crea el DF `pop_simple` usando el codigo de abajo.  
+
+```{r garrick, message=FALSE, warning=FALSE}
+
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
+if (!require('gapminder')) install.packages('gapminder'); library('gapminder')  
+
+pop_simple <- gapminder %>% 
+  filter(country %in% c("Canada", "China", "United States"), 
+         year >= 1997) %>% 
+  select(country, year, pop) %>% 
+  mutate(pop = pop / 10^6)
+
+```
+
+
+### Primeros pasos
+
+En esta sección vamos a ver algunos de los componentes que usaremos cuando visualicemos datos. Los ingredientes esenciales son:  
+
+* Aesthetic mappings (aes): Variables, colores, rellenos, formas, ...
+* Geoms (geom_): puntos, lineas, boxplots, ...
+* Facets (facet_): facet_wrap() y facet_grid()
+* Transformaciones estadísticas: stat_summary, ..prop.., ...
+
+Muchos de los ejemplos que usamos en esta sección vienen de [R for data science](https://r4ds.had.co.nz/data-visualisation.html):  
+
+
+### Aesthetic mappings
+
+En aes() vamos a indicar las variables que queremos en los ejes x e y, el color de los puntos o lineas, el relleno de las barras, la forma de los puntos, el tipo de linea, la agrupación de los datos, etc.  
+
+* x: x = displ
+* y: y = hwy
+* color: color = class; color = "red"; color = "#FAA627"
+* fill: fill = class; fill = "red"; fill = "#FAA627"
+* shape:  shape = class; shape = 0 [ver codigo de las distintas formas](https://r4ds.had.co.nz/data-visualisation.html#fig:shapes)
+* linetype: linetype = class; linetype = "dashed"
+* group: group = class
+
+
+
+```{r aes, message=FALSE, warning=FALSE, cache=TRUE}
+
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, color = class)) + 
+  geom_point()
+
+
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, color = class)) + 
+  # geom_point() +
+  geom_line()
+
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy, color = class)) +
+  geom_point() +
+  stat_summary(fun.y = mean, geom = "line") 
+  
+
+```
+
+
+#### Color
+
+http://colorbrewer2.org
+https://www.rapidtables.com/web/color/RGB_Color.html#color-picker
+
+```{r color, message=FALSE, warning=FALSE, cache=TRUE}
+
+# Grafico inicial
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy)) + 
+  geom_point()
+
+# Color "rojo" para los puntos
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, color = "red")) + 
+  geom_point()
+
+# Color en funcion de la variable 'class'
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, color = class)) + 
+  geom_point()
+
+```
+
+Imagina que queremos asignar colores manualmente. 
+
+```{r color-01, message=FALSE, warning=FALSE, eval=FALSE}
+
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, color = c("red", "pink", "green", "blue", "black", "grey", "yellow"))) + 
+  geom_point()
+
+# Error: Aesthetics must be either length 1 or the same as the data (234): colour
+
+```
+
+Tenemos que indicar que el color depende de 'class', y despues usar scale_color_manual()  
+
+```{r color-01b, message=FALSE, warning=FALSE, cache=TRUE}
+
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, color = class)) + 
+  geom_point() +
+  scale_color_manual(values = c("red", "pink", "green", "blue", "black", "grey", "yellow"))
+
+```
+
+
+#### Shape
+
+Codigos para las distintas formas:  
+
+![SOURCE: https://r4ds.had.co.nz/data-visualisation.html#aesthetic-mappings](`r here::here("data", "images", "shapes-1.png")`)
+
+<!-- (https://d33wubrfki0l68.cloudfront.net/2705b59d57362a103f0dad04b0ccfdeff9a101d2/3dc1b/visualize_files/figure-html/shapes-1.png) -->  
+
+```{r shape, message=TRUE, warning=TRUE, cache=TRUE}
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, shape = class)) +
+  geom_point()
+
+```
+
+
+
+#### Linetype
+
+Codigos para los distintos estilos de linea:  
+
+![SOURCE: http://sape.inf.usi.ch/quick-reference/ggplot2/linetype](`r here::here("data", "images", "ggplot2-linetype-identity.png")`)  
+
+<!-- (http://sape.inf.usi.ch/sites/default/files/ggplot2-linetype-identity.png) -->  
+
+```{r linetype, message=FALSE, warning=FALSE, cache=TRUE}
+
+ggplot(mpg %>% filter(class != "subcompact"), 
+       aes(x = displ, y = hwy, linetype = class, color = class)) +
+  stat_summary(fun.y = mean, geom = "line") 
+
+```
+
+
+Alguna de estas graficas dará un error?   
+
+```{r linetype-01, message=FALSE, warning=FALSE, eval = FALSE}
+
+  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
+    geom_point() +
+    stat_summary(fun.y = mean, geom = "line", linetype = "dashed")
+    
+  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class, linetype = class)) +
+    geom_point() +
+    stat_summary(fun.y = mean, geom = "line")
+
+  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
+    geom_point() +
+    stat_summary(fun.y = mean, geom = "line", linetype = class)
+  #Error in rep(value[[k]], length.out = n) : attempt to replicate an object of type 'builtin'
+    
+  # SOLUCION 1
+  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
+    geom_point() +
+    stat_summary(fun.y = mean, geom = "line", aes(linetype = class))
+
+  # SOLUCION 2
+  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class, linetype = class)) +
+    geom_point() +
+    stat_summary(fun.y = mean, geom = "line")
+  
+  # SOLUCION 3
+  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
+    geom_point() +
+    stat_summary(fun.y = mean, geom = "line", linetype = "dashed")
+  
+```
+
+
+### Geoms
+
+
+La importancia de mostrar los datos individuales y/o la distribución de los datos:  
+
+![SOURCE: https://www.autodeskresearch.com/publications/samestats](`r here::here("data", "images", "BoxViolinSmaller.gif")`)
+
+
+[Como elegir una gráfica](https://github.com/widged/data-for-good/wiki/Visualisation-::-Choosing-a-chart)
+
+
+```{r geoms, message=FALSE, warning=FALSE, cache=TRUE}
+
+
+# Points and smooth
+  ggplot(mpg, aes(displ, hwy)) + 
+    geom_point()
+
+  ggplot(mpg, aes(displ, hwy)) + 
+    geom_point() +
+    geom_smooth()
+
+  # Matices
+    ggplot(mpg, aes(displ, hwy, color = class)) +
+      geom_point() +
+      geom_smooth()
+  
+    ggplot(mpg, aes(displ, hwy)) +
+      geom_point(aes(color = class)) +
+      geom_smooth()
+    
+    ggplot(mpg, aes(displ, hwy)) + 
+      geom_point() +
+      geom_smooth(method = "lm")
+    
+
+# Boxplots y violins
+  ggplot(mpg, aes(x = manufacturer, y = hwy, group = manufacturer)) +
+    geom_point() +
+    geom_boxplot(alpha = .2) +
+    coord_flip()
+    
+  ggplot(mpg, aes(x = manufacturer, y = hwy, group = manufacturer)) +
+    geom_point() +
+    geom_violin(alpha = .2) +
+    coord_flip()
+  
+  ggplot(mpg, aes(x = manufacturer, y = hwy, group = manufacturer)) +
+    geom_jitter() +
+    geom_violin(alpha = .2) +
+    coord_flip()
+
+  
+  # Histogram
+  ggplot(mpg, aes(x = manufacturer)) +
+    geom_histogram(stat = "count") +
+    coord_flip()
+    
+  
+  # Dotplot
+  ggplot(mpg, aes(x = manufacturer)) +
+    geom_dotplot() +
+    coord_flip()
+  
+  
+  # Density
+    ggplot(mpg, aes(displ)) + 
+      geom_density()
+    
+    ggplot(mpg, aes(displ, color = manufacturer, fill = manufacturer)) + 
+      geom_density(alpha = .2)
+      
+    ggplot(mpg, aes(displ, color = manufacturer, fill = manufacturer)) + 
+      geom_density(position = "stack", alpha = .2)
+    
+        
+    ggplot(mpg, aes(displ, color = manufacturer, fill = manufacturer)) + 
+      geom_density(position = "fill", alpha = .2)
+    
+    # GGridges
+    ggplot(mpg, aes(displ, manufacturer, fill = manufacturer)) + 
+      ggridges::geom_density_ridges(alpha = .2) 
+    
+   
+       ggplot(mpg, aes(displ, manufacturer, fill = manufacturer)) +
+         # ggridges::geom_density_ridges(alpha = .2) +
+         ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE) +
+         ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.7, scale = 0.9)
+
+
+```
+
+
+
+
+#### Ejercicios con Geoms
+
+Crea los siguientes plots:  
+
+```{r geoms-ejercicios, echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE}
+
+plot1 = ggplot(mpg, aes(displ, hwy)) + 
+    geom_point() +
+    geom_smooth(se = FALSE) +
+    theme_grey()
+
+plot2 = ggplot(mpg, aes(displ, hwy, group = drv)) + 
+    geom_point() +
+    geom_smooth(se = FALSE) +
+    theme_grey()
+
+plot3 = ggplot(mpg, aes(displ, hwy, color = drv)) + 
+    geom_point() +
+    geom_smooth(se = FALSE) +
+    theme_grey()
+
+  
+plot4 = ggplot(mpg, aes(displ, hwy)) + 
+    geom_point(aes(color = drv)) +
+    geom_smooth(se = FALSE) +
+    theme_grey()
+
+plot5 = ggplot(mpg, aes(displ, hwy, linetype = drv)) + 
+    geom_point(aes(color = drv)) +
+    geom_smooth(se = FALSE) +
+    theme_grey()
+
+  
+plot6 = ggplot(mpg, aes(displ, hwy)) + 
+    geom_point(color = "white", size = 6) +
+    geom_point(aes(color = drv), size = 2) +
+    theme_grey()
+
+
+cowplot::plot_grid(plot1, plot2, plot3, plot4, plot5, plot6,
+                   ncol = 2)  
+```
+
+Crea los siguientes plots:  
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity))
+```
+
+
+
+
+
+### Facets
+
+```{r facets, message=FALSE, warning=FALSE, cache=TRUE}
+
+ ggplot(iris, aes(x = Petal.Width, y = Petal.Length, color = Species)) +
+  geom_point() +
+  facet_grid(~ Species)
+
+```
+
+
+### Transformaciones estadísticas  
+
+VER: https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations
+
+
+```{r transformaciones-estadisticas, message=FALSE, warning=FALSE, cache=TRUE}
+
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut))
+
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = ..prop.., group = 1))
+
+
+ggplot(data = diamonds) + 
+  stat_summary(
+    mapping = aes(x = cut, y = depth),
+    fun.ymin = min,
+    fun.ymax = max,
+    fun.y = median
+  ) 
+
+
+ggplot(iris, aes(Petal.Length, Petal.Width, color = Species)) +
+  geom_point(alpha = .4) +
+  stat_summary(data = iris %>% 
+                 group_by(Species) %>% 
+                 summarise(Petal.Length = mean(Petal.Length),
+                           Petal.Width  = mean(Petal.Width)),
+               fun.y = mean,
+               geom = "point",
+               size = 4)
+  
+```
+
+
+### Personalización de gráficas
+
+
+#### Coords  
+
+
+```{r personalizacion-graficas-coord, message=FALSE, warning=FALSE, cache=TRUE}
+
+# coord_flip()
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut)) +
+  coord_flip()
+
+# coord_polar()
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut)) +
+  coord_polar()
+
+```
+
+
+
+#### Scales  
+
+```{r personalizacion-graficas-axis, message=FALSE, warning=FALSE, cache=TRUE}
+
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut)) +
+  scale_y_continuous(breaks = seq(0, 25000, 2000))
+
+
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut)) +
+  hrbrthemes::scale_y_comma(breaks = seq(0, 25000, 2000))
+
+
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut)) +
+  scale_y_continuous(labels = scales::dollar_format(prefix="$", suffix = "M"))
+
+
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut)) +
+  scale_y_log10()
+
+
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut)) +
+  scale_y_reverse()
+
+
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = ..prop.., group = 1)) +
+  scale_y_continuous(labels = scales::percent)
+
+```
+
+
+#### Colors and fill scales
+
+```{r personalizacion-graficas-color-fill, message=FALSE, warning=FALSE, cache=TRUE}
+
+ ggplot(iris, aes(x = Petal.Width, y = Petal.Length, color = Species)) +
+  geom_point() +
+  scale_color_brewer(palette = "Blues")
+
+ggplot(iris, aes(x = Petal.Width, y = Petal.Length, color = Species)) +
+  geom_point() + 
+  scale_color_grey(start = 0.2, end = 0.8, na.value = "red")
+
+ggplot(iris, aes(x = Petal.Width, y = Petal.Length, color = Petal.Width)) +
+  geom_point() + 
+  scale_color_gradient(low = "red", high = "blue")
+
+ggplot(iris, aes(x = Petal.Width, y = Petal.Length, color = Petal.Width)) +
+  geom_point() + 
+  scale_colour_gradientn(colours = terrain.colors(3))
+
+
+```
+
+#### Usando estilos
+
+
+https://ggplot2.tidyverse.org/reference/ggtheme.html
+
+https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html
+
+
+```{r personalizacion-graficas-01, message=FALSE, warning=FALSE, cache=TRUE}
+
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+
+# Create a base graph
+p <- ggplot(iris, aes(x = Petal.Width, y = Petal.Length, color = Species)) +
+  geom_point() +
+  labs(title = 'A ggplot simple graph',
+       subtitle = 'Simple tweaks to improve plots, or not',
+       x = '',
+       y = '',
+       caption = 'https://github.com/gorkang / @gorkang') +
+    theme_gray() # This is the default. Needed here because of the Bookdown theme
+
+p
+
+```
+
+Usando el tema fivethirtyeight
+
+```{r personalizacion-graficas-02, message=FALSE, warning=FALSE, cache=TRUE}
+
+# if (!require('hrbrthemes')) install.packages('hrbrthemes'); library('hrbrthemes')
+if (!require('ggthemes')) install.packages('ggthemes'); library('ggthemes')
+
+p +
+  ggthemes::scale_color_fivethirtyeight() +
+  ggthemes::theme_fivethirtyeight()
+
+```
+
+Usando el tema economist
+```{r personalizacion-graficas-03, message=FALSE, warning=FALSE, cache=TRUE}
+
+p +
+  ggthemes::scale_color_economist() +
+  ggthemes::theme_economist()
+
+```
+
+## Ejercicios  
+
+**Datasets**:  
+
+* [fivethirtyeight](https://github.com/fivethirtyeight/data)  
+* [Our World in Data](https://github.com/owid/owid-datasets)  
+* [TidyTuesday](https://github.com/rfordatascience/tidytuesday)  
+
+
+
+## Bibliografía {.bibliografia -}
+
++ Matejka, J., & Fitzmaurice, G. (2017, May). Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing. In Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (pp. 1290-1294). ACM.
+
++ https://bbc.github.io/rcookbook/  
+
++ https://github.com/bbc/bbplot  
+
++ https://github.com/dreamRs/esquisse  
+
++ Garrick Aden-Buie. A Gentle Guide to the Grammar of Graphics with ggplot2: https://github.com/gadenbuie/gentle-ggplot2
+
++ Michael Toth. You Need to Start Branding Your Graphs. Here's How, with ggplot!: https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html  
