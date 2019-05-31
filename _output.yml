@@ -1,0 +1,2 @@
+bookdown::gitbook:
+    toc_depth: 4

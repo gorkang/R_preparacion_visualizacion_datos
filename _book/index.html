@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>R para preparación y visualización de datos</title>
+  <meta name="description" content="R para preparación y visualización de datos" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="R para preparación y visualización de datos" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R para preparación y visualización de datos" />
+  
+  
+  
+
+<meta name="author" content="Gorka Navarrete, ORCID: 0000-0001-7678-8656" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="preparando-sistema.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/base.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introducción</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i>Objetivos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#como-empezar"><i class="fa fa-check"></i>Como empezar</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bibliografia"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html"><i class="fa fa-check"></i>Preparando nuestro sistema</a><ul>
+<li class="chapter" data-level="0.1" data-path="preparando-sistema.html"><a href="preparando-sistema.html#empezando-en-a-b-c"><i class="fa fa-check"></i><b>0.1</b> Empezando en A-B-C</a><ul>
+<li><a href="preparando-sistema.html#a-instalar-r"><strong>(A)</strong> Instalar R</a></li>
+<li><a href="preparando-sistema.html#b-instalar-rstudio"><strong>(B)</strong> Instalar RStudio</a></li>
+<li><a href="preparando-sistema.html#c-paquetes-para-el-workshop"><strong>(C)</strong> Paquetes para el workshop</a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="preparando-sistema.html"><a href="preparando-sistema.html#algo-mas-sobre-la-instalacion-de-paquetes"><i class="fa fa-check"></i><b>0.2</b> Algo más sobre la instalación de paquetes</a><ul>
+<li class="chapter" data-level="0.2.1" data-path="preparando-sistema.html"><a href="preparando-sistema.html#cargar-paquetes"><i class="fa fa-check"></i><b>0.2.1</b> Cargar paquetes</a></li>
+<li class="chapter" data-level="0.2.2" data-path="preparando-sistema.html"><a href="preparando-sistema.html#todo-en-uno"><i class="fa fa-check"></i><b>0.2.2</b> Todo en uno</a></li>
+<li class="chapter" data-level="0.2.3" data-path="preparando-sistema.html"><a href="preparando-sistema.html#instalar-paquetes-de-github"><i class="fa fa-check"></i><b>0.2.3</b> Instalar paquetes de Github</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#bibliografia-1"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html"><i class="fa fa-check"></i><b>1</b> Introducción a R y visualización de datos</a><ul>
+<li class="chapter" data-level="" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#paquetes-para-este-capitulo"><i class="fa fa-check"></i>Paquetes para este capítulo</a></li>
+<li class="chapter" data-level="1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#introduccion-1"><i class="fa fa-check"></i><b>1.1</b> Introducción</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#porque-la-visualizacion-de-datos-es-importante---ejemplo-del-mundo-real"><i class="fa fa-check"></i><b>1.1.1</b> Porque la visualización de datos es importante - ejemplo del mundo real</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#por-que-r"><i class="fa fa-check"></i><b>1.1.2</b> Por qué R?</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#bienvenida-al-tidyverse"><i class="fa fa-check"></i><b>1.1.3</b> Bienvenida al tidyverse</a><ul>
+<li class="chapter" data-level="1.1.3.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#tidyverse-vs-base-r"><i class="fa fa-check"></i><b>1.1.3.1</b> Tidyverse vs Base R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#visualizacion-de-datos"><i class="fa fa-check"></i><b>1.2</b> Visualización de datos</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#primeros-pasos---con-training-wheels"><i class="fa fa-check"></i><b>1.2.1</b> Primeros pasos - con training wheels</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#aprendamos-con-garrick"><i class="fa fa-check"></i><b>1.2.2</b> Aprendamos con Garrick</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#primeros-pasos"><i class="fa fa-check"></i><b>1.2.3</b> Primeros pasos</a></li>
+<li class="chapter" data-level="1.2.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#aesthetic-mappings"><i class="fa fa-check"></i><b>1.2.4</b> Aesthetic mappings</a><ul>
+<li class="chapter" data-level="1.2.4.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#color"><i class="fa fa-check"></i><b>1.2.4.1</b> Color</a></li>
+<li class="chapter" data-level="1.2.4.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#shape"><i class="fa fa-check"></i><b>1.2.4.2</b> Shape</a></li>
+<li class="chapter" data-level="1.2.4.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#linetype"><i class="fa fa-check"></i><b>1.2.4.3</b> Linetype</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.5" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geoms"><i class="fa fa-check"></i><b>1.2.5</b> Geoms</a><ul>
+<li class="chapter" data-level="1.2.5.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios-con-geoms"><i class="fa fa-check"></i><b>1.2.5.1</b> Ejercicios con Geoms</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2.6" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#facets"><i class="fa fa-check"></i><b>1.2.6</b> Facets</a></li>
+<li class="chapter" data-level="1.2.7" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#transformaciones-estadisticas"><i class="fa fa-check"></i><b>1.2.7</b> Transformaciones estadísticas</a></li>
+<li class="chapter" data-level="1.2.8" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#personalizacion-de-graficas"><i class="fa fa-check"></i><b>1.2.8</b> Personalización de gráficas</a><ul>
+<li class="chapter" data-level="1.2.8.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#coords"><i class="fa fa-check"></i><b>1.2.8.1</b> Coords</a></li>
+<li class="chapter" data-level="1.2.8.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#scales"><i class="fa fa-check"></i><b>1.2.8.2</b> Scales</a></li>
+<li class="chapter" data-level="1.2.8.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#colors-and-fill-scales"><i class="fa fa-check"></i><b>1.2.8.3</b> Colors and fill scales</a></li>
+<li class="chapter" data-level="1.2.8.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#usando-estilos"><i class="fa fa-check"></i><b>1.2.8.4</b> Usando estilos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios"><i class="fa fa-check"></i><b>1.3</b> Ejercicios</a></li>
+<li class="chapter" data-level="" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#bibliografia-2"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R para preparación y visualización de datos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">R para preparación y visualización de datos</h1>
+<h2 class="subtitle"><em>Doctorado en Neurociencia Social y Cognición</em></h2>
+<p class="author"><em>Gorka Navarrete, ORCID: <a href="http://orcid.org/0000-0001-7678-8656">0000-0001-7678-8656</a></em></p>
+</div>
+<div id="introduccion" class="section level1 unnumbered">
+<h1>Introducción</h1>
+<p>El seminario estará centrado en el uso de R para la preparación y visualización de datos, además de la generación de reportes reproducibles.</p>
+<p>R es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizandonos en el trabajo abierto, colaborativo y reproducible.</p>
+<div id="objetivos" class="section level2 unnumbered">
+<h2>Objetivos</h2>
+<p>Dar las herramientas básicas a los alumnos para que puedan trabajar de manera autónoma con R y RStudio para el proceso de importación, transformación, visualización y reporte de datos.</p>
+<p>Al finalizar el curso los alumnos serán capaces de:
+Importar archivos de datos, transformar los datos, crear nuevas variables.
+Realizar análisis de datos exploratorios, visualizar distribuciones y comparar grupos.
+Generar reportes reproducibles con RMarkdown.</p>
+</div>
+<div id="como-empezar" class="section level2 unnumbered">
+<h2>Como empezar</h2>
+<p>Si ya has completado los pasos indicados en <a href="preparando-sistema.html#preparando-sistema">Preparando nuesto sistema</a>, puedes lanzar el siguiente codigo en tu ordenador para descargar los materiales del curso:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;usethis&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;usethis&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;usethis&#39;</span>)
+
+usethis<span class="op">::</span><span class="kw">use_course</span>()</code></pre>
+</div>
+<div id="bibliografia" class="section level2 bibliografia unnumbered">
+<h2>Bibliografía</h2>
+<p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc. <a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></p>
+<p>Xie, Y., Allaire, J. J., &amp; Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. <a href="https://bookdown.org/yihui/rmarkdown/" class="uri">https://bookdown.org/yihui/rmarkdown/</a></p>
+<p>Yihui Xie (2018). bookdown: Authoring Books and Technical Documents with R Markdown <a href="https://bookdown.org/yihui/bookdown/markdown-syntax.html" class="uri">https://bookdown.org/yihui/bookdown/markdown-syntax.html</a></p>
+<p>Bryan, J., &amp; Hester, J. What They Forgot to Teach You About R. <a href="https://whattheyforgot.org/" class="uri">https://whattheyforgot.org/</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="preparando-sistema.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+</body>
+
+</html>
