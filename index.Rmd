@@ -44,7 +44,7 @@ knitr::opts_chunk$set(
 
 El seminario estará centrado en el uso de R para la preparación y visualización de datos, además de la generación de reportes reproducibles. 
 
-R es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizandonos en el trabajo abierto, colaborativo y reproducible.
+R es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.
 
 
 ## Objetivos {-}
@@ -59,7 +59,7 @@ Generar reportes reproducibles con RMarkdown.
 
 ## Como empezar {-}
 
-Si ya has completado los pasos indicados en [Preparando nuesto sistema](#preparando-sistema), puedes lanzar el siguiente codigo en tu ordenador para descargar los materiales del curso:  
+Si ya has completado los pasos indicados en [Preparando nuesto sistema](#preparando-sistema), puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:  
 
 ```{r como-empezar, eval=FALSE}
 
@@ -73,10 +73,12 @@ usethis::use_course("gorkang/R_preparacion_visualizacion_datos")
 
 ## Bibliografía {.bibliografia -}
 
+Bryan, J., & Hester, J. What They Forgot to Teach You About R. https://whattheyforgot.org/  
+
 Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O'Reilly Media, Inc. https://r4ds.had.co.nz/  
+
+Wickham, H. (2014). Advanced r. Chapman and Hall/CRC. https://adv-r.hadley.nz/
 
 Xie, Y., Allaire, J. J., & Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. https://bookdown.org/yihui/rmarkdown/  
 
 Yihui Xie (2018). bookdown: Authoring Books and Technical Documents with R Markdown https://bookdown.org/yihui/bookdown/markdown-syntax.html  
-
-Bryan, J., & Hester, J. What They Forgot to Teach You About R. https://whattheyforgot.org/  

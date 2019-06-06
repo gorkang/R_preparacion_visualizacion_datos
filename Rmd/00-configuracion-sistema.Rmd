@@ -8,7 +8,7 @@ urlcolor: blue
 
 ## Empezando en A-B-C
 
-Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además de algunas librerias. **Para tener un sistema funcional, completa los pasos A, B y C**. Si ya tienes R y Rstudio instalados (recientemente), puedes pasar directamente al paso **(C)**.  
+Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además de algunas librerías. **Para tener un sistema funcional, completa los pasos A, B y C**. Si ya tienes R y Rstudio instalados (recientemente), puedes pasar directamente al paso **(C)**.  
 
 
 
@@ -37,13 +37,13 @@ knitr::include_graphics(here::here("data", "images", "empezando.png"))
 
 ### **(C)** Paquetes para el workshop  {-}
 
-Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes que simplifican la instalacion de multiples paquetes (e.g. pacman, pak, ...), pero en este caso vamos a usar una version casera.    
+Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, ...), pero en este caso vamos a usar una versión casera.    
 
-**Copia y pega el codigo de abajo y ejecutalo [tecla ENTER] en la consola de R Studio.** El proceso de instalación requiere internet y tardará un buen rato.  
+**Copia y pega el código de abajo y ejecútalo [tecla ENTER] en la consola de RStudio.** El proceso de instalación requiere Internet y tardará un buen rato.  
 
 ```{r install_workshop_packages, message=FALSE, warning=FALSE}  
 
-list_of_packages = c("bookdown", "corrplot", "cowplot", "esquisse", "ggpubr", "ggridges", "janitor", "knitr", "plotly",  
+list_of_packages = c("bookdown", "corrplot", "cowplot", "esquisse", "gapminder", "ggpubr", "ggridges", "ggthemes", "hrbrthemes", "janitor", "knitr", "plotly",  
                      "psych", "remotes", "stringr", "tictoc", "tidyverse", "usethis", "yarrr")  
 new_packages <- list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
 if (length(new_packages)) install.packages(new_packages, dependencies = TRUE)  
@@ -55,13 +55,13 @@ if (length(new_packages)) install.packages(new_packages, dependencies = TRUE)
 
 ## Algo más sobre la instalación de paquetes  
 
-Los paquetes de R son una colección de funciones, datos y documentación que amplian las capacidacidades basicas de R. En 2019 el numero de paquetes en [R-cran](https://cran.r-project.org/web/packages/index.html) ha superado los 14,000 ([ver este buscador de paquetes](https://mran.microsoft.com/packages)).  
+Los paquetes de R son una colección de funciones, datos y documentación que amplían las capacidades básicas de R. En 2019 el numero de paquetes en [R-cran](https://cran.r-project.org/web/packages/index.html) ha superado los 14,000 ([ver este buscador de paquetes](https://mran.microsoft.com/packages)).  
 
-Gran parte de las funciones y paquetes que utilizaremos en este workshop se encuentran contenidas en el meta-paquete "tidyverse" (este es un paquete de paquetes). Ya lo instalamos en **(C)**, pero si quisieras instalarlo solo tendrias que ejecutar la siguiente linea en la **consola** de RStudio (**(1)** en la imagen de arriba):  
+Gran parte de las funciones y paquetes que utilizaremos en este workshop se encuentran contenidas en el meta-paquete "tidyverse" (este es un paquete de paquetes). Ya lo instalamos en **(C)**, pero si quisieras instalarlo solo tendrías que ejecutar la siguiente linea en la **consola** de RStudio (**(1)** en la imagen de arriba):  
 
 + `install.packages("tidyverse")`  
 
-Para instalar otro paquete diferente de "tidyverse", remplaza su nombre entre comillas dentro de la funcion:  
+Para instalar otro paquete diferente de "tidyverse", remplaza su nombre entre comillas dentro de la función:  
 
 + `install.packages("NOMBRE_DE_PAQUETE")`.  
 
@@ -70,7 +70,7 @@ Una vez instalado un paquete, no es necesario volver hacerlo, a menos que reinst
 
 ### Cargar paquetes
 
-Las funciones, datos y documentación dentro de nuestros paquetes no podran ser utilizadas hasta que se cargen en R (en realidad tambien pueden ser llamadas usando su referencia absoluta `::`, por ejemplo: `dplyr::tibble(columna = 1)`. La estructura de lo anterior es: `nombre_paquete::nombre_de_funcion(parametros)`).  
+Las funciones, datos y documentación dentro de nuestros paquetes no podrán ser utilizadas hasta que se carguen en R (en realidad también pueden ser llamadas usando su referencia absoluta `::`, por ejemplo: `dplyr::tibble(columna = 1)`. La estructura de lo anterior es: `nombre_paquete::nombre_de_funcion(parametros)`).  
 
 
 Una vez instalados, para cargar los paquetes se usa la función `library()`:  
@@ -92,7 +92,7 @@ if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 ```  
 
 
-Para instalar multiples paquetes, podemos repetir la linea de mas arriba tantas veces como sea necesaria, o usar una version algo mas sofisticada como el código del apartado **(C)**:  
+Para instalar múltiples paquetes, podemos repetir la linea de mas arriba tantas veces como sea necesaria, o usar una versión algo mas sofisticada como el código del apartado **(C)**:  
 
 + `if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')`  
 + `if (!require('bookdown')) install.packages('bookdown'); library('bookdown')`  
@@ -101,7 +101,7 @@ Para instalar multiples paquetes, podemos repetir la linea de mas arriba tantas 
 
 ### Instalar paquetes de Github  
 
-En ocasiones querremos instalar directamente la versión en desarrollo del paquete desde [Github](https://github.com/). Para eso podemos usar la función `install_github` del paquete `remotes`. Por ejemplo, para instalar el paquete renv desde su [repositorio de Github](https://github.com/rstudio/renv):  
+En ocasiones querremos instalar directamente la versión en desarrollo del paquete desde [Github](https://github.com/). Para eso podemos usar la función `install_github` del paquete `remotes`. Por ejemplo, para instalar el paquete {renv} desde su [repositorio de Github](https://github.com/rstudio/renv):  
 
 + `if (!require('remotes')) install.packages('remotes'); library('remotes')`  
 + `remotes::install_github("rstudio/renv")`  
