@@ -46,6 +46,13 @@
 
 
 
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -145,35 +152,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html"><i class="fa fa-check"></i><b>1</b> Introducción a R y visualización de datos</a><ul>
 <li class="chapter" data-level="" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#paquetes-para-este-capitulo"><i class="fa fa-check"></i>Paquetes para este capítulo</a></li>
-<li class="chapter" data-level="1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#introduccion-1"><i class="fa fa-check"></i><b>1.1</b> Introducción</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#porque-la-visualizacion-de-datos-es-importante---ejemplo-del-mundo-real"><i class="fa fa-check"></i><b>1.1.1</b> Porque la visualización de datos es importante - ejemplo del mundo real</a></li>
-<li class="chapter" data-level="1.1.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#por-que-r"><i class="fa fa-check"></i><b>1.1.2</b> Por qué R?</a></li>
-<li class="chapter" data-level="1.1.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#bienvenida-al-tidyverse"><i class="fa fa-check"></i><b>1.1.3</b> Bienvenida al tidyverse</a><ul>
-<li class="chapter" data-level="1.1.3.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#tidyverse-vs-base-r"><i class="fa fa-check"></i><b>1.1.3.1</b> Tidyverse vs Base R</a></li>
+<li class="chapter" data-level="1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#introduccion-porque-la-visualizacion-de-datos-es-importante"><i class="fa fa-check"></i><b>1.1</b> Introducción: porque la visualización de datos es importante</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#porque-la-visualizacion-de-datos-es-importante---ejemplo-del-mundo-real"><i class="fa fa-check"></i><b>1.1.1</b> Porque la visualización de datos es importante - ejemplo del mundo real</a><ul>
+<li class="chapter" data-level="" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#moraleja-es-importante-mostrar-los-datos-individuales-yo-la-distribucion-de-los-datos"><i class="fa fa-check"></i>Moraleja: es importante mostrar los datos individuales y/o la distribución de los datos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#visualizacion-de-datos"><i class="fa fa-check"></i><b>1.2</b> Visualización de datos</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#primeros-pasos---con-training-wheels"><i class="fa fa-check"></i><b>1.2.1</b> Primeros pasos - con training wheels</a></li>
-<li class="chapter" data-level="1.2.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#aprendamos-con-garrick"><i class="fa fa-check"></i><b>1.2.2</b> Aprendamos con Garrick</a></li>
-<li class="chapter" data-level="1.2.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#primeros-pasos"><i class="fa fa-check"></i><b>1.2.3</b> Primeros pasos</a></li>
-<li class="chapter" data-level="1.2.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#aesthetic-mappings"><i class="fa fa-check"></i><b>1.2.4</b> Aesthetic mappings</a><ul>
-<li class="chapter" data-level="1.2.4.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#color"><i class="fa fa-check"></i><b>1.2.4.1</b> Color</a></li>
-<li class="chapter" data-level="1.2.4.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#shape"><i class="fa fa-check"></i><b>1.2.4.2</b> Shape</a></li>
-<li class="chapter" data-level="1.2.4.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#linetype"><i class="fa fa-check"></i><b>1.2.4.3</b> Linetype</a></li>
+<li class="chapter" data-level="1.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#por-que-r"><i class="fa fa-check"></i><b>1.2</b> Por qué R?</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#bienvenida-al-tidyverse"><i class="fa fa-check"></i><b>1.2.1</b> Bienvenida al tidyverse</a><ul>
+<li class="chapter" data-level="1.2.1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#tidyverse-vs-base-r"><i class="fa fa-check"></i><b>1.2.1.1</b> Tidyverse vs Base R</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2.5" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geoms"><i class="fa fa-check"></i><b>1.2.5</b> Geoms</a><ul>
-<li class="chapter" data-level="1.2.5.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios-con-geoms"><i class="fa fa-check"></i><b>1.2.5.1</b> Ejercicios con Geoms</a></li>
-</ul></li>
-<li class="chapter" data-level="1.2.6" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#facets"><i class="fa fa-check"></i><b>1.2.6</b> Facets</a></li>
-<li class="chapter" data-level="1.2.7" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#transformaciones-estadisticas"><i class="fa fa-check"></i><b>1.2.7</b> Transformaciones estadísticas</a></li>
-<li class="chapter" data-level="1.2.8" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#personalizacion-de-graficas"><i class="fa fa-check"></i><b>1.2.8</b> Personalización de gráficas</a><ul>
-<li class="chapter" data-level="1.2.8.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#coords"><i class="fa fa-check"></i><b>1.2.8.1</b> Coords</a></li>
-<li class="chapter" data-level="1.2.8.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#scales"><i class="fa fa-check"></i><b>1.2.8.2</b> Scales</a></li>
-<li class="chapter" data-level="1.2.8.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#colors-and-fill-scales"><i class="fa fa-check"></i><b>1.2.8.3</b> Colors and fill scales</a></li>
-<li class="chapter" data-level="1.2.8.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#usando-estilos"><i class="fa fa-check"></i><b>1.2.8.4</b> Usando estilos</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#antes-de-empezar"><i class="fa fa-check"></i><b>1.2.2</b> Antes de empezar</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#r-para-visualizacion-de-datos"><i class="fa fa-check"></i><b>1.2.3</b> R para visualización de datos</a><ul>
+<li class="chapter" data-level="1.2.3.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#primeros-pasos---con-training-wheels"><i class="fa fa-check"></i><b>1.2.3.1</b> Primeros pasos - con training wheels</a></li>
+<li class="chapter" data-level="1.2.3.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#aprendamos-con-garrick"><i class="fa fa-check"></i><b>1.2.3.2</b> Aprendamos con Garrick</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios"><i class="fa fa-check"></i><b>1.3</b> Ejercicios</a></li>
+<li class="chapter" data-level="1.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#visualizacion-de-datos-con-ggplot2"><i class="fa fa-check"></i><b>1.3</b> Visualización de datos con ggplot2</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#primeros-pasos"><i class="fa fa-check"></i><b>1.3.1</b> Primeros pasos</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#aesthetic-mappings"><i class="fa fa-check"></i><b>1.3.2</b> Aesthetic mappings</a><ul>
+<li class="chapter" data-level="1.3.2.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#color"><i class="fa fa-check"></i><b>1.3.2.1</b> Color</a></li>
+<li class="chapter" data-level="1.3.2.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#shape"><i class="fa fa-check"></i><b>1.3.2.2</b> Shape</a></li>
+<li class="chapter" data-level="1.3.2.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#linetype"><i class="fa fa-check"></i><b>1.3.2.3</b> Linetype</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geoms"><i class="fa fa-check"></i><b>1.3.3</b> Geoms</a><ul>
+<li class="chapter" data-level="1.3.3.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_point-y-geom_jitter"><i class="fa fa-check"></i><b>1.3.3.1</b> geom_point y geom_jitter</a></li>
+<li class="chapter" data-level="1.3.3.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_smooth"><i class="fa fa-check"></i><b>1.3.3.2</b> geom_smooth</a></li>
+<li class="chapter" data-level="1.3.3.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_boxplot-y-geom_violin"><i class="fa fa-check"></i><b>1.3.3.3</b> geom_boxplot y geom_violin</a></li>
+<li class="chapter" data-level="1.3.3.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_histogram"><i class="fa fa-check"></i><b>1.3.3.4</b> geom_histogram</a></li>
+<li class="chapter" data-level="1.3.3.5" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_dotplot"><i class="fa fa-check"></i><b>1.3.3.5</b> geom_dotplot</a></li>
+<li class="chapter" data-level="1.3.3.6" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_density"><i class="fa fa-check"></i><b>1.3.3.6</b> geom_density</a></li>
+<li class="chapter" data-level="1.3.3.7" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_density_ridges"><i class="fa fa-check"></i><b>1.3.3.7</b> geom_density_ridges</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#facets"><i class="fa fa-check"></i><b>1.3.4</b> Facets</a><ul>
+<li class="chapter" data-level="1.3.4.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#facet_grid"><i class="fa fa-check"></i><b>1.3.4.1</b> facet_grid</a></li>
+<li class="chapter" data-level="1.3.4.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#facet_wrap"><i class="fa fa-check"></i><b>1.3.4.2</b> facet_wrap</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.5" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#transformaciones-estadisticas"><i class="fa fa-check"></i><b>1.3.5</b> Transformaciones estadísticas</a><ul>
+<li class="chapter" data-level="1.3.5.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#proporciones"><i class="fa fa-check"></i><b>1.3.5.1</b> Proporciones</a></li>
+<li class="chapter" data-level="1.3.5.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#stat_summary"><i class="fa fa-check"></i><b>1.3.5.2</b> stat_summary</a></li>
+<li class="chapter" data-level="1.3.5.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#promedios-por-grupo"><i class="fa fa-check"></i><b>1.3.5.3</b> Promedios por grupo</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.6" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#personalizacion-de-graficas"><i class="fa fa-check"></i><b>1.3.6</b> Personalización de gráficas</a><ul>
+<li class="chapter" data-level="1.3.6.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#coords"><i class="fa fa-check"></i><b>1.3.6.1</b> Coords</a></li>
+<li class="chapter" data-level="1.3.6.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#scales"><i class="fa fa-check"></i><b>1.3.6.2</b> Scales</a></li>
+<li class="chapter" data-level="1.3.6.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#colors-and-fill-scales"><i class="fa fa-check"></i><b>1.3.6.3</b> Colors and fill scales</a></li>
+<li class="chapter" data-level="1.3.6.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#usando-estilos"><i class="fa fa-check"></i><b>1.3.6.4</b> Usando estilos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#visualizacion-interactiva"><i class="fa fa-check"></i><b>1.4</b> Visualización interactiva</a><ul>
+<li class="chapter" data-level="1.4.0.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#graficas-interactivas"><i class="fa fa-check"></i><b>1.4.0.1</b> Gráficas interactivas</a></li>
+<li class="chapter" data-level="1.4.0.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#animando-graficas"><i class="fa fa-check"></i><b>1.4.0.2</b> Animando gráficas</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios"><i class="fa fa-check"></i><b>1.5</b> Ejercicios</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios-con-geoms-colores"><i class="fa fa-check"></i><b>1.5.1</b> Ejercicios con Geoms, colores…</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#sintaxis-aes"><i class="fa fa-check"></i><b>1.5.2</b> Sintaxis aes()</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#bibliografia-2"><i class="fa fa-check"></i>Bibliografía</a></li>
 </ul></li>
 </ul>
@@ -201,7 +234,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="introduccion" class="section level1 unnumbered">
 <h1>Introducción</h1>
 <p>El seminario estará centrado en el uso de R para la preparación y visualización de datos, además de la generación de reportes reproducibles.</p>
-<p>R es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizandonos en el trabajo abierto, colaborativo y reproducible.</p>
+<p>R es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.</p>
 <div id="objetivos" class="section level2 unnumbered">
 <h2>Objetivos</h2>
 <p>Dar las herramientas básicas a los alumnos para que puedan trabajar de manera autónoma con R y RStudio para el proceso de importación, transformación, visualización y reporte de datos.</p>
@@ -212,17 +245,18 @@ Generar reportes reproducibles con RMarkdown.</p>
 </div>
 <div id="como-empezar" class="section level2 unnumbered">
 <h2>Como empezar</h2>
-<p>Si ya has completado los pasos indicados en <a href="preparando-sistema.html#preparando-sistema">Preparando nuesto sistema</a>, puedes lanzar el siguiente codigo en tu ordenador para descargar los materiales del curso:</p>
+<p>Si ya has completado los pasos indicados en <a href="preparando-sistema.html#preparando-sistema">Preparando nuesto sistema</a>, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;usethis&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;usethis&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;usethis&#39;</span>)
 
-usethis<span class="op">::</span><span class="kw">use_course</span>()</code></pre>
+usethis<span class="op">::</span><span class="kw">use_course</span>(<span class="st">&quot;gorkang/R_preparacion_visualizacion_datos&quot;</span>)</code></pre>
 </div>
 <div id="bibliografia" class="section level2 bibliografia unnumbered">
 <h2>Bibliografía</h2>
+<p>Bryan, J., &amp; Hester, J. What They Forgot to Teach You About R. <a href="https://whattheyforgot.org/" class="uri">https://whattheyforgot.org/</a></p>
 <p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc. <a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></p>
+<p>Wickham, H. (2014). Advanced r. Chapman and Hall/CRC. <a href="https://adv-r.hadley.nz/" class="uri">https://adv-r.hadley.nz/</a></p>
 <p>Xie, Y., Allaire, J. J., &amp; Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. <a href="https://bookdown.org/yihui/rmarkdown/" class="uri">https://bookdown.org/yihui/rmarkdown/</a></p>
 <p>Yihui Xie (2018). bookdown: Authoring Books and Technical Documents with R Markdown <a href="https://bookdown.org/yihui/bookdown/markdown-syntax.html" class="uri">https://bookdown.org/yihui/bookdown/markdown-syntax.html</a></p>
-<p>Bryan, J., &amp; Hester, J. What They Forgot to Teach You About R. <a href="https://whattheyforgot.org/" class="uri">https://whattheyforgot.org/</a></p>
 
 </div>
 </div>

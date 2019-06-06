@@ -13,5 +13,5 @@ rmd_files: [
   #"Rmd/02-preparacion_transformacion.Rmd",
   #"Rmd/03-analisis-datos-exploratorio.Rmd",
   #"Rmd/04-rmarkdown.Rmd",
-  #"Rmd/05-reproducibilidad.Rmd",
+  #"Rmd/05-reporte-final.Rmd",
   ]
