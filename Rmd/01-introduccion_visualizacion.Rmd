@@ -86,14 +86,15 @@ En el experimento le preguntamos a las personas por la probabilidad de que les a
 
 Miramos el error promedio en función de la pregunta (cuanto se han alejado de la probabilidad correcta), y vemos que nuestra manipulación ha tenido un efecto considerable:  
 
-```{r visualizacion-importante-01, message=FALSE, warning=FALSE, cache=TRUE}
+```{r visualizacion-importante-01, message=FALSE, warning=FALSE, cache=FALSE}
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 
 # Leemos datos
 DF = read_csv(
   here::here("data", "files", "01-visualizacion-importante.csv")) %>% 
   mutate(Question = as.factor(
-    case_when(Question_p_of == 0 ~ "p (salga uno)",
-              Question_p_of == 1 ~ "p (no salga ninguno)")))
+    case_when(Question_p_of == 1 ~ "p (salga uno)",
+              Question_p_of == 0 ~ "p (no salga ninguno)")))
 
 # Promedio por condicion
 DF %>% 
@@ -293,7 +294,7 @@ Hay algunos recursos que resultan muy útiles:
     + @RLadiesSantiago  
     
 
-* Webs como [R bloggers](www.r-bloggers.co)  
+* Webs como [R bloggers](https://www.r-bloggers.com/)  
 
 
 Y otros que son más que **imprescindibles**. Nadie sabe como los antiguos podían programar antes de la llegada de Stackoverflow:  
@@ -336,18 +337,18 @@ La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquiss
 
 #### Aprendamos con Garrick 
 
-[Garrick Aden-Buie](https://www.garrickadenbuie.com/) (@grrrck) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/). Vamos a usarla para familiarizarnos con algunas de las funcionalidades de ggplot.  
+[Garrick Aden-Buie](https://www.garrickadenbuie.com/) (@grrrck) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28). Vamos a usarla para familiarizarnos con algunas de las funcionalidades de ggplot.  
 <!-- https://github.com/gadenbuie/gentle-ggplot2  -->
 
 
-**Antes** de LANZAR LA PRESENTACION [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/), asegúrate que tienes instalados los paquetes `tidyverse` y `gapminder`, y crea el DF `pop_simple` usando el código de abajo.  
+**Antes** de LANZAR LA PRESENTACION [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28), asegúrate que tienes instalados los paquetes `tidyverse` y `gapminder`, y crea el DF `pop_simple` usando el código de abajo.  
 
 ```{r garrick, message=FALSE, warning=FALSE}
 
 if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 if (!require('gapminder')) install.packages('gapminder'); library('gapminder')  
 
-pop_simple <- gapminder %>% 
+tidy_pop <- gapminder %>% 
   filter(country %in% c("Canada", "China", "United States"), 
          year >= 1997) %>% 
   select(country, year, pop) %>% 
@@ -429,8 +430,8 @@ En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el co
     geom_point()
   
   # Color "rojo" para los puntos
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = "red")) + 
-    geom_point()
+  ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
+    geom_point(color = "red")
   
   # Color en funcion de la variable 'continent'
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + 
@@ -450,8 +451,8 @@ Imagina que queremos asignar colores manualmente.
 
 ```{r color-01, message=FALSE, warning=FALSE, eval=FALSE}
 
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = c("red", "grey", "green", "purple", "black"))) + 
-    geom_point() 
+  ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
+    geom_point(color = c("red", "grey", "green", "purple", "black")) 
   # Error: Aesthetics must be either length 1 or the same as the data (1704): colour
 
 ```
@@ -606,7 +607,7 @@ Hagamos una pausa para hacer algunos [ejercicios usando diferentes geoms, colore
 ```{r geom-dotplot, message=FALSE, warning=FALSE, cache=TRUE}
   
   # Dotplot
-  ggplot(mpg, aes(x = manufacturer)) +
+  ggplot(mpg, aes(manufacturer)) +
     geom_dotplot() +
     coord_flip()
 
@@ -656,24 +657,6 @@ Hagamos una pausa para hacer algunos [ejercicios usando diferentes geoms, colore
 ```
 
 
-#### stat_density_2d
-
-```{r geom-stat_density_2d}
-
-  # Plot puntos
-  ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) +
-    geom_point() +
-    guides(alpha = FALSE)
-    
-
-  # stat_density_2d
-  ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) +
-    stat_density_2d(aes(alpha = ..piece..)) +
-    guides(alpha = FALSE)
-
-
-```
-
 
 
 ### Facets  
@@ -686,24 +669,25 @@ Hay dos funciones para **facet_grid** y **facet_wrap**. facet_grid(~ variable) n
 ```{r facet_grid, message=FALSE, warning=FALSE, cache=TRUE}
  
   # Plot inicial
-  ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) +
+  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
     geom_point(alpha = .2) +
     facet_grid(~ continent) +
     guides(alpha = FALSE, color = FALSE)
 
   # Cambiamos ejes
-  ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) +
+  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
     geom_point(alpha = .2) +
     facet_grid(continent ~ .) +
     guides(alpha = FALSE, color = FALSE)
   
   # Añadimos una segunda variable
-  ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, color = country)) +
+  ggplot(gapminder, aes(gdpPercap, lifeExp, color = country)) +
     geom_line(alpha = .2) +
     facet_grid(continent ~ pop > 5000000) +
     guides(alpha = FALSE, color = FALSE)
 
 ```
+
 
 #### facet_wrap
 
@@ -711,19 +695,19 @@ Hay dos funciones para **facet_grid** y **facet_wrap**. facet_grid(~ variable) n
 ```{r facet_wrap, message=FALSE, warning=FALSE, cache=TRUE}
  
   # Plot base
-  ggplot(gapminder, aes(x = year, y = lifeExp, color = continent)) +
+  ggplot(gapminder, aes(year, lifeExp, color = continent)) +
     geom_line(alpha = .2) +
     facet_wrap( ~ continent) +
     guides(alpha = FALSE, color = FALSE)
 
   # Una sola fila
-  ggplot(gapminder, aes(x = year, y = lifeExp, color = continent)) +
+  ggplot(gapminder, aes(year, lifeExp, color = continent)) +
       geom_line(alpha = .2) +
       facet_wrap( ~ continent, nrow = 1) +
       guides(alpha = FALSE, color = FALSE)
 
   # 5 filas
-  ggplot(gapminder, aes(x = year, y = lifeExp, color = continent)) +
+  ggplot(gapminder, aes(year, lifeExp, color = continent)) +
     geom_line(alpha = .2) +
     facet_wrap(continent ~ gdpPercap > 4000, nrow = 5) +
     guides(alpha = FALSE, color = FALSE)
@@ -741,12 +725,12 @@ VER: https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations
 ```{r transformaciones-estadisticas-proporciones, message=FALSE, warning=FALSE, cache=TRUE}
 
   # Gráfico inicial
-  ggplot(gapminder) +
-      geom_bar(aes(x = continent))
+  ggplot(gapminder, aes(continent)) +
+      geom_bar()
   
   # Proporciones
-  ggplot(gapminder) +
-    geom_bar(aes(x = continent, y = ..prop.., group = 1))
+  ggplot(gapminder, aes(continent, ..prop.., group = 1)) +
+    geom_bar()
 
 ```
 
@@ -756,17 +740,15 @@ VER: https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations
 ```{r transformaciones-estadisticas-stat_summary, message=FALSE, warning=FALSE, cache=TRUE}
 
   # Mediana, máximo y mínimo
-  ggplot(gapminder) + 
+  ggplot(gapminder, aes(continent, lifeExp)) + 
     stat_summary(
-      aes(continent, lifeExp),
       fun.ymin = min,
       fun.ymax = max,
       fun.y = median)
 
   # Media y media ± sd
-    ggplot(gapminder) + 
-      stat_summary(
-        aes(continent, lifeExp),
+  ggplot(gapminder, aes(continent, lifeExp)) +
+    stat_summary(
       fun.ymin = function(x) mean(x) - sd(x),
       fun.ymax = function(x) mean(x) + sd(x),
       fun.y = mean)
@@ -829,17 +811,17 @@ Hagamos una pausa para hacer algunos [ejercicios con transformaciones estadísti
 ```{r personalizacion-graficas-coord, message=FALSE, warning=FALSE, cache=TRUE}
 
   # Gráfico inicial
-  ggplot(gapminder) +
-      geom_bar(aes(continent))
+  ggplot(gapminder, aes(continent)) +
+      geom_bar()
 
   # coord_flip()
-  ggplot(gapminder) +
-    geom_bar(aes(continent)) +
+  ggplot(gapminder, aes(continent)) +
+    geom_bar() +
     coord_flip()
 
   # coord_polar()
-  ggplot(gapminder) +
-    geom_bar(aes(continent)) +
+  ggplot(gapminder, aes(continent)) +
+    geom_bar() +
     coord_polar()
 
 ```
@@ -890,12 +872,12 @@ Hagamos una pausa para hacer algunos [ejercicios con transformaciones estadísti
     theme(axis.text.x = element_blank())
   
   # Proporciones
-  ggplot(gapminder) +
-    geom_bar(aes(x = continent, y = ..prop.., group = 1))
+  ggplot(gapminder, aes(continent, ..prop.., group = 1)) +
+    geom_bar()
   
   # %
-  ggplot(gapminder) + 
-  geom_bar(aes(x = continent, y = ..prop.., group = 1)) +
+  ggplot(gapminder, aes(continent, ..prop.., group = 1)) + 
+  geom_bar() +
   scale_y_continuous(labels = scales::percent)
   
 
@@ -918,17 +900,17 @@ Hagamos una pausa para hacer algunos [ejercicios con transformaciones estadísti
     scale_fill_brewer(palette = "Blues")
   
   # Color grey
-  ggplot(iris, aes(x = Petal.Width, y = Petal.Length, color = Species)) +
+  ggplot(iris, aes(Petal.Width, Petal.Length, color = Species)) +
     geom_point() + 
     scale_color_grey(start = 0.2, end = 0.8, na.value = "red")
   
   # Gradient
-  ggplot(iris, aes(x = Petal.Width, y = Petal.Length, color = Petal.Width)) +
+  ggplot(iris, aes(Petal.Width, Petal.Length, color = Petal.Width)) +
     geom_point() + 
     scale_color_gradient(low = "red", high = "blue")
   
   # Gradient con un numero predefinidos de una paleta
-  ggplot(iris, aes(x = Petal.Width, y = Petal.Length, color = Petal.Width)) +
+  ggplot(iris, aes(Petal.Width, Petal.Length, color = Petal.Width)) +
     geom_point() + 
     scale_colour_gradientn(colours = terrain.colors(3))
   
@@ -941,13 +923,13 @@ Hagamos una pausa para hacer algunos [ejercicios con transformaciones estadísti
 ```{r personalizando-combinando-basico}
 
 plot1 = ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
-    geom_point(alpha = .1) +
-    scale_y_continuous(breaks = seq(0, 100, 5)) +
-    scale_x_log10(labels = scales::dollar_format(prefix="$", suffix = "M")) +
+  geom_point(alpha = .1) +
+  scale_y_continuous(breaks = seq(0, 100, 5)) +
+  scale_x_log10(labels = scales::dollar_format(prefix="$", suffix = "M")) +
   theme(legend.position = "top")
 
-plot2 = ggplot(gapminder) + 
-  geom_bar(aes(x = continent, y = ..prop.., group = 1)) +
+plot2 = ggplot(gapminder, aes(continent, ..prop.., group = 1)) + 
+  geom_bar() +
   scale_y_continuous(labels = scales::percent) +
   coord_flip()
   
@@ -964,7 +946,7 @@ cowplot::plot_grid(plot2, plot1,
 if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
 
 # Set up scatterplot
-scatterplot <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+scatterplot <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
   geom_point(size = 3, alpha = 0.6) +
   guides(color = FALSE) +
   theme(plot.margin = margin())
@@ -1018,7 +1000,7 @@ https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggp
 if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
 
 # Create a base graph
-p <- ggplot(iris, aes(x = Petal.Width, y = Petal.Length, color = Species)) +
+p <- ggplot(iris, aes(Petal.Width, Petal.Length, color = Species)) +
   geom_point() +
   labs(title = 'A ggplot simple graph',
        subtitle = 'Simple tweaks to improve plots, or not',
@@ -1169,7 +1151,7 @@ cowplot::plot_grid(plot1, plot2, plot3, plot4, plot5, plot6,
 ```{r geoms-ejercicios-02, echo=FALSE}
 
 ggplot(diamonds) + 
-  geom_bar(aes(x = cut, fill = clarity))
+  geom_bar(aes(cut, fill = clarity))
 
 ```
 
@@ -1207,15 +1189,15 @@ cowplot::plot_grid(plot1, plot2,
 
 ```{r linetype-01, message=FALSE, warning=FALSE, eval = FALSE}
 
-  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
+  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
     geom_point() +
     stat_summary(fun.y = mean, geom = "line", linetype = "dashed")
     
-  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class, linetype = class)) +
+  ggplot(mpg, mapping = aes(displ, hwy, color = class, linetype = class)) +
     geom_point() +
     stat_summary(fun.y = mean, geom = "line")
 
-  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
+  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
     geom_point() +
     stat_summary(fun.y = mean, geom = "line", linetype = class)
 
@@ -1225,17 +1207,17 @@ cowplot::plot_grid(plot1, plot2,
 ```{r solucion-linetype-01, eval=FALSE, include=FALSE}
 
   # SOLUCION 1
-  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
+  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
     geom_point() +
     stat_summary(fun.y = mean, geom = "line", aes(linetype = class))
 
   # SOLUCION 2
-  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class, linetype = class)) +
+  ggplot(mpg, mapping = aes(displ, hwy, color = class, linetype = class)) +
     geom_point() +
     stat_summary(fun.y = mean, geom = "line")
   
   # SOLUCION 3
-  ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = class)) +
+  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
     geom_point() +
     stat_summary(fun.y = mean, geom = "line", linetype = "dashed")
   
@@ -1285,13 +1267,11 @@ ggplot(gapminder, aes(gdpPercap, continent, fill = continent, color = continent)
 7. Cuando al plot **A** trato de añadirle lineas con me aparece algo como lo de **B**.  
 
 ```{r ejercicio-7a}
-plotA = ggplot(data = mpg,
-       mapping = aes(x = displ, y = hwy, color = class)) +
+plotA = ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   theme(legend.position = "bottom")
 
-plotB = ggplot(data = mpg,
-       mapping = aes(x = displ, y = hwy, color = class)) +
+plotB = ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   geom_line() +
   theme(legend.position = "bottom")
@@ -1304,8 +1284,7 @@ Pero en realidad yo quiero algo como esto. ¿Podrías reproducirlo?
 
 ```{r ejercicio-7b, echo=FALSE}
 
-  ggplot(data = mpg,
-         mapping = aes(x = displ, y = hwy, color = class)) +
+  ggplot(mpg, aes(displ, hwy, color = class)) +
     geom_point() +
     stat_summary(fun.y = mean, geom = "line") +
     theme(legend.position = "bottom")
@@ -1317,9 +1296,8 @@ Pero en realidad yo quiero algo como esto. ¿Podrías reproducirlo?
 
 ```{r ejercicio-8, echo=FALSE}
 
-  ggplot(gapminder) + 
+  ggplot(gapminder, aes(country, lifeExp, color = continent)) + 
     stat_summary(
-      aes(country, lifeExp, color = continent),
       fun.ymin = function(x) median(x) - sd(x),
       fun.ymax = function(x) median(x) + sd(x),
       fun.y = mean) +
