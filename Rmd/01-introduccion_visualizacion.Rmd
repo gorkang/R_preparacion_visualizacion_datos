@@ -4,7 +4,7 @@
 
 #### Paquetes para este capítulo {-}
 
-```{r paquetes-01, echo=TRUE, message=FALSE, warning=FALSE}
+```{r paquetes-01, echo=TRUE}
 
 if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
 if (!require('esquisse')) install.packages('esquisse'); library('esquisse') 
@@ -86,7 +86,7 @@ En el experimento le preguntamos a las personas por la probabilidad de que les a
 
 Miramos el error promedio en función de la pregunta (cuanto se han alejado de la probabilidad correcta), y vemos que nuestra manipulación ha tenido un efecto considerable:  
 
-```{r visualizacion-importante-01, message=FALSE, warning=FALSE, cache=FALSE}
+```{r visualizacion-importante-01, cache=FALSE}
 if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 
 # Leemos datos
@@ -107,7 +107,7 @@ DF %>%
 
 Hay una diferencia notable entre condiciones. Pasamos de un error promedio del -30.7% a tan solo 4%, simplemente cambiando la pregunta. Hagamos un sencillo análisis de regresión para ver si la diferencia es significativa, y cuanta varianza explica nuestro modelo.  
 
-```{r visualizacion-importante-01b, message=FALSE, warning=FALSE, cache=TRUE}
+```{r visualizacion-importante-01b}
 
 # Modelo de regresion
 modelo_regresion = lm(Error ~ Question, DF)
@@ -125,7 +125,7 @@ shapiro.test(modelo_regresion$residuals)
 
 Todo es hermoso. Tenemos un efecto claramente significativo de la pregunta (y con un R2-ajustado de .258, no está nada mal), y además, nuestro modelo no incumple el supuesto de normalidad de residuos (por los pelos!). Preparamos un plot con promedios y barras con error standard para nuestro paper:  
 
-```{r visualizacion-importante-01c, message=FALSE, warning=FALSE, cache=TRUE}
+```{r visualizacion-importante-01c}
 
 # Plot para publicación
 plot_inicial = ggplot(DF, aes(Question, Error, fill = Question)) +
@@ -147,7 +147,7 @@ Estamos listos para escribir nuestro paper.
 
 Solo por curiosidad, veamos boxplots de los dos grupos. Mmmm... hay algo extraño:  
 
-```{r visualizacion-importante-02, message=FALSE, warning=FALSE, cache=TRUE}
+```{r visualizacion-importante-02}
   
 # Boxplots por condición
 ggplot(DF, aes(Question, Error, color = Question, group = Question)) +
@@ -160,7 +160,7 @@ ggplot(DF, aes(Question, Error, color = Question, group = Question)) +
 
 Volvemos a extraer descriptivos... pero esta vez incluimos la mediana.  
 
-```{r visualizacion-importante-03, message=FALSE, warning=FALSE}
+```{r visualizacion-importante-03}
 
 # Promedio y mediana por condicion
 DF %>% 
@@ -174,7 +174,7 @@ DF %>%
 
 Que esta pasando? Veamos las respuestas de todos los participantes, junto con la distribución de los datos, más la media y mediana por condición.  
 
-```{r visualizacion-importante-04, message=FALSE, warning=FALSE, cache=TRUE}
+```{r visualizacion-importante-04}
 
 plot_final = ggplot(DF, aes(Question, Error, color = Question, group = Question)) +
   geom_jitter(size = 2) +
@@ -202,7 +202,7 @@ plot_final
 
 **TLDR**: La manera en la visualizamos la información determina las conclusiones a las que llegamos.   
 
-```{r visualizacion-importante-05, message=FALSE, warning=FALSE, fig.width=12, cache=TRUE}
+```{r visualizacion-importante-05, fig.width=12}
 
 # Visualizamos el grafico inicial y el final, uno al lado del otro
 cowplot::plot_grid(plot_inicial, plot_final)
@@ -322,7 +322,7 @@ Para empezar a usar ggplot sin tener que preocuparnos de su complejidad, podemos
 
 La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquisse):  
 
-```{r visualizacion_0, message=FALSE, warning=FALSE, eval=FALSE}
+```{r visualizacion_0, eval=FALSE}
 
 # 1) Asegurate que hemos instalado el paquete esquisse
   if (!require('esquisse')) install.packages('esquisse'); library('esquisse')
@@ -343,7 +343,7 @@ La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquiss
 
 **Antes** de LANZAR LA PRESENTACION [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28), asegúrate que tienes instalados los paquetes `tidyverse` y `gapminder`, y crea el DF `pop_simple` usando el código de abajo.  
 
-```{r garrick, message=FALSE, warning=FALSE}
+```{r garrick}
 
 if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 if (!require('gapminder')) install.packages('gapminder'); library('gapminder')  
@@ -401,7 +401,7 @@ En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el co
 ---  
 
 
-```{r aes, message=FALSE, warning=FALSE, cache=TRUE}
+```{r aes}
   
   # x = gdpPercap, y = lifeExp
   ggplot(data = gapminder, 
@@ -423,7 +423,7 @@ En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el co
 * [Codigo HEX de colores](https://www.rapidtables.com/web/color/RGB_Color.html#color-picker)  
 
 
-```{r color, message=FALSE, warning=FALSE, cache=TRUE}
+```{r color}
 
   # Grafico inicial
   ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
@@ -449,7 +449,7 @@ En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el co
 
 Imagina que queremos asignar colores manualmente. 
 
-```{r color-01, message=FALSE, warning=FALSE, eval=FALSE}
+```{r color-01, eval=FALSE}
 
   ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
     geom_point(color = c("red", "grey", "green", "purple", "black")) 
@@ -459,7 +459,7 @@ Imagina que queremos asignar colores manualmente.
 
 Tenemos que indicar que el color depende de 'class', y después usar scale_color_manual()  
 
-```{r color-01b, message=FALSE, warning=FALSE, cache=TRUE}
+```{r color-01b}
 
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + 
     geom_point() +
@@ -476,7 +476,7 @@ Códigos para las distintas formas:
 
 <!-- (https://d33wubrfki0l68.cloudfront.net/2705b59d57362a103f0dad04b0ccfdeff9a101d2/3dc1b/visualize_files/figure-html/shapes-1.png) -->  
 
-```{r shape, message=TRUE, warning=TRUE, cache=TRUE}
+```{r shape, message=TRUE, warning=TRUE}
 
   ggplot(gapminder, aes(gdpPercap, lifeExp, shape = continent)) + 
     geom_point() 
@@ -493,7 +493,7 @@ Códigos para los distintos estilos de linea:
 
 <!-- (http://sape.inf.usi.ch/sites/default/files/ggplot2-linetype-identity.png) -->  
 
-```{r linetype, message=FALSE, warning=FALSE, cache=TRUE}
+```{r linetype}
 
   ggplot(gapminder, aes(year, lifeExp, linetype = continent, color = continent)) + 
     stat_summary(fun.y = mean, geom = "line") 
@@ -508,7 +508,7 @@ Una de las cosas más difíciles (inicialmente) cuando nos enfrentamos a unos da
 #### geom_point y geom_jitter
 
 
-```{r geoms-points-smooth, message=FALSE, warning=FALSE, cache=TRUE}
+```{r geoms-points-smooth}
 
 # Points
   ggplot(mpg, aes(displ, hwy)) + 
@@ -523,7 +523,7 @@ Una de las cosas más difíciles (inicialmente) cuando nos enfrentamos a unos da
 
 #### geom_smooth
 
-```{r geom-smooth, message=FALSE, warning=FALSE, cache=TRUE}
+```{r geom-smooth}
   
   # Linea de tendencia (default loess)
   ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
@@ -560,7 +560,7 @@ Hagamos una pausa para hacer algunos [ejercicios usando diferentes geoms, colore
 
 #### geom_boxplot y geom_violin
 
-```{r geoms-boxplot-violin, message=FALSE, warning=FALSE, cache=TRUE}
+```{r geoms-boxplot-violin}
 
   # Boxplot base
   ggplot(gapminder, aes(continent, lifeExp)) + 
@@ -584,7 +584,7 @@ Hagamos una pausa para hacer algunos [ejercicios usando diferentes geoms, colore
 
 #### geom_histogram
 
-```{r geom-histogram, message=FALSE, warning=FALSE, cache=TRUE}
+```{r geom-histogram}
 
   # Histogram - variable continua
   ggplot(gapminder, aes(lifeExp)) + 
@@ -604,7 +604,7 @@ Hagamos una pausa para hacer algunos [ejercicios usando diferentes geoms, colore
 
 #### geom_dotplot
 
-```{r geom-dotplot, message=FALSE, warning=FALSE, cache=TRUE}
+```{r geom-dotplot}
   
   # Dotplot
   ggplot(mpg, aes(manufacturer)) +
@@ -616,7 +616,7 @@ Hagamos una pausa para hacer algunos [ejercicios usando diferentes geoms, colore
 
 #### geom_density
 
-```{r geom-density, message=FALSE, warning=FALSE, cache=TRUE}
+```{r geom-density}
   
   # Density
   ggplot(gapminder, aes(lifeExp)) + 
@@ -643,7 +643,7 @@ Hagamos una pausa para hacer algunos [ejercicios usando diferentes geoms, colore
 
 #### geom_density_ridges
 
-```{r geom-density_ridges, message=FALSE, warning=FALSE, cache=TRUE}
+```{r geom-density_ridges}
         
   # geom_density_ridges
   ggplot(gapminder, aes(lifeExp, continent, fill = continent)) + 
@@ -666,7 +666,7 @@ Hay dos funciones para **facet_grid** y **facet_wrap**. facet_grid(~ variable) n
 
 #### facet_grid
 
-```{r facet_grid, message=FALSE, warning=FALSE, cache=TRUE}
+```{r facet_grid}
  
   # Plot inicial
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
@@ -692,7 +692,7 @@ Hay dos funciones para **facet_grid** y **facet_wrap**. facet_grid(~ variable) n
 #### facet_wrap
 
 
-```{r facet_wrap, message=FALSE, warning=FALSE, cache=TRUE}
+```{r facet_wrap}
  
   # Plot base
   ggplot(gapminder, aes(year, lifeExp, color = continent)) +
@@ -722,7 +722,7 @@ VER: https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations
 
 #### Proporciones
 
-```{r transformaciones-estadisticas-proporciones, message=FALSE, warning=FALSE, cache=TRUE}
+```{r transformaciones-estadisticas-proporciones}
 
   # Gráfico inicial
   ggplot(gapminder, aes(continent)) +
@@ -737,7 +737,7 @@ VER: https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations
 
 #### stat_summary 
 
-```{r transformaciones-estadisticas-stat_summary, message=FALSE, warning=FALSE, cache=TRUE}
+```{r transformaciones-estadisticas-stat_summary}
 
   # Mediana, máximo y mínimo
   ggplot(gapminder, aes(continent, lifeExp)) + 
@@ -758,7 +758,7 @@ VER: https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations
 
 #### Promedios por grupo
 
-```{r transformaciones-estadisticas-promedios-grupo, message=FALSE, warning=FALSE, cache=TRUE}
+```{r transformaciones-estadisticas-promedios-grupo}
 
 # Usando lineas
 ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
@@ -808,7 +808,7 @@ Hagamos una pausa para hacer algunos [ejercicios con transformaciones estadísti
 #### Coords  
 
 
-```{r personalizacion-graficas-coord, message=FALSE, warning=FALSE, cache=TRUE}
+```{r personalizacion-graficas-coord}
 
   # Gráfico inicial
   ggplot(gapminder, aes(continent)) +
@@ -830,7 +830,7 @@ Hagamos una pausa para hacer algunos [ejercicios con transformaciones estadísti
 
 #### Scales  
 
-```{r personalizacion-graficas-axis, message=FALSE, warning=FALSE, cache=TRUE}
+```{r personalizacion-graficas-axis}
   
   # Grafico inicial
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
@@ -888,7 +888,7 @@ Hagamos una pausa para hacer algunos [ejercicios con transformaciones estadísti
 
 #### Colors and fill scales
 
-```{r personalizacion-graficas-color-fill, message=FALSE, warning=FALSE, cache=TRUE}
+```{r personalizacion-graficas-color-fill}
 
   # Plot inicial
   ggplot(gapminder, aes(continent, lifeExp, fill = continent)) + 
@@ -995,7 +995,7 @@ https://ggplot2.tidyverse.org/reference/ggtheme.html
 https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html
 
 
-```{r personalizacion-graficas-01, message=FALSE, warning=FALSE, cache=TRUE}
+```{r personalizacion-graficas-01}
 
 if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
 
@@ -1015,7 +1015,7 @@ p
 
 Usando el tema fivethirtyeight
 
-```{r personalizacion-graficas-02, message=FALSE, warning=FALSE, cache=TRUE}
+```{r personalizacion-graficas-02}
 
 # if (!require('hrbrthemes')) install.packages('hrbrthemes'); library('hrbrthemes')
 if (!require('ggthemes')) install.packages('ggthemes'); library('ggthemes')
@@ -1027,7 +1027,7 @@ p +
 ```
 
 Usando el tema economist
-```{r personalizacion-graficas-03, message=FALSE, warning=FALSE, cache=TRUE}
+```{r personalizacion-graficas-03}
 
 p +
   ggthemes::scale_color_economist() +
@@ -1187,7 +1187,7 @@ cowplot::plot_grid(plot1, plot2,
 
 5. Alguna de estas gráficas dará un error? Sin correr el código, sabrías decir cuál de ellas? Hay varias soluciones posibles, ¿Cuales serían?.        
 
-```{r linetype-01, message=FALSE, warning=FALSE, eval = FALSE}
+```{r linetype-01, eval = FALSE}
 
   ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
     geom_point() +
