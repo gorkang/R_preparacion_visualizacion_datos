@@ -1,0 +1,704 @@
+# Preparación y transformación de datos
+
+Para la preparación y transformación de datos usaremos fundamentalmente `dplyr`. Hay otros paquetes [más rápidos](https://h2oai.github.io/db-benchmark/) como `data.table`. Si trabajas con datos gigantescos (millones de filas), notarás la diferencia. La desventaja es que la sintaxis es (habitualmente) algo más difícil.    
+
+
+---  
+
+#### Paquetes para este capítulo {-}
+
+```{r paquetes-02}
+
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
+if (!require('readxl')) install.packages('readxl'); library('readxl')
+if (!require('haven')) install.packages('haven'); library('haven')
+if (!require('readODS')) install.packages('readODS'); library('readODS')
+if (!require('writexl')) install.packages('writexl'); library('writexl')
+# if (!require('DT')) install.packages('DT'); library('DT')
+if (!require('gsheet')) install.packages('gsheet'); library('gsheet')
+if (!require('janitor')) install.packages('janitor'); library('janitor')
+
+```  
+
+---  
+
+## Importar y exportar datos
+
+### Importar un solo archivo
+
+Vamos a ver con más detalle los archivos CSV (*comma separated values*), pero existen funciones similares para archivos excel, SPSS, etc.  
+
+
+#### Archivos CSV
+
+Usaremos las siguientes funciones del paquete `readr`  
+* `readr::read_csv()` - comma separated values (",")  
+* `readr::read_csv2()` - semicolon separated values (";")
+* `readr::read_delim( , delim = "|")` - values separated by an arbitrary delimiter  
+
+
+
+```{r read-csv-01, eval=FALSE}
+
+# Cargamos libreria
+if (!require('readr')) install.packages('readr'); library('readr')
+
+# Version simple
+DF_name = read_csv("data/files/02-read-csv.csv")
+
+```
+
+
+```{r read-csv-02}
+  
+# Version avanzada
+name_of_file = here::here("data", "files", "02-read-csv.csv")
+DF_name = read_csv(name_of_file)
+
+DF_name
+
+```
+
+
+#### Otros tipos de archivos
+
+##### Archivos excel
+
+```{r read-others-xls}
+
+if (!require('readxl')) install.packages('readxl'); library('readxl')
+name_of_file = here::here("data", "files", "02-read-xlsx.xlsx")
+readxl::read_excel(name_of_file)
+
+
+```
+
+
+##### Archivos SPSS
+
+```{r read-others-spss}
+
+if (!require('haven')) install.packages('haven'); library('haven')
+name_of_file = here::here("data", "files", "02-read-sav.sav")
+
+haven::read_sav(name_of_file)
+
+```
+
+
+##### Archivos Libreoffice
+
+```{r read-others-libreoffice}
+
+if (!require('readODS')) install.packages('readODS'); library('readODS')
+name_of_file = here::here("data", "files", "02-read-ods.ods")
+
+readODS::read_ods(name_of_file)
+
+```
+
+##### Google sheets
+
+```{r google-sheets}
+
+if (!require('gsheet')) install.packages('gsheet'); library('gsheet')
+DF_name = gsheet::gsheet2tbl("1jjb91j2X13_JKDAeIwrKIdNv0rcseMdteSqb0ZMVOig/edit#gid=807114896") 
+
+# "Share" -> "Get shareable link"
+
+```
+
+
+### Exportar datos
+
+#### Archivos CSV
+```{r write-csv, eval = FALSE}
+
+# Versión simple
+write_csv(DF_name, "data/files/02-write-csv.csv")
+
+# Versión avanzada
+name_of_file = here::here("data", "files", "02-write-csv.csv")
+write_csv(DF_name, name_of_file)
+
+
+```
+
+#### Otros Archivos
+
+```{r write-otros, eval = FALSE}
+
+if (!require('writexl')) install.packages('writexl'); library('writexl')
+name_of_file = here::here("data", "files", "02-write-xlsx.xlsx")
+writexl::write_xlsx(DF_name, name_of_file)
+
+
+if (!require('haven')) install.packages('haven'); library('haven')
+name_of_file = here::here("data", "files", "02-write-sav.sav")
+haven::write_sav(DF_name, name_of_file)
+
+
+if (!require('readODS')) install.packages('readODS'); library('readODS')
+name_of_file = here::here("data", "files", "02-write-ods.ods")
+readODS::write_ods(DF_name, name_of_file)
+
+```
+
+
+#### Ejercicios - Importar y exportar datos
+
+
+1. Importa los archivos siguientes a DFs:
+
++ 02-extralines-1.xlsx
++ 02-extralines-2.xlsx
++ 02-extralines-3.xlsx
++ 02-spanish.csv
+
+
+```{r ejercicios-importar-datos, eval=FALSE, include=FALSE}
+
+# Proyecto OSF Workshop R
+  # https://osf.io/jdn37/
+  
+  read_excel("data/files/OSF_files/02-extralines-1.xlsx")
+  read_excel("data/files/OSF_files/02-extralines-2.xlsx", skip = 2)
+  read_excel("data/files/OSF_files/02-extralines-3.xlsx", skip = 2, sheet = 2)
+
+  read_csv2("data/files/OSF_files/02-spanish.csv")
+
+
+
+# Proyecto general Neely
+# https://osf.io/egxy5/
+  
+  # WIDE
+  # sa-raw-anonymised.csv 
+  
+  df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")
+  
+  # LONG
+  # sa-prepared.csv
+  read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv")
+
+```
+
+
+
+## Tidy data
+
+Existen tres sencillas reglas que definen la *Tidy data*:
+
+1. Cada variable tiene su columna propia
+2. Cada observacion tiene su fila propia
+3. Cada valor tiene su celda propia
+    
+    
+Las ventajas fundamentales son:
+
+1. Uso de una manera consistente de trabajar, que se alinea con el tidyverse
+2. Facilidad para trabajar con la logica vectorizada
+
+```{r tidy_vector}
+
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
+
+# Compute rate per 10,000
+table1 %>% 
+  mutate(rate = cases / population * 10000)
+
+# Compute cases per year
+table1 %>% 
+  count(year, wt = cases)
+
+# Visualise changes over time
+library(ggplot2)
+ggplot(table1, aes(as.factor(year), cases)) + 
+  geom_line(aes(group = country), colour = "grey50") + 
+  geom_point(aes(colour = country))
+
+```
+    
+    
+### Transformaciones y verbos dplyr
+
+* filter(): filtramos filas  
+* arrange(): ordenamos filas  
+* select(): seleccionamos columnas  
+* rename(): renombramos columnas  
+* mutate(): creamos columnas, modificamos columnas, etc.   
+
+
+#### Filtrando y ordenando filas
+
+```{r filtrando-ordenando}
+
+# DF original
+DF_name
+
+# Filtramos
+DF_name %>% 
+  filter(Educacion > 8)
+
+# Ordenamos
+DF_name %>% 
+  arrange(Educacion, desc(Genero))
+
+```
+
+#### Seleccionando, ordenando y renombrando columnas
+
+```{r seleccionando-ordenando-columnas}
+
+# Seleccionar columnas
+DF_name %>% 
+  select(Genero, Edad)
+
+DF_name %>% 
+  select(-X1)
+
+# Ordenar columnas
+DF_name %>% 
+  select(ID, Edad, Genero, everything(), -X1) 
+
+
+```
+**tidyselect::select_helpers()**  
+* starts_with(): Starts with a prefix  
+* ends_with(): Ends with a suffix  
+* contains(): Contains a literal string  
+* matches(): Matches a regular expression  
+* num_range(): Matches a numerical range like x01, x02, x03  
+* one_of(): Matches variable names in a character vector  
+* everything(): Matches all variables  
+* last_col(): Select last variable, possibly with an offset  
+
+
+```{r seleccion-avanzada}
+
+# Proyecto general Neely
+# https://osf.io/egxy5/
+  
+  df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")
+
+  df_wide %>% 
+    select(contains("dem"))
+
+  df_wide %>% 
+    select(ID, ends_with("cod"))
+
+  df_wide %>% 
+    select(ID, matches("cod$"))
+  
+  
+```
+
+```{r renombrando}
+
+
+# Renombrar columnas
+DF_name %>% 
+  rename(Identificador = ID,
+         Sexo = Genero)
+
+# Renombrando usando la posicion (DANGER!)
+DF_name %>% 
+  rename(Identificador = 2)
+
+# Renombrando usando vectores
+oldnames = c("ID","Genero")
+newnames = c("Identificador","Sexo")
+DF_name %>% rename_at(vars(oldnames), ~ newnames)
+
+```
+
+
+### Modificar y añadir variables
+
+
+```{r modificar-anadir-variables}
+
+# Modificar variable reemplazando valor
+DF_name %>% 
+  mutate(PPV_DECLARED = PPV_DECLARED/100)
+  
+# Añadir variables
+DF_name %>% 
+  mutate(PPV_DECLARED_PCT = PPV_DECLARED/100)
+
+# Añadimos variable destruyendo el resto del DF
+DF_name %>% 
+  transmute(PPV_DECLARED_PCT = PPV_DECLARED/100)
+
+# Limpiamos nombres
+if (!require('janitor')) install.packages('janitor'); library('janitor')
+DF_name %>% 
+  janitor::clean_names()
+
+```
+
+
+### Resúmenes agrupados
+
+```{r resumenes-agrupados}
+
+# Resumenes agrupados
+DF_name %>% 
+  group_by(Genero) %>% 
+  summarise(Promedio_PPV = mean(PPV_DECLARED), 
+            N = n())
+
+DF_name %>% 
+  group_by(Genero, condition) %>% 
+  summarise(Promedio_PPV = mean(PPV_DECLARED),
+            SD = sd(PPV_DECLARED),
+            N = n())
+
+```
+
+    
+    
+## Verbos avanzados y otras criaturas indomitas
+
+### Wide to long, Long to wide
+
+
+```{r wide-to-long}
+
+# Leemos documento en formato WIDE
+df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv") %>% 
+  # Seleccionamos solo algunas de las filas
+  select(ID, dem_genero, dem_edad, dem_nivedu, matches("lkns_[0-9]{2}_raw"))
+
+# Wide to long
+df_wide %>% 
+  gather(Item, Response, lkns_01_raw:lkns_11_raw)
+
+df_wide %>% 
+  gather(Item, Response, 5:15)
+  
+df_long = df_wide %>% 
+  gather(Item, Response, matches("lkns"))
+
+
+DT::datatable(df_long)
+
+```
+
+
+```{r long-to-wide}
+
+# Long to wide
+df_long %>%  
+  spread(Item, Response)
+
+```
+
+
+
+### Separate, omit, ifelse, case_when, tipos de variables...
+
+```{r separate-omit-ifelse-casewhen}
+
+# Separate
+DF_name %>% 
+  separate(condition, c("primer_chunk", "segundo_chunk"), sep = "_")
+
+# Separate in rows
+DF_name %>% 
+  separate_rows(condition, sep = "_")
+
+# Drop NAs
+DF_name %>%
+  drop_na(PPV_DECLARED)
+
+# If else
+DF_name %>%
+  mutate(Genero = ifelse(Genero == 1, "Hombre", "Mujer"))
+
+# Case when
+DF_name %>%
+  mutate(Genero = 
+           case_when(
+             Genero == 1 ~ "Hombre",
+             Genero == 2 ~ "Mujer",
+             TRUE ~ "Otros"))
+
+
+
+# Unite
+DF_separated = DF_name %>% 
+  separate(condition, c("primer_chunk", "segundo_chunk"), sep = "_")
+
+DF_separated %>% 
+  unite(condition, c(primer_chunk, segundo_chunk), sep = "_")
+
+
+```
+
+
+### Regular expressions
+
+[Basic Regular Expressions Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf)  
+
+![SOURCE: https://xkcd.com/208/](`r here::here("data", "images", "regular_expressions.png")`)
+
+
+```{r regular-expressions}
+
+# Regexp
+DF_name %>% 
+  mutate(condition = gsub("PPV_", "", condition)) %>% 
+  mutate(condition_N = gsub(".*([[:digit:]]$)", "\\1", condition))
+
+df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv") %>% 
+  # Seleccionamos solo algunas de las filas
+  select(ID, dem_genero, dem_edad, dem_nivedu, matches("lkns_[0-9]{2}_raw"))
+
+```
+
+Una aplicación Shiny para ayudar a construir Regular Expressions:  
+
+```{r regular-expressions-gadget, eval=FALSE}
+
+devtools::install_github("gadenbuie/regexplain")
+
+regexplain::regex_gadget()
+
+
+```
+
+
+## Leer multiples archivos y combinar bases de datos
+
+
+### Bind
+
+```{r bind}
+
+# Importar CSVs
+DF1 = read_csv(here::here("data", "files", "02-CSVs", "01.csv"))
+DF2 = read_csv(here::here("data", "files", "02-CSVs", "02.csv"))
+
+
+# Bind DFs añadiendo las filas de DF2 a DF1
+DF1 %>% 
+   rbind(DF2)
+
+
+# Bind DFs añadiendo las columnas de DF2 a DF1
+DF_cbinded = DF1 %>% 
+  cbind(DF2) 
+
+```
+
+### Joins
+
+El paquete {dplyr} tiene funciones que permiten trabajar combinando, filtrando, etc. distintos dataframes. Podéis ver más detalle y algunas ilustraciones fantásticas (como la de abajo; **inner_join()**) en el capítulo [relational data de r4ds](https://r4ds.had.co.nz/relational-data.html).
+
+![SOURCE: https://r4ds.had.co.nz/relational-data.html#mutating-joins](`r here::here("data", "images", "join-inner.png")`)  
+
+---  
+
+Estas operaciones tendrán la forma: `DF_x %>% WHATEVER_join(DF_y)`  
+
+* **Mutating joins**:  
+    + inner_join(): preserva pares de observaciones de de `DF_x` y de `DF_y` con claves iguales   
+    + left_join(): preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguales    
+    + right_join(): preserva las observaciones de `DF_y`, añadiendo las de `DF_x` con claves iguales  
+    + full_join(): preserva todas las observaciones de `DF_x` y `DF_y`, alineandolas cuando tengan claves iguales  
+    
+* **Filtering joins**:  
+    + semi_join(): preserva solo aquellas observaciones de `DF_x` cuyas claves aparezcan en `DF_y`   
+    + anti_join(): preserva solo aquellas observaciones de `DF_x` cuyas claves NO aparezcan en `DF_y`  
+
+* **Nesting joins**:  
+    + nest_join(): preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguales  
+
+
+
+#### Importamos datos {-}  
+
+Tenemos los siguientes dataframes:  
+
+* DF_IDs: Variables demográficas de participantes  
+* DF_results: Resultados en variables de interes de participantes    
+* DF_BAD: Grupo de participantes "selectos"  
+
+
+
+```{r joins-data}
+
+# Importar CSVs para los joins  
+DF_IDs = read_csv(here::here("data", "files", "02-join-IDs.csv"))
+DF_results = read_csv(here::here("data", "files", "02-join-results.csv"))
+DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
+
+DT::datatable(DF_IDs)
+DT::datatable(DF_results)
+DT::datatable(DF_BAD)
+
+```
+
+
+#### Mutating joins  
+
+
+
+```{r joins-mutating}
+
+# inner_join
+DF_inner_joined = DF_IDs %>% 
+  inner_join(DF_results)
+
+#nrow(DF_inner_joined)
+
+DT::datatable(DF_inner_joined)
+
+
+# Left Join
+DF_left_joined = DF_IDs %>% 
+   left_join(DF_results)
+
+#nrow(DF_left_joined)
+
+DT::datatable(DF_left_joined)
+
+
+# Full join
+DF_full_joined = DF_IDs %>% 
+   full_join(DF_results)
+
+#nrow(DF_full_joined)
+
+DT::datatable(DF_full_joined)
+
+```
+
+
+#### Filtering joins  
+
+
+```{r joins-filtering}
+
+# anti_join
+# AVOID the people present in DF_BAD
+DF_anti_joined = DF_IDs %>% 
+  anti_join(DF_BAD, by = "ID") %>% 
+  left_join(DF_results)
+
+DT::datatable(DF_anti_joined)
+
+
+# semi_join
+# INCLUDE ONLY the people present in DF_BAD
+DF_semi_joined = DF_IDs %>% 
+  semi_join(DF_BAD, by = "ID") %>% 
+  left_join(DF_results)
+
+DT::datatable(DF_semi_joined)
+
+```
+
+#### Nesting joins  
+
+
+```{r joins-nesting}
+
+DF_nest_joined = DF_IDs %>% 
+  nest_join(DF_results, by = "ID")
+
+DT::datatable(DF_nest_joined)
+
+```
+
+
+#### Ejercicios JOINS
+
+```{r ejercicios-joins}
+DF_IDs = read_csv(here::here("data", "files", "02-join-IDs2.csv"))
+DF_results = read_csv(here::here("data", "files", "02-join-results.csv"))
+DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
+
+
+```
+
+
+### Importar múltiples archivos
+
+```{r importar-multiples-archivos}
+
+if (!require('purrr')) install.packages('purrr'); library('purrr')
+if (!require('readr')) install.packages('readr'); library('readr')
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+
+name_of_folder = here::here("data", "files", "02-CSVs")
+files <- list.files(name_of_folder, pattern = "^0", full.names = TRUE)
+full <- map_df(files, read_csv)
+full
+
+
+# Including filenames in a column 
+name_of_folder = here::here("data", "files", "02-CSVs")
+files <- list.files(name_of_folder, pattern = "^0", full.names = TRUE) %>% 
+  set_names(basename(.))
+full2 <- map_df(files, read_csv, .id = "file")
+full2
+
+
+```
+
+
+## Ejercicios
+
+**Datasets**:  
+
+* [fivethirtyeight](https://github.com/fivethirtyeight/data)  
+* [Our World in Data](https://github.com/owid/owid-datasets)  
+* [TidyTuesday](https://github.com/rfordatascience/tidytuesday)  
+
+
+El plot que vimos en el tema anterior tiene el problema de que los datos de tuberculosis son en números absolutos.  Serias capaz de convertir estos a % de la poblacion, como se ve en el plot de abajo?  
+
+```{r geoms-ejercicios-013, echo=FALSE, fig.height=12, fig.width=8}
+df_plot = table1 %>% 
+  mutate(relative = cases/population)
+
+
+plot1 = ggplot(table1, aes(as.factor(year), cases)) + 
+  geom_line(aes(group = country), colour = "grey50") + 
+  geom_point(aes(colour = country), size = 2) +
+  hrbrthemes::scale_y_comma() +  
+  labs(title = "Casos de Tuberculosis por año",
+       x = "year",
+       caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") +
+  theme(legend.position = "bottom", 
+        legend.title = element_blank())
+
+
+plot2 = ggplot(df_plot, aes(as.factor(year), relative)) + 
+  geom_line(aes(group = country), colour = "grey50") + 
+  geom_point(aes(colour = country), size = 2) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(title = "Casos de Tuberculosis por año",
+       x = "year",
+       caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") +
+  theme(legend.position = "bottom", 
+        legend.title = element_blank())
+
+cowplot::plot_grid(plot1, plot2, rows = 2)
+
+
+```
+
+
+
+## Bibliografía {.bibliografia -}
+
+Cheatsheet dplyr
+
+Cheatsheet tydr
+
+https://mikoontz.github.io/data-carpentry-week/lesson_joins.html
+
+https://r4ds.had.co.nz/relational-data.html#mutating-joins
