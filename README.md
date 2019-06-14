@@ -1,4 +1,4 @@
-# R para preparación y visualización de datos {-}
+# R para preparación y visualización de datos
 
 Doctorado en Neurociencia Social y Cognición, Facultad de Psicología, UAI
 
@@ -8,7 +8,7 @@ Gorka Navarrete, ORCID: [0000-0001-7678-8656](http://orcid.org/0000-0001-7678-86
 En este repositorio se encuentran los materiales del workshop *R para preparación y visualización de datos*. El curso está centrado en el uso de R para la preparación y visualización de datos, además de la generación de reportes reproducibles.
 
 
-## Objetivos {-}
+## Objetivos
 
 Aportar herramientas básicas para trabajar de manera autónoma con R y RStudio para el proceso de importación, transformación, visualización y reporte de datos.
 
@@ -19,7 +19,7 @@ Al finalizar el curso deberíamos ser capaces de:
 * Generar reportes reproducibles con RMarkdown.
 
 
-## Como empezar {-}
+## Como empezar
 
 Puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:
 
