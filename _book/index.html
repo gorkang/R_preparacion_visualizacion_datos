@@ -53,6 +53,11 @@
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.7/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -159,7 +164,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#por-que-r"><i class="fa fa-check"></i><b>1.2</b> Por qué R?</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#bienvenida-al-tidyverse"><i class="fa fa-check"></i><b>1.2.1</b> Bienvenida al tidyverse</a><ul>
-<li class="chapter" data-level="1.2.1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#tidyverse-vs-base-r"><i class="fa fa-check"></i><b>1.2.1.1</b> Tidyverse vs Base R</a></li>
+<li class="chapter" data-level="1.2.1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#tidyverse-vs-base-r"><i class="fa fa-check"></i><b>1.2.1.1</b> Tidyverse vs Base R</a><ul>
+<li class="chapter" data-level="1.2.1.1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#tidyverse"><i class="fa fa-check"></i><b>1.2.1.1.1</b> Tidyverse</a></li>
+<li class="chapter" data-level="1.2.1.1.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#base-r"><i class="fa fa-check"></i><b>1.2.1.1.2</b> Base-R</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="1.2.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#antes-de-empezar"><i class="fa fa-check"></i><b>1.2.2</b> Antes de empezar</a></li>
 <li class="chapter" data-level="1.2.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#r-para-visualizacion-de-datos"><i class="fa fa-check"></i><b>1.2.3</b> R para visualización de datos</a><ul>
@@ -211,6 +219,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios-transformaciones-estadisticas"><i class="fa fa-check"></i><b>1.5.4</b> Transformaciones estadísticas</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#bibliografia-2"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html"><i class="fa fa-check"></i><b>2</b> Preparación y transformación de datos</a><ul>
+<li class="chapter" data-level="" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#paquetes-para-este-capitulo-1"><i class="fa fa-check"></i>Paquetes para este capítulo</a></li>
+<li class="chapter" data-level="2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#importar-y-exportar-datos"><i class="fa fa-check"></i><b>2.1</b> Importar y exportar datos</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#importar-un-solo-archivo"><i class="fa fa-check"></i><b>2.1.1</b> Importar un solo archivo</a><ul>
+<li class="chapter" data-level="2.1.1.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#archivos-csv"><i class="fa fa-check"></i><b>2.1.1.1</b> Archivos CSV</a></li>
+<li class="chapter" data-level="2.1.1.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#otros-tipos-de-archivos"><i class="fa fa-check"></i><b>2.1.1.2</b> Otros tipos de archivos</a><ul>
+<li class="chapter" data-level="2.1.1.2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#archivos-excel"><i class="fa fa-check"></i><b>2.1.1.2.1</b> Archivos excel</a></li>
+<li class="chapter" data-level="2.1.1.2.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#archivos-spss"><i class="fa fa-check"></i><b>2.1.1.2.2</b> Archivos SPSS</a></li>
+<li class="chapter" data-level="2.1.1.2.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#archivos-libreoffice"><i class="fa fa-check"></i><b>2.1.1.2.3</b> Archivos Libreoffice</a></li>
+<li class="chapter" data-level="2.1.1.2.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#google-sheets"><i class="fa fa-check"></i><b>2.1.1.2.4</b> Google sheets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2.1.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#ejercicios---importar-datos"><i class="fa fa-check"></i><b>2.1.2</b> Ejercicios - Importar datos</a></li>
+<li class="chapter" data-level="2.1.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#importar-multiples-archivos"><i class="fa fa-check"></i><b>2.1.3</b> Importar múltiples archivos</a><ul>
+<li class="chapter" data-level="2.1.3.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#incluir-nombres-de-archivos"><i class="fa fa-check"></i><b>2.1.3.1</b> Incluir nombres de archivos</a></li>
+<li class="chapter" data-level="2.1.3.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#con-parametros"><i class="fa fa-check"></i><b>2.1.3.2</b> Con parametros</a></li>
+</ul></li>
+<li class="chapter" data-level="2.1.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#ejercicios---importar-multiples-archivos"><i class="fa fa-check"></i><b>2.1.4</b> Ejercicios - Importar múltiples archivos</a></li>
+<li class="chapter" data-level="2.1.5" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#exportar-datos"><i class="fa fa-check"></i><b>2.1.5</b> Exportar datos</a><ul>
+<li class="chapter" data-level="2.1.5.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#archivos-csv-1"><i class="fa fa-check"></i><b>2.1.5.1</b> Archivos CSV</a></li>
+<li class="chapter" data-level="2.1.5.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#otros-archivos"><i class="fa fa-check"></i><b>2.1.5.2</b> Otros Archivos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#preparacion-y-transformacion-de-datos-1"><i class="fa fa-check"></i><b>2.2</b> Preparación y transformación de datos</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#tidy-data"><i class="fa fa-check"></i><b>2.2.1</b> Tidy data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#verbos-dplyr"><i class="fa fa-check"></i><b>2.2.2</b> Verbos dplyr</a><ul>
+<li class="chapter" data-level="" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#tabla-resumen-dplyr"><i class="fa fa-check"></i>Tabla resumen dplyr</a></li>
+<li class="chapter" data-level="2.2.2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#filtrar-y-ordenar-filas"><i class="fa fa-check"></i><b>2.2.2.1</b> Filtrar y ordenar filas</a></li>
+<li class="chapter" data-level="2.2.2.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#seleccionar-ordenar-y-renombrar-columnas"><i class="fa fa-check"></i><b>2.2.2.2</b> Seleccionar, ordenar y renombrar columnas</a><ul>
+<li class="chapter" data-level="2.2.2.2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#seleccion-avanzada-con-select_helpers"><i class="fa fa-check"></i><b>2.2.2.2.1</b> Selección avanzada con select_helpers()</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.2.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#modificar-y-anadir-variables"><i class="fa fa-check"></i><b>2.2.2.3</b> Modificar y añadir variables</a></li>
+<li class="chapter" data-level="2.2.2.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#resumenes-agrupados"><i class="fa fa-check"></i><b>2.2.2.4</b> Resúmenes agrupados</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#ejercicios---verbos-dplyr"><i class="fa fa-check"></i><b>2.2.3</b> Ejercicios - verbos dplyr</a></li>
+<li class="chapter" data-level="2.2.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#verbos-avanzados-y-otras-criaturas-indomitas"><i class="fa fa-check"></i><b>2.2.4</b> Verbos avanzados y otras criaturas indómitas</a><ul>
+<li class="chapter" data-level="2.2.4.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#wide-to-long"><i class="fa fa-check"></i><b>2.2.4.1</b> Wide to long</a></li>
+<li class="chapter" data-level="2.2.4.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#long-to-wide"><i class="fa fa-check"></i><b>2.2.4.2</b> Long to wide</a></li>
+<li class="chapter" data-level="2.2.4.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#separate-omit-ifelse-case_when-tipos-de-variables"><i class="fa fa-check"></i><b>2.2.4.3</b> Separate, omit, ifelse, case_when, tipos de variables…</a></li>
+<li class="chapter" data-level="2.2.4.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#regular-expressions"><i class="fa fa-check"></i><b>2.2.4.4</b> Regular expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.5" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#ejercicios---verbos-avanzados-dplyr"><i class="fa fa-check"></i><b>2.2.5</b> Ejercicios - verbos avanzados dplyr</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#combinar-bases-de-datos"><i class="fa fa-check"></i><b>2.3</b> Combinar bases de datos</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#bind"><i class="fa fa-check"></i><b>2.3.1</b> Bind</a></li>
+<li class="chapter" data-level="2.3.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#joins"><i class="fa fa-check"></i><b>2.3.2</b> Joins</a><ul>
+<li class="chapter" data-level="" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#tipos-de-join"><i class="fa fa-check"></i>Tipos de Join</a></li>
+<li class="chapter" data-level="2.3.2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#mutating-joins"><i class="fa fa-check"></i><b>2.3.2.1</b> Mutating joins</a></li>
+<li class="chapter" data-level="2.3.2.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#filtering-joins"><i class="fa fa-check"></i><b>2.3.2.2</b> Filtering joins</a></li>
+<li class="chapter" data-level="2.3.2.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#nesting-joins"><i class="fa fa-check"></i><b>2.3.2.3</b> Nesting joins</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#ejercicios-joins"><i class="fa fa-check"></i><b>2.3.3</b> Ejercicios JOINS</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#datasets-interesantes"><i class="fa fa-check"></i><b>2.4</b> Datasets interesantes</a></li>
+<li class="chapter" data-level="" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#bibliografia-3"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html"><i class="fa fa-check"></i>Paquetes usados</a><ul>
+<li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html#references"><i class="fa fa-check"></i>References</a></li>
 </ul></li>
 </ul>
 
