@@ -2,6 +2,7 @@
 title: "R para preparación y visualización de datos"
 subtitle: "Doctorado en Neurociencia Social y Cognición"
 author: "Gorka Navarrete, ORCID: [0000-0001-7678-8656](http://orcid.org/0000-0001-7678-8656)"
+bibliography: data/bib/pkg-refs.bib
 # description: "R para preparación y visualización de datos - Doctorado en Neurociencia y Cognición - Facultad de Psicología - UAI"
 # url: 'https\://bookdown.org/john/awesome/'
 # github-repo: "john/awesome"
