@@ -11,6 +11,7 @@ En este capítulo vamos a aprender a importar y exportar todo tipo de archivos, 
 if (!require("tidyverse")) install.packages("tidyverse"); library("tidyverse")
 if (!require("readxl")) install.packages("readxl"); library("readxl")
 if (!require("haven")) install.packages("haven"); library("haven")
+if (!require("here")) install.packages("here"); library("here")
 if (!require("readODS")) install.packages("readODS"); library("readODS")
 if (!require("writexl")) install.packages("writexl"); library("writexl")
 if (!require("DT")) install.packages("DT"); library("DT")
