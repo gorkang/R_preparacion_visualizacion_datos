@@ -18,6 +18,10 @@ if (!require("DT")) install.packages("DT"); library("DT")
 if (!require("gsheet")) install.packages("gsheet"); library("gsheet")
 if (!require("janitor")) install.packages("janitor"); library("janitor")
 
+if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests")); library('caret')
+if (!require('FFTrees')) install.packages('FFTrees'); library('FFTrees')
+
+
 ```  
 
 ---  
@@ -602,13 +606,38 @@ DF_name %>%
 
 #### Wide to long
 
+Empecemos con un ejemplo muy sencillo. 3 participantes, 2 items.  
 
 ```{r wide-to-long}
+
+# Creamos un DF
+df_simple_wide = data.frame(ID = c("Participante1", "Participante2", "Participante3"),
+           Item1 = c(22, 33, 44),
+           Item2 = c(88, 99, 77))
+
+df_simple_wide
+
+# Wide to long
+df_simple_long = df_simple_wide %>% 
+  gather(Item, Response, Item1:Item2)
+
+df_simple_long
+
+```
+
+
+Ahora pasemos a un ejemplo mas complejo. Tenemos las puntuaciones a los 11 items de la lipkus numeracy scale de 232 participantes, ademas de datos demográficos.  
+
+
+```{r wide-to-long2}
 
 # Leemos documento en formato WIDE
 df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv") %>% 
   # Seleccionamos solo algunas de las filas
   select(ID, dem_genero, dem_edad, dem_nivedu, matches("lkns_[0-9]{2}_raw"))
+
+df_wide  
+
 
 # Wide to long
 df_wide %>% 
@@ -628,7 +657,18 @@ DT::datatable(df_long)
 
 #### Long to wide
 
+Retomamos el ejemplo simple de antes:  
+
 ```{r long-to-wide}
+
+# Long to wide simple
+df_simple_long %>% spread(Item, Response)
+
+```
+
+Y lo mismo con el ejemplo mas complejo:  
+
+```{r long-to-wide-2}
 
 # Long to wide
 df_long %>%  
@@ -636,6 +676,29 @@ df_long %>%
 
 ```
 
+
+##### ¿Para que sirve tener los datos en formato long?  
+
+```{r long-wide-plots}
+
+DF_plot = df_long %>% 
+  mutate(Response_num = as.numeric(Response))
+
+DF_plot %>% 
+  drop_na(Response_num) %>% 
+  ggplot(aes(Item, Response_num, color = Item)) +
+  geom_jitter(alpha = .5) +
+  geom_violin(alpha = .4) +
+  scale_y_log10() +
+  coord_flip()
+  
+DF_plot %>% 
+  filter(is.na(Response_num)) %>% 
+  ggplot(aes(Item, Response, color = Item)) +
+  geom_jitter(alpha = .5, height = .2) +
+  facet_wrap(~ Item, scales = "free")
+
+```
 
 
 #### Separate, omit, ifelse, case_when, tipos de variables...
@@ -744,7 +807,7 @@ DF_wide = read.csv("https://raw.githubusercontent.com/gorkang/cognitive-and-soci
     DF_wide = DF_wide %>% select(ID, everything())
   
   
-  # 2. Transforma la base a formato long (aso si, mantén las variables demográficas en formato wide).   
+  # 2. Transforma la base a formato long (eso sí, mantén las variables demográficas en formato wide).   
   
     DF_long = DF_wide %>% gather(Variable, Value, Fluid.Intelligence:Working.Memory)
     
@@ -821,6 +884,7 @@ DF_C = df_wide_raw %>%
 
  all.equal(DF_A, DF_C) 
  all.equal(DF_B, DF_C) 
+ 
 ```
 
 
@@ -1130,6 +1194,113 @@ plot2 = ggplot(df_plot, aes(as.factor(year), relative)) +
         legend.title = element_blank())
 
 cowplot::plot_grid(plot1, plot2, rows = 2)
+
+```
+
+## Más allá de la manipulación 
+
+
+### Fast and Frugal trees
+
+Hay un paquete fantástico de Nathaniel Phillips llamado [{FFTrees}](https://github.com/ndphillips/FFTrees). Este permite [crear, visualizar y evaluar fast-and-frugal decision trees](http://journal.sjdm.org/17/17217/jdm17217.pdf)  
+```{r mas-alla}
+
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
+if (!require('FFTrees')) install.packages('FFTrees'); library('FFTrees')
+
+DF_wide = read.csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
+  mutate(Anxious.Attachment = round(Anxious.Attachment, 2))
+
+
+median_social_adaptation = DF_wide %>% pull(Social.Adaptation) %>% median(., na.rm = TRUE)
+    DF_split = DF_wide %>% 
+      mutate(high_social_adaptation = 
+                 case_when(
+                   Social.Adaptation >= median_social_adaptation ~ TRUE,
+                   Social.Adaptation < median_social_adaptation ~ FALSE)) %>% 
+      select(-ID, -Social.Adaptation) %>% 
+      drop_na()
+    
+sa.fft <- FFTrees(formula = high_social_adaptation ~.,
+                     data = DF_split)
+
+# Plotear el arbol de decision
+plot(sa.fft,
+     main = "Social adaptation",
+     decision.labels = c("Low", "High"))
+
+# Describe el algoritmo
+sa.fft$inwords
+    
+```
+
+### Machine learning
+
+Con el paquete [{caret}](http://topepo.github.io/caret/) podemos usar alguno de los [238 distintos métodos](http://topepo.github.io/caret/available-models.html) de machine learning. 
+
+Por ejemplo, Backprop:  
+
+```{r caret}
+
+# ensure the results are repeatable
+set.seed(7)
+
+# load the library
+if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests")); library('caret')
+# if (!require('mlbench')) install.packages("mlbench"); library('mlbench')
+
+DF_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
+  janitor::clean_names() %>% as.data.frame()
+
+DB_x = DF_wide %>% 
+  mutate(high_social_adaptation = 
+           as.factor(
+             case_when(
+               social_adaptation >= median_social_adaptation ~ "high",
+               social_adaptation < median_social_adaptation ~ "low"))) %>% 
+  select(-id, -social_adaptation) %>% 
+  drop_na() %>% 
+  select(high_social_adaptation, everything()) 
+
+
+# calculate correlation matrix
+correlationMatrix <- cor(DB_x[,2:ncol(DB_x)])
+# print(correlationMatrix)
+
+# find attributes that are highly corrected (ideally >0.75)
+highlyCorrelated <- findCorrelation(correlationMatrix, cutoff = 0.25)
+# print(highlyCorrelated)
+
+DB_final = DB_x %>% select(highlyCorrelated) %>% select(high_social_adaptation, everything()) %>% as.data.frame()
+
+
+# prepare training scheme
+control <- trainControl(method="repeatedcv", number=10, repeats=3)
+# train the model
+model <- train(high_social_adaptation ~ ., data = DB_final, method="lvq", preProcess="scale", trControl=control)
+
+# estimate variable importance
+importance <- varImp(model, scale=FALSE)
+# print(importance)
+
+# plot importance
+plot(importance)
+
+
+# define the control using a random forest selection function
+control <- rfeControl(functions=rfFuncs, method="cv", number=10)
+
+# run the RFE algorithm
+results <- rfe(DB_final[,2:ncol(DB_final)], DB_final[,1], sizes=c(1:ncol(DB_final)), rfeControl=control)
+
+# summarize the results
+print(results)
+
+# list the chosen features
+predictors(results)
+
+# plot the results
+plot(results, type=c("g", "o"))
 
 ```
 
