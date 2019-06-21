@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>R para preparación y visualización de datos</title>
-  <meta name="description" content="R para preparación y visualización de datos" />
+  <title>Capítulo 3 Análisis de datos exploratorio | R para preparación y visualización de datos</title>
+  <meta name="description" content="Capítulo 3 Análisis de datos exploratorio | R para preparación y visualización de datos" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="R para preparación y visualización de datos" />
+  <meta property="og:title" content="Capítulo 3 Análisis de datos exploratorio | R para preparación y visualización de datos" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R para preparación y visualización de datos" />
+  <meta name="twitter:title" content="Capítulo 3 Análisis de datos exploratorio | R para preparación y visualización de datos" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preparando-sistema.html">
+<link rel="prev" href="preparacion-y-transformacion-de-datos.html">
+<link rel="next" href="paquetes-usados.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -317,37 +317,262 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">R para preparación y visualización de datos</h1>
-<h2 class="subtitle"><em>Doctorado en Neurociencia Social y Cognición</em></h2>
-<p class="author"><em>Gorka Navarrete, ORCID: <a href="http://orcid.org/0000-0001-7678-8656">0000-0001-7678-8656</a></em></p>
+<div id="analisis-de-datos-exploratorio" class="section level1">
+<h1><span class="header-section-number">Capítulo 3</span> Análisis de datos exploratorio</h1>
+<hr />
+<div id="paquetes-para-este-capitulo-2" class="section level4 unnumbered">
+<h4>Paquetes para este capítulo</h4>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;gapminder&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;gapminder&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;gapminder&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;hexbin&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;hexbin&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;hexbin&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tidyverse&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tidyverse&#39;</span>)</code></pre>
+<hr />
+<p>VER: <a href="https://r4ds.had.co.nz/exploratory-data-analysis.html">R 4 data science - exploratory data analysis</a></p>
 </div>
-<div id="introduccion" class="section level1 unnumbered">
-<h1>Introducción</h1>
-<p>El seminario estará centrado en el uso de R para la preparación y visualización de datos, además de la generación de reportes reproducibles.</p>
-<p>R es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.</p>
-<div id="objetivos" class="section level2 unnumbered">
-<h2>Objetivos</h2>
-<p>Dar las herramientas básicas a los alumnos para que puedan trabajar de manera autónoma con R y RStudio para el proceso de importación, transformación, visualización y reporte de datos.</p>
-<p>Al finalizar el curso los alumnos serán capaces de:
-Importar archivos de datos, transformar los datos, crear nuevas variables.
-Realizar análisis de datos exploratorios, visualizar distribuciones y comparar grupos.
-Generar reportes reproducibles con RMarkdown.</p>
-</div>
-<div id="como-empezar" class="section level2 unnumbered">
-<h2>Como empezar</h2>
-<p>Si ya has completado los pasos indicados en <a href="preparando-sistema.html#preparando-sistema">Preparando nuesto sistema</a>, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;usethis&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;usethis&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;usethis&#39;</span>)
+<div id="visualizando-distribuciones" class="section level2">
+<h2><span class="header-section-number">3.1</span> Visualizando distribuciones</h2>
+<p>Cuando nos llega una nueva base de datos, una de las primeras cosas que haremos será familiarizarnos con los datos. Cómo se distribuyen, cual es la relación entre distintas variables, etc.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;dplyr&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;dplyr&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;dplyr&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tidyr&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tidyr&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tidyr&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;ggplot2&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;ggplot2&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;ggplot2&#39;</span>)
 
-usethis<span class="op">::</span><span class="kw">use_course</span>(<span class="st">&quot;gorkang/R_preparacion_visualizacion_datos&quot;</span>)</code></pre>
+<span class="co"># Wide to long</span>
+d &lt;-<span class="st"> </span><span class="kw">gather</span>(gapminder) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(value <span class="op">!=</span><span class="st"> </span><span class="dv">999</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Si existiera algun codigo para missing values, filtrar</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value_NUM =</span> <span class="kw">as.numeric</span>(value))
+
+<span class="co"># Plot numeric variables</span>
+d <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">drop_na</span>(value_NUM) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value_NUM)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>key, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">15</span>) <span class="co">#+ scale_x_log10()</span></code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/initial%20exploration-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot non-numeric variables</span>
+d <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">drop_na</span>(value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(value_NUM)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>key, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_bar</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_flip</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/initial%20exploration-2.png" width="1152" /></p>
+<div id="variables-categoricas" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Variables categóricas</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/visualizando-distribuciones-categoricas-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(continent)</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   continent     n
+##   &lt;fct&gt;     &lt;int&gt;
+## 1 Africa      624
+## 2 Americas    300
+## 3 Asia        396
+## 4 Europe      360
+## 5 Oceania      24</code></pre>
 </div>
-<div id="bibliografia" class="section level2 bibliografia unnumbered">
+<div id="variables-continuas" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Variables continuas</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(lifeExp)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">1</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/visualizando-distribuciones-continuas-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(lifeExp)</code></pre>
+<pre><code>## # A tibble: 1,626 x 2
+##    lifeExp     n
+##      &lt;dbl&gt; &lt;int&gt;
+##  1    23.6     1
+##  2    28.8     1
+##  3    30       1
+##  4    30.0     1
+##  5    30.3     1
+##  6    30.3     1
+##  7    31.2     1
+##  8    31.3     1
+##  9    31.6     1
+## 10    32.0     1
+## # … with 1,616 more rows</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(<span class="kw">cut_width</span>(lifeExp, <span class="dv">10</span>))</code></pre>
+<pre><code>## # A tibble: 7 x 2
+##   `cut_width(lifeExp, 10)`     n
+##   &lt;fct&gt;                    &lt;int&gt;
+## 1 [15,25]                      1
+## 2 (25,35]                     32
+## 3 (35,45]                    273
+## 4 (45,55]                    348
+## 5 (55,65]                    329
+## 6 (65,75]                    548
+## 7 (75,85]                    173</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(lifeExp)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">2</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/visualizando-distribuciones-continuas-2.png" width="1152" /></p>
+</div>
+</div>
+<div id="covariacion" class="section level2">
+<h2><span class="header-section-number">3.2</span> Covariación</h2>
+<div id="variable-categorica-y-continua" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Variable categórica y continua</h3>
+<p>Podemos contar el numero de elementos por nivel de la variable o ver densidad, etc.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(lifeExp, <span class="dt">colour =</span> continent)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">2</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-1-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Lo mismo pero usando stat(count)</span>
+<span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(lifeExp, <span class="kw">stat</span>(count), <span class="dt">colour =</span> continent)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">2</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-1-2.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># En stat() podemos usar combinaciones de funciones</span>
+<span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(lifeExp, <span class="kw">stat</span>(density<span class="op">/</span><span class="kw">max</span>(density)), <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">2</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-1-3.png" width="1152" /></p>
+<p>Podemos ver boxplots para cada nivel de la variable categórica:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(continent, lifeExp)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-2-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(<span class="kw">reorder</span>(<span class="dt">x =</span> continent, <span class="dt">X =</span> lifeExp, <span class="dt">FUN =</span> median), lifeExp)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-2-2.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Que feo ha quedado el titulo del eje x</span>
+<span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(<span class="kw">reorder</span>(<span class="dt">x =</span> continent, <span class="dt">X =</span> lifeExp, <span class="dt">FUN =</span> median), lifeExp)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Continente&quot;</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-2-3.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(lifeExp, continent, <span class="dt">fill =</span> continent)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">stat =</span> <span class="st">&quot;binline&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">scale =</span> <span class="fl">0.95</span>, <span class="dt">draw_baseline =</span> <span class="ot">FALSE</span>, <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">jittered_points =</span> <span class="ot">TRUE</span>, <span class="dt">position =</span> <span class="st">&quot;raincloud&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">scale =</span> <span class="fl">0.9</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-3-1.png" width="1152" /></p>
+<hr />
+<p>¿Qué estamos viendo exáctamente arriba? Hay un punto por cada pais, y por cada año, lo que da lugar aalgo bien dificil de interpretar. Podemos ver los datos únicamente del último año:</p>
+<pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="kw">n</span>())</code></pre>
+<pre><code>## # A tibble: 12 x 2
+##     year `n()`
+##    &lt;int&gt; &lt;int&gt;
+##  1  1952   142
+##  2  1957   142
+##  3  1962   142
+##  4  1967   142
+##  5  1972   142
+##  6  1977   142
+##  7  1982   142
+##  8  1987   142
+##  9  1992   142
+## 10  1997   142
+## 11  2002   142
+## 12  2007   142</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>), <span class="kw">aes</span>(lifeExp, continent, <span class="dt">fill =</span> continent)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">stat =</span> <span class="st">&quot;binline&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">scale =</span> <span class="fl">0.95</span>, <span class="dt">draw_baseline =</span> <span class="ot">FALSE</span>, <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">jittered_points =</span> <span class="ot">TRUE</span>, <span class="dt">position =</span> <span class="st">&quot;raincloud&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">scale =</span> <span class="fl">0.9</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-4-1.png" width="1152" /></p>
+<p>Me pregunto si será muy evidente la diferencia entre los extremos en la base de datos, 1952 y 2007:</p>
+<pre class="sourceCode r"><code class="sourceCode r">A =<span class="st"> </span><span class="kw">ggplot</span>(gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">1952</span>), <span class="kw">aes</span>(lifeExp, continent, <span class="dt">fill =</span> continent)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">stat =</span> <span class="st">&quot;binline&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">scale =</span> <span class="fl">0.95</span>, <span class="dt">draw_baseline =</span> <span class="ot">FALSE</span>, <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">jittered_points =</span> <span class="ot">TRUE</span>, <span class="dt">position =</span> <span class="st">&quot;raincloud&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">scale =</span> <span class="fl">0.9</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;1952&quot;</span>)
+
+B =<span class="st"> </span><span class="kw">ggplot</span>(gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>), <span class="kw">aes</span>(lifeExp, continent, <span class="dt">fill =</span> continent)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">stat =</span> <span class="st">&quot;binline&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">scale =</span> <span class="fl">0.95</span>, <span class="dt">draw_baseline =</span> <span class="ot">FALSE</span>, <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">jittered_points =</span> <span class="ot">TRUE</span>, <span class="dt">position =</span> <span class="st">&quot;raincloud&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">scale =</span> <span class="fl">0.9</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;2007&quot;</span>)
+
+cowplot<span class="op">::</span><span class="kw">plot_grid</span>(A, B)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-5-1.png" width="1152" /></p>
+<p>Finalmente, podemos ver el avance por país de una manera más directa:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># METODO 1: Asumimos que el valor máximo corresponde al más actualizado  </span>
+DF_gapminder_max_min =<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(continent, country) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">lifeExp =</span> <span class="kw">max</span>(lifeExp) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(lifeExp))
+
+<span class="kw">ggplot</span>(DF_gapminder_max_min, <span class="kw">aes</span>(lifeExp, continent, <span class="dt">fill =</span> continent)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">stat =</span> <span class="st">&quot;binline&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">scale =</span> <span class="fl">0.95</span>, <span class="dt">draw_baseline =</span> <span class="ot">FALSE</span>, <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">jittered_points =</span> <span class="ot">TRUE</span>, <span class="dt">position =</span> <span class="st">&quot;raincloud&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">scale =</span> <span class="fl">0.9</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Diferencia entre max y min por país&quot;</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-6-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># METODO 2: Calculamos maximo - mínimo para cada país  </span>
+DF_last_year =<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(year)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(country, continent, lifeExp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">lifeExp_max =</span> lifeExp)
+DF_first_year =<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(year)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(country, continent, lifeExp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">lifeExp_min =</span> lifeExp)
+
+DF_last_first =<span class="st"> </span>DF_last_year <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">full_join</span>(DF_first_year, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;continent&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">DIFF =</span> lifeExp_max <span class="op">-</span><span class="st"> </span>lifeExp_min)
+  <span class="co"># gather(max_min, value, lifeExp_max:lifeExp_min)</span>
+
+<span class="kw">ggplot</span>(DF_last_first, <span class="kw">aes</span>(DIFF, continent, <span class="dt">fill =</span> continent)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">stat =</span> <span class="st">&quot;binline&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">scale =</span> <span class="fl">0.95</span>, <span class="dt">draw_baseline =</span> <span class="ot">FALSE</span>, <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span>
+<span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">jittered_points =</span> <span class="ot">TRUE</span>, <span class="dt">position =</span> <span class="st">&quot;raincloud&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">scale =</span> <span class="fl">0.9</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Diferencia entre 2007 y 1952 por pais&quot;</span>)</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-6-2.png" width="1152" /></p>
+</div>
+<div id="ejercicio1" class="section level3 ejercicio">
+<h3><span class="header-section-number">3.2.2</span> Ejercicio1</h3>
+<p>Mira el plot donde mostramos la diferencia entre los extremos en la base de datos, 1952 y 2007 con dos gráficas, una al lado de la otra. Ves algún problema?</p>
+<p>Trata de resolver el problema en las escalas. El resultado final deberia ser:</p>
+<p><img src="bookdown-workshop-R_files/figure-html/ejercicio-covariacion1-1.png" width="1152" /></p>
+</div>
+<div id="dos-variables-categoricas" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Dos variables categóricas</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(cut, color)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_count</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2categoricas-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(color, cut)</code></pre>
+<pre><code>## # A tibble: 35 x 3
+##    color cut           n
+##    &lt;ord&gt; &lt;ord&gt;     &lt;int&gt;
+##  1 D     Fair        163
+##  2 D     Good        662
+##  3 D     Very Good  1513
+##  4 D     Premium    1603
+##  5 D     Ideal      2834
+##  6 E     Fair        224
+##  7 E     Good        933
+##  8 E     Very Good  2400
+##  9 E     Premium    2337
+## 10 E     Ideal      3903
+## # … with 25 more rows</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(color, cut) <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(color, cut, <span class="dt">fill =</span> n)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_tile</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2categoricas-2.png" width="1152" /></p>
+</div>
+<div id="dos-variables-continuas" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> Dos variables continuas</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(lifeExp, gdpPercap)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2continuas-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(lifeExp, gdpPercap, <span class="dt">color =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_log10</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2continuas-2.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;hexbin&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;hexbin&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;hexbin&#39;</span>)
+
+<span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(lifeExp, gdpPercap)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hex</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2continuas-3.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(lifeExp, gdpPercap)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> <span class="kw">cut_width</span>(lifeExp, <span class="dv">10</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_log10</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2continuas-4.png" width="1152" /></p>
+<!-- 7.6 Patterns and models -->
+</div>
+</div>
+<div id="ejercicios-2" class="section level2 ejercicio">
+<h2><span class="header-section-number">3.3</span> Ejercicios 2</h2>
+<p>Usando la base del paper <a href="https://osf.io/qn9a2/">Cancer Screening Risk Literacy of Physicians in Training</a>, haz un primer análisis exploratorio que incluya:</p>
+<ul>
+<li>histogramas de todas las variables numericas y no-numéricas</li>
+<li>scatterplots de la relacion entre comprensión y numéracy, y entre comprensión y screenbeliefs</li>
+</ul>
+<p><img src="bookdown-workshop-R_files/figure-html/ejercicio-final-analisis-exploratorio-1.png" width="1152" /><img src="bookdown-workshop-R_files/figure-html/ejercicio-final-analisis-exploratorio-2.png" width="1152" /><img src="bookdown-workshop-R_files/figure-html/ejercicio-final-analisis-exploratorio-3.png" width="1152" /></p>
+</div>
+<div id="bibliografia-4" class="section level2 bibliografia unnumbered">
 <h2>Bibliografía</h2>
-<p>Bryan, J., &amp; Hester, J. What They Forgot to Teach You About R. <a href="https://whattheyforgot.org/" class="uri">https://whattheyforgot.org/</a></p>
 <p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc. <a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></p>
-<p>Wickham, H. (2014). Advanced r. Chapman and Hall/CRC. <a href="https://adv-r.hadley.nz/" class="uri">https://adv-r.hadley.nz/</a></p>
-<p>Xie, Y., Allaire, J. J., &amp; Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. <a href="https://bookdown.org/yihui/rmarkdown/" class="uri">https://bookdown.org/yihui/rmarkdown/</a></p>
-<p>Yihui Xie (2018). bookdown: Authoring Books and Technical Documents with R Markdown <a href="https://bookdown.org/yihui/bookdown/markdown-syntax.html" class="uri">https://bookdown.org/yihui/bookdown/markdown-syntax.html</a></p>
 
 </div>
 </div>
@@ -356,8 +581,8 @@ usethis<span class="op">::</span><span class="kw">use_course</span>(<span class=
           </div>
         </div>
       </div>
-
-<a href="preparando-sistema.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="preparacion-y-transformacion-de-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="paquetes-usados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
