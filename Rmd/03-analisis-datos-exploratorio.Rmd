@@ -1,0 +1,353 @@
+# Análisis de datos exploratorio
+
+---  
+
+#### Paquetes para este capítulo {-}
+
+```{r paquetes-03, message=FALSE, warning=FALSE}
+
+if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
+if (!require('hexbin')) install.packages('hexbin'); library('hexbin')
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
+
+```
+
+---  
+
+VER: [R 4 data science - exploratory data analysis](https://r4ds.had.co.nz/exploratory-data-analysis.html)
+
+
+## Visualizando distribuciones
+
+Cuando nos llega una nueva base de datos, una de las primeras cosas que haremos será familiarizarnos con los datos. Cómo se distribuyen, cual es la relación entre distintas variables, etc. 
+
+
+```{r initial exploration, fig.height=12}
+
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+
+# Wide to long
+d <- gather(gapminder) %>%
+  filter(value != 999) %>% # Si existiera algun codigo para missing values, filtrar
+  mutate(value_NUM = as.numeric(value))
+
+# Plot numeric variables
+d %>% 
+  drop_na(value_NUM) %>% 
+  ggplot(aes(value_NUM)) + 
+    facet_wrap(~ key, scales = "free") + 
+    geom_histogram(bins = 15) #+ scale_x_log10()
+
+# Plot non-numeric variables
+d %>%
+  drop_na(value) %>% 
+  filter(is.na(value_NUM)) %>% 
+  ggplot(aes(value)) + 
+    facet_wrap(~ key, scales = "free") + 
+    geom_bar() +
+    coord_flip()
+
+```
+
+
+### Variables categóricas  
+
+```{r visualizando-distribuciones-categoricas}
+
+ggplot(gapminder, aes(continent)) +
+  geom_bar()
+
+gapminder %>% 
+  count(continent)
+
+```
+
+
+### Variables continuas
+
+```{r visualizando-distribuciones-continuas}
+
+ggplot(gapminder, aes(lifeExp)) +
+  geom_histogram(binwidth = 1)
+
+gapminder %>% 
+  count(lifeExp)
+
+gapminder %>% 
+  count(cut_width(lifeExp, 10))
+
+
+ggplot(gapminder, aes(lifeExp)) + 
+  geom_freqpoly(binwidth = 2)
+
+```
+
+
+## Covariación
+
+### Variable categórica y continua
+
+Podemos contar el numero de elementos por nivel de la variable o ver densidad, etc.    
+
+```{r covariacion-categorica-continua-1}
+
+ggplot(gapminder, aes(lifeExp, colour = continent)) + 
+  geom_freqpoly(binwidth = 2)
+
+# Lo mismo pero usando stat(count)
+ggplot(gapminder, aes(lifeExp, stat(count), colour = continent)) + 
+  geom_freqpoly(binwidth = 2)
+
+# En stat() podemos usar combinaciones de funciones
+ggplot(gapminder, aes(lifeExp, stat(density/max(density)), colour = continent)) +
+  geom_freqpoly(binwidth = 2)
+
+
+```
+
+
+Podemos ver boxplots para cada nivel de la variable categórica:  
+
+```{r covariacion-categorica-continua-2}
+
+ggplot(gapminder, aes(continent, lifeExp)) +
+  geom_boxplot()
+
+ggplot(gapminder, aes(reorder(x = continent, X = lifeExp, FUN = median), lifeExp)) +
+  geom_boxplot()
+
+# Que feo ha quedado el titulo del eje x
+ggplot(gapminder, aes(reorder(x = continent, X = lifeExp, FUN = median), lifeExp)) +
+  geom_boxplot() +
+  labs(x = "Continente")
+
+```
+
+
+```{r covariacion-categorica-continua-3}
+
+ggplot(gapminder, aes(lifeExp, continent, fill = continent)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9)
+
+```
+
+---  
+
+¿Qué estamos viendo exáctamente arriba? Hay un punto por cada pais, y por cada año, lo que da lugar aalgo bien dificil de interpretar. Podemos ver los datos únicamente del último año:   
+
+```{r covariacion-categorica-continua-4}
+
+gapminder %>% group_by(year) %>% summarise(n())
+
+ggplot(gapminder %>% filter(year == 2007), aes(lifeExp, continent, fill = continent)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9)
+
+```
+
+Me pregunto si será muy evidente la diferencia entre los extremos en la base de datos, 1952 y 2007:  
+
+```{r covariacion-categorica-continua-5}
+
+A = ggplot(gapminder %>% filter(year == 1952), aes(lifeExp, continent, fill = continent)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+  theme(legend.position = "none") +
+  ggtitle("1952")
+
+B = ggplot(gapminder %>% filter(year == 2007), aes(lifeExp, continent, fill = continent)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+  theme(legend.position = "none") +
+  ggtitle("2007")
+
+cowplot::plot_grid(A, B)
+
+```
+
+Finalmente, podemos ver el avance por país de una manera más directa:   
+
+```{r covariacion-categorica-continua-6}
+
+# METODO 1: Asumimos que el valor máximo corresponde al más actualizado  
+DF_gapminder_max_min = gapminder %>% 
+  group_by(continent, country) %>% 
+  summarise(lifeExp = max(lifeExp) - min(lifeExp))
+
+ggplot(DF_gapminder_max_min, aes(lifeExp, continent, fill = continent)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+  theme(legend.position = "none") +
+  ggtitle("Diferencia entre max y min por país")
+
+
+# METODO 2: Calculamos maximo - mínimo para cada país  
+DF_last_year = gapminder %>% filter(year == max(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_max = lifeExp)
+DF_first_year = gapminder %>% filter(year == min(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_min = lifeExp)
+
+DF_last_first = DF_last_year %>% 
+  full_join(DF_first_year, by = c("country", "continent")) %>% 
+  mutate(DIFF = lifeExp_max - lifeExp_min)
+  # gather(max_min, value, lifeExp_max:lifeExp_min)
+
+ggplot(DF_last_first, aes(DIFF, continent, fill = continent)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+  theme(legend.position = "none") +
+  ggtitle("Diferencia entre 2007 y 1952 por pais")
+
+```
+  
+  
+### Ejercicio1 {.ejercicio} 
+
+Mira el plot donde mostramos la diferencia entre los extremos en la base de datos, 1952 y 2007 con dos gráficas, una al lado de la otra. Ves algún problema?  
+
+Trata de resolver el problema en las escalas. El resultado final deberia ser:  
+
+```{r ejercicio-covariacion1, echo=FALSE}
+
+A = ggplot(gapminder %>% filter(year == 1952), aes(lifeExp, continent, fill = continent)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+  theme(legend.position = "none") +
+    scale_x_continuous(breaks = seq(20, 90, 5), limits = c(20, 90)) +
+  ggtitle("1952")
+
+B = ggplot(gapminder %>% filter(year == 2007), aes(lifeExp, continent, fill = continent)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+  theme(legend.position = "none") +
+    scale_x_continuous(breaks = seq(20, 90, 5), limits = c(20, 90)) +
+
+  ggtitle("2007")
+
+cowplot::plot_grid(A, B)
+```
+
+
+  
+### Dos variables categóricas
+
+
+```{r covariacion-2categoricas}
+
+ggplot(diamonds, aes(cut, color)) +
+  geom_count()
+
+diamonds %>% 
+  count(color, cut)
+
+diamonds %>% 
+  count(color, cut) %>%  
+  ggplot(aes(color, cut, fill = n)) +
+    geom_tile()
+
+```
+
+### Dos variables continuas
+
+```{r covariacion-2continuas}
+
+ggplot(gapminder, aes(lifeExp, gdpPercap)) +
+  geom_point()
+
+ggplot(gapminder, aes(lifeExp, gdpPercap, color = continent)) +
+  geom_point(alpha = 1 / 2) +
+  scale_y_log10()
+
+
+if (!require('hexbin')) install.packages('hexbin'); library('hexbin')
+
+ggplot(gapminder, aes(lifeExp, gdpPercap)) +
+  geom_hex()
+
+
+ggplot(gapminder, aes(lifeExp, gdpPercap)) +
+  geom_boxplot(mapping = aes(group = cut_width(lifeExp, 10))) +
+  scale_y_log10()
+
+```
+
+
+<!-- 7.6 Patterns and models -->
+
+
+
+
+## Ejercicios 2 {.ejercicio} 
+
+Usando la base del paper [Cancer Screening Risk Literacy of Physicians in Training](https://osf.io/qn9a2/), haz un primer análisis exploratorio que incluya:  
+
+* histogramas de todas las variables numericas y no-numéricas
+* scatterplots de la relacion entre comprensión y numéracy, y entre comprensión y screenbeliefs  
+
+
+```{r ejercicio-final-analisis-exploratorio, echo=FALSE}
+
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+if (!require('haven')) install.packages('haven'); library('haven')
+if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+
+DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening risk literacy R1.sav")) %>% as_tibble() 
+
+
+
+# * histogramas de todas las variables numericas y no-numéricas
+
+d <- gather(DF_dafina) %>% 
+  filter(value != -66) %>% 
+  mutate(value_NUM = as.numeric(value))
+
+# Plot numeric variables
+d %>% drop_na(value_NUM) %>% 
+  ggplot(aes(value_NUM)) + 
+  facet_wrap(~ key, scales = "free") + 
+  geom_histogram(bins = 15) #+ scale_x_log10()
+
+# Plot non-numeric variables
+d %>% 
+  drop_na(value) %>% 
+  filter(is.na(value_NUM)) %>% 
+  ggplot(aes(value)) + 
+  facet_wrap(~ key, scales = "free") + 
+  geom_bar() +
+  coord_flip()
+
+
+
+
+# * scatterplots de la relacion entre comprensión y numéracy, y entre comprensión y screenbeliefs  
+  DF = DF_dafina %>% 
+    select(IDparticipante, screenbeliefs, compR1, numeracy) %>% 
+    rename(comprehension = compR1) %>% 
+    drop_na()
+
+
+  A = DF %>% ggplot(aes(screenbeliefs, comprehension)) +
+    geom_jitter(height = .1, width = .1, alpha = .6, size  = 3) +
+    geom_smooth(method = "lm") +
+    theme_minimal() +
+    theme(text = element_text(size = 20)) + 
+    scale_y_discrete(limits = 0:6)
+  
+  B = DF %>% ggplot(aes(numeracy, comprehension)) +
+    geom_jitter(height = .1, width = .1, alpha = .6, size  = 3) +
+    geom_smooth(method = "lm") +
+    theme_minimal() +
+    theme(axis.title.y = element_blank(),
+          text = element_text(size = 20))
+  
+  Figure = cowplot::plot_grid(A, B, labels = c("A", "B"))
+  Figure
+  
+```
+
+
+## Bibliografía {.bibliografia -}
+
+Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O'Reilly Media, Inc. https://r4ds.had.co.nz/  

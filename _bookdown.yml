@@ -11,7 +11,7 @@ rmd_files: [
   "Rmd/00-configuracion-sistema.Rmd",
   "Rmd/01-introduccion_visualizacion.Rmd",
   "Rmd/02-preparacion_transformacion.Rmd",
-  #"Rmd/03-analisis-datos-exploratorio.Rmd",
+  "Rmd/03-analisis-datos-exploratorio.Rmd",
   #"Rmd/04-rmarkdown.Rmd",
   #"Rmd/05-reporte-final.Rmd",
   "Rmd/refs.Rmd",
