@@ -287,14 +287,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#visualizando-distribuciones"><i class="fa fa-check"></i><b>3.1</b> Visualizando distribuciones</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#variables-categoricas"><i class="fa fa-check"></i><b>3.1.1</b> Variables categóricas</a></li>
 <li class="chapter" data-level="3.1.2" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#variables-continuas"><i class="fa fa-check"></i><b>3.1.2</b> Variables continuas</a></li>
+<li class="chapter" data-level="3.1.3" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-variables-individuales"><i class="fa fa-check"></i><b>3.1.3</b> Ejercicio variables individuales</a></li>
+<li class="chapter" data-level="3.1.4" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#visualizando-datasets-completos"><i class="fa fa-check"></i><b>3.1.4</b> Visualizando datasets completos</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#covariacion"><i class="fa fa-check"></i><b>3.2</b> Covariación</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#variable-categorica-y-continua"><i class="fa fa-check"></i><b>3.2.1</b> Variable categórica y continua</a></li>
-<li class="chapter" data-level="3.2.2" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio1"><i class="fa fa-check"></i><b>3.2.2</b> Ejercicio1</a></li>
+<li class="chapter" data-level="3.2.2" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-covariacion-1"><i class="fa fa-check"></i><b>3.2.2</b> Ejercicio covariacion 1</a></li>
 <li class="chapter" data-level="3.2.3" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#dos-variables-categoricas"><i class="fa fa-check"></i><b>3.2.3</b> Dos variables categóricas</a></li>
 <li class="chapter" data-level="3.2.4" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#dos-variables-continuas"><i class="fa fa-check"></i><b>3.2.4</b> Dos variables continuas</a></li>
+<li class="chapter" data-level="3.2.5" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-covariacion-2"><i class="fa fa-check"></i><b>3.2.5</b> Ejercicio covariacion 2</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicios-2"><i class="fa fa-check"></i><b>3.3</b> Ejercicios 2</a></li>
+<li class="chapter" data-level="3.3" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicios-finales"><i class="fa fa-check"></i><b>3.3</b> Ejercicios finales</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-exploracion-base-nueva"><i class="fa fa-check"></i><b>3.3.1</b> Ejercicio exploración base nueva</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#bibliografia-4"><i class="fa fa-check"></i>Bibliografía</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html"><i class="fa fa-check"></i>Paquetes usados</a><ul>
@@ -330,32 +335,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="visualizando-distribuciones" class="section level2">
 <h2><span class="header-section-number">3.1</span> Visualizando distribuciones</h2>
-<p>Cuando nos llega una nueva base de datos, una de las primeras cosas que haremos será familiarizarnos con los datos. Cómo se distribuyen, cual es la relación entre distintas variables, etc.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;dplyr&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;dplyr&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;dplyr&#39;</span>)
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tidyr&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tidyr&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tidyr&#39;</span>)
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;ggplot2&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;ggplot2&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;ggplot2&#39;</span>)
-
-<span class="co"># Wide to long</span>
-d &lt;-<span class="st"> </span><span class="kw">gather</span>(gapminder) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(value <span class="op">!=</span><span class="st"> </span><span class="dv">999</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Si existiera algun codigo para missing values, filtrar</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value_NUM =</span> <span class="kw">as.numeric</span>(value))
-
-<span class="co"># Plot numeric variables</span>
-d <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">drop_na</span>(value_NUM) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value_NUM)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>key, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">15</span>) <span class="co">#+ scale_x_log10()</span></code></pre>
-<p><img src="bookdown-workshop-R_files/figure-html/initial%20exploration-1.png" width="1152" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot non-numeric variables</span>
-d <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">drop_na</span>(value) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(value_NUM)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>key, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_bar</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">coord_flip</span>()</code></pre>
-<p><img src="bookdown-workshop-R_files/figure-html/initial%20exploration-2.png" width="1152" /></p>
 <div id="variables-categoricas" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Variables categóricas</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(continent)) <span class="op">+</span>
@@ -409,6 +388,40 @@ d <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">2</span>)</code></pre>
 <p><img src="bookdown-workshop-R_files/figure-html/visualizando-distribuciones-continuas-2.png" width="1152" /></p>
 </div>
+<div id="ejercicio-variables-individuales" class="section level3 ejercicio">
+<h3><span class="header-section-number">3.1.3</span> Ejercicio variables individuales</h3>
+<p>Usando el DF <code>mpg</code>, visualiza la distribucion de las variables <code>manufacturer</code>, <code>class</code>, <code>trans</code>, <code>hwy</code> y <code>cty</code></p>
+<p><img src="bookdown-workshop-R_files/figure-html/ejercicio-variables-individuales-1.png" width="1152" /><img src="bookdown-workshop-R_files/figure-html/ejercicio-variables-individuales-2.png" width="1152" /></p>
+</div>
+<div id="visualizando-datasets-completos" class="section level3">
+<h3><span class="header-section-number">3.1.4</span> Visualizando datasets completos</h3>
+<p>Cuando nos llega una nueva base de datos, una de las primeras cosas que haremos será familiarizarnos con los datos. Cómo se distribuyen, cual es la relación entre distintas variables, etc.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;dplyr&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;dplyr&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;dplyr&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tidyr&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tidyr&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tidyr&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;ggplot2&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;ggplot2&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;ggplot2&#39;</span>)
+
+<span class="co"># Wide to long</span>
+d &lt;-<span class="st"> </span><span class="kw">gather</span>(gapminder) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(value <span class="op">!=</span><span class="st"> </span><span class="dv">999</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Si existiera algun codigo para missing values, filtrar</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value_NUM =</span> <span class="kw">as.numeric</span>(value))
+
+<span class="co"># Plot numeric variables</span>
+d <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">drop_na</span>(value_NUM) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value_NUM)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>key, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">15</span>) <span class="co">#+ scale_x_log10()</span></code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/initial%20exploration-1.png" width="1152" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot non-numeric variables</span>
+d <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">drop_na</span>(value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(value_NUM)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>key, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_bar</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_flip</span>()</code></pre>
+<p><img src="bookdown-workshop-R_files/figure-html/initial%20exploration-2.png" width="1152" /></p>
+</div>
 </div>
 <div id="covariacion" class="section level2">
 <h2><span class="header-section-number">3.2</span> Covariación</h2>
@@ -438,6 +451,7 @@ d <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Continente&quot;</span>)</code></pre>
 <p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-2-3.png" width="1152" /></p>
+<p>Y podemos usar geom_density_ridges() para combinar puntos con distribuciones:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(lifeExp, continent, <span class="dt">fill =</span> continent)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">stat =</span> <span class="st">&quot;binline&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">scale =</span> <span class="fl">0.95</span>, <span class="dt">draw_baseline =</span> <span class="ot">FALSE</span>, <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span>
 <span class="st">  </span>ggridges<span class="op">::</span><span class="kw">geom_density_ridges</span>(<span class="dt">jittered_points =</span> <span class="ot">TRUE</span>, <span class="dt">position =</span> <span class="st">&quot;raincloud&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">scale =</span> <span class="fl">0.9</span>)</code></pre>
@@ -507,8 +521,8 @@ DF_last_first =<span class="st"> </span>DF_last_year <span class="op">%&gt;%</sp
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Diferencia entre 2007 y 1952 por pais&quot;</span>)</code></pre>
 <p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-6-2.png" width="1152" /></p>
 </div>
-<div id="ejercicio1" class="section level3 ejercicio">
-<h3><span class="header-section-number">3.2.2</span> Ejercicio1</h3>
+<div id="ejercicio-covariacion-1" class="section level3 ejercicio">
+<h3><span class="header-section-number">3.2.2</span> Ejercicio covariacion 1</h3>
 <p>Mira el plot donde mostramos la diferencia entre los extremos en la base de datos, 1952 y 2007 con dos gráficas, una al lado de la otra. Ves algún problema?</p>
 <p>Trata de resolver el problema en las escalas. El resultado final deberia ser:</p>
 <p><img src="bookdown-workshop-R_files/figure-html/ejercicio-covariacion1-1.png" width="1152" /></p>
@@ -558,17 +572,32 @@ DF_last_first =<span class="st"> </span>DF_last_year <span class="op">%&gt;%</sp
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> <span class="kw">cut_width</span>(lifeExp, <span class="dv">10</span>))) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_log10</span>()</code></pre>
 <p><img src="bookdown-workshop-R_files/figure-html/covariacion-2continuas-4.png" width="1152" /></p>
+</div>
+<div id="ejercicio-covariacion-2" class="section level3 ejercicio">
+<h3><span class="header-section-number">3.2.5</span> Ejercicio covariacion 2</h3>
+<p>Usando el DF <code>mpg</code>, visualiza la covariacion entre:</p>
+<ul>
+<li><code>manufacturer</code> y <code>hwy</code><br />
+</li>
+<li><code>class</code> y <code>hwy</code><br />
+</li>
+<li><code>hwy</code> y <code>cty</code></li>
+</ul>
+<p><img src="bookdown-workshop-R_files/figure-html/ejercicio-covariacion-1.png" width="1152" /><img src="bookdown-workshop-R_files/figure-html/ejercicio-covariacion-2.png" width="1152" /></p>
 <!-- 7.6 Patterns and models -->
 </div>
 </div>
-<div id="ejercicios-2" class="section level2 ejercicio">
-<h2><span class="header-section-number">3.3</span> Ejercicios 2</h2>
+<div id="ejercicios-finales" class="section level2">
+<h2><span class="header-section-number">3.3</span> Ejercicios finales</h2>
+<div id="ejercicio-exploracion-base-nueva" class="section level3 ejercicio">
+<h3><span class="header-section-number">3.3.1</span> Ejercicio exploración base nueva</h3>
 <p>Usando la base del paper <a href="https://osf.io/qn9a2/">Cancer Screening Risk Literacy of Physicians in Training</a>, haz un primer análisis exploratorio que incluya:</p>
 <ul>
 <li>histogramas de todas las variables numericas y no-numéricas</li>
 <li>scatterplots de la relacion entre comprensión y numéracy, y entre comprensión y screenbeliefs</li>
 </ul>
 <p><img src="bookdown-workshop-R_files/figure-html/ejercicio-final-analisis-exploratorio-1.png" width="1152" /><img src="bookdown-workshop-R_files/figure-html/ejercicio-final-analisis-exploratorio-2.png" width="1152" /><img src="bookdown-workshop-R_files/figure-html/ejercicio-final-analisis-exploratorio-3.png" width="1152" /></p>
+</div>
 </div>
 <div id="bibliografia-4" class="section level2 bibliografia unnumbered">
 <h2>Bibliografía</h2>
