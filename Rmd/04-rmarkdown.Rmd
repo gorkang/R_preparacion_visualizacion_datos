@@ -16,16 +16,40 @@ if (!require('renv')) remotes::install_github("rstudio/renv"); library('renv')
 
 ## Que es la reproducibilidad
 
+![](`r here::here("data", "images", "reproducibility.png")`)
+
+---  
+
+La crisis de replicación (*replication crisis*) se inició con [un paper que trató de replicar los resultados de 100 investigaciones clásicas](http://eprints.lse.ac.uk/65159/1/__lse.ac.uk_storage_LIBRARY_Secondary_libfile_shared_repository_Content_Kappes%2C%20H_Estimating%20reproducibility_Kappes_Estimating%20the%20reproducibility_2016.pdf). Esta crisis ha generado un movimiento [muy interesante](http://theconversation.com/the-replication-crisis-is-good-for-science-103736) dentro de las Ciencias Sociales y la Psicología en particular. Cada vez es más común aplicar algunos principios de buenas prácticas como compartir materiales, datos y scripts de análisis, para que tanto los revisores como otros investigadores puedan entender, reanalizar, etc. nuestras investigaciones.  
+
+Hay algunas organizaciones que han surgido para tratar de mejorar la colaboración, transparencia, y manera de trabajar:  
+
+* [Psychological Science Accelerator](https://psysciacc.org/)  
+
+* [Peer Reviewer's Openness Initiative (PRO)](https://opennessinitiative.org/)  
+
+* [Open Science Foundation](https://osf.io/)  
+
+
+Y algunas prácticas y maneras de publicar "nuevas", se están haciendo cada vez más imprescindibles:  
+
+* [Registered reports](https://cos.io/rr/)  
+
+* [Preregistration](https://osf.io/prereg/)  
+
+
+En este capítulo vamos a ver algunos pasos fundamentales para tender un workflow que permita y ayude a la reproducibilidad.  
+
 
 
 ## Proyectos de R-Studio 
 
-Al usar proyectos de Rstudio, simplificamos varias cosas, haciendo automaticamente más facil compartir nuestro proyecto con otras personas. Podéis leer algo más sobre esto en [este artículo](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/).  
+El primer paso empieza por crear un proyecto de RStudio. Al usar proyectos, simplificamos varias cosas, haciendo automáticamente más fácil compartir nuestro trabajo con otras personas. Podéis leer algo más sobre esto [aquí](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/).  
 
 
 ## Control de cambios con Git y Github
 
-Un segundo elemento que nos va a ayudar a evitar problemas en proyectos relativamente complejos es el uso de un sistema de control de versiones como Git. Los proyectos de RStudio nos ponen especialmente facil usar Git, pudiendo hacer muchas cosas haciendo click en sitios.  
+Un segundo elemento que nos va a ayudar a trabajar en equipo, y a evitar problemas en proyectos relativamente complejos es el uso de un sistema de control de versiones como Git. Los proyectos de RStudio hacen especialmente sencillo usar Git, click, click, click...
 
 
 Algunas referencias útiles:  
@@ -119,10 +143,47 @@ Para el modelo básico empezamos con la rama master:
 - Si todo ha ido bien, borramos la rama: `git branch -d development`   
 
 4. Hacemos pull para sincronizar nuestras ramas locales  
-`git pull`
+`git pull`  
 
 
-#### {-}  
+
+Por cierto, todo esto lo podemos hacer sin salir de RStudio (gráficamente, como se ve abajo, o usando el Terminal):  
+
+![](`r here::here("data", "images", "git-rstudio.png")`)
+
+
+
+#### Pull request en 3 + 1 sencillos pasos
+
+Después de hacer el push de arriba, al entrar en nuestro repositorio deberíamos ver algo parecido a lo siguiente (si no lo vemos, ir a **branches**).  
+
+Lo más dificl será hacer click en los botones verdes adecuados:  
+
+Paso 1. **Compare & pull request**  
+
+![](`r here::here("data", "images", "pull-request-1.png")`){ width=70% }  
+
+---  
+
+
+Paso 2. **Create pull request**  
+
+![](`r here::here("data", "images", "pull-request-2.png")`){ width=70% }  
+
+---  
+
+
+Paso 3. **Merge pull request y confirmar**  
+
+![](`r here::here("data", "images", "pull-request-3.png")`){ width=70% }  
+
+---  
+
+
++  Borrar rama antigua  
+
+
+
 
 
 ### Ejercicio Nuestro primer commit  {.ejercicio}
@@ -201,47 +262,62 @@ Queremos destruir el stash
 
 
 
-## Varios
-
-### Shortcuts!
-
-* Alt+SHIFT+K: Ver shortcuts!  
-* CTRL+SHIFT+M: Pipe
-* CTRL+SHIFT+A: Reformat code  
-* CTRL+I: Reindent lines  
-
-
-### Estilo  
-
-Es importante ser consistente en la manera de escribir codigo. Habitualmente se recomienda seguir una guia de estilo. Por ejemplo, [Hadley Wickham's Style guide](http://adv-r.had.co.nz/Style.html). 
-
-
-### Algunos paquetes interesantes  
-
-* [Descargar datos suplementarios de papers publicados usando DOI](https://github.com/ropensci/suppdata)  
-* https://github.com/easystats/easystats  
-* https://usethis.r-lib.org/
-
-
-
 
 ## RMarkdown, openscience y  análisis reproducibles  
 
-* [Preparar artículos en formato APA](https://github.com/crsh/papaja)  
+RMarkdown es un tipo de archivo que nos permite combinar texto formateado con código y resultados en un mismo documento (HTML, PDF, WORD...).  
 
+Aprovechando la potencia de este tipo de archivo, algunas personas han creado paquetes para [preparar artículos en formato APA](https://github.com/crsh/papaja), o con las [plantillas de decenas de editoriales](https://github.com/rstudio/rticles).  
 
 
 ## Sintaxis, chunks de código, tipos de archivo  
 
+La sintáxis básica de RMarkdown es sorprendentemente sencilla, como se puede ver más abajo.  Eso si, lo que hay detrás es toda la potencia de latex, así que el cielo es el límite.  
+
+
+![](`r here::here("data", "images", "rmarkdown.png")`)  
+
+
+Y como no, tenemos mucha ayuda: 
 
 * [R Markdown cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)  
+* [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)  
+* [Web oficial de Rmarkdown dentro de RStudio](https://rmarkdown.rstudio.com/)  
+
+
+### Ejercicio básico RMarkdown {.ejercicio}
+
+Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:  
+
+1. Dale formato de artículo científico, creando las siguientes secciones:  
+
+* Title
+* Abstract
+* Introducción  
+* Materials and Methods
+  + Participants
+  + Materials
+* Results
+  + Experiment 1
+  + Experiment 2
+* Discussion
+* Bibliography
+
+2. Pon texto de relleno dentro de cada sección. Para ello puedes usar la función `stri_rand_lipsum()` del paquete {stringi}.  
+
+3. Renderiza tu documento en formato PDF.  
+
+4. Pull, Commit, Push, Pull...
+
 
 
 ### Trucos
 
-Para evitar problemas con los paths de los archivos, usar `here::here()`  
+* Cuando quieras forzar un salto de linea, o tengas problemas con el formato, probablemente necesites incluir "  " (dos espacios) despues de la frase, o un salto de linea... 
 
-Para evitar problemas con instalación de Latex: 
+* Para evitar problemas con los paths de los archivos, usar `here::here()`  
+
+* Para evitar problemas con instalación de Latex: 
 
 ```{r tinytex, eval=FALSE}
 
@@ -251,13 +327,11 @@ tinytex::install_tinytex()
 
 ```
 
-
-Corregir ortografía en Rmarkdown   (F7) 
-
-* https://github.com/ropensci/spelling#readme  
+* Corregir ortografía en Rmarkdown   (F7) 
+- https://github.com/ropensci/spelling#readme  
 
 
-Bibliográfica en Rmarkdown  
+Bibliográfia en Rmarkdown  
 
 * https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html  
 
@@ -266,8 +340,32 @@ Bibliográfica en Rmarkdown
 * Citar paquetes usados! 
 
 
+```{r include=FALSE}
+# remotes::install_github("Pakillo/grateful")
+
+# grateful::cite_packages(all.pkg = FALSE,
+#                         out.format = "rmd",
+#                         out.dir = "dev")
+```
+
+
+### Ejercicio avanzado {.ejercicio}
+
+Bajad la base de Cancer Screening Risk Literacy of Physicians in Training: https://osf.io/qn9a2/ y el [preprint del artículo](`r here::here("data", "files", "PONE-D-19-03821R2_FTC.pdf")`):
+
+En el documento .Rmd de antes:  
+
+1. Cread algo parecido a la tabla de correlaciones (Tabla 3) que se ve en el artículo.  
+
+2. Tratad de emular el tipo de análisis que se ve en la Tabla 4.  
+
+
+
 
 ## De los datos al reporte final: Una historia de amor con R  
+
+
+* [Preparar artículos en formato APA](https://github.com/crsh/papaja)  
 
 ```{r papaja, eval=FALSE}
 
@@ -288,6 +386,8 @@ rmarkdown::render(
   clean = TRUE)
 
 ```
+
+Y no olvidemos el paquete {rticles}, que contiene [plantillas de decenas de editoriales](https://github.com/rstudio/rticles)  
 
 
 
@@ -336,8 +436,26 @@ Aplicaciones web interactivas con R: [Shiny](https://shiny.rstudio.com/)
 
 
 
-# Ejercicios
+## Varios
 
+### Shortcuts!
+
+* Alt+SHIFT+K: Ver shortcuts!  
+* CTRL+SHIFT+M: Pipe
+* CTRL+SHIFT+A: Reformat code  
+* CTRL+I: Reindent lines  
+
+
+### Estilo  
+
+Es importante ser consistente en la manera de escribir codigo. Habitualmente se recomienda seguir una guia de estilo. Por ejemplo, [Hadley Wickham's Style guide](http://adv-r.had.co.nz/Style.html). 
+
+
+### Algunos paquetes interesantes  
+
+* [Descargar datos suplementarios de papers publicados usando DOI](https://github.com/ropensci/suppdata)  
+* https://github.com/easystats/easystats  
+* https://usethis.r-lib.org/
 
 
 

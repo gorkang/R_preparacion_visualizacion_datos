@@ -1134,7 +1134,7 @@ DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
 
 ---  
 
-5. En el ejercicio 3 de verbos avanzados creaste un DF llamado `DF_split` con la median split a partir de la variable `Social.Adaptation`. Uno ese DF al `DF_long` que habías creado en el ejercicio 2 de la misma sección. El DF final se vera así: 
+6. En el ejercicio 3 de verbos avanzados creaste un DF llamado `DF_split` con la median split a partir de la variable `Social.Adaptation`. Uno ese DF al `DF_long` que habías creado en el ejercicio 2 de la misma sección. El DF final se vera así: 
 
 ```{r ejercicios-joins-responses-5, echo=FALSE}
 
@@ -1145,7 +1145,7 @@ DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
     
 ```
 
-6. Haz un plot donde se vea la distribución para todas las variables de resultados de los dos niveles de `social_adaptation_split`.
+7. Haz un plot donde se vea la distribución para todas las variables de resultados de los dos niveles de `social_adaptation_split`.
 
 ```{r ejercicios-joins-responses-6, echo=FALSE}
     
@@ -1164,7 +1164,7 @@ DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
 
 ---  
 
-7. El plot que vimos en el tema anterior tiene el problema de que los datos de tuberculosis son en números absolutos.  Serias capaz de convertir estos a % de la población, como se ve en el plot de abajo?  
+8. El plot que vimos en el tema anterior tiene el problema de que los datos de tuberculosis son en números absolutos.  Serias capaz de convertir estos a % de la población, como se ve en el plot de abajo?  
 
 ```{r ejercicios-joins-responses-7, echo=FALSE, fig.height=12, fig.width=8}
 
