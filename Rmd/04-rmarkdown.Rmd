@@ -4,11 +4,15 @@
 
 ```{r paquetes-04, message=FALSE, warning=FALSE}
 
-if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
-if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
-if (!require('papaja')) devtools::install_github("crsh/papaja"); library('papaja')
+if (!require('corrr')) install.packages('corrr'); library('corrr')
+if (!require('easystats')) remotes::install_github("easystats/easystats"); library('easystats')
+if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
 if (!require('remotes')) install.packages('remotes'); library('remotes')
 if (!require('renv')) remotes::install_github("rstudio/renv"); library('renv')
+if (!require('rticles')) install.packages('rticles'); library('rticles')
+if (!require('stargazer')) install.packages('stargazer'); library('stargazer')
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
+if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
 
 ```  
 
@@ -96,8 +100,20 @@ Para prepararnos para usar Git y Github tenemos que hacer lo siguiente:
 
   + Empujar el repositorio local a Github: `git push --set-upstream origin master`  
   
+  
+  
+### Clonar un repositorio existente
 
-### {-}  
+Algo que podemos hacer con todos los repositorios de Github es clonarlos localmente:  
+
+En RStudio:  
+
+* File > New Project > Version Control > Git
+
+Pega en "repository URL" la URL del repo GitHub (ver imagen de abajo). Será algo similar a https://github.com/VUESTRO_NOMBRE_DE USUARIO/NOMBRE_REPO.git
+
+![SOURCE: www.github.com](`r here::here("data", "images", "git-clone.png")`)
+
 
 
 ### Ejercicio Git-Github  {.ejercicio}
@@ -110,7 +126,7 @@ Haz lo siguiente:
 
 3. Sigue los pasos de arriba para crear un repositorio publico asociado a tu repositorio local  
 
-
+4. Ahora cierra el proyecto. Y clona el repositorio que has creado en una nueva carpeta  
 
 
 ### Workflow  
@@ -311,7 +327,102 @@ Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:
 
 
 
-### Trucos
+### Herramientas básicas para investigadoras/es
+
+De manera relativamente sencilla podemos incluir tablas bonitas en los reportes. 
+
+
+
+```{r paquetes-tablas}
+
+# https://github.com/easystats/easystats
+# https://www.jakeruss.com/cheatsheets/stargazer/
+
+# remotes::install_github("easystats/easystats")
+library(corrr)
+library(easystats)
+library(papaja)
+library(stargazer)
+library(tidyverse)
+
+```
+
+
+#### Correlaciones
+
+```{r tablas-bonitas-correlation}
+
+  corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
+
+  report(corr_test)
+  table_easystats = report(corr_test) %>% to_table()
+  knitr::kable(table_easystats)
+
+
+# https://paulvanderlaken.com/2018/09/10/simpler-correlation-analysis-in-r-using-tidyverse-principles/
+  table <- iris %>% 
+    group_by(Species) %>% 
+    correlation() %>% 
+    report() %>% 
+    to_table()
+  
+  table
+  
+  table <- table[rowSums(is.na(table)) != ncol(table),]
+  knitr::kable(table)
+  
+```
+
+#### LM  
+
+```{r tablas-bonitas-lm}
+
+  model_lm <- lm(Sepal.Length ~ Petal.Length * Petal.Width, data = iris)
+  summary_lm = summary(model_lm)
+  # papaja::apa_print.summary.lm(summary_lm)$table
+  table_lm = papaja::apa_print.lm(model_lm)$table
+  knitr::kable(table_lm)
+  
+  report(model_lm, standardize = "robust")
+  report(model_lm, standardize = "robust") %>% to_fulltext()
+  table_easystats = report(model_lm, standardize = "robust") %>% to_table()
+  knitr::kable(table_easystats)
+  
+
+```
+
+
+```{r tablas-bonitas-stargazer, results='asis'}
+
+  stargazer::stargazer(model_lm, heather = FALSE, type = "html")
+
+```
+
+
+#### Anova
+
+!!!!!!!!!!!!!!!!!!!!! https://rdrr.io/cran/ez/man/ezANOVA.html
+
+
+```{r tablas-bonitas-anova}
+
+  data <- iris
+  data$Cat1 <- rep(c("X", "X", "Y"), length.out = nrow(data))
+  data$Cat2 <- rep(c("A", "B"), length.out = nrow(data))
+  model_aov <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data=data)
+  
+  report(model_aov)
+  report(model_aov) %>% to_table()
+  
+  table_aov = papaja::apa_print.aov(model_aov)$table
+  knitr::kable(table_aov)
+
+```
+
+
+
+
+### Otros trucos
 
 * Cuando quieras forzar un salto de linea, o tengas problemas con el formato, probablemente necesites incluir "  " (dos espacios) despues de la frase, o un salto de linea... 
 
@@ -425,7 +536,7 @@ https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html
 
 ```{r workflow, message=FALSE, warning=FALSE, eval=FALSE}
 
-install.packages("workflowr")
+# install.packages("workflowr")
 
 ```
 
@@ -448,7 +559,7 @@ Aplicaciones web interactivas con R: [Shiny](https://shiny.rstudio.com/)
 
 ### Estilo  
 
-Es importante ser consistente en la manera de escribir codigo. Habitualmente se recomienda seguir una guia de estilo. Por ejemplo, [Hadley Wickham's Style guide](http://adv-r.had.co.nz/Style.html). 
+Es importante ser consistente en la manera de escribir codigo. Habitualmente se recomienda seguir una guia de estilo. Por ejemplo, [Hadley Wickham's Style guide](http://adv-r.had.co.nz/Style.html) o la [guia de estilo del tidyverse](https://style.tidyverse.org/).
 
 
 ### Algunos paquetes interesantes  

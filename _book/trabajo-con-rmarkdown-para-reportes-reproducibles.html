@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 4 Trabajo con RMarkdown para reportes reproducibles | R para preparación y visualización de datos</title>
+  <meta name="description" content="Capítulo 4 Trabajo con RMarkdown para reportes reproducibles | R para preparación y visualización de datos" />
+  <meta name="generator" content="bookdown 0.11.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 4 Trabajo con RMarkdown para reportes reproducibles | R para preparación y visualización de datos" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 4 Trabajo con RMarkdown para reportes reproducibles | R para preparación y visualización de datos" />
+  
+  
+  
+
+<meta name="author" content="Gorka Navarrete, ORCID: 0000-0001-7678-8656" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="analisis-de-datos-exploratorio.html">
+<link rel="next" href="paquetes-usados.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.7/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/base.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introducción</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i>Objetivos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#como-empezar"><i class="fa fa-check"></i>Como empezar</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bibliografia"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html"><i class="fa fa-check"></i>Preparando nuestro sistema</a><ul>
+<li class="chapter" data-level="0.1" data-path="preparando-sistema.html"><a href="preparando-sistema.html#empezando-en-a-b-c"><i class="fa fa-check"></i><b>0.1</b> Empezando en A-B-C</a><ul>
+<li><a href="preparando-sistema.html#a-instalar-r"><strong>(A)</strong> Instalar R</a></li>
+<li><a href="preparando-sistema.html#b-instalar-rstudio"><strong>(B)</strong> Instalar RStudio</a></li>
+<li><a href="preparando-sistema.html#c-paquetes-para-el-workshop"><strong>(C)</strong> Paquetes para el workshop</a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="preparando-sistema.html"><a href="preparando-sistema.html#algo-mas-sobre-la-instalacion-de-paquetes"><i class="fa fa-check"></i><b>0.2</b> Algo más sobre la instalación de paquetes</a><ul>
+<li class="chapter" data-level="0.2.1" data-path="preparando-sistema.html"><a href="preparando-sistema.html#cargar-paquetes"><i class="fa fa-check"></i><b>0.2.1</b> Cargar paquetes</a></li>
+<li class="chapter" data-level="0.2.2" data-path="preparando-sistema.html"><a href="preparando-sistema.html#todo-en-uno"><i class="fa fa-check"></i><b>0.2.2</b> Todo en uno</a></li>
+<li class="chapter" data-level="0.2.3" data-path="preparando-sistema.html"><a href="preparando-sistema.html#instalar-paquetes-de-github"><i class="fa fa-check"></i><b>0.2.3</b> Instalar paquetes de Github</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#bibliografia-1"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html"><i class="fa fa-check"></i><b>1</b> Introducción a R y visualización de datos</a><ul>
+<li class="chapter" data-level="" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#paquetes-para-este-capitulo"><i class="fa fa-check"></i>Paquetes para este capítulo</a></li>
+<li class="chapter" data-level="1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#introduccion-porque-la-visualizacion-de-datos-es-importante"><i class="fa fa-check"></i><b>1.1</b> Introducción: porque la visualización de datos es importante</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#porque-la-visualizacion-de-datos-es-importante---ejemplo-del-mundo-real"><i class="fa fa-check"></i><b>1.1.1</b> Porque la visualización de datos es importante - ejemplo del mundo real</a><ul>
+<li class="chapter" data-level="" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#moraleja-es-importante-mostrar-los-datos-individuales-yo-la-distribucion-de-los-datos"><i class="fa fa-check"></i>Moraleja: es importante mostrar los datos individuales y/o la distribución de los datos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#por-que-r"><i class="fa fa-check"></i><b>1.2</b> Por qué R?</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#bienvenida-al-tidyverse"><i class="fa fa-check"></i><b>1.2.1</b> Bienvenida al tidyverse</a><ul>
+<li class="chapter" data-level="1.2.1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#tidyverse-vs-base-r"><i class="fa fa-check"></i><b>1.2.1.1</b> Tidyverse vs Base R</a><ul>
+<li class="chapter" data-level="1.2.1.1.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#tidyverse"><i class="fa fa-check"></i><b>1.2.1.1.1</b> Tidyverse</a></li>
+<li class="chapter" data-level="1.2.1.1.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#base-r"><i class="fa fa-check"></i><b>1.2.1.1.2</b> Base-R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.2.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#antes-de-empezar"><i class="fa fa-check"></i><b>1.2.2</b> Antes de empezar</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#r-para-visualizacion-de-datos"><i class="fa fa-check"></i><b>1.2.3</b> R para visualización de datos</a><ul>
+<li class="chapter" data-level="1.2.3.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#primeros-pasos---con-training-wheels"><i class="fa fa-check"></i><b>1.2.3.1</b> Primeros pasos - con training wheels</a></li>
+<li class="chapter" data-level="1.2.3.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#aprendamos-con-garrick"><i class="fa fa-check"></i><b>1.2.3.2</b> Aprendamos con Garrick</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#visualizacion-de-datos-con-ggplot2"><i class="fa fa-check"></i><b>1.3</b> Visualización de datos con ggplot2</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#primeros-pasos"><i class="fa fa-check"></i><b>1.3.1</b> Primeros pasos</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#aesthetic-mappings"><i class="fa fa-check"></i><b>1.3.2</b> Aesthetic mappings</a><ul>
+<li class="chapter" data-level="1.3.2.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#color-alpha-size"><i class="fa fa-check"></i><b>1.3.2.1</b> Color, alpha, size</a></li>
+<li class="chapter" data-level="1.3.2.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#shape"><i class="fa fa-check"></i><b>1.3.2.2</b> Shape</a></li>
+<li class="chapter" data-level="1.3.2.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#linetype"><i class="fa fa-check"></i><b>1.3.2.3</b> Linetype</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geoms"><i class="fa fa-check"></i><b>1.3.3</b> Geoms</a><ul>
+<li class="chapter" data-level="1.3.3.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_point-y-geom_jitter"><i class="fa fa-check"></i><b>1.3.3.1</b> geom_point y geom_jitter</a></li>
+<li class="chapter" data-level="1.3.3.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_smooth"><i class="fa fa-check"></i><b>1.3.3.2</b> geom_smooth</a></li>
+<li class="chapter" data-level="1.3.3.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_boxplot-y-geom_violin"><i class="fa fa-check"></i><b>1.3.3.3</b> geom_boxplot y geom_violin</a></li>
+<li class="chapter" data-level="1.3.3.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_histogram"><i class="fa fa-check"></i><b>1.3.3.4</b> geom_histogram</a></li>
+<li class="chapter" data-level="1.3.3.5" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_dotplot"><i class="fa fa-check"></i><b>1.3.3.5</b> geom_dotplot</a></li>
+<li class="chapter" data-level="1.3.3.6" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_density"><i class="fa fa-check"></i><b>1.3.3.6</b> geom_density</a></li>
+<li class="chapter" data-level="1.3.3.7" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#geom_density_ridges"><i class="fa fa-check"></i><b>1.3.3.7</b> geom_density_ridges</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#facets"><i class="fa fa-check"></i><b>1.3.4</b> Facets</a><ul>
+<li class="chapter" data-level="1.3.4.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#facet_grid"><i class="fa fa-check"></i><b>1.3.4.1</b> facet_grid</a></li>
+<li class="chapter" data-level="1.3.4.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#facet_wrap"><i class="fa fa-check"></i><b>1.3.4.2</b> facet_wrap</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.5" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#transformaciones-estadisticas"><i class="fa fa-check"></i><b>1.3.5</b> Transformaciones estadísticas</a><ul>
+<li class="chapter" data-level="1.3.5.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#proporciones"><i class="fa fa-check"></i><b>1.3.5.1</b> Proporciones</a></li>
+<li class="chapter" data-level="1.3.5.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#stat_summary"><i class="fa fa-check"></i><b>1.3.5.2</b> stat_summary</a></li>
+<li class="chapter" data-level="1.3.5.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#promedios-por-grupo"><i class="fa fa-check"></i><b>1.3.5.3</b> Promedios por grupo</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.6" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#personalizacion-de-graficas"><i class="fa fa-check"></i><b>1.3.6</b> Personalización de gráficas</a><ul>
+<li class="chapter" data-level="1.3.6.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#coords"><i class="fa fa-check"></i><b>1.3.6.1</b> Coords</a></li>
+<li class="chapter" data-level="1.3.6.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#scales"><i class="fa fa-check"></i><b>1.3.6.2</b> Scales</a></li>
+<li class="chapter" data-level="1.3.6.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#colors-and-fill-scales"><i class="fa fa-check"></i><b>1.3.6.3</b> Colors and fill scales</a></li>
+<li class="chapter" data-level="1.3.6.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#combinando-graficas"><i class="fa fa-check"></i><b>1.3.6.4</b> Combinando gráficas</a></li>
+<li class="chapter" data-level="1.3.6.5" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#usando-estilos"><i class="fa fa-check"></i><b>1.3.6.5</b> Usando estilos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#visualizacion-interactiva"><i class="fa fa-check"></i><b>1.4</b> Visualización interactiva</a><ul>
+<li class="chapter" data-level="1.4.0.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#graficas-interactivas"><i class="fa fa-check"></i><b>1.4.0.1</b> Gráficas interactivas</a></li>
+<li class="chapter" data-level="1.4.0.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#animando-graficas"><i class="fa fa-check"></i><b>1.4.0.2</b> Animando gráficas</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios"><i class="fa fa-check"></i><b>1.5</b> Ejercicios</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios-geoms-colores"><i class="fa fa-check"></i><b>1.5.1</b> Ejercicios con Geoms, colores…</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#sintaxis-aes"><i class="fa fa-check"></i><b>1.5.2</b> Sintaxis aes()</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios-temas"><i class="fa fa-check"></i><b>1.5.3</b> Temas</a></li>
+<li class="chapter" data-level="1.5.4" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#ejercicios-transformaciones-estadisticas"><i class="fa fa-check"></i><b>1.5.4</b> Transformaciones estadísticas</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduccion-a-r-y-visualizacion-de-datos.html"><a href="introduccion-a-r-y-visualizacion-de-datos.html#bibliografia-2"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html"><i class="fa fa-check"></i><b>2</b> Preparación y transformación de datos</a><ul>
+<li class="chapter" data-level="" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#paquetes-para-este-capitulo-1"><i class="fa fa-check"></i>Paquetes para este capítulo</a></li>
+<li class="chapter" data-level="2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#importar-y-exportar-datos"><i class="fa fa-check"></i><b>2.1</b> Importar y exportar datos</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#importar-un-solo-archivo"><i class="fa fa-check"></i><b>2.1.1</b> Importar un solo archivo</a><ul>
+<li class="chapter" data-level="2.1.1.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#archivos-csv"><i class="fa fa-check"></i><b>2.1.1.1</b> Archivos CSV</a></li>
+<li class="chapter" data-level="2.1.1.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#otros-tipos-de-archivos"><i class="fa fa-check"></i><b>2.1.1.2</b> Otros tipos de archivos</a><ul>
+<li class="chapter" data-level="2.1.1.2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#archivos-excel"><i class="fa fa-check"></i><b>2.1.1.2.1</b> Archivos excel</a></li>
+<li class="chapter" data-level="2.1.1.2.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#archivos-spss"><i class="fa fa-check"></i><b>2.1.1.2.2</b> Archivos SPSS</a></li>
+<li class="chapter" data-level="2.1.1.2.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#archivos-libreoffice"><i class="fa fa-check"></i><b>2.1.1.2.3</b> Archivos Libreoffice</a></li>
+<li class="chapter" data-level="2.1.1.2.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#google-sheets"><i class="fa fa-check"></i><b>2.1.1.2.4</b> Google sheets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2.1.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#ejercicios---importar-datos"><i class="fa fa-check"></i><b>2.1.2</b> Ejercicios - Importar datos</a></li>
+<li class="chapter" data-level="2.1.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#importar-multiples-archivos"><i class="fa fa-check"></i><b>2.1.3</b> Importar múltiples archivos</a><ul>
+<li class="chapter" data-level="2.1.3.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#incluir-nombres-de-archivos"><i class="fa fa-check"></i><b>2.1.3.1</b> Incluir nombres de archivos</a></li>
+<li class="chapter" data-level="2.1.3.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#con-parametros"><i class="fa fa-check"></i><b>2.1.3.2</b> Con parametros</a></li>
+</ul></li>
+<li class="chapter" data-level="2.1.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#ejercicios---importar-multiples-archivos"><i class="fa fa-check"></i><b>2.1.4</b> Ejercicios - Importar múltiples archivos</a></li>
+<li class="chapter" data-level="2.1.5" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#exportar-datos"><i class="fa fa-check"></i><b>2.1.5</b> Exportar datos</a><ul>
+<li class="chapter" data-level="2.1.5.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#archivos-csv-1"><i class="fa fa-check"></i><b>2.1.5.1</b> Archivos CSV</a></li>
+<li class="chapter" data-level="2.1.5.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#otros-archivos"><i class="fa fa-check"></i><b>2.1.5.2</b> Otros Archivos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#preparacion-y-transformacion-de-datos-1"><i class="fa fa-check"></i><b>2.2</b> Preparación y transformación de datos</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#tidy-data"><i class="fa fa-check"></i><b>2.2.1</b> Tidy data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#verbos-dplyr"><i class="fa fa-check"></i><b>2.2.2</b> Verbos dplyr</a><ul>
+<li class="chapter" data-level="" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#tabla-resumen-dplyr"><i class="fa fa-check"></i>Tabla resumen dplyr</a></li>
+<li class="chapter" data-level="2.2.2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#filtrar-y-ordenar-filas"><i class="fa fa-check"></i><b>2.2.2.1</b> Filtrar y ordenar filas</a></li>
+<li class="chapter" data-level="2.2.2.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#seleccionar-ordenar-y-renombrar-columnas"><i class="fa fa-check"></i><b>2.2.2.2</b> Seleccionar, ordenar y renombrar columnas</a><ul>
+<li class="chapter" data-level="2.2.2.2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#seleccion-avanzada-con-select_helpers"><i class="fa fa-check"></i><b>2.2.2.2.1</b> Selección avanzada con select_helpers()</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.2.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#modificar-y-anadir-variables"><i class="fa fa-check"></i><b>2.2.2.3</b> Modificar y añadir variables</a></li>
+<li class="chapter" data-level="2.2.2.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#resumenes-agrupados"><i class="fa fa-check"></i><b>2.2.2.4</b> Resúmenes agrupados</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#ejercicios---verbos-dplyr"><i class="fa fa-check"></i><b>2.2.3</b> Ejercicios - verbos dplyr</a></li>
+<li class="chapter" data-level="2.2.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#verbos-avanzados-y-otras-criaturas-indomitas"><i class="fa fa-check"></i><b>2.2.4</b> Verbos avanzados y otras criaturas indómitas</a><ul>
+<li class="chapter" data-level="2.2.4.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#wide-to-long"><i class="fa fa-check"></i><b>2.2.4.1</b> Wide to long</a></li>
+<li class="chapter" data-level="2.2.4.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#long-to-wide"><i class="fa fa-check"></i><b>2.2.4.2</b> Long to wide</a><ul>
+<li class="chapter" data-level="2.2.4.2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#para-que-sirve-tener-los-datos-en-formato-long"><i class="fa fa-check"></i><b>2.2.4.2.1</b> ¿Para que sirve tener los datos en formato long?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.4.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#separate-omit-ifelse-case_when-tipos-de-variables"><i class="fa fa-check"></i><b>2.2.4.3</b> Separate, omit, ifelse, case_when, tipos de variables…</a></li>
+<li class="chapter" data-level="2.2.4.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#regular-expressions"><i class="fa fa-check"></i><b>2.2.4.4</b> Regular expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.5" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#ejercicios---verbos-avanzados-dplyr"><i class="fa fa-check"></i><b>2.2.5</b> Ejercicios - verbos avanzados dplyr</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#combinar-bases-de-datos"><i class="fa fa-check"></i><b>2.3</b> Combinar bases de datos</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#bind"><i class="fa fa-check"></i><b>2.3.1</b> Bind</a></li>
+<li class="chapter" data-level="2.3.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#joins"><i class="fa fa-check"></i><b>2.3.2</b> Joins</a><ul>
+<li class="chapter" data-level="" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#tipos-de-join"><i class="fa fa-check"></i>Tipos de Join</a></li>
+<li class="chapter" data-level="2.3.2.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#mutating-joins"><i class="fa fa-check"></i><b>2.3.2.1</b> Mutating joins</a></li>
+<li class="chapter" data-level="2.3.2.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#filtering-joins"><i class="fa fa-check"></i><b>2.3.2.2</b> Filtering joins</a></li>
+<li class="chapter" data-level="2.3.2.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#nesting-joins"><i class="fa fa-check"></i><b>2.3.2.3</b> Nesting joins</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3.3" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#ejercicios-joins"><i class="fa fa-check"></i><b>2.3.3</b> Ejercicios JOINS</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#mas-alla-de-la-manipulacion"><i class="fa fa-check"></i><b>2.4</b> Más allá de la manipulación</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#fast-and-frugal-trees"><i class="fa fa-check"></i><b>2.4.1</b> Fast and Frugal trees</a></li>
+<li class="chapter" data-level="2.4.2" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#machine-learning"><i class="fa fa-check"></i><b>2.4.2</b> Machine learning</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#datasets-interesantes"><i class="fa fa-check"></i><b>2.5</b> Datasets interesantes</a></li>
+<li class="chapter" data-level="" data-path="preparacion-y-transformacion-de-datos.html"><a href="preparacion-y-transformacion-de-datos.html#bibliografia-3"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html"><i class="fa fa-check"></i><b>3</b> Análisis de datos exploratorio</a><ul>
+<li class="chapter" data-level="" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#paquetes-para-este-capitulo-2"><i class="fa fa-check"></i>Paquetes para este capítulo</a></li>
+<li class="chapter" data-level="3.1" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#visualizando-distribuciones"><i class="fa fa-check"></i><b>3.1</b> Visualizando distribuciones</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#variables-categoricas"><i class="fa fa-check"></i><b>3.1.1</b> Variables categóricas</a></li>
+<li class="chapter" data-level="3.1.2" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#variables-continuas"><i class="fa fa-check"></i><b>3.1.2</b> Variables continuas</a></li>
+<li class="chapter" data-level="3.1.3" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-variables-individuales"><i class="fa fa-check"></i><b>3.1.3</b> Ejercicio variables individuales</a></li>
+<li class="chapter" data-level="3.1.4" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#visualizando-datasets-completos"><i class="fa fa-check"></i><b>3.1.4</b> Visualizando datasets completos</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#covariacion"><i class="fa fa-check"></i><b>3.2</b> Covariación</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#variable-categorica-y-continua"><i class="fa fa-check"></i><b>3.2.1</b> Variable categórica y continua</a></li>
+<li class="chapter" data-level="3.2.2" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-covariacion-1"><i class="fa fa-check"></i><b>3.2.2</b> Ejercicio covariacion 1</a></li>
+<li class="chapter" data-level="3.2.3" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#dos-variables-categoricas"><i class="fa fa-check"></i><b>3.2.3</b> Dos variables categóricas</a></li>
+<li class="chapter" data-level="3.2.4" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#dos-variables-continuas"><i class="fa fa-check"></i><b>3.2.4</b> Dos variables continuas</a></li>
+<li class="chapter" data-level="3.2.5" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-covariacion-2"><i class="fa fa-check"></i><b>3.2.5</b> Ejercicio covariacion 2</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicios-finales"><i class="fa fa-check"></i><b>3.3</b> Ejercicios finales</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-exploracion-base-nueva"><i class="fa fa-check"></i><b>3.3.1</b> Ejercicio exploración base nueva</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#bibliografia-4"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><i class="fa fa-check"></i><b>4</b> Trabajo con RMarkdown para reportes reproducibles</a><ul>
+<li class="chapter" data-level="4.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#que-es-la-reproducibilidad"><i class="fa fa-check"></i><b>4.1</b> Que es la reproducibilidad</a></li>
+<li class="chapter" data-level="4.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#proyectos-de-r-studio"><i class="fa fa-check"></i><b>4.2</b> Proyectos de R-Studio</a></li>
+<li class="chapter" data-level="4.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#control-de-cambios-con-git-y-github"><i class="fa fa-check"></i><b>4.3</b> Control de cambios con Git y Github</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#github"><i class="fa fa-check"></i><b>4.3.1</b> Github</a><ul>
+<li class="chapter" data-level="4.3.1.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#seguir-repositorios"><i class="fa fa-check"></i><b>4.3.1.1</b> Seguir repositorios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#crear-git-y-asociar-a-github-repo"><i class="fa fa-check"></i><b>4.3.2</b> Crear Git y asociar a Github repo</a></li>
+<li class="chapter" data-level="4.3.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#clonar-un-repositorio-existente"><i class="fa fa-check"></i><b>4.3.3</b> Clonar un repositorio existente</a></li>
+<li class="chapter" data-level="4.3.4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-git-github"><i class="fa fa-check"></i><b>4.3.4</b> Ejercicio Git-Github</a></li>
+<li class="chapter" data-level="4.3.5" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#workflow"><i class="fa fa-check"></i><b>4.3.5</b> Workflow</a><ul>
+<li class="chapter" data-level="4.3.5.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#modelo-basico"><i class="fa fa-check"></i><b>4.3.5.1</b> Modelo básico</a></li>
+<li class="chapter" data-level="4.3.5.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#pull-request-en-3-1-sencillos-pasos"><i class="fa fa-check"></i><b>4.3.5.2</b> Pull request en 3 + 1 sencillos pasos</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3.6" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-nuestro-primer-commit"><i class="fa fa-check"></i><b>4.3.6</b> Ejercicio Nuestro primer commit</a></li>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-2"></a><ul>
+<li class="chapter" data-level="4.3.6.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#feature-branch"><i class="fa fa-check"></i><b>4.3.6.1</b> Feature branch</a></li>
+<li class="chapter" data-level="4.3.6.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#stash"><i class="fa fa-check"></i><b>4.3.6.2</b> Stash</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#rmarkdown-openscience-y-analisis-reproducibles"><i class="fa fa-check"></i><b>4.4</b> RMarkdown, openscience y análisis reproducibles</a></li>
+<li class="chapter" data-level="4.5" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#sintaxis-chunks-de-codigo-tipos-de-archivo"><i class="fa fa-check"></i><b>4.5</b> Sintaxis, chunks de código, tipos de archivo</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-basico-rmarkdown"><i class="fa fa-check"></i><b>4.5.1</b> Ejercicio básico RMarkdown</a></li>
+<li class="chapter" data-level="4.5.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#herramientas-basicas-para-investigadorases"><i class="fa fa-check"></i><b>4.5.2</b> Herramientas básicas para investigadoras/es</a><ul>
+<li class="chapter" data-level="4.5.2.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#correlaciones"><i class="fa fa-check"></i><b>4.5.2.1</b> Correlaciones</a></li>
+<li class="chapter" data-level="4.5.2.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#lm"><i class="fa fa-check"></i><b>4.5.2.2</b> LM</a></li>
+<li class="chapter" data-level="4.5.2.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#anova"><i class="fa fa-check"></i><b>4.5.2.3</b> Anova</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#otros-trucos"><i class="fa fa-check"></i><b>4.5.3</b> Otros trucos</a></li>
+<li class="chapter" data-level="4.5.4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-avanzado"><i class="fa fa-check"></i><b>4.5.4</b> Ejercicio avanzado</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#de-los-datos-al-reporte-final-una-historia-de-amor-con-r"><i class="fa fa-check"></i><b>4.6</b> De los datos al reporte final: Una historia de amor con R</a></li>
+<li class="chapter" data-level="4.7" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#avanzado"><i class="fa fa-check"></i><b>4.7</b> Avanzado</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#manejo-de-dependencias"><i class="fa fa-check"></i><b>4.7.1</b> Manejo de dependencias</a></li>
+<li class="chapter" data-level="4.7.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#alternativas-para-integrar-manejo-de-dependencias-y-control-de-cambios"><i class="fa fa-check"></i><b>4.7.2</b> Alternativas para integrar manejo de dependencias y control de cambios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#mas-alla-de-rmarkdown"><i class="fa fa-check"></i><b>4.8</b> Mas allá de Rmarkdown</a></li>
+<li class="chapter" data-level="4.9" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#varios"><i class="fa fa-check"></i><b>4.9</b> Varios</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#shortcuts"><i class="fa fa-check"></i><b>4.9.1</b> Shortcuts!</a></li>
+<li class="chapter" data-level="4.9.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#estilo"><i class="fa fa-check"></i><b>4.9.2</b> Estilo</a></li>
+<li class="chapter" data-level="4.9.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#algunos-paquetes-interesantes"><i class="fa fa-check"></i><b>4.9.3</b> Algunos paquetes interesantes</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#bibliografia-5"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html"><i class="fa fa-check"></i>Paquetes usados</a><ul>
+<li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html#references"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R para preparación y visualización de datos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="trabajo-con-rmarkdown-para-reportes-reproducibles" class="section level1">
+<h1><span class="header-section-number">Capítulo 4</span> Trabajo con RMarkdown para reportes reproducibles</h1>
+<hr />
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;corrr&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;corrr&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;corrr&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;easystats&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;easystats/easystats&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;easystats&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;papaja&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;papaja&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;remotes&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;remotes&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;remotes&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;renv&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/renv&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;renv&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;rticles&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;rticles&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;rticles&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;stargazer&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;stargazer&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;stargazer&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tidyverse&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tidyverse&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tinytex&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tinytex&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tinytex&#39;</span>)</code></pre>
+<hr />
+<div id="que-es-la-reproducibilidad" class="section level2">
+<h2><span class="header-section-number">4.1</span> Que es la reproducibilidad</h2>
+<p><img src="data/images/reproducibility.png" /></p>
+<hr />
+<p>La crisis de replicación (<em>replication crisis</em>) se inició con <a href="http://eprints.lse.ac.uk/65159/1/__lse.ac.uk_storage_LIBRARY_Secondary_libfile_shared_repository_Content_Kappes%2C%20H_Estimating%20reproducibility_Kappes_Estimating%20the%20reproducibility_2016.pdf">un paper que trató de replicar los resultados de 100 investigaciones clásicas</a>. Esta crisis ha generado un movimiento <a href="http://theconversation.com/the-replication-crisis-is-good-for-science-103736">muy interesante</a> dentro de las Ciencias Sociales y la Psicología en particular. Cada vez es más común aplicar algunos principios de buenas prácticas como compartir materiales, datos y scripts de análisis, para que tanto los revisores como otros investigadores puedan entender, reanalizar, etc. nuestras investigaciones.</p>
+<p>Hay algunas organizaciones que han surgido para tratar de mejorar la colaboración, transparencia, y manera de trabajar:</p>
+<ul>
+<li><p><a href="https://psysciacc.org/">Psychological Science Accelerator</a></p></li>
+<li><p><a href="https://opennessinitiative.org/">Peer Reviewer’s Openness Initiative (PRO)</a></p></li>
+<li><p><a href="https://osf.io/">Open Science Foundation</a></p></li>
+</ul>
+<p>Y algunas prácticas y maneras de publicar “nuevas”, se están haciendo cada vez más imprescindibles:</p>
+<ul>
+<li><p><a href="https://cos.io/rr/">Registered reports</a></p></li>
+<li><p><a href="https://osf.io/prereg/">Preregistration</a></p></li>
+</ul>
+<p>En este capítulo vamos a ver algunos pasos fundamentales para tender un workflow que permita y ayude a la reproducibilidad.</p>
+</div>
+<div id="proyectos-de-r-studio" class="section level2">
+<h2><span class="header-section-number">4.2</span> Proyectos de R-Studio</h2>
+<p>El primer paso empieza por crear un proyecto de RStudio. Al usar proyectos, simplificamos varias cosas, haciendo automáticamente más fácil compartir nuestro trabajo con otras personas. Podéis leer algo más sobre esto <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">aquí</a>.</p>
+</div>
+<div id="control-de-cambios-con-git-y-github" class="section level2">
+<h2><span class="header-section-number">4.3</span> Control de cambios con Git y Github</h2>
+<p>Un segundo elemento que nos va a ayudar a trabajar en equipo, y a evitar problemas en proyectos relativamente complejos es el uso de un sistema de control de versiones como Git. Los proyectos de RStudio hacen especialmente sencillo usar Git, click, click, click…</p>
+<p>Algunas referencias útiles:</p>
+<ul>
+<li><a href="http://ohshitgit.com/?utm_content=buffera425b&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">OhshitGit website</a><br />
+</li>
+<li><a href="https://github.com/GitInPractice/GitInPractice#readme">Git in practice</a><br />
+</li>
+<li><a href="http://happygitwithr.com/"><strong>happygitwithr</strong></a></li>
+</ul>
+<p>En esta sección podemos ver algunos comandos básicos asociados a workflows bien sencillos.</p>
+<div id="github" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Github</h3>
+<p><a href="https://github.com">github.com</a> es una plataforma web muy popular donde almacenar proyectos de programación. Muchos de los paquetes de R, el mismo <a href="https://github.com/rstudio">RStudio</a>, etc, tienen repositorios abiertos en Github. Una de las ventajas fundamentales de usar Github es que esta plataforma integra algunas herramientas para hacer más sencillo el control de versiones, como el <a href="https://help.github.com/en/articles/creating-a-pull-request">pull request</a>, que nos permite combinar ramas de proyectos sin apenas problemas.</p>
+<div class="figure">
+<img src="data/images/github-octocat.png" alt="SOURCE: https://github.githubassets.com/images/modules/open_graph/github-octocat.png" />
+<p class="caption">SOURCE: <a href="https://github.githubassets.com/images/modules/open_graph/github-octocat.png" class="uri">https://github.githubassets.com/images/modules/open_graph/github-octocat.png</a></p>
+</div>
+<div id="seguir-repositorios" class="section level4">
+<h4><span class="header-section-number">4.3.1.1</span> Seguir repositorios</h4>
+<p>Algo maravilloso de Github es que muchos de los paquetes que usamos se desarrollan abiertamente en la plataforma, lo que nos permite poder seguir su desarrollo, abrir Issues cuando encontramos algun problema, etc.</p>
+<p>Por ejemplo, ¿recuerdan el paquete <a href="https://github.com/dreamRs/esquisse">esquisse</a>? Recientemente salió la versión <a href="https://github.com/dreamRs/esquisse/releases/tag/CRAN_O.2.0">2.0</a> que usamos en la primera sesión?</p>
+<p>Si queremos mantenernos al dia sobre algun paquete, recibir notificaciones cuando salen nuevas versiones, o simplemente marcarlo con una estrellita para no olvidarnos de su existencia, Github nos puede ayudar:</p>
+<div class="figure">
+<img src="data/images/seguir-repos.png" alt="SOURCE: www.github.com" />
+<p class="caption">SOURCE: www.github.com</p>
+</div>
+</div>
+</div>
+<div id="crear-git-y-asociar-a-github-repo" class="section level3 parameters">
+<h3><span class="header-section-number">4.3.2</span> Crear Git y asociar a Github repo</h3>
+<p>Para prepararnos para usar Git y Github tenemos que hacer lo siguiente:</p>
+<!-- Si ya tenemos un repo Git local, saltarse el paso 1.   -->
+<ol style="list-style-type: decimal">
+<li><p>Crear local git repo: <code>usethis::use_git()</code> (cuando creamos un repositorio Git localmente, se crea una carpeta oculta llamada .git)</p></li>
+<li><p>Crear Github Token: <code>usethis::browse_github_token()</code></p></li>
+<li><p>Insertar token en .Renvirom: <code>usethis::edit_r_environ()</code></p></li>
+<li><p>Crear Github repo: <code>usethis::use_github()</code></p></li>
+</ol>
+<ul>
+<li>Empujar el repositorio local a Github: <code>git push --set-upstream origin master</code></li>
+</ul>
+</div>
+<div id="clonar-un-repositorio-existente" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> Clonar un repositorio existente</h3>
+<p>Algo que podemos hacer con todos los repositorios de Github es clonarlos localmente:</p>
+<p>En RStudio:</p>
+<ul>
+<li>File &gt; New Project &gt; Version Control &gt; Git</li>
+</ul>
+<p>Pega en “repository URL” la URL del repo GitHub (ver imagen de abajo). Será algo similar a <a href="https://github.com/VUESTRO_NOMBRE_DE" class="uri">https://github.com/VUESTRO_NOMBRE_DE</a> USUARIO/NOMBRE_REPO.git</p>
+<div class="figure">
+<img src="data/images/git-clone.png" alt="SOURCE: www.github.com" />
+<p class="caption">SOURCE: www.github.com</p>
+</div>
+</div>
+<div id="ejercicio-git-github" class="section level3 ejercicio">
+<h3><span class="header-section-number">4.3.4</span> Ejercicio Git-Github</h3>
+<p>Haz lo siguiente:</p>
+<ol style="list-style-type: decimal">
+<li><p>Crea un proyecto de RStudio</p></li>
+<li><p>Abre una cuenta en Github! o haz login</p></li>
+<li><p>Sigue los pasos de arriba para crear un repositorio publico asociado a tu repositorio local</p></li>
+<li><p>Ahora cierra el proyecto. Y clona el repositorio que has creado en una nueva carpeta</p></li>
+</ol>
+</div>
+<div id="workflow" class="section level3">
+<h3><span class="header-section-number">4.3.5</span> Workflow</h3>
+<p>Hay diferentes filosofias sobre cual es la mejor manera de trabajar con Git.</p>
+<p>En <a href="https://nvie.com/posts/a-successful-git-branching-model/">este post</a> por Vincent Driessen podeis ver una explicación bien detallada, complementada con imagenes como la que se ve a continuación.</p>
+<div class="figure">
+<img src="data/images/git-basic.png" alt="SOURCE: https://nvie.com/posts/a-successful-git-branching-model/" />
+<p class="caption">SOURCE: <a href="https://nvie.com/posts/a-successful-git-branching-model/" class="uri">https://nvie.com/posts/a-successful-git-branching-model/</a></p>
+</div>
+<p>El modelo básico implica la existencia de dos ramas. Una master (“producción”), que siempre debe funcionar, y una develop (para desarrollo), donde experimentamos, rompemos cosas, etc.</p>
+<p>Podeis ver un manual super completo llamado <a href="http://happygitwithr.com/">Happy Git and GitHub for the useR</a> elaborado por Jenny Bryan, Jim Hester, entre otros.</p>
+<div id="modelo-basico" class="section level4 parameters">
+<h4><span class="header-section-number">4.3.5.1</span> Modelo básico</h4>
+<p>Para el modelo básico empezamos con la rama master:</p>
+<ol style="list-style-type: decimal">
+<li><p>Creamos nueva rama (localmente development)<br />
+<code>git checkout -b development</code></p></li>
+<li>Hacemos cambios<br />
+</li>
+</ol>
+<ul>
+<li>Commiteamos los cambios:
+<ul>
+<li>Añadimos archivos: <code>git add foo.txt</code><br />
+</li>
+<li>Hacemos el commit: <code>git commit --message &quot;A commit message&quot;</code></li>
+</ul></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Subimos la rama a Github, donde podremos hacer un Pull request:<br />
+</li>
+</ol>
+<ul>
+<li><code>git push origin feature_x</code><br />
+</li>
+<li>Si todo ha ido bien, borramos la rama: <code>git branch -d development</code></li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Hacemos pull para sincronizar nuestras ramas locales<br />
+<code>git pull</code></li>
+</ol>
+<p>Por cierto, todo esto lo podemos hacer sin salir de RStudio (gráficamente, como se ve abajo, o usando el Terminal):</p>
+<p><img src="data/images/git-rstudio.png" /></p>
+</div>
+<div id="pull-request-en-3-1-sencillos-pasos" class="section level4">
+<h4><span class="header-section-number">4.3.5.2</span> Pull request en 3 + 1 sencillos pasos</h4>
+<p>Después de hacer el push de arriba, al entrar en nuestro repositorio deberíamos ver algo parecido a lo siguiente (si no lo vemos, ir a <strong>branches</strong>).</p>
+<p>Lo más dificl será hacer click en los botones verdes adecuados:</p>
+<p>Paso 1. <strong>Compare &amp; pull request</strong></p>
+<p><img src="data/images/pull-request-1.png" style="width:70.0%" /></p>
+<hr />
+<p>Paso 2. <strong>Create pull request</strong></p>
+<p><img src="data/images/pull-request-2.png" style="width:70.0%" /></p>
+<hr />
+<p>Paso 3. <strong>Merge pull request y confirmar</strong></p>
+<p><img src="data/images/pull-request-3.png" style="width:70.0%" /></p>
+<hr />
+<ul>
+<li>Borrar rama antigua</li>
+</ul>
+</div>
+</div>
+<div id="ejercicio-nuestro-primer-commit" class="section level3 ejercicio">
+<h3><span class="header-section-number">4.3.6</span> Ejercicio Nuestro primer commit</h3>
+<ol style="list-style-type: decimal">
+<li><p>Usando el proyecto de RStudio de antes, crea una rama nueva llamada development</p></li>
+<li><p>Crea un nuevo archivo en formato .Rmd:</p></li>
+</ol>
+<p><img src="data/images/new-Rmd-file.png" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Haz un commit de ese archivo y subelo (push) a Github (asegurate que esta allá!). No olvides hacer un pull!</p></li>
+<li><p>Ahora haz cambios en el archivo, commitealos, súbelos, y sincroniza tu repo local</p></li>
+</ol>
+</div>
+<div id="section-2" class="section level3 unnumbered">
+<h3></h3>
+<div id="feature-branch" class="section level4">
+<h4><span class="header-section-number">4.3.6.1</span> Feature branch</h4>
+<p>Para la versión más razonable deberiamos tener partir con las siguientes ramas:</p>
+<ul>
+<li>master<br />
+</li>
+<li>development</li>
+</ul>
+<p>Queremos implementar un nuevo feature o arreglar algun problema:</p>
+<ol style="list-style-type: decimal">
+<li><p>Creamos nueva rama (localmente feature_x)<br />
+<code>git checkout -b feature_x</code></p></li>
+<li>Hacemos cambios<br />
+</li>
+</ol>
+<ul>
+<li>Vemos que cambios hay: <code>git status</code>, o las diferencias exactas <code>git diff</code><br />
+</li>
+<li>Commiteamos los cambios:
+<ul>
+<li>Añadimos archivos: <code>git add foo.txt</code><br />
+</li>
+<li>Hacemos el commit: <code>git commit --message &quot;A commit message&quot;</code></li>
+</ul></li>
+</ul>
+<p>Ahora viene lo bueno… opción sencilla:</p>
+<p>3a. Subimos la rama a Github, donde podremos hacer un Pull request:<br />
+- <code>git push origin feature_x</code><br />
+- Si todo ha ido bien, borramos la rama <code>feature_x</code>: <code>git branch -d feature_x</code></p>
+<p>La opción menos sencilla:</p>
+<p>3b. Si no esperamos conflictos - mergeamos rama a developmentm para poder probar que todo funciona bien.<br />
+<code>git checkout development</code><br />
+<code>git pull origin development --ff-only</code><br />
+<code>git merge feature_x</code><br />
+<code>git push origin development</code></p>
+<hr />
+</div>
+<div id="stash" class="section level4">
+<h4><span class="header-section-number">4.3.6.2</span> Stash</h4>
+<p>Hemos hecho algunos cambios pero no queremos hacer commit:</p>
+<p><code>git stash</code></p>
+<p>Recuperamos los cambios</p>
+<p><code>git checkout rama_en_la_que_recuperar_cambios</code><br />
+<code>git stash apply</code></p>
+<p>Queremos destruir el stash</p>
+<p><code>git stash drop</code></p>
+</div>
+</div>
+</div>
+<div id="rmarkdown-openscience-y-analisis-reproducibles" class="section level2">
+<h2><span class="header-section-number">4.4</span> RMarkdown, openscience y análisis reproducibles</h2>
+<p>RMarkdown es un tipo de archivo que nos permite combinar texto formateado con código y resultados en un mismo documento (HTML, PDF, WORD…).</p>
+<p>Aprovechando la potencia de este tipo de archivo, algunas personas han creado paquetes para <a href="https://github.com/crsh/papaja">preparar artículos en formato APA</a>, o con las <a href="https://github.com/rstudio/rticles">plantillas de decenas de editoriales</a>.</p>
+</div>
+<div id="sintaxis-chunks-de-codigo-tipos-de-archivo" class="section level2">
+<h2><span class="header-section-number">4.5</span> Sintaxis, chunks de código, tipos de archivo</h2>
+<p>La sintáxis básica de RMarkdown es sorprendentemente sencilla, como se puede ver más abajo. Eso si, lo que hay detrás es toda la potencia de latex, así que el cielo es el límite.</p>
+<p><img src="data/images/rmarkdown.png" /></p>
+<p>Y como no, tenemos mucha ayuda:</p>
+<ul>
+<li><a href="https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf">R Markdown cheatsheet</a><br />
+</li>
+<li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a><br />
+</li>
+<li><a href="https://rmarkdown.rstudio.com/">Web oficial de Rmarkdown dentro de RStudio</a></li>
+</ul>
+<div id="ejercicio-basico-rmarkdown" class="section level3 ejercicio">
+<h3><span class="header-section-number">4.5.1</span> Ejercicio básico RMarkdown</h3>
+<p>Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:</p>
+<ol style="list-style-type: decimal">
+<li>Dale formato de artículo científico, creando las siguientes secciones:</li>
+</ol>
+<ul>
+<li>Title</li>
+<li>Abstract</li>
+<li>Introducción<br />
+</li>
+<li>Materials and Methods
+<ul>
+<li>Participants</li>
+<li>Materials</li>
+</ul></li>
+<li>Results
+<ul>
+<li>Experiment 1</li>
+<li>Experiment 2</li>
+</ul></li>
+<li>Discussion</li>
+<li>Bibliography</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Pon texto de relleno dentro de cada sección. Para ello puedes usar la función <code>stri_rand_lipsum()</code> del paquete {stringi}.</p></li>
+<li><p>Renderiza tu documento en formato PDF.</p></li>
+<li><p>Pull, Commit, Push, Pull…</p></li>
+</ol>
+</div>
+<div id="herramientas-basicas-para-investigadorases" class="section level3">
+<h3><span class="header-section-number">4.5.2</span> Herramientas básicas para investigadoras/es</h3>
+<p>De manera relativamente sencilla podemos incluir tablas bonitas en los reportes.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># https://github.com/easystats/easystats</span>
+<span class="co"># https://www.jakeruss.com/cheatsheets/stargazer/</span>
+
+<span class="co"># remotes::install_github(&quot;easystats/easystats&quot;)</span>
+<span class="kw">library</span>(corrr)
+<span class="kw">library</span>(easystats)
+<span class="kw">library</span>(papaja)
+<span class="kw">library</span>(stargazer)
+<span class="kw">library</span>(tidyverse)</code></pre>
+<div id="correlaciones" class="section level4">
+<h4><span class="header-section-number">4.5.2.1</span> Correlaciones</h4>
+<pre class="sourceCode r"><code class="sourceCode r">  corr_test =<span class="st"> </span><span class="kw">cor.test</span>(iris<span class="op">$</span>Sepal.Width, iris<span class="op">$</span>Sepal.Length, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)
+
+  <span class="kw">report</span>(corr_test)</code></pre>
+<pre><code>## The Spearman&#39;s rank correlation rho between iris$Sepal.Width and iris$Sepal.Length is negative, significant and small (rho = -0.17, p &lt; .05).</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  table_easystats =<span class="st"> </span><span class="kw">report</span>(corr_test) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">to_table</span>()
+  knitr<span class="op">::</span><span class="kw">kable</span>(table_easystats)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Parameter1</th>
+<th align="left">Parameter2</th>
+<th align="right">rho</th>
+<th align="right">S</th>
+<th align="right">p</th>
+<th align="left">Method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">iris$Sepal.Width</td>
+<td align="left">iris$Sepal.Length</td>
+<td align="right">-0.1667777</td>
+<td align="right">656283.3</td>
+<td align="right">0.041368</td>
+<td align="left">Spearman</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># https://paulvanderlaken.com/2018/09/10/simpler-correlation-analysis-in-r-using-tidyverse-principles/</span>
+  table &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">correlation</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">report</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">to_table</span>()
+  
+  table</code></pre>
+<pre><code>##         Group    Parameter Petal.Length Petal.Width Sepal.Length
+## 1      setosa  Petal.Width         0.33        &lt;NA&gt;         &lt;NA&gt;
+## 2      setosa Sepal.Length         0.27        0.28         &lt;NA&gt;
+## 3      setosa  Sepal.Width         0.18        0.23      0.74***
+## 4        &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;        &lt;NA&gt;         &lt;NA&gt;
+## 5  versicolor  Petal.Width      0.79***        &lt;NA&gt;         &lt;NA&gt;
+## 6  versicolor Sepal.Length      0.75***     0.55***         &lt;NA&gt;
+## 7  versicolor  Sepal.Width      0.56***     0.66***      0.53***
+## 8        &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;        &lt;NA&gt;         &lt;NA&gt;
+## 9   virginica  Petal.Width         0.32        &lt;NA&gt;         &lt;NA&gt;
+## 10  virginica Sepal.Length      0.86***        0.28         &lt;NA&gt;
+## 11  virginica  Sepal.Width        0.40*     0.54***       0.46**</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  table &lt;-<span class="st"> </span>table[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(table)) <span class="op">!=</span><span class="st"> </span><span class="kw">ncol</span>(table),]
+  knitr<span class="op">::</span><span class="kw">kable</span>(table)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Group</th>
+<th align="left">Parameter</th>
+<th align="left">Petal.Length</th>
+<th align="left">Petal.Width</th>
+<th align="left">Sepal.Length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td align="left">setosa</td>
+<td align="left">Petal.Width</td>
+<td align="left">0.33</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td align="left">setosa</td>
+<td align="left">Sepal.Length</td>
+<td align="left">0.27</td>
+<td align="left">0.28</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td align="left">setosa</td>
+<td align="left">Sepal.Width</td>
+<td align="left">0.18</td>
+<td align="left">0.23</td>
+<td align="left">0.74***</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td align="left">versicolor</td>
+<td align="left">Petal.Width</td>
+<td align="left">0.79***</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td align="left">versicolor</td>
+<td align="left">Sepal.Length</td>
+<td align="left">0.75***</td>
+<td align="left">0.55***</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td align="left">versicolor</td>
+<td align="left">Sepal.Width</td>
+<td align="left">0.56***</td>
+<td align="left">0.66***</td>
+<td align="left">0.53***</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td align="left">virginica</td>
+<td align="left">Petal.Width</td>
+<td align="left">0.32</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td align="left">virginica</td>
+<td align="left">Sepal.Length</td>
+<td align="left">0.86***</td>
+<td align="left">0.28</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td align="left">virginica</td>
+<td align="left">Sepal.Width</td>
+<td align="left">0.40*</td>
+<td align="left">0.54***</td>
+<td align="left">0.46**</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="lm" class="section level4">
+<h4><span class="header-section-number">4.5.2.2</span> LM</h4>
+<pre class="sourceCode r"><code class="sourceCode r">  model_lm &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Length <span class="op">*</span><span class="st"> </span>Petal.Width, <span class="dt">data =</span> iris)
+  summary_lm =<span class="st"> </span><span class="kw">summary</span>(model_lm)
+  <span class="co"># papaja::apa_print.summary.lm(summary_lm)$table</span>
+  table_lm =<span class="st"> </span>papaja<span class="op">::</span><span class="kw">apa_print.lm</span>(model_lm)<span class="op">$</span>table
+  knitr<span class="op">::</span><span class="kw">kable</span>(table_lm)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">predictor</th>
+<th align="left">estimate</th>
+<th align="left">ci</th>
+<th align="left">statistic</th>
+<th align="left">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Intercept</td>
+<td align="left">4.58</td>
+<td align="left"><span class="math inline">\([4.36\)</span>, <span class="math inline">\(4.80]\)</span></td>
+<td align="left">40.89</td>
+<td align="left">&lt; .001</td>
+</tr>
+<tr class="even">
+<td align="left">Petal Length</td>
+<td align="left">0.44</td>
+<td align="left"><span class="math inline">\([0.31\)</span>, <span class="math inline">\(0.57]\)</span></td>
+<td align="left">6.74</td>
+<td align="left">&lt; .001</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal Width</td>
+<td align="left">-1.24</td>
+<td align="left"><span class="math inline">\([-1.67\)</span>, <span class="math inline">\(-0.81]\)</span></td>
+<td align="left">-5.65</td>
+<td align="left">&lt; .001</td>
+</tr>
+<tr class="even">
+<td align="left">Petal Length <span class="math inline">\(\times\)</span> Petal Width</td>
+<td align="left">0.19</td>
+<td align="left"><span class="math inline">\([0.12\)</span>, <span class="math inline">\(0.25]\)</span></td>
+<td align="left">5.62</td>
+<td align="left">&lt; .001</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">report</span>(model_lm, <span class="dt">standardize =</span> <span class="st">&quot;robust&quot;</span>)</code></pre>
+<pre><code>## We fitted a linear model to predict Sepal.Length with Petal.Length and Petal.Width. The model&#39;s explanatory power is substantial (R2 = 0.81, adj. R2 = 0.80). The model&#39;s intercept is at 4.58. 
+## 
+## Within this model: 
+##   - Petal.Length is significant (beta = 0.44, 95% CI [0.31, 0.57], p &lt; .001) and large (std. beta = 1.42).
+##   - Petal.Width is significant (beta = -1.24, 95% CI [-1.67, -0.81], p &lt; .001) and small (std. beta = -0.49).
+##   - Petal.Length:Petal.Width is significant (beta = 0.19, 95% CI [0.12, 0.25], p &lt; .001) and small (std. beta = 0.31).</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">report</span>(model_lm, <span class="dt">standardize =</span> <span class="st">&quot;robust&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">to_fulltext</span>()</code></pre>
+<pre><code>## We fitted a linear model (using OLS algorithm) to predict Sepal.Length with Petal.Length and Petal.Width (formula = Sepal.Length ~ Petal.Length * Petal.Width). Effect sizes were labelled following Cohen&#39;s (1988) recommendations. The model explains a not significant and substantial proportion of variance (R2 = 0.81, F(, ) = , p , adj. R2 = 0.80). The model&#39;s intercept, corresponding to Petal.Length = 0 and Petal.Width = 0, is at 4.58 (t(146) = 40.89, 95% CI [4.36, 4.80], p &lt; .001). 
+## 
+## Within this model: 
+##   - Petal.Length is positive, significant (beta = 0.44, SE = 0.07, t(146) = 6.74, 95% CI [0.31, 0.57], p &lt; .001) and large (std. beta = 1.42, std. SE = 0.14, std. 95% CI [1.14, 1.71]).
+##   - Petal.Width is negative, significant (beta = -1.24, SE = 0.22, t(146) = -5.65, 95% CI [-1.67, -0.81], p &lt; .001) and small (std. beta = -0.49, std. SE = 0.14, std. 95% CI [-0.76, -0.21]).
+##   - Petal.Length:Petal.Width is positive, significant (beta = 0.19, SE = 0.03, t(146) = 5.62, 95% CI [0.12, 0.25], p &lt; .001) and small (std. beta = 0.31, std. SE = 0.05, std. 95% CI [0.20, 0.41]).</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  table_easystats =<span class="st"> </span><span class="kw">report</span>(model_lm, <span class="dt">standardize =</span> <span class="st">&quot;robust&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">to_table</span>()
+  knitr<span class="op">::</span><span class="kw">kable</span>(table_easystats)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="right">beta</th>
+<th align="right">CI_low</th>
+<th align="right">CI_high</th>
+<th align="right">p</th>
+<th align="right">Std_beta</th>
+<th align="right">Fit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">4.5771709</td>
+<td align="right">4.3559149</td>
+<td align="right">4.7984269</td>
+<td align="right">0e+00</td>
+<td align="right">-0.2931027</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Length</td>
+<td align="right">0.4416762</td>
+<td align="right">0.3122070</td>
+<td align="right">0.5711453</td>
+<td align="right">0e+00</td>
+<td align="right">1.4237590</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Width</td>
+<td align="right">-1.2393154</td>
+<td align="right">-1.6728668</td>
+<td align="right">-0.8057640</td>
+<td align="right">1e-07</td>
+<td align="right">-0.4884181</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Length:Petal.Width</td>
+<td align="right">0.1885887</td>
+<td align="right">0.1222389</td>
+<td align="right">0.2549386</td>
+<td align="right">1e-07</td>
+<td align="right">0.3064497</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">R2</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0.8078020</td>
+</tr>
+<tr class="odd">
+<td align="left">R2_adjusted</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0.8038527</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r">  stargazer<span class="op">::</span><span class="kw">stargazer</span>(model_lm, <span class="dt">heather =</span> <span class="ot">FALSE</span>, <span class="dt">type =</span> <span class="st">&quot;html&quot;</span>)</code></pre>
+<table style="text-align:center">
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+Sepal.Length
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Petal.Length
+</td>
+<td>
+0.442<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.066)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Petal.Width
+</td>
+<td>
+-1.239<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.219)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Petal.Length:Petal.Width
+</td>
+<td>
+0.189<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.034)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+4.577<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.112)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+150
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.808
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.804
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+0.367 (df = 146)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+204.544<sup>***</sup> (df = 3; 146)
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+<table style="text-align:center">
+<tr>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td>
+FALSE
+</td>
+</tr>
+<tr>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</table>
+</div>
+<div id="anova" class="section level4">
+<h4><span class="header-section-number">4.5.2.3</span> Anova</h4>
+<p>!!!!!!!!!!!!!!!!!!!!! <a href="https://rdrr.io/cran/ez/man/ezANOVA.html" class="uri">https://rdrr.io/cran/ez/man/ezANOVA.html</a></p>
+<pre class="sourceCode r"><code class="sourceCode r">  data &lt;-<span class="st"> </span>iris
+  data<span class="op">$</span>Cat1 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="dt">length.out =</span> <span class="kw">nrow</span>(data))
+  data<span class="op">$</span>Cat2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="dt">length.out =</span> <span class="kw">nrow</span>(data))
+  model_aov &lt;-<span class="st"> </span><span class="kw">aov</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species <span class="op">*</span><span class="st"> </span>Cat1 <span class="op">*</span><span class="st"> </span>Cat2, <span class="dt">data=</span>data)
+  
+  <span class="kw">report</span>(model_aov)</code></pre>
+<pre><code>## The ANOVA suggests that:
+## 
+##   - The effect of Species is significant (F(2, 138) = 115.28, p &lt; .001) and can be considered as large (partial omega squared = 0.60).
+##   - The effect of Cat1 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
+##   - The effect of Cat2 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
+##   - The interaction between Species and Cat1 is not significant (F(2, 138) = 0.51, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
+##   - The interaction between Species and Cat2 is not significant (F(2, 138) = 0.94, p &gt; .1) and can be considered as very small (partial omega squared = -0.00).
+##   - The interaction between Cat1 and Cat2 is not significant (F(1, 138) = 0.91, p &gt; .1) and can be considered as very small (partial omega squared = -0.00).
+##   - The interaction between Species, Cat1 and Cat2 is not significant (F(2, 138) = 0.13, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">report</span>(model_aov) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">to_table</span>()</code></pre>
+<pre><code>##           Parameter  Sum_Squares DoF  Mean_Square            F
+## 1           Species 63.212133333   2 31.606066667 1.152760e+02
+## 2              Cat1  0.002629532   1  0.002629532 9.590623e-03
+## 3              Cat2  0.001666667   1  0.001666667 6.078790e-03
+## 4      Species:Cat1  0.277538654   2  0.138769327 5.061297e-01
+## 5      Species:Cat2  0.513737669   2  0.256868834 9.368710e-01
+## 6         Cat1:Cat2  0.250794779   1  0.250794779 9.147172e-01
+## 7 Species:Cat1:Cat2  0.073353942   2  0.036676971 1.337710e-01
+## 8         Residuals 37.836478758 138  0.274177382           NA
+##              p Omega_Squared_partial
+## 1 3.658009e-30          0.6037532091
+## 2 9.221286e-01         -0.0066466150
+## 3 9.379676e-01         -0.0066703400
+## 4 6.039388e-01         -0.0066285856
+## 5 3.943298e-01         -0.0008424293
+## 6 3.405383e-01         -0.0005688752
+## 7 8.749037e-01         -0.0116846753
+## 8           NA                    NA</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">  table_aov =<span class="st"> </span>papaja<span class="op">::</span><span class="kw">apa_print.aov</span>(model_aov)<span class="op">$</span>table
+  knitr<span class="op">::</span><span class="kw">kable</span>(table_aov)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Effect</th>
+<th align="left">F</th>
+<th align="left">df1</th>
+<th align="left">df2</th>
+<th align="left">MSE</th>
+<th align="left">p</th>
+<th align="left">ges</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="left">115.28</td>
+<td align="left">2</td>
+<td align="left">138</td>
+<td align="left">0.27</td>
+<td align="left">&lt; .001</td>
+<td align="left">.626</td>
+</tr>
+<tr class="even">
+<td align="left">Cat1</td>
+<td align="left">0.01</td>
+<td align="left">1</td>
+<td align="left">138</td>
+<td align="left">0.27</td>
+<td align="left">.922</td>
+<td align="left">.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Cat2</td>
+<td align="left">0.01</td>
+<td align="left">1</td>
+<td align="left">138</td>
+<td align="left">0.27</td>
+<td align="left">.938</td>
+<td align="left">.000</td>
+</tr>
+<tr class="even">
+<td align="left">Species <span class="math inline">\(\times\)</span> Cat1</td>
+<td align="left">0.51</td>
+<td align="left">2</td>
+<td align="left">138</td>
+<td align="left">0.27</td>
+<td align="left">.604</td>
+<td align="left">.007</td>
+</tr>
+<tr class="odd">
+<td align="left">Species <span class="math inline">\(\times\)</span> Cat2</td>
+<td align="left">0.94</td>
+<td align="left">2</td>
+<td align="left">138</td>
+<td align="left">0.27</td>
+<td align="left">.394</td>
+<td align="left">.013</td>
+</tr>
+<tr class="even">
+<td align="left">Cat1 <span class="math inline">\(\times\)</span> Cat2</td>
+<td align="left">0.91</td>
+<td align="left">1</td>
+<td align="left">138</td>
+<td align="left">0.27</td>
+<td align="left">.341</td>
+<td align="left">.007</td>
+</tr>
+<tr class="odd">
+<td align="left">Species <span class="math inline">\(\times\)</span> Cat1 <span class="math inline">\(\times\)</span> Cat2</td>
+<td align="left">0.13</td>
+<td align="left">2</td>
+<td align="left">138</td>
+<td align="left">0.27</td>
+<td align="left">.875</td>
+<td align="left">.002</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="otros-trucos" class="section level3">
+<h3><span class="header-section-number">4.5.3</span> Otros trucos</h3>
+<ul>
+<li><p>Cuando quieras forzar un salto de linea, o tengas problemas con el formato, probablemente necesites incluir &quot; &quot; (dos espacios) despues de la frase, o un salto de linea…</p></li>
+<li><p>Para evitar problemas con los paths de los archivos, usar <code>here::here()</code></p></li>
+<li><p>Para evitar problemas con instalación de Latex:</p></li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tinytex&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tinytex&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tinytex&#39;</span>)
+
+tinytex<span class="op">::</span><span class="kw">install_tinytex</span>()</code></pre>
+<ul>
+<li>Corregir ortografía en Rmarkdown (F7)</li>
+<li><a href="https://github.com/ropensci/spelling#readme" class="uri">https://github.com/ropensci/spelling#readme</a></li>
+</ul>
+<p>Bibliográfia en Rmarkdown</p>
+<ul>
+<li><p><a href="https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html" class="uri">https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html</a></p></li>
+<li><p><a href="https://www.r-bloggers.com/bibliography-with-knitr-cite-your-references-and-packages/" class="uri">https://www.r-bloggers.com/bibliography-with-knitr-cite-your-references-and-packages/</a></p></li>
+<li><p>Citar paquetes usados!</p></li>
+</ul>
+</div>
+<div id="ejercicio-avanzado" class="section level3 ejercicio">
+<h3><span class="header-section-number">4.5.4</span> Ejercicio avanzado</h3>
+<p>Bajad la base de Cancer Screening Risk Literacy of Physicians in Training: <a href="https://osf.io/qn9a2/" class="uri">https://osf.io/qn9a2/</a> y el <a href="/home/emrys/gorkang@gmail.com/DOCENCIA/UAI/2019/2019-1%20Seminario%20metodologico%20R/R_preparacion_visualizacion_datos/data/files/PONE-D-19-03821R2_FTC.pdf">preprint del artículo</a>:</p>
+<p>En el documento .Rmd de antes:</p>
+<ol style="list-style-type: decimal">
+<li><p>Cread algo parecido a la tabla de correlaciones (Tabla 3) que se ve en el artículo.</p></li>
+<li><p>Tratad de emular el tipo de análisis que se ve en la Tabla 4.</p></li>
+</ol>
+</div>
+</div>
+<div id="de-los-datos-al-reporte-final-una-historia-de-amor-con-r" class="section level2">
+<h2><span class="header-section-number">4.6</span> De los datos al reporte final: Una historia de amor con R</h2>
+<ul>
+<li><a href="https://github.com/crsh/papaja">Preparar artículos en formato APA</a></li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>)
+
+<span class="co"># Create new R Markdown file</span>
+rmarkdown<span class="op">::</span><span class="kw">draft</span>(
+  here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;mymanuscript.Rmd&quot;</span>), 
+  <span class="st">&quot;apa6&quot;</span>, 
+  <span class="dt">package =</span> <span class="st">&quot;papaja&quot;</span>, 
+  <span class="dt">create_dir =</span> <span class="ot">FALSE</span>,
+  <span class="dt">edit =</span> <span class="ot">FALSE</span>)
+
+<span class="co"># Render manuscript</span>
+rmarkdown<span class="op">::</span><span class="kw">render</span>(
+  here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;mymanuscript.Rmd&quot;</span>), 
+  <span class="dt">quiet =</span> <span class="ot">TRUE</span>,
+  <span class="dt">clean =</span> <span class="ot">TRUE</span>)</code></pre>
+<p>Y no olvidemos el paquete {rticles}, que contiene <a href="https://github.com/rstudio/rticles">plantillas de decenas de editoriales</a></p>
+</div>
+<div id="avanzado" class="section level2">
+<h2><span class="header-section-number">4.7</span> Avanzado</h2>
+<div id="manejo-de-dependencias" class="section level3">
+<h3><span class="header-section-number">4.7.1</span> Manejo de dependencias</h3>
+<p>Usando un sistema de manejo de dependencias <a href="https://github.com/rstudio/renv">renv</a></p>
+<p>Estos sistemas crean un snapshot de las librerías usadas actualmente. Otra alternativa es <a href="https://rstudio.github.io/packrat/">packrat</a>:</p>
+<ol start="0" style="list-style-type: decimal">
+<li><p>Instalamos renv:
+<code>install.packages(&quot;remotes&quot;)</code><br />
+<code>remotes::install_github(&quot;rstudio/renv&quot;)</code></p></li>
+<li><p>Inicializamos el entorno local de un nuevo proyecto, con una librería privada de R
+<code>renv::init()</code></p></li>
+<li><p>Trabajamos en el proyecto, instalando los paquetes que necesitemos</p></li>
+<li><p>Guardamos el estado de las librerías usadas en el proyecto en un lockfile (llamado renv.lock),
+<code>renv::snapshot()</code></p></li>
+<li><p>Restauramos el estado de las librerías a partir del lockfile generado por renv::snapshot().
+<code>renv::restore()</code></p></li>
+</ol>
+</div>
+<div id="alternativas-para-integrar-manejo-de-dependencias-y-control-de-cambios" class="section level3">
+<h3><span class="header-section-number">4.7.2</span> Alternativas para integrar manejo de dependencias y control de cambios</h3>
+<p><a href="https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html" class="uri">https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html</a>
+<!-- https://github.com/jdblischak/workflowr --></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;workflowr&quot;)</span></code></pre>
+</div>
+</div>
+<div id="mas-alla-de-rmarkdown" class="section level2">
+<h2><span class="header-section-number">4.8</span> Mas allá de Rmarkdown</h2>
+<p>Aplicaciones web interactivas con R: <a href="https://shiny.rstudio.com/">Shiny</a></p>
+</div>
+<div id="varios" class="section level2">
+<h2><span class="header-section-number">4.9</span> Varios</h2>
+<div id="shortcuts" class="section level3">
+<h3><span class="header-section-number">4.9.1</span> Shortcuts!</h3>
+<ul>
+<li>Alt+SHIFT+K: Ver shortcuts!<br />
+</li>
+<li>CTRL+SHIFT+M: Pipe</li>
+<li>CTRL+SHIFT+A: Reformat code<br />
+</li>
+<li>CTRL+I: Reindent lines</li>
+</ul>
+</div>
+<div id="estilo" class="section level3">
+<h3><span class="header-section-number">4.9.2</span> Estilo</h3>
+<p>Es importante ser consistente en la manera de escribir codigo. Habitualmente se recomienda seguir una guia de estilo. Por ejemplo, <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s Style guide</a> o la <a href="https://style.tidyverse.org/">guia de estilo del tidyverse</a>.</p>
+</div>
+<div id="algunos-paquetes-interesantes" class="section level3">
+<h3><span class="header-section-number">4.9.3</span> Algunos paquetes interesantes</h3>
+<ul>
+<li><a href="https://github.com/ropensci/suppdata">Descargar datos suplementarios de papers publicados usando DOI</a><br />
+</li>
+<li><a href="https://github.com/easystats/easystats" class="uri">https://github.com/easystats/easystats</a><br />
+</li>
+<li><a href="https://usethis.r-lib.org/" class="uri">https://usethis.r-lib.org/</a></li>
+</ul>
+</div>
+</div>
+<div id="bibliografia-5" class="section level2 bibliografia unnumbered">
+<h2>Bibliografía</h2>
+<p>Xie, Y., Allaire, J. J., &amp; Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. <a href="https://bookdown.org/yihui/rmarkdown/" class="uri">https://bookdown.org/yihui/rmarkdown/</a></p>
+<p>Yihui Xie (2018). bookdown: Authoring Books and Technical Documents with R Markdown <a href="https://bookdown.org/yihui/bookdown/markdown-syntax.html" class="uri">https://bookdown.org/yihui/bookdown/markdown-syntax.html</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="analisis-de-datos-exploratorio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="paquetes-usados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
