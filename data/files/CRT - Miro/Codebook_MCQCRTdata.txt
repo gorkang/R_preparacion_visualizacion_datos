@@ -1,0 +1,35 @@
+This is a codebook accompanying the data file MCQCRTdata.csv
+
+Variable name/ Variable label/Variable values (if applicable)
+
+ID/ Identification Number/ NA	
+TIME/ Time spent on the questionnaire (minutes) / NA
+Age/ Age (years) / NA
+Gender/ Gender / 1 = "male", 2 = "female"
+Edu/ Education/1 = "Less than High School", 2 = "Finished High School", 3 = "Undergraduate Degree", 4 = "Masters Degree", 5 = "Doctoral (PhD) or Professional (JD, MD) Degree"
+XP/ Test item format manipulation/ 0 = "CRT open", 1 = "2-option CRT", 2 = "4-option CRT"
+CRT1/ Bat & Ball problem (Crt item 1)/ 1 = "correct answer", 2 = "intuitive incorrect answer", 3 = " other incorrect answers"
+CRT2/ Widgets problem (Crt item 2)/ 1 = "correct answer", 2 = "intuitive incorrect answer", 3 = " other incorrect answers"
+CRT3/ Lily Pads problem (Crt item 3)/ 1 = "correct answer", 2 = "intuitive incorrect answer", 3 = " other incorrect answers"
+CRT4/ Barrel problem (Crt item 4)/ 1 = "correct answer", 2 = "intuitive incorrect answer", 3 = " other incorrect answers"
+CRT5/ Class problem (Crt item 5)/ 1 = "correct answer", 2 = "intuitive incorrect answer", 3 = " other incorrect answers"
+CRT6/ Pig problem (Crt item 6)/ 1 = "correct answer", 2 = "intuitive incorrect answer", 3 = " other incorrect answers"
+CRT7/ Stock Market problem (Crt item 7)/ 1 = "correct answer", 2 = "intuitive incorrect answer", 3 = " other incorrect answers"
+CRTALL7_R/ Reflectivity summation score for 7-item CRT/ NA
+CRTALL7_I/ Intuition summation score for 7-item CRT/ NA
+CRTALL6_R/ Reflectivity summation score for 6-item CRT/ NA
+CRTALL6_I/ Intuition summation score for 6-item CRT/ NA
+CRTALL3_R/ Reflectivity summation score for 3-item CRT/ NA
+CRTALL3_I/ Intuition summation score for 3-item CRT/ NA
+CRT_Time/ Time taken to answer 7-item CRT (minutes) /NA
+Familiarity/ Familiarity score for all 7 items/NA
+PBS_Avg/ Paranormal Belief Scale: Average Score)/NA	
+BeliefBias_Sum/ Belief Bias: Summation Score/NA	
+AOM_Avg/ Actively Open-Minded Scale: Average Score/NA	
+DN_Avg/ Denominator Neglect: Average Score/NA	
+NUMERACY_Sum/ Numeracy: Summation Score/NA
+
+
+
+
+
