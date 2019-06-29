@@ -5,18 +5,39 @@
 ```{r paquetes-04, message=FALSE, warning=FALSE}
 
 if (!require('corrr')) install.packages('corrr'); library('corrr')
-if (!require('easystats')) remotes::install_github("easystats/easystats"); library('easystats')
+# if (!require('easystats')) remotes::install_github("easystats/easystats"); library('easystats')
+if (!require('correlation')) remotes::install_github("easystats/correlation"); library('correlation')
+if (!require('report')) remotes::install_github("easystats/report"); library('report')
+
 if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
 if (!require('remotes')) install.packages('remotes'); library('remotes')
 if (!require('renv')) remotes::install_github("rstudio/renv"); library('renv')
 if (!require('rticles')) install.packages('rticles'); library('rticles')
 if (!require('stargazer')) install.packages('stargazer'); library('stargazer')
 if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
-if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
 
 ```  
 
----  
+## Dependencias {.parameters -}
+
+Windows:
+
+* instalar Git: https://git-scm.com/downloads [reiniciar despues?]
+
+Todos: 
+
+* Install latex: 
+
+```{r eval=FALSE}
+
+if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
+
+# Instalar distribución latex automáticamente (llevará un rato)
+tinytex::install_tinytex()
+
+```
+
+
 
 ## Que es la reproducibilidad
 
@@ -142,31 +163,40 @@ El modelo básico implica la existencia de dos ramas. Una master ("producción")
 Podeis ver un manual super completo llamado [Happy Git and GitHub for the useR](http://happygitwithr.com/) elaborado por Jenny Bryan, Jim Hester, entre otros.  
 
 
-#### Modelo básico {.parameters}  
+#### Modelo básico 
 
-Para el modelo básico empezamos con la rama master:
+En RStudio podemos trabajar gráficamente, como se ve abajo, o usando el Terminal:  
 
-1. Creamos nueva rama (localmente development)  
-`git checkout -b development`
+![](`r here::here("data", "images", "git-rstudio.png")`)  
 
-2. Hacemos cambios  
-- Commiteamos los cambios:  
+
+##### Usando el entorno gráfico, o el `terminal` {-}
+
+##### {.parameters -}  
+
+Empezamos en la rama master:
+
+0. **Pull** ![](`r here::here("data", "images", "git-pull.png")`) : nos aseguramos que nuestro repositorio local esta actualizado  
+- `git pull` 
+
+1. **Branch** ![](`r here::here("data", "images", "git-branch.png")`) : Creamos nueva rama llamada **development**  
+- `git checkout -b development`  
+
+2. Hacemos cambios en nuestros scripts  
+
+3. **Commit** ![](`r here::here("data", "images", "git-commit.png")`) : Commiteamos los cambios  
   + Añadimos archivos: `git add foo.txt`  
   + Hacemos el commit: `git commit --message "A commit message"`  
+  
+4. **Push** ![](`r here::here("data", "images", "git-push.png")`) : subimos la rama a Github  
+- `git push origin development`  
 
-3. Subimos la rama a Github, donde podremos hacer un Pull request:     
-- `git push origin feature_x`  
-- Si todo ha ido bien, borramos la rama: `git branch -d development`   
+5. **Pull request** (En Github):
+- Compare & Pull request  
+- 2 branches, Pull request  
 
-4. Hacemos pull para sincronizar nuestras ramas locales  
-`git pull`  
-
-
-
-Por cierto, todo esto lo podemos hacer sin salir de RStudio (gráficamente, como se ve abajo, o usando el Terminal):  
-
-![](`r here::here("data", "images", "git-rstudio.png")`)
-
+6. **Pull** ![](`r here::here("data", "images", "git-pull.png")`) : nos aseguramos que nuestro repositorio local esta actualizado  
+- `git pull`  
 
 
 #### Pull request en 3 + 1 sencillos pasos
@@ -335,15 +365,12 @@ De manera relativamente sencilla podemos incluir tablas bonitas en los reportes.
 
 ```{r paquetes-tablas}
 
-# https://github.com/easystats/easystats
 # https://www.jakeruss.com/cheatsheets/stargazer/
 
-# remotes::install_github("easystats/easystats")
-library(corrr)
-library(easystats)
 library(papaja)
 library(stargazer)
 library(tidyverse)
+
 
 ```
 
@@ -351,6 +378,12 @@ library(tidyverse)
 #### Correlaciones
 
 ```{r tablas-bonitas-correlation}
+# https://github.com/easystats/easystats
+
+library(corrr)
+library(correlation)
+library(report)
+library(knitr)
 
   corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
 
@@ -361,15 +394,16 @@ library(tidyverse)
 
 # https://paulvanderlaken.com/2018/09/10/simpler-correlation-analysis-in-r-using-tidyverse-principles/
   table <- iris %>% 
-    group_by(Species) %>% 
     correlation() %>% 
     report() %>% 
-    to_table()
+    to_table(full = TRUE)
   
-  table
+table_clean = table %>% 
+  mutate_if(is.character, ~replace(., is.na(.), ""))
+    
   
-  table <- table[rowSums(is.na(table)) != ncol(table),]
-  knitr::kable(table)
+  # table <- table[rowSums(is.na(table)) != ncol(table),]
+  knitr::kable(table_clean)
   
 ```
 
@@ -401,7 +435,7 @@ library(tidyverse)
 
 #### Anova
 
-!!!!!!!!!!!!!!!!!!!!! https://rdrr.io/cran/ez/man/ezANOVA.html
+* [{eANOVA}](https://rdrr.io/cran/ez/man/ezANOVA.html)
 
 
 ```{r tablas-bonitas-anova}
@@ -462,7 +496,7 @@ Bibliográfia en Rmarkdown
 
 ### Ejercicio avanzado {.ejercicio}
 
-Bajad la base de Cancer Screening Risk Literacy of Physicians in Training: https://osf.io/qn9a2/ y el [preprint del artículo](`r here::here("data", "files", "PONE-D-19-03821R2_FTC.pdf")`):
+Bajad la base de Cancer Screening Risk Literacy of Physicians in Training: https://osf.io/qn9a2/ y el [preprint del artículo](https://github.com/gorkang/R_preparacion_visualizacion_datos/raw/master/data/files/04-Dafina-PLOS/PONE-D-19-03821R2_FTC.pdf):
 
 En el documento .Rmd de antes:  
 
