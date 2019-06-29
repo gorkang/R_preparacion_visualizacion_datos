@@ -303,6 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#bibliografia-4"><i class="fa fa-check"></i>Bibliografía</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><i class="fa fa-check"></i><b>4</b> Trabajo con RMarkdown para reportes reproducibles</a><ul>
+<li class="chapter" data-level="" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#dependencias"><i class="fa fa-check"></i>Dependencias</a></li>
 <li class="chapter" data-level="4.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#que-es-la-reproducibilidad"><i class="fa fa-check"></i><b>4.1</b> Que es la reproducibilidad</a></li>
 <li class="chapter" data-level="4.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#proyectos-de-r-studio"><i class="fa fa-check"></i><b>4.2</b> Proyectos de R-Studio</a></li>
 <li class="chapter" data-level="4.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#control-de-cambios-con-git-y-github"><i class="fa fa-check"></i><b>4.3</b> Control de cambios con Git y Github</a><ul>
@@ -313,11 +314,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#clonar-un-repositorio-existente"><i class="fa fa-check"></i><b>4.3.3</b> Clonar un repositorio existente</a></li>
 <li class="chapter" data-level="4.3.4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-git-github"><i class="fa fa-check"></i><b>4.3.4</b> Ejercicio Git-Github</a></li>
 <li class="chapter" data-level="4.3.5" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#workflow"><i class="fa fa-check"></i><b>4.3.5</b> Workflow</a><ul>
-<li class="chapter" data-level="4.3.5.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#modelo-basico"><i class="fa fa-check"></i><b>4.3.5.1</b> Modelo básico</a></li>
+<li class="chapter" data-level="4.3.5.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#modelo-basico"><i class="fa fa-check"></i><b>4.3.5.1</b> Modelo básico</a><ul>
+<li class="chapter" data-level="4.3.5.1.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#usando-el-entorno-grafico-o-el-terminal"><i class="fa fa-check"></i><b>4.3.5.1.1</b> Usando el entorno gráfico, o el <code>terminal</code></a></li>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-2"></a></li>
+</ul></li>
 <li class="chapter" data-level="4.3.5.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#pull-request-en-3-1-sencillos-pasos"><i class="fa fa-check"></i><b>4.3.5.2</b> Pull request en 3 + 1 sencillos pasos</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3.6" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-nuestro-primer-commit"><i class="fa fa-check"></i><b>4.3.6</b> Ejercicio Nuestro primer commit</a></li>
-<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-2"></a><ul>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-3"></a><ul>
 <li class="chapter" data-level="4.3.6.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#feature-branch"><i class="fa fa-check"></i><b>4.3.6.1</b> Feature branch</a></li>
 <li class="chapter" data-level="4.3.6.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#stash"><i class="fa fa-check"></i><b>4.3.6.2</b> Stash</a></li>
 </ul></li>
@@ -370,15 +374,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Capítulo 4</span> Trabajo con RMarkdown para reportes reproducibles</h1>
 <hr />
 <pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;corrr&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;corrr&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;corrr&#39;</span>)
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;easystats&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;easystats/easystats&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;easystats&#39;</span>)
+<span class="co"># if (!require(&#39;easystats&#39;)) remotes::install_github(&quot;easystats/easystats&quot;); library(&#39;easystats&#39;)</span>
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;correlation&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;easystats/correlation&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;correlation&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;report&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;easystats/report&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;report&#39;</span>)
+
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;papaja&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;papaja&#39;</span>)
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;remotes&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;remotes&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;remotes&#39;</span>)
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;renv&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/renv&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;renv&#39;</span>)
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;rticles&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;rticles&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;rticles&#39;</span>)
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;stargazer&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;stargazer&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;stargazer&#39;</span>)
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tidyverse&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tidyverse&#39;</span>)
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tinytex&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tinytex&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tinytex&#39;</span>)</code></pre>
-<hr />
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tidyverse&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tidyverse&#39;</span>)</code></pre>
+<div id="dependencias" class="section level2 parameters unnumbered">
+<h2>Dependencias</h2>
+<p>Windows:</p>
+<ul>
+<li>instalar Git: <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a> [reiniciar despues?]</li>
+</ul>
+<p>Todos:</p>
+<ul>
+<li>Install latex:</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;tinytex&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;tinytex&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;tinytex&#39;</span>)
+
+<span class="co"># Instalar distribución latex automáticamente (llevará un rato)</span>
+tinytex<span class="op">::</span><span class="kw">install_tinytex</span>()</code></pre>
+</div>
 <div id="que-es-la-reproducibilidad" class="section level2">
 <h2><span class="header-section-number">4.1</span> Que es la reproducibilidad</h2>
 <p><img src="data/images/reproducibility.png" /></p>
@@ -478,38 +498,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>El modelo básico implica la existencia de dos ramas. Una master (“producción”), que siempre debe funcionar, y una develop (para desarrollo), donde experimentamos, rompemos cosas, etc.</p>
 <p>Podeis ver un manual super completo llamado <a href="http://happygitwithr.com/">Happy Git and GitHub for the useR</a> elaborado por Jenny Bryan, Jim Hester, entre otros.</p>
-<div id="modelo-basico" class="section level4 parameters">
+<div id="modelo-basico" class="section level4">
 <h4><span class="header-section-number">4.3.5.1</span> Modelo básico</h4>
-<p>Para el modelo básico empezamos con la rama master:</p>
-<ol style="list-style-type: decimal">
-<li><p>Creamos nueva rama (localmente development)<br />
-<code>git checkout -b development</code></p></li>
-<li>Hacemos cambios<br />
+<p>En RStudio podemos trabajar gráficamente, como se ve abajo, o usando el Terminal:</p>
+<p><img src="data/images/git-rstudio.png" /></p>
+<div id="usando-el-entorno-grafico-o-el-terminal" class="section level5">
+<h5><span class="header-section-number">4.3.5.1.1</span> Usando el entorno gráfico, o el <code>terminal</code></h5>
+</div>
+<div id="section-2" class="section level5 parameters unnumbered">
+<h5></h5>
+<p>Empezamos en la rama master:</p>
+<ol start="0" style="list-style-type: decimal">
+<li><strong>Pull</strong> <img src="data/images/git-pull.png" /> : nos aseguramos que nuestro repositorio local esta actualizado<br />
 </li>
 </ol>
 <ul>
-<li>Commiteamos los cambios:
+<li><code>git pull</code></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><strong>Branch</strong> <img src="data/images/git-branch.png" /> : Creamos nueva rama llamada <strong>development</strong><br />
+</li>
+</ol>
+<ul>
+<li><code>git checkout -b development</code></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Hacemos cambios en nuestros scripts</p></li>
+<li><strong>Commit</strong> <img src="data/images/git-commit.png" /> : Commiteamos los cambios<br />
+</li>
+</ol>
 <ul>
 <li>Añadimos archivos: <code>git add foo.txt</code><br />
 </li>
 <li>Hacemos el commit: <code>git commit --message &quot;A commit message&quot;</code></li>
-</ul></li>
 </ul>
-<ol start="3" style="list-style-type: decimal">
-<li>Subimos la rama a Github, donde podremos hacer un Pull request:<br />
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Push</strong> <img src="data/images/git-push.png" /> : subimos la rama a Github<br />
 </li>
 </ol>
 <ul>
-<li><code>git push origin feature_x</code><br />
-</li>
-<li>Si todo ha ido bien, borramos la rama: <code>git branch -d development</code></li>
+<li><code>git push origin development</code></li>
 </ul>
-<ol start="4" style="list-style-type: decimal">
-<li>Hacemos pull para sincronizar nuestras ramas locales<br />
-<code>git pull</code></li>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Pull request</strong> (En Github):</li>
 </ol>
-<p>Por cierto, todo esto lo podemos hacer sin salir de RStudio (gráficamente, como se ve abajo, o usando el Terminal):</p>
-<p><img src="data/images/git-rstudio.png" /></p>
+<ul>
+<li>Compare &amp; Pull request<br />
+</li>
+<li>2 branches, Pull request</li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li><strong>Pull</strong> <img src="data/images/git-pull.png" /> : nos aseguramos que nuestro repositorio local esta actualizado<br />
+</li>
+</ol>
+<ul>
+<li><code>git pull</code></li>
+</ul>
+</div>
 </div>
 <div id="pull-request-en-3-1-sencillos-pasos" class="section level4">
 <h4><span class="header-section-number">4.3.5.2</span> Pull request en 3 + 1 sencillos pasos</h4>
@@ -541,7 +586,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Ahora haz cambios en el archivo, commitealos, súbelos, y sincroniza tu repo local</p></li>
 </ol>
 </div>
-<div id="section-2" class="section level3 unnumbered">
+<div id="section-3" class="section level3 unnumbered">
 <h3></h3>
 <div id="feature-branch" class="section level4">
 <h4><span class="header-section-number">4.3.6.1</span> Feature branch</h4>
@@ -642,18 +687,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="herramientas-basicas-para-investigadorases" class="section level3">
 <h3><span class="header-section-number">4.5.2</span> Herramientas básicas para investigadoras/es</h3>
 <p>De manera relativamente sencilla podemos incluir tablas bonitas en los reportes.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># https://github.com/easystats/easystats</span>
-<span class="co"># https://www.jakeruss.com/cheatsheets/stargazer/</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># https://www.jakeruss.com/cheatsheets/stargazer/</span>
 
-<span class="co"># remotes::install_github(&quot;easystats/easystats&quot;)</span>
-<span class="kw">library</span>(corrr)
-<span class="kw">library</span>(easystats)
 <span class="kw">library</span>(papaja)
 <span class="kw">library</span>(stargazer)
 <span class="kw">library</span>(tidyverse)</code></pre>
 <div id="correlaciones" class="section level4">
 <h4><span class="header-section-number">4.5.2.1</span> Correlaciones</h4>
-<pre class="sourceCode r"><code class="sourceCode r">  corr_test =<span class="st"> </span><span class="kw">cor.test</span>(iris<span class="op">$</span>Sepal.Width, iris<span class="op">$</span>Sepal.Length, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># https://github.com/easystats/easystats</span>
+
+<span class="kw">library</span>(corrr)
+<span class="kw">library</span>(correlation)
+<span class="kw">library</span>(report)
+<span class="kw">library</span>(knitr)
+
+  corr_test =<span class="st"> </span><span class="kw">cor.test</span>(iris<span class="op">$</span>Sepal.Width, iris<span class="op">$</span>Sepal.Length, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)
 
   <span class="kw">report</span>(corr_test)</code></pre>
 <pre><code>## The Spearman&#39;s rank correlation rho between iris$Sepal.Width and iris$Sepal.Length is negative, significant and small (rho = -0.17, p &lt; .05).</code></pre>
@@ -683,109 +731,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># https://paulvanderlaken.com/2018/09/10/simpler-correlation-analysis-in-r-using-tidyverse-principles/</span>
   table &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">correlation</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">report</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">to_table</span>()
+<span class="st">    </span><span class="kw">to_table</span>(<span class="dt">full =</span> <span class="ot">TRUE</span>)
   
-  table</code></pre>
-<pre><code>##         Group    Parameter Petal.Length Petal.Width Sepal.Length
-## 1      setosa  Petal.Width         0.33        &lt;NA&gt;         &lt;NA&gt;
-## 2      setosa Sepal.Length         0.27        0.28         &lt;NA&gt;
-## 3      setosa  Sepal.Width         0.18        0.23      0.74***
-## 4        &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;        &lt;NA&gt;         &lt;NA&gt;
-## 5  versicolor  Petal.Width      0.79***        &lt;NA&gt;         &lt;NA&gt;
-## 6  versicolor Sepal.Length      0.75***     0.55***         &lt;NA&gt;
-## 7  versicolor  Sepal.Width      0.56***     0.66***      0.53***
-## 8        &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;        &lt;NA&gt;         &lt;NA&gt;
-## 9   virginica  Petal.Width         0.32        &lt;NA&gt;         &lt;NA&gt;
-## 10  virginica Sepal.Length      0.86***        0.28         &lt;NA&gt;
-## 11  virginica  Sepal.Width        0.40*     0.54***       0.46**</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">  table &lt;-<span class="st"> </span>table[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(table)) <span class="op">!=</span><span class="st"> </span><span class="kw">ncol</span>(table),]
-  knitr<span class="op">::</span><span class="kw">kable</span>(table)</code></pre>
+table_clean =<span class="st"> </span>table <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_if</span>(is.character, <span class="op">~</span><span class="kw">replace</span>(., <span class="kw">is.na</span>(.), <span class="st">&quot;&quot;</span>))
+    
+  
+  <span class="co"># table &lt;- table[rowSums(is.na(table)) != ncol(table),]</span>
+  knitr<span class="op">::</span><span class="kw">kable</span>(table_clean)</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th></th>
-<th align="left">Group</th>
 <th align="left">Parameter</th>
-<th align="left">Petal.Length</th>
-<th align="left">Petal.Width</th>
+<th align="left">Sepal.Width</th>
 <th align="left">Sepal.Length</th>
+<th align="left">Petal.Length</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td align="left">setosa</td>
-<td align="left">Petal.Width</td>
-<td align="left">0.33</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td align="left">setosa</td>
 <td align="left">Sepal.Length</td>
-<td align="left">0.27</td>
-<td align="left">0.28</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td align="left">setosa</td>
-<td align="left">Sepal.Width</td>
-<td align="left">0.18</td>
-<td align="left">0.23</td>
-<td align="left">0.74***</td>
+<td align="left">r = -0.12, 95% CI [-0.27, 0.04], p &gt; .1</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="even">
-<td>5</td>
-<td align="left">versicolor</td>
+<td align="left">Petal.Length</td>
+<td align="left">r = -0.43, 95% CI [-0.55, -0.29], p &lt; .001***</td>
+<td align="left">r = 0.87, 95% CI [0.83, 0.91], p &lt; .001***</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
 <td align="left">Petal.Width</td>
-<td align="left">0.79***</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td align="left">versicolor</td>
-<td align="left">Sepal.Length</td>
-<td align="left">0.75***</td>
-<td align="left">0.55***</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td>7</td>
-<td align="left">versicolor</td>
-<td align="left">Sepal.Width</td>
-<td align="left">0.56***</td>
-<td align="left">0.66***</td>
-<td align="left">0.53***</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td align="left">virginica</td>
-<td align="left">Petal.Width</td>
-<td align="left">0.32</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td align="left">virginica</td>
-<td align="left">Sepal.Length</td>
-<td align="left">0.86***</td>
-<td align="left">0.28</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td align="left">virginica</td>
-<td align="left">Sepal.Width</td>
-<td align="left">0.40*</td>
-<td align="left">0.54***</td>
-<td align="left">0.46**</td>
+<td align="left">r = -0.37, 95% CI [-0.50, -0.22], p &lt; .001***</td>
+<td align="left">r = 0.82, 95% CI [0.76, 0.86], p &lt; .001***</td>
+<td align="left">r = 0.96, 95% CI [0.95, 0.97], p &lt; .001***</td>
 </tr>
 </tbody>
 </table>
@@ -1121,7 +1103,9 @@ FALSE
 </div>
 <div id="anova" class="section level4">
 <h4><span class="header-section-number">4.5.2.3</span> Anova</h4>
-<p>!!!!!!!!!!!!!!!!!!!!! <a href="https://rdrr.io/cran/ez/man/ezANOVA.html" class="uri">https://rdrr.io/cran/ez/man/ezANOVA.html</a></p>
+<ul>
+<li><a href="https://rdrr.io/cran/ez/man/ezANOVA.html">{eANOVA}</a></li>
+</ul>
 <pre class="sourceCode r"><code class="sourceCode r">  data &lt;-<span class="st"> </span>iris
   data<span class="op">$</span>Cat1 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="dt">length.out =</span> <span class="kw">nrow</span>(data))
   data<span class="op">$</span>Cat2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="dt">length.out =</span> <span class="kw">nrow</span>(data))
@@ -1261,7 +1245,7 @@ tinytex<span class="op">::</span><span class="kw">install_tinytex</span>()</code
 </div>
 <div id="ejercicio-avanzado" class="section level3 ejercicio">
 <h3><span class="header-section-number">4.5.4</span> Ejercicio avanzado</h3>
-<p>Bajad la base de Cancer Screening Risk Literacy of Physicians in Training: <a href="https://osf.io/qn9a2/" class="uri">https://osf.io/qn9a2/</a> y el <a href="/home/emrys/gorkang@gmail.com/DOCENCIA/UAI/2019/2019-1%20Seminario%20metodologico%20R/R_preparacion_visualizacion_datos/data/files/PONE-D-19-03821R2_FTC.pdf">preprint del artículo</a>:</p>
+<p>Bajad la base de Cancer Screening Risk Literacy of Physicians in Training: <a href="https://osf.io/qn9a2/" class="uri">https://osf.io/qn9a2/</a> y el <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos/raw/master/data/files/04-Dafina-PLOS/PONE-D-19-03821R2_FTC.pdf">preprint del artículo</a>:</p>
 <p>En el documento .Rmd de antes:</p>
 <ol style="list-style-type: decimal">
 <li><p>Cread algo parecido a la tabla de correlaciones (Tabla 3) que se ve en el artículo.</p></li>
