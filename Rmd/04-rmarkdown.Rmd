@@ -104,24 +104,6 @@ Si queremos mantenernos al dia sobre algun paquete, recibir notificaciones cuand
 ![SOURCE: www.github.com](`r here::here("data", "images", "seguir-repos.png")`)
 
 
-### Crear Git y asociar a Github repo  {.parameters}  
-
-
-Para prepararnos para usar Git y Github tenemos que hacer lo siguiente:
-
-<!-- Si ya tenemos un repo Git local, saltarse el paso 1.   -->
-
-1. Crear local git repo: `usethis::use_git()` (cuando creamos un repositorio Git localmente, se crea una carpeta oculta llamada .git)  
-
-2. Crear Github Token: `usethis::browse_github_token()`  
-
-3. Insertar token en .Renvirom: `usethis::edit_r_environ()`  
-
-4. Crear Github repo: `usethis::use_github()`  
-
-  + Empujar el repositorio local a Github: `git push --set-upstream origin master`  
-  
-  
   
 ### Clonar un repositorio existente
 
@@ -137,6 +119,44 @@ Pega en "repository URL" la URL del repo GitHub (ver imagen de abajo). Será alg
 
 
 
+
+### Crear Git y asociar a Github repo  
+
+
+#### Versión simple {.parameters -}
+
+En www.github.com:  
+
+1. Creamos repositorio nuevo  
+
+2. Initialize this repository with a README  
+
+3. Clonar repositorio  
+
+#### {-}  
+
+
+#### Usando el terminal {.parameters -}
+
+
+Para prepararnos para usar Git y Github tenemos que hacer lo siguiente:
+
+<!-- Si ya tenemos un repo Git local, saltarse el paso 1.   -->
+
+1. Crear local git repo: `usethis::use_git()` (cuando creamos un repositorio Git localmente, se crea una carpeta oculta llamada .git)  
+
+2. Crear Github Token: `usethis::browse_github_token()`  
+
+3. Insertar token en .Renvirom: `usethis::edit_r_environ()`  
+
+4. Crear Github repo: `usethis::use_github()`  
+
+  + Empujar el repositorio local a Github: `git push --set-upstream origin master`  
+
+  
+#### {-}  
+  
+
 ### Ejercicio Git-Github  {.ejercicio}
 
 Haz lo siguiente:   
@@ -145,9 +165,8 @@ Haz lo siguiente:
 
 2. Abre una cuenta en Github! o haz login  
 
-3. Sigue los pasos de arriba para crear un repositorio publico asociado a tu repositorio local  
+3. Sigue los pasos de arriba para crear un repositorio publico y asociarlo a un repositorio local  
 
-4. Ahora cierra el proyecto. Y clona el repositorio que has creado en una nueva carpeta  
 
 
 ### Workflow  
@@ -377,7 +396,10 @@ library(tidyverse)
 
 #### Correlaciones
 
-```{r tablas-bonitas-correlation}
+
+##### Test de correlación
+
+```{r correlation-test}
 # https://github.com/easystats/easystats
 
 library(corrr)
@@ -385,12 +407,19 @@ library(correlation)
 library(report)
 library(knitr)
 
+
   corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
 
   report(corr_test)
   table_easystats = report(corr_test) %>% to_table()
   knitr::kable(table_easystats)
 
+  
+```
+
+##### Tabla de correlaciones
+
+```{r tablas-bonitas-correlation}
 
 # https://paulvanderlaken.com/2018/09/10/simpler-correlation-analysis-in-r-using-tidyverse-principles/
   table <- iris %>% 
@@ -398,11 +427,11 @@ library(knitr)
     report() %>% 
     to_table(full = TRUE)
   
+# Cambiamos todos los NA por ""
 table_clean = table %>% 
   mutate_if(is.character, ~replace(., is.na(.), ""))
     
-  
-  # table <- table[rowSums(is.na(table)) != ncol(table),]
+# Mostramos la tabla bonita (función kable del paquete {knitr})  
   knitr::kable(table_clean)
   
 ```
@@ -426,6 +455,8 @@ table_clean = table %>%
 ```
 
 
+Usando el paquete {stargazer} podemos mostrar una tabla de resultados:  
+
 ```{r tablas-bonitas-stargazer, results='asis'}
 
   stargazer::stargazer(model_lm, heather = FALSE, type = "html")
@@ -435,7 +466,7 @@ table_clean = table %>%
 
 #### Anova
 
-* [{eANOVA}](https://rdrr.io/cran/ez/man/ezANOVA.html)
+* Ver paquete [{eANOVA}](https://rdrr.io/cran/ez/man/ezANOVA.html)
 
 
 ```{r tablas-bonitas-anova}
@@ -476,21 +507,32 @@ tinytex::install_tinytex()
 - https://github.com/ropensci/spelling#readme  
 
 
+
+#### Usar bibliografía 
+
 Bibliográfia en Rmarkdown  
 
 * https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html  
 
 * https://www.r-bloggers.com/bibliography-with-knitr-cite-your-references-and-packages/  
 
-* Citar paquetes usados! 
+
+#### Citar los paquetes que usamos  
+
+¿Debemos citar los paquetes que usamos?
+
+- Respuesta corta, [si](https://academia.stackexchange.com/a/66375/35580)  
+- Respuesta larga, [la mayoría de los paquetes](https://academia.stackexchange.com/a/27922/35580)  
 
 
-```{r include=FALSE}
-# remotes::install_github("Pakillo/grateful")
+```{r eval=FALSE, include=TRUE}
 
-# grateful::cite_packages(all.pkg = FALSE,
-#                         out.format = "rmd",
-#                         out.dir = "dev")
+remotes::install_github("Pakillo/grateful")
+
+grateful::cite_packages(all.pkg = FALSE,
+                        out.format = "rmd",
+                        out.dir = "dev")
+
 ```
 
 
