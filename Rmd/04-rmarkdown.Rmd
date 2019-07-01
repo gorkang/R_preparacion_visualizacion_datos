@@ -20,13 +20,17 @@ if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 
 ## Dependencias {.parameters -}
 
-Windows:
+* [Instalar Git](https://happygitwithr.com/install-git.html)
 
-* instalar Git: https://git-scm.com/downloads [reiniciar despues?]
+  + Windows: https://happygitwithr.com/install-git.html#install-git-windows  
+      +  "Adjusting your PATH environment", selecciona "Git from the command line and also from 3rd-party software"  
+      
+  + Mac: https://happygitwithr.com/install-git.html#macos  
+  
+  + Linux: https://happygitwithr.com/install-git.html#linux  
+  
 
-Todos: 
-
-* Install latex: 
+* Instalar latex: 
 
 ```{r eval=FALSE}
 
@@ -91,6 +95,12 @@ En esta sección podemos ver algunos comandos básicos asociados a workflows bie
 [github.com](https://github.com) es una plataforma web muy popular donde almacenar proyectos de programación. Muchos de los paquetes de R, el mismo [RStudio](https://github.com/rstudio), etc, tienen repositorios abiertos en Github. Una de las ventajas fundamentales de usar Github es que esta plataforma integra algunas herramientas para hacer más sencillo el control de versiones, como el [pull request](https://help.github.com/en/articles/creating-a-pull-request), que nos permite combinar ramas de proyectos sin apenas problemas.   
 
 ![SOURCE: https://github.githubassets.com/images/modules/open_graph/github-octocat.png](`r here::here("data", "images", "github-octocat.png")`)
+
+---  
+
+Github tiene un programa especial para estudiantes:  
+
+* https://education.github.com/  
 
 
 #### Seguir repositorios
@@ -350,6 +360,68 @@ Y como no, tenemos mucha ayuda:
 * [Web oficial de Rmarkdown dentro de RStudio](https://rmarkdown.rstudio.com/)  
 
 
+Resumiendo, tienes tres elementos básicos:  
+
+
+### Cabecera YAML  
+
+Cuando creas un documento .Rmd nuevo verás algo similar a lo siguiente en las primeras lineas:  
+
+```
+---
+title: "Untitled"
+author: "G"
+date: "6/1/2019"
+output: pdf_document
+---
+```
+
+Esta es la cabecera YAML, en la cual se le pueden pasar parámetros para añadir un índice, cambiar formato, y [muchas otras cosas](https://bookdown.org/yihui/rmarkdown/pdf-document.html).
+
+
+### Rmarkdown 
+
+En el resto del documento (con la excepción de los chunks de código), el formato que usaremos será Rmarkdown. Su sintaxis es muy sencilla pero nada tolerante. Podéis ver las bases en la [R Markdown cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf).  
+
+IMPORTANTE. Si algo no funciona como esperas:  
+
+* Añade saltos de linea entre parrafos.  
+* Añade dos espacios al final de las líneas.  
+* Añade un espacio despues de #: 
+  + MAL: #Título grande  
+  + BIEN: # Título grande  
+  
+
+### Chunks de código  
+
+Los chunks de código están delimitados por:  
+
+![](`r here::here("data", "images", "chunk-options.png")`)  
+
+
+En su interior, puedes usar código R como si estuvieras en un script de R normal.  
+```{r include=FALSE}
+
+```
+
+
+En la cabecera puedes añadir opciones. Hay una [cantidad apabullante de opciones](https://bookdown.org/yihui/rmarkdown/r-code.html). Por ejemplo, en el siguiente chunk:  
+
+`{r nombre_chunk, eval=TRUE, include=TRUE, fig.height=10, fig.width=12, message=FALSE, warning=FALSE, cache=TRUE, results='asis'}`
+
+* `eval=TRUE`: Muestra el código
+* `include=TRUE`: Corre el código
+* `fig.height=10`: altura de los plots (en inches)
+* `fig.width=12`: ancho de los plots (en inches)
+* `message=FALSE`: NO muestres mensajes
+* `warning=FALSE`: NO muestres warnings
+* `cache=TRUE`: cachea el output del plot
+* `results='asis'`: muestra el output tal cual (importante cuando el output es en latex/pdf)  
+
+Haciendo click en la herramienta de la derecha puedes controlar varios parametros esenciales. 
+
+
+
 ### Ejercicio básico RMarkdown {.ejercicio}
 
 Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:  
@@ -380,16 +452,15 @@ Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:
 
 De manera relativamente sencilla podemos incluir tablas bonitas en los reportes. 
 
+```{r paquetes-reportes}
 
-
-```{r paquetes-tablas}
-
-# https://www.jakeruss.com/cheatsheets/stargazer/
-
-library(papaja)
-library(stargazer)
-library(tidyverse)
-
+if (!require('corrr')) install.packages('corrr'); library('corrr')
+if (!require('correlation')) remotes::install_github("easystats/correlation"); library('correlation')
+if (!require('knitr')) install.packages('knitr'); library('knitr')
+if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
+if (!require('report')) remotes::install_github("easystats/report"); library('report')
+if (!require('stargazer')) install.packages('stargazer'); library('stargazer')
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 
 ```
 
@@ -401,12 +472,6 @@ library(tidyverse)
 
 ```{r correlation-test}
 # https://github.com/easystats/easystats
-
-library(corrr)
-library(correlation)
-library(report)
-library(knitr)
-
 
   corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
 
@@ -454,6 +519,8 @@ table_clean = table %>%
 
 ```
 
+---  
+
 
 Usando el paquete {stargazer} podemos mostrar una tabla de resultados:  
 
@@ -487,9 +554,7 @@ Usando el paquete {stargazer} podemos mostrar una tabla de resultados:
 
 
 
-### Otros trucos
-
-* Cuando quieras forzar un salto de linea, o tengas problemas con el formato, probablemente necesites incluir "  " (dos espacios) despues de la frase, o un salto de linea... 
+### Otros 
 
 * Para evitar problemas con los paths de los archivos, usar `here::here()`  
 
