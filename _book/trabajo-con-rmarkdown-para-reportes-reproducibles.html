@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="analisis-de-datos-exploratorio.html">
-<link rel="next" href="paquetes-usados.html">
+<link rel="next" href="reporte-final.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -295,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.2" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-covariacion-1"><i class="fa fa-check"></i><b>3.2.2</b> Ejercicio covariacion 1</a></li>
 <li class="chapter" data-level="3.2.3" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#dos-variables-categoricas"><i class="fa fa-check"></i><b>3.2.3</b> Dos variables categóricas</a></li>
 <li class="chapter" data-level="3.2.4" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#dos-variables-continuas"><i class="fa fa-check"></i><b>3.2.4</b> Dos variables continuas</a></li>
-<li class="chapter" data-level="3.2.5" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-covariacion-2"><i class="fa fa-check"></i><b>3.2.5</b> Ejercicio covariacion 2</a></li>
+<li class="chapter" data-level="3.2.5" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-covariacion-2"><i class="fa fa-check"></i><b>3.2.5</b> Ejercicio covariación 2</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicios-finales"><i class="fa fa-check"></i><b>3.3</b> Ejercicios finales</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="analisis-de-datos-exploratorio.html"><a href="analisis-de-datos-exploratorio.html#ejercicio-exploracion-base-nueva"><i class="fa fa-check"></i><b>3.3.1</b> Ejercicio exploración base nueva</a></li>
@@ -364,6 +364,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#bibliografia-5"><i class="fa fa-check"></i>Bibliografía</a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="reporte-final.html"><a href="reporte-final.html"><i class="fa fa-check"></i><b>5</b> Reporte final</a><ul>
+<li class="chapter" data-level="5.1" data-path="reporte-final.html"><a href="reporte-final.html#base-de-datos-a-usar"><i class="fa fa-check"></i><b>5.1</b> Base de datos a usar</a></li>
+<li class="chapter" data-level="5.2" data-path="reporte-final.html"><a href="reporte-final.html#paso-a-paso"><i class="fa fa-check"></i><b>5.2</b> Paso a paso</a></li>
+<li class="chapter" data-level="5.3" data-path="reporte-final.html"><a href="reporte-final.html#hint"><i class="fa fa-check"></i><b>5.3</b> Hint</a></li>
+<li class="chapter" data-level="5.4" data-path="reporte-final.html"><a href="reporte-final.html#nota-final"><i class="fa fa-check"></i><b>5.4</b> Nota final</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html"><i class="fa fa-check"></i>Paquetes usados</a><ul>
 <li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html#references"><i class="fa fa-check"></i>References</a></li>
 </ul></li>
@@ -387,10 +393,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="trabajo-con-rmarkdown-para-reportes-reproducibles" class="section level1">
 <h1><span class="header-section-number">Capítulo 4</span> Trabajo con RMarkdown para reportes reproducibles</h1>
 <hr />
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;corrr&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;corrr&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;corrr&#39;</span>)
-<span class="co"># if (!require(&#39;easystats&#39;)) remotes::install_github(&quot;easystats/easystats&quot;); library(&#39;easystats&#39;)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;afex&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;afex&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;afex&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;corrr&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;corrr&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;corrr&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;easystats&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;easystats/easystats&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;easystats&#39;</span>)
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;correlation&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;easystats/correlation&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;correlation&#39;</span>)
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;report&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;easystats/report&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;report&#39;</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;see&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;easystats/see&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;see&#39;</span>)
 
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;papaja&#39;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>); <span class="kw">library</span>(<span class="st">&#39;papaja&#39;</span>)
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;remotes&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;remotes&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;remotes&#39;</span>)
@@ -711,11 +719,11 @@ output: pdf_document
 <p>En el resto del documento (con la excepción de los chunks de código), el formato que usaremos será Rmarkdown. Su sintaxis es muy sencilla pero nada tolerante. Podéis ver las bases en la <a href="https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf">R Markdown cheatsheet</a>.</p>
 <p>IMPORTANTE. Si algo no funciona como esperas:</p>
 <ul>
-<li>Añade saltos de linea entre parrafos.<br />
+<li>Añade saltos de linea entre párrafos.<br />
 </li>
 <li>Añade dos espacios al final de las líneas.<br />
 </li>
-<li>Añade un espacio despues de #:
+<li>Añade un espacio después de #:
 <ul>
 <li>MAL: #Título grande<br />
 </li>
@@ -740,7 +748,7 @@ output: pdf_document
 <li><code>cache=TRUE</code>: cachea el output del plot</li>
 <li><code>results='asis'</code>: muestra el output tal cual (importante cuando el output es en latex/pdf)</li>
 </ul>
-<p>Haciendo click en la herramienta de la derecha puedes controlar varios parametros esenciales.</p>
+<p>Haciendo click en la herramienta de la derecha puedes controlar varios parámetros esenciales.</p>
 </div>
 <div id="ejercicio-basico-rmarkdown" class="section level3 ejercicio">
 <h3><span class="header-section-number">4.5.4</span> Ejercicio básico RMarkdown</h3>
@@ -912,74 +920,62 @@ table_clean =<span class="st"> </span>table <span class="op">%&gt;%</span><span 
 </tbody>
 </table>
 <pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">report</span>(model_lm, <span class="dt">standardize =</span> <span class="st">&quot;robust&quot;</span>)</code></pre>
-<pre><code>## We fitted a linear model to predict Sepal.Length with Petal.Length and Petal.Width. The model&#39;s explanatory power is substantial (R2 = 0.81, adj. R2 = 0.80). The model&#39;s intercept is at 4.58. 
+<pre><code>## We fitted a linear model to predict Sepal.Length with Petal.Length and Petal.Width. The model&#39;s explanatory power is substantial (R2 = 0.81, adj. R2 = 0.80). The model&#39;s intercept is at . 
 ## 
 ## Within this model: 
-##   - Petal.Length is significant (beta = 0.44, 95% CI [0.31, 0.57], p &lt; .001) and large (std. beta = 1.42).
-##   - Petal.Width is significant (beta = -1.24, 95% CI [-1.67, -0.81], p &lt; .001) and small (std. beta = -0.49).
-##   - Petal.Length:Petal.Width is significant (beta = 0.19, 95% CI [0.12, 0.25], p &lt; .001) and small (std. beta = 0.31).</code></pre>
+##   - Petal.Length is significant (beta = , 95% CI [0.31, 0.57], p &lt; .001).
+##   - Petal.Width is significant (beta = , 95% CI [-1.67, -0.81], p &lt; .001).
+##   - Petal.Length:Petal.Width is significant (beta = , 95% CI [0.12, 0.25], p &lt; .001).</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">report</span>(model_lm, <span class="dt">standardize =</span> <span class="st">&quot;robust&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">to_fulltext</span>()</code></pre>
-<pre><code>## We fitted a linear model (using OLS algorithm) to predict Sepal.Length with Petal.Length and Petal.Width (formula = Sepal.Length ~ Petal.Length * Petal.Width). Effect sizes were labelled following Cohen&#39;s (1988) recommendations. The model explains a not significant and substantial proportion of variance (R2 = 0.81, F(, ) = , p , adj. R2 = 0.80). The model&#39;s intercept, corresponding to Petal.Length = 0 and Petal.Width = 0, is at 4.58 (t(146) = 40.89, 95% CI [4.36, 4.80], p &lt; .001). 
+<pre><code>## We fitted a linear model (using OLS algorithm) to predict Sepal.Length with Petal.Length and Petal.Width (formula = Sepal.Length ~ Petal.Length * Petal.Width). Effect sizes were labelled following Cohen&#39;s (1988) recommendations. The model explains a not significant and substantial proportion of variance (R2 = 0.81, F(, ) = , p , adj. R2 = 0.80). The model&#39;s intercept, corresponding to Petal.Length = 0 and Petal.Width = 0, is at  (t(146) = 40.89, 95% CI [4.36, 4.80], p &lt; .001). 
 ## 
 ## Within this model: 
-##   - Petal.Length is positive, significant (beta = 0.44, SE = 0.07, t(146) = 6.74, 95% CI [0.31, 0.57], p &lt; .001) and large (std. beta = 1.42, std. SE = 0.14, std. 95% CI [1.14, 1.71]).
-##   - Petal.Width is negative, significant (beta = -1.24, SE = 0.22, t(146) = -5.65, 95% CI [-1.67, -0.81], p &lt; .001) and small (std. beta = -0.49, std. SE = 0.14, std. 95% CI [-0.76, -0.21]).
-##   - Petal.Length:Petal.Width is positive, significant (beta = 0.19, SE = 0.03, t(146) = 5.62, 95% CI [0.12, 0.25], p &lt; .001) and small (std. beta = 0.31, std. SE = 0.05, std. 95% CI [0.20, 0.41]).</code></pre>
+##   - Petal.Length is  and significant (beta = , SE = 0.07, t(146) = 6.74, 95% CI [0.31, 0.57], p &lt; .001).
+##   - Petal.Width is  and significant (beta = , SE = 0.22, t(146) = -5.65, 95% CI [-1.67, -0.81], p &lt; .001).
+##   - Petal.Length:Petal.Width is  and significant (beta = , SE = 0.03, t(146) = 5.62, 95% CI [0.12, 0.25], p &lt; .001).</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">  table_easystats =<span class="st"> </span><span class="kw">report</span>(model_lm, <span class="dt">standardize =</span> <span class="st">&quot;robust&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">to_table</span>()
   knitr<span class="op">::</span><span class="kw">kable</span>(table_easystats)</code></pre>
 <table>
 <thead>
 <tr class="header">
 <th align="left">Parameter</th>
-<th align="right">beta</th>
 <th align="right">CI_low</th>
 <th align="right">CI_high</th>
 <th align="right">p</th>
-<th align="right">Std_beta</th>
 <th align="right">Fit</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">(Intercept)</td>
-<td align="right">4.5771709</td>
 <td align="right">4.3559149</td>
 <td align="right">4.7984269</td>
 <td align="right">0e+00</td>
-<td align="right">-0.2931027</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Petal.Length</td>
-<td align="right">0.4416762</td>
 <td align="right">0.3122070</td>
 <td align="right">0.5711453</td>
 <td align="right">0e+00</td>
-<td align="right">1.4237590</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Petal.Width</td>
-<td align="right">-1.2393154</td>
 <td align="right">-1.6728668</td>
 <td align="right">-0.8057640</td>
 <td align="right">1e-07</td>
-<td align="right">-0.4884181</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Petal.Length:Petal.Width</td>
-<td align="right">0.1885887</td>
 <td align="right">0.1222389</td>
 <td align="right">0.2549386</td>
 <td align="right">1e-07</td>
-<td align="right">0.3064497</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
@@ -990,14 +986,10 @@ table_clean =<span class="st"> </span>table <span class="op">%&gt;%</span><span 
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
 <td align="right">0.8078020</td>
 </tr>
 <tr class="odd">
 <td align="left">R2_adjusted</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
@@ -1197,8 +1189,192 @@ FALSE
 <div id="anova" class="section level4">
 <h4><span class="header-section-number">4.5.5.3</span> Anova</h4>
 <ul>
-<li>Ver paquete <a href="https://rdrr.io/cran/ez/man/ezANOVA.html">{eANOVA}</a></li>
+<li>Ver paquete <a href="https://github.com/singmann/afex">{afex}</a></li>
 </ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&#39;afex&#39;</span>)) <span class="kw">install.packages</span>(<span class="st">&#39;afex&#39;</span>); <span class="kw">library</span>(<span class="st">&#39;afex&#39;</span>)
+
+<span class="kw">data</span>(obk.long, <span class="dt">package =</span> <span class="st">&quot;afex&quot;</span>)
+<span class="kw">head</span>(obk.long)</code></pre>
+<pre><code>##   id treatment gender   age phase hour value
+## 1  1   control      M -4.75   pre    1     1
+## 2  1   control      M -4.75   pre    2     2
+## 3  1   control      M -4.75   pre    3     4
+## 4  1   control      M -4.75   pre    4     2
+## 5  1   control      M -4.75   pre    5     1
+## 6  1   control      M -4.75  post    1     3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># estimate mixed ANOVA on the full design:</span>
+model =<span class="st"> </span><span class="kw">aov_ez</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;value&quot;</span>, obk.long, <span class="dt">between =</span> <span class="kw">c</span>(<span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;gender&quot;</span>), 
+        <span class="dt">within =</span> <span class="kw">c</span>(<span class="st">&quot;phase&quot;</span>, <span class="st">&quot;hour&quot;</span>), <span class="dt">observed =</span> <span class="st">&quot;gender&quot;</span>)
+
+  
+  table_afex =<span class="st"> </span>papaja<span class="op">::</span><span class="kw">apa_print.aov</span>(model)<span class="op">$</span>table
+  knitr<span class="op">::</span><span class="kw">kable</span>(table_afex)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Effect</th>
+<th align="left">F</th>
+<th align="left">df1</th>
+<th align="left">df2</th>
+<th align="left">MSE</th>
+<th align="left">p</th>
+<th align="left">ges</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td align="left">Treatment</td>
+<td align="left">3.94</td>
+<td align="left">2</td>
+<td align="left">10</td>
+<td align="left">22.81</td>
+<td align="left">.055</td>
+<td align="left">.278</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td align="left">Gender</td>
+<td align="left">3.66</td>
+<td align="left">1</td>
+<td align="left">10</td>
+<td align="left">22.81</td>
+<td align="left">.085</td>
+<td align="left">.152</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td align="left">Phase</td>
+<td align="left">16.13</td>
+<td align="left">1.6</td>
+<td align="left">15.99</td>
+<td align="left">5.02</td>
+<td align="left">&lt; .001</td>
+<td align="left">.217</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td align="left">Hour</td>
+<td align="left">16.69</td>
+<td align="left">1.84</td>
+<td align="left">18.41</td>
+<td align="left">3.39</td>
+<td align="left">&lt; .001</td>
+<td align="left">.183</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td align="left">Treatment <span class="math inline">\(\times\)</span> Gender</td>
+<td align="left">2.86</td>
+<td align="left">2</td>
+<td align="left">10</td>
+<td align="left">22.81</td>
+<td align="left">.104</td>
+<td align="left">.218</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td align="left">Treatment <span class="math inline">\(\times\)</span> Phase</td>
+<td align="left">4.85</td>
+<td align="left">3.2</td>
+<td align="left">15.99</td>
+<td align="left">5.02</td>
+<td align="left">.013</td>
+<td align="left">.143</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td align="left">Gender <span class="math inline">\(\times\)</span> Phase</td>
+<td align="left">0.28</td>
+<td align="left">1.6</td>
+<td align="left">15.99</td>
+<td align="left">5.02</td>
+<td align="left">.709</td>
+<td align="left">.005</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td align="left">Treatment <span class="math inline">\(\times\)</span> Hour</td>
+<td align="left">0.09</td>
+<td align="left">3.68</td>
+<td align="left">18.41</td>
+<td align="left">3.39</td>
+<td align="left">.979</td>
+<td align="left">.002</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td align="left">Gender <span class="math inline">\(\times\)</span> Hour</td>
+<td align="left">0.45</td>
+<td align="left">1.84</td>
+<td align="left">18.41</td>
+<td align="left">3.39</td>
+<td align="left">.628</td>
+<td align="left">.006</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td align="left">Phase <span class="math inline">\(\times\)</span> Hour</td>
+<td align="left">1.18</td>
+<td align="left">3.6</td>
+<td align="left">35.96</td>
+<td align="left">2.67</td>
+<td align="left">.335</td>
+<td align="left">.024</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td align="left">Treatment <span class="math inline">\(\times\)</span> Gender <span class="math inline">\(\times\)</span> Phase</td>
+<td align="left">0.64</td>
+<td align="left">3.2</td>
+<td align="left">15.99</td>
+<td align="left">5.02</td>
+<td align="left">.612</td>
+<td align="left">.021</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td align="left">Treatment <span class="math inline">\(\times\)</span> Gender <span class="math inline">\(\times\)</span> Hour</td>
+<td align="left">0.62</td>
+<td align="left">3.68</td>
+<td align="left">18.41</td>
+<td align="left">3.39</td>
+<td align="left">.641</td>
+<td align="left">.016</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td align="left">Treatment <span class="math inline">\(\times\)</span> Phase <span class="math inline">\(\times\)</span> Hour</td>
+<td align="left">0.35</td>
+<td align="left">7.19</td>
+<td align="left">35.96</td>
+<td align="left">2.67</td>
+<td align="left">.930</td>
+<td align="left">.014</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td align="left">Gender <span class="math inline">\(\times\)</span> Phase <span class="math inline">\(\times\)</span> Hour</td>
+<td align="left">0.93</td>
+<td align="left">3.6</td>
+<td align="left">35.96</td>
+<td align="left">2.67</td>
+<td align="left">.449</td>
+<td align="left">.019</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td align="left">Treatment <span class="math inline">\(\times\)</span> Gender <span class="math inline">\(\times\)</span> Phase <span class="math inline">\(\times\)</span> Hour</td>
+<td align="left">0.74</td>
+<td align="left">7.19</td>
+<td align="left">35.96</td>
+<td align="left">2.67</td>
+<td align="left">.646</td>
+<td align="left">.029</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r">  data &lt;-<span class="st"> </span>iris
   data<span class="op">$</span>Cat1 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="dt">length.out =</span> <span class="kw">nrow</span>(data))
   data<span class="op">$</span>Cat2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="dt">length.out =</span> <span class="kw">nrow</span>(data))
@@ -1207,13 +1383,13 @@ FALSE
   <span class="kw">report</span>(model_aov)</code></pre>
 <pre><code>## The ANOVA suggests that:
 ## 
-##   - The effect of Species is significant (F(2, 138) = 115.28, p &lt; .001) and can be considered as large (partial omega squared = 0.60).
-##   - The effect of Cat1 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
-##   - The effect of Cat2 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
-##   - The interaction between Species and Cat1 is not significant (F(2, 138) = 0.51, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
-##   - The interaction between Species and Cat2 is not significant (F(2, 138) = 0.94, p &gt; .1) and can be considered as very small (partial omega squared = -0.00).
-##   - The interaction between Cat1 and Cat2 is not significant (F(1, 138) = 0.91, p &gt; .1) and can be considered as very small (partial omega squared = -0.00).
-##   - The interaction between Species, Cat1 and Cat2 is not significant (F(2, 138) = 0.13, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).</code></pre>
+##   - The effect of Species is significant (F(2, 138) = 115.28, p &lt; .001) and can be considered as large (partial omega squared = ).
+##   - The effect of Cat1 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as large (partial omega squared = ).
+##   - The effect of Cat2 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as large (partial omega squared = ).
+##   - The interaction between Species and Cat1 is not significant (F(2, 138) = 0.51, p &gt; .1) and can be considered as large (partial omega squared = ).
+##   - The interaction between Species and Cat2 is not significant (F(2, 138) = 0.94, p &gt; .1) and can be considered as large (partial omega squared = ).
+##   - The interaction between Cat1 and Cat2 is not significant (F(1, 138) = 0.91, p &gt; .1) and can be considered as large (partial omega squared = ).
+##   - The interaction between Species, Cat1 and Cat2 is not significant (F(2, 138) = 0.13, p &gt; .1) and can be considered as large (partial omega squared = ).</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">report</span>(model_aov) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">to_table</span>()</code></pre>
 <pre><code>##           Parameter  Sum_Squares DoF  Mean_Square            F
 ## 1           Species 63.212133333   2 31.606066667 1.152760e+02
@@ -1224,15 +1400,15 @@ FALSE
 ## 6         Cat1:Cat2  0.250794779   1  0.250794779 9.147172e-01
 ## 7 Species:Cat1:Cat2  0.073353942   2  0.036676971 1.337710e-01
 ## 8         Residuals 37.836478758 138  0.274177382           NA
-##              p Omega_Squared_partial
-## 1 3.658009e-30          0.6037532091
-## 2 9.221286e-01         -0.0066466150
-## 3 9.379676e-01         -0.0066703400
-## 4 6.039388e-01         -0.0066285856
-## 5 3.943298e-01         -0.0008424293
-## 6 3.405383e-01         -0.0005688752
-## 7 8.749037e-01         -0.0116846753
-## 8           NA                    NA</code></pre>
+##              p Omega_Sq_partial
+## 1 3.658009e-30     0.6037532091
+## 2 9.221286e-01    -0.0066466150
+## 3 9.379676e-01    -0.0066703400
+## 4 6.039388e-01    -0.0066285856
+## 5 3.943298e-01    -0.0008424293
+## 6 3.405383e-01    -0.0005688752
+## 7 8.749037e-01    -0.0116846753
+## 8           NA               NA</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">  table_aov =<span class="st"> </span>papaja<span class="op">::</span><span class="kw">apa_print.aov</span>(model_aov)<span class="op">$</span>table
   knitr<span class="op">::</span><span class="kw">kable</span>(table_aov)</code></pre>
 <table>
@@ -1325,12 +1501,13 @@ FALSE
 
 tinytex<span class="op">::</span><span class="kw">install_tinytex</span>()</code></pre>
 <ul>
-<li>Corregir ortografía en Rmarkdown (F7)</li>
+<li>Corregir ortografía en Rmarkdown (F7)<br />
+</li>
 <li><a href="https://github.com/ropensci/spelling#readme" class="uri">https://github.com/ropensci/spelling#readme</a></li>
 </ul>
 <div id="usar-bibliografia" class="section level4">
 <h4><span class="header-section-number">4.5.6.1</span> Usar bibliografía</h4>
-<p>Bibliográfia en Rmarkdown</p>
+<p>Bibliografía en Rmarkdown</p>
 <ul>
 <li><p><a href="https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html" class="uri">https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html</a></p></li>
 <li><p><a href="https://www.r-bloggers.com/bibliography-with-knitr-cite-your-references-and-packages/" class="uri">https://www.r-bloggers.com/bibliography-with-knitr-cite-your-references-and-packages/</a></p></li>
@@ -1388,7 +1565,7 @@ rmarkdown<span class="op">::</span><span class="kw">render</span>(
 <div id="manejo-de-dependencias" class="section level3">
 <h3><span class="header-section-number">4.7.1</span> Manejo de dependencias</h3>
 <p>Usando un sistema de manejo de dependencias <a href="https://github.com/rstudio/renv">renv</a></p>
-<p>Estos sistemas crean un snapshot de las librerías usadas actualmente. Otra alternativa es <a href="https://rstudio.github.io/packrat/">packrat</a>:</p>
+<p>Estos sistemas crean un snapshot de las librerías usadas actualmente. El estándar actual para hacer esto es <a href="https://rstudio.github.io/packrat/">packrat</a>:</p>
 <ol start="0" style="list-style-type: decimal">
 <li><p>Instalamos renv:
 <code>install.packages(&quot;remotes&quot;)</code><br />
@@ -1404,7 +1581,7 @@ rmarkdown<span class="op">::</span><span class="kw">render</span>(
 </div>
 <div id="alternativas-para-integrar-manejo-de-dependencias-y-control-de-cambios" class="section level3">
 <h3><span class="header-section-number">4.7.2</span> Alternativas para integrar manejo de dependencias y control de cambios</h3>
-<p><a href="https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html" class="uri">https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html</a>
+<p><a href="https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html">{workflowr}</a>
 <!-- https://github.com/jdblischak/workflowr --></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;workflowr&quot;)</span></code></pre>
 </div>
@@ -1428,7 +1605,7 @@ rmarkdown<span class="op">::</span><span class="kw">render</span>(
 </div>
 <div id="estilo" class="section level3">
 <h3><span class="header-section-number">4.9.2</span> Estilo</h3>
-<p>Es importante ser consistente en la manera de escribir codigo. Habitualmente se recomienda seguir una guia de estilo. Por ejemplo, <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s Style guide</a> o la <a href="https://style.tidyverse.org/">guia de estilo del tidyverse</a>.</p>
+<p>Es importante ser consistente en la manera de escribir código. Habitualmente se recomienda seguir una guía de estilo. Por ejemplo, <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s Style guide</a> o la <a href="https://style.tidyverse.org/">guia de estilo del tidyverse</a>.</p>
 </div>
 <div id="algunos-paquetes-interesantes" class="section level3">
 <h3><span class="header-section-number">4.9.3</span> Algunos paquetes interesantes</h3>
@@ -1438,11 +1615,17 @@ rmarkdown<span class="op">::</span><span class="kw">render</span>(
 <li><a href="https://github.com/easystats/easystats" class="uri">https://github.com/easystats/easystats</a><br />
 </li>
 <li><a href="https://usethis.r-lib.org/" class="uri">https://usethis.r-lib.org/</a></li>
+<li><a href="https://github.com/karthik/holepunch" class="uri">https://github.com/karthik/holepunch</a></li>
 </ul>
 </div>
 </div>
 <div id="bibliografia-5" class="section level2 bibliografia unnumbered">
 <h2>Bibliografía</h2>
+<p><a href="https://style.tidyverse.org/">Guia de estilo del tidyverse</a></p>
+<p><a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s Style guide</a></p>
+<p><a href="https://happygitwithr.com">Happy Git and GitHub for the useR</a></p>
+<p><a href="https://rstudio.github.io/packrat/">packrat</a></p>
+<p><a href="https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html">{workflowr}</a></p>
 <p>Xie, Y., Allaire, J. J., &amp; Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. <a href="https://bookdown.org/yihui/rmarkdown/" class="uri">https://bookdown.org/yihui/rmarkdown/</a></p>
 <p>Yihui Xie (2018). bookdown: Authoring Books and Technical Documents with R Markdown <a href="https://bookdown.org/yihui/bookdown/markdown-syntax.html" class="uri">https://bookdown.org/yihui/bookdown/markdown-syntax.html</a></p>
 
@@ -1454,7 +1637,7 @@ rmarkdown<span class="op">::</span><span class="kw">render</span>(
         </div>
       </div>
 <a href="analisis-de-datos-exploratorio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="paquetes-usados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="reporte-final.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -2,16 +2,37 @@
 
 En la documentación y ejercicios de este workshop se usaron los paquetes que se pueden ver abajo. Este listado se creó automáticamente usando [{grateful}](https://github.com/Pakillo/grateful):  
 
+
 - base [@base]
+- knitr [@knitr]
+- stargazer [@stargazer]
+- rticles [@rticles]
 - renv [@renv]
 - remotes [@remotes]
 - papaja [@papaja]
-- tinytex [@tinytex]
+- easystats [@easystats]
+- estimate [@estimate]
+- see [@see]
+- report [@report]
+- correlation [@correlation]
+- parameters [@parameters]
+- bayestestR [@bayestestR]
+- performance [@performance]
+- insight [@insight]
+- corrr [@corrr]
+- afex [@afex]
+- lme4 [@lme4]
+- Matrix [@Matrix]
 - hexbin [@hexbin]
+- FFTrees [@FFTrees]
+- caret [@caret]
+- lattice [@lattice]
 - janitor [@janitor]
 - gsheet [@gsheet]
+- DT [@DT]
 - writexl [@writexl]
 - readODS [@readODS]
+- here [@here]
 - haven [@haven]
 - readxl [@readxl]
 - plotly [@plotly]
@@ -31,6 +52,5 @@ En la documentación y ejercicios de este workshop se usaron los paquetes que se
 - tibble [@tibble]
 - ggplot2 [@ggplot2]
 - tidyverse [@tidyverse]
-
 
 ## References  {.bibliografia -}
