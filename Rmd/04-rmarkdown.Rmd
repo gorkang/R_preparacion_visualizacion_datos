@@ -4,10 +4,12 @@
 
 ```{r paquetes-04, message=FALSE, warning=FALSE}
 
+if (!require('afex')) install.packages('afex'); library('afex')
 if (!require('corrr')) install.packages('corrr'); library('corrr')
-# if (!require('easystats')) remotes::install_github("easystats/easystats"); library('easystats')
+if (!require('easystats')) remotes::install_github("easystats/easystats"); library('easystats')
 if (!require('correlation')) remotes::install_github("easystats/correlation"); library('correlation')
 if (!require('report')) remotes::install_github("easystats/report"); library('report')
+if (!require('see')) remotes::install_github("easystats/see"); library('see')
 
 if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
 if (!require('remotes')) install.packages('remotes'); library('remotes')
@@ -16,7 +18,7 @@ if (!require('rticles')) install.packages('rticles'); library('rticles')
 if (!require('stargazer')) install.packages('stargazer'); library('stargazer')
 if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 
-```  
+```
 
 ## Dependencias {.parameters -}
 
@@ -385,9 +387,9 @@ En el resto del documento (con la excepción de los chunks de código), el forma
 
 IMPORTANTE. Si algo no funciona como esperas:  
 
-* Añade saltos de linea entre parrafos.  
+* Añade saltos de linea entre párrafos.  
 * Añade dos espacios al final de las líneas.  
-* Añade un espacio despues de #: 
+* Añade un espacio después de #: 
   + MAL: #Título grande  
   + BIEN: # Título grande  
   
@@ -418,7 +420,7 @@ En la cabecera puedes añadir opciones. Hay una [cantidad apabullante de opcione
 * `cache=TRUE`: cachea el output del plot
 * `results='asis'`: muestra el output tal cual (importante cuando el output es en latex/pdf)  
 
-Haciendo click en la herramienta de la derecha puedes controlar varios parametros esenciales. 
+Haciendo click en la herramienta de la derecha puedes controlar varios parámetros esenciales. 
 
 
 
@@ -533,7 +535,22 @@ Usando el paquete {stargazer} podemos mostrar una tabla de resultados:
 
 #### Anova
 
-* Ver paquete [{eANOVA}](https://rdrr.io/cran/ez/man/ezANOVA.html)
+* Ver paquete [{afex}](https://github.com/singmann/afex)
+
+```{r ejemplo-afex}
+if (!require('afex')) install.packages('afex'); library('afex')
+
+data(obk.long, package = "afex")
+head(obk.long)
+
+# estimate mixed ANOVA on the full design:
+model = aov_ez("id", "value", obk.long, between = c("treatment", "gender"), 
+        within = c("phase", "hour"), observed = "gender")
+
+  
+  table_afex = papaja::apa_print.aov(model)$table
+  knitr::kable(table_afex)
+```
 
 
 ```{r tablas-bonitas-anova}
@@ -568,14 +585,14 @@ tinytex::install_tinytex()
 
 ```
 
-* Corregir ortografía en Rmarkdown   (F7) 
+* Corregir ortografía en Rmarkdown (F7)   
 - https://github.com/ropensci/spelling#readme  
 
 
 
 #### Usar bibliografía 
 
-Bibliográfia en Rmarkdown  
+Bibliografía en Rmarkdown  
 
 * https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html  
 
@@ -650,7 +667,7 @@ Y no olvidemos el paquete {rticles}, que contiene [plantillas de decenas de edit
 
 Usando un sistema de manejo de dependencias [renv](https://github.com/rstudio/renv)  
 
-Estos sistemas crean un snapshot de las librerías usadas actualmente. Otra alternativa es [packrat](https://rstudio.github.io/packrat/):  
+Estos sistemas crean un snapshot de las librerías usadas actualmente. El estándar actual para hacer esto es [packrat](https://rstudio.github.io/packrat/):  
 
 0. Instalamos renv: 
 `install.packages("remotes")`  
@@ -671,7 +688,7 @@ Estos sistemas crean un snapshot de las librerías usadas actualmente. Otra alte
 
 ### Alternativas para integrar manejo de dependencias y control de cambios
 
-https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html
+[{workflowr}](https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html)
 <!-- https://github.com/jdblischak/workflowr -->
 
 
@@ -700,7 +717,7 @@ Aplicaciones web interactivas con R: [Shiny](https://shiny.rstudio.com/)
 
 ### Estilo  
 
-Es importante ser consistente en la manera de escribir codigo. Habitualmente se recomienda seguir una guia de estilo. Por ejemplo, [Hadley Wickham's Style guide](http://adv-r.had.co.nz/Style.html) o la [guia de estilo del tidyverse](https://style.tidyverse.org/).
+Es importante ser consistente en la manera de escribir código. Habitualmente se recomienda seguir una guía de estilo. Por ejemplo, [Hadley Wickham's Style guide](http://adv-r.had.co.nz/Style.html) o la [guia de estilo del tidyverse](https://style.tidyverse.org/).
 
 
 ### Algunos paquetes interesantes  
@@ -708,10 +725,21 @@ Es importante ser consistente en la manera de escribir codigo. Habitualmente se 
 * [Descargar datos suplementarios de papers publicados usando DOI](https://github.com/ropensci/suppdata)  
 * https://github.com/easystats/easystats  
 * https://usethis.r-lib.org/
+* https://github.com/karthik/holepunch
 
 
 
 ## Bibliografía {.bibliografia -}
+
+[Guia de estilo del tidyverse](https://style.tidyverse.org/)  
+
+[Hadley Wickham's Style guide](http://adv-r.had.co.nz/Style.html)  
+
+[Happy Git and GitHub for the useR](https://happygitwithr.com)  
+
+[packrat](https://rstudio.github.io/packrat/)  
+
+[{workflowr}](https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html)  
 
 Xie, Y., Allaire, J. J., & Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. https://bookdown.org/yihui/rmarkdown/  
 

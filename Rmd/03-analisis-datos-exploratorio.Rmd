@@ -294,9 +294,9 @@ ggplot(gapminder, aes(lifeExp, gdpPercap)) +
 
 
 
-### Ejercicio covariacion 2 {.ejercicio} 
+### Ejercicio covariación 2 {.ejercicio} 
 
-Usando el DF `mpg`, visualiza la covariacion entre:  
+Usando el DF `mpg`, visualiza la covariación entre:  
 
 * `manufacturer` y `hwy`  
 * `class`  y `hwy`  
@@ -327,8 +327,8 @@ ggplot(mpg, aes(hwy, cty)) +
 
 Usando la base del paper [Cancer Screening Risk Literacy of Physicians in Training](https://osf.io/qn9a2/), haz un primer análisis exploratorio que incluya:  
 
-* histogramas de todas las variables numericas y no-numéricas
-* scatterplots de la relacion entre comprensión y numéracy, y entre comprensión y screenbeliefs  
+* histogramas de todas las variables numéricas y no-numéricas
+* scatterplots de la relación entre comprensión y numeracy, y entre comprensión y screenbeliefs  
 
 
 ```{r ejercicio-final-analisis-exploratorio, echo=FALSE, fig.height=18}
@@ -342,7 +342,7 @@ DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening ri
 
 
 
-# * histogramas de todas las variables numericas y no-numéricas
+# * histogramas de todas las variables numéricas y no-numéricas
 
 d <- gather(DF_dafina) %>% 
   filter(value != -66) %>% 
@@ -366,7 +366,7 @@ d %>%
 
 
 
-# * scatterplots de la relacion entre comprensión y numéracy, y entre comprensión y screenbeliefs  
+# * scatterplots de la relación entre comprensión y numeracy, y entre comprensión y screenbeliefs  
   DF = DF_dafina %>% 
     select(IDparticipante, screenbeliefs, compR1, numeracy) %>% 
     rename(comprehension = compR1) %>% 

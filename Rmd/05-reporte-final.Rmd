@@ -1,0 +1,130 @@
+# Reporte final
+
+El objetivo **evaluable** de este workshop es escribir CONJUNTAMENTE un mini-paper (tan sólo título, abstract, método y resultados) en inglés, en formato APA usando {papaja} o algún formato de {rticles}.  
+
+
+## Base de datos a usar
+
+![SOURCE: https://twitter.com/richarddmorey/status/690680901760606209](`r here::here("data", "images", "research-parasite.png")`)
+
+Usaremos la base de datos https://osf.io/qn9a2/ asociada al paper [*Cancer screening risk literacy of physicians in
+training: An experimental study*](https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0218821&type=printable) de Petrova et al.
+
+En ese paper podréis ver que hay 1 experimento. Vuestra tarea será crear conjuntamente un paper en Rmarkdown (PDF) donde hagáis un *reanálisis de los datos* de ese paper. Cada uno de vosotros elegirá un subconjunto de variables y un análisis, e incluirá un "Experimento" dentro del paper conjunto, mostrando y describiendo sus resultados.     
+
+
+
+## Paso a paso  
+
+Tendréis que seguir los siguientes pasos para completar el trabajo:  
+
+* Paso 1: Crear un Repositorio en **Github**
+
+* Paso 2: Clonar el repositorio localmente en un computador
+
+* Paso 3: Crear una rama development y trabajar **conjuntamente** en la preparación de datos (importar, renombrar, seleccionar variables...)  
+
+* Paso 4: Usando {papaja}, o alguna de las plantillas de {rticles} cread juntos (en un solo computador) un documento Rmd e incluid la estructura (secciones) del paper  
+
+  + Title
+  + Abstract: describir brevemente que se hace
+  + ~~Introduction~~
+  + Materials and Methods
+      + Participants
+      + Materials
+  + Results
+      + Experiment 1
+      + Experiment 2
+      + Experiment 3
+  + ~~Discussion~~  
+  
+
+
+* Paso 5: Cada uno clonara el repositorio localmente en su computador, creará su **rama propia** y, en la sección adecuada (e.g. Experiment 2), completará las tareas de abajo (commit y push cambios a la **rama propia** de Github al finalizar). **NO borrar la rama propia de Github**:  
+
+  + 1. Describir el análisis realizado  
+  
+  + 2. Tabla APA con descriptivos de las variables seleccionadas    
+
+  + 3. Descripción de resultados en formato APA  
+  
+  + 4. Tabla de resultados APA  
+  
+  + 5. Plot APA que represente adecuadamente estos resultados  
+  
+* Paso 6: Combinar los cambios de las 3 ramas individuales en development  
+
+* Paso 7: Cada uno debería revisar el paper final, corregir fallos y combinarlos en la rama development  
+
+* Paso 8: Mover los cambios a master y celebrar!  
+
+
+
+## Hint  
+
+En la carpeta *Data and results* de https://osf.io/qn9a2/ hay varios archivos que os ayudarán a entender cuales son las variables de interés.  
+
+* Analysis script R1.sps: script de SPSS usado para los análisis del paper
+* Variables R1.sps: descripción de variables  
+* ...  
+
+Es muy recomendable ubicar las variables de interés, y renombrarlas para que sean fácilmente reconocibles.  
+
+
+
+
+<!-- ## Asignación de tareas   -->
+
+<!-- ```{r asignacion-tareas} -->
+
+<!-- set.seed(20190705) -->
+
+<!-- tareas = c("Experimento 1", "Experimento 2", "Experimento 3") -->
+<!-- personas = c("Seyhun", "Daniel", "Nicolas") -->
+<!-- x = sample(personas, 3) -->
+<!-- print(paste(tareas, x)) -->
+
+<!-- ``` -->
+
+## Nota final  
+
+La nota final se definirá de la siguiente manera:
+
+* Paper final: 60%   
+* Tarea individual: 40%  
+
+El formato, el estilo, y los acabados tienen que ser con el estándar de calidad esperado en un paper científico.  
+
+---  
+
+Se evaluará específicamente lo siguiente:  
+
+
+* Paper final **(60% total)**:    
+
+    +  **(90%)** El paper tiene que ser reproducible: El profesor descargará el repositorio completo en un computador sin ninguna librería instalada y kniteara el archivo .Rmd del paper. La expectativa es que todo funcione, y que el paper que se cree automáticamente sea idéntico al entregado por los alumnos.
+
+    +  **(10%)** Calidad general de la redacción, ausencia de errores gramaticales y ortográficos graves.  
+
+
+* Tarea individual **(40% total)**:  
+
+  + **(20%)** Describir el análisis realizado    
+  
+  + **(20%)** Tabla APA con descriptivos de las variables seleccionadas    
+
+  + **(20%)** Descripción de resultados en formato APA  
+  
+  + **(20%)** Tabla de resultados APA  
+  
+  + **(20%)** Plot APA que represente adecuadamente estos resultados  
+
+La historia completa de commits de todas las ramas (master, development, y las 3 individuales) deberá estar disponible.  
+
+
+```{r include=FALSE}
+
+grateful::cite_packages(all.pkg = FALSE,
+                        out.format = "rmd",
+                        out.dir = "dev")
+```
