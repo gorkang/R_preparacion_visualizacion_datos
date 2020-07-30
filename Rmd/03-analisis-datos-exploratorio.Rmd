@@ -4,7 +4,7 @@
 
 #### Paquetes para este capítulo {-}
 
-```{r paquetes-03, message=FALSE, warning=FALSE}
+```{r setup-03, message=FALSE, warning=FALSE}
 
 if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
 if (!require('hexbin')) install.packages('hexbin'); library('hexbin')
@@ -100,6 +100,54 @@ d %>%
     facet_wrap(~ key, scales = "free") + 
     geom_bar() +
     coord_flip()
+
+```
+
+
+#### inspectdf
+
+```{r inspectdf_}
+
+if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
+if (!require('inspectdf')) install.packages('inspectdf'); library('inspectdf')
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+
+
+gapminder %>% inspect_na
+gapminder %>% inspect_na %>% show_plot + coord_flip()
+
+gapminder_cat <- gapminder %>% inspect_cat()
+gapminder_cat %>% show_plot()
+
+
+gapminder_num <- gapminder %>% inspect_num()
+gapminder_num %>% show_plot()
+
+```
+
+#### Datos perdidos
+
+```{r missing}
+
+if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
+if (!require('inspectdf')) install.packages('inspectdf'); library('inspectdf')
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('naniar')) install.packages('naniar'); library('naniar')
+
+
+gapminder %>% inspect_na
+gapminder %>% inspect_na %>% show_plot + coord_flip()
+
+gapminder_cat <- gapminder %>% inspect_cat()
+gapminder_cat %>% show_plot()
+
+
+gapminder_num <- gapminder %>% inspect_num()
+gapminder_num %>% show_plot()
+
+# naniar::gg_miss_upset(gapminder)
 
 ```
 

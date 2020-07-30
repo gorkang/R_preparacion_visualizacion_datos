@@ -21,8 +21,27 @@ Al finalizar el curso deberíamos ser capaces de:
 
 ## Como empezar
 
-Puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:
+Puedes lanzar el siguiente código desde la Consola de RStudio para descargar los materiales del curso:
 
 `if (!require('usethis')) install.packages('usethis'); library('usethis')`
 
-`usethis::use_course("gorkang/R_preparacion_visualizacion_datos")`
+`usethis::use_course("gorkang/R_preparacion_visualizacion_datos")`  
+
+Sigue las instrucciones que aparecen en la Consola para tener un nuevo proyecto de RStudio con todos los materiales del curso. El codigo anterior creará una carpeta llamada `R_preparacion_visualizacion_datos-master`. Dentro de esa carpeta tendrás un archivo llamado `R_preparacion_visualizacion_datos.Rproj` que te permitirá abrir el proyecto de RStudio del workshop.  
+
+La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las mas importantes son:  
+
+- Carpeta `_book`: puedes abrir `book/index.html` en tu navegador para ver el "libro" de este curso  
+- Carpeta `Rmd`: En esa carpeta esta el codigo fuente de los capitulos del libro  
+- Carpeta `data`: Cuando usemos archivos de datos, vendrán de aquí  
+
+
+### Whoooot?
+
+Si lo de arriba te suena a Chino:
+
+1. Descargate este workshop (`Download ZIP`): ![](`r here::here("data", "images", "download_repo_manually.png")`)  
+2. Descomprime el ZIP  
+3. Abre el archivo: `R_preparacion_visualizacion_datos-master/_book/preparando-sistema.html`  
+4. Sigue las instrucciones que ahí aparecen  
+

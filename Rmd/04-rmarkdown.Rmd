@@ -1,8 +1,9 @@
+
 # Trabajo con RMarkdown para reportes reproducibles
 
 ---  
 
-```{r paquetes-04, message=FALSE, warning=FALSE}
+```{r setup-04, message=FALSE, warning=FALSE}
 
 if (!require('afex')) install.packages('afex'); library('afex')
 if (!require('corrr')) install.packages('corrr'); library('corrr')
@@ -80,7 +81,10 @@ El primer paso empieza por crear un proyecto de RStudio. Al usar proyectos, simp
 
 ## Control de cambios con Git y Github
 
-Un segundo elemento que nos va a ayudar a trabajar en equipo, y a evitar problemas en proyectos relativamente complejos es el uso de un sistema de control de versiones como Git. Los proyectos de RStudio hacen especialmente sencillo usar Git, click, click, click...
+Un segundo elemento que nos va a ayudar a trabajar en equipo, y a evitar problemas en proyectos relativamente complejos es el uso de un sistema de control de versiones como Git. Los proyectos de RStudio hacen especialmente sencillo usar Git, click, click, click...  
+
+
+![SOURCE: https://xkcd.com/1597/](`r here::here("data/images/git.png")`)  
 
 
 Algunas referencias útiles:  
@@ -390,8 +394,8 @@ IMPORTANTE. Si algo no funciona como esperas:
 * Añade saltos de linea entre párrafos.  
 * Añade dos espacios al final de las líneas.  
 * Añade un espacio después de #: 
-  + MAL: #Título grande  
-  + BIEN: # Título grande  
+  + MAL: `#Título grande  `
+  + BIEN: `# Título grande  `
   
 
 ### Chunks de código  
@@ -422,6 +426,10 @@ En la cabecera puedes añadir opciones. Hay una [cantidad apabullante de opcione
 
 Haciendo click en la herramienta de la derecha puedes controlar varios parámetros esenciales. 
 
+
+*TRUCO:*
+
+* Si tienes un chunk al principio llamado `setup`, cada vez que reinicies RStudio y ejecutes código en cualquier parte de tu documento, ese bloque se ejecutara automaticamente. Esto es ideal para poner tus librerias, lectura de datos...
 
 
 ### Ejercicio básico RMarkdown {.ejercicio}
@@ -466,6 +474,23 @@ if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 
 ```
 
+#### Descriptivos
+
+```{r descriptives}
+
+ gtsummary::tbl_summary(gapminder %>% select(-country),
+                       by = continent,
+                       missing = "ifany") %>% 
+  gtsummary::add_n()
+
+
+# table_combined_vive = gtsummary::tbl_merge(list(T_female, T_male), tab_spanner = list("Female", "Male"))
+
+# gt::gtsave(gtsummary::as_gt(table_combined_vive), file = "outputs/table-combined-vive.png")
+
+
+```
+
 
 #### Correlaciones
 
@@ -478,10 +503,18 @@ if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
   corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
 
   report(corr_test)
-  table_easystats = report(corr_test) %>% to_table()
+  table_easystats = report(corr_test) %>% table_long()
   knitr::kable(table_easystats)
 
   
+library(see) # for plotting
+library(ggraph) # needs to be loaded
+
+mtcars %>% 
+  correlation(partial = TRUE) %>% 
+  plot()
+
+
 ```
 
 ##### Tabla de correlaciones
@@ -489,13 +522,13 @@ if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 ```{r tablas-bonitas-correlation}
 
 # https://paulvanderlaken.com/2018/09/10/simpler-correlation-analysis-in-r-using-tidyverse-principles/
-  table <- iris %>% 
-    correlation() %>% 
-    report() %>% 
-    to_table(full = TRUE)
+  table_correlations <- iris %>% 
+    correlation()  
+    # report() %>% 
+    # table_long(full = TRUE)
   
 # Cambiamos todos los NA por ""
-table_clean = table %>% 
+table_clean = table_correlations %>% 
   mutate_if(is.character, ~replace(., is.na(.), ""))
     
 # Mostramos la tabla bonita (función kable del paquete {knitr})  
@@ -514,11 +547,10 @@ table_clean = table %>%
   knitr::kable(table_lm)
   
   report(model_lm, standardize = "robust")
-  report(model_lm, standardize = "robust") %>% to_fulltext()
-  table_easystats = report(model_lm, standardize = "robust") %>% to_table()
+  report(model_lm, standardize = "robust") %>% text_short()
+  table_easystats = report(model_lm, standardize = "robust") %>% table_long()
   knitr::kable(table_easystats)
   
-
 ```
 
 ---  
@@ -561,7 +593,7 @@ model = aov_ez("id", "value", obk.long, between = c("treatment", "gender"),
   model_aov <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data=data)
   
   report(model_aov)
-  report(model_aov) %>% to_table()
+  report(model_aov) %>% table_long()
   
   table_aov = papaja::apa_print.aov(model_aov)$table
   knitr::kable(table_aov)
@@ -607,7 +639,7 @@ Bibliografía en Rmarkdown
 - Respuesta larga, [la mayoría de los paquetes](https://academia.stackexchange.com/a/27922/35580)  
 
 
-```{r eval=FALSE, include=TRUE}
+```{r grateful, eval=FALSE, include=TRUE}
 
 remotes::install_github("Pakillo/grateful")
 
@@ -744,3 +776,7 @@ Es importante ser consistente en la manera de escribir código. Habitualmente se
 Xie, Y., Allaire, J. J., & Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. https://bookdown.org/yihui/rmarkdown/  
 
 Yihui Xie (2018). bookdown: Authoring Books and Technical Documents with R Markdown https://bookdown.org/yihui/bookdown/markdown-syntax.html  
+
+* Mas cosas sobre reproducibilidad:
+  + [Reproducibility project: Psychology](https://osf.io/ezcuj/)
+  + [Many labs 2](https://osf.io/8cd4r/)
