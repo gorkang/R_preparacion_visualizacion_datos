@@ -4,7 +4,7 @@
 
 #### Paquetes para este capítulo {-}
 
-```{r paquetes-01, echo=TRUE}
+```{r setup, echo=TRUE}
 
 if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
 if (!require('esquisse')) install.packages('esquisse'); library('esquisse') 
@@ -288,10 +288,10 @@ Hay algunos recursos que resultan muy útiles:
 * [Comunidad de usuarios de Rstudio](https://community.rstudio.com/)  
 
 * [Twiter!](https://twitter.com/home). Por ejemplo:  
-    + #TidyTuesday (@thomas_mock)  
-    + @dataandme  
-    + @rivaquiroga  
-    + @RLadiesSantiago  
+    + #TidyTuesday (\@thomas_mock)  
+    + \@dataandme  
+    + \@rivaquiroga  
+    + \@RLadiesSantiago  
     
 
 * Webs como [R bloggers](https://www.r-bloggers.com/)  
@@ -337,7 +337,7 @@ La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquiss
 
 #### Aprendamos con Garrick 
 
-[Garrick Aden-Buie](https://www.garrickadenbuie.com/) (@grrrck) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28). Vamos a usarla para familiarizarnos con algunas de las funcionalidades de ggplot.  
+[Garrick Aden-Buie](https://www.garrickadenbuie.com/) (\@grrrck) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28). Vamos a usarla para familiarizarnos con algunas de las funcionalidades de ggplot.  
 <!-- https://github.com/gadenbuie/gentle-ggplot2  -->
 
 
@@ -759,6 +759,35 @@ VER: https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations
 #### Promedios por grupo
 
 ```{r transformaciones-estadisticas-promedios-grupo}
+
+# Plot inicial
+ggplot(mpg) + 
+  geom_jitter(aes(x = class, y = hwy), width = 0.2) +
+  theme_minimal()
+
+# Añadimos promedio por grupo (?)
+ggplot(mpg) + 
+  geom_jitter(aes(x = class, y = hwy), width = 0.2) +
+  stat_summary(aes(x = class, y = hwy), fun = mean) + 
+  theme_minimal()
+
+# Version "refinada"
+ggplot(mpg) + 
+  geom_jitter(aes(x = class, y = hwy), width = 0.2) +
+  stat_summary(aes(x = class, y = hwy), fun = mean, color = "red", geom = "point", size = 4, alpha = .7) + 
+  theme_minimal()
+
+# More things!
+ggplot(mpg) + 
+  geom_jitter(aes(x = class, y = hwy), width = 0.2) +
+  stat_summary(aes(x = class, y = hwy), fun = mean, color = "red", geom = "point", size = 4, alpha = .7) +
+  stat_summary(aes(x = class, y = hwy), fun = median, color = "green", geom = "point", shape = "triangle", size = 4, alpha = .7) + 
+  theme_minimal()
+```
+
+Ejemplos más complejos
+
+```{r transformaciones-estadisticas-promedios-grupo-02}
 
 # Usando lineas
 ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
@@ -1320,3 +1349,10 @@ Pero en realidad yo quiero algo como esto. ¿Podrías reproducirlo?
 + Garrick Aden-Buie. A Gentle Guide to the Grammar of Graphics with ggplot2: https://github.com/gadenbuie/gentle-ggplot2
 
 + Michael Toth. You Need to Start Branding Your Graphs. Here's How, with ggplot!: https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html  
+
++ Claus Wilke: https://wilkelab.org/practicalgg/  
+
++ Thomas Lin Pedersen: 
+  
+    + Part 1: https://www.youtube.com/watch?v=h29g21z0a68
+    + Part 2: https://www.youtube.com/watch?v=0m4yywqNPVY

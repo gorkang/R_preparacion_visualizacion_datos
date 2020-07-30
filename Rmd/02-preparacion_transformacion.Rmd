@@ -6,7 +6,7 @@ En este capítulo vamos a aprender a importar y exportar todo tipo de archivos, 
 
 #### Paquetes para este capítulo {-}
 
-```{r paquetes-02}
+```{r setup-02}
 
 if (!require("tidyverse")) install.packages("tidyverse"); library("tidyverse")
 if (!require("readxl")) install.packages("readxl"); library("readxl")
@@ -918,6 +918,8 @@ El paquete {dplyr} tiene funciones que permiten trabajar combinando, filtrando, 
 
 ![SOURCE: https://r4ds.had.co.nz/relational-data.html#mutating-joins](`r here::here("data", "images", "join-inner.png")`)  
 
+En [https://github.com/gadenbuie/tidyexplain](https://github.com/gadenbuie/tidyexplain) se pueden ver animaciones mostrando estas operaciones.  
+
 ---  
 
 
@@ -952,7 +954,6 @@ Tenemos los siguientes dataframes:
 * DF_BAD: Grupo de participantes "selectos"  
 
 
-
 ```{r joins-data}
 
 # Importar CSVs para los joins  
@@ -967,9 +968,14 @@ DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
 ```
 
 
-```{r joins-mutating}
+##### Inner join  
 
-# inner_join
+Preserva pares de observaciones de de `DF_x` y de `DF_y` con claves iguales.   
+
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data", "images", "inner-join.gif")`)
+
+```{r inner-join}
+
 DF_inner_joined = DF_IDs %>% 
   inner_join(DF_results)
 
@@ -977,17 +983,34 @@ DF_inner_joined = DF_IDs %>%
 
 DT::datatable(DF_inner_joined)
 
+```
 
-# left_join
+
+##### Left join  
+
+Preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguales.  
+
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data", "images", "left-join.gif")`)
+
+```{r left-join}
+
 DF_left_joined = DF_IDs %>% 
    left_join(DF_results)
 
 #nrow(DF_left_joined)
 
 DT::datatable(DF_left_joined)
+```
 
 
-# full_join
+##### Full join  
+
+Preserva todas las observaciones de `DF_x` y `DF_y`, alineándolas cuando tengan claves iguales.  
+
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data", "images", "full-join.gif")`)
+
+```{r full-join}
+
 DF_full_joined = DF_IDs %>% 
    full_join(DF_results)
 
@@ -1000,19 +1023,31 @@ DT::datatable(DF_full_joined)
 
 #### Filtering joins  
 
+##### Anti join  
 
-```{r joins-filtering}
+Preserva solo aquellas observaciones de `DF_x` cuyas claves NO aparezcan en `DF_y`.  
 
-# anti_join
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data", "images", "anti-join.gif")`)
+
+```{r anti-join}
+
 # AVOID the people present in DF_BAD
 DF_anti_joined = DF_IDs %>% 
   anti_join(DF_BAD, by = "ID") %>% 
   left_join(DF_results)
 
 DT::datatable(DF_anti_joined)
+```
 
 
-# semi_join
+##### Semi join  
+
+Preserva solo aquellas observaciones de `DF_x` cuyas claves aparezcan en `DF_y`.  
+
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data", "images", "semi-join.gif")`)
+
+```{r semi-join}
+
 # INCLUDE ONLY the people present in DF_BAD
 DF_semi_joined = DF_IDs %>% 
   semi_join(DF_BAD, by = "ID") %>% 
@@ -1021,6 +1056,7 @@ DF_semi_joined = DF_IDs %>%
 DT::datatable(DF_semi_joined)
 
 ```
+
 
 #### Nesting joins  
 
@@ -1329,3 +1365,5 @@ En los siguientes repositorios podréis encontrar datasets interesantes para jug
 [data-carpentry-week lesson_joins](https://mikoontz.github.io/data-carpentry-week/lesson_joins.html)
 
 [R4ds - Joins](https://r4ds.had.co.nz/relational-data.html#mutating-joins)
+
+[Tidyexplain](https://github.com/gadenbuie/tidyexplain)
