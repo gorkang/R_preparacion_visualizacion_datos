@@ -38,10 +38,11 @@ La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las
 
 ### Whoooot?
 
-Si lo de arriba te suena a Chino:
+Si lo de arriba no tiene sentido:  
 
-1. Descargate este workshop (`Download ZIP`): ![](`r here::here("data", "images", "download_repo_manually.png")`)  
+1. Descargate este workshop (`Download ZIP`; ver abajo)
 2. Descomprime el ZIP  
 3. Abre el archivo: `R_preparacion_visualizacion_datos-master/_book/preparando-sistema.html`  
 4. Sigue las instrucciones que ahí aparecen  
 
+![](data/images/download_repo_manually.png)  
