@@ -503,7 +503,7 @@ if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
   corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
 
   report(corr_test)
-  table_easystats = report(corr_test) %>% table_long()
+  table_easystats = report(corr_test)
   knitr::kable(table_easystats)
 
   
@@ -543,12 +543,11 @@ table_clean = table_correlations %>%
   model_lm <- lm(Sepal.Length ~ Petal.Length * Petal.Width, data = iris)
   summary_lm = summary(model_lm)
   # papaja::apa_print.summary.lm(summary_lm)$table
-  table_lm = papaja::apa_print.lm(model_lm)$table
+  table_lm = papaja::apa_print(model_lm)$table
   knitr::kable(table_lm)
   
-  report(model_lm, standardize = "robust")
-  report(model_lm, standardize = "robust") %>% text_short()
-  table_easystats = report(model_lm, standardize = "robust") %>% table_long()
+  report(model_lm)
+  table_easystats = report(model_lm)
   knitr::kable(table_easystats)
   
 ```
@@ -580,7 +579,7 @@ model = aov_ez("id", "value", obk.long, between = c("treatment", "gender"),
         within = c("phase", "hour"), observed = "gender")
 
   
-  table_afex = papaja::apa_print.aov(model)$table
+  table_afex = papaja::apa_print(model)$table
   knitr::kable(table_afex)
 ```
 
@@ -590,12 +589,12 @@ model = aov_ez("id", "value", obk.long, between = c("treatment", "gender"),
   data <- iris
   data$Cat1 <- rep(c("X", "X", "Y"), length.out = nrow(data))
   data$Cat2 <- rep(c("A", "B"), length.out = nrow(data))
-  model_aov <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data=data)
+  model_aov <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data = data)
   
   report(model_aov)
-  report(model_aov) %>% table_long()
+  report(model_aov)
   
-  table_aov = papaja::apa_print.aov(model_aov)$table
+  table_aov = papaja::apa_print(model_aov)$table
   knitr::kable(table_aov)
 
 ```
@@ -670,7 +669,7 @@ En el documento .Rmd de antes:
 
 ```{r papaja, eval=FALSE}
 
-devtools::install_github("crsh/papaja")
+remotes::install_github("crsh/papaja")
 
 # Create new R Markdown file
 rmarkdown::draft(

@@ -78,7 +78,7 @@ Sigue las instrucciones que aparecen en la Consola para tener un nuevo proyecto 
 
 La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las mas importantes son:  
 
-- Carpeta `_book`: puedes abrir `book/index.html` en tu navegador para ver el "libro" de este curso  
+- Carpeta `docs`: puedes abrir `docs/index.html` en tu navegador para ver el "libro" de este curso. Alternativamente, puedes consultar una [version online del libro](https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html).     
 - Carpeta `Rmd`: En esa carpeta esta el codigo fuente de los capitulos del libro  
 - Carpeta `data`: Cuando usemos archivos de datos, vendrán de aquí  
 

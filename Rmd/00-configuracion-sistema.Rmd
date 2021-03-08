@@ -43,7 +43,7 @@ Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes qu
 
 ```{r install_workshop_packages, message=FALSE, warning=FALSE}  
 
-list_of_packages = c("bookdown", "corrplot", "cowplot", "esquisse", "gapminder", "ggpubr", "ggridges", "ggthemes", "hrbrthemes", "inspectdf", "janitor", "knitr", "plotly",  
+list_of_packages = c("bookdown", "corrplot", "cowplot", "easystats", "esquisse", "gapminder", "ggpubr", "ggridges", "ggthemes", "hrbrthemes", "inspectdf", "janitor", "knitr", "plotly",  
                      "psych", "remotes", "stringr", "tictoc", "tidyverse", "usethis", "yarrr")  
 new_packages <- list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
 if (length(new_packages)) install.packages(new_packages, dependencies = TRUE)  

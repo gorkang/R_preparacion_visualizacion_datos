@@ -110,11 +110,11 @@ head(df_ODS)
 
 Para poder leer una gsheet debemos antes crear un enlace para compartirla: `"Share" -> "Get shareable link"`  
 
-```{r google-sheets}
+```{r google-sheets, eval=FALSE}
 
-if (!require("gsheet")) install.packages("gsheet"); library("gsheet")
+if (!require("googlesheets4")) install.packages("gsheet"); library("googlesheets4")
 name_of_sheet = "1jjb91j2X13_JKDAeIwrKIdNv0rcseMdteSqb0ZMVOig/edit#gid=807114896"
-gsheet::gsheet2tbl(name_of_sheet)   
+googlesheets4::read_sheet(name_of_sheet)   
 
 ```
 

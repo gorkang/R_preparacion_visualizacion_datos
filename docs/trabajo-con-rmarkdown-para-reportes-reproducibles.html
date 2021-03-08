@@ -33,7 +33,7 @@
 <link rel="prev" href="análisis-de-datos-exploratorio.html"/>
 <link rel="next" href="reporte-final.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,18 +50,18 @@
 
 
 
-<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.8/datatables.js"></script>
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="libs/datatables-binding-0.17/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -463,19 +463,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="trabajo-con-rmarkdown-para-reportes-reproducibles" class="section level1" number="4">
 <h1><span class="header-section-number">Capítulo 4</span> Trabajo con RMarkdown para reportes reproducibles</h1>
 <hr />
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;afex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;afex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;afex&#39;</span>)</span>
-<span id="cb276-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;corrr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;corrr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;corrr&#39;</span>)</span>
-<span id="cb276-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;easystats&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/easystats&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;easystats&#39;</span>)</span>
-<span id="cb276-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;correlation&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/correlation&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;correlation&#39;</span>)</span>
-<span id="cb276-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;report&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/report&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;report&#39;</span>)</span>
-<span id="cb276-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;see&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/see&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;see&#39;</span>)</span>
-<span id="cb276-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;papaja&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;papaja&#39;</span>)</span>
-<span id="cb276-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;remotes&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;remotes&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;remotes&#39;</span>)</span>
-<span id="cb276-10"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;renv&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;rstudio/renv&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;renv&#39;</span>)</span>
-<span id="cb276-11"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;rticles&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;rticles&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;rticles&#39;</span>)</span>
-<span id="cb276-12"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;stargazer&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;stargazer&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;stargazer&#39;</span>)</span>
-<span id="cb276-13"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb276-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tidyverse&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;tidyverse&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;afex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;afex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;afex&#39;</span>)</span>
+<span id="cb275-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb275-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;corrr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;corrr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;corrr&#39;</span>)</span>
+<span id="cb275-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb275-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;easystats&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/easystats&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;easystats&#39;</span>)</span></code></pre></div>
+<pre><code>## # Attaching packages
+## ✔ insight     0.13.1   ✔ bayestestR  0.8.2 
+## ✔ performance 0.7.0    ✔ parameters  0.12.0
+## ✔ see         0.6.2    ✔ effectsize  0.4.3 
+## ✔ correlation 0.6.0    ✔ modelbased  0.5.1 
+## ✔ report      0.2.0    
+## Warnings or errors in CRAN checks for package(s) &#39;bayestestR&#39;, &#39;parameters&#39;, &#39;effectsize&#39;, &#39;correlation&#39;.</code></pre>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;correlation&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/correlation&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;correlation&#39;</span>)</span>
+<span id="cb277-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;report&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/report&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;report&#39;</span>)</span>
+<span id="cb277-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;see&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/see&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;see&#39;</span>)</span>
+<span id="cb277-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb277-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;papaja&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;papaja&#39;</span>)</span>
+<span id="cb277-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;remotes&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;remotes&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;remotes&#39;</span>)</span>
+<span id="cb277-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;renv&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;rstudio/renv&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;renv&#39;</span>)</span>
+<span id="cb277-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;rticles&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;rticles&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;rticles&#39;</span>)</span>
+<span id="cb277-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;stargazer&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;stargazer&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;stargazer&#39;</span>)</span>
+<span id="cb277-10"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tidyverse&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;tidyverse&#39;</span>)</span></code></pre></div>
 <div id="dependencias" class="section level2 parameters unnumbered">
 <h2>Dependencias</h2>
 <ul>
@@ -490,10 +497,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><p>Instalar latex:</p></li>
 </ul>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tinytex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;tinytex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;tinytex&#39;</span>)</span>
-<span id="cb277-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb277-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalar distribución latex automáticamente (llevará un rato)</span></span>
-<span id="cb277-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb277-4" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tinytex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;tinytex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;tinytex&#39;</span>)</span>
+<span id="cb278-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb278-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb278-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb278-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalar distribución latex automáticamente (llevará un rato)</span></span>
+<span id="cb278-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb278-4" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code></pre></div>
 </div>
 <div id="que-es-la-reproducibilidad" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Que es la reproducibilidad</h2>
@@ -860,30 +867,32 @@ output: pdf_document
 <div id="herramientas-básicas-para-investigadorases" class="section level3" number="4.5.5">
 <h3><span class="header-section-number">4.5.5</span> Herramientas básicas para investigadoras/es</h3>
 <p>De manera relativamente sencilla podemos incluir tablas bonitas en los reportes.</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;corrr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;corrr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;corrr&#39;</span>)</span>
-<span id="cb279-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb279-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;correlation&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/correlation&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;correlation&#39;</span>)</span>
-<span id="cb279-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb279-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;knitr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;knitr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;knitr&#39;</span>)</span>
-<span id="cb279-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb279-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;papaja&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;papaja&#39;</span>)</span>
-<span id="cb279-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb279-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;report&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/report&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;report&#39;</span>)</span>
-<span id="cb279-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb279-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;stargazer&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;stargazer&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;stargazer&#39;</span>)</span>
-<span id="cb279-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb279-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tidyverse&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;tidyverse&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;corrr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;corrr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;corrr&#39;</span>)</span>
+<span id="cb280-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb280-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;correlation&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/correlation&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;correlation&#39;</span>)</span>
+<span id="cb280-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb280-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;knitr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;knitr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;knitr&#39;</span>)</span>
+<span id="cb280-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb280-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;papaja&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;papaja&#39;</span>)</span>
+<span id="cb280-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb280-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;report&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/report&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;report&#39;</span>)</span>
+<span id="cb280-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb280-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;stargazer&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;stargazer&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;stargazer&#39;</span>)</span>
+<span id="cb280-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb280-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tidyverse&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;tidyverse&#39;</span>)</span></code></pre></div>
 <div id="descriptivos" class="section level4" number="4.5.5.1">
 <h4><span class="header-section-number">4.5.5.1</span> Descriptivos</h4>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb280-1" aria-hidden="true" tabindex="-1"></a> gtsummary<span class="sc">::</span><span class="fu">tbl_summary</span>(gapminder <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>country),</span>
-<span id="cb280-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb280-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">by =</span> continent,</span>
-<span id="cb280-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb280-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">missing =</span> <span class="st">&quot;ifany&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb280-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb280-4" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">add_n</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb281-1" aria-hidden="true" tabindex="-1"></a> gtsummary<span class="sc">::</span><span class="fu">tbl_summary</span>(gapminder <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>country),</span>
+<span id="cb281-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb281-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">by =</span> continent,</span>
+<span id="cb281-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb281-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">missing =</span> <span class="st">&quot;ifany&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb281-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb281-4" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">add_n</span>()</span></code></pre></div>
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#lbjfgfpbtx .gt_table {
+#mziicjnlgx .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
   font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
   background-color: #FFFFFF;
   width: auto;
   border-top-style: solid;
@@ -900,7 +909,7 @@ output: pdf_document
   border-left-color: #D3D3D3;
 }
 
-#lbjfgfpbtx .gt_heading {
+#mziicjnlgx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -912,7 +921,7 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#lbjfgfpbtx .gt_title {
+#mziicjnlgx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -922,7 +931,7 @@ output: pdf_document
   border-bottom-width: 0;
 }
 
-#lbjfgfpbtx .gt_subtitle {
+#mziicjnlgx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -932,13 +941,13 @@ output: pdf_document
   border-top-width: 0;
 }
 
-#lbjfgfpbtx .gt_bottom_border {
+#mziicjnlgx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lbjfgfpbtx .gt_col_headings {
+#mziicjnlgx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -953,7 +962,7 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#lbjfgfpbtx .gt_col_heading {
+#mziicjnlgx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -973,7 +982,7 @@ output: pdf_document
   overflow-x: hidden;
 }
 
-#lbjfgfpbtx .gt_column_spanner_outer {
+#mziicjnlgx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -985,15 +994,15 @@ output: pdf_document
   padding-right: 4px;
 }
 
-#lbjfgfpbtx .gt_column_spanner_outer:first-child {
+#mziicjnlgx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lbjfgfpbtx .gt_column_spanner_outer:last-child {
+#mziicjnlgx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lbjfgfpbtx .gt_column_spanner {
+#mziicjnlgx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1005,7 +1014,7 @@ output: pdf_document
   width: 100%;
 }
 
-#lbjfgfpbtx .gt_group_heading {
+#mziicjnlgx .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1027,7 +1036,7 @@ output: pdf_document
   vertical-align: middle;
 }
 
-#lbjfgfpbtx .gt_empty_group_heading {
+#mziicjnlgx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1042,19 +1051,15 @@ output: pdf_document
   vertical-align: middle;
 }
 
-#lbjfgfpbtx .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#lbjfgfpbtx .gt_from_md > :first-child {
+#mziicjnlgx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lbjfgfpbtx .gt_from_md > :last-child {
+#mziicjnlgx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lbjfgfpbtx .gt_row {
+#mziicjnlgx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1073,7 +1078,7 @@ output: pdf_document
   overflow-x: hidden;
 }
 
-#lbjfgfpbtx .gt_stub {
+#mziicjnlgx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1085,7 +1090,7 @@ output: pdf_document
   padding-left: 12px;
 }
 
-#lbjfgfpbtx .gt_summary_row {
+#mziicjnlgx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1095,7 +1100,7 @@ output: pdf_document
   padding-right: 5px;
 }
 
-#lbjfgfpbtx .gt_first_summary_row {
+#mziicjnlgx .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1105,7 +1110,7 @@ output: pdf_document
   border-top-color: #D3D3D3;
 }
 
-#lbjfgfpbtx .gt_grand_summary_row {
+#mziicjnlgx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1115,7 +1120,7 @@ output: pdf_document
   padding-right: 5px;
 }
 
-#lbjfgfpbtx .gt_first_grand_summary_row {
+#mziicjnlgx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1125,7 +1130,11 @@ output: pdf_document
   border-top-color: #D3D3D3;
 }
 
-#lbjfgfpbtx .gt_table_body {
+#mziicjnlgx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mziicjnlgx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1134,7 +1143,7 @@ output: pdf_document
   border-bottom-color: #D3D3D3;
 }
 
-#lbjfgfpbtx .gt_footnotes {
+#mziicjnlgx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1148,13 +1157,13 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#lbjfgfpbtx .gt_footnote {
+#mziicjnlgx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#lbjfgfpbtx .gt_sourcenotes {
+#mziicjnlgx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1168,46 +1177,46 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#lbjfgfpbtx .gt_sourcenote {
+#mziicjnlgx .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#lbjfgfpbtx .gt_left {
+#mziicjnlgx .gt_left {
   text-align: left;
 }
 
-#lbjfgfpbtx .gt_center {
+#mziicjnlgx .gt_center {
   text-align: center;
 }
 
-#lbjfgfpbtx .gt_right {
+#mziicjnlgx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lbjfgfpbtx .gt_font_normal {
+#mziicjnlgx .gt_font_normal {
   font-weight: normal;
 }
 
-#lbjfgfpbtx .gt_font_bold {
+#mziicjnlgx .gt_font_bold {
   font-weight: bold;
 }
 
-#lbjfgfpbtx .gt_font_italic {
+#mziicjnlgx .gt_font_italic {
   font-style: italic;
 }
 
-#lbjfgfpbtx .gt_super {
+#mziicjnlgx .gt_super {
   font-size: 65%;
 }
 
-#lbjfgfpbtx .gt_footnote_marks {
+#mziicjnlgx .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="lbjfgfpbtx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="mziicjnlgx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -1223,16 +1232,16 @@ output: pdf_document
   <tbody class="gt_table_body">
     <tr>
       <td class="gt_row gt_left">year</td>
-      <td class="gt_row gt_center">1704</td>
-      <td class="gt_row gt_center">1980 (1966, 1993)</td>
-      <td class="gt_row gt_center">1980 (1966, 1993)</td>
-      <td class="gt_row gt_center">1980 (1966, 1993)</td>
-      <td class="gt_row gt_center">1980 (1966, 1993)</td>
-      <td class="gt_row gt_center">1980 (1966, 1993)</td>
+      <td class="gt_row gt_center">1,704</td>
+      <td class="gt_row gt_center">1,980 (1,966, 1,993)</td>
+      <td class="gt_row gt_center">1,980 (1,966, 1,993)</td>
+      <td class="gt_row gt_center">1,980 (1,966, 1,993)</td>
+      <td class="gt_row gt_center">1,980 (1,966, 1,993)</td>
+      <td class="gt_row gt_center">1,980 (1,966, 1,993)</td>
     </tr>
     <tr>
       <td class="gt_row gt_left">lifeExp</td>
-      <td class="gt_row gt_center">1704</td>
+      <td class="gt_row gt_center">1,704</td>
       <td class="gt_row gt_center">48 (42, 54)</td>
       <td class="gt_row gt_center">67 (58, 72)</td>
       <td class="gt_row gt_center">62 (51, 70)</td>
@@ -1241,21 +1250,21 @@ output: pdf_document
     </tr>
     <tr>
       <td class="gt_row gt_left">pop</td>
-      <td class="gt_row gt_center">1704</td>
-      <td class="gt_row gt_center">4579311 (1342075, 10801490)</td>
-      <td class="gt_row gt_center">6227510 (2962359, 18340309)</td>
-      <td class="gt_row gt_center">14530830 (3844393, 46300348)</td>
-      <td class="gt_row gt_center">8551125 (4331500, 21802867)</td>
-      <td class="gt_row gt_center">6403492 (3199212, 14351625)</td>
+      <td class="gt_row gt_center">1,704</td>
+      <td class="gt_row gt_center">4,579,311 (1,342,075, 10,801,490)</td>
+      <td class="gt_row gt_center">6,227,510 (2,962,359, 18,340,309)</td>
+      <td class="gt_row gt_center">14,530,830 (3,844,393, 46,300,348)</td>
+      <td class="gt_row gt_center">8,551,125 (4,331,500, 21,802,867)</td>
+      <td class="gt_row gt_center">6,403,492 (3,199,212, 14,351,625)</td>
     </tr>
     <tr>
       <td class="gt_row gt_left">gdpPercap</td>
-      <td class="gt_row gt_center">1704</td>
-      <td class="gt_row gt_center">1192 (761, 2377)</td>
-      <td class="gt_row gt_center">5466 (3428, 7830)</td>
-      <td class="gt_row gt_center">2647 (1057, 8549)</td>
-      <td class="gt_row gt_center">12082 (7213, 20461)</td>
-      <td class="gt_row gt_center">17983 (14142, 22214)</td>
+      <td class="gt_row gt_center">1,704</td>
+      <td class="gt_row gt_center">1,192 (761, 2,377)</td>
+      <td class="gt_row gt_center">5,466 (3,428, 7,830)</td>
+      <td class="gt_row gt_center">2,647 (1,057, 8,549)</td>
+      <td class="gt_row gt_center">12,082 (7,213, 20,461)</td>
+      <td class="gt_row gt_center">17,983 (14,142, 22,214)</td>
     </tr>
   </tbody>
   
@@ -1267,30 +1276,40 @@ output: pdf_document
             <em>1</em>
           </sup>
            
-          Statistics presented: median (IQR)
+          Median (IQR)
           <br />
         </p>
       </td>
     </tr>
   </tfoot>
 </table></div>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="co"># table_combined_vive = gtsummary::tbl_merge(list(T_female, T_male), tab_spanner = list(&quot;Female&quot;, &quot;Male&quot;))</span></span>
-<span id="cb281-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb281-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb281-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb281-3" aria-hidden="true" tabindex="-1"></a><span class="co"># gt::gtsave(gtsummary::as_gt(table_combined_vive), file = &quot;outputs/table-combined-vive.png&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="co"># table_combined_vive = gtsummary::tbl_merge(list(T_female, T_male), tab_spanner = list(&quot;Female&quot;, &quot;Male&quot;))</span></span>
+<span id="cb282-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb282-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb282-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb282-3" aria-hidden="true" tabindex="-1"></a><span class="co"># gt::gtsave(gtsummary::as_gt(table_combined_vive), file = &quot;outputs/table-combined-vive.png&quot;)</span></span></code></pre></div>
 </div>
 <div id="correlaciones" class="section level4" number="4.5.5.2">
 <h4><span class="header-section-number">4.5.5.2</span> Correlaciones</h4>
 <div id="test-de-correlación" class="section level5" number="4.5.5.2.1">
 <h5><span class="header-section-number">4.5.5.2.1</span> Test de correlación</h5>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="co"># https://github.com/easystats/easystats</span></span>
-<span id="cb282-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb282-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb282-3" aria-hidden="true" tabindex="-1"></a>  corr_test <span class="ot">=</span> <span class="fu">cor.test</span>(iris<span class="sc">$</span>Sepal.Width, iris<span class="sc">$</span>Sepal.Length, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span>
-<span id="cb282-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb282-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb282-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">report</span>(corr_test)</span></code></pre></div>
-<pre><code>## The Spearman&#39;s rank correlation rho between iris$Sepal.Width and iris$Sepal.Length is negative, significant and small (rho = -0.17, S = 6.56e+05, p &lt; .05).</code></pre>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb284-1" aria-hidden="true" tabindex="-1"></a>  table_easystats <span class="ot">=</span> <span class="fu">report</span>(corr_test) <span class="sc">%&gt;%</span> <span class="fu">table_long</span>()</span>
-<span id="cb284-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb284-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_easystats)</span></code></pre></div>
-<table>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="co"># https://github.com/easystats/easystats</span></span>
+<span id="cb283-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb283-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb283-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb283-3" aria-hidden="true" tabindex="-1"></a>  corr_test <span class="ot">=</span> <span class="fu">cor.test</span>(iris<span class="sc">$</span>Sepal.Width, iris<span class="sc">$</span>Sepal.Length, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span>
+<span id="cb283-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb283-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb283-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb283-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">report</span>(corr_test)</span></code></pre></div>
+<pre><code>## Effect sizes were labelled following Funder&#39;s (2019) recommendations.
+## 
+## The Spearman&#39;s rank correlation rho between iris$Sepal.Width and iris$Sepal.Length is negative, significant and small (rho = -0.17, S = 6.56e+05, p &lt; .05)</code></pre>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb285-1" aria-hidden="true" tabindex="-1"></a>  table_easystats <span class="ot">=</span> <span class="fu">report</span>(corr_test)</span>
+<span id="cb285-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb285-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_easystats)</span></code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="19%" />
+<col width="20%" />
+<col width="6%" />
+<col width="10%" />
+<col width="6%" />
+<col width="36%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Parameter1</th>
@@ -1304,58 +1323,60 @@ output: pdf_document
 <tbody>
 <tr class="odd">
 <td align="left">iris<span class="math inline">\(Sepal.Width |iris\)</span>Sepal.Length</td>
-<td align="left">-0.1667777</td>
-<td align="right">656283.3</td>
-<td align="right">0.041368</td>
-<td align="right">Spearman</td>
+<td align="left">-0.17</td>
+<td align="right">6.56e+05</td>
+<td align="right">0.041</td>
+<td align="right">Spearman’s rank correlation rho</td>
 <td align="left"></td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(see) <span class="co"># for plotting</span></span>
-<span id="cb285-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb285-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph) <span class="co"># needs to be loaded</span></span>
-<span id="cb285-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb285-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb285-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb285-4" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
-<span id="cb285-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb285-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>(<span class="at">partial =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb285-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb285-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(see) <span class="co"># for plotting</span></span>
+<span id="cb286-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph) <span class="co"># needs to be loaded</span></span>
+<span id="cb286-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb286-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-4" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb286-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">correlation</span>(<span class="at">partial =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb286-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="bookdown-workshop-R_files/figure-html/correlation-test-1.png" width="1152" /></p>
 </div>
 <div id="tabla-de-correlaciones" class="section level5" number="4.5.5.2.2">
 <h5><span class="header-section-number">4.5.5.2.2</span> Tabla de correlaciones</h5>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="co"># https://paulvanderlaken.com/2018/09/10/simpler-correlation-analysis-in-r-using-tidyverse-principles/</span></span>
-<span id="cb286-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-2" aria-hidden="true" tabindex="-1"></a>  table_correlations <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> </span>
-<span id="cb286-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">correlation</span>()  </span>
-<span id="cb286-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># report() %&gt;% </span></span>
-<span id="cb286-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># table_long(full = TRUE)</span></span>
-<span id="cb286-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb286-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Cambiamos todos los NA por &quot;&quot;</span></span>
-<span id="cb286-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-8" aria-hidden="true" tabindex="-1"></a>table_clean <span class="ot">=</span> table_correlations <span class="sc">%&gt;%</span> </span>
-<span id="cb286-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.character, <span class="sc">~</span><span class="fu">replace</span>(., <span class="fu">is.na</span>(.), <span class="st">&quot;&quot;</span>))</span>
-<span id="cb286-10"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb286-11"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostramos la tabla bonita (función kable del paquete {knitr})  </span></span>
-<span id="cb286-12"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb286-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_clean)</span></code></pre></div>
-<table style="width:100%;">
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="co"># https://paulvanderlaken.com/2018/09/10/simpler-correlation-analysis-in-r-using-tidyverse-principles/</span></span>
+<span id="cb287-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-2" aria-hidden="true" tabindex="-1"></a>  table_correlations <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> </span>
+<span id="cb287-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">correlation</span>()  </span>
+<span id="cb287-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># report() %&gt;% </span></span>
+<span id="cb287-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># table_long(full = TRUE)</span></span>
+<span id="cb287-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb287-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Cambiamos todos los NA por &quot;&quot;</span></span>
+<span id="cb287-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-8" aria-hidden="true" tabindex="-1"></a>table_clean <span class="ot">=</span> table_correlations <span class="sc">%&gt;%</span> </span>
+<span id="cb287-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.character, <span class="sc">~</span><span class="fu">replace</span>(., <span class="fu">is.na</span>(.), <span class="st">&quot;&quot;</span>))</span>
+<span id="cb287-10"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb287-11"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostramos la tabla bonita (función kable del paquete {knitr})  </span></span>
+<span id="cb287-12"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_clean)</span></code></pre></div>
+<table>
 <colgroup>
-<col width="13%" />
-<col width="13%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
 <col width="10%" />
+<col width="10%" />
+<col width="9%" />
 <col width="4%" />
-<col width="10%" />
+<col width="9%" />
+<col width="9%" />
 <col width="8%" />
-<col width="6%" />
+<col width="7%" />
+<col width="8%" />
+<col width="16%" />
+<col width="5%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="left">Parameter1</th>
 <th align="left">Parameter2</th>
 <th align="right">r</th>
+<th align="right">CI</th>
 <th align="right">CI_low</th>
 <th align="right">CI_high</th>
 <th align="right">t</th>
-<th align="right">df</th>
+<th align="right">df_error</th>
 <th align="right">p</th>
 <th align="left">Method</th>
 <th align="right">n_Obs</th>
@@ -1366,72 +1387,78 @@ output: pdf_document
 <td align="left">Sepal.Length</td>
 <td align="left">Sepal.Width</td>
 <td align="right">-0.1175698</td>
+<td align="right">0.95</td>
 <td align="right">-0.2726932</td>
 <td align="right">0.0435116</td>
 <td align="right">-1.440287</td>
 <td align="right">148</td>
 <td align="right">0.1518983</td>
-<td align="left">Pearson</td>
+<td align="left">Pearson correlation</td>
 <td align="right">150</td>
 </tr>
 <tr class="even">
 <td align="left">Sepal.Length</td>
 <td align="left">Petal.Length</td>
 <td align="right">0.8717538</td>
+<td align="right">0.95</td>
 <td align="right">0.8270363</td>
 <td align="right">0.9055080</td>
 <td align="right">21.646019</td>
 <td align="right">148</td>
 <td align="right">0.0000000</td>
-<td align="left">Pearson</td>
+<td align="left">Pearson correlation</td>
 <td align="right">150</td>
 </tr>
 <tr class="odd">
 <td align="left">Sepal.Length</td>
 <td align="left">Petal.Width</td>
 <td align="right">0.8179411</td>
+<td align="right">0.95</td>
 <td align="right">0.7568971</td>
 <td align="right">0.8648361</td>
 <td align="right">17.296454</td>
 <td align="right">148</td>
 <td align="right">0.0000000</td>
-<td align="left">Pearson</td>
+<td align="left">Pearson correlation</td>
 <td align="right">150</td>
 </tr>
 <tr class="even">
 <td align="left">Sepal.Width</td>
 <td align="left">Petal.Length</td>
 <td align="right">-0.4284401</td>
+<td align="right">0.95</td>
 <td align="right">-0.5508771</td>
 <td align="right">-0.2879499</td>
 <td align="right">-5.768449</td>
 <td align="right">148</td>
 <td align="right">0.0000001</td>
-<td align="left">Pearson</td>
+<td align="left">Pearson correlation</td>
 <td align="right">150</td>
 </tr>
 <tr class="odd">
 <td align="left">Sepal.Width</td>
 <td align="left">Petal.Width</td>
 <td align="right">-0.3661259</td>
+<td align="right">0.95</td>
 <td align="right">-0.4972130</td>
 <td align="right">-0.2186966</td>
 <td align="right">-4.786461</td>
 <td align="right">148</td>
 <td align="right">0.0000081</td>
-<td align="left">Pearson</td>
+<td align="left">Pearson correlation</td>
 <td align="right">150</td>
 </tr>
 <tr class="even">
 <td align="left">Petal.Length</td>
 <td align="left">Petal.Width</td>
 <td align="right">0.9628654</td>
+<td align="right">0.95</td>
 <td align="right">0.9490525</td>
 <td align="right">0.9729853</td>
 <td align="right">43.387237</td>
 <td align="right">148</td>
 <td align="right">0.0000000</td>
-<td align="left">Pearson</td>
+<td align="left">Pearson correlation</td>
 <td align="right">150</td>
 </tr>
 </tbody>
@@ -1440,11 +1467,11 @@ output: pdf_document
 </div>
 <div id="lm" class="section level4" number="4.5.5.3">
 <h4><span class="header-section-number">4.5.5.3</span> LM</h4>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-1" aria-hidden="true" tabindex="-1"></a>  model_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Petal.Length <span class="sc">*</span> Petal.Width, <span class="at">data =</span> iris)</span>
-<span id="cb287-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-2" aria-hidden="true" tabindex="-1"></a>  summary_lm <span class="ot">=</span> <span class="fu">summary</span>(model_lm)</span>
-<span id="cb287-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># papaja::apa_print.summary.lm(summary_lm)$table</span></span>
-<span id="cb287-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-4" aria-hidden="true" tabindex="-1"></a>  table_lm <span class="ot">=</span> papaja<span class="sc">::</span><span class="fu">apa_print.lm</span>(model_lm)<span class="sc">$</span>table</span>
-<span id="cb287-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb287-5" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_lm)</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb288-1" aria-hidden="true" tabindex="-1"></a>  model_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Petal.Length <span class="sc">*</span> Petal.Width, <span class="at">data =</span> iris)</span>
+<span id="cb288-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb288-2" aria-hidden="true" tabindex="-1"></a>  summary_lm <span class="ot">=</span> <span class="fu">summary</span>(model_lm)</span>
+<span id="cb288-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb288-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># papaja::apa_print.summary.lm(summary_lm)$table</span></span>
+<span id="cb288-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb288-4" aria-hidden="true" tabindex="-1"></a>  table_lm <span class="ot">=</span> papaja<span class="sc">::</span><span class="fu">apa_print</span>(model_lm)<span class="sc">$</span>table</span>
+<span id="cb288-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb288-5" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_lm)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1486,211 +1513,205 @@ output: pdf_document
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb288-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">report</span>(model_lm, <span class="at">standardize =</span> <span class="st">&quot;robust&quot;</span>)</span></code></pre></div>
-<pre><code>## We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Petal.Width (formula = Sepal.Length ~ Petal.Length * Petal.Width). Parameters were standardized using the robust method. Effect sizes were labelled following Funder&#39;s (2019) recommendations.
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb289-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">report</span>(model_lm)</span></code></pre></div>
+<pre><code>## We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Petal.Width (formula: Sepal.Length ~ Petal.Length * Petal.Width). The model explains a significant and substantial proportion of variance (R2 = 0.81, F(3, 146) = 204.54, p &lt; .001, adj. R2 = 0.80). The model&#39;s intercept, corresponding to Petal.Length = 0 and Petal.Width = 0, is at 4.58 (95% CI [4.36, 4.80], t(146) = 40.89, p &lt; .001). Within this model:
 ## 
-## The model explains a significant and substantial proportion of variance (R2 = 0.81, F(3, 146) = 204.54, p &lt; .001, adj. R2 = 0.80). The model&#39;s intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Petal.Width = 0, is at 4.58 (SE = 0.11, 95% CI [4.36, 4.80], p &lt; .001). Within this model:
+##   - The effect of Petal.Length is significantly positive (beta = 0.44, 95% CI [0.31, 0.57], t(146) = 6.74, p &lt; .001; Std. beta = 1.42, 95% CI [1.14, 1.71])
+##   - The effect of Petal.Width is significantly negative (beta = -1.24, 95% CI [-1.67, -0.81], t(146) = -5.65, p &lt; .001; Std. beta = -0.49, 95% CI [-0.76, -0.21])
+##   - The interaction effect of Petal.Width on Petal.Length is significantly positive (beta = 0.19, 95% CI [0.12, 0.25], t(146) = 5.62, p &lt; .001; Std. beta = 0.31, 95% CI [0.20, 0.41])
 ## 
-##   - The effect of Petal.Length is positive and can be considered as very large and significant (beta = 0.44, SE = 0.07, std. beta = 1.42, p &lt; .001).
-##   - The effect of Petal.Width is negative and can be considered as medium and significant (beta = -1.24, SE = 0.22, std. beta = -0.49, p &lt; .001).
-##   - The effect of Petal.Length:Petal.Width is positive and can be considered as small and significant (beta = 0.19, SE = 0.03, std. beta = 0.31, p &lt; .001).</code></pre>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb290-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">report</span>(model_lm, <span class="at">standardize =</span> <span class="st">&quot;robust&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">text_short</span>()</span></code></pre></div>
-<pre><code>## We fitted a linear model to predict Sepal.Length with Petal.Length and Petal.Width.The model&#39;s explanatory power is substantial (R2 = 0.81, adj. R2 = 0.80). The model&#39;s intercept is at 4.58. Within this model:
-## 
-##   - The effect of Petal.Length is positive and can be considered as very large and significant (beta = 0.44, std. beta = 1.42, p &lt; .001).
-##   - The effect of Petal.Width is negative and can be considered as medium and significant (beta = -1.24, std. beta = -0.49, p &lt; .001).
-##   - The effect of Petal.Length:Petal.Width is positive and can be considered as small and significant (beta = 0.19, std. beta = 0.31, p &lt; .001).</code></pre>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb292-1" aria-hidden="true" tabindex="-1"></a>  table_easystats <span class="ot">=</span> <span class="fu">report</span>(model_lm, <span class="at">standardize =</span> <span class="st">&quot;robust&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">table_long</span>()</span>
-<span id="cb292-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb292-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_easystats)</span></code></pre></div>
+## Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</code></pre>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb291-1" aria-hidden="true" tabindex="-1"></a>  table_easystats <span class="ot">=</span> <span class="fu">report</span>(model_lm)</span>
+<span id="cb291-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb291-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_easystats)</span></code></pre></div>
 <table style="width:100%;">
 <colgroup>
-<col width="16%" />
+<col width="1%" />
+<col width="15%" />
+<col width="7%" />
 <col width="8%" />
-<col width="6%" />
-<col width="7%" />
-<col width="7%" />
-<col width="6%" />
-<col width="6%" />
 <col width="4%" />
-<col width="10%" />
+<col width="4%" />
 <col width="3%" />
-<col width="7%" />
-<col width="7%" />
 <col width="8%" />
+<col width="4%" />
+<col width="9%" />
+<col width="13%" />
+<col width="14%" />
+<col width="4%" />
 </colgroup>
 <thead>
 <tr class="header">
+<th align="left"></th>
 <th align="left">Parameter</th>
 <th align="right">Coefficient</th>
-<th align="right">SE</th>
-<th align="right">CI_low.x</th>
-<th align="right">CI_high.x</th>
+<th align="right">CI</th>
+<th align="right">CI_low</th>
+<th align="right">CI_high</th>
 <th align="right">t</th>
 <th align="right">df_error</th>
 <th align="right">p</th>
 <th align="right">Std_Coefficient</th>
-<th align="right">CI</th>
-<th align="right">CI_low.y</th>
-<th align="right">CI_high.y</th>
+<th align="right">Std_Coefficient_CI_low</th>
+<th align="right">Std_Coefficient_CI_high</th>
 <th align="right">Fit</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td align="left">1</td>
 <td align="left">(Intercept)</td>
-<td align="right">4.5771709</td>
-<td align="right">0.1119521</td>
-<td align="right">4.3559149</td>
-<td align="right">4.7984269</td>
-<td align="right">40.885096</td>
-<td align="right">146</td>
-<td align="right">0e+00</td>
-<td align="right">-0.2931027</td>
-<td align="right">0.95</td>
-<td align="right">-0.4185674</td>
-<td align="right">-0.1676380</td>
-<td align="right">NA</td>
+<td align="right">4.58</td>
+<td align="right">[ 4.36, 4.80]</td>
+<td align="right">40.89</td>
+<td align="right">&lt; .001</td>
+<td align="right">-0.29</td>
+<td align="right">[-0.42, -0.17]</td>
+<td align="right"></td>
+<td align="right">4.58</td>
+<td align="right">[ 4.36, 4.80]</td>
+<td align="right">40.89</td>
+<td align="right">&lt; .001</td>
 </tr>
 <tr class="even">
+<td align="left">2</td>
 <td align="left">Petal.Length</td>
-<td align="right">0.4416762</td>
-<td align="right">0.0655094</td>
-<td align="right">0.3122070</td>
-<td align="right">0.5711453</td>
-<td align="right">6.742182</td>
-<td align="right">146</td>
-<td align="right">0e+00</td>
-<td align="right">1.4237590</td>
-<td align="right">0.95</td>
-<td align="right">1.1418281</td>
-<td align="right">1.7056900</td>
-<td align="right">NA</td>
+<td align="right">0.44</td>
+<td align="right">[ 0.31, 0.57]</td>
+<td align="right">6.74</td>
+<td align="right">&lt; .001</td>
+<td align="right">1.42</td>
+<td align="right">[ 1.14, 1.71]</td>
+<td align="right"></td>
+<td align="right">0.44</td>
+<td align="right">[ 0.31, 0.57]</td>
+<td align="right">6.74</td>
+<td align="right">&lt; .001</td>
 </tr>
 <tr class="odd">
+<td align="left">3</td>
 <td align="left">Petal.Width</td>
-<td align="right">-1.2393154</td>
-<td align="right">0.2193702</td>
-<td align="right">-1.6728668</td>
-<td align="right">-0.8057640</td>
-<td align="right">-5.649424</td>
-<td align="right">146</td>
-<td align="right">1e-07</td>
-<td align="right">-0.4884181</td>
-<td align="right">0.95</td>
-<td align="right">-0.7626706</td>
-<td align="right">-0.2141656</td>
-<td align="right">NA</td>
+<td align="right">-1.24</td>
+<td align="right">[-1.67, -0.81]</td>
+<td align="right">-5.65</td>
+<td align="right">&lt; .001</td>
+<td align="right">-0.49</td>
+<td align="right">[-0.76, -0.21]</td>
+<td align="right"></td>
+<td align="right">-1.24</td>
+<td align="right">[-1.67, -0.81]</td>
+<td align="right">-5.65</td>
+<td align="right">&lt; .001</td>
 </tr>
 <tr class="even">
-<td align="left">Petal.Length:Petal.Width</td>
-<td align="right">0.1885887</td>
-<td align="right">0.0335720</td>
-<td align="right">0.1222389</td>
-<td align="right">0.2549386</td>
-<td align="right">5.617443</td>
-<td align="right">146</td>
-<td align="right">1e-07</td>
-<td align="right">0.3064497</td>
-<td align="right">0.95</td>
-<td align="right">0.1986336</td>
-<td align="right">0.4142658</td>
-<td align="right">NA</td>
+<td align="left">4</td>
+<td align="left">Petal.Length * Petal.Width</td>
+<td align="right">0.19</td>
+<td align="right">[ 0.12, 0.25]</td>
+<td align="right">5.62</td>
+<td align="right">&lt; .001</td>
+<td align="right">0.31</td>
+<td align="right">[ 0.20, 0.41]</td>
+<td align="right"></td>
+<td align="right">0.19</td>
+<td align="right">[ 0.12, 0.25]</td>
+<td align="right">5.62</td>
+<td align="right">&lt; .001</td>
 </tr>
 <tr class="odd">
+<td align="left">5</td>
 <td align="left">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
 </tr>
 <tr class="even">
+<td align="left">6</td>
 <td align="left">AIC</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">130.6951836</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">130.70</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
 </tr>
 <tr class="odd">
+<td align="left">7</td>
 <td align="left">BIC</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">145.7483600</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">145.75</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
 </tr>
 <tr class="even">
+<td align="left">8</td>
 <td align="left">R2</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0.8078020</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.81</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
 </tr>
 <tr class="odd">
+<td align="left">9</td>
 <td align="left">R2 (adj.)</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0.8038527</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.80</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
 </tr>
 <tr class="even">
-<td align="left">RMSE</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0.3618154</td>
+<td align="left">11</td>
+<td align="left">Sigma</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.37</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
 </tr>
 </tbody>
 </table>
 <hr />
 <p>Usando el paquete {stargazer} podemos mostrar una tabla de resultados:</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb293-1" aria-hidden="true" tabindex="-1"></a>  stargazer<span class="sc">::</span><span class="fu">stargazer</span>(model_lm, <span class="at">heather =</span> <span class="cn">FALSE</span>, <span class="at">type =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb292-1" aria-hidden="true" tabindex="-1"></a>  stargazer<span class="sc">::</span><span class="fu">stargazer</span>(model_lm, <span class="at">heather =</span> <span class="cn">FALSE</span>, <span class="at">type =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
 <table style="text-align:center">
 <tr>
 <td colspan="2" style="border-bottom: 1px solid black">
@@ -1882,10 +1903,10 @@ FALSE
 <ul>
 <li>Ver paquete <a href="https://github.com/singmann/afex">{afex}</a></li>
 </ul>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;afex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;afex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;afex&#39;</span>)</span>
-<span id="cb294-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb294-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb294-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb294-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(obk.long, <span class="at">package =</span> <span class="st">&quot;afex&quot;</span>)</span>
-<span id="cb294-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb294-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(obk.long)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;afex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;afex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;afex&#39;</span>)</span>
+<span id="cb293-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb293-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb293-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb293-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(obk.long, <span class="at">package =</span> <span class="st">&quot;afex&quot;</span>)</span>
+<span id="cb293-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb293-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(obk.long)</span></code></pre></div>
 <pre><code>##   id treatment gender   age phase hour value
 ## 1  1   control      M -4.75   pre    1     1
 ## 2  1   control      M -4.75   pre    2     2
@@ -1893,17 +1914,27 @@ FALSE
 ## 4  1   control      M -4.75   pre    4     2
 ## 5  1   control      M -4.75   pre    5     1
 ## 6  1   control      M -4.75  post    1     3</code></pre>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate mixed ANOVA on the full design:</span></span>
-<span id="cb296-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">aov_ez</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;value&quot;</span>, obk.long, <span class="at">between =</span> <span class="fu">c</span>(<span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;gender&quot;</span>), </span>
-<span id="cb296-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;phase&quot;</span>, <span class="st">&quot;hour&quot;</span>), <span class="at">observed =</span> <span class="st">&quot;gender&quot;</span>)</span>
-<span id="cb296-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb296-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb296-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-6" aria-hidden="true" tabindex="-1"></a>  table_afex <span class="ot">=</span> papaja<span class="sc">::</span><span class="fu">apa_print.aov</span>(model)<span class="sc">$</span>table</span>
-<span id="cb296-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-7" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_afex)</span></code></pre></div>
-<table>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate mixed ANOVA on the full design:</span></span>
+<span id="cb295-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb295-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">aov_ez</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;value&quot;</span>, obk.long, <span class="at">between =</span> <span class="fu">c</span>(<span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;gender&quot;</span>), </span>
+<span id="cb295-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb295-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;phase&quot;</span>, <span class="st">&quot;hour&quot;</span>), <span class="at">observed =</span> <span class="st">&quot;gender&quot;</span>)</span>
+<span id="cb295-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb295-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb295-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb295-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb295-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb295-6" aria-hidden="true" tabindex="-1"></a>  table_afex <span class="ot">=</span> papaja<span class="sc">::</span><span class="fu">apa_print</span>(model)<span class="sc">$</span>table</span>
+<span id="cb295-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb295-7" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_afex)</span></code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="3%" />
+<col width="59%" />
+<col width="6%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="7%" />
+<col width="5%" />
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="left">Effect</th>
 <th align="left">F</th>
 <th align="left">df1</th>
@@ -1915,7 +1946,7 @@ FALSE
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
+<td align="left">1</td>
 <td align="left">Treatment</td>
 <td align="left">3.94</td>
 <td align="left">2</td>
@@ -1925,7 +1956,7 @@ FALSE
 <td align="left">.278</td>
 </tr>
 <tr class="even">
-<td>2</td>
+<td align="left">2</td>
 <td align="left">Gender</td>
 <td align="left">3.66</td>
 <td align="left">1</td>
@@ -1935,17 +1966,17 @@ FALSE
 <td align="left">.152</td>
 </tr>
 <tr class="odd">
-<td>4</td>
+<td align="left">4</td>
 <td align="left">Phase</td>
 <td align="left">16.13</td>
-<td align="left">1.6</td>
+<td align="left">1.60</td>
 <td align="left">15.99</td>
 <td align="left">5.02</td>
 <td align="left">&lt; .001</td>
 <td align="left">.217</td>
 </tr>
 <tr class="even">
-<td>8</td>
+<td align="left">8</td>
 <td align="left">Hour</td>
 <td align="left">16.69</td>
 <td align="left">1.84</td>
@@ -1955,7 +1986,7 @@ FALSE
 <td align="left">.183</td>
 </tr>
 <tr class="odd">
-<td>3</td>
+<td align="left">3</td>
 <td align="left">Treatment <span class="math inline">\(\times\)</span> Gender</td>
 <td align="left">2.86</td>
 <td align="left">2</td>
@@ -1965,27 +1996,27 @@ FALSE
 <td align="left">.218</td>
 </tr>
 <tr class="even">
-<td>5</td>
+<td align="left">5</td>
 <td align="left">Treatment <span class="math inline">\(\times\)</span> Phase</td>
 <td align="left">4.85</td>
-<td align="left">3.2</td>
+<td align="left">3.20</td>
 <td align="left">15.99</td>
 <td align="left">5.02</td>
 <td align="left">.013</td>
 <td align="left">.143</td>
 </tr>
 <tr class="odd">
-<td>6</td>
+<td align="left">6</td>
 <td align="left">Gender <span class="math inline">\(\times\)</span> Phase</td>
 <td align="left">0.28</td>
-<td align="left">1.6</td>
+<td align="left">1.60</td>
 <td align="left">15.99</td>
 <td align="left">5.02</td>
 <td align="left">.709</td>
 <td align="left">.005</td>
 </tr>
 <tr class="even">
-<td>9</td>
+<td align="left">9</td>
 <td align="left">Treatment <span class="math inline">\(\times\)</span> Hour</td>
 <td align="left">0.09</td>
 <td align="left">3.68</td>
@@ -1995,7 +2026,7 @@ FALSE
 <td align="left">.002</td>
 </tr>
 <tr class="odd">
-<td>10</td>
+<td align="left">10</td>
 <td align="left">Gender <span class="math inline">\(\times\)</span> Hour</td>
 <td align="left">0.45</td>
 <td align="left">1.84</td>
@@ -2005,27 +2036,27 @@ FALSE
 <td align="left">.006</td>
 </tr>
 <tr class="even">
-<td>12</td>
+<td align="left">12</td>
 <td align="left">Phase <span class="math inline">\(\times\)</span> Hour</td>
 <td align="left">1.18</td>
-<td align="left">3.6</td>
+<td align="left">3.60</td>
 <td align="left">35.96</td>
 <td align="left">2.67</td>
 <td align="left">.335</td>
 <td align="left">.024</td>
 </tr>
 <tr class="odd">
-<td>7</td>
+<td align="left">7</td>
 <td align="left">Treatment <span class="math inline">\(\times\)</span> Gender <span class="math inline">\(\times\)</span> Phase</td>
 <td align="left">0.64</td>
-<td align="left">3.2</td>
+<td align="left">3.20</td>
 <td align="left">15.99</td>
 <td align="left">5.02</td>
 <td align="left">.612</td>
 <td align="left">.021</td>
 </tr>
 <tr class="even">
-<td>11</td>
+<td align="left">11</td>
 <td align="left">Treatment <span class="math inline">\(\times\)</span> Gender <span class="math inline">\(\times\)</span> Hour</td>
 <td align="left">0.62</td>
 <td align="left">3.68</td>
@@ -2035,7 +2066,7 @@ FALSE
 <td align="left">.016</td>
 </tr>
 <tr class="odd">
-<td>13</td>
+<td align="left">13</td>
 <td align="left">Treatment <span class="math inline">\(\times\)</span> Phase <span class="math inline">\(\times\)</span> Hour</td>
 <td align="left">0.35</td>
 <td align="left">7.19</td>
@@ -2045,17 +2076,17 @@ FALSE
 <td align="left">.014</td>
 </tr>
 <tr class="even">
-<td>14</td>
+<td align="left">14</td>
 <td align="left">Gender <span class="math inline">\(\times\)</span> Phase <span class="math inline">\(\times\)</span> Hour</td>
 <td align="left">0.93</td>
-<td align="left">3.6</td>
+<td align="left">3.60</td>
 <td align="left">35.96</td>
 <td align="left">2.67</td>
 <td align="left">.449</td>
 <td align="left">.019</td>
 </tr>
 <tr class="odd">
-<td>15</td>
+<td align="left">15</td>
 <td align="left">Treatment <span class="math inline">\(\times\)</span> Gender <span class="math inline">\(\times\)</span> Phase <span class="math inline">\(\times\)</span> Hour</td>
 <td align="left">0.74</td>
 <td align="left">7.19</td>
@@ -2066,34 +2097,37 @@ FALSE
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb297-1" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> iris</span>
-<span id="cb297-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb297-2" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>Cat1 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="at">length.out =</span> <span class="fu">nrow</span>(data))</span>
-<span id="cb297-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb297-3" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>Cat2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="at">length.out =</span> <span class="fu">nrow</span>(data))</span>
-<span id="cb297-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb297-4" aria-hidden="true" tabindex="-1"></a>  model_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Sepal.Length <span class="sc">~</span> Species <span class="sc">*</span> Cat1 <span class="sc">*</span> Cat2, <span class="at">data=</span>data)</span>
-<span id="cb297-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb297-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb297-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb297-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">report</span>(model_aov)</span></code></pre></div>
-<pre><code>## The ANOVA suggests that:
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-1" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> iris</span>
+<span id="cb296-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-2" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>Cat1 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="at">length.out =</span> <span class="fu">nrow</span>(data))</span>
+<span id="cb296-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-3" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>Cat2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="at">length.out =</span> <span class="fu">nrow</span>(data))</span>
+<span id="cb296-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-4" aria-hidden="true" tabindex="-1"></a>  model_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Sepal.Length <span class="sc">~</span> Species <span class="sc">*</span> Cat1 <span class="sc">*</span> Cat2, <span class="at">data =</span> data)</span>
+<span id="cb296-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb296-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb296-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">report</span>(model_aov)</span></code></pre></div>
+<pre><code>## The ANOVA (formula: Sepal.Length ~ Species * Cat1 * Cat2) suggests that:
 ## 
-##   - The main effect of Species is significant (F(2, 138) = 115.28, p &lt; .001) and can be considered as large (partial omega squared = 0.60).
-##   - The main effect of Cat1 is not significant (F(1, 138) = 0.01, p = 0.922) and can be considered as very small (partial omega squared = -0.01).
-##   - The main effect of Cat2 is not significant (F(1, 138) = 0.01, p = 0.938) and can be considered as very small (partial omega squared = -0.01).
-##   - The interaction between Species and Cat1 is not significant (F(2, 138) = 0.51, p = 0.604) and can be considered as very small (partial omega squared = -0.01).
-##   - The interaction between Species and Cat2 is not significant (F(2, 138) = 0.94, p = 0.394) and can be considered as very small (partial omega squared = -8.42e-04).
-##   - The interaction between Cat1 and Cat2 is not significant (F(1, 138) = 0.91, p = 0.341) and can be considered as very small (partial omega squared = -5.69e-04).
-##   - The interaction between Species, Cat1 and Cat2 is not significant (F(2, 138) = 0.13, p = 0.875) and can be considered as very small (partial omega squared = -0.01).</code></pre>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb299-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">report</span>(model_aov) <span class="sc">%&gt;%</span> <span class="fu">table_long</span>()</span></code></pre></div>
-<pre><code>## Parameter         | Sum_Squares |  df | Mean_Square |      F |        p | Omega_Sq_partial
-## ------------------------------------------------------------------------------------------
-## Species           |       63.21 |   2 |       31.61 | 115.28 | 3.66e-30 |             0.60
-## Cat1              |        0.00 |   1 |        0.00 |   0.01 |     0.92 |            -0.01
-## Cat2              |        0.00 |   1 |        0.00 |   0.01 |     0.94 |            -0.01
-## Species:Cat1      |        0.28 |   2 |        0.14 |   0.51 |     0.60 |            -0.01
-## Species:Cat2      |        0.51 |   2 |        0.26 |   0.94 |     0.39 |        -8.42e-04
-## Cat1:Cat2         |        0.25 |   1 |        0.25 |   0.91 |     0.34 |        -5.69e-04
-## Species:Cat1:Cat2 |        0.07 |   2 |        0.04 |   0.13 |     0.87 |            -0.01
-## Residuals         |       37.84 | 138 |        0.27 |        |          |</code></pre>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb301-1" aria-hidden="true" tabindex="-1"></a>  table_aov <span class="ot">=</span> papaja<span class="sc">::</span><span class="fu">apa_print.aov</span>(model_aov)<span class="sc">$</span>table</span>
-<span id="cb301-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb301-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_aov)</span></code></pre></div>
+##   - The main effect of Species is significant and large (F(2, 138) = 115.28, p &lt; .001; Eta2 (partial) = 0.63, 90% CI [0.55, 0.69])
+##   - The main effect of Cat1 is not significant and very small (F(1, 138) = 9.59e-03, p = 0.922; Eta2 (partial) = 6.95e-05, 90% CI [0.00, 6.47e-03])
+##   - The main effect of Cat2 is not significant and very small (F(1, 138) = 6.08e-03, p = 0.938; Eta2 (partial) = 4.40e-05, 90% CI [0.00, 3.12e-03])
+##   - The interaction between Species and Cat1 is not significant and very small (F(2, 138) = 0.51, p = 0.604; Eta2 (partial) = 7.28e-03, 90% CI [0.00, 0.04])
+##   - The interaction between Species and Cat2 is not significant and small (F(2, 138) = 0.94, p = 0.394; Eta2 (partial) = 0.01, 90% CI [0.00, 0.05])
+##   - The interaction between Cat1 and Cat2 is not significant and very small (F(1, 138) = 0.91, p = 0.341; Eta2 (partial) = 6.58e-03, 90% CI [0.00, 0.05])
+##   - The interaction between Species, Cat1 and Cat2 is not significant and very small (F(2, 138) = 0.13, p = 0.875; Eta2 (partial) = 1.93e-03, 90% CI [0.00, 0.01])
+## 
+## Effect sizes were labelled following Field&#39;s (2013) recommendations.</code></pre>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb298-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">report</span>(model_aov)</span></code></pre></div>
+<pre><code>## The ANOVA (formula: Sepal.Length ~ Species * Cat1 * Cat2) suggests that:
+## 
+##   - The main effect of Species is significant and large (F(2, 138) = 115.28, p &lt; .001; Eta2 (partial) = 0.63, 90% CI [0.55, 0.69])
+##   - The main effect of Cat1 is not significant and very small (F(1, 138) = 9.59e-03, p = 0.922; Eta2 (partial) = 6.95e-05, 90% CI [0.00, 6.47e-03])
+##   - The main effect of Cat2 is not significant and very small (F(1, 138) = 6.08e-03, p = 0.938; Eta2 (partial) = 4.40e-05, 90% CI [0.00, 3.12e-03])
+##   - The interaction between Species and Cat1 is not significant and very small (F(2, 138) = 0.51, p = 0.604; Eta2 (partial) = 7.28e-03, 90% CI [0.00, 0.04])
+##   - The interaction between Species and Cat2 is not significant and small (F(2, 138) = 0.94, p = 0.394; Eta2 (partial) = 0.01, 90% CI [0.00, 0.05])
+##   - The interaction between Cat1 and Cat2 is not significant and very small (F(1, 138) = 0.91, p = 0.341; Eta2 (partial) = 6.58e-03, 90% CI [0.00, 0.05])
+##   - The interaction between Species, Cat1 and Cat2 is not significant and very small (F(2, 138) = 0.13, p = 0.875; Eta2 (partial) = 1.93e-03, 90% CI [0.00, 0.01])
+## 
+## Effect sizes were labelled following Field&#39;s (2013) recommendations.</code></pre>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb300-1" aria-hidden="true" tabindex="-1"></a>  table_aov <span class="ot">=</span> papaja<span class="sc">::</span><span class="fu">apa_print</span>(model_aov)<span class="sc">$</span>table</span>
+<span id="cb300-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb300-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_aov)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -2180,9 +2214,9 @@ FALSE
 <li><p>Para evitar problemas con los paths de los archivos, usar <code>here::here()</code></p></li>
 <li><p>Para evitar problemas con instalación de Latex:</p></li>
 </ul>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tinytex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;tinytex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;tinytex&#39;</span>)</span>
-<span id="cb302-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb302-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb302-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb302-3" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tinytex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;tinytex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;tinytex&#39;</span>)</span>
+<span id="cb301-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb301-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb301-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb301-3" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code></pre></div>
 <ul>
 <li>Corregir ortografía en Rmarkdown (F7)<br />
 </li>
@@ -2204,11 +2238,11 @@ FALSE
 </li>
 <li>Respuesta larga, <a href="https://academia.stackexchange.com/a/27922/35580">la mayoría de los paquetes</a></li>
 </ul>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;Pakillo/grateful&quot;</span>)</span>
-<span id="cb303-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb303-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-3" aria-hidden="true" tabindex="-1"></a>grateful<span class="sc">::</span><span class="fu">cite_packages</span>(<span class="at">all.pkg =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb303-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">out.format =</span> <span class="st">&quot;rmd&quot;</span>,</span>
-<span id="cb303-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">out.dir =</span> <span class="st">&quot;dev&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb302-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;Pakillo/grateful&quot;</span>)</span>
+<span id="cb302-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb302-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb302-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb302-3" aria-hidden="true" tabindex="-1"></a>grateful<span class="sc">::</span><span class="fu">cite_packages</span>(<span class="at">all.pkg =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb302-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb302-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">out.format =</span> <span class="st">&quot;rmd&quot;</span>,</span>
+<span id="cb302-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb302-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">out.dir =</span> <span class="st">&quot;dev&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="ejercicio-avanzado" class="section level3 ejercicio" number="4.5.7">
@@ -2226,21 +2260,21 @@ FALSE
 <ul>
 <li><a href="https://github.com/crsh/papaja">Preparar artículos en formato APA</a></li>
 </ul>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>)</span>
-<span id="cb304-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb304-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new R Markdown file</span></span>
-<span id="cb304-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-4" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">draft</span>(</span>
-<span id="cb304-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-5" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;mymanuscript.Rmd&quot;</span>), </span>
-<span id="cb304-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;apa6&quot;</span>, </span>
-<span id="cb304-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">&quot;papaja&quot;</span>, </span>
-<span id="cb304-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">create_dir =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb304-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">edit =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb304-10"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb304-11"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Render manuscript</span></span>
-<span id="cb304-12"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-12" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(</span>
-<span id="cb304-13"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-13" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;mymanuscript.Rmd&quot;</span>), </span>
-<span id="cb304-14"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb304-15"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">clean =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>)</span>
+<span id="cb303-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new R Markdown file</span></span>
+<span id="cb303-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-4" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">draft</span>(</span>
+<span id="cb303-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-5" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;mymanuscript.Rmd&quot;</span>), </span>
+<span id="cb303-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;apa6&quot;</span>, </span>
+<span id="cb303-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">&quot;papaja&quot;</span>, </span>
+<span id="cb303-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">create_dir =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb303-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">edit =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb303-10"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-11"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Render manuscript</span></span>
+<span id="cb303-12"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-12" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(</span>
+<span id="cb303-13"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-13" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;mymanuscript.Rmd&quot;</span>), </span>
+<span id="cb303-14"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb303-15"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb303-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">clean =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Y no olvidemos el paquete {rticles}, que contiene <a href="https://github.com/rstudio/rticles">plantillas de decenas de editoriales</a></p>
 </div>
 <div id="avanzado" class="section level2" number="4.7">
@@ -2266,7 +2300,7 @@ FALSE
 <h3><span class="header-section-number">4.7.2</span> Alternativas para integrar manejo de dependencias y control de cambios</h3>
 <p><a href="https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html">{workflowr}</a>
 <!-- https://github.com/jdblischak/workflowr --></p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;workflowr&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;workflowr&quot;)</span></span></code></pre></div>
 </div>
 </div>
 <div id="mas-allá-de-rmarkdown" class="section level2" number="4.8">
