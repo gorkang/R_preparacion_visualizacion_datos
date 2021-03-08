@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Reporte final | R para preparación y visualización de datos</title>
+  <meta name="description" content="Capítulo 5 Reporte final | R para preparación y visualización de datos" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 Reporte final | R para preparación y visualización de datos" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Reporte final | R para preparación y visualización de datos" />
+  
+  
+  
+
+<meta name="author" content="Gorka Navarrete, ORCID: 0000-0001-7678-8656" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="trabajo-con-rmarkdown-para-reportes-reproducibles.html"/>
+<link rel="next" href="paquetes-usados.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.8/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/base.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introducción</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i>Objetivos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#como-empezar"><i class="fa fa-check"></i>Como empezar</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bibliografía"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html"><i class="fa fa-check"></i>Preparando nuestro sistema</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="preparando-sistema.html"><a href="preparando-sistema.html#empezando-en-a-b-c"><i class="fa fa-check"></i><b>0.1</b> Empezando en A-B-C</a>
+<ul>
+<li><a href="preparando-sistema.html#a-instalar-r"><strong>(A)</strong> Instalar R</a></li>
+<li><a href="preparando-sistema.html#b-instalar-rstudio"><strong>(B)</strong> Instalar RStudio</a></li>
+<li><a href="preparando-sistema.html#c-paquetes-para-el-workshop"><strong>(C)</strong> Paquetes para el workshop</a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="preparando-sistema.html"><a href="preparando-sistema.html#algo-más-sobre-la-instalación-de-paquetes"><i class="fa fa-check"></i><b>0.2</b> Algo más sobre la instalación de paquetes</a>
+<ul>
+<li class="chapter" data-level="0.2.1" data-path="preparando-sistema.html"><a href="preparando-sistema.html#cargar-paquetes"><i class="fa fa-check"></i><b>0.2.1</b> Cargar paquetes</a></li>
+<li class="chapter" data-level="0.2.2" data-path="preparando-sistema.html"><a href="preparando-sistema.html#todo-en-uno"><i class="fa fa-check"></i><b>0.2.2</b> Todo en uno</a></li>
+<li class="chapter" data-level="0.2.3" data-path="preparando-sistema.html"><a href="preparando-sistema.html#instalar-paquetes-de-github"><i class="fa fa-check"></i><b>0.2.3</b> Instalar paquetes de Github</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#bibliografía-1"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html"><i class="fa fa-check"></i><b>1</b> Introducción a R y visualización de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#paquetes-para-este-capítulo"><i class="fa fa-check"></i>Paquetes para este capítulo</a></li>
+<li class="chapter" data-level="1.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#introducción-porque-la-visualización-de-datos-es-importante"><i class="fa fa-check"></i><b>1.1</b> Introducción: porque la visualización de datos es importante</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#porque-la-visualización-de-datos-es-importante---ejemplo-del-mundo-real"><i class="fa fa-check"></i><b>1.1.1</b> Porque la visualización de datos es importante - ejemplo del mundo real</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#moraleja-es-importante-mostrar-los-datos-individuales-yo-la-distribución-de-los-datos"><i class="fa fa-check"></i>Moraleja: es importante mostrar los datos individuales y/o la distribución de los datos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#por-qué-r"><i class="fa fa-check"></i><b>1.2</b> Por qué R?</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#bienvenida-al-tidyverse"><i class="fa fa-check"></i><b>1.2.1</b> Bienvenida al tidyverse</a>
+<ul>
+<li class="chapter" data-level="1.2.1.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#tidyverse-vs-base-r"><i class="fa fa-check"></i><b>1.2.1.1</b> Tidyverse vs Base R</a>
+<ul>
+<li class="chapter" data-level="1.2.1.1.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#tidyverse"><i class="fa fa-check"></i><b>1.2.1.1.1</b> Tidyverse</a></li>
+<li class="chapter" data-level="1.2.1.1.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#base-r"><i class="fa fa-check"></i><b>1.2.1.1.2</b> Base-R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.2.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#antes-de-empezar"><i class="fa fa-check"></i><b>1.2.2</b> Antes de empezar</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#r-para-visualización-de-datos"><i class="fa fa-check"></i><b>1.2.3</b> R para visualización de datos</a>
+<ul>
+<li class="chapter" data-level="1.2.3.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#primeros-pasos---con-training-wheels"><i class="fa fa-check"></i><b>1.2.3.1</b> Primeros pasos - con training wheels</a></li>
+<li class="chapter" data-level="1.2.3.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#aprendamos-con-garrick"><i class="fa fa-check"></i><b>1.2.3.2</b> Aprendamos con Garrick</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#visualización-de-datos-con-ggplot2"><i class="fa fa-check"></i><b>1.3</b> Visualización de datos con ggplot2</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#primeros-pasos"><i class="fa fa-check"></i><b>1.3.1</b> Primeros pasos</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#aesthetic-mappings"><i class="fa fa-check"></i><b>1.3.2</b> Aesthetic mappings</a>
+<ul>
+<li class="chapter" data-level="1.3.2.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#color-alpha-size"><i class="fa fa-check"></i><b>1.3.2.1</b> Color, alpha, size</a></li>
+<li class="chapter" data-level="1.3.2.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#shape"><i class="fa fa-check"></i><b>1.3.2.2</b> Shape</a></li>
+<li class="chapter" data-level="1.3.2.3" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#linetype"><i class="fa fa-check"></i><b>1.3.2.3</b> Linetype</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.3" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#geoms"><i class="fa fa-check"></i><b>1.3.3</b> Geoms</a>
+<ul>
+<li class="chapter" data-level="1.3.3.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#geom_point-y-geom_jitter"><i class="fa fa-check"></i><b>1.3.3.1</b> geom_point y geom_jitter</a></li>
+<li class="chapter" data-level="1.3.3.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#geom_smooth"><i class="fa fa-check"></i><b>1.3.3.2</b> geom_smooth</a></li>
+<li class="chapter" data-level="1.3.3.3" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#geom_boxplot-y-geom_violin"><i class="fa fa-check"></i><b>1.3.3.3</b> geom_boxplot y geom_violin</a></li>
+<li class="chapter" data-level="1.3.3.4" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#geom_histogram"><i class="fa fa-check"></i><b>1.3.3.4</b> geom_histogram</a></li>
+<li class="chapter" data-level="1.3.3.5" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#geom_dotplot"><i class="fa fa-check"></i><b>1.3.3.5</b> geom_dotplot</a></li>
+<li class="chapter" data-level="1.3.3.6" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#geom_density"><i class="fa fa-check"></i><b>1.3.3.6</b> geom_density</a></li>
+<li class="chapter" data-level="1.3.3.7" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#geom_density_ridges"><i class="fa fa-check"></i><b>1.3.3.7</b> geom_density_ridges</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.4" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#facets"><i class="fa fa-check"></i><b>1.3.4</b> Facets</a>
+<ul>
+<li class="chapter" data-level="1.3.4.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#facet_grid"><i class="fa fa-check"></i><b>1.3.4.1</b> facet_grid</a></li>
+<li class="chapter" data-level="1.3.4.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#facet_wrap"><i class="fa fa-check"></i><b>1.3.4.2</b> facet_wrap</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.5" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#transformaciones-estadísticas"><i class="fa fa-check"></i><b>1.3.5</b> Transformaciones estadísticas</a>
+<ul>
+<li class="chapter" data-level="1.3.5.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#proporciones"><i class="fa fa-check"></i><b>1.3.5.1</b> Proporciones</a></li>
+<li class="chapter" data-level="1.3.5.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#stat_summary"><i class="fa fa-check"></i><b>1.3.5.2</b> stat_summary</a></li>
+<li class="chapter" data-level="1.3.5.3" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#promedios-por-grupo"><i class="fa fa-check"></i><b>1.3.5.3</b> Promedios por grupo</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3.6" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#personalización-de-gráficas"><i class="fa fa-check"></i><b>1.3.6</b> Personalización de gráficas</a>
+<ul>
+<li class="chapter" data-level="1.3.6.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#coords"><i class="fa fa-check"></i><b>1.3.6.1</b> Coords</a></li>
+<li class="chapter" data-level="1.3.6.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#scales"><i class="fa fa-check"></i><b>1.3.6.2</b> Scales</a></li>
+<li class="chapter" data-level="1.3.6.3" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#colors-and-fill-scales"><i class="fa fa-check"></i><b>1.3.6.3</b> Colors and fill scales</a></li>
+<li class="chapter" data-level="1.3.6.4" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#combinando-gráficas"><i class="fa fa-check"></i><b>1.3.6.4</b> Combinando gráficas</a></li>
+<li class="chapter" data-level="1.3.6.5" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#usando-estilos"><i class="fa fa-check"></i><b>1.3.6.5</b> Usando estilos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#visualización-interactiva"><i class="fa fa-check"></i><b>1.4</b> Visualización interactiva</a>
+<ul>
+<li class="chapter" data-level="1.4.0.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#gráficas-interactivas"><i class="fa fa-check"></i><b>1.4.0.1</b> Gráficas interactivas</a></li>
+<li class="chapter" data-level="1.4.0.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#animando-gráficas"><i class="fa fa-check"></i><b>1.4.0.2</b> Animando gráficas</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#ejercicios"><i class="fa fa-check"></i><b>1.5</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#ejercicios-geoms-colores"><i class="fa fa-check"></i><b>1.5.1</b> Ejercicios con Geoms, colores…</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#sintaxis-aes"><i class="fa fa-check"></i><b>1.5.2</b> Sintaxis aes()</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#ejercicios-temas"><i class="fa fa-check"></i><b>1.5.3</b> Temas</a></li>
+<li class="chapter" data-level="1.5.4" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#ejercicios-transformaciones-estadisticas"><i class="fa fa-check"></i><b>1.5.4</b> Transformaciones estadísticas</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#bibliografía-2"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html"><i class="fa fa-check"></i><b>2</b> Preparación y transformación de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#paquetes-para-este-capítulo-1"><i class="fa fa-check"></i>Paquetes para este capítulo</a></li>
+<li class="chapter" data-level="2.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#importar-y-exportar-datos"><i class="fa fa-check"></i><b>2.1</b> Importar y exportar datos</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#importar-un-solo-archivo"><i class="fa fa-check"></i><b>2.1.1</b> Importar un solo archivo</a>
+<ul>
+<li class="chapter" data-level="2.1.1.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#archivos-csv"><i class="fa fa-check"></i><b>2.1.1.1</b> Archivos CSV</a></li>
+<li class="chapter" data-level="2.1.1.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#otros-tipos-de-archivos"><i class="fa fa-check"></i><b>2.1.1.2</b> Otros tipos de archivos</a>
+<ul>
+<li class="chapter" data-level="2.1.1.2.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#archivos-excel"><i class="fa fa-check"></i><b>2.1.1.2.1</b> Archivos excel</a></li>
+<li class="chapter" data-level="2.1.1.2.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#archivos-spss"><i class="fa fa-check"></i><b>2.1.1.2.2</b> Archivos SPSS</a></li>
+<li class="chapter" data-level="2.1.1.2.3" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#archivos-libreoffice"><i class="fa fa-check"></i><b>2.1.1.2.3</b> Archivos Libreoffice</a></li>
+<li class="chapter" data-level="2.1.1.2.4" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#google-sheets"><i class="fa fa-check"></i><b>2.1.1.2.4</b> Google sheets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2.1.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#ejercicios---importar-datos"><i class="fa fa-check"></i><b>2.1.2</b> Ejercicios - Importar datos</a></li>
+<li class="chapter" data-level="2.1.3" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#importar-múltiples-archivos"><i class="fa fa-check"></i><b>2.1.3</b> Importar múltiples archivos</a>
+<ul>
+<li class="chapter" data-level="2.1.3.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#incluir-nombres-de-archivos"><i class="fa fa-check"></i><b>2.1.3.1</b> Incluir nombres de archivos</a></li>
+<li class="chapter" data-level="2.1.3.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#con-parametros"><i class="fa fa-check"></i><b>2.1.3.2</b> Con parametros</a></li>
+</ul></li>
+<li class="chapter" data-level="2.1.4" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#ejercicios---importar-múltiples-archivos"><i class="fa fa-check"></i><b>2.1.4</b> Ejercicios - Importar múltiples archivos</a></li>
+<li class="chapter" data-level="2.1.5" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#exportar-datos"><i class="fa fa-check"></i><b>2.1.5</b> Exportar datos</a>
+<ul>
+<li class="chapter" data-level="2.1.5.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#archivos-csv-1"><i class="fa fa-check"></i><b>2.1.5.1</b> Archivos CSV</a></li>
+<li class="chapter" data-level="2.1.5.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#otros-archivos"><i class="fa fa-check"></i><b>2.1.5.2</b> Otros Archivos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#preparación-y-transformación-de-datos-1"><i class="fa fa-check"></i><b>2.2</b> Preparación y transformación de datos</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#tidy-data"><i class="fa fa-check"></i><b>2.2.1</b> Tidy data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#verbos-dplyr"><i class="fa fa-check"></i><b>2.2.2</b> Verbos dplyr</a>
+<ul>
+<li class="chapter" data-level="" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#tabla-resumen-dplyr"><i class="fa fa-check"></i>Tabla resumen dplyr</a></li>
+<li class="chapter" data-level="2.2.2.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#filtrar-y-ordenar-filas"><i class="fa fa-check"></i><b>2.2.2.1</b> Filtrar y ordenar filas</a></li>
+<li class="chapter" data-level="2.2.2.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#seleccionar-ordenar-y-renombrar-columnas"><i class="fa fa-check"></i><b>2.2.2.2</b> Seleccionar, ordenar y renombrar columnas</a>
+<ul>
+<li class="chapter" data-level="2.2.2.2.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#selección-avanzada-con-select_helpers"><i class="fa fa-check"></i><b>2.2.2.2.1</b> Selección avanzada con select_helpers()</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.2.3" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#modificar-y-añadir-variables"><i class="fa fa-check"></i><b>2.2.2.3</b> Modificar y añadir variables</a></li>
+<li class="chapter" data-level="2.2.2.4" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#resúmenes-agrupados"><i class="fa fa-check"></i><b>2.2.2.4</b> Resúmenes agrupados</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.3" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#ejercicios---verbos-dplyr"><i class="fa fa-check"></i><b>2.2.3</b> Ejercicios - verbos dplyr</a></li>
+<li class="chapter" data-level="2.2.4" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#verbos-avanzados-y-otras-criaturas-indómitas"><i class="fa fa-check"></i><b>2.2.4</b> Verbos avanzados y otras criaturas indómitas</a>
+<ul>
+<li class="chapter" data-level="2.2.4.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#wide-to-long"><i class="fa fa-check"></i><b>2.2.4.1</b> Wide to long</a></li>
+<li class="chapter" data-level="2.2.4.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#long-to-wide"><i class="fa fa-check"></i><b>2.2.4.2</b> Long to wide</a>
+<ul>
+<li class="chapter" data-level="2.2.4.2.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#para-que-sirve-tener-los-datos-en-formato-long"><i class="fa fa-check"></i><b>2.2.4.2.1</b> ¿Para que sirve tener los datos en formato long?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.4.3" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#separate-omit-ifelse-case_when-tipos-de-variables"><i class="fa fa-check"></i><b>2.2.4.3</b> Separate, omit, ifelse, case_when, tipos de variables…</a></li>
+<li class="chapter" data-level="2.2.4.4" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#regular-expressions"><i class="fa fa-check"></i><b>2.2.4.4</b> Regular expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.5" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#ejercicios---verbos-avanzados-dplyr"><i class="fa fa-check"></i><b>2.2.5</b> Ejercicios - verbos avanzados dplyr</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#combinar-bases-de-datos"><i class="fa fa-check"></i><b>2.3</b> Combinar bases de datos</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#bind"><i class="fa fa-check"></i><b>2.3.1</b> Bind</a></li>
+<li class="chapter" data-level="2.3.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#joins"><i class="fa fa-check"></i><b>2.3.2</b> Joins</a>
+<ul>
+<li class="chapter" data-level="" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#tipos-de-join"><i class="fa fa-check"></i>Tipos de Join</a></li>
+<li class="chapter" data-level="2.3.2.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#mutating-joins"><i class="fa fa-check"></i><b>2.3.2.1</b> Mutating joins</a>
+<ul>
+<li class="chapter" data-level="2.3.2.1.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#inner-join"><i class="fa fa-check"></i><b>2.3.2.1.1</b> Inner join</a></li>
+<li class="chapter" data-level="2.3.2.1.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#left-join"><i class="fa fa-check"></i><b>2.3.2.1.2</b> Left join</a></li>
+<li class="chapter" data-level="2.3.2.1.3" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#full-join"><i class="fa fa-check"></i><b>2.3.2.1.3</b> Full join</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3.2.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#filtering-joins"><i class="fa fa-check"></i><b>2.3.2.2</b> Filtering joins</a>
+<ul>
+<li class="chapter" data-level="2.3.2.2.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#anti-join"><i class="fa fa-check"></i><b>2.3.2.2.1</b> Anti join</a></li>
+<li class="chapter" data-level="2.3.2.2.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#semi-join"><i class="fa fa-check"></i><b>2.3.2.2.2</b> Semi join</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3.2.3" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#nesting-joins"><i class="fa fa-check"></i><b>2.3.2.3</b> Nesting joins</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3.3" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#ejercicios-joins"><i class="fa fa-check"></i><b>2.3.3</b> Ejercicios JOINS</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#más-allá-de-la-manipulación"><i class="fa fa-check"></i><b>2.4</b> Más allá de la manipulación</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#fast-and-frugal-trees"><i class="fa fa-check"></i><b>2.4.1</b> Fast and Frugal trees</a></li>
+<li class="chapter" data-level="2.4.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#machine-learning"><i class="fa fa-check"></i><b>2.4.2</b> Machine learning</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#datasets-interesantes"><i class="fa fa-check"></i><b>2.5</b> Datasets interesantes</a></li>
+<li class="chapter" data-level="" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#bibliografía-3"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html"><i class="fa fa-check"></i><b>3</b> Análisis de datos exploratorio</a>
+<ul>
+<li class="chapter" data-level="" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#paquetes-para-este-capítulo-2"><i class="fa fa-check"></i>Paquetes para este capítulo</a></li>
+<li class="chapter" data-level="3.1" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#visualizando-distribuciones"><i class="fa fa-check"></i><b>3.1</b> Visualizando distribuciones</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#variables-categóricas"><i class="fa fa-check"></i><b>3.1.1</b> Variables categóricas</a></li>
+<li class="chapter" data-level="3.1.2" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#variables-continuas"><i class="fa fa-check"></i><b>3.1.2</b> Variables continuas</a></li>
+<li class="chapter" data-level="3.1.3" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#ejercicio-variables-individuales"><i class="fa fa-check"></i><b>3.1.3</b> Ejercicio variables individuales</a></li>
+<li class="chapter" data-level="3.1.4" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#visualizando-datasets-completos"><i class="fa fa-check"></i><b>3.1.4</b> Visualizando datasets completos</a>
+<ul>
+<li class="chapter" data-level="3.1.4.1" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#inspectdf"><i class="fa fa-check"></i><b>3.1.4.1</b> inspectdf</a></li>
+<li class="chapter" data-level="3.1.4.2" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#datos-perdidos"><i class="fa fa-check"></i><b>3.1.4.2</b> Datos perdidos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#covariación"><i class="fa fa-check"></i><b>3.2</b> Covariación</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#variable-categórica-y-continua"><i class="fa fa-check"></i><b>3.2.1</b> Variable categórica y continua</a></li>
+<li class="chapter" data-level="3.2.2" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#ejercicio-covariacion-1"><i class="fa fa-check"></i><b>3.2.2</b> Ejercicio covariacion 1</a></li>
+<li class="chapter" data-level="3.2.3" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#dos-variables-categóricas"><i class="fa fa-check"></i><b>3.2.3</b> Dos variables categóricas</a></li>
+<li class="chapter" data-level="3.2.4" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#dos-variables-continuas"><i class="fa fa-check"></i><b>3.2.4</b> Dos variables continuas</a></li>
+<li class="chapter" data-level="3.2.5" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#ejercicio-covariación-2"><i class="fa fa-check"></i><b>3.2.5</b> Ejercicio covariación 2</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#ejercicios-finales"><i class="fa fa-check"></i><b>3.3</b> Ejercicios finales</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#ejercicio-exploración-base-nueva"><i class="fa fa-check"></i><b>3.3.1</b> Ejercicio exploración base nueva</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="análisis-de-datos-exploratorio.html"><a href="análisis-de-datos-exploratorio.html#bibliografía-4"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><i class="fa fa-check"></i><b>4</b> Trabajo con RMarkdown para reportes reproducibles</a>
+<ul>
+<li class="chapter" data-level="" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#dependencias"><i class="fa fa-check"></i>Dependencias</a></li>
+<li class="chapter" data-level="4.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#que-es-la-reproducibilidad"><i class="fa fa-check"></i><b>4.1</b> Que es la reproducibilidad</a></li>
+<li class="chapter" data-level="4.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#proyectos-de-r-studio"><i class="fa fa-check"></i><b>4.2</b> Proyectos de R-Studio</a></li>
+<li class="chapter" data-level="4.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#control-de-cambios-con-git-y-github"><i class="fa fa-check"></i><b>4.3</b> Control de cambios con Git y Github</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#github"><i class="fa fa-check"></i><b>4.3.1</b> Github</a>
+<ul>
+<li class="chapter" data-level="4.3.1.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#seguir-repositorios"><i class="fa fa-check"></i><b>4.3.1.1</b> Seguir repositorios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#clonar-un-repositorio-existente"><i class="fa fa-check"></i><b>4.3.2</b> Clonar un repositorio existente</a></li>
+<li class="chapter" data-level="4.3.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#crear-git-y-asociar-a-github-repo"><i class="fa fa-check"></i><b>4.3.3</b> Crear Git y asociar a Github repo</a>
+<ul>
+<li class="chapter" data-level="" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#versión-simple"><i class="fa fa-check"></i>Versión simple</a></li>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-2"></a></li>
+<li class="chapter" data-level="" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#usando-el-terminal"><i class="fa fa-check"></i>Usando el terminal</a></li>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-3"></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3.4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-git-github"><i class="fa fa-check"></i><b>4.3.4</b> Ejercicio Git-Github</a></li>
+<li class="chapter" data-level="4.3.5" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#workflow"><i class="fa fa-check"></i><b>4.3.5</b> Workflow</a>
+<ul>
+<li class="chapter" data-level="4.3.5.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#modelo-básico"><i class="fa fa-check"></i><b>4.3.5.1</b> Modelo básico</a>
+<ul>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#usando-el-entorno-gráfico-o-el-terminal">Usando el entorno gráfico, o el <code>terminal</code></a></li>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-4"></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3.5.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#pull-request-en-3-1-sencillos-pasos"><i class="fa fa-check"></i><b>4.3.5.2</b> Pull request en 3 + 1 sencillos pasos</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3.6" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-nuestro-primer-commit"><i class="fa fa-check"></i><b>4.3.6</b> Ejercicio Nuestro primer commit</a></li>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-5"></a>
+<ul>
+<li class="chapter" data-level="4.3.6.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#feature-branch"><i class="fa fa-check"></i><b>4.3.6.1</b> Feature branch</a></li>
+<li class="chapter" data-level="4.3.6.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#stash"><i class="fa fa-check"></i><b>4.3.6.2</b> Stash</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#rmarkdown-openscience-y-análisis-reproducibles"><i class="fa fa-check"></i><b>4.4</b> RMarkdown, openscience y análisis reproducibles</a></li>
+<li class="chapter" data-level="4.5" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#sintaxis-chunks-de-código-tipos-de-archivo"><i class="fa fa-check"></i><b>4.5</b> Sintaxis, chunks de código, tipos de archivo</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cabecera-yaml"><i class="fa fa-check"></i><b>4.5.1</b> Cabecera YAML</a></li>
+<li class="chapter" data-level="4.5.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#rmarkdown"><i class="fa fa-check"></i><b>4.5.2</b> Rmarkdown</a></li>
+<li class="chapter" data-level="4.5.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#chunks-de-código"><i class="fa fa-check"></i><b>4.5.3</b> Chunks de código</a></li>
+<li class="chapter" data-level="4.5.4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-básico-rmarkdown"><i class="fa fa-check"></i><b>4.5.4</b> Ejercicio básico RMarkdown</a></li>
+<li class="chapter" data-level="4.5.5" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#herramientas-básicas-para-investigadorases"><i class="fa fa-check"></i><b>4.5.5</b> Herramientas básicas para investigadoras/es</a>
+<ul>
+<li class="chapter" data-level="4.5.5.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#descriptivos"><i class="fa fa-check"></i><b>4.5.5.1</b> Descriptivos</a></li>
+<li class="chapter" data-level="4.5.5.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#correlaciones"><i class="fa fa-check"></i><b>4.5.5.2</b> Correlaciones</a>
+<ul>
+<li class="chapter" data-level="4.5.5.2.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#test-de-correlación"><i class="fa fa-check"></i><b>4.5.5.2.1</b> Test de correlación</a></li>
+<li class="chapter" data-level="4.5.5.2.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#tabla-de-correlaciones"><i class="fa fa-check"></i><b>4.5.5.2.2</b> Tabla de correlaciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5.5.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#lm"><i class="fa fa-check"></i><b>4.5.5.3</b> LM</a></li>
+<li class="chapter" data-level="4.5.5.4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#anova"><i class="fa fa-check"></i><b>4.5.5.4</b> Anova</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5.6" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#otros"><i class="fa fa-check"></i><b>4.5.6</b> Otros</a>
+<ul>
+<li class="chapter" data-level="4.5.6.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#usar-bibliografía"><i class="fa fa-check"></i><b>4.5.6.1</b> Usar bibliografía</a></li>
+<li class="chapter" data-level="4.5.6.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#citar-los-paquetes-que-usamos"><i class="fa fa-check"></i><b>4.5.6.2</b> Citar los paquetes que usamos</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5.7" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-avanzado"><i class="fa fa-check"></i><b>4.5.7</b> Ejercicio avanzado</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#de-los-datos-al-reporte-final-una-historia-de-amor-con-r"><i class="fa fa-check"></i><b>4.6</b> De los datos al reporte final: Una historia de amor con R</a></li>
+<li class="chapter" data-level="4.7" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#avanzado"><i class="fa fa-check"></i><b>4.7</b> Avanzado</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#manejo-de-dependencias"><i class="fa fa-check"></i><b>4.7.1</b> Manejo de dependencias</a></li>
+<li class="chapter" data-level="4.7.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#alternativas-para-integrar-manejo-de-dependencias-y-control-de-cambios"><i class="fa fa-check"></i><b>4.7.2</b> Alternativas para integrar manejo de dependencias y control de cambios</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#mas-allá-de-rmarkdown"><i class="fa fa-check"></i><b>4.8</b> Mas allá de Rmarkdown</a></li>
+<li class="chapter" data-level="4.9" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#varios"><i class="fa fa-check"></i><b>4.9</b> Varios</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#shortcuts"><i class="fa fa-check"></i><b>4.9.1</b> Shortcuts!</a></li>
+<li class="chapter" data-level="4.9.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#estilo"><i class="fa fa-check"></i><b>4.9.2</b> Estilo</a></li>
+<li class="chapter" data-level="4.9.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#algunos-paquetes-interesantes"><i class="fa fa-check"></i><b>4.9.3</b> Algunos paquetes interesantes</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#bibliografía-5"><i class="fa fa-check"></i>Bibliografía</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="reporte-final.html"><a href="reporte-final.html"><i class="fa fa-check"></i><b>5</b> Reporte final</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="reporte-final.html"><a href="reporte-final.html#base-de-datos-a-usar"><i class="fa fa-check"></i><b>5.1</b> Base de datos a usar</a></li>
+<li class="chapter" data-level="5.2" data-path="reporte-final.html"><a href="reporte-final.html#paso-a-paso"><i class="fa fa-check"></i><b>5.2</b> Paso a paso</a></li>
+<li class="chapter" data-level="5.3" data-path="reporte-final.html"><a href="reporte-final.html#hint"><i class="fa fa-check"></i><b>5.3</b> Hint</a></li>
+<li class="chapter" data-level="5.4" data-path="reporte-final.html"><a href="reporte-final.html#nota-final"><i class="fa fa-check"></i><b>5.4</b> Nota final</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html"><i class="fa fa-check"></i>Paquetes usados</a>
+<ul>
+<li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html#references"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R para preparación y visualización de datos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="reporte-final" class="section level1" number="5">
+<h1><span class="header-section-number">Capítulo 5</span> Reporte final</h1>
+<p>El objetivo <strong>evaluable</strong> de este workshop es escribir CONJUNTAMENTE un mini-paper (tan sólo título, abstract, método y resultados) en inglés, en formato APA usando {papaja} o algún formato de {rticles}.</p>
+<div id="base-de-datos-a-usar" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Base de datos a usar</h2>
+<div class="figure">
+<img src="data/images/research-parasite.png" alt="" />
+<p class="caption">SOURCE: <a href="https://twitter.com/richarddmorey/status/690680901760606209" class="uri">https://twitter.com/richarddmorey/status/690680901760606209</a></p>
+</div>
+<p>Usaremos la base de datos <a href="https://osf.io/qn9a2/" class="uri">https://osf.io/qn9a2/</a> asociada al paper <a href="https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0218821&amp;type=printable"><em>Cancer screening risk literacy of physicians in
+training: An experimental study</em></a> de Petrova et al.</p>
+<p>En ese paper podréis ver que hay 1 experimento. Vuestra tarea será crear conjuntamente un paper en Rmarkdown (PDF) donde hagáis un <em>reanálisis de los datos</em> de ese paper. Cada uno de vosotros elegirá un subconjunto de variables y un análisis, e incluirá un “Experimento” dentro del paper conjunto, mostrando y describiendo sus resultados.</p>
+</div>
+<div id="paso-a-paso" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Paso a paso</h2>
+<p>Tendréis que seguir los siguientes pasos para completar el trabajo:</p>
+<ul>
+<li><p>Paso 1: Crear un Repositorio en <strong>Github</strong></p></li>
+<li><p>Paso 2: Clonar el repositorio localmente en un computador</p></li>
+<li><p>Paso 3: Crear una rama development y trabajar <strong>conjuntamente</strong> en la preparación de datos (importar, renombrar, seleccionar variables…)</p></li>
+<li><p>Paso 4: Usando {papaja}, o alguna de las plantillas de {rticles} cread juntos (en un solo computador) un documento Rmd e incluid la estructura (secciones) del paper</p>
+<ul>
+<li>Title</li>
+<li>Abstract: describir brevemente que se hace</li>
+<li><del>Introduction</del></li>
+<li>Materials and Methods
+<ul>
+<li>Participants</li>
+<li>Materials</li>
+</ul></li>
+<li>Results
+<ul>
+<li>Experiment 1</li>
+<li>Experiment 2</li>
+<li>Experiment 3</li>
+</ul></li>
+<li><del>Discussion</del></li>
+</ul></li>
+<li><p>Paso 5: Cada uno clonara el repositorio localmente en su computador, creará su <strong>rama propia</strong> y, en la sección adecuada (e.g. Experiment 2), completará las tareas de abajo (commit y push cambios a la <strong>rama propia</strong> de Github al finalizar). <strong>NO borrar la rama propia de Github</strong>:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Describir el análisis realizado</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Tabla APA con descriptivos de las variables seleccionadas</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Descripción de resultados en formato APA</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Tabla de resultados APA</li>
+</ol></li>
+<li><ol start="5" style="list-style-type: decimal">
+<li>Plot APA que represente adecuadamente estos resultados</li>
+</ol></li>
+</ul></li>
+<li><p>Paso 6: Combinar los cambios de las 3 ramas individuales en development</p></li>
+<li><p>Paso 7: Cada uno debería revisar el paper final, corregir fallos y combinarlos en la rama development</p></li>
+<li><p>Paso 8: Mover los cambios a master y celebrar!</p></li>
+</ul>
+</div>
+<div id="hint" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Hint</h2>
+<p>En la carpeta <em>Data and results</em> de <a href="https://osf.io/qn9a2/" class="uri">https://osf.io/qn9a2/</a> hay varios archivos que os ayudarán a entender cuales son las variables de interés.</p>
+<ul>
+<li>Analysis script R1.sps: script de SPSS usado para los análisis del paper</li>
+<li>Variables R1.sps: descripción de variables<br />
+</li>
+<li>…</li>
+</ul>
+<p>Es muy recomendable ubicar las variables de interés, y renombrarlas para que sean fácilmente reconocibles.</p>
+<!-- ## Asignación de tareas   -->
+<!-- ```{r asignacion-tareas} -->
+<!-- set.seed(20190705) -->
+<!-- tareas = c("Experimento 1", "Experimento 2", "Experimento 3") -->
+<!-- personas = c("Seyhun", "Daniel", "Nicolas") -->
+<!-- x = sample(personas, 3) -->
+<!-- print(paste(tareas, x)) -->
+<!-- ``` -->
+</div>
+<div id="nota-final" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Nota final</h2>
+<p>La nota final se definirá de la siguiente manera:</p>
+<ul>
+<li>Paper final: 60%<br />
+</li>
+<li>Tarea individual: 40%</li>
+</ul>
+<p>El formato, el estilo, y los acabados tienen que ser con el estándar de calidad esperado en un paper científico.</p>
+<hr />
+<p>Se evaluará específicamente lo siguiente:</p>
+<ul>
+<li><p>Paper final <strong>(60% total)</strong>:</p>
+<ul>
+<li><p><strong>(90%)</strong> El paper tiene que ser reproducible: El profesor descargará el repositorio completo en un computador sin ninguna librería instalada y kniteara el archivo .Rmd del paper. La expectativa es que todo funcione, y que el paper que se cree automáticamente sea idéntico al entregado por los alumnos.</p></li>
+<li><p><strong>(10%)</strong> Calidad general de la redacción, ausencia de errores gramaticales y ortográficos graves.</p></li>
+</ul></li>
+<li><p>Tarea individual <strong>(40% total)</strong>:</p>
+<ul>
+<li><p><strong>(20%)</strong> Describir el análisis realizado</p></li>
+<li><p><strong>(20%)</strong> Tabla APA con descriptivos de las variables seleccionadas</p></li>
+<li><p><strong>(20%)</strong> Descripción de resultados en formato APA</p></li>
+<li><p><strong>(20%)</strong> Tabla de resultados APA</p></li>
+<li><p><strong>(20%)</strong> Plot APA que represente adecuadamente estos resultados</p></li>
+</ul></li>
+</ul>
+<p>La historia completa de commits de todas las ramas (master, development, y las 3 individuales) deberá estar disponible.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="paquetes-usados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": {},
+"google": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
