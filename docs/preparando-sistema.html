@@ -10,10 +10,10 @@
 
   <meta property="og:title" content="Preparando nuestro sistema | R para preparación y visualización de datos" />
   <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html" />
   
   
-  
-  
+  <meta name="github-repo" content="gorkang/R_preparacion_visualizacion_datos" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Preparando nuestro sistema | R para preparación y visualización de datos" />
@@ -467,11 +467,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además de algunas librerías. <strong>Para tener un sistema funcional, completa los pasos A, B y C</strong>. Si ya tienes R y Rstudio instalados (recientemente), puedes pasar directamente al paso <strong>(C)</strong>.</p>
 <div id="a-instalar-r" class="section level3 unnumbered">
 <h3><strong>(A)</strong> Instalar R</h3>
-<p><a href="https://www.r-project.org/">R</a>, es un lenguaje de programación especializado en el computación estadística y visualización de datos. Es recomendable tener instalada <a href="http://dirichlet.mat.puc.cl/">la última versión de R</a>. Puedes usar uno de los enlaces siguientes:</p>
+<p><a href="https://www.r-project.org/">R</a>, es un lenguaje de programación especializado en la computación estadística y visualización de datos. Es recomendable tener instalada <a href="http://dirichlet.mat.puc.cl/">la última versión de R</a>. Puedes usar uno de los enlaces siguientes:</p>
 <ul>
-<li><strong>Windows</strong>: <a href="https://cran.r-project.org/bin/windows/base/">Descargar e instalar R para Windows</a></li>
-<li><strong>Mac</strong>: <a href="https://cran.r-project.org/bin/macosx/">Descargar e instalar R para Mac</a></li>
-<li><strong>Ubuntu Linux</strong>: <a href="https://cran.r-project.org/bin/linux/debian/">más detalles en la web de R</a>. <strong>En un terminal</strong>:
+<li><p><strong>Windows</strong>: <a href="https://cran.r-project.org/bin/windows/base/">Descargar e instalar R para Windows</a></p></li>
+<li><p><strong>Mac</strong>: <a href="https://cran.r-project.org/bin/macosx/">Descargar e instalar R para Mac</a></p></li>
+<li><p><strong>Ubuntu Linux</strong>: <a href="https://cran.r-project.org/bin/linux/debian/">más detalles en la web de R</a>. <strong>En un terminal</strong>:</p>
 <ol style="list-style-type: decimal">
 <li><code>sudo apt-get install r-base</code></li>
 </ol></li>
@@ -484,8 +484,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="http://www.rstudio.com/download">Descargar e instalar RStudio</a>.</li>
 <li>Una vez descargado e instalado, <strong>abre</strong> RStudio. Deberías ver algo parecido a lo siguiente:</li>
 </ul>
-<p><img src="data/images/empezando.png" width="50%" />
-<!-- ![](/home/emrys/gorkang@gmail.com/DOCENCIA/UAI/2019/2019-1 Seminario metodologico R/R_preparacion_visualizacion_datos/data/empezando.png)   --></p>
+<p><img src="data/images/empezando.png" width="50%" /></p>
 </div>
 <div id="c-paquetes-para-el-workshop" class="section level3 unnumbered">
 <h3><strong>(C)</strong> Paquetes para el workshop</h3>
@@ -512,9 +511,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Una vez instalado un paquete, no es necesario volver hacerlo, a menos que reinstales R.</p>
 <div id="cargar-paquetes" class="section level3" number="0.2.1">
 <h3><span class="header-section-number">0.2.1</span> Cargar paquetes</h3>
-<p>Las funciones, datos y documentación dentro de nuestros paquetes no podrán ser utilizadas hasta que se carguen en R (en realidad también pueden ser llamadas usando su referencia absoluta <code>::</code>, por ejemplo: <code>dplyr::tibble(columna = 1)</code>. La estructura de lo anterior es: <code>nombre_paquete::nombre_de_funcion(parametros)</code>).</p>
-<p>Una vez instalados, para cargar los paquetes se usa la función <code>library()</code>:</p>
+<p>Las funciones, datos y documentación dentro de nuestros paquetes no podrán ser utilizadas hasta que se carguen en R. Una vez instalados, para cargar los paquetes se usa la función <code>library()</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="preparando-sistema.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)  </span></code></pre></div>
+<p>En realidad las funciones también pueden ser llamadas usando su referencia absoluta <code>::</code>, sin necesidad de cargarlas antes. Por ejemplo: <code>dplyr::tibble(columna = 1)</code>. En general: <code>nombre_paquete::nombre_de_funcion(parametros)</code>).</p>
 </div>
 <div id="todo-en-uno" class="section level3" number="0.2.2">
 <h3><span class="header-section-number">0.2.2</span> Todo en uno</h3>

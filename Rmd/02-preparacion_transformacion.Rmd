@@ -220,7 +220,12 @@ full
 ### Ejercicios - Importar múltiples archivos {.ejercicio}
 
 
-1. Cuando más arriba importamos los archivos que están en la carpeta `data/files/02-CSVs`, ¿qué archivos importamos exáctamente? ¿Ves algún problema en lo que hicimos? El resultado final deberia ser así:      
+1. Cuando más arriba importamos los archivos que están en la carpeta `data/files/02-CSVs`:  
+
+- ¿Qué archivos importamos exáctamente?  
+- <details><summary>¿Ves algún problema en lo que hicimos?![](data/images/hint.png)</summary><span style="color: orange;">Revisa el número de filas y la variable `files`.</span></details>  
+
+El resultado final deberia ser así:  
 
 
 ```{r ejercicios-importar-multiples-1, echo=FALSE}
@@ -344,7 +349,7 @@ ggplot(table1, aes(as.factor(year), cases)) +
   geom_point(aes(colour = country))
 
 ```
-    
+
     
 ### Verbos dplyr
 

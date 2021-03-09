@@ -16,7 +16,7 @@ if (!require('ggridges')) install.packages('ggridges'); library('ggridges')
 if (!require('hrbrthemes')) install.packages('hrbrthemes'); library('hrbrthemes')
 if (!require('plotly')) install.packages('plotly'); library('plotly')
 if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
-# if (!require('gganimate')) devtools::install_github('thomasp85/gganimate'); library('gganimate')
+if (!require('gganimate')) install.packages('gganimate'); library('gganimate')
 
 ```  
 
@@ -48,14 +48,14 @@ hipergeometric_formula <- function(temas_totales = 80,
 
   temas_NO_estudiados = temas_totales - temas_estudiados # Temas NO estudiados
 
-  if(temas_estudiados > temas_totales) {
+  if (temas_estudiados > temas_totales) {
     NA
   } else {
     sum(
       ((factorial(temas_estudiados) / (factorial(temas_estudiados_salen) * (factorial(temas_estudiados - temas_estudiados_salen)))) *
          (factorial(temas_NO_estudiados) / ((factorial(temas_seleccionados - temas_estudiados_salen)) * (factorial(temas_NO_estudiados - (temas_seleccionados - temas_estudiados_salen))))))
       /
-      (factorial(temas_estudiados + temas_NO_estudiados) / (factorial(temas_seleccionados) * factorial(temas_estudiados + temas_NO_estudiados-temas_seleccionados))),
+      (factorial(temas_estudiados + temas_NO_estudiados) / (factorial(temas_seleccionados) * factorial(temas_estudiados + temas_NO_estudiados - temas_seleccionados))),
       na.rm = TRUE)
   }
 
@@ -1093,7 +1093,7 @@ plotly::ggplotly(
 
 #### Animando gráficas
 
-```{r animando-graficas, fig.height=4, fig.width=8}
+```{r animando-graficas, fig.height=4, fig.width=8, eval=FALSE}
 
 if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
 if (!require('gganimate')) devtools::install_github('thomasp85/gganimate'); library('gganimate')
@@ -1110,9 +1110,12 @@ p = ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
   transition_time(year) +
   ease_aes('linear')
 
-animate(p, renderer = ffmpeg_renderer())
+  animate(p, renderer = ffmpeg_renderer(), height = 6, width = 10, units = "in", res = 300)
+# anim_save("name_file.mp4", animation = last_animation())
 
 ```
+
+![](data/images/gganimate.mp4){width="100%"}
 
 
 ## Ejercicios  

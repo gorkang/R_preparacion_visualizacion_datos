@@ -10,10 +10,10 @@
 
   <meta property="og:title" content="Capítulo 2 Preparación y transformación de datos | R para preparación y visualización de datos" />
   <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html" />
   
   
-  
-  
+  <meta name="github-repo" content="gorkang/R_preparacion_visualizacion_datos" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Capítulo 2 Preparación y transformación de datos | R para preparación y visualización de datos" />
@@ -690,8 +690,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ejercicios---importar-múltiples-archivos" class="section level3 ejercicio" number="2.1.4">
 <h3><span class="header-section-number">2.1.4</span> Ejercicios - Importar múltiples archivos</h3>
 <ol style="list-style-type: decimal">
-<li>Cuando más arriba importamos los archivos que están en la carpeta <code>data/files/02-CSVs</code>, ¿qué archivos importamos exáctamente? ¿Ves algún problema en lo que hicimos? El resultado final deberia ser así:</li>
+<li>Cuando más arriba importamos los archivos que están en la carpeta <code>data/files/02-CSVs</code>:</li>
 </ol>
+<ul>
+<li>¿Qué archivos importamos exáctamente?<br />
+</li>
+<li><details>
+<summary>
+¿Ves algún problema en lo que hicimos?<img src="data/images/hint.png" />
+</summary>
+<span style="color: orange;">Revisa el número de filas y la variable <code>files</code>.</span>
+</details></li>
+</ul>
+<p>El resultado final deberia ser así:</p>
 <pre><code>## # A tibble: 1,200 x 9
 ##    Sex   Priming    trialN Block Adjective  Valence  Answer Arrow    rT
 ##    &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
