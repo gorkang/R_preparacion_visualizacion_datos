@@ -42,8 +42,10 @@ Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes qu
 
 ```{r install_workshop_packages, message=FALSE, warning=FALSE}
 
-list_of_packages = c("bookdown", "corrplot", "cowplot", "easystats", "esquisse", "gapminder", "ggpubr", "ggridges", "ggthemes", "hrbrthemes", "inspectdf", "janitor", "knitr", "plotly",  
-                     "psych", "remotes", "stringr", "tictoc", "tidyverse", "usethis", "yarrr")  
+list_of_packages = c("bookdown", "corrplot", "cowplot", "easystats", "esquisse", "gapminder",
+                     "ggpubr", "gganimate", "ggridges", "ggthemes", "hrbrthemes", "inspectdf",
+                     "janitor", "knitr", "plotly", "psych", "remotes", "stringr", "tictoc",
+                     "tidyverse", "usethis", "yarrr")  
 new_packages <- list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
 if (length(new_packages)) install.packages(new_packages, dependencies = TRUE)  
 
@@ -53,9 +55,9 @@ if (length(new_packages)) install.packages(new_packages, dependencies = TRUE)
 
 ## Algo más sobre la instalación de paquetes
 
-Los paquetes de R son una colección de funciones, datos y documentación que amplían las capacidades básicas de R. En 2019 el numero de paquetes en [R-cran](https://cran.r-project.org/web/packages/index.html) ha superado los 14,000 ([ver este buscador de paquetes](https://mran.microsoft.com/packages)).
+Los paquetes de R son una colección de funciones, datos y documentación que amplían las capacidades básicas de R.  
 
-Gran parte de las funciones y paquetes que utilizaremos en este workshop se encuentran contenidas en el meta-paquete "tidyverse" (este es un paquete de paquetes). Ya lo instalamos en **(C)**, pero si quisieras instalarlo solo tendrías que ejecutar la siguiente linea en la **consola** de RStudio (**(1)** en la imagen de arriba):
+Gran parte de las funciones y paquetes que utilizaremos en este workshop se encuentran contenidas en el meta-paquete [tidyverse](https://www.tidyverse.org/) (este es un paquete de paquetes). Ya lo instalamos en **(C)**, pero si quisieras instalarlo solo tendrías que ejecutar la siguiente linea en la **consola** de RStudio (**(1)** en la imagen de arriba):
 
 -   `install.packages("tidyverse")`
 
@@ -93,12 +95,16 @@ Para instalar múltiples paquetes, podemos repetir la linea de mas arriba tantas
 -   `if (!require('bookdown')) install.packages('bookdown'); library('bookdown')`\
 -   `...`
 
+Al principio de cada capítulo, verás una sección llamada `Paquetes para este capítulo`. Si pegas el contenido de esa sección en un script de R al empezar cada capítulo, te asegurarás de tener disponibles todas las funciones que usaremos.  .  
+
+
+
 ### Instalar paquetes de Github
 
-En ocasiones querremos instalar directamente la versión en desarrollo del paquete desde [Github](https://github.com/). Para eso podemos usar la función `install_github` del paquete `remotes`. Por ejemplo, para instalar el paquete {renv} desde su [repositorio de Github](https://github.com/rstudio/renv):
+En ocasiones querremos instalar directamente la versión en desarrollo del paquete desde [Github](https://github.com/). Para eso podemos usar la función `install_github()` del paquete `remotes`. Por ejemplo, para instalar el paquete {BayesianReasoning} desde su [repositorio de Github](https://github.com/gorkang/BayesianReasoning):
 
 -   `if (!require('remotes')) install.packages('remotes'); library('remotes')`\
--   `remotes::install_github("rstudio/renv")`
+-   `remotes::install_github("gorkang/BayesianReasoning")`
 
 ------------------------------------------------------------------------
 
