@@ -18,9 +18,11 @@ aprendamos-con-garrick
 visualización-de-datos-con-ggplot2
 primeros-pasos
 aesthetic-mappings
+x-y
 color-alpha-size
 shape
 linetype
+ejercicios-aes
 geoms
 geom_point-y-geom_jitter
 geom_smooth
@@ -45,7 +47,6 @@ usando-estilos
 visualización-interactiva
 gráficas-interactivas
 animando-gráficas
-ejercicios
 ejercicios-geoms-colores
 sintaxis-aes
 ejercicios-temas

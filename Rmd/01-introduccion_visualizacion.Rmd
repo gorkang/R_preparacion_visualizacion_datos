@@ -16,7 +16,6 @@ if (!require('ggridges')) install.packages('ggridges'); library('ggridges')
 if (!require('hrbrthemes')) install.packages('hrbrthemes'); library('hrbrthemes')
 if (!require('plotly')) install.packages('plotly'); library('plotly')
 if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
-if (!require('gganimate')) install.packages('gganimate'); library('gganimate')
 
 ```  
 
@@ -34,10 +33,9 @@ if (!require('gganimate')) install.packages('gganimate'); library('gganimate')
 
 ### Porque la visualización de datos es importante - ejemplo del mundo real
 
-Este ejemplo viene de un experimento que realizamos junto con [Carlos Santamaría](https://scholar.google.es/citations?user=fUHQA3gAAAAJ&hl=es) hace algún tiempo. Presentamos una tarea sobre cálculo de probabilidades en un contexto real. Nuestros participantes estaban entrando a un examen para convertirse en trabajadores del estado. La historia real tiene algunos matices, pero simplificando, digamos que la materia para el examen eran unos 80 temas. Las personas generalmente no podían estudiar con profundidad todos los temas (o sabían que esa no era la estrategia óptima), así que se concentraban en un subconjunto de esos temas (e.g. 30 de 80). En el examen, se seleccionaban al azar 5 de estos temas, y las personas tenían que elegir uno de ellos para desarrollar.  
+Este ejemplo viene de un experimento que realizamos junto con [Carlos Santamaría](https://scholar.google.es/citations?user=fUHQA3gAAAAJ&hl=es) hace algún tiempo. Presentamos una tarea sobre cálculo de probabilidades a personas que estaban entrando a un examen para convertirse en trabajadores del estado. Simplificando algo, digamos que la materia para el examen eran 80 temas. No es posible estudiar con profundidad todos los temas, así que los opositores se concentraban en un subconjunto de esos temas (e.g. 30 de 80). Al empezar el examen, se seleccionaban al azar 5 de los 80 temas, y cada persona elegía uno de ellos para desarrollar.  
 
-
-Abajo se puede ver como cambia la probabilidad de que uno de los temas estudiados aparezca dentro de los 5 seleccionados al azar. Con 30 temas estudiados (de los 80 totales), la probabilidad de que uno de ellos salga en la prueba es del 91%. Si estudiáramos 47, subiríamos a una probabilidad del 99%.    
+Abajo se puede ver como cambia la probabilidad de que uno de los temas estudiados aparezca dentro de los 5 seleccionados al azar. Con 30 de los 80 temas estudiados, la probabilidad de que uno de ellos salga en la prueba es del 91%. Si estudiáramos 47, subiríamos a una probabilidad del 99%.    
 
 ```{r opositores-plot, echo=FALSE, fig.height=6, fig.width=8}
 
@@ -70,6 +68,7 @@ plotly::ggplotly(
     geom_line() +
     geom_vline(xintercept = 30, linetype = "dashed") +
     geom_hline(yintercept = 1, linetype = "dashed") +
+    scale_x_continuous(n.breaks = 10) +
     scale_y_continuous(breaks = seq(0, 1, .05), labels = scales::percent(x = seq(0, 1, .05), accuracy = 1)) +
     labs(title = "Probabilidad de que uno de los temas estudiados aparezca",
          x = "Temas estudiados",
@@ -79,15 +78,16 @@ plotly::ggplotly(
 ```
 
 
-En el experimento le preguntamos a las personas por la probabilidad de que les aparezca alguno de los temas que han estudiado en la prueba. Comparamos las siguientes dos preguntas:  
+En el experimento le preguntamos a las personas por la probabilidad de que les apareciera alguno de los temas estudiados en la prueba. Comparamos las siguientes dos preguntas:  
 
 + ¿Cuál es la probabilidad de que **salga uno** de los temas que has estudiado?  
 + ¿Cuál es la probabilidad de que **no salga ninguno** de los temas que has estudiado?  
 
-Miramos el error promedio en función de la pregunta (cuanto se han alejado de la probabilidad correcta), y vemos que nuestra manipulación ha tenido un efecto considerable:  
+Miramos el error promedio en función de la pregunta (cuanto se han alejado de la probabilidad correcta), y vimos que nuestra manipulación había tenido un efecto considerable:  
 
-```{r visualizacion-importante-01, cache=FALSE}
+```{r visualizacion-importante-01, echo=FALSE, cache=FALSE}
 if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
+if (!require('knitr')) install.packages('knitr'); library('knitr')
 
 # Leemos datos
 DF = read_csv(
@@ -101,31 +101,36 @@ DF %>%
   group_by(Question) %>% 
   summarise(Error_promedio = mean(Error),
             SD = sd(Error, na.rm = TRUE),
-            N = n())
+            N = n()) %>% 
+  knitr::kable()
 
 ```
 
 Hay una diferencia notable entre condiciones. Pasamos de un error promedio del -30.7% a tan solo 4%, simplemente cambiando la pregunta. Hagamos un sencillo análisis de regresión para ver si la diferencia es significativa, y cuanta varianza explica nuestro modelo.  
 
 ```{r visualizacion-importante-01b}
-
 # Modelo de regresion
 modelo_regresion = lm(Error ~ Question, DF)
 
 # Resultados
-summary(modelo_regresion)
+sjPlot::tab_model(modelo_regresion)
+# summary(modelo_regresion)
+```
 
+
+```{r visualizacion-importante-01c}
 # Histograma de los residuos
 hist(modelo_regresion$residuals)
 
 # Supuesto de normalidad de residuales
 shapiro.test(modelo_regresion$residuals)
-
 ```
 
-Todo es hermoso. Tenemos un efecto claramente significativo de la pregunta (y con un R2-ajustado de .258, no está nada mal), y además, nuestro modelo no incumple el supuesto de normalidad de residuos (por los pelos!). Preparamos un plot con promedios y barras con error standard para nuestro paper:  
 
-```{r visualizacion-importante-01c}
+Todo es hermoso. Tenemos un efecto claramente significativo de la pregunta (y con un R2-ajustado de .258, no está nada mal), y además, nuestro modelo no incumple el supuesto de normalidad de residuos (por los pelos!). <details><summary>Leeme ![](data/images/hint.png)</summary><span style="color: orange;">[Las pruebas de normalidad son muy sensibles al n de la muestra](https://stats.stackexchange.com/questions/2492/is-normality-testing-essentially-useless)</span></details>   
+Preparamos un plot con promedios y barras con error standard para nuestro paper.
+
+```{r visualizacion-importante-01d}
 
 # Plot para publicación
 plot_inicial = ggplot(DF, aes(Question, Error, fill = Question)) +
@@ -143,7 +148,7 @@ plot_inicial
 
 ```
 
-Estamos listos para escribir nuestro paper.  
+Estamos listos para escribir el paper.  
 
 Solo por curiosidad, veamos boxplots de los dos grupos. Mmmm... hay algo extraño:  
 
@@ -160,7 +165,7 @@ ggplot(DF, aes(Question, Error, color = Question, group = Question)) +
 
 Volvemos a extraer descriptivos... pero esta vez incluimos la mediana.  
 
-```{r visualizacion-importante-03}
+```{r visualizacion-importante-03, echo=FALSE}
 
 # Promedio y mediana por condicion
 DF %>% 
@@ -168,11 +173,12 @@ DF %>%
   summarise(Error_promedio = mean(Error),
             Error_mediana = median(Error),
             SD = sd(Error, na.rm = TRUE),
-            N = n())
+            N = n()) %>% 
+  knitr::kable()
 
 ```
 
-Que esta pasando? Veamos las respuestas de todos los participantes, junto con la distribución de los datos, más la media y mediana por condición.  
+¿Qué está pasando? Veamos las respuestas de todos los participantes, junto con la distribución de los datos, más la media y mediana por condición.  
 
 ```{r visualizacion-importante-04}
 
@@ -199,8 +205,9 @@ plot_final
 
 ```
 
+---  
 
-**TLDR**: La manera en la visualizamos la información determina las conclusiones a las que llegamos.   
+**TLDR**: La manera en la visualizamos la información determina las conclusiones a las que llegamos. En una sola gráfica:     
 
 ```{r visualizacion-importante-05, fig.width=12}
 
@@ -219,7 +226,9 @@ cowplot::plot_grid(plot_inicial, plot_final)
 
 ## Por qué R? 
 
-R es [uno de los programas para data science mas populares](http://r4stats.com/articles/popularity/), especialmente usado en la academia. El numero de paquetes que ofrecen funcionalidades de todo tipo no ha dejado de crecer. En 2019 el numero de paquetes en [R-cran](https://cran.r-project.org/web/packages/index.html) ha superado los 14,000, y el ritmo de crecimiento nos acerca a la singularidad... ;)  
+<div style= "float:left;position: relative; margin:0px 30px 0px 0px;">![](data/images/R_logo.png)</div>
+
+R es [uno de los programas para data science mas populares](http://r4stats.com/articles/popularity/), especialmente usado en la academia. El numero de paquetes que ofrecen funcionalidades de todo tipo no ha dejado de crecer. En 2021 el numero de paquetes en [R-cran](https://cran.r-project.org/web/packages/index.html) ha superado los 19,000 ([ver este buscador de paquetes](https://mran.microsoft.com/packages)), y el ritmo de crecimiento nos acerca a la singularidad... ;)  
 
 ![SOURCE: https://gist.github.com/daroczig/3cf06d6db4be2bbe3368](`r here::here("data", "images", "number-of-submitted-packages-to-CRAN.png")`)
 
@@ -227,18 +236,22 @@ R es [uno de los programas para data science mas populares](http://r4stats.com/a
 
 ---  
 
-Además de lo anterior, R es un programa de código abierto (esencial para poder hacer buena ciencia), con una [comunidad de usuarios](https://community.rstudio.com/) muy acogedora.   
+Además de lo anterior, R es un programa de código abierto (algo esencial para poder hacer ciencia reproducible), con una [comunidad de usuarios](https://community.rstudio.com/) muy acogedora.   
 
 Sus funciones de visualización son muy potentes (ver la [r-graph-gallery](https://www.r-graph-gallery.com/) para algunos ejemplos), siendo usadas como herramienta principal en algunos medios como la [BBC](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535).  
 
 ---   
 
-Con R puedes recoger datos interactivamente con [shiny](https://shiny.rstudio.com/), preparar datos (o extraerlos de paginas web con [rvest](https://github.com/tidyverse/rvest) o [RSelenium](https://github.com/ropensci/RSelenium)), visualizar datos estáticos con [ggplot](https://ggplot2.tidyverse.org/), animarlos con [gganimate](https://github.com/thomasp85/gganimate), visualizarlos con interactivamente con [plotly](https://github.com/ropensci/plotly/) o [shiny](https://shiny.rstudio.com/). Puedes también analizar los datos con todas las técnicas imaginables, desde anovas con [afex](https://github.com/singmann/afex) a modelos mixtos con [lmer](https://github.com/lme4/lme4) y/o [afex](https://github.com/singmann/afex), pasando por meta-análisis con [metafor](http://www.metafor-project.org/doku.php), SEM, Path analysis, mediación, con [lavaan](http://lavaan.ugent.be/tutorial/sem.html), análisis Bayesianos con [brms](https://github.com/paul-buerkner/brms) o [bayesfactor](http://bayesfactor.blogspot.com/), y un larguísimo etc. Puedes llevar tus visualizaciones y análisis a reportes automáticos en múltiples formatos (pdf, html, docx) con [Rmarkdown](https://rmarkdown.rstudio.com/), crear libros como este con [bookdown](https://bookdown.org/), páginas web con [blogdown](https://bookdown.org/yihui/blogdown/), e incluso papers completamente reproducibles (preparación y análisis de datos) en formato APA con [papaja](https://github.com/crsh/papaja).  
+Con R puedes recoger datos interactivamente con [shiny](https://shiny.rstudio.com/), preparar datos (o extraerlos de paginas web con [rvest](https://github.com/tidyverse/rvest) o [RSelenium](https://github.com/ropensci/RSelenium)), visualizar datos estáticos con [ggplot](https://ggplot2.tidyverse.org/), animarlos con [gganimate](https://github.com/thomasp85/gganimate), visualizarlos con interactivamente con [plotly](https://github.com/ropensci/plotly/) o [shiny](https://shiny.rstudio.com/). Puedes también analizar los datos con todas las técnicas imaginables, desde anovas con [afex](https://github.com/singmann/afex) a modelos mixtos con [lmer](https://github.com/lme4/lme4) y/o [afex](https://github.com/singmann/afex), pasando por meta-análisis con [metafor](http://www.metafor-project.org/doku.php), SEM, Path analysis, mediación, con [lavaan](http://lavaan.ugent.be/tutorial/sem.html), análisis Bayesianos con [brms](https://github.com/paul-buerkner/brms) o [bayesfactor](http://bayesfactor.blogspot.com/), y un larguísimo etc. Puedes llevar tus visualizaciones y análisis a reportes automáticos en múltiples formatos (pdf, html, docx) con [Rmarkdown](https://rmarkdown.rstudio.com/), crear libros como este con [bookdown](https://bookdown.org/), páginas web con [blogdown](https://bookdown.org/yihui/blogdown/) o [distill](https://rstudio.github.io/distill/), e incluso papers completamente reproducibles (preparación y análisis de datos) en formato APA con [papaja](https://github.com/crsh/papaja).  
 
 ---  
 
 
 ### Bienvenida al tidyverse
+
+<div style= "float:left;position: relative; margin:0px 30px 0px 0px;">
+![](data/images/tidyverse-logo.png)
+</div>
 
 El [tidyverse](https://www.tidyverse.org/) es un conjunto de paquetes que nos permitirán hacer de manera (habitualmente) intuitiva muchas tareas de preparación y visualización de datos.    
 
@@ -254,7 +267,7 @@ Veamos un ejemplo extraído de [aqui](https://tavareshugo.github.io/data_carpent
 *Filter rows with conditions evaluated within groups: iris flowers with maximum “Petal.Width” for each “Species”*  
 
 ##### Tidyverse
-```{r tidyverse-vs-base-R-02}
+```{r tidyverse-vs-base-R-02, eval=FALSE}
   iris %>% 
     group_by(Species) %>% 
     filter(Petal.Width == max(Petal.Width))
@@ -278,7 +291,7 @@ Veamos un ejemplo extraído de [aqui](https://tavareshugo.github.io/data_carpent
 
 ### Antes de empezar
 
-Programar (tras la fase de euforia inicial) es muy difícil. Todos necesitamos ayuda. Contar con una comunidad robusta con la que compartir, preguntar, contribuir, ayuda muchísimo.
+Programar es muy difícil. Todos necesitamos ayuda. Contar con una comunidad robusta con la que compartir, preguntar, contribuir, ayuda muchísimo.
 
 ![SOURCE: http://www.keywordbasket.com/ZWZlY3RvIGR1bm5pbmcta3J1Z2Vy/](`r here::here("data", "images", "dunning-kruger.jpg")`)  
 
@@ -289,9 +302,9 @@ Hay algunos recursos que resultan muy útiles:
 
 * [Twiter!](https://twitter.com/home). Por ejemplo:  
     + #TidyTuesday (\@thomas_mock)  
-    + \@dataandme  
-    + \@rivaquiroga  
-    + \@RLadiesSantiago  
+    + [\@dataandme](https://twitter.com/dataandme)  
+    + [\@rivaquiroga](https://twitter.com/rivaquiroga)  
+    + [\@RLadiesSantiago](https://twitter.com/RLadiesSantiago)  
     
 
 * Webs como [R bloggers](https://www.r-bloggers.com/)  
@@ -337,22 +350,19 @@ La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquiss
 
 #### Aprendamos con Garrick 
 
-[Garrick Aden-Buie](https://www.garrickadenbuie.com/) (\@grrrck) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28). Vamos a usarla para familiarizarnos con algunas de las funcionalidades de ggplot.  
+[Garrick Aden-Buie](https://www.garrickadenbuie.com/) (\@grrrck) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28). Os recomiendo revisarla para familiarizaros con las funcionalidades de ggplot.  
 <!-- https://github.com/gadenbuie/gentle-ggplot2  -->
 
 
-**Antes** de LANZAR LA PRESENTACION [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28), asegúrate que tienes instalados los paquetes `tidyverse` y `gapminder`, y crea el DF `pop_simple` usando el código de abajo.  
+**Antes** de empezar, asegúrate que tienes instalados los paquetes `tidyverse` y `gapminder`, y crea el DF `pop_simple` usando el código de abajo.  
 
 ```{r garrick}
 
 if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 if (!require('gapminder')) install.packages('gapminder'); library('gapminder')  
 
-tidy_pop <- gapminder %>% 
-  filter(country %in% c("Canada", "China", "United States"), 
-         year >= 1997) %>% 
-  select(country, year, pop) %>% 
-  mutate(pop = pop / 10^6)
+
+gapminder
 
 ```
 
@@ -400,6 +410,8 @@ En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el co
 
 ---  
 
+#### x y
+
 
 ```{r aes}
   
@@ -415,6 +427,18 @@ En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el co
 
 ```
 
+
+#### Ejercicio {.ejercicio -}
+
+Usando `gapminder`, ¿podrías crear un gráfico de gdp per capita por población como éste?
+
+```{r ejercicio_xy, echo=FALSE}
+
+ggplot(gapminder, aes(gdpPercap, pop)) + 
+    geom_point()
+
+```
+  
 
 #### Color, alpha, size
 
@@ -457,7 +481,7 @@ Imagina que queremos asignar colores manualmente.
 
 ```
 
-Tenemos que indicar que el color depende de 'class', y después usar scale_color_manual()  
+Tenemos que indicar que el color depende de `continent`, y después usar `scale_color_manual()`  
 
 ```{r color-01b}
 
@@ -466,6 +490,41 @@ Tenemos que indicar que el color depende de 'class', y después usar scale_color
     scale_color_manual(values = c("red", "grey", "green", "purple", "black"))
 
 ```
+
+
+#### Ejercicio 1 {.ejercicio -}
+
+Usando como base el plot del ejercicio anterior (GDP x población), ¿podrías hacer lo siguiente?  
+
+- Colorear los puntos por continente
+- Tamaño del punto 4
+- Alpha 0.5
+
+
+```{r ejercicio_point1, echo=FALSE}
+
+ggplot(gapminder, aes(gdpPercap, pop, color = continent)) + 
+    geom_point(size = 4, alpha = .5)
+
+```
+
+#### Ejercicio 2 {.ejercicio -}
+
+Cada uno de los siguientes gráficos tiene un error. ¿Sabrias corregirlos?
+
+<details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">color = continent debe ir dentro de aes()<BR>color = "blue" debe ir fuera de aes()</span></details>
+
+```{r ejercicio_point2, echo=TRUE}
+
+ggplot(gapminder, aes(gdpPercap, pop), color = continent) + 
+    geom_point(size = 4, alpha = .5)
+
+ggplot(gapminder, aes(gdpPercap, pop, color = "blue")) + 
+    geom_point(size = 4, alpha = .5)
+
+
+```
+  
 
 
 #### Shape
@@ -499,6 +558,7 @@ Códigos para los distintos estilos de linea:
     stat_summary(fun.y = mean, geom = "line") 
 
 ```
+
 
 
 ### Geoms
@@ -1118,7 +1178,7 @@ p = ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
 ![](data/images/gganimate.mp4){width="100%"}
 
 
-## Ejercicios  
+## Ejercicios {.ejercicio -}
 
 ### Ejercicios con Geoms, colores... {#ejercicios-geoms-colores}
 
