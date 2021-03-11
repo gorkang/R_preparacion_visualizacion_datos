@@ -5,19 +5,21 @@
 
 ```{r setup-04, message=FALSE, warning=FALSE}
 
-if (!require('afex')) install.packages('afex'); library('afex')
-if (!require('corrr')) install.packages('corrr'); library('corrr')
-if (!require('easystats')) remotes::install_github("easystats/easystats"); library('easystats')
-if (!require('correlation')) remotes::install_github("easystats/correlation"); library('correlation')
-if (!require('report')) remotes::install_github("easystats/report"); library('report')
-if (!require('see')) remotes::install_github("easystats/see"); library('see')
-
-if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
-if (!require('remotes')) install.packages('remotes'); library('remotes')
-if (!require('renv')) remotes::install_github("rstudio/renv"); library('renv')
-if (!require('rticles')) install.packages('rticles'); library('rticles')
-if (!require('stargazer')) install.packages('stargazer'); library('stargazer')
-if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
+  if (!require('afex')) install.packages('afex'); library('afex')
+  if (!require('correlation')) install.packages("correlation"); library('correlation')
+  if (!require('corrr')) install.packages('corrr'); library('corrr')
+  if (!require('ggraph')) install.packages('ggraph'); library('ggraph')
+  if (!require('gtsummary')) install.packages('gtsummary'); library('gtsummary')
+  if (!require('knitr')) install.packages('knitr'); library('knitr')
+  if (!require('remotes')) install.packages('remotes'); library('remotes')
+  if (!require('renv')) install.packages("renv"); library('renv')
+  if (!require('rticles')) install.packages('rticles'); library('rticles')
+  if (!require('see')) install.packages("see"); library('see')
+  if (!require('stargazer')) install.packages('stargazer'); library('stargazer')
+  
+  if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
+  if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
+  if (!require('report')) remotes::install_github("easystats/report"); library('report')
 
 ```
 
@@ -462,18 +464,6 @@ Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:
 
 De manera relativamente sencilla podemos incluir tablas bonitas en los reportes. 
 
-```{r paquetes-reportes}
-
-if (!require('corrr')) install.packages('corrr'); library('corrr')
-if (!require('correlation')) remotes::install_github("easystats/correlation"); library('correlation')
-if (!require('knitr')) install.packages('knitr'); library('knitr')
-if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
-if (!require('report')) remotes::install_github("easystats/report"); library('report')
-if (!require('stargazer')) install.packages('stargazer'); library('stargazer')
-if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
-
-```
-
 #### Descriptivos
 
 ```{r descriptives}
@@ -503,12 +493,8 @@ if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
   corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
 
   report(corr_test)
-  table_easystats = report(corr_test)
+  table_easystats = report::report(corr_test)
   knitr::kable(table_easystats)
-
-  
-library(see) # for plotting
-library(ggraph) # needs to be loaded
 
 mtcars %>% 
   correlation(partial = TRUE) %>% 
@@ -523,7 +509,7 @@ mtcars %>%
 
 # https://paulvanderlaken.com/2018/09/10/simpler-correlation-analysis-in-r-using-tidyverse-principles/
   table_correlations <- iris %>% 
-    correlation()  
+    correlation::correlation()  
     # report() %>% 
     # table_long(full = TRUE)
   
@@ -547,7 +533,7 @@ table_clean = table_correlations %>%
   knitr::kable(table_lm)
   
   report(model_lm)
-  table_easystats = report(model_lm)
+  table_easystats = report::report(model_lm)
   knitr::kable(table_easystats)
   
 ```
@@ -569,13 +555,12 @@ Usando el paquete {stargazer} podemos mostrar una tabla de resultados:
 * Ver paquete [{afex}](https://github.com/singmann/afex)
 
 ```{r ejemplo-afex}
-if (!require('afex')) install.packages('afex'); library('afex')
 
 data(obk.long, package = "afex")
 head(obk.long)
 
 # estimate mixed ANOVA on the full design:
-model = aov_ez("id", "value", obk.long, between = c("treatment", "gender"), 
+model = afex::aov_ez("id", "value", obk.long, between = c("treatment", "gender"), 
         within = c("phase", "hour"), observed = "gender")
 
   
@@ -591,8 +576,8 @@ model = aov_ez("id", "value", obk.long, between = c("treatment", "gender"),
   data$Cat2 <- rep(c("A", "B"), length.out = nrow(data))
   model_aov <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data = data)
   
-  report(model_aov)
-  report(model_aov)
+  report::report(model_aov)
+  report::report(model_aov)
   
   table_aov = papaja::apa_print(model_aov)$table
   knitr::kable(table_aov)
@@ -625,6 +610,8 @@ tinytex::install_tinytex()
 
 Bibliografía en Rmarkdown  
 
+* https://blog.rstudio.com/2020/11/09/rstudio-1-4-preview-citations/  
+
 * https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html  
 
 * https://www.r-bloggers.com/bibliography-with-knitr-cite-your-references-and-packages/  
@@ -639,8 +626,6 @@ Bibliografía en Rmarkdown
 
 
 ```{r grateful, eval=FALSE, include=TRUE}
-
-remotes::install_github("Pakillo/grateful")
 
 grateful::cite_packages(all.pkg = FALSE,
                         out.format = "rmd",

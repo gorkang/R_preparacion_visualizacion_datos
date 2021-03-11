@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Preparación y transformación de datos
 
 En este capítulo vamos a aprender a importar y exportar todo tipo de archivos, ademas de pasar de una base de datos no especialmente amigable, a una base de datos `tidy`, esto es, siguiendo algunas reglas bien sencillas que harán más fácil trabajar con los datos.
@@ -8,18 +13,23 @@ En este capítulo vamos a aprender a importar y exportar todo tipo de archivos, 
 
 ```{r setup-02}
 
-if (!require("tidyverse")) install.packages("tidyverse"); library("tidyverse")
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+if (!require("DT")) install.packages("DT"); library("DT")
+if (!require("janitor")) install.packages("janitor"); library("janitor")
+if (!require('readr')) install.packages('readr'); library('readr')
 if (!require("readxl")) install.packages("readxl"); library("readxl")
 if (!require("haven")) install.packages("haven"); library("haven")
 if (!require("here")) install.packages("here"); library("here")
+if (!require("purrr")) install.packages("purrr"); library("purrr")
 if (!require("readODS")) install.packages("readODS"); library("readODS")
+if (!require("tidyr")) install.packages("tidyr"); library("tidyr")
 if (!require("writexl")) install.packages("writexl"); library("writexl")
-if (!require("DT")) install.packages("DT"); library("DT")
-if (!require("gsheet")) install.packages("gsheet"); library("gsheet")
-if (!require("janitor")) install.packages("janitor"); library("janitor")
 
-if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests")); library('caret')
-if (!require('FFTrees')) install.packages('FFTrees'); library('FFTrees')
+# if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests")); library('caret')
+if (!require('caret')) install.packages('caret'); library('caret')
+
+if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
+if (!require('FFTrees')) remotes::install_github("ndphillips/FFTrees"); library('FFTrees')
 
 
 ```  
@@ -41,26 +51,26 @@ Vamos a ver con más detalle los archivos CSV (*comma separated values*). Las fu
 
 Usaremos las siguientes funciones del paquete `readr`:    
 
+###### {.parameters -}    
+
 * `readr::read_csv()`: valores separados por coma (",")  
 * `readr::read_csv2()`: valores separados por punto y coma (";")  
 * `readr::read_delim( , delim = "|")`: valores separados por un delimitador arbitrario  
 
+###### {-}    
 
+Leemos el archivo `02-read-csv.csv` de la carpeta `data/files/`: 
 
 ```{r read-csv-01, eval=FALSE}
 
-# Cargamos libreria
-if (!require("readr")) install.packages("readr"); library("readr")
-
-# Version simple
 DF_name = read_csv("data/files/02-read-csv.csv")
 
 ```
 
+Si estamos usando rmarkdown, o similar, es recomendable usar `here::here()` para evitar problemas con los paths a los archivos.  
 
 ```{r read-csv-02}
   
-# Version avanzada
 name_of_file = here::here("data", "files", "02-read-csv.csv")
 DF_name = read_csv(name_of_file)
 
@@ -71,33 +81,30 @@ DF_name
 
 #### Otros tipos de archivos
 
-##### Archivos excel
+##### Archivos excel {-}
 
-```{r read-others-xls}
+```{r read-others-xls, eval=FALSE}
 
-if (!require("readxl")) install.packages("readxl"); library("readxl")
 name_of_file = here::here("data", "files", "02-read-xlsx.xlsx")
 readxl::read_excel(name_of_file)
 
 ```
 
 
-##### Archivos SPSS
+##### Archivos SPSS {-}
 
-```{r read-others-spss}
+```{r read-others-spss, eval=FALSE}
 
-if (!require("haven")) install.packages("haven"); library("haven")
 name_of_file = here::here("data", "files", "02-read-sav.sav")
 haven::read_sav(name_of_file)
 
 ```
 
 
-##### Archivos Libreoffice
+##### Archivos Libreoffice {-}
 
-```{r read-others-libreoffice}
+```{r read-others-libreoffice, eval=FALSE}
 
-if (!require("readODS")) install.packages("readODS"); library("readODS")
 name_of_file = here::here("data", "files", "02-read-ods.ods")
 df_ODS = readODS::read_ods(name_of_file)
 
@@ -106,13 +113,13 @@ head(df_ODS)
 
 ```
 
-##### Google sheets
+##### Google sheets {-}
 
 Para poder leer una gsheet debemos antes crear un enlace para compartirla: `"Share" -> "Get shareable link"`  
 
 ```{r google-sheets, eval=FALSE}
 
-if (!require("googlesheets4")) install.packages("gsheet"); library("googlesheets4")
+if (!require("googlesheets4")) install.packages("googlesheets4"); library("googlesheets4")
 name_of_sheet = "1jjb91j2X13_JKDAeIwrKIdNv0rcseMdteSqb0ZMVOig/edit#gid=807114896"
 googlesheets4::read_sheet(name_of_sheet)   
 
@@ -124,7 +131,10 @@ googlesheets4::read_sheet(name_of_sheet)
 ### Ejercicios - Importar datos {.ejercicio} 
 
 
-1. En el repositorio [R para preparación y visualización de datos - DNSC - UAI](https://osf.io/jdn37/) de la Open Science Foundation podrás ver una carpeta llamada `Capitulo 2`. Importa los archivos que ahí aparecen:  
+En el repositorio [R para preparación y visualización de datos - DNSC - UAI](https://osf.io/jdn37/) de la Open Science Foundation podrás ver una carpeta llamada `Capitulo 2`.  
+
+Importa los archivos que ahí aparecen, asegurándote que los nombres de columna se leen adecuadamente:  
+<details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">La función `read_excel()` tiene parámetros como `skip`, que permite no leer las primeras n lineas, o `sheet`, con la que puedes indicar que pestaña leer.</span></details>
 
 + 02-extralines-1.xlsx
 + 02-extralines-2.xlsx
@@ -150,17 +160,7 @@ googlesheets4::read_sheet(name_of_sheet)
 En ocasiones tenemos múltiples archivos en una carpeta (e.g. uno por participante) y queremos combinarlos todos en un solo DF.  
 
 
-```{r importar-multiples-archivos-paquetes}
-
-if (!require("purrr")) install.packages("purrr"); library("purrr")
-if (!require("readr")) install.packages("readr"); library("readr")
-if (!require("readxl")) install.packages("readxl"); library("readxl")
-
-```
-
-
 Importamos los archivos que están en la carpeta `data/files/02-CSVs`  
-
 
 ```{r importar-multiples-archivos}
 
@@ -171,7 +171,7 @@ name_of_folder = here::here("data", "files", "02-CSVs")
 files <- list.files(name_of_folder, full.names = TRUE)
 
 # Leemos todos los archivos, combinandolos en un dataframe
-full <- map_df(files, read_csv)
+full <- purrr::map_df(files, read_csv)
 full
 
 ```
@@ -223,7 +223,7 @@ full
 1. Cuando más arriba importamos los archivos que están en la carpeta `data/files/02-CSVs`:  
 
 - ¿Qué archivos importamos exáctamente?  
-- <details><summary>¿Ves algún problema en lo que hicimos?![](data/images/hint.png)</summary><span style="color: orange;">Revisa el número de filas y la variable `files`.</span></details>  
+- <details><summary>¿Ves algún problema en lo que hicimos?![](`r here::here("data", "images", "hint.png")`)</summary><span style="color: orange;">Revisa el número de filas y la variable `files`.</span></details>  
 
 El resultado final deberia ser así:  
 
@@ -277,17 +277,12 @@ write_csv(DF_name, name_of_file)
 
 ```{r write-otros, eval = FALSE}
 
-if (!require("writexl")) install.packages("writexl"); library("writexl")
 name_of_file = here::here("data", "files", "02-write-xlsx.xlsx")
 writexl::write_xlsx(DF_name, name_of_file)
 
-
-if (!require("haven")) install.packages("haven"); library("haven")
 name_of_file = here::here("data", "files", "02-write-sav.sav")
 haven::write_sav(DF_name, name_of_file)
 
-
-if (!require("readODS")) install.packages("readODS"); library("readODS")
 name_of_file = here::here("data", "files", "02-write-ods.ods")
 readODS::write_ods(DF_name, name_of_file)
 
@@ -320,8 +315,6 @@ Por ejemplo. De manera muy sencilla y rápida podemos crear una nueva columna re
 
 ```{r tidy_vector-1}
 
-if (!require("tidyverse")) install.packages("tidyverse"); library("tidyverse")
-
 # Compute rate per 100,000
 table1 %>% 
   mutate(rate_per_100K = cases / population * 100000)
@@ -343,7 +336,6 @@ Y, como no, `ggplot` funciona con datos `tidy`, en formato long.
 ```{r tidy_vector-3}
 
 # Visualise changes over time
-if (!require("tidyverse")) install.packages("tidyverse"); library("tidyverse")
 ggplot(table1, aes(as.factor(year), cases)) + 
   geom_line(aes(group = country), colour = "grey50") + 
   geom_point(aes(colour = country))
@@ -355,7 +347,9 @@ ggplot(table1, aes(as.factor(year), cases)) +
 
 Usaremos [{dplyr}](https://dplyr.tidyverse.org/), un paquete muy potente para la manipulación de datos. Su sintaxis, además, es bastante intuitiva (¡son verbos en inglés!). Usando pipes **%>%** (CONTROL + SHIFT + M) podemos enlazar operaciones de transformación de datos de manera muy sencilla (una vez nos aprendamos los verbos).  
 
-Verbos esenciales:  
+Podemos ver mas detalle y ejemplos en la [Cheatsheet de dplyr](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf).   
+
+**Verbos esenciales**:  
 
 ###### {.parameters -}    
 
@@ -365,8 +359,6 @@ Verbos esenciales:
 * rename(): renombrar columnas  
 * mutate(): crear columnas, modificar columnas, etc.   
 
-
-Podemos ver mas detalle y ejemplos en la [Cheatsheet de dplyr](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf).  
 
 
 #### Tabla resumen dplyr {-}  
@@ -508,7 +500,6 @@ DF_name %>%
   transmute(PPV_DECLARED_PCT = PPV_DECLARED/100)
 
 # Limpiar nombres
-if (!require("janitor")) install.packages("janitor"); library("janitor")
 DF_name %>% 
   janitor::clean_names()
 
@@ -782,10 +773,7 @@ Una aplicación Shiny para ayudar a construir Regular Expressions:
 
 ```{r regular-expressions-gadget, eval=FALSE}
 
-devtools::install_github("gadenbuie/regexplain")
-
 regexplain::regex_gadget()
-
 
 ```
 
@@ -800,8 +788,6 @@ Trabajaremos con los datos *procesados* del paper [Cognitive and Socio-affective
 
 
 ```{r ejercicios-dplyr-avanzado-1-2, include=FALSE}
-
-if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 
 DF_wide = read.csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
   mutate(Anxious.Attachment = round(Anxious.Attachment, 2))
@@ -855,8 +841,6 @@ Ahora volvemos a usar con los datos brutos (`sa-raw-anonymised.csv`) del paper [
   
   
 ```{r ejercicios-dplyr-avanzado-4datos}
-
-if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 
 df_wide_raw = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv") 
 
@@ -1216,7 +1200,7 @@ df_plot = table1 %>%
 plot1 = ggplot(table1, aes(as.factor(year), cases)) + 
   geom_line(aes(group = country), colour = "grey50") + 
   geom_point(aes(colour = country), size = 2) +
-  hrbrthemes::scale_y_comma() +  
+  scale_y_continuous(labels = scales::comma) +
   labs(title = "Casos de Tuberculosis por año",
        x = "year",
        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") +
@@ -1234,7 +1218,7 @@ plot2 = ggplot(df_plot, aes(as.factor(year), relative)) +
   theme(legend.position = "bottom", 
         legend.title = element_blank())
 
-cowplot::plot_grid(plot1, plot2, rows = 2)
+cowplot::plot_grid(plot1, plot2, nrow = 2)
 
 ```
 
@@ -1246,21 +1230,19 @@ cowplot::plot_grid(plot1, plot2, rows = 2)
 Hay un paquete fantástico de Nathaniel Phillips llamado [{FFTrees}](https://github.com/ndphillips/FFTrees). Este permite [crear, visualizar y evaluar fast-and-frugal decision trees](http://journal.sjdm.org/17/17217/jdm17217.pdf)  
 ```{r mas-alla}
 
-if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
-if (!require('FFTrees')) install.packages('FFTrees'); library('FFTrees')
-
 DF_wide = read.csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
   mutate(Anxious.Attachment = round(Anxious.Attachment, 2))
 
 
 median_social_adaptation = DF_wide %>% pull(Social.Adaptation) %>% median(., na.rm = TRUE)
-    DF_split = DF_wide %>% 
-      mutate(high_social_adaptation = 
-                 case_when(
-                   Social.Adaptation >= median_social_adaptation ~ TRUE,
-                   Social.Adaptation < median_social_adaptation ~ FALSE)) %>% 
-      select(-ID, -Social.Adaptation) %>% 
-      drop_na()
+
+DF_split = DF_wide %>% 
+  mutate(high_social_adaptation = 
+           case_when(
+             Social.Adaptation >= median_social_adaptation ~ TRUE,
+             Social.Adaptation < median_social_adaptation ~ FALSE)) %>% 
+  select(-ID, -Social.Adaptation) %>% 
+  drop_na()
     
 sa.fft <- FFTrees(formula = high_social_adaptation ~.,
                      data = DF_split)
@@ -1286,12 +1268,11 @@ Por ejemplo, Backprop:
 # ensure the results are repeatable
 set.seed(7)
 
-# load the library
-if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests")); library('caret')
-# if (!require('mlbench')) install.packages("mlbench"); library('mlbench')
-
 DF_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
   janitor::clean_names() %>% as.data.frame()
+
+median_social_adaptation = DF_wide %>% pull(social_adaptation) %>% median(., na.rm = TRUE)
+
 
 DB_x = DF_wide %>% 
   mutate(high_social_adaptation = 
@@ -1312,16 +1293,16 @@ correlationMatrix <- cor(DB_x[,2:ncol(DB_x)])
 highlyCorrelated <- findCorrelation(correlationMatrix, cutoff = 0.25)
 # print(highlyCorrelated)
 
-DB_final = DB_x %>% select(highlyCorrelated) %>% select(high_social_adaptation, everything()) %>% as.data.frame()
+DB_final = DB_x %>% select(all_of(highlyCorrelated)) %>% select(high_social_adaptation, everything()) %>% as.data.frame()
 
 
 # prepare training scheme
-control <- trainControl(method="repeatedcv", number=10, repeats=3)
+control <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
 # train the model
-model <- train(high_social_adaptation ~ ., data = DB_final, method="lvq", preProcess="scale", trControl=control)
+model <- train(high_social_adaptation ~ ., data = DB_final, method = "lvq", preProcess = "scale", trControl = control)
 
 # estimate variable importance
-importance <- varImp(model, scale=FALSE)
+importance <- varImp(model, scale = FALSE)
 # print(importance)
 
 # plot importance
@@ -1329,10 +1310,10 @@ plot(importance)
 
 
 # define the control using a random forest selection function
-control <- rfeControl(functions=rfFuncs, method="cv", number=10)
+control <- rfeControl(functions = rfFuncs, method = "cv", number = 10)
 
 # run the RFE algorithm
-results <- rfe(DB_final[,2:ncol(DB_final)], DB_final[,1], sizes=c(1:ncol(DB_final)), rfeControl=control)
+results <- rfe(DB_final[,2:ncol(DB_final)], DB_final[,1], sizes = c(1:ncol(DB_final)), rfeControl = control)
 
 # summarize the results
 print(results)
@@ -1341,7 +1322,7 @@ print(results)
 predictors(results)
 
 # plot the results
-plot(results, type=c("g", "o"))
+plot(results, type = c("g", "o"))
 
 ```
 

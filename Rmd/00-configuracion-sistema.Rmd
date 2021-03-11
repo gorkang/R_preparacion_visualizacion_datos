@@ -38,16 +38,40 @@ knitr::include_graphics(here::here("data", "images", "empezando.png"))
 
 Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, ...), pero en este caso vamos a usar una versión casera.
 
-**Copia y pega el código de abajo y ejecútalo [tecla ENTER] en la consola de RStudio.** El proceso de instalación requiere Internet y tardará un buen rato.
+**Copia y pega el código de abajo y ejecútalo [tecla ENTER] en la consola de RStudio.** El proceso de instalación requiere Internet y tardará un buen rato (**en algunos sistemas puede ser facilmente 1 hora**).
 
 ```{r install_workshop_packages, message=FALSE, warning=FALSE}
 
-list_of_packages = c("bookdown", "corrplot", "cowplot", "easystats", "esquisse", "gapminder",
-                     "ggpubr", "gganimate", "ggridges", "ggthemes", "hrbrthemes", "inspectdf",
-                     "janitor", "knitr", "plotly", "psych", "remotes", "stringr", "tictoc",
-                     "tidyverse", "usethis", "yarrr")  
-new_packages <- list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
-if (length(new_packages)) install.packages(new_packages, dependencies = TRUE)  
+  if (!require('parallel')) install.packages('parallel')
+  options(Ncpus = parallel::detectCores() - 2)
+
+  list_of_packages = c("afex", "caret", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
+                       "gapminder", "ggplot2", "ggraph", "ggridges", "ggthemes", "gtsummary", "haven", "here", "hexbin", 
+                       "inspectdf", "janitor", "knitr", "plotly", "purrr", "readODS",
+                       "readr", "readxl", "remotes", "renv", "rticles", "see", "sjPlot", "stargazer",
+                       "tidyr", "writexl")  
+  new_packages <- list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
+  if (length(new_packages)) install.packages(new_packages, dependencies = TRUE)
+  
+  
+  
+  
+```
+
+
+Otros paquetes que usaremos.
+
+```{r install_workshop_packages2, message=FALSE, warning=FALSE}
+
+  if (!require('FFTrees')) remotes::install_github("ndphillips/FFTrees"); library('FFTrees')
+  if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
+  if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
+  if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
+  if (!require('report')) remotes::install_github("easystats/report"); library('report')
+
+  # googlesheets4
+  # gganimate
+
 
 ```
 
@@ -59,7 +83,7 @@ Los paquetes de R son una colección de funciones, datos y documentación que am
 
 Gran parte de las funciones y paquetes que utilizaremos en este workshop se encuentran contenidas en el meta-paquete [tidyverse](https://www.tidyverse.org/) (este es un paquete de paquetes). Ya lo instalamos en **(C)**, pero si quisieras instalarlo solo tendrías que ejecutar la siguiente linea en la **consola** de RStudio (**(1)** en la imagen de arriba):
 
--   `install.packages("tidyverse")`
+-   `install.packages("ggplot2")`
 
 Para instalar otro paquete diferente de "tidyverse", remplaza su nombre entre comillas dentro de la función:
 
@@ -73,7 +97,7 @@ Las funciones, datos y documentación dentro de nuestros paquetes no podrán ser
 
 ```{r load_library, message=FALSE, warning=FALSE}
 
-library(tidyverse)  
+library(ggplot2)  
 
 ```
 
@@ -83,15 +107,15 @@ En realidad las funciones también pueden ser llamadas usando su referencia abso
 
 El siguiente código simplifica lo anterior. Comprueba que el paquete esta instalado; Si no se encuentra instalado, lo instala. Finalmente lo carga.
 
-```{r install_tidyverse, message=FALSE, warning=FALSE}
+```{r install_ggplot2, message=FALSE, warning=FALSE}
 
-if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')  
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')  
 
 ```
 
 Para instalar múltiples paquetes, podemos repetir la linea de mas arriba tantas veces como sea necesaria, o usar una versión algo mas sofisticada como el código del apartado **(C)**:
 
--   `if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')`\
+-   `if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')`\
 -   `if (!require('bookdown')) install.packages('bookdown'); library('bookdown')`\
 -   `...`
 

@@ -37,3 +37,7 @@ border-color: #bce8f1;
    padding-left: 20px;
    padding-right: 10px;
 }
+
+.bg-output {
+    background: #f7f5fc !important;
+}

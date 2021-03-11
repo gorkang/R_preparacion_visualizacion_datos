@@ -36,7 +36,6 @@ En la documentación y ejercicios de este workshop se usaron los paquetes que se
 - haven [@haven]
 - readxl [@readxl]
 - plotly [@plotly]
-- hrbrthemes [@hrbrthemes]
 - ggridges [@ggridges]
 - ggthemes [@ggthemes]
 - gganimate [@gganimate]
