@@ -160,6 +160,7 @@ Solo por curiosidad, veamos boxplots de los dos grupos. Mmmm... hay algo extrañ
 ggplot(DF, aes(Question, Error, color = Question, group = Question)) +
   geom_boxplot(alpha = .5) +
   theme_minimal() +
+  theme(legend.position = "none") +
   scale_y_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +
   labs(x = "What is the probability of x?")
 
@@ -194,6 +195,7 @@ plot_final = ggplot(DF, aes(Question, Error, color = Question, group = Question,
     color = "black",
     shape = 1) +
   theme_minimal() +
+  theme(legend.position = "none") +
   scale_y_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +
   labs(x = "What is the probability of x?")
 
