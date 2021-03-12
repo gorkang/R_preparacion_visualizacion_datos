@@ -128,7 +128,7 @@ googlesheets4::read_sheet(name_of_sheet)
 
 
 
-### Ejercicios - Importar datos {.ejercicio} 
+### Ejercicios - Importar datos {.ejercicio -} 
 
 
 En el repositorio [R para preparación y visualización de datos - DNSC - UAI](https://osf.io/jdn37/) de la Open Science Foundation podrás ver una carpeta llamada `Capitulo 2`.  
@@ -217,7 +217,7 @@ full
 ```
 
 
-### Ejercicios - Importar múltiples archivos {.ejercicio}
+### Ejercicios - Importar múltiples archivos {.ejercicio -}
 
 
 1. Cuando más arriba importamos los archivos que están en la carpeta `data/files/02-CSVs`:  
@@ -534,7 +534,7 @@ DF_name %>%
 ```
 
 
-### Ejercicios - verbos dplyr {.ejercicio} 
+### Ejercicios - verbos dplyr {.ejercicio -} 
 
 
 1. Usando la base df_wide, haz las siguientes cosas, una a una:  
@@ -778,7 +778,7 @@ regexplain::regex_gadget()
 ```
 
 
-### Ejercicios - verbos avanzados dplyr {.ejercicio} 
+### Ejercicios - verbos avanzados dplyr {.ejercicio -} 
 
 Trabajaremos con los datos *procesados* del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al. Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base final en formato wide (archivo: `/outputs/data/sa-prepared.csv`).  
 
@@ -1060,7 +1060,7 @@ DT::datatable(DF_nest_joined)
 ```
 
 
-### Ejercicios JOINS {.ejercicio}
+### Ejercicios JOINS {.ejercicio -}
 
 Con los DFs de abajo, haz las siguientes operaciones:
 

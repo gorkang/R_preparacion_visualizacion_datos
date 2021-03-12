@@ -230,6 +230,10 @@ cowplot::plot_grid(plot_inicial, plot_final, labels = c("Antes", "Después"))
 
 R es [uno de los programas para data science mas populares](http://r4stats.com/articles/popularity/), especialmente usado en la academia. El numero de paquetes que ofrecen funcionalidades de todo tipo no ha dejado de crecer. En 2021 el numero de paquetes en [R-cran](https://cran.r-project.org/web/packages/index.html) ha superado los 19,000 ([ver este buscador de paquetes](https://mran.microsoft.com/packages)), y el ritmo de crecimiento nos acerca a la singularidad... ;)  
 
+<BR>  
+
+<div style="clear: both;"></div>
+
 ![SOURCE: https://gist.github.com/daroczig/3cf06d6db4be2bbe3368](`r here::here("data", "images", "number-of-submitted-packages-to-CRAN.png")`)
 
 <!-- (https://gist.githubusercontent.com/daroczig/3cf06d6db4be2bbe3368/raw/b66b0531fb1b86d3e04a003b2e105ad4f147900e/number-of-submitted-packages-to-CRAN.png)   -->
@@ -245,9 +249,8 @@ Sus funciones de visualización son muy potentes (ver la [r-graph-gallery](https
 No menos importante, hay una gran cantidad de cursos, tutoriales, presentaciones, etc. de una calidad excelente, con los que podemos aprender de manera autónoma. Por ejemplo:
 
 - [psyTeachR team at the University of Glasgow](https://psyteachr.github.io/)
-- [A Gentle Guide to the Grammar of Graphics
-with ggplot2](https://pkg.garrickadenbuie.com/gentle-ggplot2/)
-- [](https://resulumit.com/teaching/rmd_workshop.htm)
+- [A Gentle Guide to the Grammar of Graphics with ggplot2](https://pkg.garrickadenbuie.com/gentle-ggplot2/)
+- [resulumit.com Rmd workshop](https://resulumit.com/teaching/rmd_workshop.htm)
 
 ---   
 
@@ -317,10 +320,10 @@ Y otros recursos que resultan muy útiles:
 * [Comunidad de usuarios de Rstudio](https://community.rstudio.com/)  
 
 * [Twiter!](https://twitter.com/home) Por ejemplo:  
-    + #TidyTuesday ([\@thomas_mock](https://twitter.com/thomas_mock))  
-    + [\@dataandme](https://twitter.com/dataandme)  
-    + [\@rivaquiroga](https://twitter.com/rivaquiroga)  
-    + [\@RLadiesSantiago](https://twitter.com/RLadiesSantiago)  
+    + [![](`r here::here('data/images', 'twitter_small.png')`) \@thomas_mock](https://twitter.com/thomas_mock) (#TidyTuesday)  
+    + [![](`r here::here('data/images', 'twitter_small.png')`) \@dataandme](https://twitter.com/dataandme)  
+    + [![](`r here::here('data/images', 'twitter_small.png')`) \@rivaquiroga](https://twitter.com/rivaquiroga)  
+    + [![](`r here::here('data/images', 'twitter_small.png')`) \@RLadiesSantiago](https://twitter.com/RLadiesSantiago)  
     
 
 * Webs como [R bloggers](https://www.r-bloggers.com/)  
@@ -361,7 +364,7 @@ La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquiss
 
 #### Aprendamos con Garrick 
 
-[Garrick Aden-Buie](https://www.garrickadenbuie.com/) (\@grrrck) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28). Os recomiendo revisarla para familiarizaros con las funcionalidades de ggplot.  
+[Garrick Aden-Buie](https://www.garrickadenbuie.com/) ([![](`r here::here('data/images', 'twitter_small.png')`) \@grrrck](https://twitter.com/grrrck)) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28). Os recomiendo revisarla para familiarizaros con las funcionalidades de ggplot.  
 <!-- https://github.com/gadenbuie/gentle-ggplot2  -->
 
 
@@ -1250,7 +1253,7 @@ p +
 ```
 
 
-## Ejercicios {.ejercicio -}
+#### Ejercicios {.ejercicio -}
 
 Con el DF `diamonds`, crea el siguiente plot:  
 <details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">Tienes que usar el `geom_bar()` y el parametro `fill`.</span></details>
@@ -1288,7 +1291,7 @@ cowplot::plot_grid(plot1, plot2,
 ```
 
 
-### Sintaxis aes() {-}
+#### Sintaxis aes() {.ejercicio -}
 
 
 Alguna de estas gráficas dará un error? Sin correr el código, sabrías decir cuál de ellas? Hay varias soluciones posibles, ¿Cuales serían?.        
@@ -1330,7 +1333,7 @@ Alguna de estas gráficas dará un error? Sin correr el código, sabrías decir 
 ```
 
 
-### Temas {#ejercicios-temas -}
+#### Temas {#ejercicios-temas .ejercicio -}
 
 Serías capaz de reproducir este gráfico, usando el df `diamonds` y el `theme_economist`? 
 

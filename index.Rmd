@@ -1,7 +1,7 @@
 ---
 title: "R para preparación y visualización de datos"
-subtitle: "Doctorado en Neurociencia Social y Cognición"
-author: "Gorka Navarrete, ORCID: [0000-0001-7678-8656](http://orcid.org/0000-0001-7678-8656)"
+subtitle: "[Doctorado en Neurociencia Social y Cognición](https://www.uai.cl/doctorado/doctorado-en-neurociencia-social-y-cognicion-2/), [UAI](https://www.uai.cl/)"
+author: "Gorka Navarrete [![](`r here::here('data/images', '24px-ORCID_iD.svg.png')`)](http://orcid.org/0000-0001-7678-8656) [![](`r here::here('data/images', 'twitter_small.png')`)](https://twitter.com/gorkang)"
 bibliography: data/bib/pkg-refs.bib
 # description: "R para preparación y visualización de datos - Doctorado en Neurociencia y Cognición - Facultad de Psicología - UAI"
 url: 'https\://gorkang.github.io/R_preparacion_visualizacion_datos/index.html'
@@ -49,7 +49,7 @@ knitr::opts_chunk$set(
 
 El objetivo de este seminario es aprender a usar [R](https://www.r-project.org/) para preparar y visualizar datos, además de generar reportes reproducibles. Está pensado para alumnos de postgrado con conocimentos básicos de programación.  
 
-[R](https://www.r-project.org/ es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.
+[R](https://www.r-project.org/) es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.
 
 
 ## Objetivos {-}
@@ -84,7 +84,7 @@ La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las
 - Carpeta `data`: Cuando usemos archivos de datos, vendrán de aquí  
 
 
-<details><summary>En ocasiones encontraras una bombilla como esta: ![](data/images/hint.png). Si haces click sobre ella aparecerá una pista sobre como resolver el ejercicio.</summary><span style="color: orange;">¡No hagas click en mi sin antes haber intentado resolver el ejercicio sin ayuda!</span></details>
+<details><summary>En ocasiones encontraras una bombilla como esta: ![](data/images/hint.png) Si haces click sobre ella aparecerá una pista sobre como resolver el ejercicio.</summary><span style="color: orange;">¡No hagas click en mi sin antes haber intentado resolver el ejercicio sin ayuda!</span></details>
 
 ---  
 
