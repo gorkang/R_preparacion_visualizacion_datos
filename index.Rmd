@@ -47,7 +47,7 @@ knitr::opts_chunk$set(
 
 # Introducción {-}
 
-El objetivo de este seminario es aprender a usar [R](https://www.r-project.org/) para la preparación y visualización de datos, además de la generación de reportes reproducibles. 
+El objetivo de este seminario es aprender a usar [R](https://www.r-project.org/) para preparar y visualizar datos, además de generar reportes reproducibles. Está pensado para alumnos de postgrado con conocimentos básicos de programación.  
 
 [R](https://www.r-project.org/ es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.
 
@@ -65,7 +65,7 @@ Al finalizar el curso deberíamos ser capaces de:
 
 ## Como empezar {-}
 
-Si ya has completado los pasos indicados en [Preparando nuesto sistema](#preparando-sistema), puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:  
+Si ya has completado los pasos indicados en **[Preparando nuesto sistema](#preparando-sistema)**, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:  
 
 ```{r como-empezar, eval=FALSE}
 
