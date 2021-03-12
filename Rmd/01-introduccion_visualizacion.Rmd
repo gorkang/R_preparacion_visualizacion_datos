@@ -4,6 +4,8 @@
 
 #### Paquetes para este capítulo {-}
 
+Para poder ejecutar en tu ordenador el código de los ejemplos y ejercicios de este capítulo vas a necesitar los paquetes siguientes. Te recomiendo que abras un script de R, pegues estas lineas al principio y las ejecutes (CNTRL + ENTER para ejecutar linea a linea).    
+
 ```{r setup, echo=TRUE}
 
 if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
@@ -35,7 +37,7 @@ if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
 
 
 
-### Porque la visualización de datos es importante - ejemplo del mundo real
+### Ejemplo del mundo real: ¿cuantos temas deberia estudiar?
 
 Este ejemplo viene de un experimento que realizamos junto con [Carlos Santamaría](https://scholar.google.es/citations?user=fUHQA3gAAAAJ&hl=es) hace algún tiempo. Presentamos una tarea sobre cálculo de probabilidades a personas que estaban entrando a un examen para convertirse en trabajadores del estado. Simplificando algo, digamos que la materia para el examen eran 80 temas. No es posible estudiar con profundidad todos los temas, así que los opositores se concentraban en un subconjunto de esos temas (e.g. 30 de 80). Al empezar el examen, se seleccionaban al azar 5 de los 80 temas, y cada persona elegía uno de ellos para desarrollar.  
 

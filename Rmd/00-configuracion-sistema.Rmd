@@ -7,7 +7,7 @@ urlcolor: blue
 
 # Preparando nuestro sistema {#preparando-sistema .unnumbered}
 
-## Empezando en A-B-C
+## Empezando en A-B-C {-}
 
 Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además de algunas librerías. **Para tener un sistema funcional, completa los pasos A, B y C**. Si ya tienes R y Rstudio instalados (recientemente), puedes pasar directamente al paso **(C)**.
 
@@ -52,10 +52,7 @@ Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes qu
                        "tidyr", "usethis", "writexl")  
   new_packages <- list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
   if (length(new_packages)) install.packages(new_packages, dependencies = TRUE)
-  
-  
-  
-  
+
 ```
 
 
@@ -69,15 +66,11 @@ Otros paquetes que usaremos.
   if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
   if (!require('report')) remotes::install_github("easystats/report"); library('report')
 
-  # googlesheets4
-  # gganimate
-
-
 ```
 
 ------------------------------------------------------------------------
 
-## Algo más sobre la instalación de paquetes
+## Algo más sobre la instalación de paquetes {-}
 
 Los paquetes de R son una colección de funciones, datos y documentación que amplían las capacidades básicas de R.  
 
@@ -91,7 +84,7 @@ Para instalar otro paquete diferente de "tidyverse", remplaza su nombre entre co
 
 Una vez instalado un paquete, no es necesario volver hacerlo, a menos que reinstales R.
 
-### Cargar paquetes
+### Cargar paquetes {-}
 
 Las funciones, datos y documentación dentro de nuestros paquetes no podrán ser utilizadas hasta que se carguen en R. Una vez instalados, para cargar los paquetes se usa la función `library()`:
 
@@ -103,7 +96,7 @@ library(ggplot2)
 
 En realidad las funciones también pueden ser llamadas usando su referencia absoluta `::`, sin necesidad de cargarlas antes. Por ejemplo: `dplyr::tibble(columna = 1)`. En general: `nombre_paquete::nombre_de_funcion(parametros)`).
 
-### Todo en uno
+### Todo en uno {-}
 
 El siguiente código simplifica lo anterior. Comprueba que el paquete esta instalado; Si no se encuentra instalado, lo instala. Finalmente lo carga.
 
@@ -123,7 +116,7 @@ Al principio de cada capítulo, verás una sección llamada `Paquetes para este 
 
 
 
-### Instalar paquetes de Github
+### Instalar paquetes de Github {-}
 
 En ocasiones querremos instalar directamente la versión en desarrollo del paquete desde [Github](https://github.com/). Para eso podemos usar la función `install_github()` del paquete `remotes`. Por ejemplo, para instalar el paquete {BayesianReasoning} desde su [repositorio de Github](https://github.com/gorkang/BayesianReasoning):
 

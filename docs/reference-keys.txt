@@ -1,11 +1,6 @@
-empezando-en-a-b-c
-algo-más-sobre-la-instalación-de-paquetes
-cargar-paquetes
-todo-en-uno
-instalar-paquetes-de-github
 introducción-a-r-y-visualización-de-datos
 introducción-porque-la-visualización-de-datos-es-importante
-porque-la-visualización-de-datos-es-importante---ejemplo-del-mundo-real
+ejemplo-del-mundo-real-cuantos-temas-deberia-estudiar
 por-qué-r
 bienvenida-al-tidyverse
 tidyverse-vs-base-r

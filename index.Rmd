@@ -47,9 +47,9 @@ knitr::opts_chunk$set(
 
 # Introducción {-}
 
-El seminario estará centrado en el uso de R para la preparación y visualización de datos, además de la generación de reportes reproducibles. 
+El objetivo de este seminario es aprender a usar [R](https://www.r-project.org/) para la preparación y visualización de datos, además de la generación de reportes reproducibles. 
 
-R es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.
+[R](https://www.r-project.org/ es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.
 
 
 ## Objetivos {-}
@@ -84,7 +84,7 @@ La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las
 - Carpeta `data`: Cuando usemos archivos de datos, vendrán de aquí  
 
 
-<details><summary>En ocasiones encontraras una bombilla como esta: ![](data/images/hint.png)</summary><span style="color: orange;">¡No hagas click en mi sin antes haber intentado resolver el ejercicio sin ayuda!</span></details> Si haces click sobre ella aparecerá una pista sobre como resolver el ejercicio.  
+<details><summary>En ocasiones encontraras una bombilla como esta: ![](data/images/hint.png). Si haces click sobre ella aparecerá una pista sobre como resolver el ejercicio.</summary><span style="color: orange;">¡No hagas click en mi sin antes haber intentado resolver el ejercicio sin ayuda!</span></details>
 
 ---  
 
