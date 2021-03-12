@@ -49,7 +49,7 @@ Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes qu
                        "gapminder", "ggplot2", "ggraph", "ggridges", "ggthemes", "gtsummary", "haven", "here", "hexbin", 
                        "inspectdf", "janitor", "knitr", "plotly", "purrr", "readODS",
                        "readr", "readxl", "remotes", "renv", "rticles", "see", "sjPlot", "stargazer",
-                       "tidyr", "writexl")  
+                       "tidyr", "usethis", "writexl")  
   new_packages <- list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
   if (length(new_packages)) install.packages(new_packages, dependencies = TRUE)
   

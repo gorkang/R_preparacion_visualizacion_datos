@@ -257,7 +257,7 @@ Con R puedes recoger datos interactivamente con [shiny](https://shiny.rstudio.co
 ### Bienvenida al tidyverse
 
 <div style= "float:left;position: relative; margin:0px 30px 0px 0px;">
-![](data/images/tidyverse-logo.png)
+![](`r here::here("data/images/tidyverse-logo.png")`)
 </div>
 
 El [tidyverse](https://www.tidyverse.org/) es un conjunto de paquetes que nos permitirán hacer de manera (habitualmente) intuitiva muchas tareas de preparación y visualización de datos.    
