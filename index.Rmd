@@ -47,7 +47,7 @@ knitr::opts_chunk$set(
 
 # Introducción {-}
 
-El objetivo de este seminario es aprender a usar [R](https://www.r-project.org/) para preparar y visualizar datos, además de generar reportes reproducibles. Está pensado para alumnos de postgrado con conocimentos básicos de programación.  
+El objetivo de este seminario es aprender a usar [R](https://www.r-project.org/) para preparar y visualizar datos, además de generar reportes reproducibles. Está pensado para alumnos de postgrado con conocimientos básicos de programación.  
 
 [R](https://www.r-project.org/) es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.
 
@@ -65,7 +65,7 @@ Al finalizar el curso deberíamos ser capaces de:
 
 ## Como empezar {-}
 
-Si ya has completado los pasos indicados en **[Preparando nuesto sistema](#preparando-sistema)**, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:  
+Si ya has completado los pasos indicados en **[preparando nuestro sistema](#preparando-sistema)**, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:  
 
 ```{r como-empezar, eval=FALSE}
 
@@ -75,12 +75,12 @@ usethis::use_course("gorkang/R_preparacion_visualizacion_datos")
 
 ```
 
-Sigue las instrucciones que aparecen en la Consola para tener un nuevo proyecto de RStudio con todos los materiales del curso. El codigo anterior creará una carpeta llamada `R_preparacion_visualizacion_datos-master`. Dentro de esa carpeta tendrás un archivo llamado `R_preparacion_visualizacion_datos.Rproj` que te permitirá abrir el proyecto de RStudio del workshop.  
+Sigue las instrucciones que aparecen en la Consola para tener un nuevo proyecto de RStudio con todos los materiales del curso. El código anterior creará una carpeta llamada `R_preparacion_visualizacion_datos-master`. Dentro de esa carpeta tendrás un archivo llamado `R_preparacion_visualizacion_datos.Rproj` que te permitirá abrir el proyecto de RStudio del workshop.  
 
 La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las mas importantes son:  
 
 - Carpeta `docs`: puedes abrir `docs/index.html` en tu navegador para ver el "libro" de este curso. Alternativamente, puedes consultar una [version online del libro](https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html).     
-- Carpeta `Rmd`: En esa carpeta esta el codigo fuente de los capitulos del libro  
+- Carpeta `Rmd`: En esa carpeta esta el código fuente de los capítulos del libro  
 - Carpeta `data`: Cuando usemos archivos de datos, vendrán de aquí  
 
 

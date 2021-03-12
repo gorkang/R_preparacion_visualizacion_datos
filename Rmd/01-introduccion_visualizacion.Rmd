@@ -4,7 +4,7 @@
 
 #### Paquetes para este capítulo {-}
 
-Para poder ejecutar en tu ordenador el código de los ejemplos y ejercicios de este capítulo vas a necesitar los paquetes siguientes. Te recomiendo que abras un script de R, pegues estas lineas al principio y las ejecutes (CNTRL + ENTER para ejecutar linea a linea).    
+Para poder ejecutar en tu ordenador el código de los ejemplos y ejercicios de este capítulo vas a necesitar los paquetes siguientes. Te recomiendo que abras un script de R, pegues estas líneas al principio y las ejecutes (CNTRL + ENTER para ejecutar linea a linea).    
 
 ```{r setup, echo=TRUE}
 
@@ -100,7 +100,7 @@ DF = read_csv(
     case_when(Question_p_of == 1 ~ "p (salga uno)",
               Question_p_of == 0 ~ "p (no salga ninguno)")))
 
-# Promedio por condicion
+# Promedio por condición
 DF %>% 
   group_by(Question) %>% 
   summarise(Error_promedio = mean(Error),
@@ -113,7 +113,7 @@ DF %>%
 Hay una diferencia notable entre condiciones. Pasamos de un error promedio del -30.7% a tan solo 4%, simplemente cambiando la pregunta. Hagamos un sencillo análisis de regresión para ver si la diferencia es significativa, y cuanta varianza explica nuestro modelo.  
 
 ```{r visualizacion-importante-01b, echo=FALSE}
-# Modelo de regresion
+# Modelo de regresión
 modelo_regresion = lm(Error ~ Question, DF)
 
 # Resultados
@@ -131,7 +131,7 @@ shapiro.test(modelo_regresion$residuals)
 ```
 
 
-Todo es hermoso. Tenemos un efecto claramente significativo de la pregunta (y con un R2-ajustado de .258, no está nada mal), y además, nuestro modelo no incumple el supuesto de normalidad de residuos (por los pelos!). <details><summary>Leeme ![](data/images/hint.png)</summary><span style="color: orange;">[Las pruebas de normalidad son muy sensibles al n de la muestra](https://stats.stackexchange.com/questions/2492/is-normality-testing-essentially-useless)</span></details>   
+Todo es hermoso. Tenemos un efecto claramente significativo de la pregunta (y con un R2-ajustado de .258, no está nada mal), y además, nuestro modelo no incumple el supuesto de normalidad de residuos (por los pelos!). <details><summary>Léeme ![](data/images/hint.png)</summary><span style="color: orange;">[Las pruebas de normalidad son muy sensibles al n de la muestra](https://stats.stackexchange.com/questions/2492/is-normality-testing-essentially-useless)</span></details>   
 Preparamos un plot con promedios y barras con error standard para nuestro paper.
 
 ```{r visualizacion-importante-01d, echo=FALSE}
@@ -172,7 +172,7 @@ Volvemos a extraer descriptivos... pero esta vez incluimos la mediana.
 
 ```{r visualizacion-importante-03, echo=FALSE}
 
-# Promedio y mediana por condicion
+# Promedio y mediana por condición
 DF %>% 
   group_by(Question) %>% 
   summarise(Error_promedio = mean(Error),
@@ -211,7 +211,7 @@ plot_final
 
 ```{r visualizacion-importante-05, fig.width=12, echo=FALSE}
 
-# Visualizamos el grafico inicial y el final, uno al lado del otro
+# Visualizamos el gráfico inicial y el final, uno al lado del otro
 cowplot::plot_grid(plot_inicial, plot_final, labels = c("Antes", "Después"))
 
 ```
@@ -351,7 +351,7 @@ La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquiss
 
 ```{r visualizacion_0, eval=FALSE}
 
-# 1) Asegurate que hemos instalado el paquete esquisse
+# 1) Asegúrate que hemos instalado el paquete esquisse
   if (!require('esquisse')) install.packages('esquisse'); library('esquisse')
 
 # 2) Carga el dataframe que desees. En este caso, "iris"
@@ -393,7 +393,7 @@ Los ingredientes esenciales de una gráfica son:
 ###### {.parameters -}    
 
 * **Aesthetic mappings** (aes): Variables, colores, rellenos, formas, ...
-* **Geoms** (geom_): puntos, lineas, boxplots, ...
+* **Geoms** (geom_): puntos, líneas, boxplots, ...
 * **Facets** (facet_): facet_wrap() y facet_grid()
 * **Transformaciones estadísticas**: stat_summary, ..prop.., ...
 
@@ -403,7 +403,7 @@ Los ingredientes esenciales de una gráfica son:
 
 ### Aesthetic mappings
 
-En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el color de los puntos o lineas, el relleno de las barras, la forma de los puntos, el tipo de linea, la agrupación de los datos, etc.  
+En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el color de los puntos o líneas, el relleno de las barras, la forma de los puntos, el tipo de linea, la agrupación de los datos, etc.  
 
 
 
@@ -423,7 +423,7 @@ En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el co
 
 #### x-y
 
-Usando los datos de gapminder, visualizamos la relacion entre gdpPercap (eje x), y lifeExp (eje y).  
+Usando los datos de gapminder, visualizamos la relación entre gdpPercap (eje x), y lifeExp (eje y).  
 
 ```{r aes}
 ggplot(data = gapminder, 
@@ -442,7 +442,7 @@ Si respetamos el orden, podemos simplificar nuestro código, evitando el `data =
 
 #### Ejercicio {.ejercicio -}
 
-Usando `gapminder`, ¿podrías crear un gráfico de gdp per capita por población como éste?
+Usando `gapminder`, ¿podrías crear un gráfico de gdp per cápita por población como éste?
 
 ```{r ejercicio_xy, echo=FALSE}
 
@@ -530,7 +530,7 @@ ggplot(gapminder, aes(gdpPercap, pop), color = continent) +
     geom_point(size = 4, alpha = .5)
 ```
 
-<details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">color = "blue" debe ir fuera de aes()</span></details>
+<details><summary>Solución: ![](data/images/hint.png)</summary><span style="color: orange;">color = "blue" debe ir fuera de aes()</span></details>
 
 ```{r ejercicio_point3, echo=TRUE}
 ggplot(gapminder, aes(gdpPercap, pop, color = "blue")) + 
@@ -592,9 +592,9 @@ O que el tipo de linea dependa de una variable:
 
 ### Geoms
 
-Una de las cosas más difíciles cuando nos enfrentamos a nuevos datos es elegir el método más efectivo para visualizarlos. Hay varios recursos interesantes sobre [cómo elegir una gráfica](https://github.com/widged/data-for-good/wiki/Visualisation-::-Choosing-a-chart). En esta sección veremos distintos tipos de geometria, o `geoms_()`.  
+Una de las cosas más difíciles cuando nos enfrentamos a nuevos datos es elegir el método más efectivo para visualizarlos. Hay varios recursos interesantes sobre [cómo elegir una gráfica](https://github.com/widged/data-for-good/wiki/Visualisation-::-Choosing-a-chart). En esta sección veremos distintos tipos de geometría, o `geoms_()`.  
 
-En ggplot, despues de indicar los datos y coordenadas (e.g. `ggplot(mpg, aes(displ, hwy))`), podemos sumar uno o varios `geoms` con una lógica de capas superpuestas, por ejemplo, `+ geom_point()`.   
+En ggplot, después de indicar los datos y coordenadas (e.g. `ggplot(mpg, aes(displ, hwy))`), podemos sumar uno o varios `geoms` con una lógica de capas superpuestas, por ejemplo, `+ geom_point()`.   
 
 ---  
 
@@ -613,7 +613,7 @@ Para una lista exhaustiva ver el [manual de ggplot2](https://ggplot2.tidyverse.o
 
 #### geom_point y geom_jitter
 
-Si queremos un gráfico de dispersión o scatterplor, podemos usar el `geom_point()`  
+Si queremos un gráfico de dispersión o scatterplot, podemos usar el `geom_point()`  
 
 ```{r geoms-point}
   ggplot(mpg, aes(displ, hwy)) + 
@@ -630,7 +630,7 @@ En algunos casos, tenemos muchos puntos que se superponen. Si usamos `geom_jitte
 
 #### geom_smooth
 
-Podemos usar lineas de tendencia con `geom_smooth()`. El `method` por defecto es [loess](https://en.wikipedia.org/wiki/Local_regression), pero podemos usar otros distintas funciones (e.g. `geom_smooth(method = "lm")` para usar una regresión lineal).  
+Podemos usar líneas de tendencia con `geom_smooth()`. El `method` por defecto es [loess](https://en.wikipedia.org/wiki/Local_regression), pero podemos usar otros distintas funciones (e.g. `geom_smooth(method = "lm")` para usar una regresión lineal).  
 
 ```{r geom-smooth}
   
@@ -665,7 +665,7 @@ Usando como base el plot de la sección [Shape](#shape):
 - Colorear los puntos por continente
 - Mostrar una línea de tendencia por continente (sin el intervalo de confianza)
 - Que el tipo de línea cambie por continente
-- Añadir transparencia para que las lineas destaquen
+- Añadir transparencia para que las líneas destaquen
 
 
 ```{r ejercicio_smooth, echo=FALSE}
@@ -887,7 +887,6 @@ Cuando queremos separar en gráficos independientes distintas categorías dentro
 Con la función `gghighlight()` podemos añadir una capa para facilitar la comparación de cada faceta con los datos completos.  
 
 ```{r facet_wrap2}
-# 1 fila
   ggplot(gapminder, aes(lifeExp, fill = continent)) +
     geom_histogram(alpha = .5) +
     facet_wrap( ~ continent, nrow = 1) +
@@ -912,7 +911,7 @@ ggplot2 nos permite hacer algunas transformaciones estadísticas al crear los gr
 - **max()**: máximo
 - **mean()**: media
 - **median()**: mediana
-- **sd()**: desviación estandard
+- **sd()**: desviación estandar
 
 ###### {-}  
 
@@ -927,7 +926,7 @@ Podemos usar funciones simples de manera directa. En este caso, mostramos un pun
       fun = median)
 ```
 
-Si queremos usar funciones algo mas complejas, la sintaxis es algo diferente. En este caso mostramos media ± desviación estandard:  
+Si queremos usar funciones algo mas complejas, la sintaxis es algo diferente. En este caso mostramos media ± desviación estandar:  
 
 ```{r transformaciones-estadisticas-stat_summary-2}
 
@@ -941,7 +940,7 @@ Si queremos usar funciones algo mas complejas, la sintaxis es algo diferente. En
 
 #### Promedios por grupo
 
-Lo interesante es que podemos añadir estas transformaciones estadísticas como una capa más en los gráficos. Asi que, a este gráfico inicial...  
+Lo interesante es que podemos añadir estas transformaciones estadísticas como una capa más en los gráficos. Así que, a este gráfico inicial...  
 
 ```{r transformaciones-estadisticas-promedios-grupo-1}
 ggplot(mpg) + 
@@ -981,7 +980,7 @@ ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
 
 #### Ejercicios {.ejercicio -}
 
-Cuando al plot **A** trato de añadirle lineas para cada `class`, me aparece algo como lo de **B**.  
+Cuando al plot **A** trato de añadirle líneas para cada `class`, me aparece algo como lo de **B**.  
 
 ```{r ejercicio-7a}
 plotA = ggplot(mpg, aes(displ, hwy, color = class)) +
@@ -996,7 +995,7 @@ plotB = ggplot(mpg, aes(displ, hwy, color = class)) +
 cowplot::plot_grid(plotA, plotB, labels = c("A", "B"))
 ```
 
-Pero en realidad no quiero que las lineas pasen por todos los puntos, sino que muestren el promedio ¿Podrías reproducir el gráfico de abajo?  
+Pero en realidad no quiero que las líneas pasen por todos los puntos, sino que muestren el promedio ¿Podrías reproducir el gráfico de abajo?  
 
 ```{r ejercicio-7b, echo=FALSE}
   ggplot(mpg, aes(displ, hwy, color = class)) +
@@ -1024,7 +1023,7 @@ Podrías crear este gráfico? Mostramos mediana ± sd para cada país, organizad
 
 ### Personalización de gráficas
 
-Habitualmente, un vez tenemos la gráfica que queremos querremos personalizar varias cosas, como las escalas, colores, estilos, etc.  
+Habitualmente, un vez hemos creado la gráfica, querremos personalizar varias cosas, como las escalas, colores, estilos, título,  etc.  
 
 
 #### Coordenadas
@@ -1256,7 +1255,7 @@ p +
 #### Ejercicios {.ejercicio -}
 
 Con el DF `diamonds`, crea el siguiente plot:  
-<details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">Tienes que usar el `geom_bar()` y el parametro `fill`.</span></details>
+<details><summary>Solución: ![](data/images/hint.png)</summary><span style="color: orange;">Tienes que usar el `geom_bar()` y el parámetro `fill`.</span></details>
 
 ```{r geoms-ejercicios-02, echo=FALSE}
 
@@ -1265,7 +1264,7 @@ ggplot(diamonds) +
 
 ```
 
-El plot del panel (A) tiene varios problemas (los años no son enteros o factores, los casos no se muestran con un separador de miles, la leyenda esta a la derecha ocupado un espacio precioso, etc.). Trata de resolverlos e intenta llegar al resultado que se ve en el panel (B). Usa el df `table1` del paquete {tidyr}?  
+El plot del panel (A) tiene varios problemas (los años no son enteros o factores, los casos no se muestran con un separador de miles, la leyenda esta a la derecha ocupado un espacio precioso, etc.). Trata de resolverlos e intenta llegar al resultado que se ve en el panel (B). Usa el dataframe `table1` del paquete {tidyr}?  
 
 
 ```{r geoms-ejercicios-03, echo=FALSE, fig.height=10, fig.width=8}
@@ -1335,13 +1334,13 @@ Alguna de estas gráficas dará un error? Sin correr el código, sabrías decir 
 
 #### Temas {#ejercicios-temas .ejercicio -}
 
-Serías capaz de reproducir este gráfico, usando el df `diamonds` y el `theme_economist`? 
+Serías capaz de reproducir este gráfico, usando el dataframe `diamonds` y el `theme_economist`? 
 
 ```{r ejercicio-6a, echo=FALSE}
 
 ggplot(diamonds, aes(price, cut, fill = cut, color = cut)) +
   ggridges::geom_density_ridges(alpha = .6) +
-  scale_x_log10() + #labels = scales::dollar_format
+  scale_x_log10() +
   labs(title = "Distribución de precios (log) en función del tipo de corte",
        caption = "@gorkang",
        x = "price (log)") +
@@ -1353,7 +1352,7 @@ ggplot(diamonds, aes(price, cut, fill = cut, color = cut)) +
 
 ```
 
-Serías capaz de reproducir este gráfico, usando el df `gapminder` y la paleta `Accent`? 
+Serías capaz de reproducir este gráfico, usando el dataframe `gapminder` y la paleta `Accent`? 
 
 ```{r ejercicio-6b, echo=FALSE}
 

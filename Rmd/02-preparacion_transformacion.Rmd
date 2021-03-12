@@ -24,8 +24,6 @@ if (!require("purrr")) install.packages("purrr"); library("purrr")
 if (!require("readODS")) install.packages("readODS"); library("readODS")
 if (!require("tidyr")) install.packages("tidyr"); library("tidyr")
 if (!require("writexl")) install.packages("writexl"); library("writexl")
-
-# if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests")); library('caret')
 if (!require('caret')) install.packages('caret'); library('caret')
 
 if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
@@ -347,7 +345,7 @@ ggplot(table1, aes(as.factor(year), cases)) +
 
 Usaremos [{dplyr}](https://dplyr.tidyverse.org/), un paquete muy potente para la manipulación de datos. Su sintaxis, además, es bastante intuitiva (¡son verbos en inglés!). Usando pipes **%>%** (CONTROL + SHIFT + M) podemos enlazar operaciones de transformación de datos de manera muy sencilla (una vez nos aprendamos los verbos).  
 
-Podemos ver mas detalle y ejemplos en la [Cheatsheet de dplyr](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf).   
+Podemos ver más detalle y ejemplos en la [Cheatsheet de dplyr](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf).   
 
 **Verbos esenciales**:  
 
@@ -429,7 +427,7 @@ DF_name %>%
 # Renombrar usando vectores
 oldnames = c("ID","Genero")
 newnames = c("Identificador","Sexo")
-DF_name %>% rename_at(vars(oldnames), ~ newnames)
+DF_name %>% rename_at(all_of(oldnames), ~ newnames)
 
 ```
 

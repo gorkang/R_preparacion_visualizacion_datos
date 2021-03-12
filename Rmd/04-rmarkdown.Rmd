@@ -11,6 +11,7 @@
   if (!require('afex')) install.packages('afex'); library('afex')
   if (!require('correlation')) install.packages("correlation"); library('correlation')
   if (!require('corrr')) install.packages('corrr'); library('corrr')
+  if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
   if (!require('ggraph')) install.packages('ggraph'); library('ggraph')
   if (!require('gtsummary')) install.packages('gtsummary'); library('gtsummary')
   if (!require('knitr')) install.packages('knitr'); library('knitr')
@@ -19,6 +20,7 @@
   if (!require('rticles')) install.packages('rticles'); library('rticles')
   if (!require('see')) install.packages("see"); library('see')
   if (!require('stargazer')) install.packages('stargazer'); library('stargazer')
+  if (!require('sjPlot')) install.packages('sjPlot'); library('sjPlot')
   if (!require('usethis')) install.packages('usethis'); library('usethis')
   
   if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
@@ -388,11 +390,15 @@ En el resto del documento (con la excepción de los chunks de código), el forma
 
 IMPORTANTE. Si algo no funciona como esperas:  
 
+#### {.parameters -}
+
 * Añade saltos de linea entre párrafos.  
 * Añade dos espacios al final de las líneas.  
 * Añade un espacio después de #: 
   + MAL: `#Título grande  `
   + BIEN: `# Título grande  `
+
+#### {-}
   
 
 ### Chunks de código  
@@ -412,6 +418,7 @@ En la cabecera puedes añadir opciones. Hay una [cantidad apabullante de opcione
 
 `{r nombre_chunk, eval=TRUE, include=TRUE, fig.height=10, fig.width=12, message=FALSE, warning=FALSE, cache=TRUE, results='asis'}`
 
+#### {.parameters -}
 * `eval=TRUE`: Muestra el código
 * `include=TRUE`: Corre el código
 * `fig.height=10`: altura de los plots (en inches)
@@ -421,7 +428,9 @@ En la cabecera puedes añadir opciones. Hay una [cantidad apabullante de opcione
 * `cache=TRUE`: cachea el output del plot
 * `results='asis'`: muestra el output tal cual (importante cuando el output es en latex/pdf)  
 
-Haciendo click en la herramienta de la derecha puedes controlar varios parámetros esenciales. 
+#### {-}
+
+Haciendo click en la herramienta de la derecha del chunk ![](`r here::here("data", "images", "tool")`) puedes controlar varios parámetros esenciales. 
 
 
 *TRUCO:*
@@ -447,7 +456,7 @@ Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:
 * Discussion
 * Bibliography
 
-2. Pon texto de relleno dentro de cada sección. Para ello puedes usar la función `stri_rand_lipsum()` del paquete {stringi}.  
+2. Pon texto de relleno dentro de cada sección. Para ello puedes usar la función `stringi::stri_rand_lipsum()` del paquete {stringi}.  
 
 3. Renderiza tu documento en formato PDF.  
 
@@ -457,7 +466,7 @@ Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:
 
 ### Herramientas básicas para investigadoras/es
 
-De manera relativamente sencilla podemos incluir tablas bonitas en los reportes. 
+De manera relativamente sencilla podemos incluir tablas bonitas en los reportes.  
 
 #### Descriptivos
 
@@ -467,12 +476,6 @@ De manera relativamente sencilla podemos incluir tablas bonitas en los reportes.
                        by = continent,
                        missing = "ifany") %>% 
   gtsummary::add_n()
-
-
-# table_combined_vive = gtsummary::tbl_merge(list(T_female, T_male), tab_spanner = list("Female", "Male"))
-
-# gt::gtsave(gtsummary::as_gt(table_combined_vive), file = "outputs/table-combined-vive.png")
-
 
 ```
 
@@ -487,9 +490,8 @@ De manera relativamente sencilla podemos incluir tablas bonitas en los reportes.
 
   corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
 
-  report(corr_test)
-  table_easystats = report::report(corr_test)
-  knitr::kable(table_easystats)
+  table_easystats = report::report(corr_test); table_easystats
+  knitr::kable(table_easystats, align = "c")
 
 mtcars %>% 
   correlation(partial = TRUE) %>% 
@@ -508,12 +510,13 @@ mtcars %>%
     # report() %>% 
     # table_long(full = TRUE)
   
-# Cambiamos todos los NA por ""
-table_clean = table_correlations %>% 
-  mutate_if(is.character, ~replace(., is.na(.), ""))
-    
-# Mostramos la tabla bonita (función kable del paquete {knitr})  
-  knitr::kable(table_clean)
+  # Cambiamos todos los NA por ""
+  table_clean = table_correlations %>% 
+    mutate_if(is.character, ~replace(., is.na(.), ""))
+      
+  # Mostramos la tabla bonita (función kable del paquete {knitr})  
+  DT::datatable(table_clean, options = list(dom = 't'))
+  # knitr::kable(table_clean)
   
 ```
 
@@ -523,15 +526,28 @@ table_clean = table_correlations %>%
 
   model_lm <- lm(Sepal.Length ~ Petal.Length * Petal.Width, data = iris)
   summary_lm = summary(model_lm)
-  # papaja::apa_print.summary.lm(summary_lm)$table
+  
   table_lm = papaja::apa_print(model_lm)$table
   knitr::kable(table_lm)
   
-  report(model_lm)
+  report::report(model_lm)
+  
   table_easystats = report::report(model_lm)
   knitr::kable(table_easystats)
   
 ```
+
+
+---
+
+```{r sjplot, results='asis'}
+
+  sjPlot::tab_model(model_lm)
+
+  # Para usar las tablas generadas por sjPlot en pdf's ver: https://github.com/gorkang/html2latex/
+
+```
+
 
 ---  
 

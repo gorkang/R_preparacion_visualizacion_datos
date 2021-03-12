@@ -396,8 +396,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#sintaxis-chunks-de-código-tipos-de-archivo"><i class="fa fa-check"></i><b>4.6</b> Sintaxis, chunks de código, tipos de archivo</a>
 <ul>
 <li class="chapter" data-level="4.6.1" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cabecera-yaml"><i class="fa fa-check"></i><b>4.6.1</b> Cabecera YAML</a></li>
-<li class="chapter" data-level="4.6.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#rmarkdown"><i class="fa fa-check"></i><b>4.6.2</b> Rmarkdown</a></li>
-<li class="chapter" data-level="4.6.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#chunks-de-código"><i class="fa fa-check"></i><b>4.6.3</b> Chunks de código</a></li>
+<li class="chapter" data-level="4.6.2" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#rmarkdown"><i class="fa fa-check"></i><b>4.6.2</b> Rmarkdown</a>
+<ul>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-24"></a></li>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-25"></a></li>
+</ul></li>
+<li class="chapter" data-level="4.6.3" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#chunks-de-código"><i class="fa fa-check"></i><b>4.6.3</b> Chunks de código</a>
+<ul>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-26"></a></li>
+<li><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#section-27"></a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-básico-rmarkdown"><i class="fa fa-check"></i>Ejercicio básico RMarkdown</a></li>
 <li class="chapter" data-level="4.6.4" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#herramientas-básicas-para-investigadorases"><i class="fa fa-check"></i><b>4.6.4</b> Herramientas básicas para investigadoras/es</a>
 <ul>
@@ -466,7 +474,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="introducción" class="section level1 unnumbered">
 <h1>Introducción</h1>
-<p>El objetivo de este seminario es aprender a usar <a href="https://www.r-project.org/">R</a> para preparar y visualizar datos, además de generar reportes reproducibles. Está pensado para alumnos de postgrado con conocimentos básicos de programación.</p>
+<p>El objetivo de este seminario es aprender a usar <a href="https://www.r-project.org/">R</a> para preparar y visualizar datos, además de generar reportes reproducibles. Está pensado para alumnos de postgrado con conocimientos básicos de programación.</p>
 <p><a href="https://www.r-project.org/">R</a> es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.</p>
 <div id="objetivos" class="section level2 unnumbered">
 <h2>Objetivos</h2>
@@ -480,16 +488,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="como-empezar" class="section level2 unnumbered">
 <h2>Como empezar</h2>
-<p>Si ya has completado los pasos indicados en <strong><a href="preparando-sistema.html#preparando-sistema">Preparando nuesto sistema</a></strong>, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:</p>
+<p>Si ya has completado los pasos indicados en <strong><a href="preparando-sistema.html#preparando-sistema">preparando nuestro sistema</a></strong>, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;usethis&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;usethis&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;usethis&#39;</span>)</span>
 <span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="st">&quot;gorkang/R_preparacion_visualizacion_datos&quot;</span>)</span></code></pre></div>
-<p>Sigue las instrucciones que aparecen en la Consola para tener un nuevo proyecto de RStudio con todos los materiales del curso. El codigo anterior creará una carpeta llamada <code>R_preparacion_visualizacion_datos-master</code>. Dentro de esa carpeta tendrás un archivo llamado <code>R_preparacion_visualizacion_datos.Rproj</code> que te permitirá abrir el proyecto de RStudio del workshop.</p>
+<p>Sigue las instrucciones que aparecen en la Consola para tener un nuevo proyecto de RStudio con todos los materiales del curso. El código anterior creará una carpeta llamada <code>R_preparacion_visualizacion_datos-master</code>. Dentro de esa carpeta tendrás un archivo llamado <code>R_preparacion_visualizacion_datos.Rproj</code> que te permitirá abrir el proyecto de RStudio del workshop.</p>
 <p>La carpeta <code>R_preparacion_visualizacion_datos-master</code> contiene varias cosas. Las mas importantes son:</p>
 <ul>
 <li>Carpeta <code>docs</code>: puedes abrir <code>docs/index.html</code> en tu navegador para ver el “libro” de este curso. Alternativamente, puedes consultar una <a href="https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html">version online del libro</a>.<br />
 </li>
-<li>Carpeta <code>Rmd</code>: En esa carpeta esta el codigo fuente de los capitulos del libro<br />
+<li>Carpeta <code>Rmd</code>: En esa carpeta esta el código fuente de los capítulos del libro<br />
 </li>
 <li>Carpeta <code>data</code>: Cuando usemos archivos de datos, vendrán de aquí</li>
 </ul>

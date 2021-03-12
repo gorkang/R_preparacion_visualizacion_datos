@@ -1,5 +1,14 @@
-h2 {margin-top: 0.5em !important;}
-h3 {margin-top: 0.5em !important;}
+.bibliografia h2 {margin-top: 0.5em !important;}
+.bibliografia h3 {margin-top: 0.5em !important;}
+.bibliografia h4 {margin-top: 0.5em !important;}
+
+.parameters h2 {margin-top: 0.5em !important;}
+.parameters h3 {margin-top: 0.5em !important;}
+.parameters h4 {margin-top: 0.5em !important;}
+
+.ejercicio h2 {margin-top: 0.5em !important;}
+.ejercicio h3 {margin-top: 0.5em !important;}
+.ejercicio h4 {margin-top: 0.5em !important;}
 
 
 .bibliografia {
