@@ -83,7 +83,7 @@ plotly::ggplotly(
   
 ```
 
-
+<BR>
 En el experimento le preguntamos a las personas por la probabilidad de que les apareciera alguno de los temas estudiados en la prueba. Comparamos las siguientes dos preguntas:  
 
 + ¿Cuál es la probabilidad de que **salga uno** de los temas que has estudiado?  
@@ -110,7 +110,10 @@ DF %>%
 
 ```
 
-Hay una diferencia notable entre condiciones. Pasamos de un error promedio del -30.7% a tan solo 4%, simplemente cambiando la pregunta. Hagamos un sencillo análisis de regresión para ver si la diferencia es significativa, y cuanta varianza explica nuestro modelo.  
+<BR>
+
+Hay una diferencia notable entre condiciones. Pasamos de un error promedio del -30.7% a tan solo 4%, simplemente cambiando la pregunta. Hagamos un sencillo análisis de regresión para ver si la diferencia es significativa, y cuanta varianza explica nuestro modelo.   
+
 
 ```{r visualizacion-importante-01b, echo=FALSE}
 # Modelo de regresión
@@ -130,8 +133,8 @@ hist(modelo_regresion$residuals)
 shapiro.test(modelo_regresion$residuals)
 ```
 
-
-Todo es hermoso. Tenemos un efecto claramente significativo de la pregunta (y con un R2-ajustado de .258, no está nada mal), y además, nuestro modelo no incumple el supuesto de normalidad de residuos (por los pelos!). <details><summary>Léeme ![](data/images/hint.png)</summary><span style="color: orange;">[Las pruebas de normalidad son muy sensibles al n de la muestra](https://stats.stackexchange.com/questions/2492/is-normality-testing-essentially-useless)</span></details>   
+<BR>
+<details><summary>Todo es hermoso. Tenemos un efecto claramente significativo de la pregunta (y con un R2-ajustado de .258, no está nada mal), y además, nuestro modelo no incumple el supuesto de normalidad de residuos (por los pelos!). Léeme ![](data/images/hint.png)</summary><span style="color: orange;">[Las pruebas de normalidad son muy sensibles al n de la muestra](https://stats.stackexchange.com/questions/2492/is-normality-testing-essentially-useless)</span></details>   
 Preparamos un plot con promedios y barras con error standard para nuestro paper.
 
 ```{r visualizacion-importante-01d, echo=FALSE}
@@ -152,9 +155,7 @@ plot_inicial
 
 ```
 
-Estamos listos para escribir el paper.  
-
-Solo por curiosidad, veamos boxplots de los dos grupos. Mmmm... hay algo extraño:  
+Estamos listos para escribir el paper.  Solo por curiosidad, veamos boxplots de los dos grupos. Mmmm... hay algo extraño:  
 
 ```{r visualizacion-importante-02, echo=FALSE}
   
@@ -168,6 +169,7 @@ ggplot(DF, aes(Question, Error, color = Question, group = Question)) +
 
 ```
 
+<BR>
 Volvemos a extraer descriptivos... pero esta vez incluimos la mediana.  
 
 ```{r visualizacion-importante-03, echo=FALSE}
@@ -238,13 +240,13 @@ R es [uno de los programas para data science mas populares](http://r4stats.com/a
 
 <!-- (https://gist.githubusercontent.com/daroczig/3cf06d6db4be2bbe3368/raw/b66b0531fb1b86d3e04a003b2e105ad4f147900e/number-of-submitted-packages-to-CRAN.png)   -->
 
----  
+<BR> 
 
 Además de lo anterior, R es un programa de código abierto (algo esencial para poder hacer ciencia reproducible), con una [comunidad de usuarios](https://community.rstudio.com/) muy acogedora.   
 
 Sus funciones de visualización son muy potentes (ver la [r-graph-gallery](https://www.r-graph-gallery.com/) para algunos ejemplos), siendo usadas como herramienta principal en algunos medios como la [BBC](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535).  
 
----  
+<BR> 
 
 No menos importante, hay una gran cantidad de cursos, tutoriales, presentaciones, etc. de una calidad excelente, con los que podemos aprender de manera autónoma. Por ejemplo:
 
@@ -252,11 +254,11 @@ No menos importante, hay una gran cantidad de cursos, tutoriales, presentaciones
 - [A Gentle Guide to the Grammar of Graphics with ggplot2](https://pkg.garrickadenbuie.com/gentle-ggplot2/)
 - [resulumit.com Rmd workshop](https://resulumit.com/teaching/rmd_workshop.htm)
 
----   
+<BR>    
 
 Con R puedes recoger datos interactivamente con [shiny](https://shiny.rstudio.com/), preparar datos (o extraerlos de paginas web con [rvest](https://github.com/tidyverse/rvest) o [RSelenium](https://github.com/ropensci/RSelenium)), visualizar datos estáticos con [ggplot](https://ggplot2.tidyverse.org/), animarlos con [gganimate](https://github.com/thomasp85/gganimate), visualizarlos con interactivamente con [plotly](https://github.com/ropensci/plotly/) o [shiny](https://shiny.rstudio.com/). Puedes también analizar los datos con todas las técnicas imaginables, desde anovas con [afex](https://github.com/singmann/afex) a modelos mixtos con [lmer](https://github.com/lme4/lme4) y/o [afex](https://github.com/singmann/afex), pasando por meta-análisis con [metafor](http://www.metafor-project.org/doku.php), SEM, Path analysis, mediación, con [lavaan](http://lavaan.ugent.be/tutorial/sem.html), análisis Bayesianos con [brms](https://github.com/paul-buerkner/brms) o [bayesfactor](http://bayesfactor.blogspot.com/), y un larguísimo etc. Puedes llevar tus visualizaciones y análisis a reportes automáticos en múltiples formatos (pdf, html, docx) con [Rmarkdown](https://rmarkdown.rstudio.com/), crear libros como este con [bookdown](https://bookdown.org/), páginas web con [blogdown](https://bookdown.org/yihui/blogdown/) o [distill](https://rstudio.github.io/distill/), e incluso papers completamente reproducibles (preparación y análisis de datos) en formato APA con [papaja](https://github.com/crsh/papaja).  
 
----  
+<BR>   
 
 
 ### Bienvenida al tidyverse
@@ -306,7 +308,7 @@ Programar es muy difícil. Todos necesitamos ayuda. Contar con una comunidad rob
 
 ![SOURCE: http://www.keywordbasket.com/ZWZlY3RvIGR1bm5pbmcta3J1Z2Vy/](`r here::here("data", "images", "dunning-kruger.jpg")`)  
 
----  
+<BR> 
 
 Hay algunos recursos que son **imprescindibles**. Nadie sabe como *los antiguos* podían programar antes de la llegada de Stackoverflow:  
 
@@ -344,8 +346,7 @@ Para empezar a usar ggplot sin tener que preocuparnos de su complejidad, podemos
 
 <!-- (https://www.williamrchase.com/slides/slide_img/esquisse.gif)   -->  
 
----  
-
+<BR> 
 
 La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquisse):  
 
@@ -538,10 +539,52 @@ ggplot(gapminder, aes(gdpPercap, pop, color = "blue")) +
 ```
 
 
+<BR>
+
+Alguna de estas gráficas dará un error? Sin correr el código, sabrías decir cuál de ellas? Hay varias soluciones posibles, ¿Cuales serían?.        
+
+```{r linetype-01, eval = FALSE}
+
+  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
+    geom_point() +
+    stat_summary(fun = mean, geom = "line", linetype = "dashed")
+    
+  ggplot(mpg, mapping = aes(displ, hwy, color = class, linetype = class)) +
+    geom_point() +
+    stat_summary(fun = mean, geom = "line")
+
+  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
+    geom_point() +
+    stat_summary(fun = mean, geom = "line", linetype = class)
+
+```
+
+
+```{r solucion-linetype-01, eval=FALSE, include=FALSE}
+
+  # SOLUCION 1
+  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
+    geom_point() +
+    stat_summary(fun = mean, geom = "line", aes(linetype = class))
+
+  # SOLUCION 2
+  ggplot(mpg, mapping = aes(displ, hwy, color = class, linetype = class)) +
+    geom_point() +
+    stat_summary(fun = mean, geom = "line")
+  
+  # SOLUCION 3
+  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
+    geom_point() +
+    stat_summary(fun = mean, geom = "line", linetype = "dashed")
+  
+```
+
+
+<BR>
 
 #### Shape {#shape}
 
-Códigos para las distintas formas:  
+**Códigos para las distintas formas**:  
 
 ###### {.parameters -}    
 
@@ -549,7 +592,9 @@ Códigos para las distintas formas:
 
 ###### {-}   
 
-<!-- (https://d33wubrfki0l68.cloudfront.net/2705b59d57362a103f0dad04b0ccfdeff9a101d2/3dc1b/visualize_files/figure-html/shapes-1.png) -->  
+
+En este ejemplo usamos la variable `continent` para que cada asignar una forma diferente a cada uno de los continentes.  
+
 
 ```{r shape, message=TRUE, warning=TRUE}
 
@@ -562,7 +607,7 @@ Códigos para las distintas formas:
 
 #### Linetype  
 
-Códigos para los distintos estilos de linea:  
+**Códigos para los distintos estilos de linea**:  
 
 ###### {.parameters -}    
 
@@ -570,7 +615,8 @@ Códigos para los distintos estilos de linea:
 
 ###### {-}    
 
-Podemos directamente definir el tipo de linea que queremos en `geom_line()`:  
+<BR>
+Podemos definir directamente el tipo de línea que queremos en `geom_line()`:  
 
 ```{r linetype-1}
 
@@ -580,7 +626,7 @@ Podemos directamente definir el tipo de linea que queremos en `geom_line()`:
 
 ```
 
-O que el tipo de linea dependa de una variable:  
+O que el tipo de línea dependa de una variable:  
 
 ```{r linetype-2}
 
@@ -609,7 +655,7 @@ Para una lista exhaustiva ver el [manual de ggplot2](https://ggplot2.tidyverse.o
 
 <!-- `geom_abline()`, `geom_area()`, `geom_bar()`, `geom_bin2d()`, `geom_blank()`, `geom_boxplot()`, `geom_col()`, `geom_contour()`, `geom_contour_filled()`, `geom_count()`, `geom_crossbar()`, `geom_curve()`, `geom_density()`, `geom_density2d()`, `geom_density2d_filled()`, `geom_density_2d()`, `geom_density_2d_filled()`, `geom_dotplot()`, `geom_errorbar()`, `geom_errorbarh()`, `geom_freqpoly()`, `geom_function()`, `geom_hex()`, `geom_histogram()`, `geom_hline()`, `geom_jitter()`, `geom_label()`, `geom_line()`, `geom_linerange()`, `geom_map()`, `geom_path()`, `geom_point()`, `geom_pointrange()`, `geom_polygon()`, `geom_qq()`, `geom_qq_line()`, `geom_quantile()`, `geom_raster()`, `geom_rect()`, `geom_ribbon()`, `geom_rug()`, `geom_segment()`, `geom_sf()`, `geom_sf_label()`, `geom_sf_text()`, `geom_smooth()`, `geom_spoke()`, `geom_step()`, `geom_text()`, `geom_tile()`, `geom_violin()`, `geom_vline()`   -->
 
-
+<BR> 
 
 #### geom_point y geom_jitter
 
@@ -630,7 +676,7 @@ En algunos casos, tenemos muchos puntos que se superponen. Si usamos `geom_jitte
 
 #### geom_smooth
 
-Podemos usar líneas de tendencia con `geom_smooth()`. El `method` por defecto es [loess](https://en.wikipedia.org/wiki/Local_regression), pero podemos usar otros distintas funciones (e.g. `geom_smooth(method = "lm")` para usar una regresión lineal).  
+Podemos usar líneas de tendencia con `geom_smooth()`. El `method` por defecto es [loess](https://en.wikipedia.org/wiki/Local_regression), pero podemos usar otras funciones (e.g. `geom_smooth(method = "lm")` para usar una regresión lineal).  
 
 ```{r geom-smooth}
   
@@ -737,7 +783,7 @@ cowplot::plot_grid(plot1, plot2, plot3, plot4, plot5, plot6,
 
 ```
 
-
+<BR> 
 
 #### geom_boxplot y geom_violin
 
@@ -770,7 +816,7 @@ Podemos usar histogramas `geom_histogram()` con variables continuas.
     geom_histogram()
 ```
 
-O `geom_bar()` con variables categóricas.  
+O si tenemos variables categóricas, `geom_bar()`.  
 
 ```{r geom-bar}
   ggplot(gapminder, aes(continent, fill = continent)) +
@@ -787,7 +833,18 @@ Para visualizar distribuciones (cuando tenemos muchos datos), podemos usar `geom
   # Density with fill and alpha
   ggplot(gapminder, aes(lifeExp, fill = continent)) + 
       geom_density(alpha = .2)
-  
+
+```
+
+
+#### Ejercicio {.ejercicio -}
+
+Añadiendo un parámetro a la gráfica de arriba, podemos transformarla en las versiones de abajo. ¿Podrías hacerlo? (recuerda que poníendote encima de `geom_density()` y tecleando `F1` puedes ver la ayuda de la función).  
+
+<details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">`position = "stack"` y `position = "fill"`.</span></details>
+
+```{r ejercicio-density, echo=FALSE}
+
   # Density - position stack
   ggplot(gapminder, aes(lifeExp, fill = continent)) + 
       geom_density(position = "stack", alpha = .2)
@@ -795,7 +852,7 @@ Para visualizar distribuciones (cuando tenemos muchos datos), podemos usar `geom
   # Density - position fill
   ggplot(gapminder, aes(lifeExp, fill = continent)) + 
       geom_density(position = "fill", alpha = .2)
-
+  
 ```
 
 
@@ -822,7 +879,7 @@ Especialmente porque podemos incluir en el mismo gráfico información sobre dis
 
 #### Ejercicios {.ejercicio -}
 
-Usando como base el plot de la seccion [geom_histrogram()](#histogramas):  
+Usando como base el plot de la seccion [geom_histogram()](#histogramas):  
 
 - Colorea los puntos por continente
 - Sabrias hacer que no se amontonen unos continentes sobre otros? Necesitarás añadir transparencia para ver todos los datos
@@ -838,6 +895,19 @@ ggplot(gapminder, aes(lifeExp, fill = continent)) +
 
 ```
 
+
+Con el DF `diamonds`, crea el siguiente plot:  
+<details><summary>Solución: ![](data/images/hint.png)</summary><span style="color: orange;">Tienes que usar el `geom_bar()` y el parámetro `fill`.</span></details>
+
+```{r geoms-ejercicios-02, echo=FALSE}
+
+ggplot(diamonds) + 
+  geom_bar(aes(cut, fill = clarity))
+
+```
+
+
+<BR>  
 
 ### Facets  
 
@@ -1018,8 +1088,7 @@ Podrías crear este gráfico? Mostramos mediana ± sd para cada país, organizad
   theme(axis.text.x = element_blank())
 
 ```
-
-
+<BR>
 
 ### Personalización de gráficas
 
@@ -1109,6 +1178,35 @@ Habitualmente, un vez hemos creado la gráfica, querremos personalizar varias co
 ```
 
 
+
+#### Ejercicio {.ejercicio -}
+
+El plot del panel (A) tiene varios problemas (los años no son enteros o factores, los casos no se muestran con un separador de miles, la leyenda esta a la derecha ocupado un espacio precioso, etc.). Trata de resolverlos e intenta llegar al resultado que se ve en el panel (B). Usa el dataframe `table1` del paquete {tidyr}?  
+
+
+```{r geoms-ejercicios-03, echo=FALSE, fig.height=10, fig.width=8}
+
+plot1 = ggplot(table1, aes(year, cases)) + 
+  geom_line(aes(group = country), colour = "grey50") + 
+  geom_point(aes(colour = country))
+
+plot2 = ggplot(table1, aes(as.factor(year), cases)) + 
+  geom_line(aes(group = country), colour = "grey50") + 
+  geom_point(aes(colour = country), size = 2) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(title = "Casos de Tuberculosis por año",
+       x = "year",
+       caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") +
+  theme(legend.position = "bottom", 
+        legend.title = element_blank())
+
+cowplot::plot_grid(plot1, plot2, 
+                   nrow = 2,
+                   labels = c("A", "B"))
+
+```
+
+
 #### Colors and fill scales
 
 ```{r personalizacion-graficas-color-fill}
@@ -1142,6 +1240,7 @@ Habitualmente, un vez hemos creado la gráfica, querremos personalizar varias co
 
 #### Combinando gráficas {#combinando-graficas}
 
+Con {[cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html#:~:text=The%20cowplot%20package%20is%20a,or%20mix%20plots%20with%20images.)} podemos combinar gráficas de manera muy simple. Otro paquete muy interesante es {[patchwork](https://patchwork.data-imaginist.com/)}.  
 
 ```{r personalizando-combinando-basico}
 
@@ -1161,10 +1260,9 @@ cowplot::plot_grid(plot2, plot1,
 
 ```
 
+O hacer cosas mas complejas como combinar un [scatteplot con un par de histogramas](https://stackoverflow.com/questions/8545035/scatterplot-with-marginal-histograms-in-ggplot2/56440634#56440634):  
 
 ```{r personalizando-combinando-avanzado}
-
-# SOURCE: https://stackoverflow.com/questions/8545035/scatterplot-with-marginal-histograms-in-ggplot2/56440634#56440634
 
 # Set up scatterplot
 scatterplot <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
@@ -1195,30 +1293,22 @@ aligned_y_hist <- align_plots(y_hist, scatterplot, align = "h")[[1]]
 
 # Arrange plots
 cowplot::plot_grid(
-  aligned_x_hist
-  , NULL
-  , scatterplot
-  , aligned_y_hist
-  , ncol = 2
-  , nrow = 2
-  , rel_heights = c(0.2, 1)
-  , rel_widths = c(1, 0.2))
+  aligned_x_hist, NULL, scatterplot, aligned_y_hist,
+  ncol = 2, nrow = 2, 
+  rel_heights = c(0.2, 1), rel_widths = c(1, 0.2)
+  )
 
 ```
 
-
-
+<BR>
 #### Usando estilos
 
+Los estilos nos permiten personalizar los gráficos de manera muy sencilla, por ejemplo, usando {[ggtheme](https://ggplot2.tidyverse.org/reference/ggtheme.html)}. Podéis ver un tutorial [aquí](https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html).  
 
-https://ggplot2.tidyverse.org/reference/ggtheme.html
-
-https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html
-
+Primero creamos un gráfico sobre el que aplicaremos estilos.  
 
 ```{r personalizacion-graficas-01}
 
-# Create a base graph
 p <- ggplot(iris, aes(Petal.Width, Petal.Length, color = Species)) +
   geom_point() +
   labs(title = 'A ggplot simple graph',
@@ -1232,7 +1322,7 @@ p
 
 ```
 
-Usando el tema fivethirtyeight
+Usando el tema fivethirtyeight:  
 
 ```{r personalizacion-graficas-02}
 
@@ -1242,7 +1332,8 @@ p +
 
 ```
 
-Usando el tema economist
+Usando el tema economist:  
+
 ```{r personalizacion-graficas-03}
 
 p +
@@ -1253,86 +1344,6 @@ p +
 
 
 #### Ejercicios {.ejercicio -}
-
-Con el DF `diamonds`, crea el siguiente plot:  
-<details><summary>Solución: ![](data/images/hint.png)</summary><span style="color: orange;">Tienes que usar el `geom_bar()` y el parámetro `fill`.</span></details>
-
-```{r geoms-ejercicios-02, echo=FALSE}
-
-ggplot(diamonds) + 
-  geom_bar(aes(cut, fill = clarity))
-
-```
-
-El plot del panel (A) tiene varios problemas (los años no son enteros o factores, los casos no se muestran con un separador de miles, la leyenda esta a la derecha ocupado un espacio precioso, etc.). Trata de resolverlos e intenta llegar al resultado que se ve en el panel (B). Usa el dataframe `table1` del paquete {tidyr}?  
-
-
-```{r geoms-ejercicios-03, echo=FALSE, fig.height=10, fig.width=8}
-
-plot1 = ggplot(table1, aes(year, cases)) + 
-  geom_line(aes(group = country), colour = "grey50") + 
-  geom_point(aes(colour = country))
-
-plot2 = ggplot(table1, aes(as.factor(year), cases)) + 
-  geom_line(aes(group = country), colour = "grey50") + 
-  geom_point(aes(colour = country), size = 2) +
-  scale_y_continuous(labels = scales::comma) +
-  labs(title = "Casos de Tuberculosis por año",
-       x = "year",
-       caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") +
-  theme(legend.position = "bottom", 
-        legend.title = element_blank())
-
-cowplot::plot_grid(plot1, plot2, 
-                   nrow = 2,
-                   labels = c("A", "B"))
-
-```
-
-
-#### Sintaxis aes() {.ejercicio -}
-
-
-Alguna de estas gráficas dará un error? Sin correr el código, sabrías decir cuál de ellas? Hay varias soluciones posibles, ¿Cuales serían?.        
-
-```{r linetype-01, eval = FALSE}
-
-  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line", linetype = "dashed")
-    
-  ggplot(mpg, mapping = aes(displ, hwy, color = class, linetype = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line")
-
-  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line", linetype = class)
-
-```
-
-
-```{r solucion-linetype-01, eval=FALSE, include=FALSE}
-
-  # SOLUCION 1
-  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line", aes(linetype = class))
-
-  # SOLUCION 2
-  ggplot(mpg, mapping = aes(displ, hwy, color = class, linetype = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line")
-  
-  # SOLUCION 3
-  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line", linetype = "dashed")
-  
-```
-
-
-#### Temas {#ejercicios-temas .ejercicio -}
 
 Serías capaz de reproducir este gráfico, usando el dataframe `diamonds` y el `theme_economist`? 
 

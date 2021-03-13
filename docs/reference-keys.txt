@@ -33,7 +33,6 @@ coordenadas
 scales
 colors-and-fill-scales
 combinando-graficas
-usando-estilos
 visualización-interactiva
 gráficas-interactivas
 animando-gráficas
@@ -86,7 +85,8 @@ visualizando-datasets-completos
 inspectdf
 covariación
 variable-categórica-y-continua
-ejercicio-covariacion-1
+ejercicio-3
+ejercicio-4
 dos-variables-categóricas
 dos-variables-continuas
 ejercicio-covariación-2
@@ -115,11 +115,10 @@ test-de-correlación
 tabla-de-correlaciones
 lm
 anova
-otros
-usar-bibliografía
-citar-los-paquetes-que-usamos
 de-los-datos-al-reporte-final-una-historia-de-amor-con-r
 avanzado
+usar-bibliografía
+citar-los-paquetes-que-usamos
 manejo-de-dependencias
 mas-allá-de-rmarkdown
 varios

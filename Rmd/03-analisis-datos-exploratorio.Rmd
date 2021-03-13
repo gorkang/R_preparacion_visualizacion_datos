@@ -6,9 +6,11 @@
 
 ```{r setup-03, message=FALSE, warning=FALSE}
 
+if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
 if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
 if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('ggridges')) install.packages('ggridges'); library('ggridges')
 if (!require('haven')) install.packages('haven'); library('haven')
 if (!require('inspectdf')) install.packages('inspectdf'); library('inspectdf')
 if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
@@ -131,36 +133,11 @@ Podemos contar el numero de elementos por nivel de la variable o ver densidad, e
 ggplot(gapminder, aes(lifeExp, colour = continent)) + 
   geom_freqpoly(binwidth = 2)
 
-# Lo mismo pero usando stat(count)
-ggplot(gapminder, aes(lifeExp, stat(count), colour = continent)) + 
-  geom_freqpoly(binwidth = 2)
-
-# En stat() podemos usar combinaciones de funciones
-ggplot(gapminder, aes(lifeExp, stat(density/max(density)), colour = continent)) +
-  geom_freqpoly(binwidth = 2)
-
-
 ```
 
+<BR>
 
-Podemos ver boxplots para cada nivel de la variable categórica:  
-
-```{r covariacion-categorica-continua-2}
-
-ggplot(gapminder, aes(continent, lifeExp)) +
-  geom_boxplot()
-
-ggplot(gapminder, aes(reorder(x = continent, X = lifeExp, FUN = median), lifeExp)) +
-  geom_boxplot()
-
-# Que feo ha quedado el titulo del eje x
-ggplot(gapminder, aes(reorder(x = continent, X = lifeExp, FUN = median), lifeExp)) +
-  geom_boxplot() +
-  labs(x = "Continente")
-
-```
-
-Y podemos usar geom_density_ridges() para combinar puntos con distribuciones:  
+Podemos usar geom_density_ridges() para combinar puntos con distribuciones:  
 
 ```{r covariacion-categorica-continua-3}
 
@@ -178,15 +155,17 @@ ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
 
 gapminder %>% group_by(year) %>% summarise(n())
 
-ggplot(gapminder %>% filter(year == 2007), aes(lifeExp, continent, fill = continent)) + 
+ggplot(gapminder %>% filter(year > 1995), aes(lifeExp, continent, fill = continent)) + 
   ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
   ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9)
 
 ```
 
-Me pregunto si será muy evidente la diferencia entre los extremos en la base de datos, 1952 y 2007:  
+### Ejercicio {.ejercicio} 
 
-```{r covariacion-categorica-continua-5}
+¿Podríais mostrar la diferencia entre los extremos en la base de datos, 1952 y 2007?:  
+
+```{r covariacion-categorica-continua-5, echo=FALSE}
 
 A = ggplot(gapminder %>% filter(year == 1952), aes(lifeExp, continent, fill = continent)) + 
   ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
@@ -204,45 +183,9 @@ cowplot::plot_grid(A, B)
 
 ```
 
-Finalmente, podemos ver el avance por país de una manera más directa:   
+Mira el plot donde mostramos la diferencia entre los extremos en la base de datos, 1952 y 2007 con dos gráficas, una al lado de la otra. ¿Ves algún problema?  
 
-```{r covariacion-categorica-continua-6}
-
-# METODO 1: Asumimos que el valor máximo corresponde al más actualizado  
-DF_gapminder_max_min = gapminder %>% 
-  group_by(continent, country) %>% 
-  summarise(lifeExp = max(lifeExp) - min(lifeExp))
-
-ggplot(DF_gapminder_max_min, aes(lifeExp, continent, fill = continent)) + 
-  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
-  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
-  theme(legend.position = "none") +
-  ggtitle("Diferencia entre max y min por país")
-
-
-# METODO 2: Calculamos maximo - mínimo para cada país  
-DF_last_year = gapminder %>% filter(year == max(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_max = lifeExp)
-DF_first_year = gapminder %>% filter(year == min(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_min = lifeExp)
-
-DF_last_first = DF_last_year %>% 
-  full_join(DF_first_year, by = c("country", "continent")) %>% 
-  mutate(DIFF = lifeExp_max - lifeExp_min)
-  # gather(max_min, value, lifeExp_max:lifeExp_min)
-
-ggplot(DF_last_first, aes(DIFF, continent, fill = continent)) + 
-  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
-  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
-  theme(legend.position = "none") +
-  ggtitle("Diferencia entre 2007 y 1952 por pais")
-
-```
-  
-  
-### Ejercicio covariacion 1 {.ejercicio} 
-
-Mira el plot donde mostramos la diferencia entre los extremos en la base de datos, 1952 y 2007 con dos gráficas, una al lado de la otra. Ves algún problema?  
-
-Trata de resolver el problema en las escalas. El resultado final deberia ser:  
+Trata de resolver el problema en las escalas. El resultado final debería ser:  
 
 ```{r ejercicio-covariacion1, echo=FALSE}
 
@@ -263,6 +206,44 @@ B = ggplot(gapminder %>% filter(year == 2007), aes(lifeExp, continent, fill = co
 
 cowplot::plot_grid(A, B)
 ```
+
+
+Podemos hacer algo que clarifica mucho las cosas. Como visualizar ver el avance por país de una manera más directa:   
+
+```{r covariacion-categorica-continua-6}
+# Cálculo
+DF_gapminder_max_min = gapminder %>% 
+  group_by(continent, country) %>% 
+  summarise(lifeExp = max(lifeExp) - min(lifeExp))
+
+ggplot(DF_gapminder_max_min, aes(lifeExp, continent, fill = continent)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+  theme(legend.position = "none") +
+  ggtitle("Diferencia entre max y min por país")
+```
+
+### Ejercicio {.ejercicio} 
+
+Arriba estamos asumiendo que el valor máximo de esperanza de vida corresponde al más actualizado, pero probablemente no sea así. ¿Podrías rehacer el cálculo para mostrar la diferencia entre 1952 y 2007?
+<details><summary>Pista ![](data/images/hint.png)</summary><span style="color: orange;">1. Crear un DF para cada año, renombrando la variable lifeExp<BR>2. Usando la funcion `full_join()`, juntamos ambas bases (tendras que usar el parametro `by`). <BR>3. Con `mutate()` calculamos la diferencia.</span></details>
+
+```{r covariacion-categorica-continua-7}
+DF_last_year = gapminder %>% filter(year == max(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_max = lifeExp)
+DF_first_year = gapminder %>% filter(year == min(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_min = lifeExp)
+
+DF_last_first = DF_last_year %>% 
+  full_join(DF_first_year, by = c("country", "continent")) %>% 
+  mutate(DIFF = lifeExp_max - lifeExp_min)
+  # gather(max_min, value, lifeExp_max:lifeExp_min)
+
+ggplot(DF_last_first, aes(DIFF, continent, fill = continent)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+  theme(legend.position = "none") +
+  ggtitle("Diferencia entre 2007 y 1952 por pais")
+```
+
 
 
   

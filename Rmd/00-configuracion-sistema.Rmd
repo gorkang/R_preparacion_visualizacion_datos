@@ -21,7 +21,8 @@ Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además
 
 -   **Ubuntu Linux**: [más detalles en la web de R](https://cran.r-project.org/bin/linux/debian/). **En un terminal**:
 
-    1.  `sudo apt-get install r-base`
+|     `sudo apt-get install r-base`  
+
 
 ### **(B)** Instalar RStudio {.unnumbered}
 
@@ -47,7 +48,7 @@ Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes qu
 
   list_of_packages = c("afex", "caret", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
                        "gapminder", "ggplot2", "ggraph", "ggridges", "ggthemes", "gtsummary", "haven", "here", "hexbin", 
-                       "inspectdf", "janitor", "knitr", "plotly", "purrr", "readODS",
+                       "inspectdf", "janitor", "knitr", "parameters", "plotly", "purrr", "readODS",
                        "readr", "readxl", "remotes", "renv", "rticles", "see", "sjPlot", "stargazer",
                        "tidyr", "usethis", "writexl")  
   new_packages <- list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
@@ -76,11 +77,15 @@ Los paquetes de R son una colección de funciones, datos y documentación que am
 
 Gran parte de las funciones y paquetes que utilizaremos en este workshop se encuentran contenidas en el meta-paquete [tidyverse](https://www.tidyverse.org/) (este es un paquete de paquetes). Ya lo instalamos en **(C)**, pero si quisieras instalarlo solo tendrías que ejecutar la siguiente linea en la **consola** de RStudio (**(1)** en la imagen de arriba):
 
--   `install.packages("ggplot2")`
+```{r install_gg, message=FALSE, warning=FALSE, eval=FALSE}
+install.packages("ggplot2")
+```
 
 Para instalar otro paquete diferente de "tidyverse", remplaza su nombre entre comillas dentro de la función:
 
--   `install.packages("NOMBRE_DE_PAQUETE")`.
+```{r install_any_package, message=FALSE, warning=FALSE, eval=FALSE}
+install.packages("NOMBRE_DE_PAQUETE")
+```
 
 Una vez instalado un paquete, no es necesario volver hacerlo, a menos que reinstales R.
 
@@ -88,10 +93,8 @@ Una vez instalado un paquete, no es necesario volver hacerlo, a menos que reinst
 
 Las funciones, datos y documentación dentro de nuestros paquetes no podrán ser utilizadas hasta que se carguen en R. Una vez instalados, para cargar los paquetes se usa la función `library()`:
 
-```{r load_library, message=FALSE, warning=FALSE}
-
+```{r load_library, message=FALSE, warning=FALSE, eval=FALSE}
 library(ggplot2)  
-
 ```
 
 En realidad las funciones también pueden ser llamadas usando su referencia absoluta `::`, sin necesidad de cargarlas antes. Por ejemplo: `dplyr::tibble(columna = 1)`. En general: `nombre_paquete::nombre_de_funcion(parametros)`).
@@ -100,17 +103,17 @@ En realidad las funciones también pueden ser llamadas usando su referencia abso
 
 El siguiente código simplifica lo anterior. Comprueba que el paquete esta instalado; Si no se encuentra instalado, lo instala. Finalmente lo carga.
 
-```{r install_ggplot2, message=FALSE, warning=FALSE}
-
+```{r install_ggplot2, message=FALSE, warning=FALSE, eval=FALSE}
 if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')  
-
 ```
 
-Para instalar múltiples paquetes, podemos repetir la linea de mas arriba tantas veces como sea necesaria, o usar una versión algo mas sofisticada como el código del apartado **(C)**:
+Para instalar múltiples paquetes, podemos repetir la linea de mas arriba tantas veces como sea necesario, o usar una versión algo mas sofisticada como el código del apartado **(C)**:
 
--   `if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')`\
--   `if (!require('bookdown')) install.packages('bookdown'); library('bookdown')`\
--   `...`
+```{r install_packages, message=FALSE, warning=FALSE, eval=FALSE}
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('bookdown')) install.packages('bookdown'); library('bookdown')
+```
+
 
 Al principio de cada capítulo, verás una sección llamada `Paquetes para este capítulo`. Si pegas el contenido de esa sección en un script de R al empezar cada capítulo, te asegurarás de tener disponibles todas las funciones que usaremos.  .  
 
@@ -120,8 +123,10 @@ Al principio de cada capítulo, verás una sección llamada `Paquetes para este 
 
 En ocasiones querremos instalar directamente la versión en desarrollo del paquete desde [Github](https://github.com/). Para eso podemos usar la función `install_github()` del paquete `remotes`. Por ejemplo, para instalar el paquete {BayesianReasoning} desde su [repositorio de Github](https://github.com/gorkang/BayesianReasoning):
 
--   `if (!require('remotes')) install.packages('remotes'); library('remotes')`\
--   `remotes::install_github("gorkang/BayesianReasoning")`
+```{r install_packages_github, message=FALSE, warning=FALSE, eval=FALSE}
+if (!require('remotes')) install.packages('remotes'); library('remotes')
+remotes::install_github("gorkang/BayesianReasoning")
+```
 
 ------------------------------------------------------------------------
 
