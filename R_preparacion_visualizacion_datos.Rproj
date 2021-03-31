@@ -16,6 +16,6 @@ AutoAppendNewline: Yes
 StripTrailingWhitespace: Yes
 
 BuildType: Website
-WebsitePath: ~/gorkang@gmail.com/DOCENCIA/UAI/2019/2019-1 Seminario metodologico R/R_preparacion_visualizacion_datos
+WebsitePath: ~/gorkang@gmail.com/DOCENCIA/UAI/2021/2021-1 Seminario metodologico R/R_preparacion_visualizacion_datos
 
 SpellingDictionary: es_ES

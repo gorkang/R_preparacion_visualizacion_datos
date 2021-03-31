@@ -9,7 +9,6 @@
 ```{r setup-04, message=FALSE, warning=FALSE}
 
   if (!require('afex')) install.packages('afex'); library('afex')
-  if (!require('correlation')) install.packages("correlation"); library('correlation')
   if (!require('corrr')) install.packages('corrr'); library('corrr')
   if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
   if (!require('DT')) install.packages('DT'); library('DT')
@@ -27,11 +26,12 @@
   if (!require('stringi')) install.packages('stringi'); library('stringi')
   if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
   if (!require('usethis')) install.packages('usethis'); library('usethis')
-  
+
+  if (!require('correlation')) remotes::install_github("easystats/correlation"); library('correlation')
+  # if (!require('correlation')) install.packages("correlation"); library('correlation')
   if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
   if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
   if (!require('report')) remotes::install_github("easystats/report"); library('report')
-
 
 ```
 
@@ -471,6 +471,7 @@ Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:
 
 ### Herramientas básicas para investigadoras/es
 
+
 De manera relativamente sencilla podemos incluir tablas bonitas en los reportes.  
 
 #### Descriptivos
@@ -485,22 +486,26 @@ De manera relativamente sencilla podemos incluir tablas bonitas en los reportes.
 ```
 
 
-#### Correlaciones
+#### Inferenciales
+
+[Que test estadístico debería usar, con código en R](https://stats.idre.ucla.edu/other/mult-pkg/whatstat/)
+
 
 
 ##### Test de correlación
 
 ```{r correlation-test}
-# https://github.com/easystats/easystats
 
   corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
 
   table_easystats = report::report(corr_test); table_easystats
+  # table_easystats %>% parameters::print_md()
+  
   knitr::kable(table_easystats, align = "c")
 
-mtcars %>% 
-  correlation(partial = TRUE) %>% 
-  plot()
+  iris %>% 
+    correlation(partial = TRUE) %>% 
+    plot()
 
 
 ```
@@ -512,9 +517,13 @@ mtcars %>%
   table_correlations <- iris %>% 
     correlation::correlation()  
 
-  table_correlations %>% 
-    summary() %>% 
+  TABLE_CORR = table_correlations %>% 
+    summary(stars = FALSE, include_significance = TRUE, p_digits = 3) %>% 
     parameters::print_md()
+  
+  TABLE_CORR
+  gsub("p = |p ", "", TABLE_CORR)
+  gsub("\\(p ", "<BR>(p", TABLE_CORR)
   
 ```
 

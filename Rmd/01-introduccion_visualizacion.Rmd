@@ -242,17 +242,22 @@ R es [uno de los programas para data science mas populares](http://r4stats.com/a
 
 <BR> 
 
-Además de lo anterior, R es un programa de código abierto (algo esencial para poder hacer ciencia reproducible), con una [comunidad de usuarios](https://community.rstudio.com/) muy acogedora.   
+Además de lo anterior, R es un programa de código abierto (algo esencial para poder hacer ciencia reproducible), con una [comunidad de usuarios](https://community.rstudio.com/) muy acogedora, y con un importante foco en la [inclusividad](https://qz.com/work/1661486/r-ladies-made-data-science-inclusive/). La importancia de la comunidad es difícil de apreciar. Por ejemplo, es relativamente habitual que uno abra un issue en Github pidiendo una nueva característica en un paquete, y que los creadores la implementen (e.g. [correlation](https://github.com/easystats/correlation/issues/145), [gtsummary](https://github.com/ddsjoberg/gtsummary/issues/677), [rorcid](https://github.com/ropensci/rorcid/issues/44)), que uno reporte un error y lo corrijan (e.g. [sjPlot](https://github.com/strengejacke/sjPlot/issues/725), [gtsummary](https://github.com/ddsjoberg/gtsummary/issues/686)), recibir correcciones y mejoras en tus repositorios (e.g. [html2latex](https://github.com/gorkang/html2latex/pull/1), [2019-Chile](https://github.com/gorkang/2019-Chile/pull/1)), o poder contribuir a repositorios de otros (e.g. [jsPsych](https://github.com/jspsych/jsPsych/pull/1212), [gtsummary](https://github.com/ddsjoberg/gtsummary/pull/683)).  
 
-Sus funciones de visualización son muy potentes (ver la [r-graph-gallery](https://www.r-graph-gallery.com/) para algunos ejemplos), siendo usadas como herramienta principal en algunos medios como la [BBC](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535).  
+Sus funciones de visualización son muy potentes (ver la [r-graph-gallery](https://www.r-graph-gallery.com/) para algunos ejemplos), siendo usadas como herramienta principal en medios como la [BBC](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535).  
+
+
+![SOURCE: [BBC](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535)](`r here::here("data", "images", "BBC.png")`)
 
 <BR> 
 
-No menos importante, hay una gran cantidad de cursos, tutoriales, presentaciones, etc. de una calidad excelente, con los que podemos aprender de manera autónoma. Por ejemplo:
+No menos importante, hay una gran cantidad de cursos, tutoriales, presentaciones y libros de una calidad excelente, con los que podemos aprender de manera autónoma. Por ejemplo:
 
 - [psyTeachR team at the University of Glasgow](https://psyteachr.github.io/)
 - [A Gentle Guide to the Grammar of Graphics with ggplot2](https://pkg.garrickadenbuie.com/gentle-ggplot2/)
 - [resulumit.com Rmd workshop](https://resulumit.com/teaching/rmd_workshop.htm)
+- [R for Data Science](https://r4ds.had.co.nz/)
+- [Advanced R](https://adv-r.hadley.nz/)
 
 <BR>    
 

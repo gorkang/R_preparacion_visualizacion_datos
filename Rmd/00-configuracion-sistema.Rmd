@@ -75,10 +75,10 @@ Otros paquetes que usaremos.
 
 Los paquetes de R son una colección de funciones, datos y documentación que amplían las capacidades básicas de R.  
 
-Gran parte de las funciones y paquetes que utilizaremos en este workshop se encuentran contenidas en el meta-paquete [tidyverse](https://www.tidyverse.org/) (este es un paquete de paquetes). Ya lo instalamos en **(C)**, pero si quisieras instalarlo solo tendrías que ejecutar la siguiente linea en la **consola** de RStudio (**(1)** en la imagen de arriba):
+Gran parte de las funciones y paquetes que utilizaremos en este workshop se encuentran contenidas en el meta-paquete [tidyverse](https://www.tidyverse.org/) (este es un paquete de paquetes). No lo instalamos en **(C)**, pero si quisieras instalarlo solo tendrías que ejecutar la siguiente linea en la **consola** de RStudio:  
 
 ```{r install_gg, message=FALSE, warning=FALSE, eval=FALSE}
-install.packages("ggplot2")
+install.packages("tidyverse")
 ```
 
 Para instalar otro paquete diferente de "tidyverse", remplaza su nombre entre comillas dentro de la función:
@@ -104,18 +104,18 @@ En realidad las funciones también pueden ser llamadas usando su referencia abso
 El siguiente código simplifica lo anterior. Comprueba que el paquete esta instalado; Si no se encuentra instalado, lo instala. Finalmente lo carga.
 
 ```{r install_ggplot2, message=FALSE, warning=FALSE, eval=FALSE}
-if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')  
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')  
 ```
 
 Para instalar múltiples paquetes, podemos repetir la linea de mas arriba tantas veces como sea necesario, o usar una versión algo mas sofisticada como el código del apartado **(C)**:
 
 ```{r install_packages, message=FALSE, warning=FALSE, eval=FALSE}
-if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
 if (!require('bookdown')) install.packages('bookdown'); library('bookdown')
 ```
 
 
-Al principio de cada capítulo, verás una sección llamada `Paquetes para este capítulo`. Si pegas el contenido de esa sección en un script de R al empezar cada capítulo, te asegurarás de tener disponibles todas las funciones que usaremos.  .  
+Al principio de cada capítulo, verás una sección llamada `Paquetes para este capítulo`. Si pegas el contenido de esa sección en un script de R al empezar cada capítulo, te asegurarás de tener disponibles todas las funciones que usaremos.  
 
 
 

@@ -80,7 +80,6 @@ análisis-de-datos-exploratorio
 visualizando-distribuciones
 variables-categóricas
 variables-continuas
-ejercicio-variables-individuales
 visualizando-datasets-completos
 inspectdf
 covariación
@@ -110,7 +109,7 @@ rmarkdown
 chunks-de-código
 herramientas-básicas-para-investigadorases
 descriptivos
-correlaciones
+inferenciales
 test-de-correlación
 tabla-de-correlaciones
 lm

@@ -19,9 +19,11 @@ if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
 
 ---  
 
-VER: [R 4 data science - exploratory data analysis](https://r4ds.had.co.nz/exploratory-data-analysis.html)
+En este capítulo vamos a aplicar lo que hemos aprendido en los dos capítulos anteriores, combinando transformación de datos con visualización para entender nuestras bases de datos, buscar patrones interesantes, etc. Podéis encontrar una introducción más completa en el manual [R 4 data science - exploratory data analysis](https://r4ds.had.co.nz/exploratory-data-analysis.html).  
 
 ## Visualizando distribuciones
+
+Para visualizar la distribución de nuestras variables, tendremos que seguir estrategias diferentes dependiendo de si se trata de variables categóricas o continuas.  
 
 ### Variables categóricas  
 
@@ -44,19 +46,51 @@ ggplot(gapminder, aes(lifeExp)) +
   geom_histogram(binwidth = 1)
 
 gapminder %>% 
-  count(lifeExp)
-
-gapminder %>% 
-  count(cut_width(lifeExp, 10))
-
-
-ggplot(gapminder, aes(lifeExp)) + 
-  geom_freqpoly(binwidth = 2)
+  summarise(MEAN = mean(lifeExp),
+            MEDIAN = median(lifeExp),
+            SD = sd(lifeExp),
+            MAX = max(lifeExp),
+            MIN = min(lifeExp))
 
 ```
 
+### Ejercicios {.ejercicio -} 
 
-### Ejercicio variables individuales {.ejercicio} 
+¿Podrías replicar la visualización de abajo? Queremos mostrar un histograma por continente.
+
+```{r ejercicio-variables-individuales-1, echo=FALSE}
+ggplot(gapminder, aes(lifeExp, fill = continent)) +
+  geom_histogram(binwidth = 1) +
+  facet_wrap(~continent)
+```
+
+¿Como podemos añadir el histograma general para poder entender donde se ubica cada continente?
+
+```{r ejercicio-variables-individuales-2, echo=FALSE}
+ggplot(gapminder, aes(lifeExp, fill = continent)) +
+  geom_histogram(binwidth = 1) +
+  gghighlight::gghighlight() +
+  facet_wrap(~continent)
+```
+
+
+También queremos ver los descriptivos por continente, ordenados por el promedio:  
+
+```{r ejercicio-variables-individuales-3, echo=FALSE}
+gapminder %>% 
+  group_by(continent) %>% 
+  summarise(MEAN = mean(lifeExp),
+            MEDIAN = median(lifeExp),
+            SD = sd(lifeExp),
+            MAX = max(lifeExp),
+            MIN = min(lifeExp)) %>% 
+  arrange(MEAN)
+```
+
+### {-}
+<BR>
+
+### Ejercicio variables individuales {.ejercicio -} 
 
 Usando el DF `mpg`, visualiza la distribucion de las variables `manufacturer`, `class`, `trans`, `hwy` y `cty`  
 
@@ -228,7 +262,7 @@ ggplot(DF_gapminder_max_min, aes(lifeExp, continent, fill = continent)) +
 Arriba estamos asumiendo que el valor máximo de esperanza de vida corresponde al más actualizado, pero probablemente no sea así. ¿Podrías rehacer el cálculo para mostrar la diferencia entre 1952 y 2007?
 <details><summary>Pista ![](data/images/hint.png)</summary><span style="color: orange;">1. Crear un DF para cada año, renombrando la variable lifeExp<BR>2. Usando la funcion `full_join()`, juntamos ambas bases (tendras que usar el parametro `by`). <BR>3. Con `mutate()` calculamos la diferencia.</span></details>
 
-```{r covariacion-categorica-continua-7}
+```{r covariacion-categorica-continua-7, echo=FALSE}
 DF_last_year = gapminder %>% filter(year == max(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_max = lifeExp)
 DF_first_year = gapminder %>% filter(year == min(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_min = lifeExp)
 
