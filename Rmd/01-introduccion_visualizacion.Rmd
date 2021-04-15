@@ -1182,6 +1182,29 @@ Habitualmente, un vez hemos creado la gráfica, querremos personalizar varias co
 
 ```
 
+Usar eje secundario (derecho) para mostrar etiquetas:  
+
+```{r advanced-scales}
+
+gapminder_last = gapminder %>% 
+  group_by(continent) %>% 
+  filter(year == max(year)) %>% 
+  summarize(lifeExp = mean(lifeExp))
+
+ggplot(gapminder, aes(year, lifeExp, linetype = continent, color = continent)) + 
+  stat_summary(fun = mean, geom = "line") +
+  scale_y_continuous(
+    limits = c(0, max(gapminder$lifeExp)),
+    expand = c(0,0),
+    sec.axis = dup_axis(
+      breaks = gapminder_last$lifeExp,
+      labels = gapminder_last$continent,
+      name = NULL)) +
+  scale_x_continuous(expand = c(0,0)) +
+  guides(color = "none",
+         linetype = "none")
+
+```
 
 
 #### Ejercicio {.ejercicio -}
@@ -1195,10 +1218,12 @@ plot1 = ggplot(table1, aes(year, cases)) +
   geom_line(aes(group = country), colour = "grey50") + 
   geom_point(aes(colour = country))
 
-plot2 = ggplot(table1, aes(as.factor(year), cases)) + 
+plot2 =
+  ggplot(table1, aes(as.factor(year), cases)) + 
   geom_line(aes(group = country), colour = "grey50") + 
   geom_point(aes(colour = country), size = 2) +
   scale_y_continuous(labels = scales::comma) +
+  scale_x_discrete(expand = c(.05,0)) +
   labs(title = "Casos de Tuberculosis por año",
        x = "year",
        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") +
@@ -1209,6 +1234,32 @@ cowplot::plot_grid(plot1, plot2,
                    nrow = 2,
                    labels = c("A", "B"))
 
+```
+
+Si te sobra tiempo, puedes tratar de reproducir la siguiente versión mejorada...  
+
+```{r geoms-ejercicios-extra,, echo=FALSE, fig.height=5, fig.width=8}
+table1_end = table1 %>% filter(year == max(.$year))
+
+  ggplot(table1, aes(as.factor(year), cases)) + 
+  geom_line(aes(group = country), colour = "grey50") + 
+  geom_point(aes(colour = country), size = 2) +
+  scale_y_continuous(limits = c(0, max(table1_end$cases)),
+                     labels = scales::comma,
+                     expand = c(0.1,0),
+                     sec.axis = dup_axis(
+                       breaks = table1_end$cases,
+                       labels = table1_end$country,
+                       name = NULL)) +
+  scale_x_discrete(expand = c(.05,0)) +
+  labs(title = "Casos de Tuberculosis por año",
+       x = "year",
+       caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") +
+  theme(legend.position = "bottom", 
+        legend.title = element_blank()) +
+    guides(color = "none") +
+    theme_minimal()
+  
 ```
 
 
