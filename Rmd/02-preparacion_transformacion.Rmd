@@ -916,7 +916,7 @@ Estas operaciones tendrán la forma: `DF_x %>% WHATEVER_join(DF_y)`
 
 
 * **Mutating joins**:  
-    + inner_join(): preserva pares de observaciones de de `DF_x` y de `DF_y` con claves iguales   
+    + inner_join(): preserva pares de observaciones de `DF_x` y de `DF_y` con claves iguales   
     + left_join(): preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguales    
     + right_join(): preserva las observaciones de `DF_y`, añadiendo las de `DF_x` con claves iguales  
     + full_join(): preserva todas las observaciones de `DF_x` y `DF_y`, alineándolas cuando tengan claves iguales  
@@ -957,7 +957,7 @@ DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
 
 ##### Inner join  
 
-Preserva pares de observaciones de de `DF_x` y de `DF_y` con claves iguales.   
+Preserva pares de observaciones de `DF_x` y de `DF_y` con claves iguales.   
 
 ![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data", "images", "inner-join.gif")`)
 

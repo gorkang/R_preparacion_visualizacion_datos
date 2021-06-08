@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Introducción a R y visualización de datos
 
 ---  
@@ -149,28 +154,14 @@ plot_inicial = ggplot(DF, aes(Question, Error, fill = Question)) +
   stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge", color = "black", width = .2) +
   scale_y_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +
   theme_minimal(base_size = 12) +
+  labs(x = "What is the probability of x?") +
   theme(legend.position = "none")
 
 plot_inicial
 
 ```
 
-Estamos listos para escribir el paper.  Solo por curiosidad, veamos boxplots de los dos grupos. Mmmm... hay algo extraño:  
-
-```{r visualizacion-importante-02, echo=FALSE}
-  
-# Boxplots por condición
-ggplot(DF, aes(Question, Error, color = Question, group = Question)) +
-  geom_boxplot(alpha = .5) +
-  theme_minimal() +
-  theme(legend.position = "none") +
-  scale_y_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +
-  labs(x = "What is the probability of x?")
-
-```
-
-<BR>
-Volvemos a extraer descriptivos... pero esta vez incluimos la mediana.  
+Estamos listos para escribir el paper.  Preparemos la tabla con descriptivos...
 
 ```{r visualizacion-importante-03, echo=FALSE}
 
@@ -178,40 +169,38 @@ Volvemos a extraer descriptivos... pero esta vez incluimos la mediana.
 DF %>% 
   group_by(Question) %>% 
   summarise(Error_promedio = mean(Error),
-            Error_mediana = median(Error),
+            # Error_mediana = median(Error),
             SD = sd(Error, na.rm = TRUE),
             N = n()) %>% 
   knitr::kable()
 
 ```
 
-¿Qué está pasando? Veamos las respuestas de todos los participantes, junto con la distribución de los datos, más la media y mediana por condición.  
+Es curioso que la desviación estandard sea mayor en el grupo con menos error promedio... Visualicemos las respuestas de todos los participantes, junto con la distribución de los datos.  
 
 ```{r visualizacion-importante-04, echo=FALSE}
 
-plot_final = ggplot(DF, aes(Question, Error, color = Question, group = Question, fill = Question)) +
-  geom_jitter(size = 2) +
-  geom_violin(alpha = .2) +
-  stat_summary(
-    fun = median,
-    geom = "point",
-    size = 4,
-    color = "black",
-    shape = 1) +
+plot_final = ggplot(DF, aes(Error, Question, fill = Question, color = Question)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.8, draw_baseline = FALSE, alpha = .6) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.7, scale = 0.9) +
   theme_minimal() +
   theme(legend.position = "none") +
-  scale_y_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +
-  labs(x = "What is the probability of x?")
+  # scale_x_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +
+  labs(y = "What is the probability of x?") +
+  coord_flip()
 
 plot_final
 
 ```
+
+Como se puede apreciar en la gráfica, cuando usamos la pregunta `¿Cuál es la probabilidad de que no salga ninguno de los temas que has estudiado?` no estamos reduciendo el error, sino convirtiendo una distribución de respuestas unimodal en bimodal.  
 
 ---  
 
 **TLDR**: La manera en la visualizamos la información determina las conclusiones a las que llegamos. En una sola gráfica:     
 
 ```{r visualizacion-importante-05, fig.width=12, echo=FALSE}
+
 
 # Visualizamos el gráfico inicial y el final, uno al lado del otro
 cowplot::plot_grid(plot_inicial, plot_final, labels = c("Antes", "Después"))
@@ -360,11 +349,10 @@ La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquiss
 # 1) Asegúrate que hemos instalado el paquete esquisse
   if (!require('esquisse')) install.packages('esquisse'); library('esquisse')
 
-# 2) Carga el dataframe que desees. En este caso, "iris"
-  data(iris)
+# 2) Lanza el wizard esquisser  
+  esquisse:::esquisser(iris)
 
-# 3) Lanza el wizard esquisser
-  esquisse:::esquisser()
+# 3) Crea el gráfico que quieras, exporta el código...
 
 ```
 
@@ -373,17 +361,6 @@ La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquiss
 [Garrick Aden-Buie](https://www.garrickadenbuie.com/) ([![](`r here::here('data/images', 'twitter_small.png')`) \@grrrck](https://twitter.com/grrrck)) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28). Os recomiendo revisarla para familiarizaros con las funcionalidades de ggplot.  
 <!-- https://github.com/gadenbuie/gentle-ggplot2  -->
 
-
-**Antes** de empezar, asegúrate que tienes instalados los paquetes `tidyverse` y `gapminder`.  
-
-```{r garrick}
-
-if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
-if (!require('gapminder')) install.packages('gapminder'); library('gapminder')  
-
-gapminder
-
-```
 
 
 ## Visualización de datos con ggplot2 
@@ -405,6 +382,37 @@ Los ingredientes esenciales de una gráfica son:
 
 ![SOURCE: https://skillgaze.com/2017/10/31/understanding-different-visualization-layers-of-ggplot/](`r here::here("data", "images", "visualization-layers-of-ggplot.png")`)  
 
+---  
+
+
+En ggplot, después de indicar los datos y coordenadas (e.g. `ggplot(data = mpg, aes(x = displ, y = hwy))`), podemos sumar uno o varios `geoms` con una lógica de capas superpuestas, por ejemplo ` + geom_point()`:
+
+```{r geoms-example-01, echo=FALSE}
+
+  plot1 = ggplot(mpg, aes(displ, hwy)) +
+    labs(subtitle = "\nggplot(mpg, aes(displ, hwy))")
+  
+  
+  plot2 = ggplot(mpg, aes(displ, hwy)) +
+    geom_point() +
+    labs(subtitle = "\nggplot(mpg, aes(displ, hwy)) + 
+    geom_point()")
+  
+
+  plot3 = ggplot(mpg, aes(displ, hwy)) +
+  geom_point() + 
+  geom_smooth() +
+    labs(subtitle = "\nggplot(mpg, aes(displ, hwy)) + 
+    geom_point() +
+    geom_smooth()")
+
+
+  cowplot::plot_grid(plot1, plot2, plot3, nrow = 1)
+  
+```
+
+
+---  
 
 
 ### Aesthetic mappings
@@ -546,46 +554,6 @@ ggplot(gapminder, aes(gdpPercap, pop, color = "blue")) +
 
 <BR>
 
-Alguna de estas gráficas dará un error? Sin correr el código, sabrías decir cuál de ellas? Hay varias soluciones posibles, ¿Cuales serían?.        
-
-```{r linetype-01, eval = FALSE}
-
-  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line", linetype = "dashed")
-    
-  ggplot(mpg, mapping = aes(displ, hwy, color = class, linetype = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line")
-
-  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line", linetype = class)
-
-```
-
-
-```{r solucion-linetype-01, eval=FALSE, include=FALSE}
-
-  # SOLUCION 1
-  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line", aes(linetype = class))
-
-  # SOLUCION 2
-  ggplot(mpg, mapping = aes(displ, hwy, color = class, linetype = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line")
-  
-  # SOLUCION 3
-  ggplot(mpg, mapping = aes(displ, hwy, color = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line", linetype = "dashed")
-  
-```
-
-
-<BR>
 
 #### Shape {#shape}
 
@@ -625,9 +593,9 @@ Podemos definir directamente el tipo de línea que queremos en `geom_line()`:
 
 ```{r linetype-1}
 
-  ggplot(gapminder, aes(year, lifeExp, color = country, group = country)) + 
-    geom_line(linetype = "dashed", show.legend = FALSE) +
-    facet_wrap(~continent)
+  ggplot(gapminder, aes(year, lifeExp, color = continent)) + 
+    stat_summary(fun = mean, geom = "line", linetype = "dashed")
+
 
 ```
 
@@ -644,8 +612,6 @@ O que el tipo de línea dependa de una variable:
 ### Geoms
 
 Una de las cosas más difíciles cuando nos enfrentamos a nuevos datos es elegir el método más efectivo para visualizarlos. Hay varios recursos interesantes sobre [cómo elegir una gráfica](https://github.com/widged/data-for-good/wiki/Visualisation-::-Choosing-a-chart). En esta sección veremos distintos tipos de geometría, o `geoms_()`.  
-
-En ggplot, después de indicar los datos y coordenadas (e.g. `ggplot(mpg, aes(displ, hwy))`), podemos sumar uno o varios `geoms` con una lógica de capas superpuestas, por ejemplo, `+ geom_point()`.   
 
 ---  
 
@@ -902,7 +868,7 @@ ggplot(gapminder, aes(lifeExp, fill = continent)) +
 
 
 Con el DF `diamonds`, crea el siguiente plot:  
-<details><summary>Solución: ![](data/images/hint.png)</summary><span style="color: orange;">Tienes que usar el `geom_bar()` y el parámetro `fill`.</span></details>
+<details><summary>Pista: ![](data/images/hint.png)</summary><span style="color: orange;">Tienes que usar el `geom_bar()` y el parámetro `fill`.</span></details>
 
 ```{r geoms-ejercicios-02, echo=FALSE}
 
@@ -955,7 +921,7 @@ Cuando queremos separar en gráficos independientes distintas categorías dentro
   ggplot(gapminder, aes(lifeExp, fill = continent)) +
     geom_histogram(alpha = .5) +
     facet_wrap( ~ continent) +
-    guides(alpha = FALSE, color = FALSE)
+    guides(fill = FALSE)
 
 ```
 
@@ -1504,3 +1470,5 @@ p = ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
   
     + Part 1: https://www.youtube.com/watch?v=h29g21z0a68
     + Part 2: https://www.youtube.com/watch?v=0m4yywqNPVY
+
++ Big Book or R : https://www.bigbookofr.com/index.html

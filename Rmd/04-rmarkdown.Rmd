@@ -1,6 +1,25 @@
 
 # Trabajo con RMarkdown para reportes reproducibles
 
+```{r eval=FALSE, include=FALSE}
+# https://vincentarelbundock.github.io/modelsummary/
+  
+# library(modelsummary)
+# 
+# url <- 'https://vincentarelbundock.github.io/Rdatasets/csv/HistData/Guerry.csv'
+# dat <- read.csv(url) 
+# dat$Small <- dat$Pop1831 > median(dat$Pop1831)
+# datasummary_balance(~Small, dat)
+# datasummary_correlation(dat)
+# 
+# datasummary(Literacy + Commerce ~ Small * (mean + sd), dat)
+# 
+# mod <- lm(Donations ~ Crime_prop, data = dat)
+# 
+# modelsummary(mod)
+
+```
+
 
 ---  
 
