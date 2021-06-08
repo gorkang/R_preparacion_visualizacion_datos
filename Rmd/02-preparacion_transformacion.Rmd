@@ -366,10 +366,10 @@ Podemos ver más detalle y ejemplos en la [Cheatsheet de dplyr](https://github.c
 DT::datatable(data.frame(
   tarea = c("Filtrar", "Ordenar", "Seleccionar/eliminar variables", "Renombrar variables", "Separar contenidos de variable", 
             "Extraer valores únicos", "Crear/modificar variables", "Omitir NAs", "Wide to long", "Long to wide", "Combinar bases de datos", "Recodificar valores", "Recodificar valores"),
-  funcion = c("filter()", "arrange()", "select()", "rename()", "separate()", "distinct()", "mutate()", "drop_na()", "gather()", "spread()", "left_join()", "ifelse()", "case_when()"),
+  funcion = c("filter()", "arrange()", "select()", "rename()", "separate()", "distinct()", "mutate()", "drop_na()", "pivot_longer()", "pivot_wider()", "left_join()", "ifelse()", "case_when()"),
   ejemplo = c("datos %>% filter(Sexo == 1)", "datos %>% arrange(Sexo)", "datos %>% select(-Sexo)", "datos %>% rename(Genero = Sexo)", 
               "datos %>% separate(var_name, c('First', 'Second'), sep = '_')", "datos %>% distinct(Edad, .keep_all = T)", "datos %>% mutate(Viejo = Edad > 30)", 
-              "datos %>% drop_na(Sexo)", "datos %>% gather(Condition, VD, 4:6)", "datos %>% spread(Condition, VD)", "left_join(datos1, datos2, by = 'ID')", 
+              "datos %>% drop_na(Sexo)", "datos %>% pivot_longer(4:6, names_to = 'Condition', values_to = 'VD')", "datos %>% pivot_wider(names_from = Condition, values_from = VD)", "left_join(datos1, datos2, by = 'ID')", 
               "datos %>%  mutate(Edad = ifelse(Edad > 30, 'Viejo', 'Joven'))", "datos %>%  mutate(Edad = case_when(.$Edad > 30 ~ 'Viejo', 'Joven')")))
 
 ```
@@ -613,7 +613,8 @@ df_simple_wide
 
 # Wide to long
 df_simple_long = df_simple_wide %>% 
-  gather(Item, Response, Item1:Item2)
+  pivot_longer(Item1:Item2, names_to = "Item", values_to = "Response")
+  
 
 df_simple_long
 
@@ -635,13 +636,13 @@ df_wide
 
 # Wide to long
 df_wide %>% 
-  gather(Item, Response, lkns_01_raw:lkns_11_raw)
+  pivot_longer(cols = lkns_01_raw:lkns_11_raw, names_to = "Item", values_to = "Response", values_transform = list(Response = as.character))
 
 df_wide %>% 
-  gather(Item, Response, 5:15)
+  pivot_longer(5:15, names_to = "Item", values_to = "Response", values_transform = list(Response = as.character))
   
 df_long = df_wide %>% 
-  gather(Item, Response, matches("lkns"))
+  pivot_longer(matches("lkns"), names_to = "Item", values_to = "Response", values_transform = list(Response = as.character))
 
 
 DT::datatable(df_long)
@@ -656,7 +657,8 @@ Retomamos el ejemplo simple de antes:
 ```{r long-to-wide}
 
 # Long to wide simple
-df_simple_long %>% spread(Item, Response)
+df_simple_long %>% 
+  pivot_wider(names_from = Item, values_from = Response)
 
 ```
 
@@ -666,7 +668,7 @@ Y lo mismo con el ejemplo mas complejo:
 
 # Long to wide
 df_long %>%  
-  spread(Item, Response)
+  pivot_wider(names_from = Item, values_from = Response)
 
 ```
 
@@ -798,7 +800,7 @@ DF_wide = read.csv("https://raw.githubusercontent.com/gorkang/cognitive-and-soci
   
   # 2. Transforma la base a formato long (eso sí, mantén las variables demográficas en formato wide).   
   
-    DF_long = DF_wide %>% gather(Variable, Value, Fluid.Intelligence:Working.Memory)
+    DF_long = DF_wide %>% pivot_longer(Fluid.Intelligence:Working.Memory, names_to = "Variable", values_to = "Value")
     
 ```
 
@@ -855,19 +857,19 @@ DF_A = df_wide_raw %>%
 
 # Estrategia B - long
 DF_B = df_wide_raw %>% 
-  gather(Variable, Value, WVOC_01_cod:bayes_text_quantitative_accuracy) %>% 
+  pivot_longer(WVOC_01_cod:bayes_text_quantitative_accuracy, names_to = "Variable", values_to = "Value", values_transform = list(Value = as.character)) %>% 
   filter(grepl("WMAT_[0-9]{2}_cod", Variable)) %>% 
   mutate(Value = as.numeric(Value)) %>%  
   group_by(ID) %>% 
-  summarise(WMAT_sum = sum(Value, na.rm = TRUE))
+  summarise(WMAT_sum = sum(Value, na.rm = FALSE))
    
 
 # Estrategia B2 - long2
 DF_C = df_wide_raw %>% 
   select(ID, matches("WMAT_[0-9]{2}_cod")) %>% 
-  gather(Variable, Value, starts_with("W")) %>% 
+  pivot_longer(starts_with("W"), names_to = "Variable", values_to = "Value", values_transform = list(Value = as.numeric)) %>% 
   group_by(ID) %>% 
-  summarise(WMAT_sum = sum(Value, na.rm = TRUE))
+  summarise(WMAT_sum = sum(Value, na.rm = FALSE))
 
  all.equal(DF_A, DF_C) 
  all.equal(DF_B, DF_C) 

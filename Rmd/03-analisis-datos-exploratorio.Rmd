@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Análisis de datos exploratorio
 
 ---  
@@ -116,7 +121,8 @@ Cuando nos llega una nueva base de datos, una de las primeras cosas que haremos 
 ```{r initial exploration, fig.height=18}
 
 # Wide to long
-d <- gather(gapminder) %>%
+d <- gapminder %>% 
+  pivot_longer(everything(), values_transform = list(value = as.character)) %>% 
   filter(value != 999) %>% # Si existiera algun codigo para missing values, filtrar
   mutate(value_NUM = as.numeric(value))
 
@@ -124,7 +130,7 @@ d <- gather(gapminder) %>%
 d %>% 
   drop_na(value_NUM) %>% 
   ggplot(aes(value_NUM)) + 
-    facet_wrap(~ key, scales = "free") + 
+    facet_wrap(~ name, scales = "free") + 
     geom_histogram(bins = 15) #+ scale_x_log10()
 
 # Plot non-numeric variables
@@ -132,7 +138,7 @@ d %>%
   drop_na(value) %>% 
   filter(is.na(value_NUM)) %>% 
   ggplot(aes(value)) + 
-    facet_wrap(~ key, scales = "free") + 
+    facet_wrap(~ name, scales = "free") + 
     geom_bar() +
     coord_flip()
 
@@ -269,7 +275,6 @@ DF_first_year = gapminder %>% filter(year == min(year)) %>% select(country, cont
 DF_last_first = DF_last_year %>% 
   full_join(DF_first_year, by = c("country", "continent")) %>% 
   mutate(DIFF = lifeExp_max - lifeExp_min)
-  # gather(max_min, value, lifeExp_max:lifeExp_min)
 
 ggplot(DF_last_first, aes(DIFF, continent, fill = continent)) + 
   ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
@@ -369,14 +374,15 @@ DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening ri
 
 # * histogramas de todas las variables numéricas y no-numéricas
 
-d <- gather(DF_dafina) %>% 
+d <- DF_dafina %>% 
+  pivot_longer(everything(), values_transform = list(value = as.character)) %>% 
   filter(value != -66) %>% 
   mutate(value_NUM = as.numeric(value))
 
 # Plot numeric variables
 d %>% drop_na(value_NUM) %>% 
   ggplot(aes(value_NUM)) + 
-  facet_wrap(~ key, scales = "free") + 
+  facet_wrap(~ name, scales = "free") + 
   geom_histogram(bins = 15) #+ scale_x_log10()
 
 # Plot non-numeric variables
@@ -384,7 +390,7 @@ d %>%
   drop_na(value) %>% 
   filter(is.na(value_NUM)) %>% 
   ggplot(aes(value)) + 
-  facet_wrap(~ key, scales = "free") + 
+  facet_wrap(~ name, scales = "free") + 
   geom_bar() +
   coord_flip()
 
