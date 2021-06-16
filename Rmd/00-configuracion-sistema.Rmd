@@ -55,7 +55,7 @@ Otros paquetes que usaremos.
 ```{r install_workshop_packages2, message=FALSE, warning=FALSE}
 
   if (!require('FFTrees')) remotes::install_github("ndphillips/FFTrees"); library('FFTrees')
-  if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
+  # if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
   if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
   if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
   if (!require('report')) remotes::install_github("easystats/report"); library('report')

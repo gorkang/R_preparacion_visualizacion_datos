@@ -124,7 +124,7 @@ La historia completa de commits de todas las ramas (master, development, y las 3
 
 ```{r include=FALSE}
 
-grateful::cite_packages(all.pkg = FALSE,
-                        out.format = "rmd",
-                        out.dir = "dev")
+# grateful::cite_packages(all.pkg = FALSE,
+#                         out.format = "rmd",
+#                         out.dir = "dev")
 ```

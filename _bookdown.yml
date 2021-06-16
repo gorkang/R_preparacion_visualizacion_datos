@@ -15,5 +15,6 @@ rmd_files: [
   "Rmd/03-analisis-datos-exploratorio.Rmd",
   "Rmd/04-rmarkdown.Rmd",
   "Rmd/05-reporte-final.Rmd",
+  "Rmd/10-ejercicios.Rmd",
   "Rmd/refs.Rmd",
   ]

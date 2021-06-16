@@ -472,7 +472,7 @@ Trabajaremos con los datos del paper [Cognitive and Socio-affective Predictors o
 
   # Lo mismo, pero usando expresiones regulares
   df_wide %>% 
-    select(ID, matches("cod$"))
+    select(ID, matches("cod$")) # $: fin de la cadena de texto
   
 ```
 
@@ -810,6 +810,7 @@ DF_wide = read.csv("https://raw.githubusercontent.com/gorkang/cognitive-and-soci
 ```{r ejercicios-dplyr-avanzado-3, echo=FALSE}
 
     median_social_adaptation = DF_wide %>% pull(Social.Adaptation) %>% median(., na.rm = TRUE)
+
     DF_split = DF_wide %>% 
       mutate(social_adaptation_split = 
                as.factor(
@@ -871,8 +872,10 @@ DF_C = df_wide_raw %>%
   group_by(ID) %>% 
   summarise(WMAT_sum = sum(Value, na.rm = FALSE))
 
- all.equal(DF_A, DF_C) 
- all.equal(DF_B, DF_C) 
+# Todas las versiones dan resultados identicos
+ all.equal(DF_A, DF_B)
+ all.equal(DF_A, DF_C)
+ all.equal(DF_B, DF_C)
  
 ```
 

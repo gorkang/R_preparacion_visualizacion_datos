@@ -48,7 +48,7 @@
 
   if (!require('correlation')) remotes::install_github("easystats/correlation"); library('correlation')
   # if (!require('correlation')) install.packages("correlation"); library('correlation')
-  if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
+  # if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
   if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
   if (!require('report')) remotes::install_github("easystats/report"); library('report')
 
@@ -725,9 +725,9 @@ Bibliografía en Rmarkdown
 
 ```{r grateful, eval=FALSE, include=TRUE}
 
-grateful::cite_packages(all.pkg = FALSE,
-                        out.format = "rmd",
-                        out.dir = "dev")
+# grateful::cite_packages(all.pkg = FALSE,
+#                         out.format = "rmd",
+#                         out.dir = "dev")
 
 ```
 

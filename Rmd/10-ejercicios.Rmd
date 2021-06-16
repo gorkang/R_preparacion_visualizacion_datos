@@ -1,0 +1,26 @@
+# Ejercicios
+
+1. Crea un script en el que hagas lo siguiente:  
+
+  + Cargar librerias necesarias  
+  + Importar datos  
+  + Preparar datos   
+  + Crear gráfica  
+  + Crear tabla  
+
+Tendras que mostrar como corre el script con una sesion limpia de RStudio (CONTROL + SHIFT + F10)
+
+
+#### Notas {.ejercicio -}
+
+(2): Los datos deberían ser, idealmente, de un proyecto en el que estes trabajando. Si no tienes datos disponibles, puedes encontrar bases de datos abiertas de varias maneras:
+
+- Tidytuesday: https://github.com/rfordatascience/tidytuesday
+- Buscando en google scholar papers que comparten sus datos: https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=data+available+%22osf.io%22+psychology&btnG=
+- Buscando directamente en Open Science Foundation: https://osf.io/
+
+(3): Algunos ejemplos de preparación de datos: renombrar variables, filtrar, computar nuevas variables, combinar bases...
+
+(4): Algunos ejemplos de gráficas: distribución de variable/s, relación entre variables, ...
+
+(5): Algunos ejemplos de tablas: promedios por condición, media, mediana, max y min para algunas variables claves...

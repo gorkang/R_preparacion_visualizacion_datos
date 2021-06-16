@@ -32,7 +32,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="introducción-a-r-y-visualización-de-datos.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -53,7 +53,7 @@
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.4/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
@@ -475,6 +475,10 @@ div.csl-indent {
 <li class="chapter" data-level="5.3" data-path="reporte-final.html"><a href="reporte-final.html#hint"><i class="fa fa-check"></i><b>5.3</b> Hint</a></li>
 <li class="chapter" data-level="5.4" data-path="reporte-final.html"><a href="reporte-final.html#nota-final"><i class="fa fa-check"></i><b>5.4</b> Nota final</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="ejercicios-6.html"><a href="ejercicios-6.html"><i class="fa fa-check"></i><b>6</b> Ejercicios</a>
+<ul>
+<li class="chapter" data-level="" data-path="ejercicios-6.html"><a href="ejercicios-6.html#ejercicio-6"><i class="fa fa-check"></i>Ejercicio</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html"><i class="fa fa-check"></i>Paquetes usados</a>
 <ul>
 <li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html#references"><i class="fa fa-check"></i>References</a></li>
@@ -536,7 +540,7 @@ div.csl-indent {
 <span id="cb2-10"><a href="preparando-sistema.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(new_packages)) <span class="fu">install.packages</span>(new_packages, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Otros paquetes que usaremos.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="preparando-sistema.html#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;FFTrees&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ndphillips/FFTrees&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;FFTrees&#39;</span>)</span>
-<span id="cb3-2"><a href="preparando-sistema.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;grateful&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;Pakillo/grateful&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;grateful&#39;</span>)</span>
+<span id="cb3-2"><a href="preparando-sistema.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if (!require(&#39;grateful&#39;)) remotes::install_github(&quot;Pakillo/grateful&quot;); library(&#39;grateful&#39;)</span></span>
 <span id="cb3-3"><a href="preparando-sistema.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;papaja&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;papaja&#39;</span>)</span>
 <span id="cb3-4"><a href="preparando-sistema.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;regexplain&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;gadenbuie/regexplain&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;regexplain&#39;</span>)</span>
 <span id="cb3-5"><a href="preparando-sistema.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;report&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/report&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;report&#39;</span>)</span></code></pre></div>
