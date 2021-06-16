@@ -130,5 +130,5 @@ paso-a-paso
 hint
 nota-final
 ejercicios-6
-description-r-para-preparación-y-visualización-de-datos---doctorado-en-neurociencia-y-cognición---facultad-de-psicología---uai
-usando-estilos
+ejercicio-1-1
+ejercicio-2-1

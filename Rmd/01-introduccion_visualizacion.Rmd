@@ -96,7 +96,7 @@ En el experimento le preguntamos a las personas por la probabilidad de que les a
 
 Miramos el error promedio en función de la pregunta (cuanto se han alejado de la probabilidad correcta), y vimos que nuestra manipulación había tenido un efecto considerable:  
 
-```{r visualizacion-importante-01, echo=FALSE, cache=FALSE}
+```{r visualizacion-importante-01, echo=FALSE}
 
 # Leemos datos
 DF = read_csv(
@@ -852,7 +852,7 @@ Especialmente porque podemos incluir en el mismo gráfico información sobre dis
 
 Usando como base el plot de la seccion [geom_histogram()](#histogramas):  
 
-- Colorea los puntos por continente
+- Colorea los histogramas por continente
 - Sabrias hacer que no se amontonen unos continentes sobre otros? Necesitarás añadir transparencia para ver todos los datos
 <details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">`geom_histogram(position = "identity", alpha = .3)`.</span></details>
 
@@ -895,19 +895,19 @@ Cuando queremos separar en gráficos independientes distintas categorías dentro
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
     geom_point(alpha = .2) +
     facet_grid(~ continent) +
-    guides(alpha = FALSE, color = FALSE)
+    guides(color = "none")
 
   # Cambiamos ejes
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
     geom_point(alpha = .2) +
     facet_grid(continent ~ .) +
-    guides(alpha = FALSE, color = FALSE)
+    guides(color = "none")
   
   # Añadimos una segunda variable
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = country)) +
     geom_line(alpha = .2) +
     facet_grid(continent ~ pop > 5000000) +
-    guides(alpha = FALSE, color = FALSE)
+    guides(color = "none")
 
 ```
 
@@ -921,7 +921,7 @@ Cuando queremos separar en gráficos independientes distintas categorías dentro
   ggplot(gapminder, aes(lifeExp, fill = continent)) +
     geom_histogram(alpha = .5) +
     facet_wrap( ~ continent) +
-    guides(fill = FALSE)
+    guides(fill = "none")
 
 ```
 
@@ -931,7 +931,7 @@ Con la función `gghighlight()` podemos añadir una capa para facilitar la compa
   ggplot(gapminder, aes(lifeExp, fill = continent)) +
     geom_histogram(alpha = .5) +
     facet_wrap( ~ continent, nrow = 1) +
-    guides(alpha = FALSE, color = FALSE) +
+    guides(color = "none") +
     gghighlight::gghighlight()
 
 ```
