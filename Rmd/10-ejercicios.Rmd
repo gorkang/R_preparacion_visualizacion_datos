@@ -33,8 +33,8 @@ Tendras que mostrar como corre el script con una sesion limpia de RStudio (CONTR
 
 2. Diseña un **sencillo** experimento:
 
-  + Debes usar alguna de las tareas que aparecen en: https://github.com/gorkang/jsPsychMaker (ver carpeta canonical_protocol)
-  + Debes diseñar una tarea **muy sencilla** o adaptar una nueva tarea
+  + Debes usar algunas de las escalas/tareas que aparecen en: https://github.com/gorkang/jsPsychMaker (ver carpeta canonical_protocol, archivo canonical_protocol_details.csv)
+  + Además, debes diseñar una nueva tarea **muy sencilla** o adaptar una nueva escala
   + La duración total del "experimento" no deberia superar los 5 minutos
   
   Tendrás que hacer una breve presentación contándonos el diseño experimental.  
