@@ -62,7 +62,7 @@ para-que-sirve-tener-los-datos-en-formato-long
 separate-omit-ifelse-case_when-tipos-de-variables
 regular-expressions
 combinar-bases-de-datos
-bind
+bind-rows-or-columns
 joins
 mutating-joins
 inner-join

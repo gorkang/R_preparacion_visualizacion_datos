@@ -23,12 +23,12 @@ if (!require("here")) install.packages("here"); library("here")
 if (!require("purrr")) install.packages("purrr"); library("purrr")
 if (!require("readODS")) install.packages("readODS"); library("readODS")
 if (!require("tidyr")) install.packages("tidyr"); library("tidyr")
+if (!require("waldo")) install.packages("waldo"); library("waldo")
 if (!require("writexl")) install.packages("writexl"); library("writexl")
-if (!require('caret')) install.packages('caret'); library('caret')
 
 if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
 if (!require('FFTrees')) remotes::install_github("ndphillips/FFTrees"); library('FFTrees')
-
+if (!require('caret')) install.packages('caret'); library('caret')
 
 ```  
 
@@ -69,7 +69,7 @@ Si estamos usando rmarkdown, o similar, es recomendable usar `here::here()` para
 
 ```{r read-csv-02}
   
-name_of_file = here::here("data", "files", "02-read-csv.csv")
+name_of_file = here::here("data/files/02-read-csv.csv")
 DF_name = read_csv(name_of_file)
 
 DF_name
@@ -83,7 +83,7 @@ DF_name
 
 ```{r read-others-xls, eval=FALSE}
 
-name_of_file = here::here("data", "files", "02-read-xlsx.xlsx")
+name_of_file = here::here("data/files/02-read-xlsx.xlsx")
 readxl::read_excel(name_of_file)
 
 ```
@@ -93,7 +93,7 @@ readxl::read_excel(name_of_file)
 
 ```{r read-others-spss, eval=FALSE}
 
-name_of_file = here::here("data", "files", "02-read-sav.sav")
+name_of_file = here::here("data/files/02-read-sav.sav")
 haven::read_sav(name_of_file)
 
 ```
@@ -103,7 +103,7 @@ haven::read_sav(name_of_file)
 
 ```{r read-others-libreoffice, eval=FALSE}
 
-name_of_file = here::here("data", "files", "02-read-ods.ods")
+name_of_file = here::here("data/files/02-read-ods.ods")
 df_ODS = readODS::read_ods(name_of_file)
 
 # Vemos las primeras filas
@@ -118,18 +118,17 @@ Para poder leer una gsheet debemos antes crear un enlace para compartirla: `"Sha
 ```{r google-sheets, eval=FALSE}
 
 if (!require("googlesheets4")) install.packages("googlesheets4"); library("googlesheets4")
-name_of_sheet = "1jjb91j2X13_JKDAeIwrKIdNv0rcseMdteSqb0ZMVOig/edit#gid=807114896"
+name_of_sheet = "1EK5Be4r3eh4QkFjfLvutPYGNhI_MBa4TyIt3rtkJk2c"
 googlesheets4::read_sheet(name_of_sheet)   
 
 ```
 
 
 
-
 ### Ejercicios - Importar datos {.ejercicio -} 
 
 
-En el repositorio [R para preparación y visualización de datos - DNSC - UAI](https://osf.io/jdn37/) de la Open Science Foundation podrás ver una carpeta llamada `Capitulo 2`.  
+En el repositorio [R para preparación y visualización de datos - DNSC - UAI](https://osf.io/jdn37/) de la Open Science Foundation podrás ver una carpeta llamada `Capitulo 2`. Si no tenéis conexión a internet, podéis encontrar los archivos en `data/files/OSF_files`.  
 
 Importa los archivos que ahí aparecen, asegurándote que los nombres de columna se leen adecuadamente:  
 <details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">La función `read_excel()` tiene parámetros como `skip`, que permite no leer las primeras n lineas, o `sheet`, con la que puedes indicar que pestaña leer.</span></details>
@@ -145,7 +144,7 @@ Importa los archivos que ahí aparecen, asegurándote que los nombres de columna
   read_excel("data/files/OSF_files/02-extralines-1.xlsx")
   read_excel("data/files/OSF_files/02-extralines-2.xlsx", skip = 2)
   read_excel("data/files/OSF_files/02-extralines-3.xlsx", skip = 2, sheet = 2)
-  read_csv2("data/files/OSF_files/02-spanish.csv")
+  read_csv2("data/files/OSF_files/02-spanish.csv", skip = 2)
 
 ```
 
@@ -163,7 +162,7 @@ Importamos los archivos que están en la carpeta `data/files/02-CSVs`
 ```{r importar-multiples-archivos}
 
 # Directorio donde se encuentran los archivos
-name_of_folder = here::here("data", "files", "02-CSVs")
+name_of_folder = here::here("data/files/02-CSVs")
 
 # Listamos los archivos a leer
 files <- list.files(name_of_folder, full.names = TRUE)
@@ -181,7 +180,7 @@ Incluimos nombres de archivo en una columna:
 
 ```{r importar-multiples-archivos-nombres}
 
-name_of_folder = here::here("data", "files", "02-CSVs")
+name_of_folder = here::here("data/files/02-CSVs")
 files <- list.files(name_of_folder, full.names = TRUE) %>% 
   set_names(basename(.))
 full2 <- map_df(files, read_csv, .id = "file")
@@ -196,7 +195,7 @@ Añadimos parametros a la funcion de lectura. En este caso, definimos el tipo de
 
 ```{r importar-multiples-archivos-parametros}
 
-name_of_folder = here::here("data", "files", "02-CSVs")
+name_of_folder = here::here("data/files/02-CSVs")
 files <- list.files(name_of_folder, full.names = TRUE)
 full <- map_df(files, read_csv, 
                col_types = cols(
@@ -221,7 +220,7 @@ full
 1. Cuando más arriba importamos los archivos que están en la carpeta `data/files/02-CSVs`:  
 
 - ¿Qué archivos importamos exáctamente?  
-- <details><summary>¿Ves algún problema en lo que hicimos?![](`r here::here("data", "images", "hint.png")`)</summary><span style="color: orange;">Revisa el número de filas y la variable `files`.</span></details>  
+- <details><summary>¿Ves algún problema en lo que hicimos?![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">Revisa el número de filas y la variable `files`.</span></details>  
 
 El resultado final deberia ser así:  
 
@@ -229,7 +228,7 @@ El resultado final deberia ser así:
 ```{r ejercicios-importar-multiples-1, echo=FALSE}
 
 # Directorio donde se encuentran los archivos
-name_of_folder = here::here("data", "files", "02-CSVs")
+name_of_folder = here::here("data/files/02-CSVs")
 
 # Listamos los archivos a leer
 files <- list.files(name_of_folder, pattern = "csv", full.names = TRUE)
@@ -245,7 +244,7 @@ full
 
 ```{r ejercicios-importar-multiples-2, echo=FALSE}
 
-name_of_folder = here::here("data", "files", "02-XLSs")
+name_of_folder = here::here("data/files/02-XLSs")
 
 # Listamos los archivos a leer
 files <- list.files(name_of_folder, pattern = "xls", full.names = TRUE)
@@ -265,7 +264,7 @@ map_df(files, read_xlsx, sheet = 2, skip = 5)
 write_csv(DF_name, "data/files/02-write-csv.csv")
 
 # Versión avanzada
-name_of_file = here::here("data", "files", "02-write-csv.csv")
+name_of_file = here::here("data/files/02-write-csv.csv")
 write_csv(DF_name, name_of_file)
 
 
@@ -275,13 +274,13 @@ write_csv(DF_name, name_of_file)
 
 ```{r write-otros, eval = FALSE}
 
-name_of_file = here::here("data", "files", "02-write-xlsx.xlsx")
+name_of_file = here::here("data/files/02-write-xlsx.xlsx")
 writexl::write_xlsx(DF_name, name_of_file)
 
-name_of_file = here::here("data", "files", "02-write-sav.sav")
+name_of_file = here::here("data/files/02-write-sav.sav")
 haven::write_sav(DF_name, name_of_file)
 
-name_of_file = here::here("data", "files", "02-write-ods.ods")
+name_of_file = here::here("data/files/02-write-ods.ods")
 readODS::write_ods(DF_name, name_of_file)
 
 ```
@@ -379,7 +378,7 @@ DT::datatable(data.frame(
 ```{r filtrando-ordenando}
 
 # DF original
-name_of_file = here::here("data", "files", "02-read-csv.csv")
+name_of_file = here::here("data/files/02-read-csv.csv")
 DF_name = read_csv(name_of_file)
 DF_name
 
@@ -433,7 +432,7 @@ DF_name %>% rename_at(all_of(oldnames), ~ newnames)
 
 
 
-##### Selección avanzada con select_helpers()  
+#### Selección avanzada con select_helpers()  
 
 El `everything()` que usamos dentro de `select()` más arriba es uno de los `select_helpers()` existentes. Estos permiten realizar operaciones de selección de variables de manera más sencilla.  
 
@@ -537,6 +536,7 @@ DF_name %>%
 
 1. Usando la base df_wide, haz las siguientes cosas, una a una:  
 
+* Importa los datos (ver código abajo)
 * Filtra el DF para quedarnos solo con edades entre 18 y 50 años  
 * Ordena los datos por genero y edad, esta última decreciente  
 * Selecciona las columnas para quedarnos solo con ID, variables demograficas, y respuestas crudas (raw)  
@@ -545,6 +545,9 @@ DF_name %>%
 2. Ahora combina el resultado de todas las operaciones anteriores en un DF  
 
 3. Calcula el promedio y desviación típica de edad para cada género  
+
+---  
+
 
 ```{r ejercicios-dplyr-1}
 
@@ -697,12 +700,50 @@ DF_plot %>%
 ```
 
 
-#### Separate, omit, ifelse, case_when, tipos de variables...
+### Ejercicios - wide to long {.ejercicio -} 
+
+Trabajaremos con los datos *procesados* del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al. Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base final en formato wide (Dentro de https://osf.io/egxy5/, ver archivo: `/outputs/data/sa-prepared.csv`).  
+
+1. Cambia el orden de las variables para que ID sea la primera columna.  
+
+2. Transforma la base a formato long.  
+
+<details><summary>Pista: ![](data/images/hint.png)</summary><span style="color: orange;">Tendras que usar la función `select()` y el select helper `everything()` para el primer paso.</span></details>
+
+---  
+
+Importamos datos, y limpiamos nombres de variables:  
+```{r ejercicios-dplyr-avanzado-1-2-import, echo=TRUE}
+
+DF_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
+  janitor::clean_names()
+
+```
+
+```{r ejercicios-dplyr-avanzado-1-2, include=FALSE}
+
+DF_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
+  janitor::clean_names()
+  # mutate(anxious_attachment = round(anxious_attachment, 2))
+
+
+  # 1. Cambia el orden de las variables para que ID sea la primera columna.  
+    DF_wide = DF_wide %>% select(id, everything())
+  
+  
+  # 2. Transforma la base a formato long (eso sí, mantén las variables demográficas en formato wide).   
+    DF_long = DF_wide %>% pivot_longer(fluid_intelligence:working_memory)
+    
+```
+
+
+
+### Separate, omit, ifelse, case_when, tipos de variables...
 
 ```{r separate-omit-ifelse-casewhen}
 
 # Base original
-name_of_file = here::here("data", "files", "02-read-csv.csv")
+name_of_file = here::here("data/files/02-read-csv.csv")
 DF_name = read_csv(name_of_file)
 
 # Separate
@@ -747,21 +788,86 @@ DF_name %>% pull(PPV_DECLARED) %>% mean(.)
 ```
 
 
-#### Regular expressions
+### Ejercicios - verbos avanzados dplyr {.ejercicio -} 
+
+1. Importa los datos y limpia los nombres de columna:  
+
+```{r ejercicios-dplyr-avanzado-import, include=FALSE, echo=TRUE}
+
+# Leemos los datos y usamos janitor::clean_names() para limpiar los nombres de las columnas
+
+ DF_wide = 
+  read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
+  janitor::clean_names()
+
+```
+
+2. En un nuevo DF (`DF_split`), crea una variable llamada `social_adaptation_split` con la median split para la variable social_adaptation. La mitad superior se llamará `high_social_adaptation` y la mitad inferior `low_social_adaptation`.
+
+3. Asegúrate que no hay valores NA.  
+
+<details><summary>Pista: ![](data/images/hint.png)</summary><span style="color: orange;">Necesitarás extraer la mediana a una variable a parte, y después usar `case_when()` para crear la nueva variable `social_adaptation_split`. La función `drop_na()` será necesaria para el paso 3.</span></details>
+
+---  
+
+El resultado final debería ser:    
+
+```{r ejercicios-dplyr-avanzado-3, echo=FALSE}
+
+  DF_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
+  janitor::clean_names()
+
+    median_social_adaptation = DF_wide %>% pull(social_adaptation) %>% median(., na.rm = TRUE)
+
+    DF_split = DF_wide %>% 
+      mutate(social_adaptation_split = 
+               as.factor(
+                 case_when(
+                   social_adaptation >= median_social_adaptation ~ "high_social_adaptation",
+                   social_adaptation < median_social_adaptation ~ "low_social_adaptation",
+                   TRUE ~ NA_character_))) %>% 
+      select(id, social_adaptation, social_adaptation_split) %>% 
+      drop_na(social_adaptation_split)
+
+    DT::datatable(DF_split)
+    
+    # DF_split %>% summary(.)
+  
+```
+
+
+### Regular expressions
 
 [Basic Regular Expressions Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf)  
 
-![SOURCE: https://xkcd.com/208/](`r here::here("data", "images", "regular_expressions.png")`)
+![SOURCE: https://xkcd.com/208/](`r here::here("data/images/regular_expressions.png")`)
 
+
+Usando este dataframe:  
 
 ```{r regular-expressions}
 
 DF_regexp = DF_name %>% select(-X1); DF_regexp
+```
 
-# Regexp
+
+Podemos usar la función `gsub()` para eliminar partes de una cadena de texto, o para extraer un número:  
+```{r regular-expressions-1}
+
+# gsub()
 DF_regexp %>% 
-  mutate(condition = gsub("PPV_", "", condition)) %>% 
-  mutate(condition_N = gsub(".*([[:digit:]]$)", "\\1", condition))
+  mutate(condition = gsub("PPV_", "", condition)) %>%  # Buscamos PPV_ y lo reemplazamos por nada (lo eliminamos!)
+  mutate(condition_N = gsub(".*([[:digit:]]$)", "\\1", condition)) # Busca cualquier dígito al final de la cadena de texto y elimina el resto
+
+```
+
+Con `select()` y `matches()` seleccionamos columnas usando la siguiente regular expression `lkns_[0-9]{2}_raw`:
+
+- `lkns_` contiene esta cadena de texto  
+- `[0-9]{2}` a continuación, contiene cualquier dígito del 0 al 9, dos veces.
+- `_raw`a continuación, contiene esta cadena de texto  
+
+```{r regular-expressions-2}
 
 read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv") %>% 
   # Seleccionamos solo algunas de las filas
@@ -773,77 +879,40 @@ Una aplicación Shiny para ayudar a construir Regular Expressions:
 
 ```{r regular-expressions-gadget, eval=FALSE}
 
-regexplain::regex_gadget()
+regexplain::regexplain_gadget()
 
 ```
 
 
-### Ejercicios - verbos avanzados dplyr {.ejercicio -} 
-
-Trabajaremos con los datos *procesados* del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al. Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base final en formato wide (archivo: `/outputs/data/sa-prepared.csv`).  
-
-1. Cambia el orden de las variables para que ID sea la primera columna.  
-
-2. Transforma la base a formato long.  
-
-
-```{r ejercicios-dplyr-avanzado-1-2, include=FALSE}
-
-DF_wide = read.csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
-  mutate(Anxious.Attachment = round(Anxious.Attachment, 2))
-
-
-  # 1. Cambia el orden de las variables para que ID sea la primera columna.  
-  
-    DF_wide = DF_wide %>% select(ID, everything())
-  
-  
-  # 2. Transforma la base a formato long (eso sí, mantén las variables demográficas en formato wide).   
-  
-    DF_long = DF_wide %>% pivot_longer(Fluid.Intelligence:Working.Memory, names_to = "Variable", values_to = "Value")
-    
-```
-
-
-3. Crea un nuevo DF (`DF_split`) donde crees una variable llamada `social_adaptation_split` con la median split para la variable Social.Adaptation. La mitad superior se llamará `high_social_adaptation` y la mitad inferior `low_social_adaptation`. Asegúrate que no hay valores NA. El resultado final debería ser:    
-
-```{r ejercicios-dplyr-avanzado-3, echo=FALSE}
-
-    median_social_adaptation = DF_wide %>% pull(Social.Adaptation) %>% median(., na.rm = TRUE)
-
-    DF_split = DF_wide %>% 
-      mutate(social_adaptation_split = 
-               as.factor(
-                 case_when(
-                   Social.Adaptation >= median_social_adaptation ~ "high_social_adaptation",
-                   Social.Adaptation < median_social_adaptation ~ "low_social_adaptation",
-                   TRUE ~ NA_character_))) %>% 
-      select(ID, social_adaptation_split) %>% 
-      drop_na(social_adaptation_split)
-
-    DT::datatable(DF_split)
-    
-    # DF_split %>% summary(.)      
-  
-```
-
----
-
+### Ejercicios - Calcular puntajes de escalas usando regular expressions {.ejercicio -} 
 
 Ahora volvemos a usar con los datos brutos (`sa-raw-anonymised.csv`) del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al.      
 
-4. En estos datos se muestran las puntuaciones crudas (e.g. WMAT_01_raw) y ya codificadas/corregidas (WMAT_01_cod) para los ítems de varias pruebas. Con los datos de los ítems de cada prueba, necesitamos calcular el puntaje para cada participante. Empezaremos con la prueba de Matrices de WAIS (WMAT_). Extrae la suma para cada participante de los ítems WMAT_*_cod.
+En estos datos tenemos las puntuaciones crudas (e.g. WMAT_01_raw) y ya codificadas/corregidas (WMAT_01_cod) para los ítems de varias escalas Para preparar los datos de cara al análisis final, necesitamos calcular el puntaje para cada participante y escala. Empezaremos con la prueba de Matrices de WAIS (`WMAT_`). 
+
+1. **Extrae la suma para cada participante de los ítems WMAT_[NUMEROS]_cod**  
   
   Hay al menos dos estrategias posibles:
   
   A) Selecciona las columnas relevantes y haz la suma de columnas  
   
   B) Convierte a long, filtra para quedarte con las filas correspondientes a la prueba relevante, y haz una suma agrupada  
+
+<details><summary>Pista para seleccionar o filtrar columnas: ![](data/images/hint.png)</summary><span style="color: orange;">Recuerda que usamos `select()` para seleccionar columnas, o `filter()` para filtrar.</span></details>
+
+<details><summary>Pista para seleccionar columnas: ![](data/images/hint.png)</summary><span style="color: orange;">Podemos usar `matches("WMAT_[0-9]{2}_cod")` para seleccionar o filtrar todas las columnas o ítems que contienen: `WMAT_`, 2 numeros del 0 al 9, y acaban en `_cod`.</span></details>
+
+<details><summary>Pista para suma de columnas: ![](data/images/hint.png)</summary><span style="color: orange;">`rowSums()` es la función que podemos usar, pero su sintaxis es algo complicada.</span></details>
+
+<details><summary>Pista para suma agrupada: ![](data/images/hint.png)</summary><span style="color: orange;">Usamos `group_by() %>% summarise()` poniendo parámetros dentro de cada función.</span></details>
   
-  
+---  
+
+Importar datos:  
+
 ```{r ejercicios-dplyr-avanzado-4datos}
 
-df_wide_raw = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv") 
+df_wide_raw = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")
 
 ```
 
@@ -873,9 +942,9 @@ DF_C = df_wide_raw %>%
   summarise(WMAT_sum = sum(Value, na.rm = FALSE))
 
 # Todas las versiones dan resultados identicos
- all.equal(DF_A, DF_B)
- all.equal(DF_A, DF_C)
- all.equal(DF_B, DF_C)
+ waldo::compare(DF_A, DF_B)
+ waldo::compare(DF_A, DF_C)
+ waldo::compare(DF_B, DF_C)
  
 ```
 
@@ -883,13 +952,15 @@ DF_C = df_wide_raw %>%
 ## Combinar bases de datos
 
 
-### Bind
+### Bind rows or columns
+
+El método más sencillo. Símplemente unimos las filas o columnas de los dataframes.  
 
 ```{r bind}
 
 # Importar CSVs
-DF1 = read_csv(here::here("data", "files", "02-CSVs", "01.csv"))
-DF2 = read_csv(here::here("data", "files", "02-CSVs", "02.csv"))
+DF1 = read_csv(here::here("data/files/02-CSVs/01.csv"))
+DF2 = read_csv(here::here("data/files/02-CSVs/02.csv"))
 
 
 # Bind DFs añadiendo las *filas* de DF2 a DF1
@@ -908,7 +979,7 @@ DF1 %>%
 
 El paquete {dplyr} tiene funciones que permiten trabajar combinando, filtrando, etc. distintos dataframes. Podéis ver más detalle y algunas ilustraciones fantásticas (como la de abajo; **inner_join()**) en el capítulo [relational data de r4ds](https://r4ds.had.co.nz/relational-data.html).
 
-![SOURCE: https://r4ds.had.co.nz/relational-data.html#mutating-joins](`r here::here("data", "images", "join-inner.png")`)  
+![SOURCE: https://r4ds.had.co.nz/relational-data.html#mutating-joins](`r here::here("data/images/join-inner.png")`)  
 
 En [https://github.com/gadenbuie/tidyexplain](https://github.com/gadenbuie/tidyexplain) se pueden ver animaciones mostrando estas operaciones.  
 
@@ -949,9 +1020,9 @@ Tenemos los siguientes dataframes:
 ```{r joins-data}
 
 # Importar CSVs para los joins  
-DF_IDs = read_csv(here::here("data", "files", "02-join-IDs.csv"))
-DF_results = read_csv(here::here("data", "files", "02-join-results.csv"))
-DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
+DF_IDs = read_csv(here::here("data/files/02-join-IDs.csv"))
+DF_results = read_csv(here::here("data/files/02-join-results.csv"))
+DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 
 # DT::datatable(DF_IDs)
 # DT::datatable(DF_results)
@@ -964,7 +1035,7 @@ DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
 
 Preserva pares de observaciones de `DF_x` y de `DF_y` con claves iguales.   
 
-![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data", "images", "inner-join.gif")`)
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data/images/inner-join.gif")`)
 
 ```{r inner-join}
 
@@ -982,7 +1053,7 @@ DT::datatable(DF_inner_joined)
 
 Preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguales.  
 
-![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data", "images", "left-join.gif")`)
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data/images/left-join.gif")`)
 
 ```{r left-join}
 
@@ -999,7 +1070,7 @@ DT::datatable(DF_left_joined)
 
 Preserva todas las observaciones de `DF_x` y `DF_y`, alineándolas cuando tengan claves iguales.  
 
-![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data", "images", "full-join.gif")`)
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data/images/full-join.gif")`)
 
 ```{r full-join}
 
@@ -1019,7 +1090,7 @@ DT::datatable(DF_full_joined)
 
 Preserva solo aquellas observaciones de `DF_x` cuyas claves NO aparezcan en `DF_y`.  
 
-![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data", "images", "anti-join.gif")`)
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data/images/anti-join.gif")`)
 
 ```{r anti-join}
 
@@ -1036,7 +1107,7 @@ DT::datatable(DF_anti_joined)
 
 Preserva solo aquellas observaciones de `DF_x` cuyas claves aparezcan en `DF_y`.  
 
-![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data", "images", "semi-join.gif")`)
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data/images/semi-join.gif")`)
 
 ```{r semi-join}
 
@@ -1069,9 +1140,9 @@ Con los DFs de abajo, haz las siguientes operaciones:
 
 ```{r ejercicios-joins-dfs}
 
-DF_IDs = read_csv(here::here("data", "files", "02-join-IDs2.csv"))
-DF_results = read_csv(here::here("data", "files", "02-join-results.csv"))
-DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
+DF_IDs = read_csv(here::here("data/files/02-join-IDs2.csv"))
+DF_results = read_csv(here::here("data/files/02-join-results.csv"))
+DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 
 ```
 
@@ -1167,7 +1238,7 @@ DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
 ```{r ejercicios-joins-responses-5, echo=FALSE}
 
     DF_final = DF_long %>% 
-      right_join(DF_split, by = "ID")
+      right_join(DF_split, by = "id")
   
     DT::datatable(DF_final)
     
@@ -1178,15 +1249,15 @@ DF_BAD = read_csv(here::here("data", "files", "02-join-BAD.csv"))
 ```{r ejercicios-joins-responses-6, echo=FALSE}
     
   DF_final %>% 
-    ggplot(aes(Value, color = social_adaptation_split, fill = social_adaptation_split)) +
+    ggplot(aes(value, color = social_adaptation_split, fill = social_adaptation_split)) +
     geom_density(alpha = .2) +
     theme(legend.position = "bottom") +
-    facet_wrap(~ Variable, scales = "free", nrow = 3)
+    facet_wrap(~ name, scales = "free", nrow = 3)
 
-  # DF_final %>% 
-  #   ggplot(aes(Value, Variable, color = social_adaptation_split, fill = social_adaptation_split)) +
-  #   ggridges::geom_density_ridges(alpha = .2) +
-  #   theme(legend.position = "bottom")
+  DF_final %>%
+    ggplot(aes(value, name, color = social_adaptation_split, fill = social_adaptation_split)) +
+    ggridges::geom_density_ridges(alpha = .2) +
+    theme(legend.position = "bottom")
 
 ```
 
@@ -1328,6 +1399,9 @@ predictors(results)
 plot(results, type = c("g", "o"))
 
 ```
+
+Caret ha sido desplazado por {[tidymodels](https://www.tidymodels.org/)}, un conjunto de paquetes que emplean la filosofía del {[tidyverse](https://www.tidyverse.org/)}.  
+
 
 
 ## Datasets interesantes  
