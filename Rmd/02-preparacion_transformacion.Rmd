@@ -706,7 +706,7 @@ Trabajaremos con los datos *procesados* del paper [Cognitive and Socio-affective
 
 1. Cambia el orden de las variables para que ID sea la primera columna.  
 
-2. Transforma la base a formato long.  
+2. Transforma la base a formato long (eso sí, mantén las variables demográficas en formato wide).  
 
 <details><summary>Pista: ![](data/images/hint.png)</summary><span style="color: orange;">Tendras que usar la función `select()` y el select helper `everything()` para el primer paso.</span></details>
 
@@ -792,7 +792,7 @@ DF_name %>% pull(PPV_DECLARED) %>% mean(.)
 
 1. Importa los datos y limpia los nombres de columna:  
 
-```{r ejercicios-dplyr-avanzado-import, include=FALSE, echo=TRUE}
+```{r ejercicios-dplyr-avanzado-import}
 
 # Leemos los datos y usamos janitor::clean_names() para limpiar los nombres de las columnas
 

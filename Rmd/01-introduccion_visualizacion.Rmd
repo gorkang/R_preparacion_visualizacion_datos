@@ -1322,7 +1322,7 @@ cowplot::plot_grid(
 
 ```
 
-<BR>
+
 #### Usando estilos
 
 Los estilos nos permiten personalizar los gráficos de manera muy sencilla, por ejemplo, usando {[ggtheme](https://ggplot2.tidyverse.org/reference/ggtheme.html)}. Podéis ver un tutorial [aquí](https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html).  

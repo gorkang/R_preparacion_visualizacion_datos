@@ -33,6 +33,7 @@ coordenadas
 scales
 colors-and-fill-scales
 combinando-graficas
+usando-estilos
 visualización-interactiva
 gráficas-interactivas
 animando-gráficas

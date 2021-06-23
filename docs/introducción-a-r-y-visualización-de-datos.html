@@ -254,6 +254,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#ejercicio-2"><i class="fa fa-check"></i>Ejercicio</a></li>
 <li class="chapter" data-level="1.3.6.3" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#colors-and-fill-scales"><i class="fa fa-check"></i><b>1.3.6.3</b> Colors and fill scales</a></li>
 <li class="chapter" data-level="1.3.6.4" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#combinando-graficas"><i class="fa fa-check"></i><b>1.3.6.4</b> Combinando gráficas</a></li>
+<li class="chapter" data-level="1.3.6.5" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#usando-estilos"><i class="fa fa-check"></i><b>1.3.6.5</b> Usando estilos</a></li>
 <li class="chapter" data-level="" data-path="introducción-a-r-y-visualización-de-datos.html"><a href="introducción-a-r-y-visualización-de-datos.html#ejercicios-4"><i class="fa fa-check"></i>Ejercicios</a></li>
 </ul></li>
 </ul></li>
@@ -1455,8 +1456,9 @@ Pista: <img src="data/images/hint.png" />
 <span id="cb75-32"><a href="introducción-a-r-y-visualización-de-datos.html#cb75-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="dv">1</span>), <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.2</span>)</span>
 <span id="cb75-33"><a href="introducción-a-r-y-visualización-de-datos.html#cb75-33" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="bookdown-workshop-R_files/figure-html/personalizando-combinando-avanzado-1.png" width="1152" /></p>
-<p><BR>
-#### Usando estilos</p>
+</div>
+<div id="usando-estilos" class="section level4" number="1.3.6.5">
+<h4><span class="header-section-number">1.3.6.5</span> Usando estilos</h4>
 <p>Los estilos nos permiten personalizar los gráficos de manera muy sencilla, por ejemplo, usando {<a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">ggtheme</a>}. Podéis ver un tutorial <a href="https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html">aquí</a>.</p>
 <p>Primero creamos un gráfico sobre el que aplicaremos estilos.</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="introducción-a-r-y-visualización-de-datos.html#cb76-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Petal.Width, Petal.Length, <span class="at">color =</span> Species)) <span class="sc">+</span></span>
