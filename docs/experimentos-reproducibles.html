@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 3 Análisis de datos exploratorio | R para preparación y visualización de datos</title>
-  <meta name="description" content="Capítulo 3 Análisis de datos exploratorio | R para preparación y visualización de datos" />
+  <title>Capítulo 5 Experimentos reproducibles | R para preparación y visualización de datos</title>
+  <meta name="description" content="Capítulo 5 Experimentos reproducibles | R para preparación y visualización de datos" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 3 Análisis de datos exploratorio | R para preparación y visualización de datos" />
+  <meta property="og:title" content="Capítulo 5 Experimentos reproducibles | R para preparación y visualización de datos" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gorkang/R_preparacion_visualizacion_datos" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 3 Análisis de datos exploratorio | R para preparación y visualización de datos" />
+  <meta name="twitter:title" content="Capítulo 5 Experimentos reproducibles | R para preparación y visualización de datos" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="preparación-y-transformación-de-datos.html"/>
-<link rel="next" href="trabajo-con-rmarkdown-para-reportes-reproducibles.html"/>
+<link rel="prev" href="trabajo-con-rmarkdown-para-reportes-reproducibles.html"/>
+<link rel="next" href="ejercicios-6.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -515,269 +515,67 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="análisis-de-datos-exploratorio" class="section level1" number="3">
-<h1><span class="header-section-number">Capítulo 3</span> Análisis de datos exploratorio</h1>
+<div id="experimentos-reproducibles" class="section level1" number="5">
+<h1><span class="header-section-number">Capítulo 5</span> Experimentos reproducibles</h1>
+<p>En el CSCN usamos distintas tecnologías para desarrollar experimentos. Algunos ejemplos son <a href="https://www.psychopy.org/">Psychopy</a>, <a href="https://www.qualtrics.com/">Qualtrics</a>, <a href="https://www.limesurvey.org/">Limesurvey</a>, <a href="https://www.jspsych.org/plugins/jspsych-preload/">jsPsych</a>, <a href="https://gorilla.sc/">Gorilla</a>, etc. Cada una de estas tiene ventajas y desventajas, y en general es importante tener en cuenta aspectos pragmáticos a la hora de adoptar una u otra tecnología (costo económico, tipo de experimento [EEG/conductual, laboratorio/online]).</p>
+<p>Algunos de nosotros hemos optado principalmente por <a href="https://www.jspsych.org/">jsPsych</a> para experimentos conductuales por tratarse de una libreria javascript de código abierto, basada en tecnologías web standard, y que puede ser usada online y offline. Dado que en el CSCN diponemos de servidor propio, los costos habituales de hosting no se aplican.</p>
+<p>En los últimos años, hemos empezado a trabajar en un conjunto de herramientas para crear experimentos usando la librería <a href="https://www.jspsych.org/">jsPsych</a> con <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a>, simular participantes con <a href="https://github.com/gorkang/jsPsychMonkeys">jspsychMonkeys</a> y estandarizar y automatizar la preparación de datos con <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a>.</p>
+<p>Nuestro objetivo final es tener en la carpeta <code>canonical_protocol/</code> del repositorio de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a> un <a href="https://github.com/gorkang/jsPsychMaker/blob/main/canonical_protocol/canonical_protocol_details.csv">listado exhaustivo de tareas</a> disponibles para ser usadas. Cada una de estas tareas debería funcionar en <a href="https://github.com/gorkang/jsPsychMonkeys">jspsychMonkeys</a> para poder crear participantes virtuales, y tener un script hermano en <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a> para automatizar la preparación de datos.</p>
+<div id="pipeline-experimental-abierto-y-reproducible" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Pipeline experimental abierto y reproducible</h2>
+<p>Replicar el experimento a partir de una publicación no es trivial. Una de las fortalezas fundamentales de este sistema es que compartir y reproducir un experimento y los análisis asociados se convierte en algo trivial.</p>
+<p>Además, todos los componentes del proceso son código abierto, lo que permite que revisores, colaboradores, etc. puedan verificar que no hay errores en el código.</p>
+<p>Con este sistema podremos crear fácilmente el codigo del experimento, simular datos y preparar datos de manera casi automática (incluyendo anonimizacion).</p>
+<p>El output del sistema es estandarizado, lo que implica que los nombres de las variables y la estructura de datos son predecibles. Finalmente, la generacion de graficas, tablas, reportes y los analisis son reproducibles.</p>
+<div id="como-crear-un-protocolo-experimental" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Como crear un protocolo experimental</h3>
+<ol style="list-style-type: decimal">
+<li>Descargamos el proyecto de RStudio jsPsychMaker:</li>
+</ol>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="experimentos-reproducibles.html#cb259-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMaker&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
+<span id="cb259-2"><a href="experimentos-reproducibles.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
 <hr />
-<div id="paquetes-para-este-capítulo-2" class="section level4 unnumbered">
-<h4>Paquetes para este capítulo</h4>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="análisis-de-datos-exploratorio.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;cowplot&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;cowplot&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;cowplot&#39;</span>)</span>
-<span id="cb209-2"><a href="análisis-de-datos-exploratorio.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;dplyr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;dplyr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;dplyr&#39;</span>)</span>
-<span id="cb209-3"><a href="análisis-de-datos-exploratorio.html#cb209-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;gapminder&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;gapminder&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;gapminder&#39;</span>)</span>
-<span id="cb209-4"><a href="análisis-de-datos-exploratorio.html#cb209-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;ggplot2&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;ggplot2&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;ggplot2&#39;</span>)</span>
-<span id="cb209-5"><a href="análisis-de-datos-exploratorio.html#cb209-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;ggridges&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;ggridges&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;ggridges&#39;</span>)</span>
-<span id="cb209-6"><a href="análisis-de-datos-exploratorio.html#cb209-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;haven&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;haven&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;haven&#39;</span>)</span>
-<span id="cb209-7"><a href="análisis-de-datos-exploratorio.html#cb209-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;inspectdf&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;inspectdf&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;inspectdf&#39;</span>)</span>
-<span id="cb209-8"><a href="análisis-de-datos-exploratorio.html#cb209-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tidyr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;tidyr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;tidyr&#39;</span>)</span></code></pre></div>
-<hr />
-<p>En este capítulo vamos a aplicar lo que hemos aprendido en los dos capítulos anteriores, combinando transformación de datos con visualización para entender nuestras bases de datos, buscar patrones interesantes, etc. Podéis encontrar una introducción más completa en el manual <a href="https://r4ds.had.co.nz/exploratory-data-analysis.html">R 4 data science - exploratory data analysis</a>.</p>
-</div>
-<div id="visualizando-distribuciones" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Visualizando distribuciones</h2>
-<p>Para visualizar la distribución de nuestras variables, tendremos que seguir estrategias diferentes dependiendo de si se trata de variables categóricas o continuas.</p>
-<div id="variables-categóricas" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Variables categóricas</h3>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="análisis-de-datos-exploratorio.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(continent)) <span class="sc">+</span></span>
-<span id="cb210-2"><a href="análisis-de-datos-exploratorio.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/visualizando-distribuciones-categoricas-1.png" width="1152" /></p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="análisis-de-datos-exploratorio.html#cb211-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb211-2"><a href="análisis-de-datos-exploratorio.html#cb211-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(continent)</span></code></pre></div>
-<pre class="bg-output"><code>## # A tibble: 5 x 2
-##   continent     n
-##   &lt;fct&gt;     &lt;int&gt;
-## 1 Africa      624
-## 2 Americas    300
-## 3 Asia        396
-## 4 Europe      360
-## 5 Oceania      24</code></pre>
-</div>
-<div id="variables-continuas" class="section level3" number="3.1.2">
-<h3><span class="header-section-number">3.1.2</span> Variables continuas</h3>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="análisis-de-datos-exploratorio.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(lifeExp)) <span class="sc">+</span></span>
-<span id="cb213-2"><a href="análisis-de-datos-exploratorio.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/visualizando-distribuciones-continuas-1.png" width="1152" /></p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="análisis-de-datos-exploratorio.html#cb214-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb214-2"><a href="análisis-de-datos-exploratorio.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">MEAN =</span> <span class="fu">mean</span>(lifeExp),</span>
-<span id="cb214-3"><a href="análisis-de-datos-exploratorio.html#cb214-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">MEDIAN =</span> <span class="fu">median</span>(lifeExp),</span>
-<span id="cb214-4"><a href="análisis-de-datos-exploratorio.html#cb214-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(lifeExp),</span>
-<span id="cb214-5"><a href="análisis-de-datos-exploratorio.html#cb214-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">MAX =</span> <span class="fu">max</span>(lifeExp),</span>
-<span id="cb214-6"><a href="análisis-de-datos-exploratorio.html#cb214-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">MIN =</span> <span class="fu">min</span>(lifeExp))</span></code></pre></div>
-<pre class="bg-output"><code>## # A tibble: 1 x 5
-##    MEAN MEDIAN    SD   MAX   MIN
-##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1  59.5   60.7  12.9  82.6  23.6</code></pre>
-</div>
-<div id="ejercicios-5" class="section level3 ejercicio unnumbered">
-<h3>Ejercicios</h3>
-<p>¿Podrías replicar la visualización de abajo? Queremos mostrar un histograma por continente.</p>
-<p><img src="bookdown-workshop-R_files/figure-html/ejercicio-variables-individuales-1-1.png" width="1152" /></p>
-<p>¿Como podemos añadir el histograma general para poder entender donde se ubica cada continente?</p>
-<p><img src="bookdown-workshop-R_files/figure-html/ejercicio-variables-individuales-2-1.png" width="1152" /></p>
-<p>También queremos ver los descriptivos por continente, ordenados por el promedio:</p>
-<pre class="bg-output"><code>## # A tibble: 5 x 6
-##   continent  MEAN MEDIAN    SD   MAX   MIN
-##   &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 Africa     48.9   47.8  9.15  76.4  23.6
-## 2 Asia       60.1   61.8 11.9   82.6  28.8
-## 3 Americas   64.7   67.0  9.35  80.7  37.6
-## 4 Europe     71.9   72.2  5.43  81.8  43.6
-## 5 Oceania    74.3   73.7  3.80  81.2  69.1</code></pre>
-</div>
-<div id="section-13" class="section level3 unnumbered">
-<h3 class="unnumbered"></h3>
-<p><BR></p>
-</div>
-<div id="ejercicio-variables-individuales" class="section level3 ejercicio unnumbered">
-<h3>Ejercicio variables individuales</h3>
-<p>Usando el DF <code>mpg</code>, visualiza la distribucion de las variables <code>manufacturer</code>, <code>class</code>, <code>trans</code>, <code>hwy</code> y <code>cty</code></p>
-<p><img src="bookdown-workshop-R_files/figure-html/ejercicio-variables-individuales-1.png" width="1152" /><img src="bookdown-workshop-R_files/figure-html/ejercicio-variables-individuales-2.png" width="1152" /></p>
-</div>
-<div id="visualizando-datasets-completos" class="section level3" number="3.1.3">
-<h3><span class="header-section-number">3.1.3</span> Visualizando datasets completos</h3>
-<p>Cuando nos llega una nueva base de datos, una de las primeras cosas que haremos será familiarizarnos con los datos. Cómo se distribuyen, cual es la relación entre distintas variables, etc.</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="análisis-de-datos-exploratorio.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wide to long</span></span>
-<span id="cb217-2"><a href="análisis-de-datos-exploratorio.html#cb217-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb217-3"><a href="análisis-de-datos-exploratorio.html#cb217-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character)) <span class="sc">%&gt;%</span> </span>
-<span id="cb217-4"><a href="análisis-de-datos-exploratorio.html#cb217-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(value <span class="sc">!=</span> <span class="dv">999</span>) <span class="sc">%&gt;%</span> <span class="co"># Si existiera algun codigo para missing values, filtrar</span></span>
-<span id="cb217-5"><a href="análisis-de-datos-exploratorio.html#cb217-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value_NUM =</span> <span class="fu">as.numeric</span>(value))</span>
-<span id="cb217-6"><a href="análisis-de-datos-exploratorio.html#cb217-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb217-7"><a href="análisis-de-datos-exploratorio.html#cb217-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot numeric variables</span></span>
-<span id="cb217-8"><a href="análisis-de-datos-exploratorio.html#cb217-8" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> </span>
-<span id="cb217-9"><a href="análisis-de-datos-exploratorio.html#cb217-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(value_NUM) <span class="sc">%&gt;%</span> </span>
-<span id="cb217-10"><a href="análisis-de-datos-exploratorio.html#cb217-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value_NUM)) <span class="sc">+</span> </span>
-<span id="cb217-11"><a href="análisis-de-datos-exploratorio.html#cb217-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> name, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb217-12"><a href="análisis-de-datos-exploratorio.html#cb217-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">15</span>) <span class="co">#+ scale_x_log10()</span></span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/initial%20exploration-1.png" width="1152" /></p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="análisis-de-datos-exploratorio.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot non-numeric variables</span></span>
-<span id="cb218-2"><a href="análisis-de-datos-exploratorio.html#cb218-2" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb218-3"><a href="análisis-de-datos-exploratorio.html#cb218-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(value) <span class="sc">%&gt;%</span> </span>
-<span id="cb218-4"><a href="análisis-de-datos-exploratorio.html#cb218-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(value_NUM)) <span class="sc">%&gt;%</span> </span>
-<span id="cb218-5"><a href="análisis-de-datos-exploratorio.html#cb218-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value)) <span class="sc">+</span> </span>
-<span id="cb218-6"><a href="análisis-de-datos-exploratorio.html#cb218-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> name, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb218-7"><a href="análisis-de-datos-exploratorio.html#cb218-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb218-8"><a href="análisis-de-datos-exploratorio.html#cb218-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/initial%20exploration-2.png" width="1152" /></p>
-<div id="inspectdf" class="section level4" number="3.1.3.1">
-<h4><span class="header-section-number">3.1.3.1</span> inspectdf</h4>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="análisis-de-datos-exploratorio.html#cb219-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> inspectdf<span class="sc">::</span><span class="fu">inspect_na</span>()</span></code></pre></div>
-<pre class="bg-output"><code>## # A tibble: 6 x 3
-##   col_name    cnt  pcnt
-##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt;
-## 1 country       0     0
-## 2 continent     0     0
-## 3 year          0     0
-## 4 lifeExp       0     0
-## 5 pop           0     0
-## 6 gdpPercap     0     0</code></pre>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="análisis-de-datos-exploratorio.html#cb221-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> inspectdf<span class="sc">::</span><span class="fu">inspect_na</span>() <span class="sc">%&gt;%</span> show_plot <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/inspectdf_-1.png" width="1152" /></p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="análisis-de-datos-exploratorio.html#cb222-1" aria-hidden="true" tabindex="-1"></a>gapminder_cat <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> inspectdf<span class="sc">::</span><span class="fu">inspect_cat</span>()</span>
-<span id="cb222-2"><a href="análisis-de-datos-exploratorio.html#cb222-2" aria-hidden="true" tabindex="-1"></a>gapminder_cat <span class="sc">%&gt;%</span> inspectdf<span class="sc">::</span><span class="fu">show_plot</span>()</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/inspectdf_-2.png" width="1152" /></p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="análisis-de-datos-exploratorio.html#cb223-1" aria-hidden="true" tabindex="-1"></a>gapminder_num <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> inspectdf<span class="sc">::</span><span class="fu">inspect_num</span>()</span>
-<span id="cb223-2"><a href="análisis-de-datos-exploratorio.html#cb223-2" aria-hidden="true" tabindex="-1"></a>gapminder_num <span class="sc">%&gt;%</span> inspectdf<span class="sc">::</span><span class="fu">show_plot</span>()</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/inspectdf_-3.png" width="1152" /></p>
-</div>
-</div>
-</div>
-<div id="covariación" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Covariación</h2>
-<div id="variable-categórica-y-continua" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Variable categórica y continua</h3>
-<p>Podemos contar el numero de elementos por nivel de la variable o ver densidad, etc.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="análisis-de-datos-exploratorio.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(lifeExp, <span class="at">colour =</span> continent)) <span class="sc">+</span> </span>
-<span id="cb224-2"><a href="análisis-de-datos-exploratorio.html#cb224-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-1-1.png" width="1152" /></p>
-<p><BR></p>
-<p>Podemos usar geom_density_ridges() para combinar puntos con distribuciones:</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="análisis-de-datos-exploratorio.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(lifeExp, continent, <span class="at">fill =</span> continent)) <span class="sc">+</span> </span>
-<span id="cb225-2"><a href="análisis-de-datos-exploratorio.html#cb225-2" aria-hidden="true" tabindex="-1"></a>  ggridges<span class="sc">::</span><span class="fu">geom_density_ridges</span>(<span class="at">stat =</span> <span class="st">&quot;binline&quot;</span>, <span class="at">bins =</span> <span class="dv">20</span>, <span class="at">scale =</span> <span class="fl">0.95</span>, <span class="at">draw_baseline =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb225-3"><a href="análisis-de-datos-exploratorio.html#cb225-3" aria-hidden="true" tabindex="-1"></a>  ggridges<span class="sc">::</span><span class="fu">geom_density_ridges</span>(<span class="at">jittered_points =</span> <span class="cn">TRUE</span>, <span class="at">position =</span> <span class="st">&quot;raincloud&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">scale =</span> <span class="fl">0.9</span>)</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-3-1.png" width="1152" /></p>
-<hr />
-<p>¿Qué estamos viendo exáctamente arriba? Hay un punto por cada pais, y por cada año, lo que da lugar aalgo bien dificil de interpretar. Podemos ver los datos únicamente del último año:</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="análisis-de-datos-exploratorio.html#cb226-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">n</span>())</span></code></pre></div>
-<pre class="bg-output"><code>## # A tibble: 12 x 2
-##     year `n()`
-##    &lt;int&gt; &lt;int&gt;
-##  1  1952   142
-##  2  1957   142
-##  3  1962   142
-##  4  1967   142
-##  5  1972   142
-##  6  1977   142
-##  7  1982   142
-##  8  1987   142
-##  9  1992   142
-## 10  1997   142
-## 11  2002   142
-## 12  2007   142</code></pre>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="análisis-de-datos-exploratorio.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">1995</span>), <span class="fu">aes</span>(lifeExp, continent, <span class="at">fill =</span> continent)) <span class="sc">+</span> </span>
-<span id="cb228-2"><a href="análisis-de-datos-exploratorio.html#cb228-2" aria-hidden="true" tabindex="-1"></a>  ggridges<span class="sc">::</span><span class="fu">geom_density_ridges</span>(<span class="at">stat =</span> <span class="st">&quot;binline&quot;</span>, <span class="at">bins =</span> <span class="dv">20</span>, <span class="at">scale =</span> <span class="fl">0.95</span>, <span class="at">draw_baseline =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb228-3"><a href="análisis-de-datos-exploratorio.html#cb228-3" aria-hidden="true" tabindex="-1"></a>  ggridges<span class="sc">::</span><span class="fu">geom_density_ridges</span>(<span class="at">jittered_points =</span> <span class="cn">TRUE</span>, <span class="at">position =</span> <span class="st">&quot;raincloud&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">scale =</span> <span class="fl">0.9</span>)</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-4-1.png" width="1152" /></p>
-</div>
-<div id="ejercicio-3" class="section level3 ejercicio" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Ejercicio</h3>
-<p>¿Podríais mostrar la diferencia entre los extremos en la base de datos, 1952 y 2007?:</p>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-5-1.png" width="1152" /></p>
-<p>Mira el plot donde mostramos la diferencia entre los extremos en la base de datos, 1952 y 2007 con dos gráficas, una al lado de la otra. ¿Ves algún problema?</p>
-<p>Trata de resolver el problema en las escalas. El resultado final debería ser:</p>
-<p><img src="bookdown-workshop-R_files/figure-html/ejercicio-covariacion1-1.png" width="1152" /></p>
-<p>Podemos hacer algo que clarifica mucho las cosas. Como visualizar ver el avance por país de una manera más directa:</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="análisis-de-datos-exploratorio.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo</span></span>
-<span id="cb229-2"><a href="análisis-de-datos-exploratorio.html#cb229-2" aria-hidden="true" tabindex="-1"></a>DF_gapminder_max_min <span class="ot">=</span> gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb229-3"><a href="análisis-de-datos-exploratorio.html#cb229-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent, country) <span class="sc">%&gt;%</span> </span>
-<span id="cb229-4"><a href="análisis-de-datos-exploratorio.html#cb229-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">lifeExp =</span> <span class="fu">max</span>(lifeExp) <span class="sc">-</span> <span class="fu">min</span>(lifeExp))</span>
-<span id="cb229-5"><a href="análisis-de-datos-exploratorio.html#cb229-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb229-6"><a href="análisis-de-datos-exploratorio.html#cb229-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(DF_gapminder_max_min, <span class="fu">aes</span>(lifeExp, continent, <span class="at">fill =</span> continent)) <span class="sc">+</span> </span>
-<span id="cb229-7"><a href="análisis-de-datos-exploratorio.html#cb229-7" aria-hidden="true" tabindex="-1"></a>  ggridges<span class="sc">::</span><span class="fu">geom_density_ridges</span>(<span class="at">stat =</span> <span class="st">&quot;binline&quot;</span>, <span class="at">bins =</span> <span class="dv">20</span>, <span class="at">scale =</span> <span class="fl">0.95</span>, <span class="at">draw_baseline =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb229-8"><a href="análisis-de-datos-exploratorio.html#cb229-8" aria-hidden="true" tabindex="-1"></a>  ggridges<span class="sc">::</span><span class="fu">geom_density_ridges</span>(<span class="at">jittered_points =</span> <span class="cn">TRUE</span>, <span class="at">position =</span> <span class="st">&quot;raincloud&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">scale =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb229-9"><a href="análisis-de-datos-exploratorio.html#cb229-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb229-10"><a href="análisis-de-datos-exploratorio.html#cb229-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Diferencia entre max y min por país&quot;</span>)</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-6-1.png" width="1152" /></p>
-</div>
-<div id="ejercicio-4" class="section level3 ejercicio" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> Ejercicio</h3>
-Arriba estamos asumiendo que el valor máximo de esperanza de vida corresponde al más actualizado, pero probablemente no sea así. ¿Podrías rehacer el cálculo para mostrar la diferencia entre 1952 y 2007?
-<details>
-<summary>
-Pista <img src="data/images/hint.png" />
-</summary>
-<span style="color: orange;">1. Crear un DF para cada año, renombrando la variable lifeExp<BR>2. Usando la funcion <code>full_join()</code>, juntamos ambas bases (tendras que usar el parametro <code>by</code>). <BR>3. Con <code>mutate()</code> calculamos la diferencia.</span>
-</details>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-categorica-continua-7-1.png" width="1152" /></p>
-</div>
-<div id="dos-variables-categóricas" class="section level3" number="3.2.4">
-<h3><span class="header-section-number">3.2.4</span> Dos variables categóricas</h3>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="análisis-de-datos-exploratorio.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(cut, color)) <span class="sc">+</span></span>
-<span id="cb230-2"><a href="análisis-de-datos-exploratorio.html#cb230-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_count</span>()</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2categoricas-1.png" width="1152" /></p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="análisis-de-datos-exploratorio.html#cb231-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span> </span>
-<span id="cb231-2"><a href="análisis-de-datos-exploratorio.html#cb231-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(color, cut)</span></code></pre></div>
-<pre class="bg-output"><code>## # A tibble: 35 x 3
-##    color cut           n
-##    &lt;ord&gt; &lt;ord&gt;     &lt;int&gt;
-##  1 D     Fair        163
-##  2 D     Good        662
-##  3 D     Very Good  1513
-##  4 D     Premium    1603
-##  5 D     Ideal      2834
-##  6 E     Fair        224
-##  7 E     Good        933
-##  8 E     Very Good  2400
-##  9 E     Premium    2337
-## 10 E     Ideal      3903
-## # … with 25 more rows</code></pre>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="análisis-de-datos-exploratorio.html#cb233-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span> </span>
-<span id="cb233-2"><a href="análisis-de-datos-exploratorio.html#cb233-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(color, cut) <span class="sc">%&gt;%</span>  </span>
-<span id="cb233-3"><a href="análisis-de-datos-exploratorio.html#cb233-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(color, cut, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
-<span id="cb233-4"><a href="análisis-de-datos-exploratorio.html#cb233-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>()</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2categoricas-2.png" width="1152" /></p>
-</div>
-<div id="dos-variables-continuas" class="section level3" number="3.2.5">
-<h3><span class="header-section-number">3.2.5</span> Dos variables continuas</h3>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="análisis-de-datos-exploratorio.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(lifeExp, gdpPercap)) <span class="sc">+</span></span>
-<span id="cb234-2"><a href="análisis-de-datos-exploratorio.html#cb234-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2continuas-1.png" width="1152" /></p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="análisis-de-datos-exploratorio.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(lifeExp, gdpPercap, <span class="at">color =</span> continent)) <span class="sc">+</span></span>
-<span id="cb235-2"><a href="análisis-de-datos-exploratorio.html#cb235-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb235-3"><a href="análisis-de-datos-exploratorio.html#cb235-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2continuas-2.png" width="1152" /></p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="análisis-de-datos-exploratorio.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(lifeExp, gdpPercap)) <span class="sc">+</span></span>
-<span id="cb236-2"><a href="análisis-de-datos-exploratorio.html#cb236-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex</span>()</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2continuas-3.png" width="1152" /></p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="análisis-de-datos-exploratorio.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(lifeExp, gdpPercap)) <span class="sc">+</span></span>
-<span id="cb237-2"><a href="análisis-de-datos-exploratorio.html#cb237-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">group =</span> <span class="fu">cut_width</span>(lifeExp, <span class="dv">10</span>))) <span class="sc">+</span></span>
-<span id="cb237-3"><a href="análisis-de-datos-exploratorio.html#cb237-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code></pre></div>
-<p><img src="bookdown-workshop-R_files/figure-html/covariacion-2continuas-4.png" width="1152" /></p>
-</div>
-<div id="ejercicio-covariación-2" class="section level3 ejercicio" number="3.2.6">
-<h3><span class="header-section-number">3.2.6</span> Ejercicio covariación 2</h3>
-<p>Usando el DF <code>mpg</code>, visualiza la covariación entre:</p>
+<ol start="2" style="list-style-type: decimal">
+<li>En a la carpeta <code>canonical_protocols</code>:</li>
+</ol>
 <ul>
-<li><code>manufacturer</code> y <code>hwy</code><br />
-</li>
-<li><code>class</code> y <code>hwy</code><br />
-</li>
-<li><code>hwy</code> y <code>cty</code></li>
+<li>Editamos index.html para dejar en la variable <code>not_ordered_experiments</code> solo aquellas tareas que queremos conservar.</li>
 </ul>
-<p><img src="bookdown-workshop-R_files/figure-html/ejercicio-covariacion-1.png" width="1152" /><img src="bookdown-workshop-R_files/figure-html/ejercicio-covariacion-2.png" width="1152" /></p>
-<!-- 7.6 Patterns and models -->
+<ol start="3" style="list-style-type: decimal">
+<li>El experimento esta listo para ser utilizado localmente. Podemos hacerlo ejecutando <code>index.html</code></li>
+</ol>
+</div>
+<div id="como-simular-datos" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Como simular datos</h3>
+<ol style="list-style-type: decimal">
+<li>Descargamos e instalamos docker:</li>
+</ol>
+<p><a href="https://docs.docker.com/docker-for-windows/install/" class="uri">https://docs.docker.com/docker-for-windows/install/</a> [~ 500MB]</p>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li>Descargamos el proyecto de RStudio jsPsychMonkeys:</li>
+</ol>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="experimentos-reproducibles.html#cb260-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMonkeys&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
+<span id="cb260-2"><a href="experimentos-reproducibles.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li>Abrimos <code>run.R</code> y seguimos las instrucciones.</li>
+</ol>
+</div>
+<div id="como-preparar-datos" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Como preparar datos</h3>
+<ol style="list-style-type: decimal">
+<li>Descargamos el proyecto de RStudio jsPsychHelper:</li>
+</ol>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="experimentos-reproducibles.html#cb261-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychHelper&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
+<span id="cb261-2"><a href="experimentos-reproducibles.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Abrimos <code>run.R</code> y seguimos las instrucciones.</li>
+</ol>
+<hr />
 </div>
 </div>
-<div id="ejercicios-finales" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Ejercicios finales</h2>
-<div id="ejercicio-exploración-base-nueva" class="section level3 ejercicio" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Ejercicio exploración base nueva</h3>
-<p>Usando la base del paper <a href="https://osf.io/qn9a2/">Cancer Screening Risk Literacy of Physicians in Training</a>, haz un primer análisis exploratorio que incluya:</p>
-<ul>
-<li>histogramas de todas las variables numéricas y no-numéricas</li>
-<li>scatterplots de la relación entre comprensión y numeracy, y entre comprensión y screenbeliefs</li>
-</ul>
-<p><img src="bookdown-workshop-R_files/figure-html/ejercicio-final-analisis-exploratorio-1.png" width="1152" /><img src="bookdown-workshop-R_files/figure-html/ejercicio-final-analisis-exploratorio-2.png" width="1152" /><img src="bookdown-workshop-R_files/figure-html/ejercicio-final-analisis-exploratorio-3.png" width="1152" /></p>
-</div>
-</div>
-<div id="bibliografía-4" class="section level2 bibliografia unnumbered">
+<div id="bibliografía-6" class="section level2 bibliografia unnumbered">
 <h2>Bibliografía</h2>
 <p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc. <a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></p>
 
@@ -788,8 +586,8 @@ Pista <img src="data/images/hint.png" />
           </div>
         </div>
       </div>
-<a href="preparación-y-transformación-de-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ejercicios-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

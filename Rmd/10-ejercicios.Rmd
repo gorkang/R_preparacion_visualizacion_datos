@@ -2,7 +2,7 @@
 
 ## Ejercicio 1
 
-1. Crea un script en el que hagas lo siguiente:  
+Crea un script en el que hagas lo siguiente:  
 
   + Cargar librerias necesarias  
   + Importar datos  
@@ -31,7 +31,7 @@ Tendras que mostrar como corre el script con una sesion limpia de RStudio (CONTR
 
 ## Ejercicio 2
 
-2. Diseña un **sencillo** experimento:
+Diseña un **sencillo** experimento:
 
   + Debes usar algunas de las escalas/tareas que aparecen en: https://github.com/gorkang/jsPsychMaker (ver carpeta canonical_protocol, archivo canonical_protocol_details.csv)
   + Además, debes diseñar una nueva tarea **muy sencilla** o adaptar una nueva escala
@@ -43,3 +43,25 @@ Tendras que mostrar como corre el script con una sesion limpia de RStudio (CONTR
 
 (tareas jsPsychMaker): Usa un máximo de 2 tareas  
 (tarea nueva): Puedes diseñar una tarea con una sola pregunta para dos condiciones experimentales, o adaptar un cuestionario breve ya existente (que no tengamos en jsPsychMaker). 
+
+
+
+
+
+## Ejercicio FINAL
+
+Simularemos datos para tu experimento con jsPsychMonkeys. A continuación:
+
+- Crearemos un proyecto de jsPsychHelper
+- Procesaremos los datos
+- Crearemos un reporte en Rmd donde incluiremos: 
+  + Tabla con descriptivos
+  + Gráfico con resultado
+
+El proyecto tiene que correr en cualquier computador.  
+
+
+#### Notas {.ejercicio -}
+
+(simulacion datos): El profesor os ayudara con esto y/o os compartira los datos
+(procesamiento datos): 

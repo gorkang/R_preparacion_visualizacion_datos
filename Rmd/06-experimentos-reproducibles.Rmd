@@ -1,0 +1,89 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Experimentos reproducibles
+
+En el CSCN usamos distintas tecnologías para desarrollar experimentos. Algunos ejemplos son [Psychopy](https://www.psychopy.org/), [Qualtrics](https://www.qualtrics.com/), [Limesurvey](https://www.limesurvey.org/), [jsPsych](https://www.jspsych.org/plugins/jspsych-preload/), [Gorilla](https://gorilla.sc/), etc. Cada una de estas tiene ventajas y desventajas, y en general es importante tener en cuenta aspectos pragmáticos a la hora de adoptar una u otra tecnología (costo económico, tipo de experimento [EEG/conductual, laboratorio/online]).  
+
+Algunos de nosotros hemos optado principalmente por [jsPsych](https://www.jspsych.org/) para experimentos conductuales por tratarse de una libreria javascript de código abierto, basada en tecnologías web standard, y que puede ser usada online y offline. Dado que en el CSCN diponemos de servidor propio, los costos habituales de hosting no se aplican.    
+
+En los últimos años, hemos empezado a trabajar en un conjunto de herramientas para crear experimentos usando la librería [jsPsych](https://www.jspsych.org/) con [jsPsychMaker](https://github.com/gorkang/jsPsychMaker), simular participantes con [jspsychMonkeys](https://github.com/gorkang/jsPsychMonkeys) y estandarizar y automatizar la preparación de datos con [jsPsychHelpeR](https://github.com/gorkang/jsPsychHelpeR).  
+
+Nuestro objetivo final es tener en la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker) un [listado exhaustivo de tareas](https://github.com/gorkang/jsPsychMaker/blob/main/canonical_protocol/canonical_protocol_details.csv) disponibles para ser usadas. Cada una de estas tareas debería funcionar en [jspsychMonkeys](https://github.com/gorkang/jsPsychMonkeys) para poder crear participantes virtuales, y tener un script hermano en [jsPsychHelpeR](https://github.com/gorkang/jsPsychHelpeR) para automatizar la preparación de datos.  
+
+
+## Pipeline experimental abierto y reproducible
+
+Replicar el experimento a partir de una publicación no es trivial. Una de las fortalezas fundamentales de este sistema es que compartir y reproducir un experimento y los análisis asociados se convierte en algo trivial.  
+
+Además, todos los componentes del proceso son código abierto, lo que permite que revisores, colaboradores, etc. puedan verificar que no hay errores en el código.  
+
+Con este sistema podremos crear fácilmente el codigo del experimento, simular datos y preparar datos de manera casi automática (incluyendo anonimizacion).
+
+El output del sistema es estandarizado, lo que implica que los nombres de las variables y la estructura de datos son predecibles. Finalmente, la generacion de graficas, tablas, reportes y los analisis son reproducibles.  
+
+
+
+### Como crear un protocolo experimental
+
+1) Descargamos el proyecto de RStudio jsPsychMaker:  
+
+```{r, eval=FALSE}
+
+usethis::use_course(url = "gorkang/jsPsychMaker", destdir = "~/Downloads/")
+# Select YES to delete zip
+```
+
+---  
+
+2) En a la carpeta `canonical_protocols`:  
+
+- Editamos index.html para dejar en la variable `not_ordered_experiments` solo aquellas tareas que queremos conservar.  
+
+3) El experimento esta listo para ser utilizado localmente. Podemos hacerlo ejecutando `index.html`  
+
+
+
+### Como simular datos
+
+
+1) Descargamos e instalamos docker:
+
+  https://docs.docker.com/docker-for-windows/install/  [~ 500MB]  
+  
+---  
+
+  
+2) Descargamos el proyecto de RStudio jsPsychMonkeys:  
+
+```{r, eval=FALSE}
+usethis::use_course(url = "gorkang/jsPsychMonkeys", destdir = "~/Downloads/")
+# Select YES to delete zip
+
+```
+
+---  
+
+3) Abrimos `run.R` y seguimos las instrucciones.  
+
+### Como preparar datos
+
+1) Descargamos el proyecto de RStudio jsPsychHelper:  
+
+```{r, eval=FALSE}
+usethis::use_course(url = "gorkang/jsPsychHelper", destdir = "~/Downloads/")
+# Select YES to delete zip
+
+```
+
+2) Abrimos `run.R` y seguimos las instrucciones.  
+
+
+---  
+
+
+## Bibliografía {.bibliografia -}
+
+Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O'Reilly Media, Inc. https://r4ds.had.co.nz/  

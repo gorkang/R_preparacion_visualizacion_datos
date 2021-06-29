@@ -125,11 +125,12 @@ varios
 shortcuts
 estilo
 algunos-paquetes-interesantes
-reporte-final
-base-de-datos-a-usar
-paso-a-paso
-hint
-nota-final
+experimentos-reproducibles
+pipeline-experimental-abierto-y-reproducible
+como-crear-un-protocolo-experimental
+como-simular-datos
+como-preparar-datos
 ejercicios-6
 ejercicio-1-1
 ejercicio-2-1
+ejercicio-final

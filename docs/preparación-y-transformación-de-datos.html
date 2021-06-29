@@ -469,12 +469,15 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="trabajo-con-rmarkdown-para-reportes-reproducibles.html"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#bibliografía-5"><i class="fa fa-check"></i>Bibliografía</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="reporte-final.html"><a href="reporte-final.html"><i class="fa fa-check"></i><b>5</b> Reporte final</a>
+<li class="chapter" data-level="5" data-path="experimentos-reproducibles.html"><a href="experimentos-reproducibles.html"><i class="fa fa-check"></i><b>5</b> Experimentos reproducibles</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="reporte-final.html"><a href="reporte-final.html#base-de-datos-a-usar"><i class="fa fa-check"></i><b>5.1</b> Base de datos a usar</a></li>
-<li class="chapter" data-level="5.2" data-path="reporte-final.html"><a href="reporte-final.html#paso-a-paso"><i class="fa fa-check"></i><b>5.2</b> Paso a paso</a></li>
-<li class="chapter" data-level="5.3" data-path="reporte-final.html"><a href="reporte-final.html#hint"><i class="fa fa-check"></i><b>5.3</b> Hint</a></li>
-<li class="chapter" data-level="5.4" data-path="reporte-final.html"><a href="reporte-final.html#nota-final"><i class="fa fa-check"></i><b>5.4</b> Nota final</a></li>
+<li class="chapter" data-level="5.1" data-path="experimentos-reproducibles.html"><a href="experimentos-reproducibles.html#pipeline-experimental-abierto-y-reproducible"><i class="fa fa-check"></i><b>5.1</b> Pipeline experimental abierto y reproducible</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="experimentos-reproducibles.html"><a href="experimentos-reproducibles.html#como-crear-un-protocolo-experimental"><i class="fa fa-check"></i><b>5.1.1</b> Como crear un protocolo experimental</a></li>
+<li class="chapter" data-level="5.1.2" data-path="experimentos-reproducibles.html"><a href="experimentos-reproducibles.html#como-simular-datos"><i class="fa fa-check"></i><b>5.1.2</b> Como simular datos</a></li>
+<li class="chapter" data-level="5.1.3" data-path="experimentos-reproducibles.html"><a href="experimentos-reproducibles.html#como-preparar-datos"><i class="fa fa-check"></i><b>5.1.3</b> Como preparar datos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="experimentos-reproducibles.html"><a href="experimentos-reproducibles.html#bibliografía-6"><i class="fa fa-check"></i>Bibliografía</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="ejercicios-6.html"><a href="ejercicios-6.html"><i class="fa fa-check"></i><b>6</b> Ejercicios</a>
 <ul>
@@ -485,6 +488,10 @@ div.csl-indent {
 <li class="chapter" data-level="6.2" data-path="ejercicios-6.html"><a href="ejercicios-6.html#ejercicio-2-1"><i class="fa fa-check"></i><b>6.2</b> Ejercicio 2</a>
 <ul>
 <li class="chapter" data-level="" data-path="ejercicios-6.html"><a href="ejercicios-6.html#notas-1"><i class="fa fa-check"></i>Notas</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="ejercicios-6.html"><a href="ejercicios-6.html#ejercicio-final"><i class="fa fa-check"></i><b>6.3</b> Ejercicio FINAL</a>
+<ul>
+<li class="chapter" data-level="" data-path="ejercicios-6.html"><a href="ejercicios-6.html#notas-2"><i class="fa fa-check"></i>Notas</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="paquetes-usados.html"><a href="paquetes-usados.html"><i class="fa fa-check"></i>Paquetes usados</a>
@@ -1566,10 +1573,9 @@ Pista: <img src="data/images/hint.png" />
 <li>Importa los datos y limpia los nombres de columna:</li>
 </ol>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="preparación-y-transformación-de-datos.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Leemos los datos y usamos janitor::clean_names() para limpiar los nombres de las columnas</span></span>
-<span id="cb179-2"><a href="preparación-y-transformación-de-datos.html#cb179-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb179-3"><a href="preparación-y-transformación-de-datos.html#cb179-3" aria-hidden="true" tabindex="-1"></a> DF_wide <span class="ot">=</span> </span>
-<span id="cb179-4"><a href="preparación-y-transformación-de-datos.html#cb179-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb179-5"><a href="preparación-y-transformación-de-datos.html#cb179-5" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span></code></pre></div>
+<span id="cb179-2"><a href="preparación-y-transformación-de-datos.html#cb179-2" aria-hidden="true" tabindex="-1"></a> DF_wide <span class="ot">=</span> </span>
+<span id="cb179-3"><a href="preparación-y-transformación-de-datos.html#cb179-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb179-4"><a href="preparación-y-transformación-de-datos.html#cb179-4" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><p>En un nuevo DF (<code>DF_split</code>), crea una variable llamada <code>social_adaptation_split</code> con la median split para la variable social_adaptation. La mitad superior se llamará <code>high_social_adaptation</code> y la mitad inferior <code>low_social_adaptation</code>.</p></li>
 <li><p>Asegúrate que no hay valores NA.</p></li>
@@ -1587,7 +1593,7 @@ Pista: <img src="data/images/hint.png" />
 </div>
 <div id="regular-expressions" class="section level3" number="2.2.5">
 <h3><span class="header-section-number">2.2.5</span> Regular expressions</h3>
-<p><a href="https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf">Basic Regular Expressions Cheatsheet</a></p>
+<p><a href="https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf">Basic Regular Expressions Cheatsheet</a>. <a href="https://tobyhodges.gitbooks.io/introduction-to-regular-expressions/content/">Introduction to Regular Expressions</a>.</p>
 <div class="figure">
 <img src="data/images/regular_expressions.png" alt="" />
 <p class="caption">SOURCE: <a href="https://xkcd.com/208/" class="uri">https://xkcd.com/208/</a></p>

@@ -795,7 +795,6 @@ DF_name %>% pull(PPV_DECLARED) %>% mean(.)
 ```{r ejercicios-dplyr-avanzado-import}
 
 # Leemos los datos y usamos janitor::clean_names() para limpiar los nombres de las columnas
-
  DF_wide = 
   read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
   janitor::clean_names()
@@ -838,7 +837,7 @@ El resultado final debería ser:
 
 ### Regular expressions
 
-[Basic Regular Expressions Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf)  
+[Basic Regular Expressions Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf). [Introduction to Regular Expressions](https://tobyhodges.gitbooks.io/introduction-to-regular-expressions/content/).  
 
 ![SOURCE: https://xkcd.com/208/](`r here::here("data/images/regular_expressions.png")`)
 
@@ -925,27 +924,43 @@ DF_A = df_wide_raw %>%
   transmute(ID = ID,
             WMAT_sum = rowSums(.[,2:27]))
 
+
+# Estrategia A2 - wide con nombres de variables
+DF_A2 = 
+  df_wide_raw %>% 
+  # select(ID, matches("WMAT_[0-9]{2}_cod")) %>%
+  mutate(WMAT_sum = rowSums(.[,which(names(.) == "WMAT_01_cod"):which(names(.) == "WMAT_26_cod")])) %>% 
+  select(ID, WMAT_sum)
+
 # Estrategia B - long
-DF_B = df_wide_raw %>% 
-  pivot_longer(WVOC_01_cod:bayes_text_quantitative_accuracy, names_to = "Variable", values_to = "Value", values_transform = list(Value = as.character)) %>% 
-  filter(grepl("WMAT_[0-9]{2}_cod", Variable)) %>% 
-  mutate(Value = as.numeric(Value)) %>%  
+DF_B = 
+  df_wide_raw %>% 
+  select(ID, matches("WMAT_[0-9]{2}_cod")) %>% 
+  pivot_longer(starts_with("WMAT")) %>% 
   group_by(ID) %>% 
-  summarise(WMAT_sum = sum(Value, na.rm = FALSE))
+  summarise(WMAT_sum = sum(value, na.rm = FALSE))
+
+
+# Estrategia C - long
+DF_C = 
+  df_wide_raw %>% 
+  pivot_longer(WVOC_01_cod:bayes_text_quantitative_accuracy, 
+               values_transform = list(value = as.character)) %>% 
+  filter(grepl("WMAT_[0-9]{2}_cod", name)) %>% 
+  mutate(value = as.numeric(value)) %>%  
+  group_by(ID) %>% 
+  summarise(WMAT_sum = sum(value, na.rm = FALSE))
    
 
-# Estrategia B2 - long2
-DF_C = df_wide_raw %>% 
-  select(ID, matches("WMAT_[0-9]{2}_cod")) %>% 
-  pivot_longer(starts_with("W"), names_to = "Variable", values_to = "Value", values_transform = list(Value = as.numeric)) %>% 
-  group_by(ID) %>% 
-  summarise(WMAT_sum = sum(Value, na.rm = FALSE))
+
 
 # Todas las versiones dan resultados identicos
  waldo::compare(DF_A, DF_B)
  waldo::compare(DF_A, DF_C)
  waldo::compare(DF_B, DF_C)
  
+ waldo::compare(DF_A, DF_A2)
+
 ```
 
 
