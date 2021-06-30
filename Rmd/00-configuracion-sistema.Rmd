@@ -28,6 +28,9 @@ RStudio es un entorno integrado de desarrollo (IDE) para la programación R.
 knitr::include_graphics(here::here("data", "images", "empezando.png"))
 ```
 
+- Si encuentras un error de instalación en ubuntu, tendrás que instalar RStudio manualmente, y después:
+    + `sudo apt --fix-broken install`
+
 ### **(C)** Paquetes para el workshop {.unnumbered}
 
 Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, ...), pero en este caso vamos a usar una versión casera.

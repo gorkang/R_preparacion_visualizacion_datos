@@ -477,7 +477,6 @@ div.csl-indent {
 <li class="chapter" data-level="5.1.2" data-path="experimentos-reproducibles.html"><a href="experimentos-reproducibles.html#como-simular-datos"><i class="fa fa-check"></i><b>5.1.2</b> Como simular datos</a></li>
 <li class="chapter" data-level="5.1.3" data-path="experimentos-reproducibles.html"><a href="experimentos-reproducibles.html#como-preparar-datos"><i class="fa fa-check"></i><b>5.1.3</b> Como preparar datos</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="experimentos-reproducibles.html"><a href="experimentos-reproducibles.html#bibliografía-6"><i class="fa fa-check"></i>Bibliografía</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="ejercicios-6.html"><a href="ejercicios-6.html"><i class="fa fa-check"></i><b>6</b> Ejercicios</a>
 <ul>
@@ -520,15 +519,16 @@ div.csl-indent {
 <p>En el CSCN usamos distintas tecnologías para desarrollar experimentos. Algunos ejemplos son <a href="https://www.psychopy.org/">Psychopy</a>, <a href="https://www.qualtrics.com/">Qualtrics</a>, <a href="https://www.limesurvey.org/">Limesurvey</a>, <a href="https://www.jspsych.org/plugins/jspsych-preload/">jsPsych</a>, <a href="https://gorilla.sc/">Gorilla</a>, etc. Cada una de estas tiene ventajas y desventajas, y en general es importante tener en cuenta aspectos pragmáticos a la hora de adoptar una u otra tecnología (costo económico, tipo de experimento [EEG/conductual, laboratorio/online]).</p>
 <p>Algunos de nosotros hemos optado principalmente por <a href="https://www.jspsych.org/">jsPsych</a> para experimentos conductuales por tratarse de una libreria javascript de código abierto, basada en tecnologías web standard, y que puede ser usada online y offline. Dado que en el CSCN diponemos de servidor propio, los costos habituales de hosting no se aplican.</p>
 <p>En los últimos años, hemos empezado a trabajar en un conjunto de herramientas para crear experimentos usando la librería <a href="https://www.jspsych.org/">jsPsych</a> con <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a>, simular participantes con <a href="https://github.com/gorkang/jsPsychMonkeys">jspsychMonkeys</a> y estandarizar y automatizar la preparación de datos con <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a>.</p>
-<p>Nuestro objetivo final es tener en la carpeta <code>canonical_protocol/</code> del repositorio de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a> un <a href="https://github.com/gorkang/jsPsychMaker/blob/main/canonical_protocol/canonical_protocol_details.csv">listado exhaustivo de tareas</a> disponibles para ser usadas. Cada una de estas tareas debería funcionar en <a href="https://github.com/gorkang/jsPsychMonkeys">jspsychMonkeys</a> para poder crear participantes virtuales, y tener un script hermano en <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a> para automatizar la preparación de datos.</p>
+<p>Nuestro objetivo final es tener un gran número de tareas disponibles para ser usadas en el repositorio de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a>. Cada una de estas tareas funcionará en <a href="https://github.com/gorkang/jsPsychMonkeys">jspsychMonkeys</a> para crear participantes virtuales. Cada tarea tendrá un script hermano en <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a> para automatizar la preparación de datos.</p>
 <div id="pipeline-experimental-abierto-y-reproducible" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Pipeline experimental abierto y reproducible</h2>
-<p>Replicar el experimento a partir de una publicación no es trivial. Una de las fortalezas fundamentales de este sistema es que compartir y reproducir un experimento y los análisis asociados se convierte en algo trivial.</p>
+<p>Replicar el experimento a partir de una publicación no es trivial. Una de las fortalezas fundamentales de este sistema es que compartir y reproducir un experimento y los análisis asociados se convierte en algo muy sencillo.</p>
 <p>Además, todos los componentes del proceso son código abierto, lo que permite que revisores, colaboradores, etc. puedan verificar que no hay errores en el código.</p>
 <p>Con este sistema podremos crear fácilmente el codigo del experimento, simular datos y preparar datos de manera casi automática (incluyendo anonimizacion).</p>
 <p>El output del sistema es estandarizado, lo que implica que los nombres de las variables y la estructura de datos son predecibles. Finalmente, la generacion de graficas, tablas, reportes y los analisis son reproducibles.</p>
 <div id="como-crear-un-protocolo-experimental" class="section level3" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Como crear un protocolo experimental</h3>
+<p>En la carpeta <code>canonical_protocol/</code> del repositorio de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a> tenemos un <a href="https://github.com/gorkang/jsPsychMaker/blob/main/canonical_protocol/canonical_protocol_details.csv">listado exhaustivo de tareas</a> disponibles para ser usadas.</p>
 <ol style="list-style-type: decimal">
 <li>Descargamos el proyecto de RStudio jsPsychMaker:</li>
 </ol>
@@ -547,8 +547,19 @@ div.csl-indent {
 </div>
 <div id="como-simular-datos" class="section level3" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> Como simular datos</h3>
+<p>El sistema para simular participantes utiliza <a href="https://www.selenium.dev/">Selenium</a> dentro de un contenedor de <a href="https://www.docker.com/">Docker</a>. En Linux es trivial su uso, pero en Windows su configuracion puede ser más compleja.</p>
+<p>Puedes seguir los siguientes pasos, pero si no tienes una instalación funcional de Docker que utilice contenedores Linux, el sistema fallará. En ese caso, quedan las siguientes opciones:</p>
+<ul>
+<li>Correr un par de participantes manualmente<br />
+</li>
+<li>Usar un ordenador con Linux o crear una partición Linux<br />
+</li>
+<li>Crear una máquina virtual linux desde la que simular participantes. Puedes usar <a href="https://www.virtualbox.org/wiki/Downloads">Virtualbox</a> para instalar <a href="https://releases.ubuntu.com/20.04/">Ubuntu</a>. Una vez dentro, tendrás que seguir los pasos del <a href="https://gorkang.github.io/R_preparacion_visualizacion_datos/preparando-sistema.html#empezando-en-a-b-c">manual para prepara el sistema para correr R y RStudio</a></li>
+</ul>
+<!-- sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev  -->
+<hr />
 <ol style="list-style-type: decimal">
-<li>Descargamos e instalamos docker:</li>
+<li>[Solo Windows] Descargamos e instalamos docker:</li>
 </ol>
 <p><a href="https://docs.docker.com/docker-for-windows/install/" class="uri">https://docs.docker.com/docker-for-windows/install/</a> [~ 500MB]</p>
 <hr />
@@ -564,6 +575,8 @@ div.csl-indent {
 </div>
 <div id="como-preparar-datos" class="section level3" number="5.1.3">
 <h3><span class="header-section-number">5.1.3</span> Como preparar datos</h3>
+<p>Cada tarea de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a> tendrá un script hermano en <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a> para automatizar la preparación de datos. Una vez tengamos nuestro protocolo listo, con una función de jsPsychMaker crearemos todo lo necesario para que la preparación de datos corra automáticamente.</p>
+<hr />
 <ol style="list-style-type: decimal">
 <li>Descargamos el proyecto de RStudio jsPsychHelper:</li>
 </ol>
@@ -573,12 +586,10 @@ div.csl-indent {
 <li>Abrimos <code>run.R</code> y seguimos las instrucciones.</li>
 </ol>
 <hr />
-</div>
-</div>
-<div id="bibliografía-6" class="section level2 bibliografia unnumbered">
-<h2>Bibliografía</h2>
-<p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc. <a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></p>
+<!-- ## Bibliografía {.bibliografia -} -->
+<!-- Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O'Reilly Media, Inc. https://r4ds.had.co.nz/   -->
 
+</div>
 </div>
 </div>
             </section>
