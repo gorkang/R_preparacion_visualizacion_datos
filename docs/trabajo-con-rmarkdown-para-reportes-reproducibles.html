@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 4 Trabajo con RMarkdown para reportes reproducibles | R para preparación y visualización de datos</title>
   <meta name="description" content="Capítulo 4 Trabajo con RMarkdown para reportes reproducibles | R para preparación y visualización de datos" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 4 Trabajo con RMarkdown para reportes reproducibles | R para preparación y visualización de datos" />
   <meta property="og:type" content="book" />
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="análisis-de-datos-exploratorio.html"/>
 <link rel="next" href="experimentos-reproducibles.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,21 +50,20 @@
 
 
 
-
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.4/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.18/datatables.js"></script>
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="libs/datatables-binding-0.20/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -935,12 +935,12 @@ output: pdf_document
 <span id="cb241-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb241-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">by =</span> continent,</span>
 <span id="cb241-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb241-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">missing =</span> <span class="st">&quot;ifany&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb241-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb241-4" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">add_n</span>()</span></code></pre></div>
-<div id="mnfuvswbia" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="dtypsbnicw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#mnfuvswbia .gt_table {
+#dtypsbnicw .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -965,7 +965,7 @@ output: pdf_document
   border-left-color: #D3D3D3;
 }
 
-#mnfuvswbia .gt_heading {
+#dtypsbnicw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -977,7 +977,7 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#mnfuvswbia .gt_title {
+#dtypsbnicw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -987,23 +987,23 @@ output: pdf_document
   border-bottom-width: 0;
 }
 
-#mnfuvswbia .gt_subtitle {
+#dtypsbnicw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
   padding-top: 0;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#mnfuvswbia .gt_bottom_border {
+#dtypsbnicw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mnfuvswbia .gt_col_headings {
+#dtypsbnicw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1018,7 +1018,7 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#mnfuvswbia .gt_col_heading {
+#dtypsbnicw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1038,7 +1038,7 @@ output: pdf_document
   overflow-x: hidden;
 }
 
-#mnfuvswbia .gt_column_spanner_outer {
+#dtypsbnicw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1050,27 +1050,27 @@ output: pdf_document
   padding-right: 4px;
 }
 
-#mnfuvswbia .gt_column_spanner_outer:first-child {
+#dtypsbnicw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mnfuvswbia .gt_column_spanner_outer:last-child {
+#dtypsbnicw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mnfuvswbia .gt_column_spanner {
+#dtypsbnicw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
   vertical-align: bottom;
   padding-top: 5px;
-  padding-bottom: 6px;
+  padding-bottom: 5px;
   overflow-x: hidden;
   display: inline-block;
   width: 100%;
 }
 
-#mnfuvswbia .gt_group_heading {
+#dtypsbnicw .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1092,7 +1092,7 @@ output: pdf_document
   vertical-align: middle;
 }
 
-#mnfuvswbia .gt_empty_group_heading {
+#dtypsbnicw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1107,15 +1107,15 @@ output: pdf_document
   vertical-align: middle;
 }
 
-#mnfuvswbia .gt_from_md > :first-child {
+#dtypsbnicw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mnfuvswbia .gt_from_md > :last-child {
+#dtypsbnicw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mnfuvswbia .gt_row {
+#dtypsbnicw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1134,7 +1134,7 @@ output: pdf_document
   overflow-x: hidden;
 }
 
-#mnfuvswbia .gt_stub {
+#dtypsbnicw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1146,7 +1146,7 @@ output: pdf_document
   padding-left: 12px;
 }
 
-#mnfuvswbia .gt_summary_row {
+#dtypsbnicw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1156,7 +1156,7 @@ output: pdf_document
   padding-right: 5px;
 }
 
-#mnfuvswbia .gt_first_summary_row {
+#dtypsbnicw .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1166,7 +1166,7 @@ output: pdf_document
   border-top-color: #D3D3D3;
 }
 
-#mnfuvswbia .gt_grand_summary_row {
+#dtypsbnicw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1176,7 +1176,7 @@ output: pdf_document
   padding-right: 5px;
 }
 
-#mnfuvswbia .gt_first_grand_summary_row {
+#dtypsbnicw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1186,11 +1186,11 @@ output: pdf_document
   border-top-color: #D3D3D3;
 }
 
-#mnfuvswbia .gt_striped {
+#dtypsbnicw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mnfuvswbia .gt_table_body {
+#dtypsbnicw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1199,7 +1199,7 @@ output: pdf_document
   border-bottom-color: #D3D3D3;
 }
 
-#mnfuvswbia .gt_footnotes {
+#dtypsbnicw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1213,13 +1213,13 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#mnfuvswbia .gt_footnote {
+#dtypsbnicw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#mnfuvswbia .gt_sourcenotes {
+#dtypsbnicw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1233,41 +1233,41 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#mnfuvswbia .gt_sourcenote {
+#dtypsbnicw .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#mnfuvswbia .gt_left {
+#dtypsbnicw .gt_left {
   text-align: left;
 }
 
-#mnfuvswbia .gt_center {
+#dtypsbnicw .gt_center {
   text-align: center;
 }
 
-#mnfuvswbia .gt_right {
+#dtypsbnicw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mnfuvswbia .gt_font_normal {
+#dtypsbnicw .gt_font_normal {
   font-weight: normal;
 }
 
-#mnfuvswbia .gt_font_bold {
+#dtypsbnicw .gt_font_bold {
   font-weight: bold;
 }
 
-#mnfuvswbia .gt_font_italic {
+#dtypsbnicw .gt_font_italic {
   font-style: italic;
 }
 
-#mnfuvswbia .gt_super {
+#dtypsbnicw .gt_super {
   font-size: 65%;
 }
 
-#mnfuvswbia .gt_footnote_marks {
+#dtypsbnicw .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1344,7 +1344,7 @@ output: pdf_document
 <span id="cb242-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb242-3" aria-hidden="true" tabindex="-1"></a>  table_easystats <span class="ot">=</span> report<span class="sc">::</span><span class="fu">report</span>(corr_test); table_easystats</span></code></pre></div>
 <pre class="bg-output"><code>## Effect sizes were labelled following Funder&#39;s (2019) recommendations.
 ## 
-## The Spearman&#39;s rank correlation rho between iris$Sepal.Width and iris$Sepal.Length is negative, statistically significant, and small (rho = -0.17, S = 6.56e+05, p &lt; .05)</code></pre>
+## The Spearman&#39;s rank correlation rho between iris$Sepal.Width and iris$Sepal.Length is negative, statistically significant, and small (rho = -0.17, S = 6.56e+05, p = 0.041)</code></pre>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb244-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># table_easystats %&gt;% parameters::print_md()</span></span>
 <span id="cb244-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb244-2" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb244-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb244-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_easystats, <span class="at">align =</span> <span class="st">&quot;c&quot;</span>)</span></code></pre></div>
@@ -1505,11 +1505,11 @@ output: pdf_document
 <span id="cb249-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb249-4" aria-hidden="true" tabindex="-1"></a>  report<span class="sc">::</span><span class="fu">report</span>(model_lm)</span></code></pre></div>
 <pre class="bg-output"><code>## We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Petal.Width (formula: Sepal.Length ~ Petal.Length * Petal.Width). The model explains a statistically significant and substantial proportion of variance (R2 = 0.81, F(3, 146) = 204.54, p &lt; .001, adj. R2 = 0.80). The model&#39;s intercept, corresponding to Petal.Length = 0 and Petal.Width = 0, is at 4.58 (95% CI [4.36, 4.80], t(146) = 40.89, p &lt; .001). Within this model:
 ## 
-##   - The effect of Petal.Length is statistically significant and positive (beta = 0.44, 95% CI [0.31, 0.57], t(146) = 6.74, p &lt; .001; Std. beta = 1.42, 95% CI [1.14, 1.71])
-##   - The effect of Petal.Width is statistically significant and negative (beta = -1.24, 95% CI [-1.67, -0.81], t(146) = -5.65, p &lt; .001; Std. beta = -0.49, 95% CI [-0.76, -0.21])
-##   - The interaction effect of Petal.Width on Petal.Length is statistically significant and positive (beta = 0.19, 95% CI [0.12, 0.25], t(146) = 5.62, p &lt; .001; Std. beta = 0.31, 95% CI [0.20, 0.41])
+##   - The effect of Petal Length is statistically significant and positive (beta = 0.44, 95% CI [0.31, 0.57], t(146) = 6.74, p &lt; .001; Std. beta = 1.42, 95% CI [1.14, 1.71])
+##   - The effect of Petal Width is statistically significant and negative (beta = -1.24, 95% CI [-1.67, -0.81], t(146) = -5.65, p &lt; .001; Std. beta = -0.49, 95% CI [-0.76, -0.21])
+##   - The interaction effect of Petal Width on Petal Length is statistically significant and positive (beta = 0.19, 95% CI [0.12, 0.25], t(146) = 5.62, p &lt; .001; Std. beta = 0.31, 95% CI [0.20, 0.41])
 ## 
-## Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</code></pre>
+## Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using the Wald approximation.</code></pre>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb251-1" aria-hidden="true" tabindex="-1"></a>  parameters<span class="sc">::</span><span class="fu">model_parameters</span>(model_lm) <span class="sc">%&gt;%</span> parameters<span class="sc">::</span><span class="fu">print_md</span>()</span></code></pre></div>
 <table>
 <thead>
@@ -1532,7 +1532,7 @@ output: pdf_document
 <td align="center">&lt; .001</td>
 </tr>
 <tr class="even">
-<td align="left">Petal.Length</td>
+<td align="left">Petal Length</td>
 <td align="center">0.44</td>
 <td align="center">0.07</td>
 <td align="center">(0.31, 0.57)</td>
@@ -1540,7 +1540,7 @@ output: pdf_document
 <td align="center">&lt; .001</td>
 </tr>
 <tr class="odd">
-<td align="left">Petal.Width</td>
+<td align="left">Petal Width</td>
 <td align="center">-1.24</td>
 <td align="center">0.22</td>
 <td align="center">(-1.67, -0.81)</td>
@@ -1548,7 +1548,7 @@ output: pdf_document
 <td align="center">&lt; .001</td>
 </tr>
 <tr class="even">
-<td align="left">Petal.Length * Petal.Width</td>
+<td align="left">Petal Length * Petal Width</td>
 <td align="center">0.19</td>
 <td align="center">0.03</td>
 <td align="center">(0.12, 0.25)</td>
@@ -1601,7 +1601,7 @@ p
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-Petal.Length
+Petal Length
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 0.44
@@ -1615,7 +1615,7 @@ Petal.Length
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-Petal.Width
+Petal Width
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 -1.24
@@ -1629,7 +1629,7 @@ Petal.Width
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-Petal.Length *<br>Petal.Width
+Petal Length * Petal<br>Width
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 0.19
@@ -1928,7 +1928,6 @@ R<sup>2</sup> / R<sup>2</sup> adjusted
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1969,10 +1968,13 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
-},
-"search": true
+}
 });
 });
 </script>

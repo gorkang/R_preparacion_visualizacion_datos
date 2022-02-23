@@ -14,7 +14,7 @@ Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además
 
 -   **Ubuntu Linux**: [más detalles en la web de R](https://cran.r-project.org/bin/linux/debian/). **En un terminal**:
 
-|     `sudo apt-get install r-base`  
+|     `sudo apt install r-base`  
 
 
 ### **(B)** Instalar RStudio {.unnumbered}
@@ -28,7 +28,8 @@ RStudio es un entorno integrado de desarrollo (IDE) para la programación R.
 knitr::include_graphics(here::here("data", "images", "empezando.png"))
 ```
 
-- Si encuentras un error de instalación en ubuntu, tendrás que instalar RStudio manualmente, y después:
+- Si encuentras un error de instalación en ubuntu, tendrás que instalar RStudio manualmente:
+    + `sudo dpkg -i rstudio-1.4.1717-amd64.deb`
     + `sudo apt --fix-broken install`
 
 ### **(C)** Paquetes para el workshop {.unnumbered}

@@ -402,11 +402,11 @@ DF_name %>%
 
 # Eliminar columnas  
 DF_name %>% 
-  select(-X1)
+  select(-...1)
 
 # Ordenar y eliminar columnas
 DF_name %>% 
-  select(ID, Edad, Genero, everything(), -X1) 
+  select(ID, Edad, Genero, everything(), -...1) 
 
 
 ```
@@ -846,7 +846,7 @@ Usando este dataframe:
 
 ```{r regular-expressions}
 
-DF_regexp = DF_name %>% select(-X1); DF_regexp
+DF_regexp = DF_name %>% select(-...1); DF_regexp
 ```
 
 

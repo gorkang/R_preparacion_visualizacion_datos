@@ -55,8 +55,8 @@ Simularemos datos para tu experimento con jsPsychMonkeys. A continuación:
 - Crearemos un proyecto de jsPsychHelper
 - Procesaremos los datos
 - Crearemos un reporte en Rmd donde incluiremos: 
-  + Tabla con descriptivos
-  + Gráfico con resultado
+  + Tabla/s con descriptivos
+  + Gráfico/s con resultado
 
 El proyecto tiene que correr en cualquier computador.  
 
