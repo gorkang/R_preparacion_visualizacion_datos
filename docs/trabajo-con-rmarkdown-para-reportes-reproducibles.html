@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 4 Trabajo con RMarkdown para reportes reproducibles | R para preparación y visualización de datos</title>
   <meta name="description" content="Capítulo 4 Trabajo con RMarkdown para reportes reproducibles | R para preparación y visualización de datos" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 4 Trabajo con RMarkdown para reportes reproducibles | R para preparación y visualización de datos" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html" />
   
   
   <meta name="github-repo" content="gorkang/R_preparacion_visualizacion_datos" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="análisis-de-datos-exploratorio.html"/>
 <link rel="next" href="experimentos-reproducibles.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
@@ -60,7 +59,7 @@
 <link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.20/datatables.js"></script>
+<script src="libs/datatables-binding-0.23/datatables.js"></script>
 <link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
@@ -177,9 +176,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#empezando-en-a-b-c"><i class="fa fa-check"></i>Empezando en A-B-C</a>
 <ul>
-<li><a href="preparando-sistema.html#a-instalar-r"><strong>(A)</strong> Instalar R</a></li>
-<li><a href="preparando-sistema.html#b-instalar-rstudio"><strong>(B)</strong> Instalar RStudio</a></li>
-<li><a href="preparando-sistema.html#c-paquetes-para-el-workshop"><strong>(C)</strong> Paquetes para el workshop</a></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#a-instalar-r"><i class="fa fa-check"></i><strong>(A)</strong> Instalar R</a></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#b-instalar-rstudio"><i class="fa fa-check"></i><strong>(B)</strong> Instalar RStudio</a></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#c-paquetes-para-el-workshop"><i class="fa fa-check"></i><strong>(C)</strong> Paquetes para el workshop</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#algo-más-sobre-la-instalación-de-paquetes"><i class="fa fa-check"></i>Algo más sobre la instalación de paquetes</a>
 <ul>
@@ -514,69 +513,69 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="trabajo-con-rmarkdown-para-reportes-reproducibles" class="section level1" number="4">
-<h1><span class="header-section-number">Capítulo 4</span> Trabajo con RMarkdown para reportes reproducibles</h1>
+<div id="trabajo-con-rmarkdown-para-reportes-reproducibles" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Capítulo 4</span> Trabajo con RMarkdown para reportes reproducibles<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#trabajo-con-rmarkdown-para-reportes-reproducibles" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <hr />
-<div id="paquetes-para-este-capítulo-3" class="section level4 unnumbered">
-<h4>Paquetes para este capítulo</h4>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-1" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;afex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;afex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;afex&#39;</span>)</span>
-<span id="cb238-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;corrr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;corrr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;corrr&#39;</span>)</span>
-<span id="cb238-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;dplyr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;dplyr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;dplyr&#39;</span>)</span>
-<span id="cb238-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;DT&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;DT&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;DT&#39;</span>)</span>
-<span id="cb238-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;ggraph&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;ggraph&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;ggraph&#39;</span>)</span>
-<span id="cb238-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;here&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;here&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;here&#39;</span>)</span>
-<span id="cb238-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;gtsummary&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;gtsummary&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;gtsummary&#39;</span>)</span>
-<span id="cb238-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;knitr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;knitr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;knitr&#39;</span>)</span>
-<span id="cb238-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;parameters&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;parameters&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;parameters&#39;</span>)</span>
-<span id="cb238-10"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;remotes&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;remotes&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;remotes&#39;</span>)</span>
-<span id="cb238-11"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;renv&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&quot;renv&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;renv&#39;</span>)</span>
-<span id="cb238-12"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;rticles&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;rticles&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;rticles&#39;</span>)</span>
-<span id="cb238-13"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;see&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&quot;see&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;see&#39;</span>)</span>
-<span id="cb238-14"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;sjPlot&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;sjPlot&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;sjPlot&#39;</span>)</span>
-<span id="cb238-15"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if (!require(&#39;stargazer&#39;)) install.packages(&#39;stargazer&#39;); library(&#39;stargazer&#39;)</span></span>
-<span id="cb238-16"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;stringi&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;stringi&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;stringi&#39;</span>)</span>
-<span id="cb238-17"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tinytex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;tinytex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;tinytex&#39;</span>)</span>
-<span id="cb238-18"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;usethis&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;usethis&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;usethis&#39;</span>)</span>
-<span id="cb238-19"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-20"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;correlation&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/correlation&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;correlation&#39;</span>)</span>
-<span id="cb238-21"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if (!require(&#39;correlation&#39;)) install.packages(&quot;correlation&quot;); library(&#39;correlation&#39;)</span></span>
-<span id="cb238-22"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if (!require(&#39;grateful&#39;)) remotes::install_github(&quot;Pakillo/grateful&quot;); library(&#39;grateful&#39;)</span></span>
-<span id="cb238-23"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;papaja&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;papaja&#39;</span>)</span>
-<span id="cb238-24"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb238-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;report&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/report&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;report&#39;</span>)</span></code></pre></div>
+<div id="paquetes-para-este-capítulo-3" class="section level4 unnumbered hasAnchor">
+<h4>Paquetes para este capítulo<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#paquetes-para-este-capítulo-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-1" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;afex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;afex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;afex&#39;</span>)</span>
+<span id="cb239-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;corrr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;corrr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;corrr&#39;</span>)</span>
+<span id="cb239-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;dplyr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;dplyr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;dplyr&#39;</span>)</span>
+<span id="cb239-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;DT&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;DT&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;DT&#39;</span>)</span>
+<span id="cb239-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;ggraph&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;ggraph&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;ggraph&#39;</span>)</span>
+<span id="cb239-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;here&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;here&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;here&#39;</span>)</span>
+<span id="cb239-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;gtsummary&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;gtsummary&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;gtsummary&#39;</span>)</span>
+<span id="cb239-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;knitr&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;knitr&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;knitr&#39;</span>)</span>
+<span id="cb239-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;parameters&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;parameters&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;parameters&#39;</span>)</span>
+<span id="cb239-10"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;remotes&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;remotes&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;remotes&#39;</span>)</span>
+<span id="cb239-11"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;renv&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&quot;renv&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;renv&#39;</span>)</span>
+<span id="cb239-12"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;rticles&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;rticles&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;rticles&#39;</span>)</span>
+<span id="cb239-13"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;see&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&quot;see&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;see&#39;</span>)</span>
+<span id="cb239-14"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;sjPlot&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;sjPlot&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;sjPlot&#39;</span>)</span>
+<span id="cb239-15"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if (!require(&#39;stargazer&#39;)) install.packages(&#39;stargazer&#39;); library(&#39;stargazer&#39;)</span></span>
+<span id="cb239-16"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;stringi&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;stringi&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;stringi&#39;</span>)</span>
+<span id="cb239-17"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;tinytex&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;tinytex&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;tinytex&#39;</span>)</span>
+<span id="cb239-18"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;usethis&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;usethis&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;usethis&#39;</span>)</span>
+<span id="cb239-19"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb239-20"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;correlation&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/correlation&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;correlation&#39;</span>)</span>
+<span id="cb239-21"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if (!require(&#39;correlation&#39;)) install.packages(&quot;correlation&quot;); library(&#39;correlation&#39;)</span></span>
+<span id="cb239-22"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if (!require(&#39;grateful&#39;)) remotes::install_github(&quot;Pakillo/grateful&quot;); library(&#39;grateful&#39;)</span></span>
+<span id="cb239-23"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;papaja&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;papaja&#39;</span>)</span>
+<span id="cb239-24"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;report&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;easystats/report&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;report&#39;</span>)</span></code></pre></div>
 <hr />
 </div>
-<div id="dependencias" class="section level2 parameters unnumbered">
-<h2>Dependencias</h2>
+<div id="dependencias" class="section level2 parameters unnumbered hasAnchor">
+<h2>Dependencias<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#dependencias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Vamos a necesitar <a href="https://git-scm.com/">Git</a> y <a href="https://www.latex-project.org/">Latex</a> para poder trabajar:</p>
 <p><strong>Instalar Git</strong></p>
 <p>Ver instrucciones para <a href="https://happygitwithr.com/install-git.html#install-git-windows">Windows</a>, <a href="https://happygitwithr.com/install-git.html#macos">Mac</a> y <a href="https://happygitwithr.com/install-git.html#linux">Linux</a>.</p>
 <div class="line-block">  <span style="font-size: 10px;">Importante: en el paso <em>Adjusting your PATH environment</em> en en Windows, selecciona <em>Git from the command line and also from 3rd-party software</em></span></div>
 <p><BR></p>
 <p><strong>Instalar latex:</strong></p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb239-1" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>() <span class="co"># Llevará un rato</span></span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb240-1" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>() <span class="co"># Llevará un rato</span></span></code></pre></div>
 </div>
-<div id="que-es-la-reproducibilidad" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Que es la reproducibilidad</h2>
+<div id="que-es-la-reproducibilidad" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Que es la reproducibilidad<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#que-es-la-reproducibilidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="data/images/reproducibility.png" /></p>
 <hr />
 <p>La crisis de replicación (<em>replication crisis</em>) se inició con <a href="http://eprints.lse.ac.uk/65159/1/__lse.ac.uk_storage_LIBRARY_Secondary_libfile_shared_repository_Content_Kappes%2C%20H_Estimating%20reproducibility_Kappes_Estimating%20the%20reproducibility_2016.pdf">un paper que trató de replicar los resultados de 100 investigaciones clásicas</a>. Esta crisis ha generado un movimiento <a href="http://theconversation.com/the-replication-crisis-is-good-for-science-103736">muy interesante</a> dentro de las Ciencias Sociales y la Psicología en particular. Cada vez es más común aplicar algunos principios de buenas prácticas como compartir materiales, datos y scripts de análisis, para que tanto los revisores como otros investigadores puedan entender, reanalizar, etc. nuestras investigaciones.</p>
 <p>Hay algunas organizaciones que han surgido para tratar de mejorar la colaboración, transparencia, y manera de trabajar, como el <a href="https://psysciacc.org/">Psychological Science Accelerator</a>, la <a href="https://opennessinitiative.org/">Peer Reviewer’s Openness Initiative (PRO)</a>, o la <a href="https://osf.io/">Open Science Foundation</a>. Una de las soluciones propuestas para resolver muchos de los <a href="https://psyarxiv.com/p6e9c/">problemas actuales</a> pasa por los <a href="https://cos.io/rr/">Registered reports</a>. En estos se da una <em>restructured submission timeline: Before collecting data, authors submit a study protocol containing their hypotheses, planned methods, and analysis pipeline, which undergoes peer review</em>.</p>
 <p>Además de los motivos científicos para trabajar de manera más transparente y reproducible, hay también motivos prácticos. Si trabajamos de manera reproducible, las modificaciones en tablas, gráficas, número de participantes o reanálisis son triviales. En este capítulo vamos a ver algunos pasos fundamentales para tender un workflow que permita y ayude a la reproducibilidad.</p>
 </div>
-<div id="proyectos-de-r-studio" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Proyectos de R-Studio</h2>
+<div id="proyectos-de-r-studio" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Proyectos de R-Studio<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#proyectos-de-r-studio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El primer paso empieza por crear un proyecto de RStudio. Al usar proyectos, simplificamos varias cosas, haciendo automáticamente más fácil compartir nuestro trabajo con otras personas. Podéis leer algo más sobre esto <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">aquí</a>.</p>
 </div>
-<div id="control-de-cambios-con-git-y-github" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Control de cambios con Git y Github</h2>
+<div id="control-de-cambios-con-git-y-github" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Control de cambios con Git y Github<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#control-de-cambios-con-git-y-github" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div style="float:right;position: relative; margin:0px 0px 0px 50px;">
 <div class="figure">
 <img src="data/images/git.png" alt="" />
 <p class="caption">SOURCE: <a href="https://xkcd.com/1597/" class="uri">https://xkcd.com/1597/</a></p>
 </div>
 </div>
-<div id="git" class="section level3" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Git</h3>
+<div id="git" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Git<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#git" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Un segundo elemento que nos va a ayudar a trabajar en equipo, y a evitar problemas en proyectos relativamente complejos es el uso de un sistema de control de versiones como <a href="https://git-scm.com/">Git</a>. Los proyectos de RStudio hacen especialmente sencillo usar algunas funcionalidades básicas de Git.</p>
 <p>Algunas referencias útiles:</p>
 <ul>
@@ -590,8 +589,8 @@ div.csl-indent {
 
 </div>
 </div>
-<div id="github" class="section level3" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Github</h3>
+<div id="github" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Github<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#github" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div style="float:left;position: relative; margin:0px 30px 0px 0px;">
 <div class="figure">
 <img src="data/images/github-octocat.png" alt="" />
@@ -601,8 +600,8 @@ div.csl-indent {
 <p><a href="https://github.com">Github</a> es una plataforma web muy popular donde almacenar proyectos de programación que usa como motor. Muchos de los paquetes de R, el mismo <a href="https://github.com/rstudio">RStudio</a>, etc, tienen repositorios abiertos en Github. Una de las ventajas fundamentales de usar Github es que esta plataforma integra algunas herramientas para hacer más sencillo el control de versiones, como el <a href="https://help.github.com/en/articles/creating-a-pull-request">pull request</a>, que nos permite combinar ramas de proyectos sin apenas problemas.</p>
 <p>Github tiene un programa especial para estudiantes: <a href="https://education.github.com/" class="uri">https://education.github.com/</a></p>
 </div>
-<div id="clonar-repo" class="section level3" number="4.3.3">
-<h3><span class="header-section-number">4.3.3</span> Clonar un repositorio existente</h3>
+<div id="clonar-repo" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Clonar un repositorio existente<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#clonar-repo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Algo que podemos hacer con todos los repositorios de Github es clonarlos localmente:</p>
 <div id="section-14" class="section level4 parameters unnumbered">
 <h4 class="parameters unnumbered"></h4>
@@ -617,11 +616,11 @@ div.csl-indent {
 <p><img src="data/images/rstudio-github.gif" /></p>
 </div>
 </div>
-<div id="crear-un-proyecto-en-rstudio-asociado-a-github" class="section level3" number="4.3.4">
-<h3><span class="header-section-number">4.3.4</span> Crear un proyecto en RStudio asociado a Github</h3>
+<div id="crear-un-proyecto-en-rstudio-asociado-a-github" class="section level3 hasAnchor" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Crear un proyecto en RStudio asociado a Github<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#crear-un-proyecto-en-rstudio-asociado-a-github" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Podemos empezar creando un repositorio en Github, para despues clonarlo localmente.</p>
-<div id="versión-simple-recomendado" class="section level4 parameters unnumbered">
-<h4>Versión simple [recomendado]</h4>
+<div id="versión-simple-recomendado" class="section level4 parameters unnumbered hasAnchor">
+<h4>Versión simple [recomendado]<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#versión-simple-recomendado" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>En <a href="https://github.com/">Github</a>:</p>
 <ol style="list-style-type: decimal">
 <li><p>Creamos repositorio nuevo</p></li>
@@ -633,8 +632,8 @@ div.csl-indent {
 <h4 class="unnumbered"></h4>
 <p>Alternativamente, si ya tenemos un proyecto de RStudio, podemos crear un repositorio de Github asociado automágicamente.</p>
 </div>
-<div id="usando-el-terminal" class="section level4 parameters unnumbered">
-<h4>Usando el terminal</h4>
+<div id="usando-el-terminal" class="section level4 parameters unnumbered hasAnchor">
+<h4>Usando el terminal<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#usando-el-terminal" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ol style="list-style-type: decimal">
 <li><p>Crear local git repo (solo si no lo tenemos aún): <code>usethis::use_git()</code> (se crea una carpeta oculta llamada .git)</p></li>
 <li><p>Crear Github Token: <code>usethis::browse_github_token()</code></p></li>
@@ -649,8 +648,8 @@ div.csl-indent {
 <h4 class="unnumbered"></h4>
 </div>
 </div>
-<div id="ejercicio-git-github" class="section level3 ejercicio unnumbered">
-<h3>Ejercicio Git-Github</h3>
+<div id="ejercicio-git-github" class="section level3 ejercicio unnumbered hasAnchor">
+<h3>Ejercicio Git-Github<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-git-github" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
 <li><p>Crea un proyecto de RStudio</p></li>
 <li><p>Abre una cuenta en <a href="https://github.com/">Github</a> y/o haz login</p></li>
@@ -658,8 +657,8 @@ div.csl-indent {
 </ol>
 </div>
 </div>
-<div id="workflow" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> Workflow</h2>
+<div id="workflow" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Workflow<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#workflow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div style="float:left;position: relative; margin:0px 30px 0px 0px;">
 <div class="figure">
 <img src="data/images/git-basic.png" alt="" />
@@ -673,8 +672,8 @@ div.csl-indent {
 <div style="clear: both;">
 
 </div>
-<div id="modelo-básico" class="section level3" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span> Modelo básico</h3>
+<div id="modelo-básico" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Modelo básico<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#modelo-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>En RStudio podemos trabajar gráficamente, Usando el panel <code>Git</code>.</p>
 <p><img src="data/images/git-rstudio.png" /></p>
 <p><strong>Usando el entorno gráfico</strong></p>
@@ -736,8 +735,8 @@ Como hacerlo usando el <code>terminal</code> <img src="data/images/hint.png" />
 </details>
 </div>
 </div>
-<div id="pull-request-en-3-1-sencillos-pasos" class="section level3" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> Pull request en 3 + 1 sencillos pasos</h3>
+<div id="pull-request-en-3-1-sencillos-pasos" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Pull request en 3 + 1 sencillos pasos<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#pull-request-en-3-1-sencillos-pasos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Después de hacer el push de arriba, al entrar en nuestro repositorio deberíamos ver algo parecido a lo siguiente (si no lo vemos, ir a <strong>branches</strong>). La única dificultad es saber cual de los botones verdes apretar:</p>
 <p><strong>Paso 1. Compare &amp; pull request</strong></p>
 <div id="section-18" class="section level5 parameters unnumbered">
@@ -768,8 +767,8 @@ Como hacerlo usando el <code>terminal</code> <img src="data/images/hint.png" />
 <hr />
 </div>
 </div>
-<div id="ejercicio-5" class="section level3 ejercicio unnumbered">
-<h3>Ejercicio</h3>
+<div id="ejercicio-5" class="section level3 ejercicio unnumbered hasAnchor">
+<h3>Ejercicio<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Nuestro primer commit</strong></p>
 <ol style="list-style-type: decimal">
 <li><p>Usando el proyecto de RStudio de antes, crea una rama nueva llamada development</p></li>
@@ -816,13 +815,13 @@ Como hacerlo usando el <code>terminal</code> <img src="data/images/hint.png" />
 <!-- `git stash drop`   -->
 </div>
 </div>
-<div id="rmarkdown-openscience-y-análisis-reproducibles" class="section level2" number="4.5">
-<h2><span class="header-section-number">4.5</span> RMarkdown, openscience y análisis reproducibles</h2>
+<div id="rmarkdown-openscience-y-análisis-reproducibles" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> RMarkdown, openscience y análisis reproducibles<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#rmarkdown-openscience-y-análisis-reproducibles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>RMarkdown es un tipo de archivo que nos permite combinar texto formateado con código y resultados en un mismo documento (HTML, PDF, WORD…).</p>
 <p>Aprovechando la potencia de este tipo de archivo, algunas personas han creado paquetes para <a href="http://frederikaust.com/papaja_man">preparar artículos en formato APA</a>, o con las <a href="https://github.com/rstudio/rticles">plantillas de decenas de editoriales</a>.</p>
 </div>
-<div id="sintaxis-chunks-de-código-tipos-de-archivo" class="section level2" number="4.6">
-<h2><span class="header-section-number">4.6</span> Sintaxis, chunks de código, tipos de archivo</h2>
+<div id="sintaxis-chunks-de-código-tipos-de-archivo" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Sintaxis, chunks de código, tipos de archivo<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#sintaxis-chunks-de-código-tipos-de-archivo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La sintáxis básica de RMarkdown es sorprendentemente sencilla, como se puede ver más abajo. Eso si, lo que hay detrás es toda la potencia de latex, así que el cielo es el límite.</p>
 <p><img src="data/images/rmarkdown.png" /></p>
 <p>Y como no, tenemos mucha ayuda:</p>
@@ -834,8 +833,8 @@ Como hacerlo usando el <code>terminal</code> <img src="data/images/hint.png" />
 <li><a href="https://rmarkdown.rstudio.com/">Web oficial de Rmarkdown dentro de RStudio</a></li>
 </ul>
 <p>Resumiendo, tienes tres elementos básicos:</p>
-<div id="cabecera-yaml" class="section level3" number="4.6.1">
-<h3><span class="header-section-number">4.6.1</span> Cabecera YAML</h3>
+<div id="cabecera-yaml" class="section level3 hasAnchor" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> Cabecera YAML<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cabecera-yaml" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Cuando creas un documento .Rmd nuevo verás algo similar a lo siguiente en las primeras lineas:</p>
 <pre><code>---
 title: &quot;Untitled&quot;
@@ -845,8 +844,8 @@ output: pdf_document
 ---</code></pre>
 <p>Esta es la cabecera YAML, en la cual se le pueden pasar parámetros para añadir un índice, cambiar formato, y <a href="https://bookdown.org/yihui/rmarkdown/pdf-document.html">muchas otras cosas</a>.</p>
 </div>
-<div id="rmarkdown" class="section level3" number="4.6.2">
-<h3><span class="header-section-number">4.6.2</span> Rmarkdown</h3>
+<div id="rmarkdown" class="section level3 hasAnchor" number="4.6.2">
+<h3><span class="header-section-number">4.6.2</span> Rmarkdown<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#rmarkdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>En el resto del documento (con la excepción de los chunks de código), el formato que usaremos será Rmarkdown. Su sintaxis es muy sencilla pero nada tolerante. Podéis ver las bases en la <a href="https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf">R Markdown cheatsheet</a>.</p>
 <p>IMPORTANTE. Si algo no funciona como esperas:</p>
 <div id="section-25" class="section level4 parameters unnumbered">
@@ -867,8 +866,8 @@ output: pdf_document
 <h4 class="unnumbered"></h4>
 </div>
 </div>
-<div id="chunks-de-código" class="section level3" number="4.6.3">
-<h3><span class="header-section-number">4.6.3</span> Chunks de código</h3>
+<div id="chunks-de-código" class="section level3 hasAnchor" number="4.6.3">
+<h3><span class="header-section-number">4.6.3</span> Chunks de código<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#chunks-de-código" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Los chunks de código están delimitados por:</p>
 <p><img src="data/images/chunk-options.png" /></p>
 <p>En su interior, puedes usar código R como si estuvieras en un script de R normal.</p>
@@ -889,15 +888,15 @@ output: pdf_document
 </div>
 <div id="section-28" class="section level4 unnumbered">
 <h4 class="unnumbered"></h4>
-<p>Haciendo click en la herramienta de la derecha del chunk <img src="/home/emrys/gorkang@gmail.com/DOCENCIA/UAI/2021/2021-1%20Seminario%20metodologico%20R/R_preparacion_visualizacion_datos/data/images/tool" /> puedes controlar varios parámetros esenciales.</p>
+<p>Haciendo click en la herramienta de la derecha del chunk <img src="/home/emrys/gorkang@gmail.com/DOCENCIA/UAI/2022/2022-1%20Seminario%20metodologico%20R/R_preparacion_visualizacion_datos/data/images/tool" /> puedes controlar varios parámetros esenciales.</p>
 <p><em>TRUCO:</em></p>
 <ul>
 <li>Si tienes un chunk al principio llamado <code>setup</code>, cada vez que reinicies RStudio y ejecutes código en cualquier parte de tu documento, ese bloque se ejecutara automaticamente. Esto es ideal para poner tus librerias, lectura de datos…</li>
 </ul>
 </div>
 </div>
-<div id="ejercicio-básico-rmarkdown" class="section level3 ejercicio unnumbered">
-<h3>Ejercicio básico RMarkdown</h3>
+<div id="ejercicio-básico-rmarkdown" class="section level3 ejercicio unnumbered hasAnchor">
+<h3>Ejercicio básico RMarkdown<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-básico-rmarkdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:</p>
 <ol style="list-style-type: decimal">
 <li>Dale formato de artículo científico, creando las siguientes secciones:</li>
@@ -926,21 +925,21 @@ output: pdf_document
 <li><p>Pull, Commit, Push, Pull…</p></li>
 </ol>
 </div>
-<div id="herramientas-básicas-para-investigadorases" class="section level3" number="4.6.4">
-<h3><span class="header-section-number">4.6.4</span> Herramientas básicas para investigadoras/es</h3>
+<div id="herramientas-básicas-para-investigadorases" class="section level3 hasAnchor" number="4.6.4">
+<h3><span class="header-section-number">4.6.4</span> Herramientas básicas para investigadoras/es<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#herramientas-básicas-para-investigadorases" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>De manera relativamente sencilla podemos incluir tablas bonitas en los reportes.</p>
-<div id="descriptivos" class="section level4" number="4.6.4.1">
-<h4><span class="header-section-number">4.6.4.1</span> Descriptivos</h4>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb241-1" aria-hidden="true" tabindex="-1"></a> gtsummary<span class="sc">::</span><span class="fu">tbl_summary</span>(gapminder <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>country),</span>
-<span id="cb241-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb241-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">by =</span> continent,</span>
-<span id="cb241-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb241-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">missing =</span> <span class="st">&quot;ifany&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb241-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb241-4" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">add_n</span>()</span></code></pre></div>
-<div id="dtypsbnicw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="descriptivos" class="section level4 hasAnchor" number="4.6.4.1">
+<h4><span class="header-section-number">4.6.4.1</span> Descriptivos<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#descriptivos" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb242-1" aria-hidden="true" tabindex="-1"></a> gtsummary<span class="sc">::</span><span class="fu">tbl_summary</span>(gapminder <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>country),</span>
+<span id="cb242-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb242-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">by =</span> continent,</span>
+<span id="cb242-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb242-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">missing =</span> <span class="st">&quot;ifany&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb242-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb242-4" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">add_n</span>()</span></code></pre></div>
+<div id="typsbnicwv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#dtypsbnicw .gt_table {
+#typsbnicwv .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -965,7 +964,7 @@ output: pdf_document
   border-left-color: #D3D3D3;
 }
 
-#dtypsbnicw .gt_heading {
+#typsbnicwv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -977,33 +976,37 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#dtypsbnicw .gt_title {
+#typsbnicwv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
   padding-top: 4px;
   padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
 
-#dtypsbnicw .gt_subtitle {
+#typsbnicwv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
   padding-top: 0;
   padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#dtypsbnicw .gt_bottom_border {
+#typsbnicwv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dtypsbnicw .gt_col_headings {
+#typsbnicwv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1018,7 +1021,7 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#dtypsbnicw .gt_col_heading {
+#typsbnicwv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1038,7 +1041,7 @@ output: pdf_document
   overflow-x: hidden;
 }
 
-#dtypsbnicw .gt_column_spanner_outer {
+#typsbnicwv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1050,15 +1053,15 @@ output: pdf_document
   padding-right: 4px;
 }
 
-#dtypsbnicw .gt_column_spanner_outer:first-child {
+#typsbnicwv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dtypsbnicw .gt_column_spanner_outer:last-child {
+#typsbnicwv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dtypsbnicw .gt_column_spanner {
+#typsbnicwv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1070,8 +1073,11 @@ output: pdf_document
   width: 100%;
 }
 
-#dtypsbnicw .gt_group_heading {
-  padding: 8px;
+#typsbnicwv .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1092,7 +1098,7 @@ output: pdf_document
   vertical-align: middle;
 }
 
-#dtypsbnicw .gt_empty_group_heading {
+#typsbnicwv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1107,15 +1113,15 @@ output: pdf_document
   vertical-align: middle;
 }
 
-#dtypsbnicw .gt_from_md > :first-child {
+#typsbnicwv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dtypsbnicw .gt_from_md > :last-child {
+#typsbnicwv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dtypsbnicw .gt_row {
+#typsbnicwv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1134,7 +1140,7 @@ output: pdf_document
   overflow-x: hidden;
 }
 
-#dtypsbnicw .gt_stub {
+#typsbnicwv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1143,10 +1149,29 @@ output: pdf_document
   border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
-  padding-left: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#dtypsbnicw .gt_summary_row {
+#typsbnicwv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#typsbnicwv .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#typsbnicwv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1156,17 +1181,26 @@ output: pdf_document
   padding-right: 5px;
 }
 
-#dtypsbnicw .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
+#typsbnicwv .gt_first_summary_row {
   border-top-style: solid;
-  border-top-width: 2px;
   border-top-color: #D3D3D3;
 }
 
-#dtypsbnicw .gt_grand_summary_row {
+#typsbnicwv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#typsbnicwv .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#typsbnicwv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1176,7 +1210,7 @@ output: pdf_document
   padding-right: 5px;
 }
 
-#dtypsbnicw .gt_first_grand_summary_row {
+#typsbnicwv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1186,11 +1220,11 @@ output: pdf_document
   border-top-color: #D3D3D3;
 }
 
-#dtypsbnicw .gt_striped {
+#typsbnicwv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dtypsbnicw .gt_table_body {
+#typsbnicwv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1199,7 +1233,7 @@ output: pdf_document
   border-bottom-color: #D3D3D3;
 }
 
-#dtypsbnicw .gt_footnotes {
+#typsbnicwv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1213,13 +1247,16 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#dtypsbnicw .gt_footnote {
+#typsbnicwv .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  padding: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#dtypsbnicw .gt_sourcenotes {
+#typsbnicwv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1233,44 +1270,80 @@ output: pdf_document
   border-right-color: #D3D3D3;
 }
 
-#dtypsbnicw .gt_sourcenote {
+#typsbnicwv .gt_sourcenote {
   font-size: 90%;
-  padding: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#dtypsbnicw .gt_left {
+#typsbnicwv .gt_left {
   text-align: left;
 }
 
-#dtypsbnicw .gt_center {
+#typsbnicwv .gt_center {
   text-align: center;
 }
 
-#dtypsbnicw .gt_right {
+#typsbnicwv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dtypsbnicw .gt_font_normal {
+#typsbnicwv .gt_font_normal {
   font-weight: normal;
 }
 
-#dtypsbnicw .gt_font_bold {
+#typsbnicwv .gt_font_bold {
   font-weight: bold;
 }
 
-#dtypsbnicw .gt_font_italic {
+#typsbnicwv .gt_font_italic {
   font-style: italic;
 }
 
-#dtypsbnicw .gt_super {
+#typsbnicwv .gt_super {
   font-size: 65%;
 }
 
-#dtypsbnicw .gt_footnote_marks {
+#typsbnicwv .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#typsbnicwv .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
-  font-size: 65%;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#typsbnicwv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#typsbnicwv .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#typsbnicwv .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#typsbnicwv .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
@@ -1317,37 +1390,28 @@ output: pdf_document
 <td class="gt_row gt_center">17,983 (14,142, 22,214)</td></tr>
   </tbody>
   
-  <tfoot>
-    <tr class="gt_footnotes">
-      <td colspan="7">
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>1</em>
-          </sup>
-           
-          Median (IQR)
-          <br />
-        </p>
-      </td>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="7"><sup class="gt_footnote_marks">1</sup> Median (IQR)</td>
     </tr>
   </tfoot>
 </table>
 </div>
 </div>
-<div id="inferenciales" class="section level4" number="4.6.4.2">
-<h4><span class="header-section-number">4.6.4.2</span> Inferenciales</h4>
+<div id="inferenciales" class="section level4 hasAnchor" number="4.6.4.2">
+<h4><span class="header-section-number">4.6.4.2</span> Inferenciales<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#inferenciales" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><a href="https://stats.idre.ucla.edu/other/mult-pkg/whatstat/">Que test estadístico debería usar, con código en R</a></p>
-<div id="test-de-correlación" class="section level5" number="4.6.4.2.1">
-<h5><span class="header-section-number">4.6.4.2.1</span> Test de correlación</h5>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb242-1" aria-hidden="true" tabindex="-1"></a>  corr_test <span class="ot">=</span> <span class="fu">cor.test</span>(iris<span class="sc">$</span>Sepal.Width, iris<span class="sc">$</span>Sepal.Length, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span>
-<span id="cb242-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb242-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb242-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb242-3" aria-hidden="true" tabindex="-1"></a>  table_easystats <span class="ot">=</span> report<span class="sc">::</span><span class="fu">report</span>(corr_test); table_easystats</span></code></pre></div>
+<div id="test-de-correlación" class="section level5 hasAnchor" number="4.6.4.2.1">
+<h5><span class="header-section-number">4.6.4.2.1</span> Test de correlación<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#test-de-correlación" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb243-1" aria-hidden="true" tabindex="-1"></a>  corr_test <span class="ot">=</span> <span class="fu">cor.test</span>(iris<span class="sc">$</span>Sepal.Width, iris<span class="sc">$</span>Sepal.Length, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span>
+<span id="cb243-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb243-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb243-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb243-3" aria-hidden="true" tabindex="-1"></a>  table_easystats <span class="ot">=</span> report<span class="sc">::</span><span class="fu">report</span>(corr_test); table_easystats</span></code></pre></div>
 <pre class="bg-output"><code>## Effect sizes were labelled following Funder&#39;s (2019) recommendations.
 ## 
 ## The Spearman&#39;s rank correlation rho between iris$Sepal.Width and iris$Sepal.Length is negative, statistically significant, and small (rho = -0.17, S = 6.56e+05, p = 0.041)</code></pre>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb244-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># table_easystats %&gt;% parameters::print_md()</span></span>
-<span id="cb244-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb244-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb244-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb244-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_easystats, <span class="at">align =</span> <span class="st">&quot;c&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb245-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># table_easystats %&gt;% parameters::print_md()</span></span>
+<span id="cb245-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb245-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb245-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb245-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_easystats, <span class="at">align =</span> <span class="st">&quot;c&quot;</span>)</span></code></pre></div>
 <table style="width:100%;">
 <colgroup>
 <col width="16%" />
@@ -1381,23 +1445,29 @@ output: pdf_document
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb245-1" aria-hidden="true" tabindex="-1"></a>  iris <span class="sc">%&gt;%</span> </span>
-<span id="cb245-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb245-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">correlation</span>(<span class="at">partial =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb245-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb245-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb246-1" aria-hidden="true" tabindex="-1"></a>  iris <span class="sc">%&gt;%</span> </span>
+<span id="cb246-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb246-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">correlation</span>(<span class="at">partial =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb246-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb246-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="bookdown-workshop-R_files/figure-html/correlation-test-1.png" width="1152" /></p>
 </div>
-<div id="tabla-de-correlaciones" class="section level5" number="4.6.4.2.2">
-<h5><span class="header-section-number">4.6.4.2.2</span> Tabla de correlaciones</h5>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb246-1" aria-hidden="true" tabindex="-1"></a>  table_correlations <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> </span>
-<span id="cb246-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb246-2" aria-hidden="true" tabindex="-1"></a>    correlation<span class="sc">::</span><span class="fu">correlation</span>()  </span>
-<span id="cb246-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb246-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb246-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb246-4" aria-hidden="true" tabindex="-1"></a>  TABLE_CORR <span class="ot">=</span> table_correlations <span class="sc">%&gt;%</span> </span>
-<span id="cb246-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb246-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>(<span class="at">stars =</span> <span class="cn">FALSE</span>, <span class="at">include_significance =</span> <span class="cn">TRUE</span>, <span class="at">p_digits =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb246-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb246-6" aria-hidden="true" tabindex="-1"></a>    parameters<span class="sc">::</span><span class="fu">print_md</span>()</span>
-<span id="cb246-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb246-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb246-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb246-8" aria-hidden="true" tabindex="-1"></a>  TABLE_CORR</span></code></pre></div>
+<div id="tabla-de-correlaciones" class="section level5 hasAnchor" number="4.6.4.2.2">
+<h5><span class="header-section-number">4.6.4.2.2</span> Tabla de correlaciones<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#tabla-de-correlaciones" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb247-1" aria-hidden="true" tabindex="-1"></a>  table_correlations <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> </span>
+<span id="cb247-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb247-2" aria-hidden="true" tabindex="-1"></a>    correlation<span class="sc">::</span><span class="fu">correlation</span>()  </span>
+<span id="cb247-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb247-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb247-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb247-4" aria-hidden="true" tabindex="-1"></a>  TABLE_CORR <span class="ot">=</span> table_correlations <span class="sc">%&gt;%</span> </span>
+<span id="cb247-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb247-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>(<span class="at">stars =</span> <span class="cn">FALSE</span>, <span class="at">include_significance =</span> <span class="cn">TRUE</span>, <span class="at">p_digits =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb247-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb247-6" aria-hidden="true" tabindex="-1"></a>    parameters<span class="sc">::</span><span class="fu">print_md</span>()</span>
+<span id="cb247-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb247-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb247-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb247-8" aria-hidden="true" tabindex="-1"></a>  TABLE_CORR</span></code></pre></div>
 <table>
 <caption>Correlation Matrix (pearson-method)</caption>
+<colgroup>
+<col width="19%" />
+<col width="26%" />
+<col width="26%" />
+<col width="27%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Parameter</th>
@@ -1428,9 +1498,15 @@ output: pdf_document
 </tbody>
 </table>
 <p>p-value adjustment method: Holm (1979)</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb247-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;p = |p &quot;</span>, <span class="st">&quot;&quot;</span>, TABLE_CORR)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb248-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;p = |p &quot;</span>, <span class="st">&quot;&quot;</span>, TABLE_CORR)</span></code></pre></div>
 <table>
 <caption>Correlation Matrix (pearson-method)</caption>
+<colgroup>
+<col width="19%" />
+<col width="26%" />
+<col width="26%" />
+<col width="27%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Parameter</th>
@@ -1461,9 +1537,15 @@ output: pdf_document
 </tbody>
 </table>
 <p>p-value adjustment method: Holm (1979)</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb248-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">(p &quot;</span>, <span class="st">&quot;&lt;BR&gt;(p&quot;</span>, TABLE_CORR)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb249-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">(p &quot;</span>, <span class="st">&quot;&lt;BR&gt;(p&quot;</span>, TABLE_CORR)</span></code></pre></div>
 <table>
 <caption>Correlation Matrix (pearson-method)</caption>
+<colgroup>
+<col width="19%" />
+<col width="26%" />
+<col width="26%" />
+<col width="27%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Parameter</th>
@@ -1496,13 +1578,13 @@ output: pdf_document
 <p>p-value adjustment method: Holm (1979)</p>
 </div>
 </div>
-<div id="lm" class="section level4" number="4.6.4.3">
-<h4><span class="header-section-number">4.6.4.3</span> LM</h4>
+<div id="lm" class="section level4 hasAnchor" number="4.6.4.3">
+<h4><span class="header-section-number">4.6.4.3</span> LM<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#lm" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Usaremos un análisis de regresión sencillo tratando de predecir la longitud de los sépalos a partir de los efectos principales y la interacción entre la longitud y ancho de los pétalos.</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb249-1" aria-hidden="true" tabindex="-1"></a>  model_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Petal.Length <span class="sc">*</span> Petal.Width, <span class="at">data =</span> iris)</span>
-<span id="cb249-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb249-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#summary(model_lm)</span></span>
-<span id="cb249-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb249-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb249-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb249-4" aria-hidden="true" tabindex="-1"></a>  report<span class="sc">::</span><span class="fu">report</span>(model_lm)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb250-1" aria-hidden="true" tabindex="-1"></a>  model_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Petal.Length <span class="sc">*</span> Petal.Width, <span class="at">data =</span> iris)</span>
+<span id="cb250-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb250-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#summary(model_lm)</span></span>
+<span id="cb250-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb250-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb250-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb250-4" aria-hidden="true" tabindex="-1"></a>  report<span class="sc">::</span><span class="fu">report</span>(model_lm)</span></code></pre></div>
 <pre class="bg-output"><code>## We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Petal.Width (formula: Sepal.Length ~ Petal.Length * Petal.Width). The model explains a statistically significant and substantial proportion of variance (R2 = 0.81, F(3, 146) = 204.54, p &lt; .001, adj. R2 = 0.80). The model&#39;s intercept, corresponding to Petal.Length = 0 and Petal.Width = 0, is at 4.58 (95% CI [4.36, 4.80], t(146) = 40.89, p &lt; .001). Within this model:
 ## 
 ##   - The effect of Petal Length is statistically significant and positive (beta = 0.44, 95% CI [0.31, 0.57], t(146) = 6.74, p &lt; .001; Std. beta = 1.42, 95% CI [1.14, 1.71])
@@ -1510,8 +1592,16 @@ output: pdf_document
 ##   - The interaction effect of Petal Width on Petal Length is statistically significant and positive (beta = 0.19, 95% CI [0.12, 0.25], t(146) = 5.62, p &lt; .001; Std. beta = 0.31, 95% CI [0.20, 0.41])
 ## 
 ## Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using the Wald approximation.</code></pre>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb251-1" aria-hidden="true" tabindex="-1"></a>  parameters<span class="sc">::</span><span class="fu">model_parameters</span>(model_lm) <span class="sc">%&gt;%</span> parameters<span class="sc">::</span><span class="fu">print_md</span>()</span></code></pre></div>
-<table>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb252-1" aria-hidden="true" tabindex="-1"></a>  parameters<span class="sc">::</span><span class="fu">model_parameters</span>(model_lm) <span class="sc">%&gt;%</span> parameters<span class="sc">::</span><span class="fu">print_md</span>()</span></code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="34%" />
+<col width="16%" />
+<col width="7%" />
+<col width="20%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Parameter</th>
@@ -1561,7 +1651,7 @@ output: pdf_document
 <p>Hay varias maneras de mostrar tablas en Rmarkdown. Arriba usamos el paquete {<a href="https://github.com/easystats/parameters">parameters</a>}, pero también se puede hacer con {stargazer}, papaja, kable, etc.</p>
 <p><BR></p>
 <p>sjPlot es especialmente potente. El único detalle es que no genera outputs en pdf. Para usar las tablas generadas por sjPlot en pdf’s ver el paquete {<a href="https://github.com/gorkang/html2latex/">html2latex</a>}</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb252-1" aria-hidden="true" tabindex="-1"></a>  sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(model_lm)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb253-1" aria-hidden="true" tabindex="-1"></a>  sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(model_lm)</span></code></pre></div>
 <table style="border-collapse:collapse; border:none;">
 <tr>
 <th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
@@ -1660,13 +1750,13 @@ R<sup>2</sup> / R<sup>2</sup> adjusted
 </table>
 <p><BR></p>
 </div>
-<div id="anova" class="section level4" number="4.6.4.4">
-<h4><span class="header-section-number">4.6.4.4</span> Anova</h4>
+<div id="anova" class="section level4 hasAnchor" number="4.6.4.4">
+<h4><span class="header-section-number">4.6.4.4</span> Anova<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#anova" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>Ver paquete <a href="https://github.com/singmann/afex">{afex}</a></li>
 </ul>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(obk.long, <span class="at">package =</span> <span class="st">&quot;afex&quot;</span>)</span>
-<span id="cb253-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(obk.long)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(obk.long, <span class="at">package =</span> <span class="st">&quot;afex&quot;</span>)</span>
+<span id="cb254-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(obk.long)</span></code></pre></div>
 <pre class="bg-output"><code>##   id treatment gender   age phase hour value
 ## 1  1   control      M -4.75   pre    1     1
 ## 2  1   control      M -4.75   pre    2     2
@@ -1674,105 +1764,106 @@ R<sup>2</sup> / R<sup>2</sup> adjusted
 ## 4  1   control      M -4.75   pre    4     2
 ## 5  1   control      M -4.75   pre    5     1
 ## 6  1   control      M -4.75  post    1     3</code></pre>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate mixed ANOVA on the full design:</span></span>
-<span id="cb255-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb255-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> afex<span class="sc">::</span><span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
-<span id="cb255-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb255-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">dv =</span> <span class="st">&quot;value&quot;</span>, </span>
-<span id="cb255-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb255-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> obk.long, <span class="at">between =</span> <span class="fu">c</span>(<span class="st">&quot;treatment&quot;</span>), </span>
-<span id="cb255-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb255-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;phase&quot;</span>, <span class="st">&quot;hour&quot;</span>))</span>
-<span id="cb255-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb255-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb255-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb255-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb255-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb255-8" aria-hidden="true" tabindex="-1"></a>  table_afex <span class="ot">=</span> papaja<span class="sc">::</span><span class="fu">apa_print</span>(model)<span class="sc">$</span>table</span>
-<span id="cb255-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb255-9" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_afex)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate mixed ANOVA on the full design:</span></span>
+<span id="cb256-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> afex<span class="sc">::</span><span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb256-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">dv =</span> <span class="st">&quot;value&quot;</span>, </span>
+<span id="cb256-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> obk.long, <span class="at">between =</span> <span class="fu">c</span>(<span class="st">&quot;treatment&quot;</span>), </span>
+<span id="cb256-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> <span class="fu">c</span>(<span class="st">&quot;phase&quot;</span>, <span class="st">&quot;hour&quot;</span>))</span>
+<span id="cb256-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb256-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-8" aria-hidden="true" tabindex="-1"></a>  table_afex <span class="ot">=</span> papaja<span class="sc">::</span><span class="fu">apa_print</span>(model)<span class="sc">$</span>table</span>
+<span id="cb256-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-9" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(table_afex)</span></code></pre></div>
 <table>
+<colgroup>
+<col width="40%" />
+<col width="9%" />
+<col width="13%" />
+<col width="10%" />
+<col width="5%" />
+<col width="12%" />
+<col width="8%" />
+</colgroup>
 <thead>
 <tr class="header">
-<th align="left"></th>
-<th align="left">Effect</th>
-<th align="left">F</th>
-<th align="left">df1</th>
-<th align="left">df2</th>
-<th align="left">MSE</th>
-<th align="left">p</th>
-<th align="left">ges</th>
+<th align="left">term</th>
+<th align="left">estimate</th>
+<th align="left">conf.int</th>
+<th align="left">statistic</th>
+<th align="left">df</th>
+<th align="left">df.residual</th>
+<th align="left">p.value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">1</td>
 <td align="left">Treatment</td>
+<td align="left">.211</td>
+<td align="left">[.000, .468]</td>
 <td align="left">2.91</td>
 <td align="left">2</td>
 <td align="left">13</td>
-<td align="left">32.04</td>
 <td align="left">.090</td>
-<td align="left">.211</td>
 </tr>
 <tr class="even">
-<td align="left">2</td>
 <td align="left">Phase</td>
+<td align="left">.164</td>
+<td align="left">[.000, .356]</td>
 <td align="left">19.29</td>
 <td align="left">1.74</td>
 <td align="left">22.64</td>
-<td align="left">4.07</td>
 <td align="left">&lt; .001</td>
-<td align="left">.164</td>
 </tr>
 <tr class="odd">
-<td align="left">4</td>
 <td align="left">Hour</td>
+<td align="left">.129</td>
+<td align="left">[.000, .237]</td>
 <td align="left">18.44</td>
 <td align="left">1.95</td>
 <td align="left">25.41</td>
-<td align="left">2.87</td>
 <td align="left">&lt; .001</td>
-<td align="left">.129</td>
 </tr>
 <tr class="even">
-<td align="left">3</td>
 <td align="left">Treatment <span class="math inline">\(\times\)</span> Phase</td>
+<td align="left">.099</td>
+<td align="left">[.000, .212]</td>
 <td align="left">5.43</td>
 <td align="left">3.48</td>
 <td align="left">22.64</td>
-<td align="left">4.07</td>
 <td align="left">.004</td>
-<td align="left">.099</td>
 </tr>
 <tr class="odd">
-<td align="left">5</td>
 <td align="left">Treatment <span class="math inline">\(\times\)</span> Hour</td>
+<td align="left">.001</td>
+<td align="left">[.000, .000]</td>
 <td align="left">0.08</td>
 <td align="left">3.91</td>
 <td align="left">25.41</td>
-<td align="left">2.87</td>
 <td align="left">.987</td>
-<td align="left">.001</td>
 </tr>
 <tr class="even">
-<td align="left">6</td>
 <td align="left">Phase <span class="math inline">\(\times\)</span> Hour</td>
+<td align="left">.017</td>
+<td align="left">[.000, .000]</td>
 <td align="left">1.35</td>
 <td align="left">4.02</td>
 <td align="left">52.29</td>
-<td align="left">2.24</td>
 <td align="left">.265</td>
-<td align="left">.017</td>
 </tr>
 <tr class="odd">
-<td align="left">7</td>
 <td align="left">Treatment <span class="math inline">\(\times\)</span> Phase <span class="math inline">\(\times\)</span> Hour</td>
+<td align="left">.008</td>
+<td align="left">[.000, .000]</td>
 <td align="left">0.33</td>
 <td align="left">8.05</td>
 <td align="left">52.29</td>
-<td align="left">2.24</td>
 <td align="left">.951</td>
-<td align="left">.008</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="ejercicio-avanzado" class="section level3 ejercicio unnumbered">
-<h3>Ejercicio avanzado</h3>
+<div id="ejercicio-avanzado" class="section level3 ejercicio unnumbered hasAnchor">
+<h3>Ejercicio avanzado<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#ejercicio-avanzado" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Bajad la base de Cancer Screening Risk Literacy of Physicians in Training: <a href="https://osf.io/qn9a2/" class="uri">https://osf.io/qn9a2/</a> y el <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos/raw/master/data/files/04-Dafina-PLOS/PONE-D-19-03821R2_FTC.pdf">preprint del artículo</a>:</p>
 <p>En el documento .Rmd de antes:</p>
 <ol style="list-style-type: decimal">
@@ -1786,42 +1877,42 @@ R<sup>2</sup> / R<sup>2</sup> adjusted
 <p><BR></p>
 </div>
 </div>
-<div id="de-los-datos-al-reporte-final-una-historia-de-amor-con-r" class="section level2" number="4.7">
-<h2><span class="header-section-number">4.7</span> De los datos al reporte final: Una historia de amor con R</h2>
+<div id="de-los-datos-al-reporte-final-una-historia-de-amor-con-r" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> De los datos al reporte final: Una historia de amor con R<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#de-los-datos-al-reporte-final-una-historia-de-amor-con-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><a href="https://github.com/crsh/papaja">Preparar artículos en formato APA</a></li>
 </ul>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>)</span>
-<span id="cb256-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb256-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new R Markdown file</span></span>
-<span id="cb256-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-4" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">draft</span>(</span>
-<span id="cb256-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-5" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;mymanuscript.Rmd&quot;</span>), </span>
-<span id="cb256-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;apa6&quot;</span>, </span>
-<span id="cb256-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">&quot;papaja&quot;</span>, </span>
-<span id="cb256-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">create_dir =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb256-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">edit =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb256-10"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb256-11"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Render manuscript</span></span>
-<span id="cb256-12"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-12" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(</span>
-<span id="cb256-13"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-13" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;mymanuscript.Rmd&quot;</span>), </span>
-<span id="cb256-14"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb256-15"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb256-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">clean =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>)</span>
+<span id="cb257-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new R Markdown file</span></span>
+<span id="cb257-4"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-4" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">draft</span>(</span>
+<span id="cb257-5"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-5" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;mymanuscript.Rmd&quot;</span>), </span>
+<span id="cb257-6"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;apa6&quot;</span>, </span>
+<span id="cb257-7"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="st">&quot;papaja&quot;</span>, </span>
+<span id="cb257-8"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">create_dir =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb257-9"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">edit =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb257-10"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-11"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Render manuscript</span></span>
+<span id="cb257-12"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-12" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(</span>
+<span id="cb257-13"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-13" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;mymanuscript.Rmd&quot;</span>), </span>
+<span id="cb257-14"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb257-15"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">clean =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Y no olvidemos el paquete {rticles}, que contiene <a href="https://github.com/rstudio/rticles">plantillas de decenas de editoriales</a></p>
 </div>
-<div id="avanzado" class="section level2" number="4.8">
-<h2><span class="header-section-number">4.8</span> Avanzado</h2>
+<div id="avanzado" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> Avanzado<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#avanzado" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><p>Para evitar problemas con los paths de los archivos, usar <code>here::here()</code></p></li>
 <li><p>Para evitar problemas con instalación de Latex:</p></li>
 </ul>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb257-1" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb258-1" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code></pre></div>
 <ul>
 <li>Corregir ortografía en Rmarkdown (F7)<br />
 </li>
 <li><a href="https://github.com/ropensci/spelling#readme" class="uri">https://github.com/ropensci/spelling#readme</a></li>
 </ul>
-<div id="usar-bibliografía" class="section level3" number="4.8.1">
-<h3><span class="header-section-number">4.8.1</span> Usar bibliografía</h3>
+<div id="usar-bibliografía" class="section level3 hasAnchor" number="4.8.1">
+<h3><span class="header-section-number">4.8.1</span> Usar bibliografía<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#usar-bibliografía" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Bibliografía en Rmarkdown</p>
 <ul>
 <li><p><a href="https://blog.rstudio.com/2020/11/09/rstudio-1-4-preview-citations/" class="uri">https://blog.rstudio.com/2020/11/09/rstudio-1-4-preview-citations/</a></p></li>
@@ -1829,20 +1920,20 @@ R<sup>2</sup> / R<sup>2</sup> adjusted
 <li><p><a href="https://www.r-bloggers.com/bibliography-with-knitr-cite-your-references-and-packages/" class="uri">https://www.r-bloggers.com/bibliography-with-knitr-cite-your-references-and-packages/</a></p></li>
 </ul>
 </div>
-<div id="citar-los-paquetes-que-usamos" class="section level3" number="4.8.2">
-<h3><span class="header-section-number">4.8.2</span> Citar los paquetes que usamos</h3>
+<div id="citar-los-paquetes-que-usamos" class="section level3 hasAnchor" number="4.8.2">
+<h3><span class="header-section-number">4.8.2</span> Citar los paquetes que usamos<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#citar-los-paquetes-que-usamos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>¿Debemos citar los paquetes que usamos?</p>
 <ul>
 <li>Respuesta corta, <a href="https://academia.stackexchange.com/a/66375/35580">si</a><br />
 </li>
 <li>Respuesta larga, <a href="https://academia.stackexchange.com/a/27922/35580">la mayoría de los paquetes</a></li>
 </ul>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grateful::cite_packages(all.pkg = FALSE,</span></span>
-<span id="cb258-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                         out.format = &quot;rmd&quot;,</span></span>
-<span id="cb258-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb258-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                         out.dir = &quot;dev&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grateful::cite_packages(all.pkg = FALSE,</span></span>
+<span id="cb259-2"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                         out.format = &quot;rmd&quot;,</span></span>
+<span id="cb259-3"><a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#cb259-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                         out.dir = &quot;dev&quot;)</span></span></code></pre></div>
 </div>
-<div id="manejo-de-dependencias" class="section level3" number="4.8.3">
-<h3><span class="header-section-number">4.8.3</span> Manejo de dependencias</h3>
+<div id="manejo-de-dependencias" class="section level3 hasAnchor" number="4.8.3">
+<h3><span class="header-section-number">4.8.3</span> Manejo de dependencias<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#manejo-de-dependencias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Usando un sistema de manejo de dependencias <a href="https://github.com/rstudio/renv">renv</a> creamos un snapshot de las librerías usadas actualmente. Es muy importante para garantizar que nuestros scripts correran en el futuro.</p>
 <div id="section-29" class="section level4 parameters unnumbered">
 <h4 class="parameters unnumbered"></h4>
@@ -1864,16 +1955,16 @@ R<sup>2</sup> / R<sup>2</sup> adjusted
 </div>
 </div>
 </div>
-<div id="mas-allá-de-rmarkdown" class="section level2" number="4.9">
-<h2><span class="header-section-number">4.9</span> Mas allá de Rmarkdown</h2>
+<div id="mas-allá-de-rmarkdown" class="section level2 hasAnchor" number="4.9">
+<h2><span class="header-section-number">4.9</span> Mas allá de Rmarkdown<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#mas-allá-de-rmarkdown" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Aplicaciones web interactivas con R: <a href="https://shiny.rstudio.com/">Shiny</a></p>
 <p><a href="https://gorkang.shinyapps.io/BayesianReasoning/">Bayesian reasoning</a></p>
 <p><img src="data/images/shiny-bayesian.png" /></p>
 </div>
-<div id="varios" class="section level2" number="4.10">
-<h2><span class="header-section-number">4.10</span> Varios</h2>
-<div id="shortcuts" class="section level3" number="4.10.1">
-<h3><span class="header-section-number">4.10.1</span> Shortcuts!</h3>
+<div id="varios" class="section level2 hasAnchor" number="4.10">
+<h2><span class="header-section-number">4.10</span> Varios<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#varios" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="shortcuts" class="section level3 hasAnchor" number="4.10.1">
+<h3><span class="header-section-number">4.10.1</span> Shortcuts!<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#shortcuts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Alt+SHIFT+K: Ver shortcuts!<br />
 </li>
@@ -1883,12 +1974,12 @@ R<sup>2</sup> / R<sup>2</sup> adjusted
 <li>CTRL+I: Reindent lines</li>
 </ul>
 </div>
-<div id="estilo" class="section level3" number="4.10.2">
-<h3><span class="header-section-number">4.10.2</span> Estilo</h3>
+<div id="estilo" class="section level3 hasAnchor" number="4.10.2">
+<h3><span class="header-section-number">4.10.2</span> Estilo<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#estilo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Es recomendable ser consistente en la manera de escribir código. Habitualmente se recomienda seguir una guía de estilo. Por ejemplo, <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s Style guide</a> o la <a href="https://style.tidyverse.org/">guia de estilo del tidyverse</a>.</p>
 </div>
-<div id="algunos-paquetes-interesantes" class="section level3" number="4.10.3">
-<h3><span class="header-section-number">4.10.3</span> Algunos paquetes interesantes</h3>
+<div id="algunos-paquetes-interesantes" class="section level3 hasAnchor" number="4.10.3">
+<h3><span class="header-section-number">4.10.3</span> Algunos paquetes interesantes<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#algunos-paquetes-interesantes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><a href="https://github.com/ropensci/suppdata">Descargar datos suplementarios de papers publicados usando DOI</a><br />
 </li>
@@ -1899,8 +1990,8 @@ R<sup>2</sup> / R<sup>2</sup> adjusted
 </ul>
 </div>
 </div>
-<div id="bibliografía-5" class="section level2 bibliografia unnumbered">
-<h2>Bibliografía</h2>
+<div id="bibliografía-5" class="section level2 bibliografia unnumbered hasAnchor">
+<h2>Bibliografía<a href="trabajo-con-rmarkdown-para-reportes-reproducibles.html#bibliografía-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><a href="https://style.tidyverse.org/">Guia de estilo del tidyverse</a></p>
 <p><a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s Style guide</a></p>
 <p><a href="https://happygitwithr.com">Happy Git and GitHub for the useR</a></p>

@@ -17,6 +17,7 @@ if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
 if (!require('esquisse')) install.packages('esquisse'); library('esquisse') 
 if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
+if (!require('geomtextpath')) install.packages('geomtextpath'); library('geomtextpath')
 if (!require('gghighlight')) install.packages('gghighlight'); library('gghighlight')
 if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
 if (!require('ggthemes')) install.packages('ggthemes'); library('ggthemes')
@@ -29,6 +30,7 @@ if (!require('sjPlot')) install.packages('sjPlot'); library('sjPlot')
 if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
 
 ```  
+
 
 ---  
 
@@ -308,7 +310,8 @@ Hay algunos recursos que son **imprescindibles**. Nadie sabe como *los antiguos*
 
 * [**Stack overflow**](https://stackoverflow.com/questions/tagged/r)   
 
-* [Google](https://www.google.com/): text size ggplot  
+* [Google: avoid scientific notation R](https://www.google.com/search?q=avoid+scientific+notation+R&oq=avoid+scientific+notation+R&aqs=chrome..69i57j0i22i30l9.5946j0j7&sourceid=chrome&ie=UTF-8): `options(scipen=999)`
+
 
 
 Y otros recursos que resultan muy útiles:
@@ -1166,6 +1169,25 @@ ggplot(gapminder, aes(year, lifeExp, linetype = continent, color = continent)) +
       breaks = gapminder_last$lifeExp,
       labels = gapminder_last$continent,
       name = NULL)) +
+  scale_x_continuous(expand = c(0,0)) +
+  guides(color = "none",
+         linetype = "none")
+
+```
+
+
+Usar {geomtextpath} para ubicar las etiquetas en el camino de las líneas:  
+
+```{r geomtextpath}
+
+# https://allancameron.github.io/geomtextpath/
+
+ggplot(gapminder, aes(year, lifeExp, linetype = continent, color = continent)) + 
+  
+  geomtextpath::geom_labelsmooth(aes(label = continent), text_smoothing = 30, 
+                   method = "loess", formula = y ~ x,
+                   size = 3, linewidth = 1, boxlinewidth = 0.3) +
+
   scale_x_continuous(expand = c(0,0)) +
   guides(color = "none",
          linetype = "none")

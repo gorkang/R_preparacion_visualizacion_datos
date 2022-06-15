@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>R para preparación y visualización de datos</title>
   <meta name="description" content="R para preparación y visualización de datos" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="R para preparación y visualización de datos" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html" />
   
   
   <meta name="github-repo" content="gorkang/R_preparacion_visualizacion_datos" />
@@ -32,7 +31,6 @@
   
 
 <link rel="next" href="preparando-sistema.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
@@ -60,7 +59,7 @@
 <link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.20/datatables.js"></script>
+<script src="libs/datatables-binding-0.23/datatables.js"></script>
 <link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
@@ -177,9 +176,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#empezando-en-a-b-c"><i class="fa fa-check"></i>Empezando en A-B-C</a>
 <ul>
-<li><a href="preparando-sistema.html#a-instalar-r"><strong>(A)</strong> Instalar R</a></li>
-<li><a href="preparando-sistema.html#b-instalar-rstudio"><strong>(B)</strong> Instalar RStudio</a></li>
-<li><a href="preparando-sistema.html#c-paquetes-para-el-workshop"><strong>(C)</strong> Paquetes para el workshop</a></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#a-instalar-r"><i class="fa fa-check"></i><strong>(A)</strong> Instalar R</a></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#b-instalar-rstudio"><i class="fa fa-check"></i><strong>(B)</strong> Instalar RStudio</a></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#c-paquetes-para-el-workshop"><i class="fa fa-check"></i><strong>(C)</strong> Paquetes para el workshop</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#algo-más-sobre-la-instalación-de-paquetes"><i class="fa fa-check"></i>Algo más sobre la instalación de paquetes</a>
 <ul>
@@ -519,22 +518,24 @@ div.csl-indent {
 <h2 class="subtitle"><em><a href="https://www.uai.cl/doctorado/doctorado-en-neurociencia-social-y-cognicion-2/">Doctorado en Neurociencia Social y Cognición</a>, <a href="https://www.uai.cl/">UAI</a></em></h2>
 <p class="author"><em>Gorka Navarrete <a href="http://orcid.org/0000-0001-7678-8656"><img src="data/images/24px-ORCID_iD.svg.png" /></a> <a href="https://twitter.com/gorkang"><img src="data/images/twitter_small.png" /></a></em></p>
 </div>
-<div id="introducción" class="section level1 unnumbered">
-<h1>Introducción</h1>
+<div id="introducción" class="section level1 unnumbered hasAnchor">
+<h1>Introducción<a href="index.html#introducción" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>El objetivo de este seminario es aprender a usar <a href="https://www.r-project.org/">R</a> para preparar y visualizar datos, además de generar reportes reproducibles. Está pensado para alumnos de postgrado con conocimientos básicos de programación.</p>
+<p>A lo largo del seminario aprenderemos a usar <a href="https://gorkang.github.io/jsPsychR-manual/index.html">jsPsychR</a>, un conjunto de herramientas creado en el <a href="cscn.uai.cl">CSCN</a> para ayudar a crear paradigmas experimentales con <a href="https://www.jspsych.org/">jsPsych</a>, simular participantes, y estandarizar el proceso de preparación y análisis de datos.</p>
 <p><a href="https://www.r-project.org/">R</a> es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.</p>
-<div id="objetivos" class="section level2 unnumbered">
-<h2>Objetivos</h2>
+<div id="objetivos" class="section level2 unnumbered hasAnchor">
+<h2>Objetivos<a href="index.html#objetivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Dar las herramientas básicas a los alumnos para que puedan trabajar de manera autónoma con R y RStudio para el proceso de importación, transformación, visualización y reporte de datos.</p>
 <p>Al finalizar el curso deberíamos ser capaces de:</p>
 <ul>
 <li>Importar archivos de datos, transformar los datos, crear nuevas variables.</li>
 <li>Realizar análisis de datos exploratorios, visualizar distribuciones y comparar grupos.</li>
 <li>Generar reportes reproducibles con RMarkdown.</li>
+<li>Crear paradigmas experimentales y un pipeline completo para la preparación de datos con <a href="https://gorkang.github.io/jsPsychR-manual/index.html">jsPsychR</a>.</li>
 </ul>
 </div>
-<div id="como-empezar" class="section level2 unnumbered">
-<h2>Como empezar</h2>
+<div id="como-empezar" class="section level2 unnumbered hasAnchor">
+<h2>Como empezar<a href="index.html#como-empezar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Si ya has completado los pasos indicados en <strong><a href="preparando-sistema.html#preparando-sistema">preparando nuestro sistema</a></strong>, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;usethis&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;usethis&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;usethis&#39;</span>)</span>
 <span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -556,8 +557,8 @@ En ocasiones encontraras una bombilla como esta: <img src="data/images/hint.png"
 </details>
 <hr />
 </div>
-<div id="bibliografía" class="section level2 bibliografia unnumbered">
-<h2>Bibliografía</h2>
+<div id="bibliografía" class="section level2 bibliografia unnumbered hasAnchor">
+<h2>Bibliografía<a href="index.html#bibliografía" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Bryan, J., &amp; Hester, J. What They Forgot to Teach You About R. <a href="https://whattheyforgot.org/" class="uri">https://whattheyforgot.org/</a></p>
 <p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc. <a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></p>
 <p>Wickham, H. (2014). Advanced r. Chapman and Hall/CRC. <a href="https://adv-r.hadley.nz/" class="uri">https://adv-r.hadley.nz/</a></p>

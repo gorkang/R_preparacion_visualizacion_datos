@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 5 Experimentos reproducibles | R para preparación y visualización de datos</title>
   <meta name="description" content="Capítulo 5 Experimentos reproducibles | R para preparación y visualización de datos" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 5 Experimentos reproducibles | R para preparación y visualización de datos" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html" />
   
   
   <meta name="github-repo" content="gorkang/R_preparacion_visualizacion_datos" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="trabajo-con-rmarkdown-para-reportes-reproducibles.html"/>
 <link rel="next" href="ejercicios-6.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
@@ -60,7 +59,7 @@
 <link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.20/datatables.js"></script>
+<script src="libs/datatables-binding-0.23/datatables.js"></script>
 <link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
@@ -177,9 +176,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#empezando-en-a-b-c"><i class="fa fa-check"></i>Empezando en A-B-C</a>
 <ul>
-<li><a href="preparando-sistema.html#a-instalar-r"><strong>(A)</strong> Instalar R</a></li>
-<li><a href="preparando-sistema.html#b-instalar-rstudio"><strong>(B)</strong> Instalar RStudio</a></li>
-<li><a href="preparando-sistema.html#c-paquetes-para-el-workshop"><strong>(C)</strong> Paquetes para el workshop</a></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#a-instalar-r"><i class="fa fa-check"></i><strong>(A)</strong> Instalar R</a></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#b-instalar-rstudio"><i class="fa fa-check"></i><strong>(B)</strong> Instalar RStudio</a></li>
+<li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#c-paquetes-para-el-workshop"><i class="fa fa-check"></i><strong>(C)</strong> Paquetes para el workshop</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="preparando-sistema.html"><a href="preparando-sistema.html#algo-más-sobre-la-instalación-de-paquetes"><i class="fa fa-check"></i>Algo más sobre la instalación de paquetes</a>
 <ul>
@@ -514,26 +513,26 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="experimentos-reproducibles" class="section level1" number="5">
-<h1><span class="header-section-number">Capítulo 5</span> Experimentos reproducibles</h1>
+<div id="experimentos-reproducibles" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Capítulo 5</span> Experimentos reproducibles<a href="experimentos-reproducibles.html#experimentos-reproducibles" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>En el CSCN usamos distintas tecnologías para desarrollar experimentos. Algunos ejemplos son <a href="https://www.psychopy.org/">Psychopy</a>, <a href="https://www.qualtrics.com/">Qualtrics</a>, <a href="https://www.limesurvey.org/">Limesurvey</a>, <a href="https://www.jspsych.org/plugins/jspsych-preload/">jsPsych</a>, <a href="https://gorilla.sc/">Gorilla</a>, etc. Cada una de estas tiene ventajas y desventajas, y en general es importante tener en cuenta aspectos pragmáticos a la hora de adoptar una u otra tecnología (costo económico, tipo de experimento [EEG/conductual, laboratorio/online]).</p>
 <p>Algunos de nosotros hemos optado principalmente por <a href="https://www.jspsych.org/">jsPsych</a> para experimentos conductuales por tratarse de una libreria javascript de código abierto, basada en tecnologías web standard, y que puede ser usada online y offline. Dado que en el CSCN diponemos de servidor propio, los costos habituales de hosting no se aplican.</p>
 <p>En los últimos años, hemos empezado a trabajar en un conjunto de herramientas para crear experimentos usando la librería <a href="https://www.jspsych.org/">jsPsych</a> con <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a>, simular participantes con <a href="https://github.com/gorkang/jsPsychMonkeys">jspsychMonkeys</a> y estandarizar y automatizar la preparación de datos con <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a>.</p>
 <p>Nuestro objetivo final es tener un gran número de tareas disponibles para ser usadas en el repositorio de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a>. Cada una de estas tareas funcionará en <a href="https://github.com/gorkang/jsPsychMonkeys">jspsychMonkeys</a> para crear participantes virtuales. Cada tarea tendrá un script hermano en <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a> para automatizar la preparación de datos.</p>
-<div id="pipeline-experimental-abierto-y-reproducible" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Pipeline experimental abierto y reproducible</h2>
+<div id="pipeline-experimental-abierto-y-reproducible" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Pipeline experimental abierto y reproducible<a href="experimentos-reproducibles.html#pipeline-experimental-abierto-y-reproducible" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Replicar el experimento a partir de una publicación no es trivial. Una de las fortalezas fundamentales de este sistema es que compartir y reproducir un experimento y los análisis asociados se convierte en algo muy sencillo.</p>
 <p>Además, todos los componentes del proceso son código abierto, lo que permite que revisores, colaboradores, etc. puedan verificar que no hay errores en el código.</p>
 <p>Con este sistema podremos crear fácilmente el codigo del experimento, simular datos y preparar datos de manera casi automática (incluyendo anonimizacion).</p>
 <p>El output del sistema es estandarizado, lo que implica que los nombres de las variables y la estructura de datos son predecibles. Finalmente, la generacion de graficas, tablas, reportes y los analisis son reproducibles.</p>
-<div id="como-crear-un-protocolo-experimental" class="section level3" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> Como crear un protocolo experimental</h3>
+<div id="como-crear-un-protocolo-experimental" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Como crear un protocolo experimental<a href="experimentos-reproducibles.html#como-crear-un-protocolo-experimental" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>En la carpeta <code>canonical_protocol/</code> del repositorio de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a> tenemos un <a href="https://github.com/gorkang/jsPsychMaker/blob/main/canonical_protocol/canonical_protocol_details.csv">listado exhaustivo de tareas</a> disponibles para ser usadas.</p>
 <ol style="list-style-type: decimal">
 <li>Descargamos el proyecto de RStudio jsPsychMaker:</li>
 </ol>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="experimentos-reproducibles.html#cb259-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMaker&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
-<span id="cb259-2"><a href="experimentos-reproducibles.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="experimentos-reproducibles.html#cb260-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMaker&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
+<span id="cb260-2"><a href="experimentos-reproducibles.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li>En a la carpeta <code>canonical_protocols</code>:</li>
@@ -545,8 +544,8 @@ div.csl-indent {
 <li>El experimento esta listo para ser utilizado localmente. Podemos hacerlo ejecutando <code>index.html</code></li>
 </ol>
 </div>
-<div id="como-simular-datos" class="section level3" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> Como simular datos</h3>
+<div id="como-simular-datos" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Como simular datos<a href="experimentos-reproducibles.html#como-simular-datos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>El sistema para simular participantes utiliza <a href="https://www.selenium.dev/">Selenium</a> dentro de un contenedor de <a href="https://www.docker.com/">Docker</a>. En Linux es trivial su uso, pero en Windows su configuracion puede ser más compleja.</p>
 <p>Puedes seguir los siguientes pasos, pero si no tienes una instalación funcional de Docker que utilice contenedores Linux, el sistema fallará. En ese caso, quedan las siguientes opciones:</p>
 <ul>
@@ -566,22 +565,22 @@ div.csl-indent {
 <ol start="2" style="list-style-type: decimal">
 <li>Descargamos el proyecto de RStudio jsPsychMonkeys:</li>
 </ol>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="experimentos-reproducibles.html#cb260-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMonkeys&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
-<span id="cb260-2"><a href="experimentos-reproducibles.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="experimentos-reproducibles.html#cb261-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMonkeys&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
+<span id="cb261-2"><a href="experimentos-reproducibles.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
 <hr />
 <ol start="3" style="list-style-type: decimal">
 <li>Abrimos <code>run.R</code> y seguimos las instrucciones.</li>
 </ol>
 </div>
-<div id="como-preparar-datos" class="section level3" number="5.1.3">
-<h3><span class="header-section-number">5.1.3</span> Como preparar datos</h3>
+<div id="como-preparar-datos" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Como preparar datos<a href="experimentos-reproducibles.html#como-preparar-datos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Cada tarea de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a> tendrá un script hermano en <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a> para automatizar la preparación de datos. Una vez tengamos nuestro protocolo listo, con una función de jsPsychMaker crearemos todo lo necesario para que la preparación de datos corra automáticamente.</p>
 <hr />
 <ol style="list-style-type: decimal">
 <li>Descargamos el proyecto de RStudio jsPsychHelper:</li>
 </ol>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="experimentos-reproducibles.html#cb261-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychHelper&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
-<span id="cb261-2"><a href="experimentos-reproducibles.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="experimentos-reproducibles.html#cb262-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychHelper&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
+<span id="cb262-2"><a href="experimentos-reproducibles.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Abrimos <code>run.R</code> y seguimos las instrucciones.</li>
 </ol>
