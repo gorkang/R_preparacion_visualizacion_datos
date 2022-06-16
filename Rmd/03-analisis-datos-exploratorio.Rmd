@@ -16,7 +16,6 @@ if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
 if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
 if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
 if (!require('ggridges')) install.packages('ggridges'); library('ggridges')
-if (!require('gtsummary')) install.packages('gtsummary'); library('gtsummary')
 if (!require('haven')) install.packages('haven'); library('haven')
 if (!require('inspectdf')) install.packages('inspectdf'); library('inspectdf')
 if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
@@ -424,63 +423,6 @@ d %>%
   
 ```
 
-
-## Tablas descriptivos
-
-https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html
-
-```{r tablas, echo=FALSE, fig.height=18}
-
-gapminder %>% 
-  select(-country) %>% 
-  gtsummary::tbl_summary() 
-
-gapminder %>% 
-  select(-country) %>% 
-  gtsummary::tbl_summary(by = continent)
-
-gapminder %>% 
-  select(-country) %>% 
-  gtsummary::tbl_summary(by = continent,
-                         statistic = list(all_continuous() ~ "{mean} ({sd})",
-                                          all_categorical() ~ "{n} / {N} ({p}%)"))
-  # add_p()
-
-```
-
-
-## Tablas estadística
-
-```{r tablas-estadistica, echo=TRUE, fig.height=18}
-
-# Transform variables
-DF_gapminder =
-  gapminder %>% 
-  mutate(gdpPercap_log = log(gdpPercap),
-         pop = pop / mean(pop))
-
-# Reference levels and contrast coding
-DF_gapminder <- within(DF_gapminder, continent <- relevel(continent, ref = "Africa"))
-contrasts(DF_gapminder$continent) = car::contr.Sum(levels(DF_gapminder$continent))
-      
-# Model
-model = lme4::lmer(lifeExp ~ gdpPercap_log + pop + year + continent + (1|country), DF_gapminder)
-R2 = performance::r2(model)
-
-# Table
-gtsummary::tbl_regression(model, intercept = TRUE) %>% 
-  add_global_p() %>%
-  bold_labels() %>% 
-  italicize_levels() %>% 
-  add_glance_source_note(include = c("nobs", "df.residual")) %>%
-  as_gt() %>%
-  gt::tab_source_note(gt::md(paste0("R2 conditional = ", round(R2$R2_conditional, 3),
-                                    ", R2 marginal = ", round(R2$R2_marginal, 3))))
-
-# Checks
-performance::check_model(model)
-
-```
 
 
 ## Bibliografía {.bibliografia -}

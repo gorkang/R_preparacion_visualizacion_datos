@@ -45,8 +45,8 @@ Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes qu
 
   list_of_packages = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
                        "gapminder", "ggplot2", "ggraph", "ggridges", "ggthemes", "gtsummary", "haven", "here", "hexbin", 
-                       "inspectdf", "janitor", "knitr", "parameters", "plotly", "purrr", "readODS",
-                       "readr", "readxl", "remotes", "renv", "rticles", "see", "sjPlot", "stargazer",
+                       "inspectdf", "janitor", "knitr", "lme4", "parameters", "performance", "plotly", "purrr", "readODS",
+                       "readr", "readxl", "remotes", "renv", "report", "rticles", "see", "sjPlot", "stargazer",
                        "tidyr", "usethis", "writexl")  
   new_packages <- list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
   if (length(new_packages)) install.packages(new_packages, dependencies = TRUE)
@@ -62,7 +62,7 @@ Otros paquetes que usaremos.
   # if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
   if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
   if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
-  if (!require('report')) remotes::install_github("easystats/report"); library('report')
+  # if (!require('report')) remotes::install_github("easystats/report"); library('report')
 
 ```
 

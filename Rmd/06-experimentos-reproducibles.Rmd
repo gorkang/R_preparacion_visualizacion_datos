@@ -9,9 +9,12 @@ En el CSCN usamos distintas tecnologías para desarrollar experimentos. Algunos 
 
 Algunos de nosotros hemos optado principalmente por [jsPsych](https://www.jspsych.org/) para experimentos conductuales por tratarse de una libreria javascript de código abierto, basada en tecnologías web standard, y que puede ser usada online y offline. Dado que en el CSCN diponemos de servidor propio, los costos habituales de hosting no se aplican.    
 
-En los últimos años, hemos empezado a trabajar en un conjunto de herramientas para crear experimentos usando la librería [jsPsych](https://www.jspsych.org/) con [jsPsychMaker](https://github.com/gorkang/jsPsychMaker), simular participantes con [jspsychMonkeys](https://github.com/gorkang/jsPsychMonkeys) y estandarizar y automatizar la preparación de datos con [jsPsychHelpeR](https://github.com/gorkang/jsPsychHelpeR).  
+En los últimos años, hemos empezado a trabajar en un conjunto de herramientas ([jsPsychR](https://gorkang.github.io/jsPsychR-manual/)) para crear experimentos usando la librería [jsPsych](https://www.jspsych.org/) con [jsPsychMaker](https://github.com/gorkang/jsPsychMaker), simular participantes con [jspsychMonkeys](https://github.com/gorkang/jsPsychMonkeys) y estandarizar y automatizar la preparación de datos con [jsPsychHelpeR](https://github.com/gorkang/jsPsychHelpeR).  
 
 Nuestro objetivo final es tener un gran número de tareas disponibles para ser usadas en el repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker). Cada una de estas tareas funcionará en [jspsychMonkeys](https://github.com/gorkang/jsPsychMonkeys) para crear participantes virtuales. Cada tarea tendrá un script hermano en [jsPsychHelpeR](https://github.com/gorkang/jsPsychHelpeR) para automatizar la preparación de datos.  
+
+Puedes consultar el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/) para más detalles.  
+
 
 
 ## Pipeline experimental abierto y reproducible
@@ -28,7 +31,11 @@ El output del sistema es estandarizado, lo que implica que los nombres de las va
 
 ### Como crear un protocolo experimental
 
-En la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker) tenemos un [listado exhaustivo de tareas](https://github.com/gorkang/jsPsychMaker/blob/main/canonical_protocol/canonical_protocol_details.csv) disponibles para ser usadas. 
+En el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/jsPsychMaker.html#available-tasks) puedes ver las tareas disponibles junto con una breve descripción de cada una de ellas.    
+
+Si quieres consultar los [scrips de las tareas](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks) puedes hacerlo en la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker).  
+
+
 
 
 1) Descargamos el proyecto de RStudio jsPsychMaker:  
@@ -43,7 +50,7 @@ usethis::use_course(url = "gorkang/jsPsychMaker", destdir = "~/Downloads/")
 
 2) En a la carpeta `canonical_protocols`:  
 
-- Editamos index.html para dejar en la variable `not_ordered_experiments` solo aquellas tareas que queremos conservar.  
+- Editamos `config.js` para indicar las tareas que queremos usar en la seccion `// ORDER OF TASKS`  
 
 3) El experimento esta listo para ser utilizado localmente. Podemos hacerlo ejecutando `index.html`  
 

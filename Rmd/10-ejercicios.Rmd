@@ -63,5 +63,5 @@ El proyecto tiene que correr en cualquier computador.
 
 #### Notas {.ejercicio -}
 
-(simulacion datos): El profesor os ayudara con esto y/o os compartira los datos
-(procesamiento datos): 
+(simulacion datos): El profesor os ayudara con esto y/o os compartira los datos  
+(procesamiento datos): Ver [el manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/QuickGuide.html#QuickGuidejsPsychHelpeR)  
