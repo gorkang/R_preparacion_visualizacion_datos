@@ -27,8 +27,6 @@ if (!require("waldo")) install.packages("waldo"); library("waldo")
 if (!require("writexl")) install.packages("writexl"); library("writexl")
 
 if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
-if (!require('FFTrees')) remotes::install_github("ndphillips/FFTrees"); library('FFTrees')
-if (!require('caret')) install.packages('caret'); library('caret')
 
 ```  
 
@@ -964,7 +962,7 @@ DF_C =
 ```
 
 
-## Combinar bases de datos
+## Combinar datos
 
 
 ### Bind rows or columns
@@ -1310,113 +1308,6 @@ plot2 = ggplot(df_plot, aes(as.factor(year), relative)) +
 cowplot::plot_grid(plot1, plot2, nrow = 2)
 
 ```
-
-## Más allá de la manipulación 
-
-
-### Fast and Frugal trees
-
-Hay un paquete fantástico de Nathaniel Phillips llamado [{FFTrees}](https://github.com/ndphillips/FFTrees). Este permite [crear, visualizar y evaluar fast-and-frugal decision trees](http://journal.sjdm.org/17/17217/jdm17217.pdf)  
-```{r mas-alla}
-
-DF_wide = read.csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
-  mutate(Anxious.Attachment = round(Anxious.Attachment, 2))
-
-
-median_social_adaptation = DF_wide %>% pull(Social.Adaptation) %>% median(., na.rm = TRUE)
-
-DF_split = DF_wide %>% 
-  mutate(high_social_adaptation = 
-           case_when(
-             Social.Adaptation >= median_social_adaptation ~ TRUE,
-             Social.Adaptation < median_social_adaptation ~ FALSE)) %>% 
-  select(-ID, -Social.Adaptation) %>% 
-  drop_na()
-    
-sa.fft <- FFTrees(formula = high_social_adaptation ~.,
-                     data = DF_split)
-
-# Plotear el arbol de decision
-plot(sa.fft,
-     main = "Social adaptation",
-     decision.labels = c("Low", "High"))
-
-# Describe el algoritmo
-sa.fft$inwords
-    
-```
-
-### Machine learning
-
-Con el paquete [{caret}](http://topepo.github.io/caret/) podemos usar alguno de los [238 distintos métodos](http://topepo.github.io/caret/available-models.html) de machine learning. 
-
-Por ejemplo, Backprop:  
-
-```{r caret}
-
-# ensure the results are repeatable
-set.seed(7)
-
-DF_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
-  janitor::clean_names() %>% as.data.frame()
-
-median_social_adaptation = DF_wide %>% pull(social_adaptation) %>% median(., na.rm = TRUE)
-
-
-DB_x = DF_wide %>% 
-  mutate(high_social_adaptation = 
-           as.factor(
-             case_when(
-               social_adaptation >= median_social_adaptation ~ "high",
-               social_adaptation < median_social_adaptation ~ "low"))) %>% 
-  select(-id, -social_adaptation) %>% 
-  drop_na() %>% 
-  select(high_social_adaptation, everything()) 
-
-
-# calculate correlation matrix
-correlationMatrix <- cor(DB_x[,2:ncol(DB_x)])
-# print(correlationMatrix)
-
-# find attributes that are highly corrected (ideally >0.75)
-highlyCorrelated <- findCorrelation(correlationMatrix, cutoff = 0.25)
-# print(highlyCorrelated)
-
-DB_final = DB_x %>% select(all_of(highlyCorrelated)) %>% select(high_social_adaptation, everything()) %>% as.data.frame()
-
-
-# prepare training scheme
-control <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
-# train the model
-model <- train(high_social_adaptation ~ ., data = DB_final, method = "lvq", preProcess = "scale", trControl = control)
-
-# estimate variable importance
-importance <- varImp(model, scale = FALSE)
-# print(importance)
-
-# plot importance
-plot(importance)
-
-
-# define the control using a random forest selection function
-control <- rfeControl(functions = rfFuncs, method = "cv", number = 10)
-
-# run the RFE algorithm
-results <- rfe(DB_final[,2:ncol(DB_final)], DB_final[,1], sizes = c(1:ncol(DB_final)), rfeControl = control)
-
-# summarize the results
-print(results)
-
-# list the chosen features
-predictors(results)
-
-# plot the results
-plot(results, type = c("g", "o"))
-
-```
-
-Caret ha sido desplazado por {[tidymodels](https://www.tidymodels.org/)}, un conjunto de paquetes que emplean la filosofía del {[tidyverse](https://www.tidyverse.org/)}.  
-
 
 
 ## Datasets interesantes  

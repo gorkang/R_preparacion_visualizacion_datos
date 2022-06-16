@@ -43,7 +43,7 @@ Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes qu
   if (!require('parallel')) install.packages('parallel')
   options(Ncpus = parallel::detectCores() - 2)
 
-  list_of_packages = c("afex", "caret", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
+  list_of_packages = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
                        "gapminder", "ggplot2", "ggraph", "ggridges", "ggthemes", "gtsummary", "haven", "here", "hexbin", 
                        "inspectdf", "janitor", "knitr", "parameters", "plotly", "purrr", "readODS",
                        "readr", "readxl", "remotes", "renv", "rticles", "see", "sjPlot", "stargazer",

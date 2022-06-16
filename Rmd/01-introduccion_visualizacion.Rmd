@@ -612,7 +612,7 @@ O que el tipo de línea dependa de una variable:
 ```
 
 
-### Geoms
+## Geoms
 
 Una de las cosas más difíciles cuando nos enfrentamos a nuevos datos es elegir el método más efectivo para visualizarlos. Hay varios recursos interesantes sobre [cómo elegir una gráfica](https://github.com/widged/data-for-good/wiki/Visualisation-::-Choosing-a-chart). En esta sección veremos distintos tipos de geometría, o `geoms_()`.  
 
@@ -631,7 +631,7 @@ Para una lista exhaustiva ver el [manual de ggplot2](https://ggplot2.tidyverse.o
 
 <BR> 
 
-#### geom_point y geom_jitter
+### geom_point y geom_jitter
 
 Si queremos un gráfico de dispersión o scatterplot, podemos usar el `geom_point()`  
 
@@ -648,7 +648,7 @@ En algunos casos, tenemos muchos puntos que se superponen. Si usamos `geom_jitte
 ```
 
 
-#### geom_smooth
+### geom_smooth
 
 Podemos usar líneas de tendencia con `geom_smooth()`. El `method` por defecto es [loess](https://en.wikipedia.org/wiki/Local_regression), pero podemos usar otras funciones (e.g. `geom_smooth(method = "lm")` para usar una regresión lineal).  
 
@@ -678,7 +678,7 @@ Podemos usar líneas de tendencia con `geom_smooth()`. El `method` por defecto e
 ```
 
 
-#### Ejercicios {.ejercicio -}
+### Ejercicios {.ejercicio -}
 
 Usando como base el plot de la sección [Shape](#shape):  
 
@@ -759,7 +759,7 @@ cowplot::plot_grid(plot1, plot2, plot3, plot4, plot5, plot6,
 
 <BR> 
 
-#### geom_boxplot y geom_violin
+### geom_boxplot y geom_violin
 
 Podemos crear diagramas de cajas (boxplots) con `geom_boxplot` o violines con `geom_violin` para visualizar como cambian los datos por grupo.  
 
@@ -781,7 +781,7 @@ Podemos crear diagramas de cajas (boxplots) con `geom_boxplot` o violines con `g
 ```
 
 
-#### geom_histogram y geom_bar {#histogramas}
+### geom_histogram y geom_bar {#histogramas}
 
 Podemos usar histogramas `geom_histogram()` con variables continuas.  
 
@@ -798,7 +798,7 @@ O si tenemos variables categóricas, `geom_bar()`.
 ```
 
 
-#### geom_density
+### geom_density
 
 Para visualizar distribuciones (cuando tenemos muchos datos), podemos usar `geom_density()`.  
 
@@ -811,7 +811,7 @@ Para visualizar distribuciones (cuando tenemos muchos datos), podemos usar `geom
 ```
 
 
-#### Ejercicio {.ejercicio -}
+### Ejercicio {.ejercicio -}
 
 Añadiendo un parámetro a la gráfica de arriba, podemos transformarla en las versiones de abajo. ¿Podrías hacerlo? (recuerda que poníendote encima de `geom_density()` y tecleando `F1` puedes ver la ayuda de la función).  
 
@@ -830,7 +830,7 @@ Añadiendo un parámetro a la gráfica de arriba, podemos transformarla en las v
 ```
 
 
-#### geom_density_ridges
+### geom_density_ridges
 
 Uno de mis geoms favoritos para comparar distribuciones es `geom_density_ridges`:   
 
@@ -851,7 +851,7 @@ Especialmente porque podemos incluir en el mismo gráfico información sobre dis
 
 
 
-#### Ejercicios {.ejercicio -}
+### Ejercicios {.ejercicio -}
 
 Usando como base el plot de la seccion [geom_histogram()](#histogramas):  
 
@@ -883,12 +883,12 @@ ggplot(diamonds) +
 
 <BR>  
 
-### Facets  
+## Facets  
 
 Cuando queremos separar en gráficos independientes distintas categorías dentro de nuestros datos, podemos usar facetas. Hay dos funciones para esto,  **facet_grid** y **facet_wrap**.  
 
 
-#### facet_grid
+### facet_grid
 
 `facet_grid(~ variable)` nos devuelve una matriz simétrica de gráficas.  
 
@@ -915,7 +915,7 @@ Cuando queremos separar en gráficos independientes distintas categorías dentro
 ```
 
 
-#### facet_wrap
+### facet_wrap
 
  `facet_wrap(~ variable)` nos devuelve tantas facetas como niveles de la variable, pudiendo definir el número de filas y columnas que queremos.  
 
@@ -940,16 +940,16 @@ Con la función `gghighlight()` podemos añadir una capa para facilitar la compa
 ```
 
 
-### Transformaciones estadísticas  
+## Transformaciones estadísticas  
 
 ggplot2 nos permite hacer algunas transformaciones estadísticas al crear los gráficos. Para más detalles, ver [r4ds](https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations).  
 
 
-#### stat_summary 
+### stat_summary 
 
 **Algunas funciones que podemos usar en los gráficos**  
 
-###### {.parameters -}  
+##### {.parameters -}  
 
 - **min()**: mínimo
 - **max()**: máximo
@@ -957,7 +957,7 @@ ggplot2 nos permite hacer algunas transformaciones estadísticas al crear los gr
 - **median()**: mediana
 - **sd()**: desviación estandar
 
-###### {-}  
+##### {-}  
 
 Podemos usar funciones simples de manera directa. En este caso, mostramos un punto con la mediana, y barras que muestran el rango completo de los datos:  
 
@@ -982,7 +982,7 @@ Si queremos usar funciones algo mas complejas, la sintaxis es algo diferente. En
 ```
 
 
-#### Promedios por grupo
+### Promedios por grupo
 
 Lo interesante es que podemos añadir estas transformaciones estadísticas como una capa más en los gráficos. Así que, a este gráfico inicial...  
 
@@ -1022,7 +1022,7 @@ ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
 
 
 
-#### Ejercicios {.ejercicio -}
+### Ejercicios {.ejercicio -}
 
 Cuando al plot **A** trato de añadirle líneas para cada `class`, me aparece algo como lo de **B**.  
 
@@ -1064,12 +1064,12 @@ Podrías crear este gráfico? Mostramos mediana ± sd para cada país, organizad
 ```
 <BR>
 
-### Personalización de gráficas
+## Personalización de gráficas
 
 Habitualmente, un vez hemos creado la gráfica, querremos personalizar varias cosas, como las escalas, colores, estilos, título,  etc.  
 
 
-#### Coordenadas
+### Coordenadas
 
 
 ```{r personalizacion-graficas-coord}
@@ -1092,7 +1092,7 @@ Habitualmente, un vez hemos creado la gráfica, querremos personalizar varias co
 
 
 
-#### Scales  
+### Scales  
 
 ```{r personalizacion-graficas-axis}
   
@@ -1195,7 +1195,7 @@ ggplot(gapminder, aes(year, lifeExp, linetype = continent, color = continent)) +
 ```
 
 
-#### Ejercicio {.ejercicio -}
+### Ejercicio {.ejercicio -}
 
 El plot del panel (A) tiene varios problemas (los años no son enteros o factores, los casos no se muestran con un separador de miles, la leyenda esta a la derecha ocupado un espacio precioso, etc.). Trata de resolverlos e intenta llegar al resultado que se ve en el panel (B). Usa el dataframe `table1` del paquete {tidyr}?  
 
@@ -1251,7 +1251,7 @@ table1_end = table1 %>% filter(year == max(.$year))
 ```
 
 
-#### Colors and fill scales
+### Colors and fill scales
 
 ```{r personalizacion-graficas-color-fill}
 
@@ -1282,7 +1282,7 @@ table1_end = table1 %>% filter(year == max(.$year))
 ```
 
 
-#### Combinando gráficas {#combinando-graficas}
+### Combinando gráficas {#combinando-graficas}
 
 Con {[cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html#:~:text=The%20cowplot%20package%20is%20a,or%20mix%20plots%20with%20images.)} podemos combinar gráficas de manera muy simple. Otro paquete muy interesante es {[patchwork](https://patchwork.data-imaginist.com/)}.  
 
@@ -1345,7 +1345,7 @@ cowplot::plot_grid(
 ```
 
 
-#### Usando estilos
+### Estilos
 
 Los estilos nos permiten personalizar los gráficos de manera muy sencilla, por ejemplo, usando {[ggtheme](https://ggplot2.tidyverse.org/reference/ggtheme.html)}. Podéis ver un tutorial [aquí](https://michaeltoth.me/you-need-to-start-branding-your-graphs-heres-how-with-ggplot.html).  
 
@@ -1387,7 +1387,7 @@ p +
 ```
 
 
-#### Ejercicios {.ejercicio -}
+### Ejercicios {.ejercicio -}
 
 Serías capaz de reproducir este gráfico, usando el dataframe `diamonds` y el `theme_economist`? 
 
@@ -1429,7 +1429,7 @@ ggplot(gapminder, aes(gdpPercap, continent, fill = continent, color = continent)
 ## Visualización interactiva
 
 
-#### Gráficas interactivas
+### Gráficas interactivas
 
 ```{r graficas-interactivas, fig.height=8, fig.width=8}
 
@@ -1444,7 +1444,7 @@ plotly::ggplotly(
 ```
 
 
-#### Animando gráficas
+### Animando gráficas
 
 ```{r animando-graficas, fig.height=4, fig.width=8, eval=FALSE}
 

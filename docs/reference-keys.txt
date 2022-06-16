@@ -33,7 +33,7 @@ coordenadas
 scales
 colors-and-fill-scales
 combinando-graficas
-usando-estilos
+estilos
 visualización-interactiva
 gráficas-interactivas
 animando-gráficas
@@ -62,7 +62,7 @@ long-to-wide
 para-que-sirve-tener-los-datos-en-formato-long
 separate-omit-ifelse-case_when-tipos-de-variables
 regular-expressions
-combinar-bases-de-datos
+combinar-datos
 bind-rows-or-columns
 joins
 mutating-joins
@@ -73,9 +73,6 @@ filtering-joins
 anti-join
 semi-join
 nesting-joins
-más-allá-de-la-manipulación
-fast-and-frugal-trees
-machine-learning
 datasets-interesantes
 análisis-de-datos-exploratorio
 visualizando-distribuciones
@@ -92,6 +89,8 @@ dos-variables-continuas
 ejercicio-covariación-2
 ejercicios-finales
 ejercicio-exploración-base-nueva
+tablas-descriptivos
+tablas-estadística
 trabajo-con-rmarkdown-para-reportes-reproducibles
 que-es-la-reproducibilidad
 proyectos-de-r-studio
