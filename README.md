@@ -14,31 +14,21 @@ Aportar herramientas básicas para trabajar de manera autónoma con R y RStudio 
 
 Al finalizar el curso deberíamos ser capaces de:  
 
-* Importar archivos de datos, transformar los datos, crear nuevas variables.
-* Realizar análisis de datos exploratorios, visualizar distribuciones y comparar grupos.
-* Generar reportes reproducibles con RMarkdown.
+* Importar archivos de datos, transformar los datos, crear nuevas variables  
+* Realizar análisis de datos exploratorios, visualizar distribuciones y comparar grupos  
+* Generar reportes reproducibles con RMarkdown  
+* Crear paradigmas experimentales y un pipeline completo para la preparación de datos con [jsPsychR](https://gorkang.github.io/jsPsychR-manual/index.html)  
+
 
 
 ## Como empezar
 
-Puedes lanzar el siguiente código desde la Consola de RStudio para descargar los materiales del curso:
-
-`if (!require('usethis')) install.packages('usethis'); library('usethis')`
-
-`usethis::use_course("gorkang/R_preparacion_visualizacion_datos")`  
-
-Sigue las instrucciones que aparecen en la Consola para tener un nuevo proyecto de RStudio con todos los materiales del curso. El codigo anterior creará una carpeta llamada `R_preparacion_visualizacion_datos-master`. Dentro de esa carpeta tendrás un archivo llamado `R_preparacion_visualizacion_datos.Rproj` que te permitirá abrir el proyecto de RStudio del workshop.  
-
-La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las mas importantes son:  
-
-- Carpeta `docs`: puedes abrir `docs/index.html` en tu navegador para ver el "libro" de este curso. Alternativamente, puedes consultar una [version online del libro](https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html).     
-- Carpeta `Rmd`: En esa carpeta esta el codigo fuente de los capitulos del libro  
-- Carpeta `data`: Cuando usemos archivos de datos, vendrán de aquí  
+Consulta las [instrucciones sobre como empezar en el libro online del workshop](https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html#como-empezar).  
 
 
 ### Whoooot?
 
-Si lo de arriba no tiene sentido:  
+Si las instrucciones del manual no tienen sentido:  
 
 1. Descargate este workshop (`Download ZIP`; ver abajo)
 2. Descomprime el ZIP  

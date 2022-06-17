@@ -6,7 +6,7 @@ Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además
 
 ### **(A)** Instalar R {.unnumbered}
 
-[R](https://www.r-project.org/), es un lenguaje de programación especializado en la computación estadística y visualización de datos. Es recomendable tener instalada [la última versión de R](http://dirichlet.mat.puc.cl/). Puedes usar uno de los enlaces siguientes:
+[R](https://www.r-project.org/), es un lenguaje de programación especializado en la computación estadística y visualización de datos. Es recomendable tener instalada la última versión de R. Puedes usar uno de los enlaces siguientes:
 
 -   **Windows**: [Descargar e instalar R para Windows](https://cran.r-project.org/bin/windows/base/)
 
@@ -24,19 +24,27 @@ RStudio es un entorno integrado de desarrollo (IDE) para la programación R.
 -   [Descargar e instalar RStudio](http://www.rstudio.com/download).
 -   Una vez descargado e instalado, **abre** RStudio. Deberías ver algo parecido a lo siguiente:
 
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="50%"}
 knitr::include_graphics(here::here("data", "images", "empezando.png"))
 ```
 
 - Si encuentras un error de instalación en ubuntu, tendrás que instalar RStudio manualmente:
-    + `sudo dpkg -i rstudio-1.4.1717-amd64.deb`
+    + `sudo dpkg -i rstudio-[VERSION_NUMBER]-amd64.deb`
     + `sudo apt --fix-broken install`
 
 ### **(C)** Paquetes para el workshop {.unnumbered}
 
-Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, ...), pero en este caso vamos a usar una versión casera.
+Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, ...), pero en este caso vamos a usar una versión casera.  
 
-**Copia y pega el código de abajo y ejecútalo [tecla ENTER] en la consola de RStudio.** El proceso de instalación requiere Internet y tardará un buen rato (**en algunos sistemas puede ser facilmente 1 hora**).
+Para instalar los paquetes del workshop, ejecuta el código de más abajo (sección sombreada en gris claro) en la consola de RStudio. El proceso de instalación requiere Internet y tardará un buen rato (_en algunos sistemas puede ser facilmente 1 hora_). Si tienes alguna dificultad en este punto, te recomiendo que veas algun [tutorial básico de R o RStudio](https://www.youtube.com/watch?v=BvKETZ6kr9Q).    
+
+En este gif puedes ver como hacerlo:  
+
+![](`r here::here("data", "videos", "rstudio_install_ALL.gif")`)
+
+
+**Copia y pega el código de abajo en la consola de RStudio y ejecútalo [tecla ENTER]**:  
 
 ```{r install_workshop_packages, message=FALSE, warning=FALSE}
 
@@ -54,15 +62,12 @@ Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes qu
 ```
 
 
-Otros paquetes que usaremos.
+Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber completado el paso previo.  
 
 ```{r install_workshop_packages2, message=FALSE, warning=FALSE}
 
-  if (!require('FFTrees')) remotes::install_github("ndphillips/FFTrees"); library('FFTrees')
-  # if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
   if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
   if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
-  # if (!require('report')) remotes::install_github("easystats/report"); library('report')
 
 ```
 
@@ -94,7 +99,7 @@ Las funciones, datos y documentación dentro de nuestros paquetes no podrán ser
 library(ggplot2)  
 ```
 
-En realidad las funciones también pueden ser llamadas usando su referencia absoluta `::`, sin necesidad de cargarlas antes. Por ejemplo: `dplyr::tibble(columna = 1)`. En general: `nombre_paquete::nombre_de_funcion(parametros)`).
+En realidad las funciones también pueden ser llamadas usando su referencia absoluta `::`, sin necesidad de cargarlas antes. Por ejemplo: `dplyr::tibble(columna = 1)`. En general: `nombre_paquete::nombre_de_funcion(parametros)`).  
 
 ### Todo en uno {-}
 
