@@ -556,8 +556,7 @@ div.csl-indent {
 </div>
 <div id="c-paquetes-para-el-workshop" class="section level3 unnumbered hasAnchor">
 <h3><strong>(C)</strong> Paquetes para el workshop<a href="preparando-sistema.html#c-paquetes-para-el-workshop" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, …), pero en este caso vamos a usar una versión casera.</p>
-<p>Para instalar los paquetes del workshop, ejecuta el código de más abajo (sección sombreada en gris claro) en la consola de RStudio. El proceso de instalación requiere Internet y tardará un buen rato (<em>en algunos sistemas puede ser facilmente 1 hora</em>). Si tienes alguna dificultad en este punto, te recomiendo que veas algun <a href="https://www.youtube.com/watch?v=BvKETZ6kr9Q">tutorial básico de R o RStudio</a>.</p>
+<p>Para instalar los paquetes del workshop, ejecuta el código de más abajo (sección sombreada en gris claro) en la consola de RStudio.</p>
 <p>En este gif puedes ver como hacerlo:</p>
 <p><img src="data/videos/rstudio_install_ALL.gif" /></p>
 <p><strong>Copia y pega el código de abajo en la consola de RStudio y ejecútalo [tecla ENTER]</strong>:</p>
@@ -574,6 +573,8 @@ div.csl-indent {
 <p>Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber completado el paso previo.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="preparando-sistema.html#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;papaja&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;papaja&#39;</span>)</span>
 <span id="cb3-2"><a href="preparando-sistema.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;regexplain&#39;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;gadenbuie/regexplain&quot;</span>); <span class="fu">library</span>(<span class="st">&#39;regexplain&#39;</span>)</span></code></pre></div>
+<p>Usaremos un buen numero de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (<em>en algunos sistemas puede ser facilmente 1 hora</em>). Si tienes alguna dificultad en este punto, te recomiendo que veas algun <a href="https://www.youtube.com/watch?v=BvKETZ6kr9Q">tutorial básico de R o RStudio</a>.</p>
+<p>Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, renv, …), pero dejaremos eso para más adelante.</p>
 <hr />
 </div>
 </div>

@@ -35,9 +35,7 @@ knitr::include_graphics(here::here("data", "images", "empezando.png"))
 
 ### **(C)** Paquetes para el workshop {.unnumbered}
 
-Usaremos un buen numero de paquetes en el workshop. Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, ...), pero en este caso vamos a usar una versión casera.  
-
-Para instalar los paquetes del workshop, ejecuta el código de más abajo (sección sombreada en gris claro) en la consola de RStudio. El proceso de instalación requiere Internet y tardará un buen rato (_en algunos sistemas puede ser facilmente 1 hora_). Si tienes alguna dificultad en este punto, te recomiendo que veas algun [tutorial básico de R o RStudio](https://www.youtube.com/watch?v=BvKETZ6kr9Q).    
+Para instalar los paquetes del workshop, ejecuta el código de más abajo (sección sombreada en gris claro) en la consola de RStudio.  
 
 En este gif puedes ver como hacerlo:  
 
@@ -70,6 +68,10 @@ Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber comp
   if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
 
 ```
+
+Usaremos un buen numero de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (_en algunos sistemas puede ser facilmente 1 hora_). Si tienes alguna dificultad en este punto, te recomiendo que veas algun [tutorial básico de R o RStudio](https://www.youtube.com/watch?v=BvKETZ6kr9Q).  
+
+Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, renv, ...), pero dejaremos eso para más adelante.  
 
 ------------------------------------------------------------------------
 
