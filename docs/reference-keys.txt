@@ -9,7 +9,8 @@ r-para-visualización-de-datos
 primeros-pasos---con-training-wheels
 aprendamos-con-garrick
 visualización-de-datos-con-ggplot2
-primeros-pasos
+componentes-de-una-gráfica
+mi-primera-gráfica-1-2-3
 aesthetic-mappings
 x-y
 color-alpha-size
@@ -25,6 +26,7 @@ geom_density_ridges
 facets
 facet_grid
 facet_wrap
+gghighlight-y-facet_wrap
 transformaciones-estadísticas
 stat_summary
 promedios-por-grupo
@@ -33,10 +35,12 @@ coordenadas
 scales
 colors-and-fill-scales
 combinando-graficas
+combinando-múltiples-gráficas
 estilos
 visualización-interactiva
-gráficas-interactivas
-animando-gráficas
+ggplots-interactivos-con-plotly
+surface-plots-con-plotly
+animando-gráficas-con-gganimate
 preparación-y-transformación-de-datos
 importar-y-exportar-datos
 importar-un-solo-archivo
@@ -82,8 +86,8 @@ visualizando-datasets-completos
 inspectdf
 covariación
 variable-categórica-y-continua
-ejercicio-3
-ejercicio-4
+ejercicio-5
+ejercicio-6
 dos-variables-categóricas
 dos-variables-continuas
 ejercicio-covariación-2
@@ -132,7 +136,7 @@ pipeline-experimental-abierto-y-reproducible
 como-crear-un-protocolo-experimental
 como-simular-datos
 como-preparar-datos
-ejercicios-6
+ejercicios-7
 ejercicio-1-1
 ejercicio-2-1
 ejercicio-final

@@ -33,9 +33,6 @@ if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
 if (!require('remotes')) install.packages('remotes'); library('remotes')
 if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
 
-  
-# if (!require('see')) install.packages("see"); library('see')
-# # if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
 
 ```
 

@@ -77,7 +77,6 @@ Si ya has completado los pasos indicados en **[preparando nuestro sistema](#prep
 ```{r como-empezar, eval=FALSE}
 
 if (!require('usethis')) install.packages('usethis'); library('usethis')
-
 usethis::use_course("gorkang/R_preparacion_visualizacion_datos")
 
 ```

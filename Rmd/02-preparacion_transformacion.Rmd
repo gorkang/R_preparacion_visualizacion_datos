@@ -15,6 +15,7 @@ En este capítulo vamos a aprender a importar y exportar todo tipo de archivos, 
 
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
 if (!require("DT")) install.packages("DT"); library("DT")
+if (!require("googlesheets4")) install.packages("googlesheets4"); library("googlesheets4")
 if (!require("janitor")) install.packages("janitor"); library("janitor")
 if (!require('readr')) install.packages('readr'); library('readr')
 if (!require("readxl")) install.packages("readxl"); library("readxl")
@@ -111,12 +112,17 @@ head(df_ODS)
 
 ##### Google sheets {-}
 
-Para poder leer una gsheet debemos antes crear un enlace para compartirla: `"Share" -> "Get shareable link"`  
+Para poder leer una gsheet debemos: 
+
+1) Crear un enlace para compartirla: `"Share" -> "Get shareable link"`   
+2) Extraemos el identificador de la google sheet:  
+  + De `https://docs.google.com/spreadsheets/d/1KFmnYnKhPCi3zRJpkZzZii8H-aGSTwr97lonoaz76AY/edit?usp=sharing`  
+  + Extraemos: `1KFmnYnKhPCi3zRJpkZzZii8H-aGSTwr97lonoaz76AY`  
 
 ```{r google-sheets, eval=FALSE}
 
 if (!require("googlesheets4")) install.packages("googlesheets4"); library("googlesheets4")
-name_of_sheet = "1EK5Be4r3eh4QkFjfLvutPYGNhI_MBa4TyIt3rtkJk2c"
+name_of_sheet = "1KFmnYnKhPCi3zRJpkZzZii8H-aGSTwr97lonoaz76AY"
 googlesheets4::read_sheet(name_of_sheet)   
 
 ```
@@ -179,9 +185,14 @@ Incluimos nombres de archivo en una columna:
 ```{r importar-multiples-archivos-nombres}
 
 name_of_folder = here::here("data/files/02-CSVs")
+
 files <- list.files(name_of_folder, full.names = TRUE) %>% 
+  # Esta es la linea clave
   set_names(basename(.))
+
+# Junto con el parámetro .id que se ve aquí
 full2 <- map_df(files, read_csv, .id = "file")
+
 full2
 
 ```
@@ -233,6 +244,7 @@ files <- list.files(name_of_folder, pattern = "csv", full.names = TRUE)
 
 # Leemos todos los archivos, combinandolos en un dataframe
 full <- map_df(files, read_csv)
+
 full
 
 ```
@@ -287,7 +299,7 @@ readODS::write_ods(DF_name, name_of_file)
 
 ## Preparación y transformación de datos
 
-Para la preparación y transformación de datos usaremos fundamentalmente `dplyr`. Hay otros paquetes [más rápidos](https://h2oai.github.io/db-benchmark/) como `data.table`. Si trabajas con datos gigantescos (millones de filas), sin duda notarás la diferencia. La desventaja es que la sintaxis es (habitualmente) algo más difícil.    
+Para la preparación y transformación de datos usaremos fundamentalmente `dplyr`. Hay otros paquetes [más rápidos](https://h2oai.github.io/db-benchmark/) como `data.table`. Si trabajas con datos gigantescos (millones de filas), sin duda notarás la diferencia. La desventaja es que la sintaxis es (habitualmente) algo menos intuitiva.      
 
 
 ### Tidy data
@@ -310,7 +322,7 @@ Por ejemplo. De manera muy sencilla y rápida podemos crear una nueva columna re
 
 ```{r tidy_vector-1}
 
-# Compute rate per 100,000
+# Computa ratio por 100,000
 table1 %>% 
   mutate(rate_per_100K = cases / population * 100000)
 
@@ -320,9 +332,14 @@ O contar el número de casos por valor de una variable.
 
 ```{r tidy_vector-2}
 
-# Compute cases per year
+# Computa casos para cada año
+table1 %>% 
+  count(year, cases)
+
+# La suma total de casos para cada año
 table1 %>% 
   count(year, wt = cases)
+
 
 ```
 
@@ -330,7 +347,7 @@ Y, como no, `ggplot` funciona con datos `tidy`, en formato long.
 
 ```{r tidy_vector-3}
 
-# Visualise changes over time
+# Visualizar cambios a lo largo del tiempo
 ggplot(table1, aes(as.factor(year), cases)) + 
   geom_line(aes(group = country), colour = "grey50") + 
   geom_point(aes(colour = country))
@@ -340,7 +357,9 @@ ggplot(table1, aes(as.factor(year), cases)) +
     
 ### Verbos dplyr
 
-Usaremos [{dplyr}](https://dplyr.tidyverse.org/), un paquete muy potente para la manipulación de datos. Su sintaxis, además, es bastante intuitiva (¡son verbos en inglés!). Usando pipes **%>%** (CONTROL + SHIFT + M) podemos enlazar operaciones de transformación de datos de manera muy sencilla (una vez nos aprendamos los verbos).  
+Usaremos [{dplyr}](https://dplyr.tidyverse.org/), un paquete muy potente para la manipulación de datos. Su sintaxis, además, es bastante intuitiva (¡son verbos en inglés!).   
+
+Usando pipes **%>%** (CONTROL + SHIFT + M) podemos enlazar operaciones de transformación de datos de manera muy sencilla (una vez nos aprendamos los verbos).  
 
 Podemos ver más detalle y ejemplos en la [Cheatsheet de dplyr](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf).   
 
@@ -429,14 +448,50 @@ DF_name %>% rename_at(all_of(oldnames), ~ newnames)
 ```
 
 
+##### Ejercicios - verbos dplyr simples {.ejercicio -} 
+
+- Cuenta los registros por año en el dataframe `mpg`  
+- Filtra los datos para quedarnos solo con los del año 1999
+- Renombra la variable displ para que se llame "engine displacement"
+  + Si aparece el error `Error: unexpected symbol in ...`, puedes ver la ayuda de la función ?make.names, o [este post](https://stackoverflow.com/questions/22842232/dplyr-nonstandard-column-names-white-space-punctuation-starts-with-numbers)
+- Ordena por consumo en ciudad `cty` y clase de vehículo `class`
+- Crea un data-frame que no contenga la variable `model`
+
+
+<details><summary>Soluciones: ![](data/images/hint.png)</summary><span style="color: orange;">
+- `mpg %>% count(year)`  
+- `mpg %>% filter(year == 1999)`  
+- `mpg %>% rename(engine displacement = displ)` #ERROR  
+- `mpg %>% rename(engine_displacement = displ)` #SOLUCION1  
+- `mpg %>% rename(`engine displacement` = displ)`#SOLUCION2  
+- `mpg %>% arrange(cty, class)`  
+- `mpg %>% select(-model)`
+
+</span></details>  
+
+```{r verbos-simples-ej, eval=FALSE, include=FALSE}
+mpg %>% count(year)
+
+mpg %>% filter(year == 1999)
+
+
+mpg %>% rename(engine displacement = displ) # ERROR
+mpg %>% rename(engine_displacement = displ) # Solucion 1
+mpg %>% rename(`engine displacement` = displ) # solucion 2
+
+mpg %>% arrange(cty, class)
+
+mpg %>% select(-model)
+
+
+```
+
 
 #### Selección avanzada con select_helpers()  
 
 El `everything()` que usamos dentro de `select()` más arriba es uno de los `select_helpers()` existentes. Estos permiten realizar operaciones de selección de variables de manera más sencilla.  
 
 ###### select_helpers() {.parameters -}   
-
-<!-- **tidyselect::select_helpers()**    -->
 
 * starts_with(): Empieza con un prefijo (e.g. starts_with("))  
 * ends_with(): Ends with a suffix   
@@ -843,7 +898,6 @@ El resultado final debería ser:
 Usando este dataframe:  
 
 ```{r regular-expressions}
-
 DF_regexp = DF_name %>% select(-...1); DF_regexp
 ```
 
@@ -917,16 +971,17 @@ df_wide_raw = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-
 ```{r ejercicios-dplyr-avanzado-4solucion, eval=FALSE, include=FALSE}
 
 # Estrategia A - wide
-DF_A = df_wide_raw %>% 
+DF_A = 
+  df_wide_raw %>% 
   select(ID, matches("WMAT_[0-9]{2}_cod")) %>% 
   transmute(ID = ID,
             WMAT_sum = rowSums(.[,2:27]))
 
 
-# Estrategia A2 - wide con nombres de variables
+# Estrategia A2 - wide con intervalos entre nombres de variables
 DF_A2 = 
   df_wide_raw %>% 
-  # select(ID, matches("WMAT_[0-9]{2}_cod")) %>%
+  # select(ID, matches("WMAT_[0-9]{2}_cod")) %>% # si no usamos esta linea, se suman también las WMAT_[09]_raw
   mutate(WMAT_sum = rowSums(.[,which(names(.) == "WMAT_01_cod"):which(names(.) == "WMAT_26_cod")])) %>% 
   select(ID, WMAT_sum)
 
@@ -956,7 +1011,8 @@ DF_C =
  waldo::compare(DF_A, DF_B)
  waldo::compare(DF_A, DF_C)
  waldo::compare(DF_B, DF_C)
- 
+
+ # Diferente si no se pre-seleccionan las variables "_cod" 
  waldo::compare(DF_A, DF_A2)
 
 ```
@@ -982,7 +1038,7 @@ DF1 %>%
 
 
 # Bind DFs añadiendo las *columnas* de DF2 a DF1
-  # bind_cols renombra automaticamente los nombres de las columnas para que no haya coincidencias
+  ## bind_cols renombra automaticamente los nombres de las columnas para que no haya coincidencias
 DF1 %>% 
   bind_cols(DF2) 
 
@@ -1184,7 +1240,7 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
     left_join(DF_results, by = "ID")
   
   # Comprobamos que son iguales
-  all.equal(DF_joined, DF_joined2)
+  waldo::compare(DF_joined, DF_joined2)
 
   
   
@@ -1208,7 +1264,7 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
     left_join(DF_results, by = "ID")
   
   # Comprobamos que son iguales
-  all.equal(DF_joined_discarded, DF_joined_discarded2)
+  waldo::compare(DF_joined_discarded, DF_joined_discarded2)
 
   
   
@@ -1236,7 +1292,7 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
   DF_all %>% 
     ggplot(aes(type, `Crystallized Intelligence`, color = type)) +
     geom_jitter(width = .2, height = 0) +
-    stat_summary(fun.y = mean,
+    stat_summary(fun = mean,
                  geom = "point",
                  size = 3, 
                  color = "black",

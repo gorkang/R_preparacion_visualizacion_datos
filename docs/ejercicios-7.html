@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>R para preparación y visualización de datos</title>
-  <meta name="description" content="R para preparación y visualización de datos" />
+  <title>Capítulo 7 Ejercicios | R para preparación y visualización de datos</title>
+  <meta name="description" content="Capítulo 7 Ejercicios | R para preparación y visualización de datos" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="R para preparación y visualización de datos" />
+  <meta property="og:title" content="Capítulo 7 Ejercicios | R para preparación y visualización de datos" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="gorkang/R_preparacion_visualizacion_datos" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R para preparación y visualización de datos" />
+  <meta name="twitter:title" content="Capítulo 7 Ejercicios | R para preparación y visualización de datos" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preparando-sistema.html"/>
+<link rel="prev" href="experimentos-reproducibles.html"/>
+<link rel="next" href="paquetes-usados.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -535,57 +535,70 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">R para preparación y visualización de datos</h1>
-<h2 class="subtitle"><em><a href="https://www.uai.cl/doctorado/doctorado-en-neurociencia-social-y-cognicion-2/">Doctorado en Neurociencia Social y Cognición</a>, <a href="https://www.uai.cl/">UAI</a></em></h2>
-<p class="author"><em>Gorka Navarrete <a href="http://orcid.org/0000-0001-7678-8656"><img src="data/images/24px-ORCID_iD.svg.png" /></a> <a href="https://twitter.com/gorkang"><img src="data/images/twitter_small.png" /></a></em></p>
-</div>
-<div id="introducción" class="section level1 unnumbered hasAnchor">
-<h1>Introducción<a href="index.html#introducción" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>El objetivo de este seminario es aprender a usar <a href="https://www.r-project.org/">R</a> para preparar y visualizar datos, además de generar reportes reproducibles. Está pensado para alumnos de postgrado con conocimientos básicos de programación.</p>
-<p>A lo largo del seminario aprenderemos a usar <a href="https://gorkang.github.io/jsPsychR-manual/index.html">jsPsychR</a>, un conjunto de herramientas creado en el <a href="cscn.uai.cl">CSCN</a> para ayudar a crear paradigmas experimentales con <a href="https://www.jspsych.org/">jsPsych</a>, simular participantes, y estandarizar el proceso de preparación y análisis de datos.</p>
-<p><a href="https://www.r-project.org/">R</a> es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.</p>
-<div id="objetivos" class="section level2 unnumbered hasAnchor">
-<h2>Objetivos<a href="index.html#objetivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Dar las herramientas básicas a los alumnos para que puedan trabajar de manera autónoma con R y RStudio para el proceso de importación, transformación, visualización y reporte de datos.</p>
-<p>Al finalizar el curso deberíamos ser capaces de:</p>
+<div id="ejercicios-7" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Capítulo 7</span> Ejercicios<a href="ejercicios-7.html#ejercicios-7" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="ejercicio-1-1" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Ejercicio 1<a href="ejercicios-7.html#ejercicio-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Crea un script en el que hagas lo siguiente:</p>
 <ul>
-<li>Importar archivos de datos, transformar los datos, crear nuevas variables.</li>
-<li>Realizar análisis de datos exploratorios, visualizar distribuciones y comparar grupos.</li>
-<li>Generar reportes reproducibles con RMarkdown.</li>
-<li>Crear paradigmas experimentales y un pipeline completo para la preparación de datos con <a href="https://gorkang.github.io/jsPsychR-manual/index.html">jsPsychR</a>.</li>
+<li>Cargar librerias necesarias<br />
+</li>
+<li>Importar datos<br />
+</li>
+<li>Preparar datos<br />
+</li>
+<li>Crear gráfica<br />
+</li>
+<li>Crear tabla</li>
 </ul>
-</div>
-<div id="como-empezar" class="section level2 unnumbered hasAnchor">
-<h2>Como empezar<a href="index.html#como-empezar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Si ya has completado los pasos indicados en <strong><a href="preparando-sistema.html#preparando-sistema">preparando nuestro sistema</a></strong>, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&#39;usethis&#39;</span>)) <span class="fu">install.packages</span>(<span class="st">&#39;usethis&#39;</span>); <span class="fu">library</span>(<span class="st">&#39;usethis&#39;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="st">&quot;gorkang/R_preparacion_visualizacion_datos&quot;</span>)</span></code></pre></div>
-<p>Sigue las instrucciones que aparecen en la Consola para tener un nuevo proyecto de RStudio con todos los materiales del curso. El código anterior creará una carpeta llamada <code>R_preparacion_visualizacion_datos-master</code>. Dentro de esa carpeta tendrás un archivo llamado <code>R_preparacion_visualizacion_datos.Rproj</code> que te permitirá abrir el proyecto de RStudio del workshop.</p>
-<p>La carpeta <code>R_preparacion_visualizacion_datos-master</code> contiene varias cosas. Las mas importantes son:</p>
+<p>Tendras que mostrar como corre el script con una sesion limpia de RStudio (CONTROL + SHIFT + F10)</p>
+<div id="notas" class="section level4 ejercicio unnumbered hasAnchor">
+<h4>Notas<a href="ejercicios-7.html#notas" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>(importar datos): Los datos deberían ser, idealmente, de un proyecto en el que estés trabajando. Si no tienes datos disponibles, puedes encontrar bases de datos abiertas de varias maneras:</p>
 <ul>
-<li>Carpeta <code>docs</code>: puedes abrir <code>docs/index.html</code> en tu navegador para ver el “libro” de este curso. Alternativamente, puedes consultar una <a href="https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html">version online del libro</a>.<br />
-</li>
-<li>Carpeta <code>Rmd</code>: En esa carpeta esta el código fuente de los capítulos del libro<br />
-</li>
-<li>Carpeta <code>data</code>: Cuando usemos archivos de datos, vendrán de aquí</li>
+<li>Tidytuesday: <a href="https://github.com/rfordatascience/tidytuesday" class="uri">https://github.com/rfordatascience/tidytuesday</a></li>
+<li>Buscando en google scholar papers que comparten sus datos: <a href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=data+available+%22osf.io%22+psychology&amp;btnG=" class="uri">https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=data+available+%22osf.io%22+psychology&amp;btnG=</a></li>
+<li>Buscando directamente en Open Science Foundation: <a href="https://osf.io/" class="uri">https://osf.io/</a></li>
 </ul>
-<details>
-<summary>
-En ocasiones encontraras una bombilla como esta: <img src="data/images/hint.png" /> Si haces click sobre ella aparecerá una pista sobre como resolver el ejercicio.
-</summary>
-<span style="color: orange;">¡No hagas click en mi sin antes haber intentado resolver el ejercicio sin ayuda!</span>
-</details>
-<hr />
+<p>(preparación de datos): Algunos ejemplos de preparación de datos: renombrar variables, filtrar, computar nuevas variables, combinar bases…</p>
+<p>(gráfica): Algunos ejemplos de gráficas: distribución de variable/s, relación entre variables, …</p>
+<p>(tabla): Algunos ejemplos de tablas: promedios por condición, media, mediana, max y min para algunas variables claves…</p>
 </div>
-<div id="bibliografía" class="section level2 bibliografia unnumbered hasAnchor">
-<h2>Bibliografía<a href="index.html#bibliografía" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Bryan, J., &amp; Hester, J. What They Forgot to Teach You About R. <a href="https://whattheyforgot.org/" class="uri">https://whattheyforgot.org/</a></p>
-<p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc. <a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></p>
-<p>Wickham, H. (2014). Advanced r. Chapman and Hall/CRC. <a href="https://adv-r.hadley.nz/" class="uri">https://adv-r.hadley.nz/</a></p>
-<p>Xie, Y., Allaire, J. J., &amp; Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. <a href="https://bookdown.org/yihui/rmarkdown/" class="uri">https://bookdown.org/yihui/rmarkdown/</a></p>
-<p>Yihui Xie (2018). bookdown: Authoring Books and Technical Documents with R Markdown <a href="https://bookdown.org/yihui/bookdown/markdown-syntax.html" class="uri">https://bookdown.org/yihui/bookdown/markdown-syntax.html</a></p>
+</div>
+<div id="ejercicio-2-1" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Ejercicio 2<a href="ejercicios-7.html#ejercicio-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Diseña un <strong>sencillo</strong> experimento:</p>
+<ul>
+<li>Debes usar algunas de las escalas/tareas que aparecen en: <a href="https://github.com/gorkang/jsPsychMaker" class="uri">https://github.com/gorkang/jsPsychMaker</a> (ver carpeta canonical_protocol, archivo canonical_protocol_details.csv)</li>
+<li>Además, debes diseñar una nueva tarea <strong>muy sencilla</strong> o adaptar una nueva escala</li>
+<li>La duración total del “experimento” no deberia superar los 5 minutos</li>
+</ul>
+<p>Tendrás que hacer una breve presentación contándonos el diseño experimental.</p>
+<div id="notas-1" class="section level4 ejercicio unnumbered hasAnchor">
+<h4>Notas<a href="ejercicios-7.html#notas-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>(tareas jsPsychMaker): Usa un máximo de 2 tareas<br />
+(tarea nueva): Puedes diseñar una tarea con una sola pregunta para dos condiciones experimentales, o adaptar un cuestionario breve ya existente (que no tengamos en jsPsychMaker).</p>
+</div>
+</div>
+<div id="ejercicio-final" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Ejercicio FINAL<a href="ejercicios-7.html#ejercicio-final" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Simularemos datos para tu experimento con jsPsychMonkeys. A continuación:</p>
+<ul>
+<li>Crearemos un proyecto de jsPsychHelper</li>
+<li>Procesaremos los datos</li>
+<li>Crearemos un reporte en Rmd donde incluiremos:
+<ul>
+<li>Tabla/s con descriptivos</li>
+<li>Gráfico/s con resultado</li>
+</ul></li>
+</ul>
+<p>El proyecto tiene que correr en cualquier computador.</p>
+<div id="notas-2" class="section level4 ejercicio unnumbered hasAnchor">
+<h4>Notas<a href="ejercicios-7.html#notas-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>(simulacion datos): El profesor os ayudara con esto y/o os compartira los datos<br />
+(procesamiento datos): Ver <a href="https://gorkang.github.io/jsPsychR-manual/QuickGuide.html#QuickGuidejsPsychHelpeR">el manual de jsPsychR</a></p>
 
+</div>
 </div>
 </div>
             </section>
@@ -593,8 +606,8 @@ En ocasiones encontraras una bombilla como esta: <img src="data/images/hint.png"
           </div>
         </div>
       </div>
-
-<a href="preparando-sistema.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="experimentos-reproducibles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="paquetes-usados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

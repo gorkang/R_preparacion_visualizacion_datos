@@ -178,6 +178,9 @@ DF %>%
 
 ```
 
+---  
+
+
 Es curioso que la desviación estandard sea mayor en el grupo con menos error promedio... Visualicemos las respuestas de todos los participantes, junto con la distribución de los datos.  
 
 ```{r visualizacion-importante-04, echo=FALSE}
@@ -221,7 +224,7 @@ cowplot::plot_grid(plot_inicial, plot_final, labels = c("Antes", "Después"))
 
 <div style= "float:left;position: relative; margin:0px 30px 0px 0px;">![](data/images/R_logo.png)</div>
 
-R es [uno de los programas para data science mas populares](http://r4stats.com/articles/popularity/), especialmente usado en la academia. El numero de paquetes que ofrecen funcionalidades de todo tipo no ha dejado de crecer. En 2021 el numero de paquetes en [R-cran](https://cran.r-project.org/web/packages/index.html) ha superado los 19,000 ([ver este buscador de paquetes](https://mran.microsoft.com/packages)), y el ritmo de crecimiento nos acerca a la singularidad... ;)  
+R es [uno de los programas para data science mas populares](http://r4stats.com/articles/popularity/), especialmente usado en la academia. El numero de paquetes que ofrecen funcionalidades de todo tipo no ha dejado de crecer. En 2022 el numero de paquetes en [R-cran](https://cran.r-project.org/web/packages/index.html) ha superado los 20,000 ([ver este buscador de paquetes](https://mran.microsoft.com/packages)), y el ritmo de crecimiento nos acerca a la singularidad... ;)  
 
 <BR>  
 
@@ -233,7 +236,9 @@ R es [uno de los programas para data science mas populares](http://r4stats.com/a
 
 <BR> 
 
-Además de lo anterior, R es un programa de código abierto (algo esencial para poder hacer ciencia reproducible), con una [comunidad de usuarios](https://community.rstudio.com/) muy acogedora, y con un importante foco en la [inclusividad](https://qz.com/work/1661486/r-ladies-made-data-science-inclusive/). La importancia de la comunidad es difícil de apreciar. Por ejemplo, es relativamente habitual que uno abra un issue en Github pidiendo una nueva característica en un paquete, y que los creadores la implementen (e.g. [correlation](https://github.com/easystats/correlation/issues/145), [gtsummary](https://github.com/ddsjoberg/gtsummary/issues/677), [rorcid](https://github.com/ropensci/rorcid/issues/44)), que uno reporte un error y lo corrijan (e.g. [sjPlot](https://github.com/strengejacke/sjPlot/issues/725), [gtsummary](https://github.com/ddsjoberg/gtsummary/issues/686)), recibir correcciones y mejoras en tus repositorios (e.g. [html2latex](https://github.com/gorkang/html2latex/pull/1), [2019-Chile](https://github.com/gorkang/2019-Chile/pull/1)), o poder contribuir a repositorios de otros (e.g. [jsPsych](https://github.com/jspsych/jsPsych/pull/1212), [gtsummary](https://github.com/ddsjoberg/gtsummary/pull/683)).  
+Además de lo anterior, R es un programa de [código abierto](https://en.wikipedia.org/wiki/Open_source) (algo esencial para poder hacer ciencia reproducible), con una [comunidad de usuarios](https://community.rstudio.com/) muy acogedora, y con un importante foco en la [inclusividad](https://qz.com/work/1661486/r-ladies-made-data-science-inclusive/).  
+
+La importancia de la comunidad es difícil de apreciar. Por ejemplo, es relativamente habitual que uno abra un issue en Github pidiendo una nueva característica en un paquete, y que los creadores la implementen (e.g. [correlation](https://github.com/easystats/correlation/issues/145), [gtsummary](https://github.com/ddsjoberg/gtsummary/issues/677), [rorcid](https://github.com/ropensci/rorcid/issues/44)), que uno reporte un error y lo corrijan (e.g. [sjPlot](https://github.com/strengejacke/sjPlot/issues/725), [gtsummary](https://github.com/ddsjoberg/gtsummary/issues/686)), recibir correcciones y mejoras en tus repositorios (e.g. [html2latex](https://github.com/gorkang/html2latex/pull/1), [2019-Chile](https://github.com/gorkang/2019-Chile/pull/1)), o poder contribuir a repositorios de otros (e.g. [jsPsych](https://github.com/jspsych/jsPsych/pull/1212), [gtsummary](https://github.com/ddsjoberg/gtsummary/pull/683)).  
 
 Sus funciones de visualización son muy potentes (ver la [r-graph-gallery](https://www.r-graph-gallery.com/) para algunos ejemplos), siendo usadas como herramienta principal en medios como la [BBC](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535).  
 
@@ -252,7 +257,11 @@ No menos importante, hay una gran cantidad de cursos, tutoriales, presentaciones
 
 <BR>    
 
-Con R puedes recoger datos interactivamente con [shiny](https://shiny.rstudio.com/), preparar datos (o extraerlos de paginas web con [rvest](https://github.com/tidyverse/rvest) o [RSelenium](https://github.com/ropensci/RSelenium)), visualizar datos estáticos con [ggplot](https://ggplot2.tidyverse.org/), animarlos con [gganimate](https://github.com/thomasp85/gganimate), visualizarlos con interactivamente con [plotly](https://github.com/ropensci/plotly/) o [shiny](https://shiny.rstudio.com/). Puedes también analizar los datos con todas las técnicas imaginables, desde anovas con [afex](https://github.com/singmann/afex) a modelos mixtos con [lmer](https://github.com/lme4/lme4) y/o [afex](https://github.com/singmann/afex), pasando por meta-análisis con [metafor](http://www.metafor-project.org/doku.php), SEM, Path analysis, mediación, con [lavaan](http://lavaan.ugent.be/tutorial/sem.html), análisis Bayesianos con [brms](https://github.com/paul-buerkner/brms) o [bayesfactor](http://bayesfactor.blogspot.com/), y un larguísimo etc. Puedes llevar tus visualizaciones y análisis a reportes automáticos en múltiples formatos (pdf, html, docx) con [Rmarkdown](https://rmarkdown.rstudio.com/), crear libros como este con [bookdown](https://bookdown.org/), páginas web con [blogdown](https://bookdown.org/yihui/blogdown/) o [distill](https://rstudio.github.io/distill/), e incluso papers completamente reproducibles (preparación y análisis de datos) en formato APA con [papaja](https://github.com/crsh/papaja).  
+Para ver una compilación de todos los libros disponibles: [Big Book of R](https://www.bigbookofr.com/index.html)  
+
+<BR>    
+
+Con R puedes recoger datos interactivamente con [shiny](https://shiny.rstudio.com/), preparar datos (o extraerlos de paginas web con [rvest](https://github.com/tidyverse/rvest) o [RSelenium](https://github.com/ropensci/RSelenium)), visualizar datos estáticos con [ggplot](https://ggplot2.tidyverse.org/), animarlos con [gganimate](https://github.com/thomasp85/gganimate), visualizarlos con interactivamente con [plotly](https://github.com/ropensci/plotly/) o [shiny](https://shiny.rstudio.com/). Puedes también analizar los datos con todas las técnicas imaginables, desde anovas con [afex](https://github.com/singmann/afex) a modelos mixtos con [lmer](https://github.com/lme4/lme4) y/o [afex](https://github.com/singmann/afex), pasando por meta-análisis con [metafor](http://www.metafor-project.org/doku.php), SEM, Path analysis, mediación, con [lavaan](http://lavaan.ugent.be/tutorial/sem.html), análisis Bayesianos con [brms](https://github.com/paul-buerkner/brms) o [bayesfactor](http://bayesfactor.blogspot.com/), y un larguísimo etc. Puedes llevar tus visualizaciones y análisis a reportes automáticos en múltiples formatos (pdf, html, docx) con [Rmarkdown](https://rmarkdown.rstudio.com/), o [quarto](https://quarto.org/), crear libros como este con [bookdown](https://bookdown.org/), páginas web con [blogdown](https://bookdown.org/yihui/blogdown/) o [distill](https://rstudio.github.io/distill/), e incluso papers completamente reproducibles (preparación y análisis de datos) en formato APA con [papaja](https://github.com/crsh/papaja).  
 
 <BR>   
 
@@ -269,10 +278,14 @@ El [tidyverse](https://www.tidyverse.org/) es un conjunto de paquetes que nos pe
 
 #### Tidyverse vs Base R
 
-Muchas de las funciones que existen en el Tidyverse tienen un [equivalente en base-R](https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html) (la instalación por defecto de R). El Tidyverse tiene ventajas y desventajas. La ventaja fundamental es que el código resulta (habitualmente) más fácil de leer, los nombres de las funciones son mas intuitivos, y las maneras de hacer las cosas tienen a ser consistentes. La desventaja fundamental es que [incrementamos el numero de dependencias](http://www.tinyverse.org/) (paquetes) de nuestro código.  
+Muchas de las funciones que existen en el Tidyverse tienen un [equivalente en base-R](https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html) (la instalación por defecto de R). El Tidyverse tiene ventajas y desventajas. La ventaja fundamental es que el código resulta (habitualmente) más fácil de leer, los nombres de las funciones son más intuitivos, y la forma de hacer las cosas tiene a ser consistente. La desventaja fundamental es que [incrementamos el numero de dependencias](http://www.tinyverse.org/) (paquetes) de nuestro código.  
 
 
-Veamos un ejemplo extraído de [aqui](https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html). La misma operación con base-R o con tidyverse:    
+Veamos un ejemplo extraído de [aquí](https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html).  
+
+<BR>  
+
+La misma operación con base-R o con tidyverse:    
 
 *Filter rows with conditions evaluated within groups: iris flowers with maximum “Petal.Width” for each “Species”*  
 
@@ -318,13 +331,13 @@ Y otros recursos que resultan muy útiles:
 
 * [Comunidad de usuarios de Rstudio](https://community.rstudio.com/)  
 
-* [Twiter!](https://twitter.com/home) Por ejemplo:  
+* [Twitter!](https://twitter.com/home) Por ejemplo:  
     + [![](`r here::here('data/images', 'twitter_small.png')`) \@thomas_mock](https://twitter.com/thomas_mock) (#TidyTuesday)  
     + [![](`r here::here('data/images', 'twitter_small.png')`) \@dataandme](https://twitter.com/dataandme)  
     + [![](`r here::here('data/images', 'twitter_small.png')`) \@rivaquiroga](https://twitter.com/rivaquiroga)  
     + [![](`r here::here('data/images', 'twitter_small.png')`) \@RLadiesSantiago](https://twitter.com/RLadiesSantiago)  
     
-
+  
 * Webs como [R bloggers](https://www.r-bloggers.com/)  
 
 
@@ -369,7 +382,7 @@ La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquiss
 ## Visualización de datos con ggplot2 
 
 
-### Primeros pasos
+### Componentes de una gráfica
 
 En esta sección vamos a ver algunos de los componentes que usaremos cuando visualicemos datos. Muchos de los ejemplos que usaremos vienen de [R for data science](https://r4ds.had.co.nz/data-visualisation.html).  
 
@@ -380,15 +393,25 @@ Los ingredientes esenciales de una gráfica son:
 
 * **Aesthetic mappings** (aes): Variables, colores, rellenos, formas, ...
 * **Geoms** (geom_): puntos, líneas, boxplots, ...
-* **Facets** (facet_): facet_wrap() y facet_grid()
-* **Transformaciones estadísticas**: stat_summary, ..prop.., ...
+* **Facets** (facet_): paneles con diferentes gráficos para cada nivel de una variable categórica, ...
+* **Transformaciones estadísticas**: calcular promedios, barras de error, ...
 
 ![SOURCE: https://skillgaze.com/2017/10/31/understanding-different-visualization-layers-of-ggplot/](`r here::here("data", "images", "visualization-layers-of-ggplot.png")`)  
 
 ---  
 
+### Mi primera gráfica 1-2-3
 
-En ggplot, después de indicar los datos y coordenadas (e.g. `ggplot(data = mpg, aes(x = displ, y = hwy))`), podemos sumar uno o varios `geoms` con una lógica de capas superpuestas, por ejemplo ` + geom_point()`:
+Para crear una gráfica con ggplot, tenemos que indicar donde están nuestros datos, que mostraremos en el eje `x` e `y`, además de que geometrias queremos (`geoms`).  Usaremos `+` para sumar instrucciones, con una lógica de capas superpuestas.  
+
+Por ejemplo:  
+
+1) Indicamos los datos y coordenadas: `ggplot(data = mpg, aes(x = displ, y = hwy))`  
+
+2) Añadimos el `geom` de puntos para mostrar la relación entre x e y: ` + geom_point()`  
+
+3) Añadimos un segundo `geom` para trazar  una línea de tendencia: `+ geom_smooth()`  
+
 
 ```{r geoms-example-01, echo=FALSE}
 
@@ -440,7 +463,19 @@ En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el co
 
 #### x-y
 
-Usando los datos de gapminder, visualizamos la relación entre gdpPercap (eje x), y lifeExp (eje y).  
+Algo esencial es decirle a ggplot que queremos que aparezca en el eje `x` y en el eje `y` de nuestra gráfica.  
+
+Empezaremos usando los datos de gapminder. A ver que variables tenemos en el data-frame `gapminder`:   
+
+
+```{r datos-gapminder}
+
+gapminder
+
+```
+
+
+Visualizamos la relación entre gdpPercap (eje x), y lifeExp (eje y):    
 
 ```{r aes}
 ggplot(data = gapminder, 
@@ -448,7 +483,9 @@ ggplot(data = gapminder,
     geom_point()
 ```
 
-Si respetamos el orden, podemos simplificar nuestro código, evitando el `data =` y `mapping =`. En este caso, vemos de nuevo lifeExp y gdpPercap, invirtiendo los ejes.  
+Si respetamos el orden de las variables, podemos simplificar nuestro código, evitando el `data =` y `mapping =`.   
+
+Por ejemplo, podemos ver de nuevo la relación entre lifeExp y gdpPercap, invirtiendo los ejes.  
 
 ```{r aes2}
 
@@ -471,10 +508,16 @@ ggplot(gapminder, aes(gdpPercap, pop)) +
 
 #### Color, alpha, size
 
-* Para elegir paletas de colores: [colorbrewer](http://colorbrewer2.org)  
+Para asignar colores podemos usar nombres de colores en inglés, o algo llamado código HEX:  
 
-* [Codigo HEX de colores](https://www.rapidtables.com/web/color/RGB_Color.html#color-picker)  
+* Escribe `colors()` en la Consola de RStudio  
 
+* [Ver el código HEX de los colores](https://www.rapidtables.com/web/color/RGB_Color.html#color-picker)
+
+---  
+
+
+Empecemos a cambiar parámetros de nuestro gráfico inicial:  
 
 ```{r color}
 
@@ -490,34 +533,17 @@ ggplot(gapminder, aes(gdpPercap, pop)) +
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + 
     geom_point()
   
-  # Color en función de la variable 'continent' + size
+  # Color en función de la variable 'continent'
+  # Cambiamos el tamaño de los puntos a 2
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent, size = 2)) + 
     geom_point()
   
-  # Color en función de la variable 'continent' + size + alpha
+  # Color en función de la variable 'continent'
+  # Cambiamos el tamaño de los puntos a 2
+  # Añadimos transparencia usando el parámetro 'alpha'
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent, size = 2, alpha = .1)) + 
     geom_point()
   
-```
-
-Imagina que queremos asignar colores manualmente. 
-
-```{r color-01, eval=FALSE}
-
-  ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
-    geom_point(color = c("red", "grey", "green", "purple", "black")) 
-  # Error: Aesthetics must be either length 1 or the same as the data (1704): colour
-
-```
-
-Tenemos que indicar que el color depende de `continent`, y después usar `scale_color_manual()`  
-
-```{r color-01b}
-
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + 
-    geom_point() +
-    scale_color_manual(values = c("red", "grey", "green", "purple", "black"))
-
 ```
 
 
@@ -650,7 +676,9 @@ En algunos casos, tenemos muchos puntos que se superponen. Si usamos `geom_jitte
 
 ### geom_smooth
 
-Podemos usar líneas de tendencia con `geom_smooth()`. El `method` por defecto es [loess](https://en.wikipedia.org/wiki/Local_regression), pero podemos usar otras funciones (e.g. `geom_smooth(method = "lm")` para usar una regresión lineal).  
+Podemos usar líneas de tendencia con `geom_smooth()`. El `method` por defecto es [loess](https://en.wikipedia.org/wiki/Local_regression), pero podemos usar otros métodos (e.g. `geom_smooth(method = "lm")` para usar una regresión lineal).  
+
+Recuerda que las funciones que usamos (todo lo que contiene `()` e.g. `geom_smooth()`) tienen parámetros, que son instrucciones addicionales que nos permiten modificar como se comportan. Para ver que opciones tenemos, podemos ver la ayuda de las funciones : `?geom_smooth()`, o poner el cursor encima y presionar F1 (ayuda).  
 
 ```{r geom-smooth}
   
@@ -682,10 +710,15 @@ Podemos usar líneas de tendencia con `geom_smooth()`. El `method` por defecto e
 
 Usando como base el plot de la sección [Shape](#shape):  
 
-- Colorear los puntos por continente
-- Mostrar una línea de tendencia por continente (sin el intervalo de confianza)
-- Que el tipo de línea cambie por continente
-- Añadir transparencia para que las líneas destaquen
+```
+  ggplot(gapminder, aes(gdpPercap, lifeExp, shape = continent)) + 
+    geom_point()
+```
+
+- Colorea los puntos por continente
+- Muestra una línea de tendencia por continente (sin el intervalo de confianza)
+- Haz que el tipo de línea cambie por continente
+- Añade transparencia a los puntos para que las líneas destaquen
 
 
 ```{r ejercicio_smooth, echo=FALSE}
@@ -698,7 +731,7 @@ Usando como base el plot de la sección [Shape](#shape):
 ```
 
 
-Usando el df `mpg`, intenta crear los 6 plots que se pueden ver más abajo.  
+Ahora usando el data-frame `mpg`, intenta crear los 6 plots que se pueden ver más abajo.  
 
 Aquí tienes el plot base, para hacer mas fácil la tarea:   
 
@@ -713,7 +746,7 @@ ggplot(mpg, aes(displ, hwy)) +
 
 Además de generar uno a uno los 6 plots, serías capaz de generar la figura que se ve abajo? Esto es, un plot que incluye los 6 plots juntos.  
 
-<details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">En la sección [Combinando gráficas](#combinando-graficas) veras un ejemplo del uso de la función cowplot::plot_grid()</span></details>  
+<details><summary>Solucion para combinar plots: ![](data/images/hint.png)</summary><span style="color: orange;">En la sección [Combinando gráficas](#combinando-graficas) veras un ejemplo del uso de la función cowplot::plot_grid()</span></details>  
 
 
 
@@ -783,7 +816,7 @@ Podemos crear diagramas de cajas (boxplots) con `geom_boxplot` o violines con `g
 
 ### geom_histogram y geom_bar {#histogramas}
 
-Podemos usar histogramas `geom_histogram()` con variables continuas.  
+Podemos usar histogramas `geom_histogram()` con variables continuas. Como puedes ver, ahora solo le pasamos una variable a `aes()`  
 
 ```{r geom-histogram}
   ggplot(gapminder, aes(lifeExp)) + 
@@ -814,6 +847,11 @@ Para visualizar distribuciones (cuando tenemos muchos datos), podemos usar `geom
 ### Ejercicio {.ejercicio -}
 
 Añadiendo un parámetro a la gráfica de arriba, podemos transformarla en las versiones de abajo. ¿Podrías hacerlo? (recuerda que poníendote encima de `geom_density()` y tecleando `F1` puedes ver la ayuda de la función).  
+
+```
+ggplot(gapminder, aes(lifeExp, fill = continent)) + 
+      geom_density(alpha = .2)
+```
 
 <details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">`position = "stack"` y `position = "fill"`.</span></details>
 
@@ -855,6 +893,11 @@ Especialmente porque podemos incluir en el mismo gráfico información sobre dis
 
 Usando como base el plot de la seccion [geom_histogram()](#histogramas):  
 
+```
+  ggplot(gapminder, aes(lifeExp)) + 
+    geom_histogram()
+```
+
 - Colorea los histogramas por continente
 - Sabrias hacer que no se amontonen unos continentes sobre otros? Necesitarás añadir transparencia para ver todos los datos
 <details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">`geom_histogram(position = "identity", alpha = .3)`.</span></details>
@@ -871,12 +914,17 @@ ggplot(gapminder, aes(lifeExp, fill = continent)) +
 
 
 Con el DF `diamonds`, crea el siguiente plot:  
+
+```
+  ggplot(diamonds, aes(cut))
+```
+
 <details><summary>Pista: ![](data/images/hint.png)</summary><span style="color: orange;">Tienes que usar el `geom_bar()` y el parámetro `fill`.</span></details>
 
 ```{r geoms-ejercicios-02, echo=FALSE}
 
-ggplot(diamonds) + 
-  geom_bar(aes(cut, fill = clarity))
+ggplot(diamonds, aes(cut, fill = clarity)) + 
+  geom_bar()
 
 ```
 
@@ -885,7 +933,7 @@ ggplot(diamonds) +
 
 ## Facets  
 
-Cuando queremos separar en gráficos independientes distintas categorías dentro de nuestros datos, podemos usar facetas. Hay dos funciones para esto,  **facet_grid** y **facet_wrap**.  
+Cuando queremos separar en gráficos independientes distintas categorías dentro de nuestros datos, podemos usar facetas. Hay dos funciones para esto,  **facet_grid()** y **facet_wrap()**.  
 
 
 ### facet_grid
@@ -895,6 +943,11 @@ Cuando queremos separar en gráficos independientes distintas categorías dentro
 ```{r facet_grid}
  
   # Plot inicial
+  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
+    geom_point(alpha = .2)
+
+  # Un grafico para cada continente
+  ## Tip: usamos guides(color = "none") para que no se vea la leyenda asociada a color
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
     geom_point(alpha = .2) +
     facet_grid(~ continent) +
@@ -920,22 +973,58 @@ Cuando queremos separar en gráficos independientes distintas categorías dentro
  `facet_wrap(~ variable)` nos devuelve tantas facetas como niveles de la variable, pudiendo definir el número de filas y columnas que queremos.  
 
 ```{r facet_wrap}
-# Plot base
+  # Plot base
+  ggplot(gapminder, aes(lifeExp, fill = continent)) +
+    geom_histogram(alpha = .5)
+
+  # Facetas por continente
+  ## En 2 columnas
   ggplot(gapminder, aes(lifeExp, fill = continent)) +
     geom_histogram(alpha = .5) +
-    facet_wrap( ~ continent) +
+    facet_wrap( ~ continent, ncol = 2) +
     guides(fill = "none")
-
 ```
+
+
+### gghighlight y facet_wrap
 
 Con la función `gghighlight()` podemos añadir una capa para facilitar la comparación de cada faceta con los datos completos.  
 
-```{r facet_wrap2}
+```{r facet_wrap-gghighlight}
   ggplot(gapminder, aes(lifeExp, fill = continent)) +
     geom_histogram(alpha = .5) +
     facet_wrap( ~ continent, nrow = 1) +
     guides(color = "none") +
     gghighlight::gghighlight()
+
+```
+
+
+### Ejercicios {.ejercicio -}
+
+Usando como base el plot siguiente:  
+
+```
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point()
+```
+
+- Crea un panel para cada tipo de coche (`class`) en una rejilla simétrica  
+- Crea un panel para cada tipo de coche (`class`), mostrando paneles en 3 filas    
+
+<details><summary>Solucion: ![](data/images/hint.png)</summary><span style="color: orange;">`facet_grid()` permite crear rejullas simétricas de panekes, y el parámetro `nrow` de `facet_wrap()` nos ayuda con paneles con números de filas definidos.</span></details>
+
+
+```{r ejercicio_facetas, echo=FALSE}
+
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() +
+  facet_grid(~ class)
+ 
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() +
+  facet_wrap(~ class, nrow = 3)
+
 
 ```
 
@@ -965,20 +1054,22 @@ Podemos usar funciones simples de manera directa. En este caso, mostramos un pun
 
   ggplot(gapminder, aes(continent, lifeExp)) + 
     stat_summary(
-      fun.ymin = min,
-      fun.ymax = max,
+      fun.min = min,
+      fun.max = max,
       fun = median)
 ```
-
+  
+  
 Si queremos usar funciones algo mas complejas, la sintaxis es algo diferente. En este caso mostramos media ± desviación estandar:  
 
 ```{r transformaciones-estadisticas-stat_summary-2}
 
   ggplot(gapminder, aes(continent, lifeExp)) +
     stat_summary(
-      fun.ymin = function(x) mean(x) - sd(x),
-      fun.ymax = function(x) mean(x) + sd(x),
+      fun.min = function(x) mean(x) - sd(x),
+      fun.max = function(x) mean(x) + sd(x),
       fun = mean)
+
 ```
 
 
@@ -1006,7 +1097,6 @@ O cosas aún más elaboradas:
 
 ```{r transformaciones-estadisticas-promedios-grupo-02}
 
-# Gapminder
 ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
   geom_point(alpha = .1) +
   stat_summary(data = gapminder %>% 
@@ -1024,7 +1114,7 @@ ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
 
 ### Ejercicios {.ejercicio -}
 
-Cuando al plot **A** trato de añadirle líneas para cada `class`, me aparece algo como lo de **B**.  
+Cuando al plot **A** trato de añadirle líneas para cada `class`, me aparece algo como lo de **B**, porque tenemos varios puntos en cada nivel de `displ`.  
 
 ```{r ejercicio-7a}
 plotA = ggplot(mpg, aes(displ, hwy, color = class)) +
@@ -1039,7 +1129,7 @@ plotB = ggplot(mpg, aes(displ, hwy, color = class)) +
 cowplot::plot_grid(plotA, plotB, labels = c("A", "B"))
 ```
 
-Pero en realidad no quiero que las líneas pasen por todos los puntos, sino que muestren el promedio ¿Podrías reproducir el gráfico de abajo?  
+Pero en realidad no quiero que las líneas pasen por todos los puntos, sino que muestren el promedio en cada nivel de `displ` ¿Podrías reproducir el gráfico de abajo?  
 
 ```{r ejercicio-7b, echo=FALSE}
   ggplot(mpg, aes(displ, hwy, color = class)) +
@@ -1048,7 +1138,15 @@ Pero en realidad no quiero que las líneas pasen por todos los puntos, sino que 
     theme(legend.position = "bottom")
 ```
 
+Usando como base:
 
+```
+ggplot(gapminder, aes(country, lifeExp, color = continent)) +
+  stat_summary(...) +
+  facet_grid(...) +
+  theme(axis.text.x = element_blank()) # Eliminamos etiquetas de nombres de paises
+
+```
 Podrías crear este gráfico? Mostramos mediana ± sd para cada país, organizado por continente.
 
 ```{r ejercicio-8, echo=FALSE}
@@ -1093,6 +1191,9 @@ Habitualmente, un vez hemos creado la gráfica, querremos personalizar varias co
 
 
 ### Scales  
+
+Usaremos las funciones que empiezan por `scale_` para multitud de cosas, por ejemplo, cambiar las etiquetas de los ejes x o y:  
+
 
 ```{r personalizacion-graficas-axis}
   
@@ -1197,8 +1298,23 @@ ggplot(gapminder, aes(year, lifeExp, linetype = continent, color = continent)) +
 
 ### Ejercicio {.ejercicio -}
 
-El plot del panel (A) tiene varios problemas (los años no son enteros o factores, los casos no se muestran con un separador de miles, la leyenda esta a la derecha ocupado un espacio precioso, etc.). Trata de resolverlos e intenta llegar al resultado que se ve en el panel (B). Usa el dataframe `table1` del paquete {tidyr}?  
+El plot del panel (A) tiene varios problemas:  
 
+- los años no son enteros o factores
+- los casos no se muestran con un separador de miles  
+- la leyenda esta a la derecha ocupado un espacio precioso, ...  
+
+Usando el plot base (A):  
+
+```
+ggplot(table1, aes(year, cases)) + 
+  geom_line(aes(group = country), colour = "grey50") + 
+  geom_point(aes(colour = country))
+```
+
+Trata de resolver los problemas e intenta llegar al resultado que se ve en el panel (B). 
+
+<details><summary>Soluciones: ![](data/images/hint.png)</summary><span style="color: orange;">- `as.factor(VARIABLE)`: convierte una variable en categórica  <BR>- `scale_x_discrete(expand = c(.05, 0))` nos ayuda a posicionar los niveles de `year` cerca de los extremos de la gráfica.  </span></details>
 
 ```{r geoms-ejercicios-03, echo=FALSE, fig.height=10, fig.width=8}
 
@@ -1211,7 +1327,7 @@ plot2 =
   geom_line(aes(group = country), colour = "grey50") + 
   geom_point(aes(colour = country), size = 2) +
   scale_y_continuous(labels = scales::comma) +
-  scale_x_discrete(expand = c(.05,0)) +
+  scale_x_discrete(expand = c(.05, 0)) +
   labs(title = "Casos de Tuberculosis por año",
        x = "year",
        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") +
@@ -1227,6 +1343,7 @@ cowplot::plot_grid(plot1, plot2,
 Si te sobra tiempo, puedes tratar de reproducir la siguiente versión mejorada...  
 
 ```{r geoms-ejercicios-extra,, echo=FALSE, fig.height=5, fig.width=8}
+
 table1_end = table1 %>% filter(year == max(.$year))
 
   ggplot(table1, aes(as.factor(year), cases)) + 
@@ -1239,7 +1356,7 @@ table1_end = table1 %>% filter(year == max(.$year))
                        breaks = table1_end$cases,
                        labels = table1_end$country,
                        name = NULL)) +
-  scale_x_discrete(expand = c(.05,0)) +
+  scale_x_discrete(expand = c(.01,0)) +
   labs(title = "Casos de Tuberculosis por año",
        x = "year",
        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") +
@@ -1252,6 +1369,8 @@ table1_end = table1 %>% filter(year == max(.$year))
 
 
 ### Colors and fill scales
+
+Las funciones `scale_color_`, `scale_fill_` nos sirven para hacer cambios globales en los colores o rellenos de las gráficas. Algunos ejemplos:  
 
 ```{r personalizacion-graficas-color-fill}
 
@@ -1282,6 +1401,47 @@ table1_end = table1 %>% filter(year == max(.$year))
 ```
 
 
+
+### Ejercicio {.ejercicio -}
+
+1) Usando como base este plot, podrias cambiarle la paleta de color para usar una de las cualitativas?  
+
+<details><summary>Soluciones: ![](data/images/hint.png)</summary><span style="color: orange;">Ver sección Palettes de la ayuda de `scale_fill_brewer()` </span></details>  
+
+
+```{r color-01aa, echo=TRUE}
+
+  ggplot(gapminder, aes(continent, lifeExp, fill = continent)) + 
+    geom_violin(alpha = .2) +
+    scale_fill_brewer(palette = "Blues")
+
+```
+
+
+2) Si intentamos asignar colores manualmente a los continentes de este modo, recibimos un error:  
+
+```
+  ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
+    geom_point(color = c("red", "grey", "green", "purple", "black")) 
+  # Error: Aesthetics must be either length 1 or the same as the data (1704): colour
+```
+
+Podrías resolver el error y mostrar el gráfico de abajo?  
+
+<details><summary>Soluciones: ![](data/images/hint.png)</summary><span style="color: orange;">Tenemos que:  
+- indicar que el color depende de `continent`  
+- usar `scale_color_manual()`, con el parámetro `values` para asignar los colores (ver ejemplos en la ayuda de la función)</span></details>
+
+
+
+```{r color-01b, echo=FALSE}
+  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + 
+    geom_point() +
+    scale_color_manual(values = c("red", "grey", "green", "purple", "black"))
+```
+ 
+
+
 ### Combinando gráficas {#combinando-graficas}
 
 Con {[cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html#:~:text=The%20cowplot%20package%20is%20a,or%20mix%20plots%20with%20images.)} podemos combinar gráficas de manera muy simple. Otro paquete muy interesante es {[patchwork](https://patchwork.data-imaginist.com/)}.  
@@ -1299,19 +1459,52 @@ plot2 = ggplot(gapminder, aes(continent, ..prop.., group = 1)) +
   scale_y_continuous(labels = scales::percent) +
   coord_flip()
   
-cowplot::plot_grid(plot2, plot1,
-                   rel_widths = c(.3, 0.7))
+cowplot::plot_grid(plot2, plot1, rel_widths = c(.3, 0.7))
 
 ```
 
-O hacer cosas mas complejas como combinar un [scatteplot con un par de histogramas](https://stackoverflow.com/questions/8545035/scatterplot-with-marginal-histograms-in-ggplot2/56440634#56440634):  
+
+
+
+##### Ejercicio {.ejercicio -}
+
+1) Combina los dos plots del ejercicio anterior, con las siguientes modificaciones: 
+
+- Elimina las leyendas asociadas a colores y rellenos
+- Usa la paleta "Accent" para los colores y rellenos
+
+<details><summary>Soluciones: ![](data/images/hint.png)</summary><span style="color: orange;">- guides(fill = "none") quita la leyenda asociada a `fill`...  <BR>- scale_fill_brewer(palette = "Accent") asigna la paleta "Accent" a los rellenos (`fill`)</span></details>  
+
+
+```{r ejercicio-combinar-plots, echo=FALSE}
+
+ plot1 = ggplot(gapminder, aes(continent, lifeExp, fill = continent)) + 
+    geom_violin(alpha = .2) +
+    scale_fill_brewer(palette = "Accent") +
+    guides(fill = "none")
+
+  plot2 = ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + 
+    geom_point() +
+    scale_color_brewer(palette = "Accent") +
+    guides(color = "none")
+
+
+cowplot::plot_grid(plot1, plot2, rel_widths = c(.3, 0.7))
+
+```
+
+---  
+
+#### Combinando múltiples gráficas
+
+Podemos combinar múltiples gráficas y llegar a hacer cosas mucho más complejas como combinar un [scatteplot con un par de histogramas](https://stackoverflow.com/questions/8545035/scatterplot-with-marginal-histograms-in-ggplot2/56440634#56440634):  
 
 ```{r personalizando-combinando-avanzado}
 
 # Set up scatterplot
 scatterplot <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
   geom_point(size = 3, alpha = 0.6) +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme(plot.margin = margin())
 
 
@@ -1320,7 +1513,7 @@ marginal_distribution <- function(x, var, group) {
   ggplot(x, aes_string(x = var, fill = group)) +
     geom_histogram(bins = 30, alpha = 0.4, position = "identity") +
     # geom_density(alpha = 0.4, size = 0.1) +
-    guides(fill = FALSE) +
+    guides(fill = "none") +
     theme_void() +
     theme(plot.margin = margin())
 }
@@ -1389,7 +1582,17 @@ p +
 
 ### Ejercicios {.ejercicio -}
 
-Serías capaz de reproducir este gráfico, usando el dataframe `diamonds` y el `theme_economist`? 
+Serías capaz de reproducir este gráfico, usando el dataframe `diamonds` y el `theme_economist`?  
+
+Gráfica inicial:  
+
+```
+ggplot(diamonds, aes(price, cut, fill = cut, color = cut)) +
+  ggridges::geom_density_ridges(alpha = .6)
+```
+
+<details><summary>Soluciones: ![](data/images/hint.png)</summary><span style="color: orange;">- scale_x_log10() nos permite transformar el eje x a una escala logarítmica  <BR>- Hay que aplicar un `ggthemes::scale_*` para cada elemento: `color`, `fill`... </span></details>  
+
 
 ```{r ejercicio-6a, echo=FALSE}
 
@@ -1407,7 +1610,20 @@ ggplot(diamonds, aes(price, cut, fill = cut, color = cut)) +
 
 ```
 
+---  
+
 Serías capaz de reproducir este gráfico, usando el dataframe `gapminder` y la paleta `Accent`? 
+
+
+Gráfica inicial:  
+
+```
+ggplot(gapminder, aes(gdpPercap, continent, fill = continent, color = continent)) +
+  ggridges::geom_density_ridges(alpha = .6)
+```
+
+<details><summary>Soluciones: ![](data/images/hint.png)</summary><span style="color: orange;">- `scales::dollar_format()` aplicado al parámetro `labels` de las funciones `scale_x_*` nos permite darle formato de moneda a las etiquetas de la escala x</span></details>  
+
 
 ```{r ejercicio-6b, echo=FALSE}
 
@@ -1428,10 +1644,12 @@ ggplot(gapminder, aes(gdpPercap, continent, fill = continent, color = continent)
 
 ## Visualización interactiva
 
+El paquete {[plotly](https://plotly.com/r/)} nos permite crear gráficas con algunos niveles de interactividad usando funciones propias, o modificando gráficas creadas con ggplot.  
 
-### Gráficas interactivas
 
-Scatterplot donde se puede ver el valor de los puntos, seleccionar áreas, etc.
+### ggplots interactivos con plotly
+
+Scatterplot creado con ggplot donde se puede ver el valor de los puntos, seleccionar áreas, etc.
 
 ```{r graficas-interactivas, fig.height=8, fig.width=8}
 
@@ -1446,7 +1664,9 @@ plotly::ggplotly(
 ```
 
 
-Surface plots donde se muestra la relación entre 3 variables en un entorno interactivo 3D.  
+### Surface plots con plotly
+
+Surface plot creado con plotly donde se muestra la relación entre 3 variables en un entorno interactivo 3D.  
 
 ```{r graficas-interactivas2, fig.height=8, fig.width=8}
 
@@ -1492,7 +1712,9 @@ plot1
 ```
 
 
-### Animando gráficas
+### Animando gráficas con gganimate
+
+{[gganimate](https://gganimate.com/)} nos permite crear ggplots añadiendo la dimensión temporal  
 
 ```{r animando-graficas, fig.height=4, fig.width=8, eval=FALSE}
 
@@ -1505,13 +1727,17 @@ p = ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
   scale_size(range = c(2, 12)) +
   scale_x_log10() +
   facet_wrap(~continent) +
+  
   # Here comes the gganimate specific bits
   labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
   transition_time(year) +
   ease_aes('linear')
 
+  # Create animated plot
   animate(p, renderer = ffmpeg_renderer(), height = 6, width = 10, units = "in", res = 300)
-# anim_save("name_file.mp4", animation = last_animation())
+  
+  # Save plot
+    # anim_save("name_file.mp4", animation = last_animation())
 
 ```
 
