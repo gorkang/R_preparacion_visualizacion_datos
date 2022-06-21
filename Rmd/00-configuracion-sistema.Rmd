@@ -47,12 +47,14 @@ En este gif puedes ver como hacerlo:
 ```{r install_workshop_packages, message=FALSE, warning=FALSE}
 
   if (!require('rlang')) install.packages('rlang'); library('rlang')
-  rlang::check_installed(pkg = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
-                                 "gapminder", "ggplot2", "ggraph", "ggridges", "ggthemes", "googlesheets4", "gtsummary", "haven", "here", "hexbin", 
-                                 "inspectdf", "janitor", "knitr", "lme4", "parameters", "performance", "plotly", "purrr", "readODS",
-                                 "readr", "readxl", "remotes", "renv", "report", "rticles", "see", "sjPlot", "stargazer",
-                                 "tidyr", "usethis", "writexl"), 
-                         reason = "to run the initial setup")
+  rlang::check_installed(
+    pkg = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
+            "gapminder", "geomtextpath", "ggplot2", "ggraph", "ggridges", "ggthemes", 
+            "googlesheets4", "gtsummary", "haven", "here", "hexbin", "inspectdf", 
+            "janitor", "knitr", "lme4", "parameters", "performance", "plotly", 
+            "purrr", "readODS", "readr", "readxl", "remotes", "renv", "report", 
+            "rticles", "see", "sjPlot", "stargazer", "tidyr", "usethis", "writexl"), 
+    reason = "to run the initial setup")
 
 ```
 
@@ -63,6 +65,9 @@ Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber comp
 
   if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
   if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
+  if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
+
+
 
 ```
 

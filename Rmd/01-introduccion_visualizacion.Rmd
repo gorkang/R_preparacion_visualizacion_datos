@@ -29,6 +29,8 @@ if (!require('readr')) install.packages('readr'); library('readr')
 if (!require('sjPlot')) install.packages('sjPlot'); library('sjPlot')
 if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
 
+if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
+
 ```  
 
 
@@ -1639,6 +1641,39 @@ ggplot(gapminder, aes(gdpPercap, continent, fill = continent, color = continent)
 
 ```
 
+
+
+## Otras gráficas
+
+Un tipo de gráfica genial para mostrar simultáneamente observaciones individuales, distribuciones, y cambios, es el [raincloudplot](https://github.com/jorvlan/raincloudplots).  
+
+```{r otras-graficas-raincloudplots, fig.height=8, fig.width=8}
+
+# Transforma datos para adaptarlos a la estructura necesaria para raincloudplot
+df_1x1 <- data_1x1(
+  array_1 = iris$Sepal.Length[1:50],
+  array_2 = iris$Sepal.Length[51:100],
+  jit_distance = .09,
+  jit_seed = 321)
+
+# Crea raincloudplot
+raincloud_1x1_repmes(
+  data = df_1x1,
+  colors = (c('dodgerblue', 'darkorange')),
+  fills = (c('dodgerblue', 'darkorange')),
+  line_color = 'gray',
+  line_alpha = .3,
+  size = 1,
+  alpha = .6,
+  align_clouds = FALSE) +
+  
+  scale_x_continuous(breaks = c(1, 2), 
+                     labels = c("Pre", "Post"), 
+                     limits = c(0, 3)) +
+  xlab("Time") + 
+  ylab("Score")
+
+```
 
 
 
