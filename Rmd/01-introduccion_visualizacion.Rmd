@@ -347,7 +347,7 @@ Y otros recursos que resultan muy útiles:
 
 ### R para visualización de datos
 
-[ggplot2](https://ggplot2.tidyverse.org/) es el paquete por excelencia para visualización de datos. Su potencia va asociada a un nivel de complejidad considerable, hasta el punto que hay [Cheat sheets oficiales](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf), [Cheat sheets buscables](https://www.computerworld.com/article/2935394/my-ggplot2-cheat-sheet-search-by-task.html), y decenas de miles de preguntas en [Stack Overflow](https://stackoverflow.com/questions/tagged/ggplot2).  
+[ggplot2](https://ggplot2.tidyverse.org/) es el paquete por excelencia para visualización de datos. Su potencia va asociada a un nivel de complejidad considerable, hasta el punto que hay [Cheat sheets oficiales](https://github.com/rstudio/cheatsheets/raw/main/data-visualization-2.1.pdf), [Cheat sheets buscables](https://www.computerworld.com/article/2935394/my-ggplot2-cheat-sheet-search-by-task.html), y decenas de miles de preguntas en [Stack Overflow](https://stackoverflow.com/questions/tagged/ggplot2).  
 
 
 #### Primeros pasos - con training wheels

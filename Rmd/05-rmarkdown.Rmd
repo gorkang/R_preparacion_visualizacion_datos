@@ -364,7 +364,7 @@ La sintáxis básica de RMarkdown es sorprendentemente sencilla, como se puede v
 
 Y como no, tenemos mucha ayuda: 
 
-* [R Markdown cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)  
+* [R Markdown cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf)  
 * [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)  
 * [Web oficial de Rmarkdown dentro de RStudio](https://rmarkdown.rstudio.com/)  
 
@@ -390,7 +390,7 @@ Esta es la cabecera YAML, en la cual se le pueden pasar parámetros para añadir
 
 ### Rmarkdown 
 
-En el resto del documento (con la excepción de los chunks de código), el formato que usaremos será Rmarkdown. Su sintaxis es muy sencilla pero nada tolerante. Podéis ver las bases en la [R Markdown cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf).  
+En el resto del documento (con la excepción de los chunks de código), el formato que usaremos será Rmarkdown. Su sintaxis es muy sencilla pero nada tolerante. Podéis ver las bases en la [R Markdown cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf).  
 
 IMPORTANTE. Si algo no funciona como esperas:  
 

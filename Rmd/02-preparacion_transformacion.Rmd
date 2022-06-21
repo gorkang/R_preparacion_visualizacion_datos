@@ -16,12 +16,12 @@ En este capítulo vamos a aprender a importar y exportar todo tipo de archivos, 
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
 if (!require("DT")) install.packages("DT"); library("DT")
 if (!require("googlesheets4")) install.packages("googlesheets4"); library("googlesheets4")
-if (!require("janitor")) install.packages("janitor"); library("janitor")
-if (!require('readr')) install.packages('readr'); library('readr')
-if (!require("readxl")) install.packages("readxl"); library("readxl")
 if (!require("haven")) install.packages("haven"); library("haven")
 if (!require("here")) install.packages("here"); library("here")
+if (!require("janitor")) install.packages("janitor"); library("janitor")
 if (!require("purrr")) install.packages("purrr"); library("purrr")
+if (!require('readr')) install.packages('readr'); library('readr')
+if (!require("readxl")) install.packages("readxl"); library("readxl")
 if (!require("readODS")) install.packages("readODS"); library("readODS")
 if (!require("tidyr")) install.packages("tidyr"); library("tidyr")
 if (!require("waldo")) install.packages("waldo"); library("waldo")
@@ -35,13 +35,14 @@ if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); lib
 
 ## Importar y exportar datos
 
+Hasta ahora hemos trabajado con data-frames como `mpg` o `gaminder`, que forman parte de la instalación por defecto de R, o alguno de sus paquetes. Pero habitualmente trabajaremos con datos propios, por lo que necesitaremos leer uno o varios archivos. RStudio tiene un menú para ayudar a importar datos en formatos habituales ![](`r here::here("data", "images", "import'data.png")`), pero aquí aprenderemos a hacerlo todo en código, para que nuestros scripts sean autocontenidos.    
 
-Podemos ver las funciones de esta sección y como usarlas en la [Cheatsheet importar datos](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)  
+Podemos ver algunas de las funciones de esta sección y cómo usarlas en la [Cheatsheet importar datos](https://github.com/rstudio/cheatsheets/raw/main/data-import.pdf)  
 
 
 ### Importar un solo archivo
 
-Vamos a ver con más detalle los archivos CSV (*comma separated values*). Las funciones para importar archivos excel, Libreoffice, SPSS, etc. tienen parámetros muy similares.    
+Empezaremos por la situación básica más común, cómo importar un solo archivo. Vamos a ver con más detalle los archivos CSV (*comma separated values*). Las funciones para importar archivos excel, Libreoffice, SPSS, etc. tienen parámetros muy similares.    
 
 
 #### Archivos CSV
@@ -72,6 +73,15 @@ name_of_file = here::here("data/files/02-read-csv.csv")
 DF_name = read_csv(name_of_file)
 
 DF_name
+
+```
+
+Si usamos un repositorio online para almacenar los archivos, podemos leer directamente de una URL.  
+
+```{r read-csv-URL, eval=FALSE}
+
+URL = "https://raw.githubusercontent.com/gorkang/R_preparacion_visualizacion_datos/master/data/files/02-read-csv.csv"
+read_csv(URL)
 
 ```
 
@@ -117,7 +127,7 @@ Para poder leer una gsheet debemos:
 1) Crear un enlace para compartirla: `"Share" -> "Get shareable link"`   
 2) Extraemos el identificador de la google sheet:  
   + De `https://docs.google.com/spreadsheets/d/1KFmnYnKhPCi3zRJpkZzZii8H-aGSTwr97lonoaz76AY/edit?usp=sharing`  
-  + Extraemos: `1KFmnYnKhPCi3zRJpkZzZii8H-aGSTwr97lonoaz76AY`  
+  + Usaremos: `1KFmnYnKhPCi3zRJpkZzZii8H-aGSTwr97lonoaz76AY`  
 
 ```{r google-sheets, eval=FALSE}
 
@@ -154,11 +164,9 @@ Importa los archivos que ahí aparecen, asegurándote que los nombres de columna
 
 
 
-
-
 ### Importar múltiples archivos
 
-En ocasiones tenemos múltiples archivos en una carpeta (e.g. uno por participante) y queremos combinarlos todos en un solo DF.  
+En ocasiones tenemos múltiples archivos en una carpeta (e.g. uno por participante) y queremos combinarlos todos en un solo DF.    
 
 
 Importamos los archivos que están en la carpeta `data/files/02-CSVs`  
@@ -180,17 +188,19 @@ full
 
 #### Incluir nombres de archivos
 
-Incluimos nombres de archivo en una columna:  
+Habitualmente será importante saber a que archivo pertenecen los datos que hemos leído.  
+
+Podemos incluir los nombres de archivo en una columna:  
 
 ```{r importar-multiples-archivos-nombres}
 
 name_of_folder = here::here("data/files/02-CSVs")
 
 files <- list.files(name_of_folder, full.names = TRUE) %>% 
-  # Esta es la linea clave
+  # Asignamos nombres a los elementos del vector
   set_names(basename(.))
 
-# Junto con el parámetro .id que se ve aquí
+# Con el parámetro .id, almacenamos los nombres en la columna "file"
 full2 <- map_df(files, read_csv, .id = "file")
 
 full2
@@ -200,7 +210,7 @@ full2
 
 #### Con parametros
 
-Añadimos parametros a la funcion de lectura. En este caso, definimos el tipo de columna esperado con la función `col_types()`. Con esto nos aseguraremos que si alguno de los archivos tiene el tipo de datos "incorrecto", aparecerán warnings en la importación:  
+Añadimos parámetros a la función de lectura. En este caso, definimos el tipo de columna esperado con la función `col_types()`. Con esto nos aseguraremos que si alguno de los archivos tiene el tipo de datos "incorrecto", aparecerán warnings en la importación:  
 
 ```{r importar-multiples-archivos-parametros}
 
@@ -231,7 +241,7 @@ full
 - ¿Qué archivos importamos exáctamente?  
 - <details><summary>¿Ves algún problema en lo que hicimos?![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">Revisa el número de filas y la variable `files`.</span></details>  
 
-El resultado final deberia ser así:  
+El resultado final debería ser así:  
 
 
 ```{r ejercicios-importar-multiples-1, echo=FALSE}
@@ -266,6 +276,8 @@ map_df(files, read_xlsx, sheet = 2, skip = 5)
 
 ### Exportar datos
 
+Muchas veces guardaremos los datos una vez procesados. Esto se puede hacer con la familia de funciones `write_*`.  
+
 #### Archivos CSV
 
 ```{r write-csv, eval = FALSE}
@@ -273,7 +285,7 @@ map_df(files, read_xlsx, sheet = 2, skip = 5)
 # Versión simple
 write_csv(DF_name, "data/files/02-write-csv.csv")
 
-# Versión avanzada
+# Versión para Rmarkdown
 name_of_file = here::here("data/files/02-write-csv.csv")
 write_csv(DF_name, name_of_file)
 
@@ -299,7 +311,7 @@ readODS::write_ods(DF_name, name_of_file)
 
 ## Preparación y transformación de datos
 
-Para la preparación y transformación de datos usaremos fundamentalmente `dplyr`. Hay otros paquetes [más rápidos](https://h2oai.github.io/db-benchmark/) como `data.table`. Si trabajas con datos gigantescos (millones de filas), sin duda notarás la diferencia. La desventaja es que la sintaxis es (habitualmente) algo menos intuitiva.      
+Para la preparación y transformación de datos usaremos fundamentalmente `dplyr`. Hay otros paquetes [más rápidos](https://h2oai.github.io/db-benchmark/) como `data.table`. Si trabajas con datos gigantescos (millones de filas), sin duda notarás la diferencia. La desventaja es que la sintaxis es (habitualmente) menos intuitiva.      
 
 
 ### Tidy data
@@ -307,14 +319,14 @@ Para la preparación y transformación de datos usaremos fundamentalmente `dplyr
 Existen tres sencillas reglas que definen la *Tidy data*:
 
 1. Cada variable tiene su columna propia
-2. Cada observacion tiene su fila propia
+2. Cada observación tiene su fila propia
 3. Cada valor tiene su celda propia
     
     
 Las ventajas fundamentales son:
 
 * Uso de una manera consistente de trabajar, que se alinea con el tidyverse  
-* Facilidad para trabajar con la logica vectorizada  
+* Facilidad para trabajar con la lógica vectorizada  
 
 ---  
 
@@ -361,7 +373,7 @@ Usaremos [{dplyr}](https://dplyr.tidyverse.org/), un paquete muy potente para la
 
 Usando pipes **%>%** (CONTROL + SHIFT + M) podemos enlazar operaciones de transformación de datos de manera muy sencilla (una vez nos aprendamos los verbos).  
 
-Podemos ver más detalle y ejemplos en la [Cheatsheet de dplyr](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf).   
+Podemos ver más detalle y ejemplos en la [Cheatsheet de dplyr](https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf).   
 
 **Verbos esenciales**:  
 
@@ -425,7 +437,6 @@ DF_name %>%
 DF_name %>% 
   select(ID, Edad, Genero, everything(), -...1) 
 
-
 ```
 
 
@@ -474,7 +485,6 @@ mpg %>% count(year)
 
 mpg %>% filter(year == 1999)
 
-
 mpg %>% rename(engine displacement = displ) # ERROR
 mpg %>% rename(engine_displacement = displ) # Solucion 1
 mpg %>% rename(`engine displacement` = displ) # solucion 2
@@ -489,18 +499,18 @@ mpg %>% select(-model)
 
 #### Selección avanzada con select_helpers()  
 
-El `everything()` que usamos dentro de `select()` más arriba es uno de los `select_helpers()` existentes. Estos permiten realizar operaciones de selección de variables de manera más sencilla.  
+El `everything()` que usamos dentro de `select()` más arriba es uno de los `select_helpers()` existentes. Estos nos ayudan a realizar operaciones de selección de variables sin necesidad de escribir a mano todas las variables.  
 
 ###### select_helpers() {.parameters -}   
 
-* starts_with(): Empieza con un prefijo (e.g. starts_with("))  
-* ends_with(): Ends with a suffix   
-* contains(): Contains a literal string  
+* starts_with(): Empieza con un prefijo (e.g. starts_with("CI_"))  
+* ends_with(): Acaba con un sufijo  
+* contains(): Contiene una cadena de texto específica  
 * matches(): Matches a regular expression   
 * num_range(): Matches a numerical range like x01, x02, x03  
 * one_of(): Matches variable names in a character vector  
 * everything(): Matches all variables  
-* last_col(): Select last variable, possibly with an offset  
+* last_col(): Select last variable  
 
 
 ###### {-}  
@@ -549,7 +559,7 @@ DF_name %>%
 DF_name %>% 
   transmute(PPV_DECLARED_PCT = PPV_DECLARED/100)
 
-# Limpiar nombres
+# Limpiar nombres con el paquete {janitor}
 DF_name %>% 
   janitor::clean_names()
 
@@ -761,7 +771,9 @@ Trabajaremos con los datos *procesados* del paper [Cognitive and Socio-affective
 
 2. Transforma la base a formato long (eso sí, mantén las variables demográficas en formato wide).  
 
-<details><summary>Pista: ![](data/images/hint.png)</summary><span style="color: orange;">Tendras que usar la función `select()` y el select helper `everything()` para el primer paso.</span></details>
+3. Aprovechando que tenemos la base en formato long, sabrías hacer una gráfica con un histograma o densidad para cada una de las variables no deográficas?    
+
+<details><summary>Pista: ![](data/images/hint.png)</summary><span style="color: orange;">Tendras que usar la función `select()` y el select helper `everything()` para el primer paso.  Para el segundo paso, `pivot_longer(primera_variable:ultima_variable)`  Para el tercer paso, `facet_wrap(~name, scales = "free") te ayudara a crear paneles para cada nombre, donde las escalas x/y pueden variar libremente.`</span></details>
 
 ---  
 
@@ -787,11 +799,20 @@ DF_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-soci
   # 2. Transforma la base a formato long (eso sí, mantén las variables demográficas en formato wide).   
     DF_long = DF_wide %>% pivot_longer(fluid_intelligence:working_memory)
     
+  
+    # 3. Aprovechando que tenemos la base en formato long, sabrías hacer una gráfica con un histograma o densidad para cada una de las variables no deográficas?    
+    DF_long %>% 
+      ggplot(aes(value)) +
+      geom_density() + 
+      facet_wrap(~name, scales = "free")
+    
 ```
 
 
 
 ### Separate, omit, ifelse, case_when, tipos de variables...
+
+Para transformaciones algo más complejas, pero muy habituales, usaremos algunos verbos del paquete {tidyr}, y variaciones con {dplyr}  
 
 ```{r separate-omit-ifelse-casewhen}
 
@@ -811,21 +832,24 @@ DF_name %>%
 DF_name %>%
   drop_na(PPV_DECLARED)
 
-# If else
+# Para re-etiquetar, cambiar valores condicionalmente, etc.
+## If else
 DF_name %>%
   mutate(Genero = ifelse(Genero == 1, "Hombre", "Mujer"))
 
-# Case when
+## Case when
+### las condiciones lógicas pueden ser arbitrariamente complejas
 DF_name %>%
   mutate(Genero = 
            case_when(
              Genero == 1 ~ "Hombre",
              Genero == 2 ~ "Mujer",
-             TRUE ~ "Otros"))
+             TRUE ~ "Otros")
+         )
 
 
 
-# Unite
+# Unite: inversa de separate
 DF_separated = DF_name %>% 
   separate(condition, c("primer_chunk", "segundo_chunk"), sep = "_")
 
@@ -835,8 +859,6 @@ DF_separated %>%
 
 # Pull
 DF_name %>% pull(PPV_DECLARED) %>% mean(.)
-
-
 
 ```
 
@@ -890,12 +912,12 @@ El resultado final debería ser:
 
 ### Regular expressions
 
-[Basic Regular Expressions Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf). [Introduction to Regular Expressions](https://tobyhodges.gitbooks.io/introduction-to-regular-expressions/content/).  
+[Basic Regular Expressions Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf). [Introduction to Regular Expressions](https://tobyhodges.gitbooks.io/introduction-to-regular-expressions/content/).  
 
 ![SOURCE: https://xkcd.com/208/](`r here::here("data/images/regular_expressions.png")`)
 
 
-Usando este dataframe:  
+Usando este data-frame:  
 
 ```{r regular-expressions}
 DF_regexp = DF_name %>% select(-...1); DF_regexp
@@ -905,7 +927,6 @@ DF_regexp = DF_name %>% select(-...1); DF_regexp
 Podemos usar la función `gsub()` para eliminar partes de una cadena de texto, o para extraer un número:  
 ```{r regular-expressions-1}
 
-# gsub()
 DF_regexp %>% 
   mutate(condition = gsub("PPV_", "", condition)) %>%  # Buscamos PPV_ y lo reemplazamos por nada (lo eliminamos!)
   mutate(condition_N = gsub(".*([[:digit:]]$)", "\\1", condition)) # Busca cualquier dígito al final de la cadena de texto y elimina el resto
@@ -1023,7 +1044,7 @@ DF_C =
 
 ### Bind rows or columns
 
-El método más sencillo. Símplemente unimos las filas o columnas de los dataframes.  
+El método más sencillo. Simplemente unimos las filas o columnas de los data-frames.  
 
 ```{r bind}
 
@@ -1093,10 +1114,6 @@ DF_IDs = read_csv(here::here("data/files/02-join-IDs.csv"))
 DF_results = read_csv(here::here("data/files/02-join-results.csv"))
 DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 
-# DT::datatable(DF_IDs)
-# DT::datatable(DF_results)
-# DT::datatable(DF_BAD)
-
 ```
 
 
@@ -1108,7 +1125,8 @@ Preserva pares de observaciones de `DF_x` y de `DF_y` con claves iguales.
 
 ```{r inner-join}
 
-DF_inner_joined = DF_IDs %>% 
+DF_inner_joined = 
+  DF_IDs %>% 
   inner_join(DF_results)
 
 #nrow(DF_inner_joined)
@@ -1129,7 +1147,8 @@ Preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguale
 DF_left_joined = DF_IDs %>% 
    left_join(DF_results)
 
-#nrow(DF_left_joined)
+# nrow(DF_left_joined)
+# map(list("DF_left_joined" = DF_left_joined, "DF_IDs" = DF_IDs, "DF_results" = DF_results), nrow)
 
 DT::datatable(DF_left_joined)
 ```
@@ -1146,7 +1165,8 @@ Preserva todas las observaciones de `DF_x` y `DF_y`, alineándolas cuando tengan
 DF_full_joined = DF_IDs %>% 
    full_join(DF_results)
 
-#nrow(DF_full_joined)
+# CHECK
+# map(list("DF_full_joined" = DF_full_joined, "DF_IDs" = DF_IDs, "DF_results" = DF_results), nrow)
 
 DT::datatable(DF_full_joined)
 
@@ -1168,6 +1188,10 @@ DF_anti_joined = DF_IDs %>%
   anti_join(DF_BAD, by = "ID") %>% 
   left_join(DF_results)
 
+# CHECK
+# map(list("DF_anti_joined" = DF_anti_joined, "DF_IDs" = DF_IDs, "DF_BAD" = DF_BAD, "DF_results" = DF_results), nrow)
+
+
 DT::datatable(DF_anti_joined)
 ```
 
@@ -1184,6 +1208,9 @@ Preserva solo aquellas observaciones de `DF_x` cuyas claves aparezcan en `DF_y`.
 DF_semi_joined = DF_IDs %>% 
   semi_join(DF_BAD, by = "ID") %>% 
   left_join(DF_results)
+
+# CHECK
+# map(list("DF_semi_joined" = DF_semi_joined, "DF_IDs" = DF_IDs, "DF_BAD" = DF_BAD, "DF_results" = DF_results), nrow)
 
 DT::datatable(DF_semi_joined)
 
@@ -1385,7 +1412,7 @@ En los siguientes repositorios podréis encontrar datasets interesantes para jug
 
 [Cheatsheets RStudio](https://github.com/rstudio/cheatsheets)
 
-[Cheatsheet dplyr](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
+[Cheatsheet dplyr](https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf)
 
 [data-carpentry-week lesson_joins](https://mikoontz.github.io/data-carpentry-week/lesson_joins.html)
 
