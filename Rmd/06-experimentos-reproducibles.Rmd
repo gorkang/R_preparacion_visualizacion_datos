@@ -36,6 +36,7 @@ En el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/jsPsychMake
 Si quieres consultar los [scrips de las tareas](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks) puedes hacerlo en la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker).  
 
 
+---  
 
 
 1) Descargamos el proyecto de RStudio jsPsychMaker:  
@@ -52,8 +53,15 @@ usethis::use_course(url = "gorkang/jsPsychMaker", destdir = "~/Downloads/")
 
 - Editamos `config.js` para indicar las tareas que queremos usar en la seccion `// ORDER OF TASKS`  
 
+- Alternativamente, podemos usar la [jsPsychMaker Shiny APP](https://gorkang.shinyapps.io/jsPsychMaker_config/) para crear nuestro archivo `config.js` (recuerda copiar el archivo `config.js` a la carpeta de tu protocolo)  
+
+
+---  
+
 3) El experimento esta listo para ser utilizado localmente. Podemos hacerlo ejecutando `index.html`  
 
+
+---  
 
 
 ### Como simular datos
@@ -91,6 +99,8 @@ usethis::use_course(url = "gorkang/jsPsychMonkeys", destdir = "~/Downloads/")
 
 3) Abrimos `run.R` y seguimos las instrucciones.  
 
+
+---  
 
 
 ### Como preparar datos

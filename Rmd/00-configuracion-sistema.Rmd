@@ -51,7 +51,7 @@ En este gif puedes ver como hacerlo:
     pkg = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
             "gapminder", "geomtextpath", "ggplot2", "ggraph", "ggridges", "ggthemes", 
             "googlesheets4", "gtsummary", "haven", "here", "hexbin", "inspectdf", 
-            "janitor", "knitr", "lme4", "parameters", "performance", "plotly", 
+            "janitor", "knitr", "lme4", "papaja", "parameters", "performance", "plotly", 
             "purrr", "readODS", "readr", "readxl", "remotes", "renv", "report", 
             "rticles", "see", "sjPlot", "stargazer", "tidyr", "usethis", "writexl"), 
     reason = "to run the initial setup")
@@ -63,7 +63,6 @@ Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber comp
 
 ```{r install_workshop_packages2, message=FALSE, warning=FALSE}
 
-  if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
   if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
   if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
 
