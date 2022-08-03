@@ -2,24 +2,23 @@
 
 ## Ejercicio 1
 
-Crea un script en el que hagas lo siguiente:  
+Crea un script en el que hagas lo siguiente:
 
-  + Cargar librerias necesarias  
-  + Importar datos  
-  + Preparar datos   
-  + Crear gráfica  
-  + Crear tabla  
+-   Cargar librerías necesarias
+-   Importar datos
+-   Preparar datos
+-   Crear gráfica
+-   Crear tabla
 
-Tendras que mostrar como corre el script con una sesion limpia de RStudio (CONTROL + SHIFT + F10)
+Tendrás que mostrar como corre el script con una sesión limpia de RStudio (CONTROL + SHIFT + F10)
 
-
-#### Notas {.ejercicio -}
+#### Notas {.ejercicio .unnumbered}
 
 (importar datos): Los datos deberían ser, idealmente, de un proyecto en el que estés trabajando. Si no tienes datos disponibles, puedes encontrar bases de datos abiertas de varias maneras:
 
-- Tidytuesday: https://github.com/rfordatascience/tidytuesday
-- Buscando en google scholar papers que comparten sus datos: https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=data+available+%22osf.io%22+psychology&btnG=
-- Buscando directamente en Open Science Foundation: https://osf.io/
+-   Tidytuesday: <https://github.com/rfordatascience/tidytuesday>
+-   Buscando en Google Scholar papers que comparten sus datos: <https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=data+available+%22osf.io%22+psychology&btnG=>
+-   Buscando directamente en Open Science Foundation: <https://osf.io/>
 
 (preparación de datos): Algunos ejemplos de preparación de datos: renombrar variables, filtrar, computar nuevas variables, combinar bases...
 
@@ -27,50 +26,62 @@ Tendras que mostrar como corre el script con una sesion limpia de RStudio (CONTR
 
 (tabla): Algunos ejemplos de tablas: promedios por condición, media, mediana, max y min para algunas variables claves...
 
-
+------------------------------------------------------------------------
 
 ## Ejercicio 2
 
+Crea la siguiente tarea en jsPsychMaker:
+
+-   [The Brief Resilience Scale](https://sci-hub.ru/10.1080/10705500802222972) (PDF version inglesa), o en su [versión española](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S0212-97282021000200006&lng=es&tlng=es)
+
+#### Notas {.ejercicio .unnumbered}
+
+(tareas jsPsychMaker): Ver instrucciones en [experimentos-reproducibles](#experimentos-reproducibles)
+
+Si prefieres puedes implementar una tarea distinta. Los únicos requisitos son que sea breve y sencilla.
+
+------------------------------------------------------------------------
+
+## Ejercicio 3
+
 Diseña un **sencillo** experimento:
 
-  + Debes usar algunas de las escalas/tareas que aparecen en: https://github.com/gorkang/jsPsychMaker (ver carpeta canonical_protocol, archivo canonical_protocol_details.csv)
-  + Además, debes diseñar una nueva tarea **muy sencilla** o adaptar una nueva escala
-  + La duración total del "experimento" no deberia superar los 5 minutos
-  
-  Tendrás que hacer una breve presentación contándonos el diseño experimental.  
+-   Debes usar alguna de las [tareas que aparecen en en manual](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) (máximo 2)
+-   Además, debes diseñar una nueva tarea **muy sencilla** o adaptar una nueva escala
+-   La duración total del "experimento" no debería superar los 5 minutos
 
-#### Notas {.ejercicio -}
+Tendrás que hacer una breve presentación contándonos el diseño experimental.
 
-(tareas jsPsychMaker): Usa un máximo de 2 tareas  
-(tarea nueva): Puedes diseñar una tarea con una sola pregunta para dos condiciones experimentales, o adaptar un cuestionario breve ya existente (que no tengamos en jsPsychMaker). 
+#### Notas {.ejercicio .unnumbered}
 
+(tareas jsPsychMaker): Usa un máximo de 2 tareas\
+(tarea nueva): Puedes diseñar una tarea con una sola pregunta para dos condiciones experimentales, o adaptar un cuestionario breve ya existente (que no tengamos en jsPsychMaker).
 
-
-
+------------------------------------------------------------------------
 
 ## Ejercicio FINAL
 
-Simularemos datos para tu experimento con jsPsychMonkeys. A continuación:
+El profesor os ayudará a simular datos para tu experimento con jsPsychMonkeys.
 
-- Crearemos un proyecto de jsPsychHelper  
+Una vez tengamos los datos:
 
-- Procesaremos los datos  
+-   Crearemos un proyecto de jsPsychHelper
 
-- Crearemos un reporte en Rmd donde incluiremos:   
+-   Procesaremos los datos
 
-  + Tabla/s con descriptivos  
-  
-  + Gráfico/s con resultado  
-  
-  + Tabla/s con resultados de un análisis sencillo  
-  
-  + Una frase reportando resultados del análisis (usando [Texto inline de gtsummary](análisis-de-datos-inferencial.html#texto-inline))  
-  
+-   Crearemos un reporte en Rmd donde incluiremos:
 
-El proyecto tiene que correr en cualquier computador.  
+    -   Tabla/s con descriptivos
 
+    -   Gráfico/s con resultado
 
-#### Notas {.ejercicio -}
+    -   Tabla/s con resultados de un análisis sencillo
 
-(simulacion datos): El profesor os ayudara con esto y/o os compartira los datos  
-(procesamiento datos): Ver [el manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/QuickGuide.html#QuickGuidejsPsychHelpeR)  
+    -   Una frase reportando resultados del análisis (usando [Texto inline de gtsummary](análisis-de-datos-inferencial.html#texto-inline))
+
+El proyecto tiene que correr en cualquier computador.
+
+#### Notas {.ejercicio .unnumbered}
+
+(simulación datos): El profesor os ayudara con esto y/o os compartirá los datos\
+(procesamiento datos): Ver [el manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/02-QuickGuide.html#QuickGuidejsPsychHelpeR)

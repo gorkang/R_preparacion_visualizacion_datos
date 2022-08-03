@@ -66,8 +66,6 @@ Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber comp
   if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
   if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
 
-
-
 ```
 
 Usaremos un buen numero de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (_en algunos sistemas puede ser facilmente 1 hora_). Si tienes alguna dificultad en este punto, te recomiendo que veas algun [tutorial básico de R o RStudio](https://www.youtube.com/watch?v=BvKETZ6kr9Q).  
