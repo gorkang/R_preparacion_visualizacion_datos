@@ -200,7 +200,15 @@ Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:
 
 ### Ejercicio avanzado {.ejercicio -}
 
-Bajad la base de Cancer Screening Risk Literacy of Physicians in Training: https://osf.io/qn9a2/ y el [preprint del artículo](https://github.com/gorkang/R_preparacion_visualizacion_datos/raw/master/data/files/04-Dafina-PLOS/PONE-D-19-03821R2_FTC.pdf):
+Usando la base de Cancer Screening Risk Literacy of Physicians in Training: https://osf.io/qn9a2/ y el [preprint del artículo](https://github.com/gorkang/R_preparacion_visualizacion_datos/raw/master/data/files/04-Dafina-PLOS/PONE-D-19-03821R2_FTC.pdf):
+
+```{r avanzado-rmarkdown0}
+# Leemos la base y seleccionamos algunas de las columnas clave
+DF = haven::read_sav(here::here("data/files/Dafina/Cancer screening risk literacy R1.sav")) %>%
+  select(IDparticipante, gender, Edad, Sexo, screenbeliefs, numeracy, sciliteracy, statsed, benefits, harms, recommendation)
+
+```
+
 
 En el documento .Rmd de antes:  
 
@@ -211,13 +219,13 @@ En el documento .Rmd de antes:
 
 ```{r avanzado-rmarkdown, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 
-DF = haven::read_sav(here::here("data/files/Dafina/Cancer screening risk literacy R1.sav"))
-
-DF_table3 = DF %>% select(screenbeliefs, numeracy, sciliteracy, statsed, benefits, harms, recommendation)
+DF_table3 = 
+  DF %>% select(screenbeliefs, numeracy, sciliteracy, statsed, benefits, harms, recommendation)
 
 table_correlation = correlation::correlation(DF_table3)
 
-table_correlation %>% summary() %>% 
+table_correlation %>% 
+  summary() %>% 
   parameters::print_md()
 
 # Mostramos detalles de las correlaciones
@@ -231,13 +239,14 @@ table_correlation %>%
 
 ```
 
-2. Tratad de emular el tipo de análisis que se ve en la Tabla 4.  
+2. Tratad de emular el tipo de análisis que se ve en la Tabla 4. Podéis hacer una regresión lineal prediciendo `recommendation` con algunas de las variables que usamos en la correlación anterior.   
 
 ![](`r here::here('data/files/Dafina/table4-dafina.png')`)
 
 ```{r avanzado-rmarkdown2, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 
-DF_table4 = DF %>% select(effective, demand, gender, resident, statsed, screenbeliefs, compR1, numeracy, sciliteracy, benefits, harms, recommendation)
+DF_table4 = 
+  DF %>% select(effective, demand, gender, resident, statsed, screenbeliefs, compR1, numeracy, sciliteracy, benefits, harms, recommendation)
 
 model = lm(recommendation ~ effective + demand + gender + resident + statsed + screenbeliefs + numeracy + sciliteracy + benefits + harms, DF_table4)
 
@@ -256,7 +265,8 @@ sjPlot::tab_model(model)
 
 ```{r papaja, eval=FALSE}
 
-remotes::install_github("crsh/papaja")
+# remotes::install_github("crsh/papaja")
+install.packages("papaja")
 
 # Create new R Markdown file
 rmarkdown::draft(
@@ -295,7 +305,9 @@ tinytex::install_tinytex()
 
 ### Usar bibliografía 
 
-Bibliografía en Rmarkdown  
+Bibliografía en Rmarkdown o Quarto:    
+
+* https://quarto.org/docs/authoring/footnotes-and-citations.html
 
 * https://blog.rstudio.com/2020/11/09/rstudio-1-4-preview-citations/  
 
@@ -345,13 +357,13 @@ Usando un sistema de manejo de dependencias [renv](https://github.com/rstudio/re
 #### {-}
 
 
-## Mas allá de Rmarkdown
+<!-- ## Mas allá de Rmarkdown -->
 
-Aplicaciones web interactivas con R: [Shiny](https://shiny.rstudio.com/)  
+<!-- Aplicaciones web interactivas con R: [Shiny](https://shiny.rstudio.com/)   -->
 
-[Bayesian reasoning](https://gorkang.shinyapps.io/BayesianReasoning/)
+<!-- [Bayesian reasoning](https://gorkang.shinyapps.io/BayesianReasoning/) -->
 
-![](`r here::here("data", "images", "shiny-bayesian.png")`)
+<!-- ![](`r here::here("data", "images", "shiny-bayesian.png")`) -->
 
 
 ## Varios
@@ -435,7 +447,17 @@ Algo que podemos hacer con todos los repositorios de Github es clonarlos localme
 
 ### Crear un proyecto en RStudio asociado a Github  
 
-Podemos empezar creando un repositorio en Github, para despues clonarlo localmente.  
+Podemos empezar creando un repositorio en Github, para después clonarlo localmente. Si necesitamos crear un [personal access token, podemos consultar la ayuda de Github](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).  
+
+```
+# Puedes usar:  
+
+usethis::create_github_token()
+
+# O manualmente, como los animales:  
+
+  # En tu página de Github, haz click en tu icon (arriba a la derecha) -> Settings -> Developer settings -> Personal access tokens -> [Generate new token] -> Give gist, repo and workflow permissions.
+```
 
 #### Versión simple [recomendado] {.parameters -}
 
@@ -456,7 +478,7 @@ Alternativamente, si ya tenemos un proyecto de RStudio, podemos crear un reposit
 
 1. Crear local git repo (solo si no lo tenemos aún): `usethis::use_git()` (se crea una carpeta oculta llamada .git)  
 
-2. Crear Github Token: `usethis::browse_github_token()`  
+2. Crear Github Token: `usethis::create_github_token()`  
 
 3. Insertar token en archivo .Renviron: `usethis::edit_r_environ()`  
 

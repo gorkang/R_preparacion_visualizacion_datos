@@ -118,7 +118,6 @@ avanzado
 usar-bibliografía
 citar-los-paquetes-que-usamos
 manejo-de-dependencias
-mas-allá-de-rmarkdown
 varios
 shortcuts
 estilo
