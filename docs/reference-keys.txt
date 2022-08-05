@@ -84,11 +84,10 @@ visualizando-distribuciones
 variables-categóricas
 variables-continuas
 visualizando-datasets-completos
-inspectdf
 covariación
 variable-categórica-y-continua
+ejercicio-avanzado---introducción
 ejercicio-5
-ejercicio-6
 dos-variables-categóricas
 dos-variables-continuas
 ejercicio-covariación-2
@@ -103,7 +102,7 @@ correlación-simple
 multiples-correlaciones
 lm
 anova
-tablas-resultdos-inferenciales
+tablas-resultados-inferenciales
 ejemplo-completo
 texto-inline
 trabajo-con-rmarkdown-para-reportes-reproducibles

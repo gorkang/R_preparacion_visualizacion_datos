@@ -45,10 +45,19 @@ gapminder %>%
 
 ### Variables continuas
 
-```{r visualizando-distribuciones-continuas}
+Para ver la distribución de una variable podemos empezar con un histograma sencillo.  
+
+```{r visualizando-distribuciones-continuas1}
 
 ggplot(gapminder, aes(lifeExp)) +
   geom_histogram(binwidth = 1)
+
+```
+
+`summarise()` nos permite ver medias, medianas, etc.
+
+
+```{r visualizando-distribuciones-continuas2}
 
 gapminder %>% 
   summarise(MEAN = mean(lifeExp),
@@ -59,9 +68,32 @@ gapminder %>%
 
 ```
 
+
+
+### Ejercicio variables individuales {.ejercicio -} 
+
+Usando el DF `mpg`, visualiza la distribucion de las variables `manufacturer`, y `hwy`. Fijate que la primera es categórica, y la segunda continua.    
+
+```{r ejercicio-variables-individuales, echo=FALSE}
+
+# Var discreta
+ggplot(mpg, aes(manufacturer)) +
+  geom_bar()
+
+# Var continua
+ggplot(mpg, aes(hwy)) +
+  geom_histogram(binwidth = 1)
+
+```
+### {-}
+<BR>
+
 ### Ejercicios {.ejercicio -} 
 
 ¿Podrías replicar la visualización de abajo? Queremos mostrar un histograma por continente.
+
+<details><summary>Lo mejor es dividir el proceso en varios pasos![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">1) Empieza con el histograma de arriba [variables-continuas](#variables-continuas). <BR>2) recuerda que puedes usar el parámetro `fill` (dentro de aes), para asignar un color de relleno por nivel de una variable categórica. <BR>3) Finalmente, usando facetas podrás crear una gráfica para cada nivel de la variable categórica [facet_wrap()!](#facet_wrap)</span></details>  
+
 
 ```{r ejercicio-variables-individuales-1, echo=FALSE}
 ggplot(gapminder, aes(lifeExp, fill = continent)) +
@@ -70,6 +102,10 @@ ggplot(gapminder, aes(lifeExp, fill = continent)) +
 ```
 
 ¿Como podemos añadir el histograma general para poder entender donde se ubica cada continente?
+
+<details><summary>La solución está en el capítulo 1![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">El paquete [gghighlight](#gghighlight-y-facet_wrap) es justo lo que necesitas</span></details>  
+
+
 
 ```{r ejercicio-variables-individuales-2, echo=FALSE}
 ggplot(gapminder, aes(lifeExp, fill = continent)) +
@@ -92,24 +128,7 @@ gapminder %>%
   arrange(MEAN)
 ```
 
-### {-}
-<BR>
 
-### Ejercicio variables individuales {.ejercicio -} 
-
-Usando el DF `mpg`, visualiza la distribucion de las variables `manufacturer`, `class`, `trans`, `hwy` y `cty`  
-
-```{r ejercicio-variables-individuales, echo=FALSE}
-
-# Var discreta
-ggplot(mpg, aes(manufacturer)) +
-  geom_bar()
-
-# Var continua
-ggplot(mpg, aes(hwy)) +
-  geom_histogram(binwidth = 1)
-
-```
 
 
 
@@ -145,28 +164,28 @@ d %>%
 ```
 
 
-#### inspectdf
+<!-- #### inspectdf -->
 
-```{r inspectdf_}
+<!-- ```{r inspectdf_} -->
 
-gapminder %>% inspectdf::inspect_na()
-gapminder %>% inspectdf::inspect_na() %>% show_plot + coord_flip()
+<!-- gapminder %>% inspectdf::inspect_na() -->
+<!-- gapminder %>% inspectdf::inspect_na() %>% show_plot + coord_flip() -->
 
-gapminder_cat <- gapminder %>% inspectdf::inspect_cat()
-gapminder_cat %>% inspectdf::show_plot()
+<!-- gapminder_cat <- gapminder %>% inspectdf::inspect_cat() -->
+<!-- gapminder_cat %>% inspectdf::show_plot() -->
 
 
-gapminder_num <- gapminder %>% inspectdf::inspect_num()
-gapminder_num %>% inspectdf::show_plot()
+<!-- gapminder_num <- gapminder %>% inspectdf::inspect_num() -->
+<!-- gapminder_num %>% inspectdf::show_plot() -->
 
-```
+<!-- ``` -->
 
 
 ## Covariación
 
 ### Variable categórica y continua
 
-Podemos contar el numero de elementos por nivel de la variable o ver densidad, etc.    
+Podemos contar el numero de elementos por nivel de la variable o ver densidad, etc. Esto funciona bien si tenemos pocos niveles de la variable categórica.      
 
 ```{r covariacion-categorica-continua-1}
 
@@ -201,57 +220,41 @@ ggplot(gapminder %>% filter(year > 1995), aes(lifeExp, continent, fill = contine
 
 ```
 
-### Ejercicio {.ejercicio} 
+---  
 
-¿Podríais mostrar la diferencia entre los extremos en la base de datos, 1952 y 2007?:  
 
-```{r covariacion-categorica-continua-5, echo=FALSE}
+### Ejercicio avanzado - Introducción
+
+En este ejercicio vamos a intentar mostrar la como la distribución de esperanza de vida ha cambiado a lo largo del tiempo. Para ello, usando la base `gapminder`, compararemos las distribuciones por continente del año 1952 con el año 2007.  
+
+Empezamos creando dos gráficos. En cada uno filtramos por el año deseado (e.g. `filter(year == 1952)`). Fíjate que usamos `scale_x_continuous(n.breaks = 10, limits = c(20, 90))` para que ambas gráficas compartan la misma escala en el eje x:  
+
+```{r covariacion-categorica-continua-5, echo=TRUE}
 
 A = ggplot(gapminder %>% filter(year == 1952), aes(lifeExp, continent, fill = continent)) + 
   ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
   ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
   theme(legend.position = "none") +
+  scale_x_continuous(n.breaks = 10, limits = c(20, 90)) +
   ggtitle("1952")
 
 B = ggplot(gapminder %>% filter(year == 2007), aes(lifeExp, continent, fill = continent)) + 
   ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
   ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
   theme(legend.position = "none") +
+  scale_x_continuous(n.breaks = 10, limits = c(20, 90)) +
   ggtitle("2007")
 
 cowplot::plot_grid(A, B)
 
 ```
 
-Mira el plot donde mostramos la diferencia entre los extremos en la base de datos, 1952 y 2007 con dos gráficas, una al lado de la otra. ¿Ves algún problema?  
 
-Trata de resolver el problema en las escalas. El resultado final debería ser:  
-
-```{r ejercicio-covariacion1, echo=FALSE}
-
-A = ggplot(gapminder %>% filter(year == 1952), aes(lifeExp, continent, fill = continent)) + 
-  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
-  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
-  theme(legend.position = "none") +
-    scale_x_continuous(breaks = seq(20, 90, 5), limits = c(20, 90)) +
-  ggtitle("1952")
-
-B = ggplot(gapminder %>% filter(year == 2007), aes(lifeExp, continent, fill = continent)) + 
-  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
-  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
-  theme(legend.position = "none") +
-    scale_x_continuous(breaks = seq(20, 90, 5), limits = c(20, 90)) +
-
-  ggtitle("2007")
-
-cowplot::plot_grid(A, B)
-```
-
-
-Podemos hacer algo que clarifica mucho las cosas. Como visualizar ver el avance por país de una manera más directa:   
+Para visualizar la diferencia entre 2007 y 1952, podemos calcular primero cuanto ha cambiado la esperanza de vida en cada pais de cada continente, y crear una gráfica con esa variable:   
 
 ```{r covariacion-categorica-continua-6}
-# Cálculo
+
+# Cálculo de la diferencia entre el máximo y mínimo de lifeExp para cada country. Incluimos continent en group_by() para poder usar esa variable en la gráfica
 DF_gapminder_max_min = gapminder %>% 
   group_by(continent, country) %>% 
   summarise(lifeExp = max(lifeExp) - min(lifeExp))
@@ -265,8 +268,8 @@ ggplot(DF_gapminder_max_min, aes(lifeExp, continent, fill = continent)) +
 
 ### Ejercicio {.ejercicio} 
 
-Arriba estamos asumiendo que el valor máximo de esperanza de vida corresponde al más actualizado, pero probablemente no sea así. ¿Podrías rehacer el cálculo para mostrar la diferencia entre 1952 y 2007?
-<details><summary>Pista ![](data/images/hint.png)</summary><span style="color: orange;">1. Crear un DF para cada año, renombrando la variable lifeExp<BR>2. Usando la funcion `full_join()`, juntamos ambas bases (tendras que usar el parametro `by`). <BR>3. Con `mutate()` calculamos la diferencia.</span></details>
+Arriba estamos restando la esperanza de vida máxima y mínima de cada pais, pero querríamos ver la diferencia entre 2007 y 1952 ¿Podrías rehacer el cálculo para mostrar la diferencia entre 2007 y 1952?
+<details><summary>Pista ![](data/images/hint.png)</summary><span style="color: orange;">1. Crear un DF para cada 2007 y otro para 1952, renombrando la variable lifeExp (e.g. max_lifeExp y min_lifeExp, respectivamente)<BR>2. Usando la funcion `full_join()`, juntamos ambas bases (tendras que usar el parametro `by = c("country", "continent")`). <BR>3. Con `mutate()` calculamos la diferencia.</span></details>
 
 ```{r covariacion-categorica-continua-7, echo=FALSE}
 DF_last_year = gapminder %>% filter(year == max(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_max = lifeExp)
@@ -336,11 +339,22 @@ Usando el DF `mpg`, visualiza la covariación entre:
 * `class`  y `hwy`  
 * `hwy` y `cty`   
 
+
+
+<details><summary>Visualizando una variable categórica y una continua![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">[geom_density_ridges()!](#variable-categórica-y-continua)</span></details>  
+
+<details><summary>Visualizando pares de variables continuas![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">[geom_smooth()!](#geom_smooth)</span></details>  
+
+
 ```{r ejercicio-covariacion, echo=FALSE}
 
 # * `manufacturer` y `hwy`  
-ggplot(mpg, aes(reorder(x = manufacturer, X = hwy, FUN = median), hwy)) +
-  geom_boxplot()
+# ggplot(mpg, aes(reorder(x = manufacturer, X = hwy, FUN = median), hwy)) +
+#   geom_boxplot()
+
+ggplot(mpg, aes(hwy, manufacturer, fill = manufacturer)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9)
 
 # * `hwy` y `cty`   
 ggplot(mpg, aes(hwy, cty)) +
@@ -364,12 +378,20 @@ Usando la base del paper [Cancer Screening Risk Literacy of Physicians in Traini
 * histogramas de todas las variables numéricas y no-numéricas
 * scatterplots de la relación entre comprensión y numeracy, y entre comprensión y screenbeliefs  
 
+Puedes ir al enlace anterior y descargar el archivo `Cancer screening risk literacy R1.sav` en la carpeta `Data and results`, o directamente usar el codigo de abajo.  
 
-```{r ejercicio-final-analisis-exploratorio, echo=FALSE, fig.height=18}
+<details><summary>Como visualizar todas las variables![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">[Ver el apartado visualizando-datasets-completos en este mismo capítulo](#visualizando-datasets-completos)</span></details>  
 
 
+
+```{r ejercicio-final-analisis-exploratorio1, echo=TRUE, fig.height=18}
+
+# Usamos haven::read_sav() para leer los archivos .sav
 DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening risk literacy R1.sav")) %>% as_tibble() 
 
+```
+
+```{r ejercicio-final-analisis-exploratorio2, echo=FALSE, fig.height=18}
 
 
 # * histogramas de todas las variables numéricas y no-numéricas

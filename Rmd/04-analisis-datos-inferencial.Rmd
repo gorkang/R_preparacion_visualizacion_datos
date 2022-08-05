@@ -112,7 +112,7 @@ DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening ri
 
 Intenta reproducir la siguiente tabla:  
 
-<details><summary>Donde encontrar ayuda![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html) tienes ejemplos para todo lo que necesitarás.</span></details>  
+<details><summary>Donde encontrar ayuda![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html) tienes ejemplos para todo lo que necesitarás. Busca a la función `tbl_summary()`</span></details>  
 
 <details><summary>Error al añadir valor p![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">En la ayuda de la funcion: `?add_p.tbl_summary` encontrarás que puedes usar algo como: `add_p(test = everything() ~ "t.test")`</span></details>  
 
@@ -178,12 +178,7 @@ DF_dafina %>%
   # Fancy table
   TABLE_CORR %>% 
     parameters::print_md()
-  
-  # Personalize table
-  TABLE_CORR
-  gsub("p = |p ", "", TABLE_CORR)
-  gsub("\\(p ", "<BR>(p", TABLE_CORR)
-  
+
 ```
 
 ### LM  
@@ -250,7 +245,7 @@ model = afex::aov_ez(id = "id",
 
 
 
-## Tablas resultdos inferenciales
+## Tablas resultados inferenciales
 
 Para tablas con los resultados de nuestros modelos estadísticos, usamos la función `tbl_regression()` de {[gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html)}  
 
@@ -373,7 +368,7 @@ Haz una regresión lineal preciciendo compresion a partir de las variables de la
 
 Finalmente, crea una tabla para reportar los resultados de tu análisis, como la siguiente:  
 
-<details><summary>Donde encontrar ayuda![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) tienes ejemplos para todo lo que necesitarás.</span></details>  
+<details><summary>Donde encontrar ayuda![](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) tienes ejemplos para todo lo que necesitarás. `tbl_regression()` es tu amiga.</span></details>  
 
 
 <details><summary>Como añadir información en el pie de la tabla[](`r here::here("data/images/hint.png")`)</summary><span style="color: orange;">Tendrás que usar la función `add_glance_source_note()`. Para saber que nombres poner en el paràmetro `include`, puedes usar la función `broom::glance(model)`
