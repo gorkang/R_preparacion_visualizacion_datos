@@ -325,11 +325,13 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#ejercicios---verbos-dplyr"><i class="fa fa-check"></i>Ejercicios - verbos dplyr</a></li>
 <li class="chapter" data-level="2.2.3" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#verbos-avanzados-y-otras-criaturas-indómitas"><i class="fa fa-check"></i><b>2.2.3</b> Verbos avanzados y otras criaturas indómitas</a>
 <ul>
-<li class="chapter" data-level="2.2.3.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#wide-to-long"><i class="fa fa-check"></i><b>2.2.3.1</b> Wide to long</a></li>
-<li class="chapter" data-level="2.2.3.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#long-to-wide"><i class="fa fa-check"></i><b>2.2.3.2</b> Long to wide</a>
+<li class="chapter" data-level="2.2.3.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#wide-to-long-simple"><i class="fa fa-check"></i><b>2.2.3.1</b> Wide to long simple</a></li>
+<li class="chapter" data-level="2.2.3.2" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#long-to-wide-simple"><i class="fa fa-check"></i><b>2.2.3.2</b> Long to wide simple</a>
 <ul>
 <li class="chapter" data-level="2.2.3.2.1" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#para-que-sirve-tener-los-datos-en-formato-long"><i class="fa fa-check"></i><b>2.2.3.2.1</b> ¿Para que sirve tener los datos en formato long?</a></li>
 </ul></li>
+<li class="chapter" data-level="2.2.3.3" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#wide-to-long-complex"><i class="fa fa-check"></i><b>2.2.3.3</b> Wide to long complex</a></li>
+<li class="chapter" data-level="2.2.3.4" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#long-to-wide-complex"><i class="fa fa-check"></i><b>2.2.3.4</b> Long to wide complex</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#ejercicios---wide-to-long"><i class="fa fa-check"></i>Ejercicios - wide to long</a></li>
 <li class="chapter" data-level="2.2.4" data-path="preparación-y-transformación-de-datos.html"><a href="preparación-y-transformación-de-datos.html#separate-omit-ifelse-case_when-tipos-de-variables"><i class="fa fa-check"></i><b>2.2.4</b> Separate, omit, ifelse, case_when, tipos de variables…</a></li>
@@ -579,8 +581,8 @@ div.csl-indent {
 <ol style="list-style-type: decimal">
 <li>Descargamos el proyecto de RStudio jsPsychMaker. En la Consola de RStudio:</li>
 </ol>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="experimentos-reproducibles.html#cb280-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMaker&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
-<span id="cb280-2"><a href="experimentos-reproducibles.html#cb280-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="experimentos-reproducibles.html#cb278-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMaker&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
+<span id="cb278-2"><a href="experimentos-reproducibles.html#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Ve a la carpeta <code>canonical_protocols_clean</code> del proyecto RStudio jsPsychMaker</p></li>
 <li><p>En la carpeta <code>tasks</code> tienes tareas que empiezan por <code>SHORNAMETASK</code>, por ejemplo:</p>
@@ -616,22 +618,22 @@ div.csl-indent {
 <div id="instrucciones" class="section level4 hasAnchor" number="6.2.1.2">
 <h4><span class="header-section-number">6.2.1.2</span> Instrucciones<a href="experimentos-reproducibles.html#instrucciones" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Puedes tener tantas páginas de instrucciones como desees, simplemente, modifica la variables <code>pages: []</code> para que contenga lo que necesitas. Cada página de instrucciones estará separada por <code>,</code>:</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb281-1"><a href="experimentos-reproducibles.html#cb281-1" aria-hidden="true" tabindex="-1"></a>pages<span class="op">:</span> [<span class="vs">`pagina1`</span><span class="op">,</span> <span class="vs">`pagina2`</span><span class="op">,</span> <span class="vs">`pagina3`</span>] </span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb279-1"><a href="experimentos-reproducibles.html#cb279-1" aria-hidden="true" tabindex="-1"></a>pages<span class="op">:</span> [<span class="vs">`pagina1`</span><span class="op">,</span> <span class="vs">`pagina2`</span><span class="op">,</span> <span class="vs">`pagina3`</span>] </span></code></pre></div>
 <script type="text/javascript">
 pages: [`pagina1`, `pagina2`, `pagina3`] 
 </script>
 <p>Para darle formato tendrás que usar lenguaje <a href="https://www.w3schools.com/html/html_formatting.asp">HTML</a>.</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb282-1"><a href="experimentos-reproducibles.html#cb282-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-2"><a href="experimentos-reproducibles.html#cb282-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> instruction_screen_experiment <span class="op">=</span> {</span>
-<span id="cb282-3"><a href="experimentos-reproducibles.html#cb282-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;instructions&#39;</span><span class="op">,</span></span>
-<span id="cb282-4"><a href="experimentos-reproducibles.html#cb282-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">pages</span><span class="op">:</span> [<span class="vs">`&lt;p&gt;&lt;left&gt;&lt;b&gt;&lt;big&gt;NAME TASK&lt;/big&gt;&lt;/b&gt;&lt;br/&gt;&lt;br&gt; Instrucciones detalladas de tarea con slider&lt;br&gt;&lt;br&gt; Muchas gracias por tu colaboración.&lt;/p&gt;`</span><span class="op">,</span></span>
-<span id="cb282-5"><a href="experimentos-reproducibles.html#cb282-5" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`&lt;p&gt;Pagina 2 de instrucciones. &lt;BR&gt;&lt;BR&gt;Dale a siguiente para empezar la tarea&lt;/p&gt;`</span>]<span class="op">,</span></span>
-<span id="cb282-6"><a href="experimentos-reproducibles.html#cb282-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">data</span><span class="op">:</span>{<span class="dt">trialid</span><span class="op">:</span> <span class="st">&#39;SHORNAMETASKslider_000&#39;</span><span class="op">,</span> <span class="dt">procedure</span><span class="op">:</span> <span class="st">&#39;SHORNAMETASKslider&#39;</span>}<span class="op">,</span></span>
-<span id="cb282-7"><a href="experimentos-reproducibles.html#cb282-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">show_clickable_nav</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb282-8"><a href="experimentos-reproducibles.html#cb282-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">on_trial_start</span><span class="op">:</span> <span class="kw">function</span>(){</span>
-<span id="cb282-9"><a href="experimentos-reproducibles.html#cb282-9" aria-hidden="true" tabindex="-1"></a>        bloquear_enter <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb282-10"><a href="experimentos-reproducibles.html#cb282-10" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb282-11"><a href="experimentos-reproducibles.html#cb282-11" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb280-1"><a href="experimentos-reproducibles.html#cb280-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb280-2"><a href="experimentos-reproducibles.html#cb280-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> instruction_screen_experiment <span class="op">=</span> {</span>
+<span id="cb280-3"><a href="experimentos-reproducibles.html#cb280-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;instructions&#39;</span><span class="op">,</span></span>
+<span id="cb280-4"><a href="experimentos-reproducibles.html#cb280-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">pages</span><span class="op">:</span> [<span class="vs">`&lt;p&gt;&lt;left&gt;&lt;b&gt;&lt;big&gt;NAME TASK&lt;/big&gt;&lt;/b&gt;&lt;br/&gt;&lt;br&gt; Instrucciones detalladas de tarea con slider&lt;br&gt;&lt;br&gt; Muchas gracias por tu colaboración.&lt;/p&gt;`</span><span class="op">,</span></span>
+<span id="cb280-5"><a href="experimentos-reproducibles.html#cb280-5" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`&lt;p&gt;Pagina 2 de instrucciones. &lt;BR&gt;&lt;BR&gt;Dale a siguiente para empezar la tarea&lt;/p&gt;`</span>]<span class="op">,</span></span>
+<span id="cb280-6"><a href="experimentos-reproducibles.html#cb280-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">data</span><span class="op">:</span>{<span class="dt">trialid</span><span class="op">:</span> <span class="st">&#39;SHORNAMETASKslider_000&#39;</span><span class="op">,</span> <span class="dt">procedure</span><span class="op">:</span> <span class="st">&#39;SHORNAMETASKslider&#39;</span>}<span class="op">,</span></span>
+<span id="cb280-7"><a href="experimentos-reproducibles.html#cb280-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">show_clickable_nav</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb280-8"><a href="experimentos-reproducibles.html#cb280-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">on_trial_start</span><span class="op">:</span> <span class="kw">function</span>(){</span>
+<span id="cb280-9"><a href="experimentos-reproducibles.html#cb280-9" aria-hidden="true" tabindex="-1"></a>        bloquear_enter <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb280-10"><a href="experimentos-reproducibles.html#cb280-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb280-11"><a href="experimentos-reproducibles.html#cb280-11" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
 <script type="text/javascript">
 
 var instruction_screen_experiment = {
@@ -667,13 +669,13 @@ var instruction_screen_experiment = {
 </ul></li>
 </ul>
 <p>Cada uno de los plugins de jsPsych tiene múltiples parámetros que podemos definir. Puedes ver la <a href="https://www.jspsych.org/7.0/plugins/list-of-plugins/">ayuda de jsPsych aquí</a>. Por ejemplo, si se trata de un slider, modificando la variable <code>labels: []</code> controlarás los anclajes de la escala. Si se trata de un multichoice, podrás establecer las alternativas con la variable <code>options: []</code>.</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb283-1"><a href="experimentos-reproducibles.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="co">//Un item</span></span>
-<span id="cb283-2"><a href="experimentos-reproducibles.html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> question01 <span class="op">=</span> {</span>
-<span id="cb283-3"><a href="experimentos-reproducibles.html#cb283-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;html-slider-response&#39;</span><span class="op">,</span></span>
-<span id="cb283-4"><a href="experimentos-reproducibles.html#cb283-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">stimulus</span><span class="op">:</span> <span class="st">&quot;&lt;div class=&#39;justified&#39;&gt;Una pregunta&lt;/div&gt;&lt;/br&gt;&quot;</span><span class="op">,</span> <span class="dt">require_movement</span><span class="op">:</span><span class="kw">true</span><span class="op">,</span> <span class="dt">required</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span> <span class="dt">slider_width</span><span class="op">:</span> <span class="dv">500</span><span class="op">,</span> <span class="dt">slider_start</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">labels</span><span class="op">:</span> [<span class="st">&quot;No me describe bien&quot;</span><span class="op">,</span> <span class="st">&quot;Me describe muy bien&quot;</span>]<span class="op">,</span> <span class="dt">button_label</span><span class="op">:</span> <span class="st">&quot;Siguiente&quot;</span><span class="op">,</span></span>
-<span id="cb283-5"><a href="experimentos-reproducibles.html#cb283-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">data</span><span class="op">:</span> {<span class="dt">trialid</span><span class="op">:</span> <span class="st">&#39;SHORNAMETASKslider_001&#39;</span><span class="op">,</span> <span class="dt">procedure</span><span class="op">:</span> <span class="st">&#39;SHORNAMETASKslider&#39;</span>}</span>
-<span id="cb283-6"><a href="experimentos-reproducibles.html#cb283-6" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
-<span id="cb283-7"><a href="experimentos-reproducibles.html#cb283-7" aria-hidden="true" tabindex="-1"></a>SHORNAMETASKslider<span class="op">.</span><span class="fu">push</span>(question01)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb281-1"><a href="experimentos-reproducibles.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="co">//Un item</span></span>
+<span id="cb281-2"><a href="experimentos-reproducibles.html#cb281-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> question01 <span class="op">=</span> {</span>
+<span id="cb281-3"><a href="experimentos-reproducibles.html#cb281-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;html-slider-response&#39;</span><span class="op">,</span></span>
+<span id="cb281-4"><a href="experimentos-reproducibles.html#cb281-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">stimulus</span><span class="op">:</span> <span class="st">&quot;&lt;div class=&#39;justified&#39;&gt;Una pregunta&lt;/div&gt;&lt;/br&gt;&quot;</span><span class="op">,</span> <span class="dt">require_movement</span><span class="op">:</span><span class="kw">true</span><span class="op">,</span> <span class="dt">required</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span> <span class="dt">slider_width</span><span class="op">:</span> <span class="dv">500</span><span class="op">,</span> <span class="dt">slider_start</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">labels</span><span class="op">:</span> [<span class="st">&quot;No me describe bien&quot;</span><span class="op">,</span> <span class="st">&quot;Me describe muy bien&quot;</span>]<span class="op">,</span> <span class="dt">button_label</span><span class="op">:</span> <span class="st">&quot;Siguiente&quot;</span><span class="op">,</span></span>
+<span id="cb281-5"><a href="experimentos-reproducibles.html#cb281-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">data</span><span class="op">:</span> {<span class="dt">trialid</span><span class="op">:</span> <span class="st">&#39;SHORNAMETASKslider_001&#39;</span><span class="op">,</span> <span class="dt">procedure</span><span class="op">:</span> <span class="st">&#39;SHORNAMETASKslider&#39;</span>}</span>
+<span id="cb281-6"><a href="experimentos-reproducibles.html#cb281-6" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb281-7"><a href="experimentos-reproducibles.html#cb281-7" aria-hidden="true" tabindex="-1"></a>SHORNAMETASKslider<span class="op">.</span><span class="fu">push</span>(question01)<span class="op">;</span></span></code></pre></div>
 <script type="text/javascript">
 //Un item
 var question01 = {
@@ -722,8 +724,8 @@ SHORNAMETASKslider.push(question01);
 <ol style="list-style-type: decimal">
 <li>Descargamos el proyecto de RStudio jsPsychMaker:</li>
 </ol>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="experimentos-reproducibles.html#cb284-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMaker&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
-<span id="cb284-2"><a href="experimentos-reproducibles.html#cb284-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="experimentos-reproducibles.html#cb282-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMaker&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
+<span id="cb282-2"><a href="experimentos-reproducibles.html#cb282-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li>En a la carpeta <code>canonical_protocols</code>:</li>
@@ -765,8 +767,8 @@ SHORNAMETASKslider.push(question01);
 <ol start="2" style="list-style-type: decimal">
 <li>Descargamos el proyecto de RStudio jsPsychMonkeys. En la Consola de RStudio:</li>
 </ol>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="experimentos-reproducibles.html#cb285-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMonkeys&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
-<span id="cb285-2"><a href="experimentos-reproducibles.html#cb285-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="experimentos-reproducibles.html#cb283-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychMonkeys&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
+<span id="cb283-2"><a href="experimentos-reproducibles.html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span></code></pre></div>
 <hr />
 <ol start="3" style="list-style-type: decimal">
 <li>Abrimos <code>run.R</code> y seguimos las instrucciones.</li>
@@ -782,16 +784,16 @@ SHORNAMETASKslider.push(question01);
 <ol style="list-style-type: decimal">
 <li>Descargamos el proyecto de RStudio jsPsychHelper. En la Consola de RStudio:</li>
 </ol>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="experimentos-reproducibles.html#cb286-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychHelper&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
-<span id="cb286-2"><a href="experimentos-reproducibles.html#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span>
-<span id="cb286-3"><a href="experimentos-reproducibles.html#cb286-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb286-4"><a href="experimentos-reproducibles.html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Si es la primera vez que abrimos jsPsychHelper: </span></span>
-<span id="cb286-5"><a href="experimentos-reproducibles.html#cb286-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;setup/setup.R&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="experimentos-reproducibles.html#cb284-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychHelper&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
+<span id="cb284-2"><a href="experimentos-reproducibles.html#cb284-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span>
+<span id="cb284-3"><a href="experimentos-reproducibles.html#cb284-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-4"><a href="experimentos-reproducibles.html#cb284-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Si es la primera vez que abrimos jsPsychHelper: </span></span>
+<span id="cb284-5"><a href="experimentos-reproducibles.html#cb284-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;setup/setup.R&quot;</span>)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Creamos el nuevo archivo <code>prepare_NOMBRETAREA()</code>:</li>
 </ol>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="experimentos-reproducibles.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="st">&quot;./R&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;.R$&quot;</span>), source))</span>
-<span id="cb287-2"><a href="experimentos-reproducibles.html#cb287-2" aria-hidden="true" tabindex="-1"></a><span class="fu">create_new_task</span>(<span class="at">short_name_task =</span> <span class="st">&quot;NAMETASK&quot;</span>, <span class="at">get_info_googledoc =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="experimentos-reproducibles.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="st">&quot;./R&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;.R$&quot;</span>), source))</span>
+<span id="cb285-2"><a href="experimentos-reproducibles.html#cb285-2" aria-hidden="true" tabindex="-1"></a><span class="fu">create_new_task</span>(<span class="at">short_name_task =</span> <span class="st">&quot;NAMETASK&quot;</span>, <span class="at">get_info_googledoc =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Esta función:</p>
 <ol style="list-style-type: decimal">
 <li>Creará un nuevo archivo de corrección a partir de la plantilla</li>
@@ -813,11 +815,11 @@ SHORNAMETASKslider.push(question01);
 <ol style="list-style-type: decimal">
 <li>Descargamos el proyecto de RStudio jsPsychHelper:</li>
 </ol>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="experimentos-reproducibles.html#cb288-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychHelper&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
-<span id="cb288-2"><a href="experimentos-reproducibles.html#cb288-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span>
-<span id="cb288-3"><a href="experimentos-reproducibles.html#cb288-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb288-4"><a href="experimentos-reproducibles.html#cb288-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Si es la primera vez que abrimos jsPsychHelper: </span></span>
-<span id="cb288-5"><a href="experimentos-reproducibles.html#cb288-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;setup/setup.R&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="experimentos-reproducibles.html#cb286-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_course</span>(<span class="at">url =</span> <span class="st">&quot;gorkang/jsPsychHelper&quot;</span>, <span class="at">destdir =</span> <span class="st">&quot;~/Downloads/&quot;</span>)</span>
+<span id="cb286-2"><a href="experimentos-reproducibles.html#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select YES to delete zip</span></span>
+<span id="cb286-3"><a href="experimentos-reproducibles.html#cb286-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb286-4"><a href="experimentos-reproducibles.html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Si es la primera vez que abrimos jsPsychHelper: </span></span>
+<span id="cb286-5"><a href="experimentos-reproducibles.html#cb286-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;setup/setup.R&quot;</span>)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Abrimos <code>run.R</code> y seguimos las instrucciones. En esencia:</p>
 <ul>
@@ -825,21 +827,21 @@ SHORNAMETASKslider.push(question01);
 <li><p>Correr estas dos líneas, <strong>cambiando el 999 por tu número de protocolo</strong>:</p></li>
 </ul></li>
 </ol>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="experimentos-reproducibles.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="st">&quot;./R&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;.R$&quot;</span>), source))</span>
-<span id="cb289-2"><a href="experimentos-reproducibles.html#cb289-2" aria-hidden="true" tabindex="-1"></a><span class="fu">run_initial_setup</span>(<span class="at">pid =</span> <span class="dv">999</span>, <span class="at">download_files =</span> <span class="cn">FALSE</span>, <span class="at">download_task_script =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb289-3"><a href="experimentos-reproducibles.html#cb289-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb289-4"><a href="experimentos-reproducibles.html#cb289-4" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="experimentos-reproducibles.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="st">&quot;./R&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;.R$&quot;</span>), source))</span>
+<span id="cb287-2"><a href="experimentos-reproducibles.html#cb287-2" aria-hidden="true" tabindex="-1"></a><span class="fu">run_initial_setup</span>(<span class="at">pid =</span> <span class="dv">999</span>, <span class="at">download_files =</span> <span class="cn">FALSE</span>, <span class="at">download_task_script =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb287-3"><a href="experimentos-reproducibles.html#cb287-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb287-4"><a href="experimentos-reproducibles.html#cb287-4" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>()</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Para ver el data frame final listo para el análisis</li>
 </ol>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="experimentos-reproducibles.html#cb290-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># List available objects</span></span>
-<span id="cb290-2"><a href="experimentos-reproducibles.html#cb290-2" aria-hidden="true" tabindex="-1"></a>  targets<span class="sc">::</span><span class="fu">tar_objects</span>()</span>
-<span id="cb290-3"><a href="experimentos-reproducibles.html#cb290-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb290-4"><a href="experimentos-reproducibles.html#cb290-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load DF_analysis file</span></span>
-<span id="cb290-5"><a href="experimentos-reproducibles.html#cb290-5" aria-hidden="true" tabindex="-1"></a>  targets<span class="sc">::</span><span class="fu">tar_load</span>(DF_analysis)</span>
-<span id="cb290-6"><a href="experimentos-reproducibles.html#cb290-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb290-7"><a href="experimentos-reproducibles.html#cb290-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># See DF_analysis dataframe</span></span>
-<span id="cb290-8"><a href="experimentos-reproducibles.html#cb290-8" aria-hidden="true" tabindex="-1"></a>  DF_analysis</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="experimentos-reproducibles.html#cb288-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># List available objects</span></span>
+<span id="cb288-2"><a href="experimentos-reproducibles.html#cb288-2" aria-hidden="true" tabindex="-1"></a>  targets<span class="sc">::</span><span class="fu">tar_objects</span>()</span>
+<span id="cb288-3"><a href="experimentos-reproducibles.html#cb288-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb288-4"><a href="experimentos-reproducibles.html#cb288-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load DF_analysis file</span></span>
+<span id="cb288-5"><a href="experimentos-reproducibles.html#cb288-5" aria-hidden="true" tabindex="-1"></a>  targets<span class="sc">::</span><span class="fu">tar_load</span>(DF_analysis)</span>
+<span id="cb288-6"><a href="experimentos-reproducibles.html#cb288-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb288-7"><a href="experimentos-reproducibles.html#cb288-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># See DF_analysis dataframe</span></span>
+<span id="cb288-8"><a href="experimentos-reproducibles.html#cb288-8" aria-hidden="true" tabindex="-1"></a>  DF_analysis</span></code></pre></div>
 <!-- ## Bibliografía {.bibliografia -} -->
 <!-- Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O'Reilly Media, Inc. https://r4ds.had.co.nz/   -->
 

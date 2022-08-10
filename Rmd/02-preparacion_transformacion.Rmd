@@ -15,6 +15,7 @@ En este capítulo vamos a aprender a importar y exportar todo tipo de archivos, 
 
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
 if (!require("DT")) install.packages("DT"); library("DT")
+if (!require("ggplot2")) install.packages("ggplot2"); library("ggplot2")
 if (!require("googlesheets4")) install.packages("googlesheets4"); library("googlesheets4")
 if (!require("haven")) install.packages("haven"); library("haven")
 if (!require("here")) install.packages("here"); library("here")
@@ -35,7 +36,7 @@ if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); lib
 
 ## Importar y exportar datos
 
-Hasta ahora hemos trabajado con data-frames como `mpg` o `gaminder`, que forman parte de la instalación por defecto de R, o alguno de sus paquetes. Pero habitualmente trabajaremos con datos propios, por lo que necesitaremos leer uno o varios archivos. RStudio tiene un menú para ayudar a importar datos en formatos habituales ![](`r here::here("data", "images", "import'data.png")`), pero aquí aprenderemos a hacerlo todo en código, para que nuestros scripts sean autocontenidos.    
+Hasta ahora hemos trabajado con data-frames como `mpg` o `gaminder`, que forman parte de la instalación por defecto de R, o alguno de sus paquetes. Pero habitualmente trabajaremos con datos propios, por lo que necesitaremos leer uno o varios archivos. RStudio tiene un menú para ayudar a importar datos en formatos habituales ![](`r here::here("data/images/import-data.png")`), pero aquí aprenderemos a hacerlo todo en código, para que nuestros scripts sean autocontenidos.    
 
 Podemos ver algunas de las funciones de esta sección y cómo usarlas en la [Cheatsheet importar datos](https://github.com/rstudio/cheatsheets/raw/main/data-import.pdf)  
 
@@ -465,7 +466,7 @@ DF_name %>% rename_at(all_of(oldnames), ~ newnames)
 - Filtra los datos para quedarnos solo con los del año 1999
 - Renombra la variable displ para que se llame "engine displacement"
   + Si aparece el error `Error: unexpected symbol in ...`, puedes ver la ayuda de la función ?make.names, o [este post](https://stackoverflow.com/questions/22842232/dplyr-nonstandard-column-names-white-space-punctuation-starts-with-numbers)
-- Ordena por consumo en ciudad `cty` y clase de vehículo `class`
+- Ordena los datos (no las columnas) por consumo en ciudad `cty` y clase de vehículo `class`
 - Crea un data-frame que no contenga la variable `model`
 
 
@@ -474,7 +475,7 @@ DF_name %>% rename_at(all_of(oldnames), ~ newnames)
 - `mpg %>% filter(year == 1999)`  
 - `mpg %>% rename(engine displacement = displ)` #ERROR  
 - `mpg %>% rename(engine_displacement = displ)` #SOLUCION1  
-- `mpg %>% rename(`engine displacement` = displ)`#SOLUCION2  
+- mpg %>% rename(`engine displacement` = displ) #SOLUCION2  
 - `mpg %>% arrange(cty, class)`  
 - `mpg %>% select(-model)`
 
@@ -622,28 +623,34 @@ DF_name %>%
 ```{r ejercicios-dplyr-soluciones, eval=FALSE, include=FALSE}
 
 # 1. Usando la base df_wide, haz las siguientes cosas, una a una:  
-# 
+ 
 # * Filtra el DF para quedarnos solo con edades entre 18 y 50 años  
-# * Ordena los datos por genero y edad, esta última decreciente  
-# * Selecciona las columnas para quedarnos solo con ID, variables demograficas, y respuestas crudas (raw)  
-# * Crea una nueva variable que sea niv_edu_porc, en la que calcules cual es el porcentaje de nivel educativo al que han llegado relativo al máximo de la base de datos (nivel educativo persona / nivel educativo maximo; en porcentaje)  
   
+  # Metodo paso a paso
+  df_wide %>% 
+    filter(dem_edad >= 18) %>% 
+    filter(dem_edad <= 50)
+
+  # Metodo condensado
   df_wide %>% 
     filter(dem_edad >= 18 & dem_edad <= 50)
-  
+
+  # * Ordena los datos por genero y edad, esta última decreciente  
   df_wide %>% 
     arrange(dem_genero, desc(dem_edad))
   
+  # * Selecciona las columnas para quedarnos solo con ID, variables demograficas, y respuestas crudas (raw)  
   df_wide %>% 
     select(ID, contains("dem_"), contains("raw"))
   
+  # * Crea una nueva variable que sea niv_edu_porc, en la que calcules cual es el porcentaje de nivel educativo al que han llegado relativo al máximo de la base de datos (nivel educativo persona / nivel educativo maximo; en porcentaje)  
+
   df_wide %>% 
     mutate(niv_edu_porc = dem_nivedu / max(dem_nivedu) * 100)
 
 
 # 2. Ahora combina el resultado de todas las operaciones anteriores en un DF  
 
-  
   df_final = df_wide %>% 
     filter(dem_edad >= 18 & dem_edad <= 50) %>%
     arrange(dem_genero, desc(dem_edad)) %>%
@@ -664,16 +671,20 @@ DF_name %>%
 ### Verbos avanzados y otras criaturas indómitas
 
 
-#### Wide to long
+#### Wide to long simple
 
 Empecemos con un ejemplo muy sencillo. 3 participantes, 2 items.  
 
 ```{r wide-to-long}
 
 # Creamos un DF
-df_simple_wide = data.frame(ID = c("Participante1", "Participante2", "Participante3"),
-           Item1 = c(22, 33, 44),
-           Item2 = c(88, 99, 77))
+df_simple_wide = 
+  tibble(
+    ID = c("Participante1", "Participante2", "Participante3", "Participante4"),
+    condition = c("calor", "calor", "frio", "frio"),
+    Item1 = c(22, 33, 44, 55),
+    Item2 = c(88, 99, 77, 66)
+    )
 
 df_simple_wide
 
@@ -687,36 +698,8 @@ df_simple_long
 ```
 
 
-Ahora pasemos a un ejemplo mas complejo. Tenemos las puntuaciones a los 11 items de la lipkus numeracy scale de 232 participantes, ademas de datos demográficos.  
 
-
-```{r wide-to-long2}
-
-# Leemos documento en formato WIDE
-df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv") %>% 
-  # Seleccionamos solo algunas de las filas
-  select(ID, dem_genero, dem_edad, dem_nivedu, matches("lkns_[0-9]{2}_raw"))
-
-df_wide  
-
-
-# Wide to long
-df_wide %>% 
-  pivot_longer(cols = lkns_01_raw:lkns_11_raw, names_to = "Item", values_to = "Response", values_transform = list(Response = as.character))
-
-df_wide %>% 
-  pivot_longer(5:15, names_to = "Item", values_to = "Response", values_transform = list(Response = as.character))
-  
-df_long = df_wide %>% 
-  pivot_longer(matches("lkns"), names_to = "Item", values_to = "Response", values_transform = list(Response = as.character))
-
-
-DT::datatable(df_long)
-
-```
-
-
-#### Long to wide
+#### Long to wide simple
 
 Retomamos el ejemplo simple de antes:  
 
@@ -728,7 +711,84 @@ df_simple_long %>%
 
 ```
 
-Y lo mismo con el ejemplo mas complejo:  
+
+
+##### ¿Para que sirve tener los datos en formato long?  
+
+Hay algunos análisis para los que necesitamos formato long (anovas, modelos mixtos...), y varias cosas que se simplifican cuando los datos estan en formato largo.  
+
+Por ejemplo, si queremos usar resúmenes agrupados para obtener la media, mediana, desviación estandard... por ítem, con el formato WIDE necesitaremos 3 lineas de código para cada ítem que tenga nuestra base (imagina con 100 items...). Con el formato long, el código de abajo es suficiente.  
+
+```{r long-wide-plots}
+# En formato wide podriamos usar cosas como:  
+  # skimr::skim(df_simple_wide)
+
+# Añadir para cada item 3 líneas
+df_simple_wide %>%
+  summarise(mean_Item1 = mean(Item1),
+            mean_Item2 = mean(Item2),
+            # ...
+            median_Item1 = median(Item1),
+            median_Item2 = median(Item2),
+            # ...
+            sd_Item1 = sd(Item1),
+            sd_Item2 = sd(Item2),
+            # ...
+            N = n()
+            # NO aparece N por item
+            )
+
+# Sirve para 1 item o para 10 millones de items
+df_simple_long %>%
+  group_by(Item) %>%
+  summarise(MEAN = mean(Response),
+            MEDIAN = median(Response),
+            SD = sd(Response),
+            N = n())
+
+
+# Análisis modelos mixtos
+model = lme4::lmer(Response ~ condition + (1|ID), df_simple_long)
+sjPlot::tab_model(model)
+
+
+```
+
+
+
+
+#### Wide to long complex
+
+Ahora pasemos a un ejemplo mas complejo. Tenemos las puntuaciones a los 11 items de la lipkus numeracy scale de 232 participantes, ademas de datos demográficos.  
+
+
+```{r wide-to-long2}
+
+# Leemos documento en formato WIDE
+df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv") %>% 
+  # Seleccionamos solo algunas de las filas
+  select(ID, dem_genero, dem_edad, dem_nivedu, matches("lkns_[0-9]{2}_raw"))
+
+DT::datatable(df_wide)
+  
+
+# Wide to long
+df_long = 
+  df_wide %>% 
+  pivot_longer(cols = lkns_01_raw:lkns_11_raw, names_to = "Item", values_to = "Response", values_transform = list(Response = as.character))
+
+# Podemos usar select_helpers!
+  # Reemplaza lkns_01_raw:lkns_11_raw por matches("lkns")
+
+
+DT::datatable(df_long)
+
+```
+
+
+#### Long to wide complex
+
+Nos sirve el mismo código que con el ejemplo más simple: 
 
 ```{r long-to-wide-2}
 
@@ -738,29 +798,6 @@ df_long %>%
 
 ```
 
-
-##### ¿Para que sirve tener los datos en formato long?  
-
-```{r long-wide-plots}
-
-DF_plot = df_long %>% 
-  mutate(Response_num = as.numeric(Response))
-
-DF_plot %>% 
-  drop_na(Response_num) %>% 
-  ggplot(aes(Item, Response_num, color = Item)) +
-  geom_jitter(alpha = .5) +
-  geom_violin(alpha = .4) +
-  scale_y_log10() +
-  coord_flip()
-  
-DF_plot %>% 
-  filter(is.na(Response_num)) %>% 
-  ggplot(aes(Item, Response, color = Item)) +
-  geom_jitter(alpha = .5, height = .2) +
-  facet_wrap(~ Item, scales = "free")
-
-```
 
 
 ### Ejercicios - wide to long {.ejercicio -} 

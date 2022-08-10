@@ -63,9 +63,11 @@ selección-avanzada-con-select_helpers
 modificar-y-añadir-variables
 resúmenes-agrupados
 verbos-avanzados-y-otras-criaturas-indómitas
-wide-to-long
-long-to-wide
+wide-to-long-simple
+long-to-wide-simple
 para-que-sirve-tener-los-datos-en-formato-long
+wide-to-long-complex
+long-to-wide-complex
 separate-omit-ifelse-case_when-tipos-de-variables
 regular-expressions
 combinar-datos
