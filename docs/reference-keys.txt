@@ -1,3 +1,4 @@
+tab:skimr
 introducción-a-r-y-visualización-de-datos
 introducción-porque-la-visualización-de-datos-es-importante
 ejemplo-del-mundo-real-cuantos-temas-deberia-estudiar

@@ -54,6 +54,9 @@ ggplot(gapminder, aes(lifeExp)) +
 
 ```
 
+
+---  
+
 `summarise()` nos permite ver medias, medianas, etc.
 
 
@@ -65,6 +68,14 @@ gapminder %>%
             SD = sd(lifeExp),
             MAX = max(lifeExp),
             MIN = min(lifeExp))
+
+```
+
+Alternativamente, hay funciones como `skimr::skim()` que nos muestran una panorámica muy util de las variables de nuestro dataframe. Corre la función en tu Consola para ver el output completo.    
+
+```{r skimr, results='asis'}
+
+skimr::skim(gapminder)
 
 ```
 
@@ -85,7 +96,9 @@ ggplot(mpg, aes(hwy)) +
   geom_histogram(binwidth = 1)
 
 ```
-### {-}
+
+### {-}  
+
 <BR>
 
 ### Ejercicios {.ejercicio -} 

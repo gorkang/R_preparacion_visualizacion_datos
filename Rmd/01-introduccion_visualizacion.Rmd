@@ -404,7 +404,7 @@ Los ingredientes esenciales de una gráfica son:
 
 ### Mi primera gráfica 1-2-3
 
-Para crear una gráfica con ggplot, tenemos que indicar donde están nuestros datos, que mostraremos en el eje `x` e `y`, además de que geometrias queremos (`geoms`).  Usaremos `+` para sumar instrucciones, con una lógica de capas superpuestas.  
+Para crear una gráfica con ggplot, tenemos que indicar donde están nuestros datos, qué mostraremos en el eje `x` e `y`, además de que geometrias queremos (`geoms`).  Usaremos `+` para sumar instrucciones, con una lógica de capas superpuestas.  
 
 Por ejemplo:  
 
@@ -1088,28 +1088,28 @@ ggplot(mpg) +
 Le podemos añadir el promedio por grupo:  
 
 ```{r transformaciones-estadisticas-promedios-grupo-2}
-ggplot(mpg) + 
-  geom_jitter(aes(x = class, y = hwy), width = 0.2) +
-  stat_summary(aes(x = class, y = hwy), fun = mean, color = "red", geom = "point", size = 4, alpha = .7) + 
+ggplot(mpg, aes(x = class, y = hwy)) + 
+  geom_jitter(width = 0.2) +
+  stat_summary(fun = mean, color = "red", geom = "point", size = 4, alpha = .7) + 
   theme_minimal()
 ```
 
 
-O cosas aún más elaboradas:  
+<!-- O cosas aún más elaboradas:   -->
 
-```{r transformaciones-estadisticas-promedios-grupo-02}
+<!-- ```{r transformaciones-estadisticas-promedios-grupo-02} -->
 
-ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
-  geom_point(alpha = .1) +
-  stat_summary(data = gapminder %>% 
-                 group_by(continent) %>% 
-                 summarise(gdpPercap = mean(gdpPercap),
-                           lifeExp  = mean(lifeExp)),
-               fun = mean,
-               geom = "point",
-               size = 4)
-    
-```
+<!-- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + -->
+<!--   geom_point(alpha = .1) + -->
+<!--   stat_summary(data = gapminder %>%  -->
+<!--                  group_by(continent) %>%  -->
+<!--                  summarise(gdpPercap = mean(gdpPercap), -->
+<!--                            lifeExp  = mean(lifeExp)), -->
+<!--                fun = mean, -->
+<!--                geom = "point", -->
+<!--                size = 4) -->
+
+<!-- ``` -->
 
 
 
@@ -1131,7 +1131,7 @@ plotB = ggplot(mpg, aes(displ, hwy, color = class)) +
 cowplot::plot_grid(plotA, plotB, labels = c("A", "B"))
 ```
 
-Pero en realidad no quiero que las líneas pasen por todos los puntos, sino que muestren el promedio en cada nivel de `displ` ¿Podrías reproducir el gráfico de abajo?  
+Pero en realidad no quiero que las líneas pasen por todos los puntos, sino que muestren el promedio en cada nivel de `displ` para cada `class` de vehículo. ¿Podrías reproducir el gráfico de abajo?  
 
 ```{r ejercicio-7b, echo=FALSE}
   ggplot(mpg, aes(displ, hwy, color = class)) +
