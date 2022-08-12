@@ -960,7 +960,8 @@ Pista <img src="data/images/hint.png" />
 ##  8 E     Very Good  2400
 ##  9 E     Premium    2337
 ## 10 E     Ideal      3903
-## # … with 25 more rows</code></pre>
+## # … with 25 more rows
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="análisis-de-datos-exploratorio.html#cb251-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span> </span>
 <span id="cb251-2"><a href="análisis-de-datos-exploratorio.html#cb251-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(color, cut) <span class="sc">%&gt;%</span>  </span>
 <span id="cb251-3"><a href="análisis-de-datos-exploratorio.html#cb251-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(color, cut, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
