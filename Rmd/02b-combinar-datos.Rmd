@@ -1,0 +1,470 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+
+# Combinar datos
+
+Combinar distintos data frames es una tarea muy común cuando preparamos datos. En ocasiones trabajaremos con distintos archivos que tendremos que combinar, y otras veces, separararemos nuestra base original en distintos data frames, para realizar procesamientos diferenciados, y más adelante volver a combinar los data frames en una base final.    
+
+
+
+---  
+
+#### Paquetes para este capítulo {-}
+
+```{r setup-02b}
+
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+if (!require("DT")) install.packages("DT"); library("DT")
+if (!require("ggplot2")) install.packages("ggplot2"); library("ggplot2")
+if (!require("here")) install.packages("here"); library("here")
+if (!require("janitor")) install.packages("janitor"); library("janitor")
+if (!require("purrr")) install.packages("purrr"); library("purrr")
+if (!require('readr')) install.packages('readr'); library('readr')
+if (!require("readxl")) install.packages("readxl"); library("readxl")
+if (!require("tidyr")) install.packages("tidyr"); library("tidyr")
+if (!require("waldo")) install.packages("waldo"); library("waldo")
+
+```  
+
+---  
+
+
+## Bind rows or columns
+
+El método más sencillo. Simplemente unimos las filas o columnas de los data-frames.  
+
+```{r bind}
+
+# Importar CSVs
+DF1 = read_csv(here::here("data/files/02-CSVs/01.csv"))
+DF2 = read_csv(here::here("data/files/02-CSVs/02.csv"))
+
+
+# Bind DFs añadiendo las *filas* de DF2 a DF1
+DF1 %>% 
+   bind_rows(DF2)
+
+
+# Bind DFs añadiendo las *columnas* de DF2 a DF1
+  ## bind_cols renombra automaticamente los nombres de las columnas para que no haya coincidencias
+DF1 %>% 
+  bind_cols(DF2) 
+
+```
+
+## Joins
+
+El paquete {dplyr} tiene funciones que permiten trabajar combinando, filtrando, etc. distintos dataframes. Podéis ver más detalle y algunas ilustraciones fantásticas (como la de abajo; **inner_join()**) en el capítulo [relational data de r4ds](https://r4ds.had.co.nz/relational-data.html).
+
+![SOURCE: https://r4ds.had.co.nz/relational-data.html#mutating-joins](`r here::here("data/images/join-inner.png")`)  
+
+En [https://github.com/gadenbuie/tidyexplain](https://github.com/gadenbuie/tidyexplain) se pueden ver animaciones mostrando estas operaciones.  
+
+---  
+
+
+### Tipos de Join {.parameters -}  
+
+Estas operaciones tendrán la forma: `DF_x %>% WHATEVER_join(DF_y)`  
+
+
+* **Mutating joins**:  
+    + inner_join(): preserva pares de observaciones de `DF_x` y de `DF_y` con claves iguales   
+    + left_join(): preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguales    
+    + right_join(): preserva las observaciones de `DF_y`, añadiendo las de `DF_x` con claves iguales  
+    + full_join(): preserva todas las observaciones de `DF_x` y `DF_y`, alineándolas cuando tengan claves iguales  
+    
+* **Filtering joins**:  
+    + semi_join(): preserva solo aquellas observaciones de `DF_x` cuyas claves aparezcan en `DF_y`   
+    + anti_join(): preserva solo aquellas observaciones de `DF_x` cuyas claves NO aparezcan en `DF_y`  
+
+* **Nesting joins**:  
+    + nest_join(): preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguales  
+
+
+### Mutating joins  
+
+
+**Importamos datos**
+
+Tenemos los siguientes dataframes:  
+
+* DF_IDs: Variables demográficas de participantes  
+* DF_results: Resultados en variables de interés de participantes    
+* DF_BAD: Grupo de participantes "selectos"  
+
+
+```{r joins-data}
+
+# Importar CSVs para los joins  
+DF_IDs = read_csv(here::here("data/files/02-join-IDs.csv"))
+DF_results = read_csv(here::here("data/files/02-join-results.csv"))
+DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
+
+```
+
+
+#### Inner join  
+
+Preserva pares de observaciones de `DF_x` y de `DF_y` con claves iguales (fijaros en el mensaje que aparece en la Consola: `Joining, by = "ID"`).   
+
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data/images/inner-join.gif")`)
+
+```{r inner-join}
+
+DF_inner_joined = 
+  DF_IDs %>% 
+  inner_join(DF_results)
+
+#nrow(DF_inner_joined)
+
+DT::datatable(DF_inner_joined)
+
+```
+
+
+#### Left join  
+
+Preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguales (columnas con el mismo nombre).  
+
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data/images/left-join.gif")`)
+
+```{r left-join}
+
+DF_left_joined = DF_IDs %>% 
+   left_join(DF_results)
+
+# Vemos el número de filas de cada dataframe
+# nrow(DF_left_joined)
+# map(list("DF_left_joined" = DF_left_joined, "DF_IDs" = DF_IDs, "DF_results" = DF_results), nrow)
+
+DT::datatable(DF_left_joined)
+```
+
+
+---  
+
+
+Si no tenemos columnas con el mismo nombre en ambos dataframes, tenemos que indicarle a la función a partir de que dos columnas queremos unir los dataframes. Por ejemplo, con `by = c("ID" = "Identificador")` le decimos que la columna `ID` el primer dataframe corresponde a `Identificador` del segundo dataframe.  
+
+```{r left-join2}
+
+# Renombramos el identificador para que no coincidan
+DF_results2 = DF_results |> rename(Identificador = ID)
+
+# Si no hay variables en común, nos da un error:
+
+# DF_left_joined = DF_IDs %>% 
+#    left_join(DF_results2)
+  # Error in `left_join()`:
+  # ! `by` must be supplied when `x` and `y` have no common variables.
+# ℹ use by = character()` to perform a cross-join.
+
+# Tenemos que indicar explicitamente que identificador del primer dataframe (DF_IDs) 
+  # coincide con que identificador del segundo dataframe (DF_results2)
+DF_left_joined = DF_IDs %>%
+   left_join(DF_results2, by = c("ID" = "Identificador"))
+
+```
+
+
+
+#### Full join  
+
+Preserva todas las observaciones de `DF_x` y `DF_y`, alineándolas cuando tengan claves iguales.  
+
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data/images/full-join.gif")`)
+
+```{r full-join}
+
+DF_full_joined = DF_IDs %>% 
+   full_join(DF_results)
+
+# CHECK
+# map(list("DF_full_joined" = DF_full_joined, "DF_IDs" = DF_IDs, "DF_results" = DF_results), nrow)
+
+DT::datatable(DF_full_joined)
+
+```
+
+
+### Filtering joins  
+
+#### Anti join  
+
+Preserva solo aquellas observaciones de `DF_x` cuyas claves NO aparezcan en `DF_y`.  
+
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data/images/anti-join.gif")`)
+
+```{r anti-join}
+
+# AVOID the people present in DF_BAD
+DF_anti_joined = DF_IDs %>% 
+  anti_join(DF_BAD, by = "ID") %>% 
+  left_join(DF_results)
+
+# CHECK
+# map(list("DF_anti_joined" = DF_anti_joined, "DF_IDs" = DF_IDs, "DF_BAD" = DF_BAD, "DF_results" = DF_results), nrow)
+
+
+DT::datatable(DF_anti_joined)
+```
+
+
+#### Semi join  
+
+Preserva solo aquellas observaciones de `DF_x` cuyas claves aparezcan en `DF_y`.  
+
+![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data/images/semi-join.gif")`)
+
+```{r semi-join}
+
+# INCLUDE ONLY the people present in DF_BAD
+DF_semi_joined = DF_IDs %>% 
+  semi_join(DF_BAD, by = "ID") %>% 
+  left_join(DF_results)
+
+# CHECK
+# map(list("DF_semi_joined" = DF_semi_joined, "DF_IDs" = DF_IDs, "DF_BAD" = DF_BAD, "DF_results" = DF_results), nrow)
+
+DT::datatable(DF_semi_joined)
+
+```
+
+
+### Nesting joins  
+
+
+```{r joins-nesting}
+
+DF_nest_joined = DF_IDs %>% 
+  nest_join(DF_results, by = "ID")
+
+DT::datatable(DF_nest_joined)
+
+```
+
+
+## Ejercicios JOINS {.ejercicio -}
+
+Con los DFs de abajo, haz las siguientes operaciones:
+
+```{r ejercicios-joins-dfs}
+
+DF_IDs = read_csv(here::here("data/files/02-join-IDs2.csv"))
+DF_results = read_csv(here::here("data/files/02-join-results.csv"))
+DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
+
+```
+
+
+1. Une los datos demográficos con los resultados. <details><summary>Pista para unir bases: ![](data/images/hint.png)</summary><span style="color: orange;">[Vimos en el apartado left_join() como hacer esto](#left-join)</span></details>  
+
+2. A la base resultante, quítale los sujetos descartados de `DF_BAD`. <details><summary>Pista descartar filas: ![](data/images/hint.png)</summary><span style="color: orange;">[anti_join()!](#anti-join)</span></details>  
+
+3. Crea una nueva base con datos demográficos y resultados para los sujetos descartados. <details><summary>Pista para filtrar a partir de una base: ![](data/images/hint.png)</summary><span style="color: orange;">[semi_join()!](#semi-join)</span></details>  
+
+4. Comprueba si el promedio para `Crystallized Intelligence` de los participantes descartados difiere de la de los no descartados. <details><summary>Pista para promedios agrupados: ![](data/images/hint.png)</summary><span style="color: orange;">`group_by() %>% summarise()`</span></details>  
+
+5. Haz una gráfica donde se puedan ver las diferencias  
+
+
+```{r ejercicios-joins-responses, eval=FALSE, include=FALSE}
+# 1. Une los datos demográficos con los resultados  
+
+  # Solucion 1  
+
+  DF_joined = DF_IDs %>% 
+    left_join(DF_results, by = c("Identificador" = "ID"))
+  
+  # Solucion 2
+  DF_joined2 = DF_IDs %>% 
+    rename(ID = Identificador) %>% 
+    left_join(DF_results, by = "ID")
+  
+  # Comprobamos que son iguales
+  waldo::compare(DF_joined, DF_joined2)
+
+  
+  
+# 2. A la base resultante, quítale los sujetos descartados de `DF_BAD`  
+
+  DF_joined_clean = DF_joined2 %>% 
+    anti_join(DF_BAD, by = "ID")
+  
+  
+
+# 3. Crea una nueva base con datos demográficos y resultados para los sujetos descartados  
+
+  # Solucion 1
+  DF_joined_discarded = DF_IDs %>% 
+    rename(ID = Identificador) %>% 
+    left_join(DF_results, by = "ID") %>% 
+    semi_join(DF_BAD, by = "ID")
+
+  # Solucion 2
+  DF_joined_discarded2 = DF_BAD %>% 
+    left_join(DF_results, by = "ID")
+  
+  # Comprobamos que son iguales
+  waldo::compare(DF_joined_discarded, DF_joined_discarded2)
+
+  
+  
+# 4. Comprueba si el promedio para `Crystallized Intelligence` de los participantes descartados difiere de la de los no descartados  
+  
+  # Solucion basica
+  DF_joined_clean %>% 
+    summarise(mean_CI = mean(`Crystallized Intelligence`, na.rm = TRUE))
+
+  DF_joined_discarded %>% 
+      summarise(mean_CI = mean(`Crystallized Intelligence`, na.rm = TRUE))
+  
+  # Solucion avanzada
+  DF_all = DF_joined_clean %>% mutate(type = "clean") %>% 
+    bind_rows(DF_joined_discarded %>% mutate(type = "discarded")) 
+  
+  DF_all %>% 
+    group_by(type) %>% 
+    summarise(mean_CI = mean(`Crystallized Intelligence`, na.rm = TRUE))
+  
+
+  
+# 5. Haz una gráfica donde se puedan ver las diferencias  
+  
+  DF_all %>% 
+    ggplot(aes(type, `Crystallized Intelligence`, color = type)) +
+    geom_jitter(width = .2, height = 0) +
+    stat_summary(fun = mean,
+                 geom = "point",
+                 size = 3, 
+                 color = "black",
+                 alpha = .5)
+  
+```
+
+---  
+
+6. En el ejercicio 3 de verbos avanzados creaste un DF llamado `DF_split` con la median split a partir de la variable `Social.Adaptation`. 
+
+```{r ejercicios-joins-responses-5-setup}
+
+  DF_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
+    janitor::clean_names()
+
+  median_social_adaptation = DF_wide %>% 
+    pull(social_adaptation) %>% 
+    median(., na.rm = TRUE)
+
+  DF_split = DF_wide %>% 
+    mutate(social_adaptation_split = 
+             as.factor(
+               case_when(
+                 social_adaptation >= median_social_adaptation ~ "high_social_adaptation",
+                 social_adaptation < median_social_adaptation ~ "low_social_adaptation",
+                 TRUE ~ NA_character_))) %>% 
+    select(id, social_adaptation, social_adaptation_split) %>% 
+    drop_na(social_adaptation_split)
+  
+  DF_long = DF_wide %>% pivot_longer(fluid_intelligence:working_memory)
+
+```
+
+Uno ese DF al `DF_long` que habías creado en el ejercicio 2 de la misma sección. El DF final se vera así:  
+
+```{r ejercicios-joins-responses-5, echo=FALSE}
+  
+  DF_final = DF_long %>% 
+    right_join(DF_split, by = "id")
+
+  DT::datatable(DF_final)
+  
+```
+
+7. Haz un plot donde se vea la distribución para todas las variables de resultados de los dos niveles de `social_adaptation_split`.
+
+```{r ejercicios-joins-responses-6, echo=FALSE}
+    
+  DF_final %>% 
+    ggplot(aes(value, color = social_adaptation_split, fill = social_adaptation_split)) +
+    geom_density(alpha = .2) +
+    theme(legend.position = "bottom") +
+    facet_wrap(~ name, scales = "free", nrow = 3)
+
+  DF_final %>%
+    ggplot(aes(value, name, color = social_adaptation_split, fill = social_adaptation_split)) +
+    ggridges::geom_density_ridges(alpha = .2) +
+    theme(legend.position = "bottom")
+
+```
+
+---  
+
+<!-- 8. El plot que vimos en el tema anterior tiene el problema de que los datos de tuberculosis son en números absolutos.   -->
+
+<!-- ```{r ejercicios-joins-responses-7-setup, echo=TRUE, fig.height=6, fig.width=8} -->
+
+<!-- library(tidyr) -->
+<!-- # table1 -->
+
+<!-- ggplot(table1, aes(as.factor(year), cases)) +  -->
+<!--   geom_line(aes(group = country), colour = "grey50") +  -->
+<!--   geom_point(aes(colour = country), size = 2) + -->
+<!--   scale_y_continuous(labels = scales::comma) + -->
+<!--   labs(title = "Casos de Tuberculosis por año", -->
+<!--        x = "year", -->
+<!--        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") + -->
+<!--   theme(legend.position = "bottom",  -->
+<!--         legend.title = element_blank()) -->
+
+<!-- ``` -->
+
+<!-- Serias capaz de convertir estos a % de la población, como se ve en el plot de abajo?   -->
+
+<!-- ```{r ejercicios-joins-responses-7, echo=FALSE, fig.height=6, fig.width=8} -->
+
+<!-- df_plot = table1 %>%  -->
+<!--   mutate(relative = cases/population) -->
+
+
+<!-- ggplot(df_plot, aes(as.factor(year), relative)) +  -->
+<!--   geom_line(aes(group = country), colour = "grey50") +  -->
+<!--   geom_point(aes(colour = country), size = 2) + -->
+<!--   scale_y_continuous(labels = scales::percent) + -->
+<!--   labs(title = "Casos de Tuberculosis por año", -->
+<!--        x = "year", -->
+<!--        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") + -->
+<!--   theme(legend.position = "bottom",  -->
+<!--         legend.title = element_blank()) -->
+
+<!-- ``` -->
+
+
+## Datasets interesantes  
+
+En los siguientes repositorios podréis encontrar datasets interesantes para jugar.  
+
+* [fivethirtyeight](https://github.com/fivethirtyeight/data)  
+
+* [Our World in Data](https://github.com/owid/owid-datasets)  
+
+* [TidyTuesday](https://github.com/rfordatascience/tidytuesday)  
+
+
+--- 
+
+
+
+## Bibliografía {.bibliografia -}
+
+[Cheatsheets RStudio](https://github.com/rstudio/cheatsheets)
+
+[data-carpentry-week lesson_joins](https://mikoontz.github.io/data-carpentry-week/lesson_joins.html)
+
+[R4ds - Joins](https://r4ds.had.co.nz/relational-data.html#mutating-joins)
+
+[Tidyexplain](https://github.com/gadenbuie/tidyexplain)

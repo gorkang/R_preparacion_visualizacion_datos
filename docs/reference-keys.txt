@@ -70,6 +70,7 @@ wide-to-long-complex
 long-to-wide-complex
 separate-omit-ifelse-case_when-tipos-de-variables
 regular-expressions
+ayuda-con-regular-expressions
 combinar-datos
 bind-rows-or-columns
 joins
