@@ -958,8 +958,7 @@ DF_name %>%
 
 # Leemos los datos y usamos janitor::clean_names() para limpiar los nombres de las columnas
  DF_wide = 
-  read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
-  janitor::clean_names()
+  read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv")
 
 ```
 
@@ -1092,7 +1091,7 @@ Ahora volvemos a usar con los datos brutos (`sa-raw-anonymised.csv`) del paper [
 
 En estos datos tenemos las puntuaciones crudas (e.g. WMAT_01_raw) y ya codificadas/corregidas (WMAT_01_cod) para los ítems de varias escalas Para preparar los datos de cara al análisis final, necesitamos calcular el puntaje para cada participante y escala. Empezaremos con la prueba de Matrices de WAIS (`WMAT_`). 
 
-1. **Extrae la suma para cada participante de los ítems WMAT_[NUMEROS]_cod**  
+1. Calcula el puntaje para cada participante en la prueba de Matrices de WAIS (ítems WMAT_[NUMEROS]_cod)  
   
   Hay al menos dos estrategias posibles:
   
@@ -1125,8 +1124,8 @@ df_wide_raw = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-
 DF_A = 
   df_wide_raw %>% 
   select(ID, matches("WMAT_[0-9]{2}_cod")) %>% 
-  transmute(ID = ID,
-            WMAT_sum = rowSums(.[,2:27]))
+  mutate(WMAT_sum = rowSums(.[,2:27])) %>% 
+  select(ID, WMAT_sum)
 
 
 # Estrategia A2 - wide con intervalos entre nombres de variables

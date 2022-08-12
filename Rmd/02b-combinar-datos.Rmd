@@ -217,7 +217,7 @@ DT::datatable(DF_anti_joined)
 
 #### Semi join  
 
-Preserva solo aquellas observaciones de `DF_x` cuyas claves aparezcan en `DF_y`.  
+Preserva solo aquellas observaciones de `DF_x` cuyas claves aparezcan en `DF_y`. La diferencia con `inner_join()` es que NO se preservan las observaciones de `DF_y`.     
 
 ![SOURCE: https://github.com/gadenbuie/tidyexplain](`r here::here("data/images/semi-join.gif")`)
 

@@ -24,15 +24,12 @@ if (!require('haven')) install.packages('haven'); library('haven')
 if (!require('inspectdf')) install.packages('inspectdf'); library('inspectdf')
 if (!require('knitr')) install.packages('knitr'); library('knitr')
 if (!require('lme4')) install.packages('lme4'); library('lme4')
+if (!require('papaja')) install.packages("papaja"); library('papaja')
 if (!require('parameters')) install.packages('parameters'); library('parameters')
 if (!require('performance')) install.packages('performance'); library('performance')
 if (!require('report')) install.packages('report'); library('report')
 if (!require('sjPlot')) install.packages('sjPlot'); library('sjPlot')
 if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
-
-if (!require('remotes')) install.packages('remotes'); library('remotes')
-if (!require('papaja')) remotes::install_github("crsh/papaja"); library('papaja')
-
 
 ```
 

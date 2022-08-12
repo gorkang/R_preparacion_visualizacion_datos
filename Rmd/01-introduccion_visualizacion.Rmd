@@ -39,7 +39,7 @@ if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'
 ## Introducción: porque la visualización de datos es importante
 
 
-*"These 13 datasets (the Datasaurus, plus 12 others) each have the same summary statistics (x/y mean, x/y standard deviation, and Pearson's correlation) to two decimal places, while being drastically different in appearance."* (Matejka, J., & Fitzmaurice, G., 2017)  
+*"These 13 datasets (the Datasaurus, plus 12 others) each have the same summary statistics (x/y mean, x/y standard deviation, and Pearson's correlation) to two decimal places, while being drastically different in appearance."* (Matejka, J., & Fitzmaurice, G., 2017).    
 
 
 ![SOURCE: https://www.autodeskresearch.com/publications/samestats](`r here::here("data", "images", "DinoSequentialSmaller.gif")`)
@@ -218,7 +218,9 @@ cowplot::plot_grid(plot_inicial, plot_final, labels = c("Antes", "Después"))
 
 ![SOURCE: https://www.autodeskresearch.com/publications/samestats](`r here::here("data", "images", "BoxViolinSmaller.gif")`)
 
+---  
 
+<!-- [@riedel2022cs]: https://doi.org/10.1042/CS20220287 -->
 
 ---  
 
