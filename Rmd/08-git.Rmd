@@ -43,17 +43,14 @@ Ver instrucciones para [Windows](https://happygitwithr.com/install-git.html#inst
 
 |   <span style = "font-size: 10px;">Importante: en el paso *Adjusting your PATH environment* en en Windows, selecciona *Git from the command line and also from 3rd-party software*</span>  
 
-<BR>  
-
----  
 
 
+
+## Git
 
 <div style= "float:right;position: relative; margin:0px 0px 0px 50px;">
 ![SOURCE: https://xkcd.com/1597/](`r here::here("data/images/git.png")`)    
 </div>
-
-### Git
 
 Un segundo elemento que nos va a ayudar a trabajar en equipo, y a evitar problemas en proyectos relativamente complejos es el uso de un sistema de control de versiones como [Git](https://git-scm.com/). Los proyectos de RStudio hacen especialmente sencillo usar algunas funcionalidades básicas de Git.   
 
@@ -66,7 +63,7 @@ Algunas referencias útiles:
 <div style="clear: both;"></div>
 
 
-### Github
+## Github
 
 <div style= "float:left;position: relative; margin:0px 30px 0px 0px;">
 ![SOURCE: [github.githubassets.com](https://github.githubassets.com/images/modules/open_graph/github-octocat.png)](`r here::here("data", "images", "github-octocat.png")`)
@@ -78,7 +75,7 @@ Github tiene un programa especial para estudiantes: https://education.github.com
 
 
   
-### Clonar un repositorio existente {#clonar-repo}
+## Clonar un repositorio existente {#clonar-repo}
 
 Algo que podemos hacer con todos los repositorios de Github es clonarlos localmente:  
 
@@ -101,7 +98,7 @@ Algo que podemos hacer con todos los repositorios de Github es clonarlos localme
 
 
 
-### Crear un proyecto en RStudio asociado a Github  
+## Crear un proyecto en RStudio asociado a Github  
 
 Podemos empezar creando un repositorio en Github, para después clonarlo localmente. Si necesitamos crear un [personal access token, podemos consultar la ayuda de Github](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).  
 
@@ -115,7 +112,7 @@ usethis::create_github_token()
   # En tu página de Github, haz click en tu icon (arriba a la derecha) -> Settings -> Developer settings -> Personal access tokens -> [Generate new token] -> Give gist, repo and workflow permissions.
 ```
 
-#### Versión simple [recomendado] {.parameters -}
+### Versión simple [recomendado] {.parameters -}
 
 En [Github](https://github.com/):  
 
@@ -125,12 +122,12 @@ En [Github](https://github.com/):
 
 3. [Clonar repositorio](#clonar-repo)  
 
-#### {-}
+### {-}
 
 
 Alternativamente, si ya tenemos un proyecto de RStudio, podemos crear un repositorio de Github asociado automágicamente.  
 
-#### Usando el terminal  {.parameters -}
+### Usando el terminal  {.parameters -}
 
 1. Crear local git repo (solo si no lo tenemos aún): `usethis::use_git()` (se crea una carpeta oculta llamada .git)  
 
@@ -143,10 +140,10 @@ Alternativamente, si ya tenemos un proyecto de RStudio, podemos crear un reposit
   + Empujar el repositorio local a Github: `git push --set-upstream origin master`  
 
   
-#### {-}
+### {-}
   
 
-### Ejercicio Git-Github  {.ejercicio -}
+## Ejercicio Git-Github  {.ejercicio -}
 
 1. Crea un proyecto de RStudio  
 
@@ -220,31 +217,31 @@ En RStudio podemos trabajar gráficamente, Usando el panel `Git`.
 
 Después de hacer el push de arriba, al entrar en nuestro repositorio deberíamos ver algo parecido a lo siguiente (si no lo vemos, ir a **branches**). La única dificultad es saber cual de los botones verdes apretar:  
 
-**Paso 1. Compare & pull request**  
+#### Paso 1. Compare & pull request  
 
-##### {.parameters -} 
+<!-- ##### {.parameters -}  -->
 
 ![](`r here::here("data", "images", "pull-request-1.png")`){ width=70% }  
 
-##### {-}  
+<!-- ##### {-}   -->
 
-**Paso 2. Create pull request**  
+#### Paso 2. Create pull request  
 
-##### {.parameters -} 
+<!-- ##### {.parameters -}  -->
 
 ![](`r here::here("data", "images", "pull-request-2.png")`){ width=70% }  
 
-##### {-} 
+<!-- ##### {-}  -->
 
-**Paso 3. Merge pull request**
+#### Paso 3. Merge pull request  
 
-##### {.parameters -} 
+<!-- ##### {.parameters -}  -->
 
 ![](`r here::here("data", "images", "pull-request-3.png")`){ width=70% }  
 
 +  Borrar rama antigua  
 
-##### {-} 
+<!-- ##### {-}  -->
 
 
 ---  

@@ -26,6 +26,139 @@ Con este sistema podremos crear fácilmente el código del experimento, simular 
 
 El output del sistema es estandarizado, lo que implica que los [nombres de las variables y la estructura de datos son predecibles](https://gorkang.github.io/jsPsychR-manual/qmd/05-jsPsychHelpeR.html#output-dataframes-column-names). Finalmente, la generación de gráficas, tablas, reportes y los análisis son reproducibles.
 
+
+
+## Como crear un protocolo experimental
+
+En el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) puedes ver las tareas disponibles junto con una breve descripción de cada una de ellas.
+
+Si quieres consultar los [scripts de las tareas](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks) puedes hacerlo en la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker).
+
+------------------------------------------------------------------------
+
+1)  Descargamos el proyecto de RStudio jsPsychMaker:
+
+```{r, eval=FALSE}
+
+usethis::use_course(url = "gorkang/jsPsychMaker", destdir = "~/Downloads/")
+# Select YES to delete zip
+```
+
+------------------------------------------------------------------------
+
+2)  En a la carpeta `canonical_protocols`:
+
+-   Editamos `config.js` para indicar las tareas que queremos usar en la sección `// ORDER OF TASKS`
+
+-   Alternativamente, podemos usar la [jsPsychMaker Shiny APP](https://gorkang.shinyapps.io/jsPsychMaker_config/) para crear nuestro archivo `config.js` (recuerda copiar el archivo `config.js` a la carpeta de tu protocolo)
+
+------------------------------------------------------------------------
+
+3)  El experimento esta listo para ser utilizado localmente. Podemos hacerlo ejecutando `index.html`
+
+------------------------------------------------------------------------
+
+
+
+### Ejercicio 3 {.ejercicio -}
+
+Ve al [ejercicio 3 del siguiente capítulo](ejercicios-7.html#ejercicio-3) 
+
+
+
+
+## Como simular datos
+
+El sistema para simular participantes utiliza [Selenium](https://www.selenium.dev/) dentro de un contenedor de [Docker](https://www.docker.com/). En Linux es trivial su uso, pero en Windows su configuración puede ser más compleja.
+
+Puedes seguir los siguientes pasos, pero si no tienes una instalación funcional de Docker que utilice contenedores Linux, el sistema fallará. En ese caso, quedan las siguientes opciones:
+
+-   Correr un par de participantes manualmente\
+-   Usar un ordenador con Linux o crear una partición Linux\
+-   Crear una máquina virtual linux desde la que simular participantes. Puedes usar [Virtualbox](https://www.virtualbox.org/wiki/Downloads) para instalar [Ubuntu](https://releases.ubuntu.com/20.04/). Una vez dentro, tendrás que seguir los pasos del [manual para prepara el sistema para correr R y RStudio](https://gorkang.github.io/R_preparacion_visualizacion_datos/preparando-sistema.html#empezando-en-a-b-c)
+
+<!-- sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev  -->
+
+------------------------------------------------------------------------
+
+1)  Descargamos e instalamos docker (\~ 500MB):
+    1.  [Windows](https://docs.docker.com/desktop/install/windows-install/), o [Apple](https://docs.docker.com/desktop/mac/apple-silicon/)
+
+------------------------------------------------------------------------
+
+2)  Descargamos el proyecto de RStudio jsPsychMonkeys. En la Consola de RStudio:
+
+```{r, eval=FALSE}
+usethis::use_course(url = "gorkang/jsPsychMonkeys", destdir = "~/Downloads/")
+# Select YES to delete zip
+
+```
+
+------------------------------------------------------------------------
+
+3)  Abrimos `run.R` y seguimos las instrucciones.
+
+------------------------------------------------------------------------
+
+## Como preparar datos
+
+Cada tarea de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker) debería tener un script hermano en [jsPsychHelpeR](https://github.com/gorkang/jsPsychHelpeR) para automatizar la preparación de datos. Una vez tengamos nuestro protocolo listo para el pilotaje, con una función de jsPsychHelpeR crearemos todo lo necesario para que la preparación de datos corra automáticamente.
+
+
+------------------------------------------------------------------------
+
+1)  Descargamos el proyecto de RStudio jsPsychHelper:
+
+```{r, eval=FALSE}
+usethis::use_course(url = "gorkang/jsPsychHelper", destdir = "~/Downloads/")
+# Select YES to delete zip
+
+#Si es la primera vez que abrimos jsPsychHelper: 
+source("setup/setup.R")
+```
+
+------------------------------------------------------------------------
+
+2)  Abrimos `run.R` y seguimos las instrucciones. En esencia:
+
+    -   Ponemos datos en la carpeta `data/ID_PROTOCOLO` (**reemplazar ID_PROTOCOLO por el número de nuestro protocolo**. Si lo desconoces, pon un número alto, por ejemplo, 9991).
+
+    -   Correr estas dos líneas, **cambiando el 999 por tu número de protocolo**:
+
+```{r, eval=FALSE}
+
+invisible(lapply(list.files("./R", full.names = TRUE, pattern = ".R$"), source))
+run_initial_setup(pid = 999, download_files = FALSE, download_task_script = FALSE)
+
+targets::tar_make()
+```
+
+------------------------------------------------------------------------
+
+
+3)  Para ver el data frame final listo para el análisis
+
+```{r, eval=FALSE}
+
+  # List available objects
+  targets::tar_objects()
+  
+  # Load DF_analysis file
+  targets::tar_load(DF_analysis)
+  
+  # See DF_analysis dataframe
+  DF_analysis
+```
+
+------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 ## Como crear una nueva tarea
 
 Tenemos un buen número de tareas disponibles para usar (puedes verlas en el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks)). Si la tarea que necesitas no está disponible, puedes crearla usando una de las plantillas que encontrarás en [canonical_protocol_clean](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol_clean). Están preparadas para que puedas modificarlas fácilmente y crear tu propia tarea. Alternativamente, también puedes usar como punto de partida las [tareas que tenemos en jsPSychMaker](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks).
@@ -164,83 +297,7 @@ Ve al [ejercicio 2 del siguiente capítulo](ejercicios-7.html#ejercicio-2-1)
 
 
 
-## Como crear un protocolo experimental
-
-En el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) puedes ver las tareas disponibles junto con una breve descripción de cada una de ellas.
-
-Si quieres consultar los [scripts de las tareas](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks) puedes hacerlo en la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker).
-
-------------------------------------------------------------------------
-
-1)  Descargamos el proyecto de RStudio jsPsychMaker:
-
-```{r, eval=FALSE}
-
-usethis::use_course(url = "gorkang/jsPsychMaker", destdir = "~/Downloads/")
-# Select YES to delete zip
-```
-
-------------------------------------------------------------------------
-
-2)  En a la carpeta `canonical_protocols`:
-
--   Editamos `config.js` para indicar las tareas que queremos usar en la sección `// ORDER OF TASKS`
-
--   Alternativamente, podemos usar la [jsPsychMaker Shiny APP](https://gorkang.shinyapps.io/jsPsychMaker_config/) para crear nuestro archivo `config.js` (recuerda copiar el archivo `config.js` a la carpeta de tu protocolo)
-
-------------------------------------------------------------------------
-
-3)  El experimento esta listo para ser utilizado localmente. Podemos hacerlo ejecutando `index.html`
-
-------------------------------------------------------------------------
-
-
-
-### Ejercicio 3 {.ejercicio -}
-
-Ve al [ejercicio 3 del siguiente capítulo](ejercicios-7.html#ejercicio-3) 
-
-
-
-
-## Como simular datos
-
-El sistema para simular participantes utiliza [Selenium](https://www.selenium.dev/) dentro de un contenedor de [Docker](https://www.docker.com/). En Linux es trivial su uso, pero en Windows su configuración puede ser más compleja.
-
-Puedes seguir los siguientes pasos, pero si no tienes una instalación funcional de Docker que utilice contenedores Linux, el sistema fallará. En ese caso, quedan las siguientes opciones:
-
--   Correr un par de participantes manualmente\
--   Usar un ordenador con Linux o crear una partición Linux\
--   Crear una máquina virtual linux desde la que simular participantes. Puedes usar [Virtualbox](https://www.virtualbox.org/wiki/Downloads) para instalar [Ubuntu](https://releases.ubuntu.com/20.04/). Una vez dentro, tendrás que seguir los pasos del [manual para prepara el sistema para correr R y RStudio](https://gorkang.github.io/R_preparacion_visualizacion_datos/preparando-sistema.html#empezando-en-a-b-c)
-
-<!-- sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev  -->
-
-------------------------------------------------------------------------
-
-1)  Descargamos e instalamos docker (\~ 500MB):
-    1.  [Windows](https://docs.docker.com/desktop/install/windows-install/), o [Apple](https://docs.docker.com/desktop/mac/apple-silicon/)
-
-------------------------------------------------------------------------
-
-2)  Descargamos el proyecto de RStudio jsPsychMonkeys. En la Consola de RStudio:
-
-```{r, eval=FALSE}
-usethis::use_course(url = "gorkang/jsPsychMonkeys", destdir = "~/Downloads/")
-# Select YES to delete zip
-
-```
-
-------------------------------------------------------------------------
-
-3)  Abrimos `run.R` y seguimos las instrucciones.
-
-------------------------------------------------------------------------
-
-## Como preparar datos
-
-Cada tarea de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker) debería tener un script hermano en [jsPsychHelpeR](https://github.com/gorkang/jsPsychHelpeR) para automatizar la preparación de datos. Una vez tengamos nuestro protocolo listo para el pilotaje, con una función de jsPsychHelpeR crearemos todo lo necesario para que la preparación de datos corra automáticamente.
-
-### Si hemos creado alguna tarea nueva
+## Como preparar datos para una tarea nueva
 
 Tendremos que crear primero el script de preparación para la nueva tarea. En jsPsychHelpeR tienes una tarea que te ayudará con esto. Si has completado los datos en [NUEVAS Tareas jsPsychR](https://docs.google.com/spreadsheets/d/1LAsyTZ2ZRP_xLiUBkqmawwnKWgy8OCwq4mmWrrc_rpQ/edit#gid=0), el proceso será muy sencillo.
 
@@ -279,50 +336,6 @@ Si hay información en todas las pestañas de [NUEVAS Tareas jsPsychR](https://d
 -   ítems invertidos
 
 -   conversión numérica
-
-### Si no hemos creado ninguna tarea nueva
-
-------------------------------------------------------------------------
-
-1)  Descargamos el proyecto de RStudio jsPsychHelper:
-
-```{r, eval=FALSE}
-usethis::use_course(url = "gorkang/jsPsychHelper", destdir = "~/Downloads/")
-# Select YES to delete zip
-
-#Si es la primera vez que abrimos jsPsychHelper: 
-source("setup/setup.R")
-```
-
-2)  Abrimos `run.R` y seguimos las instrucciones. En esencia:
-
-    -   Ponemos datos en la carpeta `data/ID_PROTOCOLO` (**reemplazar ID_PROTOCOLO por el número de nuestro protocolo**. Si lo desconoces, pon un número alto, por ejemplo, 9991).
-
-    -   Correr estas dos líneas, **cambiando el 999 por tu número de protocolo**:
-
-```{r, eval=FALSE}
-
-invisible(lapply(list.files("./R", full.names = TRUE, pattern = ".R$"), source))
-run_initial_setup(pid = 999, download_files = FALSE, download_task_script = FALSE)
-
-targets::tar_make()
-```
-
-3)  Para ver el data frame final listo para el análisis
-
-```{r, eval=FALSE}
-
-  # List available objects
-  targets::tar_objects()
-  
-  # Load DF_analysis file
-  targets::tar_load(DF_analysis)
-  
-  # See DF_analysis dataframe
-  DF_analysis
-```
-
-
 
 
 <!-- ## Bibliografía {.bibliografia -} -->

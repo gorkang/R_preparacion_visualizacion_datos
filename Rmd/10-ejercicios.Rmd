@@ -1,6 +1,6 @@
 # Ejercicios
 
-## Ejercicio 1
+## Ejercicio
 
 Crea un script en el que hagas lo siguiente:
 
@@ -28,26 +28,26 @@ Tendrás que mostrar como corre el script con una sesión limpia de RStudio (CON
 
 ------------------------------------------------------------------------
 
-## Ejercicio 2
+<!-- ## Ejercicio 2 -->
 
-Crea la siguiente tarea en jsPsychMaker:
+<!-- Crea la siguiente tarea en jsPsychMaker: -->
 
--   [The Brief Resilience Scale](https://sci-hub.ru/10.1080/10705500802222972) (PDF version inglesa), o en su [versión española](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S0212-97282021000200006&lng=es&tlng=es)
+<!-- -   [The Brief Resilience Scale](https://sci-hub.ru/10.1080/10705500802222972) (PDF version inglesa), o en su [versión española](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S0212-97282021000200006&lng=es&tlng=es) -->
 
-#### Notas {.ejercicio .unnumbered}
+<!-- #### Notas {.ejercicio .unnumbered} -->
 
-(tareas jsPsychMaker): Ver instrucciones en [experimentos-reproducibles](#experimentos-reproducibles)
+<!-- (tareas jsPsychMaker): Ver instrucciones en [experimentos-reproducibles](#experimentos-reproducibles) -->
 
-Si prefieres puedes implementar una tarea distinta. Los únicos requisitos son que sea breve y sencilla.
+<!-- Si prefieres puedes implementar una tarea distinta. Los únicos requisitos son que sea breve y sencilla. -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-## Ejercicio 3
+## Ejercicio
 
 Diseña un **sencillo** experimento:
 
 -   Debes usar alguna de las [tareas que aparecen en en manual](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) (máximo 2)
--   Además, debes diseñar una nueva tarea **muy sencilla** o adaptar una nueva escala
+<!-- -   Además, debes diseñar una nueva tarea **muy sencilla** o adaptar una nueva escala -->
 -   La duración total del "experimento" no debería superar los 5 minutos
 
 Tendrás que hacer una breve presentación contándonos el diseño experimental.
@@ -55,7 +55,7 @@ Tendrás que hacer una breve presentación contándonos el diseño experimental.
 #### Notas {.ejercicio .unnumbered}
 
 (tareas jsPsychMaker): Usa un máximo de 2 tareas\
-(tarea nueva): Puedes diseñar una tarea con una sola pregunta para dos condiciones experimentales, o adaptar un cuestionario breve ya existente (que no tengamos en jsPsychMaker).
+<!-- (tarea nueva): Puedes diseñar una tarea con una sola pregunta para dos condiciones experimentales, o adaptar un cuestionario breve ya existente (que no tengamos en jsPsychMaker). -->
 
 ------------------------------------------------------------------------
 
