@@ -24,11 +24,13 @@ geom_boxplot-y-geom_violin
 histogramas
 geom_density
 geom_density_ridges
+visualización-avanzada
 facets
 facet_grid
 facet_wrap
 gghighlight-y-facet_wrap
 transformaciones-estadísticas
+computaciones-con-ggplot
 stat_summary
 promedios-por-grupo
 personalización-de-gráficas
@@ -112,7 +114,7 @@ texto-inline
 trabajo-con-rmarkdown-para-reportes-reproducibles
 que-es-la-reproducibilidad
 proyectos-de-r-studio
-rmarkdown-openscience-y-análisis-reproducibles
+rmarkdownquarto-openscience-y-análisis-reproducibles
 sintaxis-chunks-de-código-tipos-de-archivo
 cabecera-yaml
 rmarkdown

@@ -9,7 +9,7 @@ editor_options:
 
 #### Paquetes para este capítulo {-}
 
-```{r setup-03, message=FALSE, warning=FALSE}
+```{r setup-05, message=FALSE, warning=FALSE}
 
 if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')

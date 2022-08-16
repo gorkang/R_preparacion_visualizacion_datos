@@ -11,7 +11,7 @@ En este capítulo vamos a aprender a importar y exportar todo tipo de archivos, 
 
 #### Paquetes para este capítulo {-}
 
-```{r setup-02}
+```{r setup-03}
 
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
 if (!require("DT")) install.packages("DT"); library("DT")
@@ -1148,7 +1148,7 @@ DF_B =
 DF_C = 
   df_wide_raw %>% 
   pivot_longer(WVOC_01_cod:bayes_text_quantitative_accuracy, 
-               values_transform = list(value = as.character)) %>% 
+               
   filter(grepl("WMAT_[0-9]{2}_cod", name)) %>% 
   mutate(value = as.numeric(value)) %>%  
   group_by(ID) %>% 

@@ -15,7 +15,7 @@ Combinar distintos data frames es una tarea muy común cuando preparamos datos. 
 
 #### Paquetes para este capítulo {-}
 
-```{r setup-02b}
+```{r setup-04}
 
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
 if (!require("DT")) install.packages("DT"); library("DT")

@@ -9,7 +9,7 @@ editor_options:
 
 #### Paquetes para este capítulo {-}
 
-```{r setup-04, message=FALSE, warning=FALSE}
+```{r setup-06, message=FALSE, warning=FALSE}
 
 if (!require('afex')) install.packages('afex'); library('afex')
 if (!require('correlation')) install.packages('correlation'); library('correlation')

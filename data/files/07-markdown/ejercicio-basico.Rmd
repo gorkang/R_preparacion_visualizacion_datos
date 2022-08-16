@@ -1,0 +1,67 @@
+---
+title: "La vida nocturna del berberecho salvaje"
+author: "Gorka Navarrete"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(stringi)
+```
+
+
+## Abstract
+
+```{r abstract, echo=FALSE, results='asis'}
+cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
+```
+
+
+## Introducción  
+
+```{r introduccion, echo=FALSE, results='asis'}
+cat(stringi::stri_rand_lipsum(n_paragraphs = 2))
+```
+
+## Materials and Methods
+
+```{r materiales-metodos, echo=FALSE, results='asis'}
+cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
+```
+
+### Participants
+
+```{r participantes, echo=FALSE, results='asis'}
+cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
+```
+
+### Materials
+
+```{r materiales, echo=FALSE, results='asis'}
+cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
+```
+
+## Results
+
+```{r resultados, echo=FALSE, results='asis'}
+cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
+```
+
+
+### Experiment 1
+
+```{r experimento1, echo=FALSE, results='asis'}
+cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
+```
+
+
+## Discussion
+
+```{r discusion, echo=FALSE, results='asis'}
+cat(stringi::stri_rand_lipsum(n_paragraphs = 2))
+```
+
+
+## Bibliography
+
