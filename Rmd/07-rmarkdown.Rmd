@@ -172,7 +172,7 @@ Haciendo click en la herramienta de la derecha del chunk ![](`r here::here("data
 ---  
 
 
-### Ejercicio básico RMarkdown {.ejercicio -}
+## Ejercicio básico RMarkdown {.ejercicio -}
 
 Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:  
 
@@ -209,142 +209,49 @@ Los chunks de código deberán ser similares a este:
 
 
 
-### {-}
+## {-}
 
 ---  
 
-El resultado del ejercicio anterior deberá ser un archivo pdf con la estructura general de un artículo científico. Puedes ver el archivo Rmd y su pdf resultante en `data/files/07-markdown/`    
+El resultado del ejercicio anterior deberá ser un archivo pdf con la estructura general de un artículo científico. Puedes ver el archivo Rmd y su pdf resultante en `data/files/07-markdown/`.  
+
+Si el botón `knit` no funciona, puedes renderizar el pdf usando: `rmarkdown::render("data/files/07-markdown/ejercicio-basico.Rmd")`  
 
 ---  
 
 
 
-### Ejercicio avanzado {.ejercicio -}
+## Ejercicio avanzado {.ejercicio -}
 
-Usando una base propia, o la base de Cancer Screening Risk Literacy of Physicians in Training: https://osf.io/qn9a2/ y el [preprint del artículo](https://github.com/gorkang/R_preparacion_visualizacion_datos/raw/master/data/files/04-Dafina-PLOS/PONE-D-19-03821R2_FTC.pdf):
+Usando una base propia, incluye en el documento .Rmd de antes:  
 
-```{r avanzado-rmarkdown0}
-# Leemos la base y seleccionamos algunas de las columnas clave
-DF = haven::read_sav(here::here("data/files/Dafina/Cancer screening risk literacy R1.sav")) %>%
-  select(IDparticipante, gender, Edad, Sexo, effective, demand, screenbeliefs, numeracy, sciliteracy, statsed, benefits, harms, recommendation, resident, compR1)
+1. Una tabla de descriptivos.  
 
-```
+2. Una tabla con los resultados de un análisis sencillo (e.g. una regresión lineal).  
 
-
-En el documento .Rmd de antes:  
-
-1. Cread una tabla de descriptivos. Un ejemplo algo complejo podría ser la que se ve en el artículo (Tabla 2).      
-
-![](`r here::here('data/files/Dafina/table2-dafina.png')`)
+Podéis ver ejemplos de [tablas de descriptivos](#tablas-descriptivos) o [tablas de resultados inferenciales](#tablas-resultados-inferenciales) en el capítulo anterior.  
 
 
-```{r avanzado-rmarkdown, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+## {-}
 
-DF_table2 = DF %>%
-  select(effective, demand, screenbeliefs, numeracy, sciliteracy, statsed, benefits, harms, recommendation) %>% 
-  
-  mutate(effective = 
-           case_when(
-             effective == 0 ~ "Inefective",
-             effective == 1 ~ "Efective",
-             demand == 0 ~ "No demand",
-             demand == 1 ~ "Demand"
-           )) %>% 
-  mutate(demand = 
-           case_when(
-             effective == 0 ~ "Inefective",
-             effective == 1 ~ "Efective",
-             demand == 0 ~ "No demand",
-             demand == 1 ~ "Demand"
-           ))
-  
-table1 = DF_table2 %>% select(-demand) %>% 
-  gtsummary::tbl_summary(
-    by = effective,
-    statistic = list(
-      all_continuous() ~ "{mean} ({sd})",
-      all_categorical() ~ "{n} / {N} ({p}%)"
-    ),
-    type = list(everything() ~ 'continuous'), #Sexo ~ "categorical"),
-    missing = "ifany"
-  )
+---  
 
-table2 = DF_table2 %>% select(-effective) %>% 
-  gtsummary::tbl_summary(
-    by = demand,
-    statistic = list(
-      all_continuous() ~ "{mean} ({sd})",
-      all_categorical() ~ "{n} / {N} ({p}%)"
-    ),
-    type = list(everything() ~ 'continuous'), #Sexo ~ "categorical"),
-    missing = "ifany"
-  )
+El resultado de este ejercicio deberá ser un archivo pdf como el que se puede ver en `data/files/07-markdown/`.  
+
+De nuevo, si el botón `knit` no funciona, puedes renderizar el pdf usando: `rmarkdown::render("data/files/07-markdown/ejercicio-basico.Rmd")`  
+
+---  
 
 
-table3 = DF_table2 %>% select(-effective, -demand) %>% 
-  gtsummary::tbl_summary(
-    statistic = list(
-      all_continuous() ~ "{mean} ({sd})",
-      all_categorical() ~ "{n} / {N} ({p}%)"
-    ),
-    type = list(everything() ~ 'continuous'), #Sexo ~ "categorical"),
-    missing = "ifany"
-  )
-
-gtsummary::tbl_merge(tbls = list(table1, table2, table3), tab_spanner = c("By effectivity", "By demand", "Total"))
 
 
-# Example table 3
-# DF_table3 = 
-#   DF %>% select(screenbeliefs, numeracy, sciliteracy, statsed, benefits, harms, recommendation)
-# 
-# table_correlation = correlation::correlation(DF_table3)
-# 
-# table_correlation %>% 
-#   summary() %>% 
-#   parameters::print_md()
-# 
-# # Mostramos detalles de las correlaciones
-# # DT::datatable(table_correlation, options = list(dom = 't'))
-# table_correlation %>% 
-#   mutate(result = paste0(round(r, 3), " (", round(p, 3), ")")) %>% 
-#   select(Parameter1, Parameter2, result) %>% 
-#   tidyr::pivot_wider(names_from = Parameter2, values_from = result) %>% 
-#   mutate_if(is.character, ~replace(., is.na(.), "")) %>% 
-#   knitr::kable()
+## Avanzado   
 
-```
-
-2. Cread una tabla con un análisis sencillo (e.g. una regresión lineal). Si usais los datos de `Cancer Screening Risk Literacy of Physicians in Training`, podéis intentar de emular el análisis que se ve en la Tabla 4. Predecimos `recommendation` a partir de algunas de las variables clave.   
-
-![](`r here::here('data/files/Dafina/table4-dafinaB.png')`)
-
-```{r avanzado-rmarkdown2, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
-
-DF_table4 = 
-  DF %>% select(effective, demand, gender, resident, statsed, screenbeliefs, compR1, numeracy, sciliteracy, benefits, harms, recommendation)
-
-model1 = lm(recommendation ~ effective + demand + gender + resident + statsed + screenbeliefs + numeracy + sciliteracy + benefits + harms, DF_table4)
-
-# sjPlot::tab_model(model)
-
- # broom::glance(model1)
-
-  gtsummary::tbl_regression(model1, intercept = TRUE) %>% 
-    add_global_p() %>%
-    bold_labels() %>% 
-    italicize_levels() %>% 
-    add_glance_source_note(include = c("nobs", "df.residual", "r.squared", "adj.r.squared"))
-   # gtsummary::add_glance_table(include = c("nobs", "df.residual", "r.squared", "adj.r.squared"))
+Puedes crear artículos en formato APA, añadir bibliografía a tus documentos facilmente, citar los paquetes de R que usas, etc.  
 
 
-```
 
-
-<BR>
-
-
-## De los datos al reporte final: Una historia de amor con R  
+### Artículos APA con Papaja
 
 
 * [Preparar artículos en formato APA](https://github.com/crsh/papaja)  
@@ -373,25 +280,16 @@ rmarkdown::render(
 Y no olvidemos el paquete {rticles}, que contiene [plantillas de decenas de editoriales](https://github.com/rstudio/rticles)  
 
 
-
-## Avanzado   
-
-* Para evitar problemas con los paths de los archivos, usar `here::here()`  
-
-* Para evitar problemas con instalación de Latex: 
-
-```{r tinytex, eval=FALSE}
-tinytex::install_tinytex()
-```
-
-* Corregir ortografía en Rmarkdown (F7)   
-- https://github.com/ropensci/spelling#readme  
-
-
-
 ### Usar bibliografía 
 
-Bibliografía en Rmarkdown o Quarto:    
+Puedes incluir citas en tu documento facilmente con [Rmarkdown](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) o [Quarto](https://quarto.org/docs/authoring/footnotes-and-citations.html#sec-citations).  
+
+Necesitaras un archivo .bib e incluirlo en el yaml inicial, por ejemplo: `bibliography: name_file.bib`.  
+
+A partir de ahí, puedes citar artículos simplemente incluyendo `Blah Blah [@wickham2015; @knuth1984].` o `@knuth1984 says blah.`.  
+
+
+Para saber más:    
 
 * https://quarto.org/docs/authoring/footnotes-and-citations.html
 
@@ -443,16 +341,6 @@ Usando un sistema de manejo de dependencias [renv](https://github.com/rstudio/re
 #### {-}
 
 
-<!-- ## Mas allá de Rmarkdown -->
-
-<!-- Aplicaciones web interactivas con R: [Shiny](https://shiny.rstudio.com/)   -->
-
-<!-- [Bayesian reasoning](https://gorkang.shinyapps.io/BayesianReasoning/) -->
-
-<!-- ![](`r here::here("data", "images", "shiny-bayesian.png")`) -->
-
-
-## Varios
 
 ### Shortcuts!
 
@@ -474,8 +362,9 @@ Es recomendable ser consistente en la manera de escribir código. Habitualmente 
 <!-- * https://usethis.r-lib.org/ -->
 <!-- * https://github.com/karthik/holepunch -->
 
+---  
 
-
+<BR>
 
 
 ## Bibliografía {.bibliografia -}

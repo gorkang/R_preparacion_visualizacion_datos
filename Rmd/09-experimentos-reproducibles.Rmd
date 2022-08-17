@@ -6,6 +6,9 @@ editor_options:
 
 # Experimentos reproducibles
 
+
+![](data/images/jsPsych-trinity.png)  
+
 En el CSCN usamos distintas tecnologías para desarrollar experimentos. Algunos ejemplos son [Psychopy](https://www.psychopy.org/), [Qualtrics](https://www.qualtrics.com/), [Limesurvey](https://www.limesurvey.org/), [jsPsych](https://www.jspsych.org/plugins/jspsych-preload/), [Gorilla](https://gorilla.sc/), etc. Cada una de estas tiene ventajas y desventajas, y en general es importante tener en cuenta aspectos pragmáticos a la hora de adoptar una u otra tecnología (costo económico, tipo de experimento [EEG/conductual, laboratorio/online]).
 
 Algunos de nosotros hemos optado principalmente por [jsPsych](https://www.jspsych.org/) para experimentos conductuales por tratarse de una librería javascript de **código abierto**, basada en tecnologías web standard, y que puede ser usada online y offline. Dado que en el CSCN disponemos de servidor propio, los costos habituales de hosting no se aplican.
@@ -30,9 +33,12 @@ El output del sistema es estandarizado, lo que implica que los [nombres de las v
 
 ## Como crear un protocolo experimental
 
-En el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) puedes ver las tareas disponibles junto con una breve descripción de cada una de ellas.
+En el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) puedes ver las tareas disponibles junto con una breve descripción de cada una de ellas. Alternativamente, puedes ver [el documento con todos los detalles de las tareas disponibles](https://docs.google.com/spreadsheets/d/1Eo0F4GcmqWZ1cghTpQlA4aHsc8kTABss-HAeimE2IqA/edit#gid=0).  
 
-Si quieres consultar los [scripts de las tareas](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks) puedes hacerlo en la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker).
+Si quieres consultar los [scripts de las tareas](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks) puedes hacerlo en la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker).  
+
+
+Sigue los siguientes 3 pasos para crear tu protocolo:  
 
 ------------------------------------------------------------------------
 
@@ -50,6 +56,8 @@ usethis::use_course(url = "gorkang/jsPsychMaker", destdir = "~/Downloads/")
 
 -   Editamos `config.js` para indicar las tareas que queremos usar en la sección `// ORDER OF TASKS`
 
+-   En `config.js` revisamos la sección `// Main parameters` para asegurarnos que todo esta bien (e.g. `online = false;`)  
+
 -   Alternativamente, podemos usar la [jsPsychMaker Shiny APP](https://gorkang.shinyapps.io/jsPsychMaker_config/) para crear nuestro archivo `config.js` (recuerda copiar el archivo `config.js` a la carpeta de tu protocolo)
 
 ------------------------------------------------------------------------
@@ -60,9 +68,9 @@ usethis::use_course(url = "gorkang/jsPsychMaker", destdir = "~/Downloads/")
 
 
 
-### Ejercicio 3 {.ejercicio -}
+### Ejercicio 1 {.ejercicio -}
 
-Ve al [ejercicio 3 del siguiente capítulo](ejercicios-7.html#ejercicio-3) 
+Ve al [ejercicio 1 del siguiente capítulo](ejercicios-7.html#ejercicio-1-2) 
 
 
 
@@ -78,6 +86,9 @@ Puedes seguir los siguientes pasos, pero si no tienes una instalación funcional
 -   Crear una máquina virtual linux desde la que simular participantes. Puedes usar [Virtualbox](https://www.virtualbox.org/wiki/Downloads) para instalar [Ubuntu](https://releases.ubuntu.com/20.04/). Una vez dentro, tendrás que seguir los pasos del [manual para prepara el sistema para correr R y RStudio](https://gorkang.github.io/R_preparacion_visualizacion_datos/preparando-sistema.html#empezando-en-a-b-c)
 
 <!-- sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev  -->
+
+
+De nuevo, podemos hacer esto en 3 pasos:  
 
 ------------------------------------------------------------------------
 
@@ -104,6 +115,7 @@ usethis::use_course(url = "gorkang/jsPsychMonkeys", destdir = "~/Downloads/")
 
 Cada tarea de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker) debería tener un script hermano en [jsPsychHelpeR](https://github.com/gorkang/jsPsychHelpeR) para automatizar la preparación de datos. Una vez tengamos nuestro protocolo listo para el pilotaje, con una función de jsPsychHelpeR crearemos todo lo necesario para que la preparación de datos corra automáticamente.
 
+Una vez más, nuestros 3 pasos:  
 
 ------------------------------------------------------------------------
 
@@ -154,7 +166,43 @@ targets::tar_make()
 
 
 
+## Como crear un reporte dentro del jsPsychHelpeR
 
+Dentro del proyecto en el que has preparado los datos, simplemente tienes que:  
+
+------------------------------------------------------------------------
+
+1) Abre la plantilla report_analysis.Rmd:  
+
+`rstudioapi::navigateToFile("Rmd/report_analysis.Rmd")`
+
+
+------------------------------------------------------------------------
+
+2) En el archivo `_targets.R`, en la sección análisis, descomenta las dos líneas de abajo
+
+```
+
+  # tar_render(report_analysis, "Rmd/report_analysis.Rmd",
+  #            output_file = paste0("../outputs/reports/report_analysis.html")),
+  
+```
+
+------------------------------------------------------------------------
+
+3) Finalmente, puedes trabajar en report_analysis.Rmd tal y como hiciste en el capítulo anterior. Cuando acabes, o quieras probar si todo funciona bien, solo tienes que correr `targets::tar_make()` desde la Consola.  
+
+
+------------------------------------------------------------------------
+
+
+
+### Ejercicio FINAL {.ejercicio -}
+
+Ya estáis listas/os para enfrentaros al  [ejercicio FINAL](ejercicios-7.html#ejercicio-final)  
+
+
+---  
 
 
 

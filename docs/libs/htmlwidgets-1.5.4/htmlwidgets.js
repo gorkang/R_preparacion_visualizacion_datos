@@ -14,14 +14,21 @@
   var shinyMode = window.HTMLWidgets.shinyMode =
       typeof(window.Shiny) !== "undefined" && !!window.Shiny.outputBindings;
 
+  // If we're running inside of Displayr then Displayr will call instantiateDisplayrWidget()
+  // and we don't want staticRender().
+  var displayrMode = window.HTMLWidgets.displayrMode =
+      window.IsDisplayr;
+
   // We can't count on jQuery being available, so we implement our own
   // version if necessary.
   function querySelectorAll(scope, selector) {
-    if (typeof(jQuery) !== "undefined" && scope instanceof jQuery) {
-      return scope.find(selector);
-    }
-    if (scope.querySelectorAll) {
-      return scope.querySelectorAll(selector);
+    if (scope) {
+      if (typeof(jQuery) !== "undefined" && scope instanceof jQuery) {
+        return scope.find(selector);
+      }
+      if (scope.querySelectorAll) {
+        return scope.querySelectorAll(selector);
+      }
     }
   }
 
@@ -267,6 +274,8 @@
     return result;
   }
 
+  // This handles sizing for static rendering of a widget.  It appears to assume that there
+  // is only one widget on the page.
   function initSizing(el) {
     var sizing = sizingPolicy(el);
     if (!sizing)
@@ -287,6 +296,55 @@
       document.body.style.height = "100%";
       document.documentElement.style.width = "100%";
       document.documentElement.style.height = "100%";
+      if (cel) {
+        cel.style.position = "absolute";
+        var pad = unpackPadding(sizing.padding);
+        cel.style.top = pad.top + "px";
+        cel.style.right = pad.right + "px";
+        cel.style.bottom = pad.bottom + "px";
+        cel.style.left = pad.left + "px";
+        el.style.width = "100%";
+        el.style.height = "100%";
+      }
+
+      return {
+        getWidth: function() { return cel.offsetWidth; },
+        getHeight: function() { return cel.offsetHeight; }
+      };
+
+    } else {
+      el.style.width = px(sizing.width);
+      el.style.height = px(sizing.height);
+
+      return {
+        getWidth: function() { return el.offsetWidth; },
+        getHeight: function() { return el.offsetHeight; }
+      };
+    }
+  }
+
+  // Initializes sizing for a widget that sits entirely within a single block element.
+  // This is copied and adapted from static initSizing() above.
+  function initSizingInABlock(el) {
+    var sizing = sizingPolicy(el);
+    if (!sizing)
+      return;
+
+    var cel = el.parentElement;
+    if (cel.id !== 'htmlwidget_container')
+      throw new Error('Parent of widget should have id htmlwidget_container');
+
+    if (typeof (sizing.padding) !== "undefined") {
+      // I don't understand the point of this, but initSizing() does it to body,
+      // so we do it to the equivalent enclosing element.
+      cel.parentElement.style.margin = "0";
+      cel.parentElement.style.padding = paddingToCss(unpackPadding(sizing.padding));
+    }
+
+    if (sizing.fill) {
+      el.style.overflow = "hidden";
+      el.style.width = "100%";
+      el.style.height = "100%";
       if (cel) {
         cel.style.position = "absolute";
         var pad = unpackPadding(sizing.padding);
@@ -451,6 +509,7 @@
     overrideMethod(staticBinding, "find", function(superfunc) {
       return function(scope) {
         var results = superfunc(scope);
+
         // Filter out Shiny outputs, we only want the static kind
         return filterByClass(results, "html-widget-output", false);
       };
@@ -567,6 +626,117 @@
     }
   }
 
+  // Render a single new static widget.
+  function initializeWidget(el, binding, sizeObj, initialState, widgetStateChanged) {
+    var initResult;
+    if (binding.initialize) {
+      initResult = binding.initialize(el,
+        sizeObj ? sizeObj.getWidth() : el.offsetWidth,
+        sizeObj ? sizeObj.getHeight() : el.offsetHeight,
+        widgetStateChanged
+      );
+      elementData(el, "init_result", initResult);
+    }
+
+    if (binding.resize) {
+      var lastSize = {
+        w: sizeObj ? sizeObj.getWidth() : el.offsetWidth,
+        h: sizeObj ? sizeObj.getHeight() : el.offsetHeight
+      };
+      var resizeHandler = function(e) {
+        var size = {
+          w: sizeObj ? sizeObj.getWidth() : el.offsetWidth,
+          h: sizeObj ? sizeObj.getHeight() : el.offsetHeight
+        };
+        if (size.w === 0 && size.h === 0)
+          return;
+        if (size.w === lastSize.w && size.h === lastSize.h)
+          return;
+        lastSize = size;
+        binding.resize(el, size.w, size.h, initResult);
+      };
+
+      on(window, "resize", resizeHandler);
+
+      // This is needed for cases where we're running in a Shiny
+      // app, but the widget itself is not a Shiny output, but
+      // rather a simple static widget. One example of this is
+      // an rmarkdown document that has runtime:shiny and widget
+      // that isn't in a render function. Shiny only knows to
+      // call resize handlers for Shiny outputs, not for static
+      // widgets, so we do it ourselves.
+      if (window.jQuery) {
+        window.jQuery(document).on(
+          "shown.htmlwidgets shown.bs.tab.htmlwidgets shown.bs.collapse.htmlwidgets",
+          resizeHandler
+        );
+        window.jQuery(document).on(
+          "hidden.htmlwidgets hidden.bs.tab.htmlwidgets hidden.bs.collapse.htmlwidgets",
+          resizeHandler
+        );
+      }
+
+      // This is needed for the specific case of ioslides, which
+      // flips slides between display:none and display:block.
+      // Ideally we would not have to have ioslide-specific code
+      // here, but rather have ioslides raise a generic event,
+      // but the rmarkdown package just went to CRAN so the
+      // window to getting that fixed may be long.
+      if (window.addEventListener) {
+        // It's OK to limit this to window.addEventListener
+        // browsers because ioslides itself only supports
+        // such browsers.
+        on(document, "slideenter", resizeHandler);
+        on(document, "slideleave", resizeHandler);
+      }
+    }
+
+    var scriptData = document.querySelector("script[data-for='" + el.id + "'][type='application/json']");
+    if (scriptData) {
+      var data = JSON.parse(scriptData.textContent || scriptData.text);
+      // Resolve strings marked as javascript literals to objects
+      if (!(data.evals instanceof Array)) data.evals = [data.evals];
+      for (var k = 0; data.evals && k < data.evals.length; k++) {
+        window.HTMLWidgets.evaluateStringMember(data.x, data.evals[k]);
+      }
+      binding.renderValue(el, data.x, initResult, initialState);
+      evalAndRun(data.jsHooks.render, initResult, [el, data.x]);
+    }
+  }
+
+  // Initialize an htmlwidget for Displayr.  At this point its assets (JavaScript, CSS) ought to have
+  // finished loading, and its body elements should be within the document's DOM. 
+  //
+  // el_parent  An element that contains a single rendered widget within it.
+  //
+  // Returns { binding, element, instance }.
+  window.HTMLWidgets.instantiateDisplayrWidget = function(el_parent, initialState, stateChangedHook) {
+    var bindings = window.HTMLWidgets.widgets || [];
+    var matches = bindings.map(function(binding) {return {binding: binding, found: binding.find(el_parent)};}).filter(function (e) { return e.found.length });
+    if (matches.length === 0)
+      throw new Error('No element was found matching an installed binding.  Have you loaded all assets?');
+    const binding = matches[0].binding;
+    const el = matches[0].found[0];
+    if (HTMLWidgets.getInstance(el))
+      throw new Error('A widget has already been instantiated on this DOM element.  Don\'t reuse DOM elements for widgets.');
+    var sizeObj = initSizingInABlock(el);
+    initializeWidget(el, binding, sizeObj, initialState, stateChangedHook);
+    return {
+      binding: binding,
+      element: el,
+      instance: HTMLWidgets.getInstance(el)
+    };
+  }
+
+  // Stops a Displayr widget.  Base Htmlwidgets do not support this concept, presuming that
+  // the entire page will be closed.  Callers are expected to remove the original element
+  // from the DOM.  `widget` should be what was returned by instantiateDisplayrWidget().
+  window.HTMLWidgets.destroyDisplayrWidget = function(widget) {
+    if (widget.instance.destroy)
+      widget.instance.destroy();
+    elementData(widget.element, "init_result", undefined);
+  }
+
   // Render static widgets after the document finishes loading
   // Statically render all elements that are of this widget's class
   window.HTMLWidgets.staticRender = function() {
@@ -580,79 +750,14 @@
           return;
         el.className = el.className + " html-widget-static-bound";
 
-        var initResult;
-        if (binding.initialize) {
-          initResult = binding.initialize(el,
-            sizeObj ? sizeObj.getWidth() : el.offsetWidth,
-            sizeObj ? sizeObj.getHeight() : el.offsetHeight
-          );
-          elementData(el, "init_result", initResult);
+        var widgetStateChanged = function(state) {
+          if (window.HTMLWidgets.stateChangedHook)
+            window.HTMLWidgets.stateChangedHook(state)
         }
-
-        if (binding.resize) {
-          var lastSize = {
-            w: sizeObj ? sizeObj.getWidth() : el.offsetWidth,
-            h: sizeObj ? sizeObj.getHeight() : el.offsetHeight
-          };
-          var resizeHandler = function(e) {
-            var size = {
-              w: sizeObj ? sizeObj.getWidth() : el.offsetWidth,
-              h: sizeObj ? sizeObj.getHeight() : el.offsetHeight
-            };
-            if (size.w === 0 && size.h === 0)
-              return;
-            if (size.w === lastSize.w && size.h === lastSize.h)
-              return;
-            lastSize = size;
-            binding.resize(el, size.w, size.h, initResult);
-          };
-
-          on(window, "resize", resizeHandler);
-
-          // This is needed for cases where we're running in a Shiny
-          // app, but the widget itself is not a Shiny output, but
-          // rather a simple static widget. One example of this is
-          // an rmarkdown document that has runtime:shiny and widget
-          // that isn't in a render function. Shiny only knows to
-          // call resize handlers for Shiny outputs, not for static
-          // widgets, so we do it ourselves.
-          if (window.jQuery) {
-            window.jQuery(document).on(
-              "shown.htmlwidgets shown.bs.tab.htmlwidgets shown.bs.collapse.htmlwidgets",
-              resizeHandler
-            );
-            window.jQuery(document).on(
-              "hidden.htmlwidgets hidden.bs.tab.htmlwidgets hidden.bs.collapse.htmlwidgets",
-              resizeHandler
-            );
-          }
-
-          // This is needed for the specific case of ioslides, which
-          // flips slides between display:none and display:block.
-          // Ideally we would not have to have ioslide-specific code
-          // here, but rather have ioslides raise a generic event,
-          // but the rmarkdown package just went to CRAN so the
-          // window to getting that fixed may be long.
-          if (window.addEventListener) {
-            // It's OK to limit this to window.addEventListener
-            // browsers because ioslides itself only supports
-            // such browsers.
-            on(document, "slideenter", resizeHandler);
-            on(document, "slideleave", resizeHandler);
-          }
-        }
-
-        var scriptData = document.querySelector("script[data-for='" + el.id + "'][type='application/json']");
-        if (scriptData) {
-          var data = JSON.parse(scriptData.textContent || scriptData.text);
-          // Resolve strings marked as javascript literals to objects
-          if (!(data.evals instanceof Array)) data.evals = [data.evals];
-          for (var k = 0; data.evals && k < data.evals.length; k++) {
-            window.HTMLWidgets.evaluateStringMember(data.x, data.evals[k]);
-          }
-          binding.renderValue(el, data.x, initResult);
-          evalAndRun(data.jsHooks.render, initResult, [el, data.x]);
-        }
+        var initialStateData = document.querySelector("script[data-for='" + el.id + "'][type='application/htmlwidget-state']");
+        var initialState = initialStateData ? JSON.parse(initialStateData.textContent || initialStateData.text) : null;
+      
+        initializeWidget(el, binding, sizeObj, initialState, widgetStateChanged);
       });
     });
 
@@ -694,7 +799,7 @@
   function maybeStaticRenderLater() {
     if (shinyMode && has_jQuery3()) {
       window.jQuery(window.HTMLWidgets.staticRender);
-    } else {
+    } else if (!displayrMode) {
       window.HTMLWidgets.staticRender();
     }
   }
@@ -879,11 +984,11 @@
     var result = {
       name: defn.name,
       type: defn.type,
-      initialize: function(el, width, height) {
-        return defn.factory(el, width, height);
+      initialize: function(el, width, height, stateChanged) {
+        return defn.factory(el, width, height, stateChanged);
       },
-      renderValue: function(el, x, instance) {
-        return instance.renderValue(x);
+      renderValue: function(el, x, instance, state) {
+        return instance.renderValue(x, state);
       },
       resize: function(el, width, height, instance) {
         return instance.resize(width, height);

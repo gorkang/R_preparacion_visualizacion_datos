@@ -10,15 +10,13 @@ knitr::opts_chunk$set(echo = TRUE)
 library(stringi)
 ```
 
-
 ## Abstract
 
 ```{r abstract, echo=FALSE, results='asis'}
 cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 ```
 
-
-## Introducción  
+## Introducción
 
 ```{r introduccion, echo=FALSE, results='asis'}
 cat(stringi::stri_rand_lipsum(n_paragraphs = 2))
@@ -48,13 +46,11 @@ cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 ```
 
-
 ### Experiment 1
 
 ```{r experimento1, echo=FALSE, results='asis'}
 cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 ```
-
 
 ## Discussion
 
@@ -62,6 +58,4 @@ cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 cat(stringi::stri_rand_lipsum(n_paragraphs = 2))
 ```
 
-
 ## Bibliography
-
