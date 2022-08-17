@@ -135,7 +135,7 @@ source("setup/setup.R")
 
 2)  Abrimos `run.R` y seguimos las instrucciones. En esencia:
 
-    -   Ponemos datos en la carpeta `data/ID_PROTOCOLO` (**reemplazar ID_PROTOCOLO por el número de nuestro protocolo**. Si lo desconoces, es el primer número de tus archivos de datos, antes del "_").
+    -   Ponemos datos en la carpeta `data/ID_PROTOCOLO` (**reemplazar ID_PROTOCOLO por el número de nuestro protocolo**. Si lo desconoces, es el primer número de tus archivos de datos, antes del "_". **Si usas el 999, BORRA el archivo 999.zip que hay en `data/999` antes de copiar tus datos**).
 
     -   Correr las dos líneas de abajo, **cambiando el 999 por tu número de protocolo**:
 
