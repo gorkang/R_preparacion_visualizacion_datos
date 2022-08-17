@@ -56,9 +56,9 @@ usethis::use_course(url = "gorkang/jsPsychMaker", destdir = "~/Downloads/")
 
 -   Editamos `config.js` para indicar las tareas que queremos usar en la sección `// ORDER OF TASKS`
 
--   En `config.js` revisamos la sección `// Main parameters` para asegurarnos que todo esta bien (e.g. `online = false;`)  
+-   Alternativamente, podemos usar la [jsPsychMaker Shiny APP](https://gorkang.shinyapps.io/jsPsychMaker_config/) para crear nuestro archivo `config.js` (recuerda copiar el archivo `config.js` a la carpeta de tu protocolo)  
 
--   Alternativamente, podemos usar la [jsPsychMaker Shiny APP](https://gorkang.shinyapps.io/jsPsychMaker_config/) para crear nuestro archivo `config.js` (recuerda copiar el archivo `config.js` a la carpeta de tu protocolo)
+-   Finalmente, en `config.js` revisamos la sección `// Main parameters` para asegurarnos que todo esta bien (e.g. `online = false;`)  
 
 ------------------------------------------------------------------------
 
@@ -92,8 +92,10 @@ De nuevo, podemos hacer esto en 3 pasos:
 
 ------------------------------------------------------------------------
 
-1)  Descargamos e instalamos docker (\~ 500MB):
-    1.  [Windows](https://docs.docker.com/desktop/install/windows-install/), o [Apple](https://docs.docker.com/desktop/mac/apple-silicon/)
+1)  Instalamos docker (descarga de \~ 500MB):
+
+- [Windows](https://docs.docker.com/desktop/install/windows-install/), o [Apple](https://docs.docker.com/desktop/mac/apple-silicon/)
+- Ubuntu: `sudo apt install docker`
 
 ------------------------------------------------------------------------
 
@@ -133,9 +135,9 @@ source("setup/setup.R")
 
 2)  Abrimos `run.R` y seguimos las instrucciones. En esencia:
 
-    -   Ponemos datos en la carpeta `data/ID_PROTOCOLO` (**reemplazar ID_PROTOCOLO por el número de nuestro protocolo**. Si lo desconoces, pon un número alto, por ejemplo, 9991).
+    -   Ponemos datos en la carpeta `data/ID_PROTOCOLO` (**reemplazar ID_PROTOCOLO por el número de nuestro protocolo**. Si lo desconoces, es el primer número de tus archivos de datos, antes del "_").
 
-    -   Correr estas dos líneas, **cambiando el 999 por tu número de protocolo**:
+    -   Correr las dos líneas de abajo, **cambiando el 999 por tu número de protocolo**:
 
 ```{r, eval=FALSE}
 
@@ -143,6 +145,7 @@ invisible(lapply(list.files("./R", full.names = TRUE, pattern = ".R$"), source))
 run_initial_setup(pid = 999, download_files = FALSE, download_task_script = FALSE)
 
 targets::tar_make()
+
 ```
 
 ------------------------------------------------------------------------

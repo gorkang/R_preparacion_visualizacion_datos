@@ -594,8 +594,8 @@ div.csl-indent {
 </ol>
 <ul>
 <li><p>Editamos <code>config.js</code> para indicar las tareas que queremos usar en la sección <code>// ORDER OF TASKS</code></p></li>
-<li><p>En <code>config.js</code> revisamos la sección <code>// Main parameters</code> para asegurarnos que todo esta bien (e.g. <code>online = false;</code>)</p></li>
 <li><p>Alternativamente, podemos usar la <a href="https://gorkang.shinyapps.io/jsPsychMaker_config/">jsPsychMaker Shiny APP</a> para crear nuestro archivo <code>config.js</code> (recuerda copiar el archivo <code>config.js</code> a la carpeta de tu protocolo)</p></li>
+<li><p>Finalmente, en <code>config.js</code> revisamos la sección <code>// Main parameters</code> para asegurarnos que todo esta bien (e.g. <code>online = false;</code>)</p></li>
 </ul>
 <hr />
 <ol start="3" style="list-style-type: decimal">
@@ -622,11 +622,12 @@ div.csl-indent {
 <p>De nuevo, podemos hacer esto en 3 pasos:</p>
 <hr />
 <ol style="list-style-type: decimal">
-<li>Descargamos e instalamos docker (~ 500MB):
-<ol style="list-style-type: decimal">
-<li><a href="https://docs.docker.com/desktop/install/windows-install/">Windows</a>, o <a href="https://docs.docker.com/desktop/mac/apple-silicon/">Apple</a></li>
-</ol></li>
+<li>Instalamos docker (descarga de ~ 500MB):</li>
 </ol>
+<ul>
+<li><a href="https://docs.docker.com/desktop/install/windows-install/">Windows</a>, o <a href="https://docs.docker.com/desktop/mac/apple-silicon/">Apple</a></li>
+<li>Ubuntu: <code>sudo apt install docker</code></li>
+</ul>
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li>Descargamos el proyecto de RStudio jsPsychMonkeys. En la Consola de RStudio:</li>
@@ -656,8 +657,8 @@ div.csl-indent {
 <ol start="2" style="list-style-type: decimal">
 <li><p>Abrimos <code>run.R</code> y seguimos las instrucciones. En esencia:</p>
 <ul>
-<li><p>Ponemos datos en la carpeta <code>data/ID_PROTOCOLO</code> (<strong>reemplazar ID_PROTOCOLO por el número de nuestro protocolo</strong>. Si lo desconoces, pon un número alto, por ejemplo, 9991).</p></li>
-<li><p>Correr estas dos líneas, <strong>cambiando el 999 por tu número de protocolo</strong>:</p></li>
+<li><p>Ponemos datos en la carpeta <code>data/ID_PROTOCOLO</code> (<strong>reemplazar ID_PROTOCOLO por el número de nuestro protocolo</strong>. Si lo desconoces, es el primer número de tus archivos de datos, antes del “_“).</p></li>
+<li><p>Correr las dos líneas de abajo, <strong>cambiando el 999 por tu número de protocolo</strong>:</p></li>
 </ul></li>
 </ol>
 <div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="experimentos-reproducibles.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="st">&quot;./R&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;.R$&quot;</span>), source))</span>
