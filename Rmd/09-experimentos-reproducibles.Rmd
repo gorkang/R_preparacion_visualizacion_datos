@@ -135,15 +135,23 @@ source("setup/setup.R")
 
 2)  Abrimos `run.R` y seguimos las instrucciones. En esencia:
 
-    -   Ponemos datos en la carpeta `data/ID_PROTOCOLO` (**reemplazar ID_PROTOCOLO por el número de nuestro protocolo**. Si lo desconoces, es el primer número de tus archivos de datos, antes del "_". **Si usas el 999, BORRA el archivo 999.zip que hay en `data/999` antes de copiar tus datos**).
+    A) Averiguamos cual es nuestro número de protocolo:   
+    
+      - Si lo desconoces, es el primer número de los archivos de datos, antes del "_". Por ejemplo, **134**_Consent_original_2022-04-02T205622_18840434.csv -> número de protocolo 134  
+      
+    B) Ponemos los datos (archivos csv) en la carpeta `data/ID_PROTOCOLO` (**reemplazar ID_PROTOCOLO por el número de nuestro protocolo**.  
+    
+      + Si la carpeta `data/ID_PROTOCOLO` contiene algun archivo, borrar antes de copiar nuestros datos: Por ejemplo, si usas el 999, BORRA el archivo 999.zip que hay en `data/999` antes de copiar tus datos.  
 
-    -   Correr las dos líneas de abajo, **cambiando el 999 por tu número de protocolo**:
+    C) Correr las líneas de abajo (**el parametro `pid` en `run_initial_setup()` tiene que tener tu número de protocolo**. Por ejemplo, si mi protocolo es el 134, `pid = 134`)  
 
 ```{r, eval=FALSE}
 
+# Setup de nuestro sistema
 invisible(lapply(list.files("./R", full.names = TRUE, pattern = ".R$"), source))
 run_initial_setup(pid = 999, download_files = FALSE, download_task_script = FALSE)
 
+# Corremos el pipeline de preparación de datos
 targets::tar_make()
 
 ```

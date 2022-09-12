@@ -656,15 +656,28 @@ div.csl-indent {
 <hr />
 <ol start="2" style="list-style-type: decimal">
 <li><p>Abrimos <code>run.R</code> y seguimos las instrucciones. En esencia:</p>
-<ul>
-<li><p>Ponemos datos en la carpeta <code>data/ID_PROTOCOLO</code> (<strong>reemplazar ID_PROTOCOLO por el número de nuestro protocolo</strong>. Si lo desconoces, es el primer número de tus archivos de datos, antes del “_“. <strong>Si usas el 999, BORRA el archivo 999.zip que hay en <code>data/999</code> antes de copiar tus datos</strong>).</p></li>
-<li><p>Correr las dos líneas de abajo, <strong>cambiando el 999 por tu número de protocolo</strong>:</p></li>
-</ul></li>
+<ol style="list-style-type: upper-alpha">
+<li>Averiguamos cual es nuestro número de protocolo:</li>
 </ol>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="experimentos-reproducibles.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="st">&quot;./R&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;.R$&quot;</span>), source))</span>
-<span id="cb294-2"><a href="experimentos-reproducibles.html#cb294-2" aria-hidden="true" tabindex="-1"></a><span class="fu">run_initial_setup</span>(<span class="at">pid =</span> <span class="dv">999</span>, <span class="at">download_files =</span> <span class="cn">FALSE</span>, <span class="at">download_task_script =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb294-3"><a href="experimentos-reproducibles.html#cb294-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb294-4"><a href="experimentos-reproducibles.html#cb294-4" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>()</span></code></pre></div>
+<ul>
+<li>Si lo desconoces, es el primer número de los archivos de datos, antes del “_“. Por ejemplo, <strong>134</strong>_Consent_original_2022-04-02T205622_18840434.csv -&gt; número de protocolo 134</li>
+</ul>
+<ol start="2" style="list-style-type: upper-alpha">
+<li>Ponemos los datos (archivos csv) en la carpeta <code>data/ID_PROTOCOLO</code> (<strong>reemplazar ID_PROTOCOLO por el número de nuestro protocolo</strong>.</li>
+</ol>
+<ul>
+<li>Si la carpeta <code>data/ID_PROTOCOLO</code> contiene algun archivo, borrar antes de copiar nuestros datos: Por ejemplo, si usas el 999, BORRA el archivo 999.zip que hay en <code>data/999</code> antes de copiar tus datos.</li>
+</ul>
+<ol start="3" style="list-style-type: upper-alpha">
+<li>Correr las líneas de abajo (<strong>el parametro <code>pid</code> en <code>run_initial_setup()</code> tiene que tener tu número de protocolo</strong>. Por ejemplo, si mi protocolo es el 134, <code>pid = 134</code>)</li>
+</ol></li>
+</ol>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="experimentos-reproducibles.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup de nuestro sistema</span></span>
+<span id="cb294-2"><a href="experimentos-reproducibles.html#cb294-2" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="st">&quot;./R&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;.R$&quot;</span>), source))</span>
+<span id="cb294-3"><a href="experimentos-reproducibles.html#cb294-3" aria-hidden="true" tabindex="-1"></a><span class="fu">run_initial_setup</span>(<span class="at">pid =</span> <span class="dv">999</span>, <span class="at">download_files =</span> <span class="cn">FALSE</span>, <span class="at">download_task_script =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb294-4"><a href="experimentos-reproducibles.html#cb294-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb294-5"><a href="experimentos-reproducibles.html#cb294-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Corremos el pipeline de preparación de datos</span></span>
+<span id="cb294-6"><a href="experimentos-reproducibles.html#cb294-6" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>()</span></code></pre></div>
 <hr />
 <ol start="3" style="list-style-type: decimal">
 <li>Para ver el data frame final listo para el análisis</li>
