@@ -24,6 +24,7 @@ if (!require('gghighlight')) install.packages('gghighlight'); library('gghighlig
 if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
 if (!require('ggthemes')) install.packages('ggthemes'); library('ggthemes')
 if (!require('ggridges')) install.packages('ggridges'); library('ggridges')
+if (!require('ggtext')) install.packages('ggtext'); library('ggtext')
 if (!require('knitr')) install.packages('knitr'); library('knitr')
 if (!require('plotly')) install.packages('plotly'); library('plotly')
 if (!require('purrr')) install.packages('purrr'); library('purrr')
@@ -760,6 +761,42 @@ ggplot(gapminder, aes(gdpPercap, continent, fill = continent, color = continent)
   scale_x_log10(labels = scales::dollar_format(prefix = "$", suffix = "M"))
 
 ```
+
+
+### Estilos en textos
+
+Con {ggtext} podemos incluir estilos en los textos, por ejemplo, en el título de nuestras gráficas.  
+
+```{r estilos-texto}
+
+# Ejemplo adaptado de https://wilkelab.org/ggtext/articles/theme_elements.html
+mtcars %>%
+  mutate(
+    transmission = ifelse(am == 1, "automatic", "manual")
+  ) %>%
+  ggplot(aes(hp, mpg, color = transmission)) +
+  geom_point(size = 2) +
+  geom_smooth(se = FALSE, method = "lm") +
+  scale_color_manual(
+    values = c(automatic = "#0072B2", manual = "#D55E00"),
+    guide = "none"
+  ) +
+  labs(
+    x = "Horse power",
+    y = "Miles per gallon (MPG)",
+    title = "Transmission type impacts fuel efficiency",
+    subtitle = "MPG is higher for <span style = 'color:#0072B2;'>automatic</span>
+            than for <span style = 'color:#D55E00;'>manual</span> transmissions"
+            
+  ) +
+  theme_minimal() +
+  theme(
+    # plot.title.position = "plot",
+    plot.subtitle = element_markdown(size = 11, lineheight = 1.2)
+  )
+
+```
+
 
 
 

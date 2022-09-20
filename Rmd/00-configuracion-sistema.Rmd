@@ -50,7 +50,7 @@ En este gif puedes ver como hacerlo:
   rlang::check_installed(
     pkg = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
             "gapminder", "geomtextpath", "ggplot2", "ggraph", "ggridges", "ggthemes", 
-            "googlesheets4", "gtsummary", "haven", "here", "hexbin", "inspectdf", 
+            "ggtext", "googlesheets4", "gtsummary", "haven", "here", "hexbin", "inspectdf", 
             "janitor", "knitr", "lme4", "papaja", "parameters", "performance", "plotly", 
             "purrr", "readODS", "readr", "readxl", "remotes", "renv", "report", 
             "rticles", "see", "sjPlot", "stargazer", "tidyr", "usethis", "writexl"), 
