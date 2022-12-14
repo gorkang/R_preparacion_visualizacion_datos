@@ -21,7 +21,7 @@ Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además
 
 RStudio es un entorno integrado de desarrollo (IDE) para la programación R.
 
--   [Descargar e instalar RStudio](http://www.rstudio.com/download).
+-   [Descargar e instalar RStudio](https://posit.co/download/rstudio-desktop/).
 -   Una vez descargado e instalado, **abre** RStudio. Deberías ver algo parecido a lo siguiente:
 
 

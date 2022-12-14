@@ -888,7 +888,11 @@ Especialmente porque podemos incluir en el mismo gráfico información sobre dis
 # geom_density_ridges junto con raincloud points y histograma
   ggplot(gapminder, aes(lifeExp, continent, fill = continent)) + 
      ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE) +
-     ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.7, scale = 0.9)
+     ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.7, scale = 0.9, 
+                                   quantile_lines = TRUE, quantile_fun = mean) +
+  theme(legend.position = "none") +
+  scale_x_continuous(n.breaks = 10) +
+  labs(caption = "vertical lines represent the mean lifeExp per continent")
 ```
 
 
