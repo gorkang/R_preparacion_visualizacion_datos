@@ -5,3 +5,5 @@
 dev/
 _bookdown_files
 .Renviron
+
+/.quarto/

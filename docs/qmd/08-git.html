@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>R para preparación y visualización de datos - 8&nbsp; Control de cambios con Git y Github</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../qmd/09-experimentos-reproducibles.html" rel="next">
+<link href="../qmd/07-rmarkdown.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/08-git.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Control de cambios con Git y Github</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">R para preparación y visualización de datos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/00-configuracion-sistema.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparando nuestro sistema</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/01-introduccion_visualizacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a R y visualización de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/02-visualizacion-avanzada.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Visualización avanzada</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/03-preparacion_transformacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Preparación y transformación de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/04-combinar-datos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Combinar datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/05-analisis-datos-exploratorio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Análisis de datos exploratorio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/06-analisis-datos-inferencial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análisis de datos inferencial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/07-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Trabajo con RMarkdown para reportes reproducibles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/08-git.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Control de cambios con Git y Github</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/09-experimentos-reproducibles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experimentos reproducibles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/10-ejercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ejercicios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/refs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Paquetes usados</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#paquetes-para-este-cap%C3%ADtulo" id="toc-paquetes-para-este-capítulo" class="nav-link active" data-scroll-target="#paquetes-para-este-cap%C3%ADtulo">Paquetes para este capítulo</a></li>
+  <li><a href="#dependencias" id="toc-dependencias" class="nav-link" data-scroll-target="#dependencias">Dependencias</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="header-section-number">8.1</span> Git</a></li>
+  <li><a href="#github" id="toc-github" class="nav-link" data-scroll-target="#github"><span class="header-section-number">8.2</span> Github</a></li>
+  <li>
+<a href="#clonar-repo" id="toc-clonar-repo" class="nav-link" data-scroll-target="#clonar-repo"><span class="header-section-number">8.3</span> Clonar un repositorio existente</a>
+  <ul>
+<li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul>
+</li>
+  <li>
+<a href="#crear-un-proyecto-en-rstudio-asociado-a-github" id="toc-crear-un-proyecto-en-rstudio-asociado-a-github" class="nav-link" data-scroll-target="#crear-un-proyecto-en-rstudio-asociado-a-github"><span class="header-section-number">8.4</span> Crear un proyecto en RStudio asociado a Github</a>
+  <ul>
+<li><a href="#versi%C3%B3n-simple-recomendado" id="toc-versión-simple-recomendado" class="nav-link" data-scroll-target="#versi%C3%B3n-simple-recomendado">Versión simple [recomendado]</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#usando-el-terminal" id="toc-usando-el-terminal" class="nav-link" data-scroll-target="#usando-el-terminal">Usando el terminal</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
+  </ul>
+</li>
+  <li><a href="#ejercicio-git-github" id="toc-ejercicio-git-github" class="nav-link" data-scroll-target="#ejercicio-git-github">Ejercicio Git-Github</a></li>
+  <li>
+<a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow"><span class="header-section-number">8.5</span> Workflow</a>
+  <ul>
+<li>
+<a href="#modelo-b%C3%A1sico" id="toc-modelo-básico" class="nav-link" data-scroll-target="#modelo-b%C3%A1sico"><span class="header-section-number">8.5.1</span> Modelo básico</a>
+  <ul>
+<li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
+  </ul>
+</li>
+  <li>
+<a href="#pull-request-en-3-1-sencillos-pasos" id="toc-pull-request-en-3-1-sencillos-pasos" class="nav-link" data-scroll-target="#pull-request-en-3-1-sencillos-pasos"><span class="header-section-number">8.5.2</span> Pull request en 3 + 1 sencillos pasos</a>
+  <ul>
+<li><a href="#paso-1.-compare-pull-request" id="toc-paso-1.-compare-pull-request" class="nav-link" data-scroll-target="#paso-1.-compare-pull-request"><span class="header-section-number">8.5.2.1</span> Paso 1. Compare &amp; pull request</a></li>
+  <li><a href="#paso-2.-create-pull-request" id="toc-paso-2.-create-pull-request" class="nav-link" data-scroll-target="#paso-2.-create-pull-request"><span class="header-section-number">8.5.2.2</span> Paso 2. Create pull request</a></li>
+  <li><a href="#paso-3.-merge-pull-request" id="toc-paso-3.-merge-pull-request" class="nav-link" data-scroll-target="#paso-3.-merge-pull-request"><span class="header-section-number">8.5.2.3</span> Paso 3. Merge pull request</a></li>
+  </ul>
+</li>
+  <li><a href="#ejercicio" id="toc-ejercicio" class="nav-link" data-scroll-target="#ejercicio">Ejercicio</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
+  </ul>
+</li>
+  <li><a href="#bibliograf%C3%ADa" id="toc-bibliografía" class="nav-link" data-scroll-target="#bibliograf%C3%ADa">Bibliografía</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Control de cambios con Git y Github</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><hr>
+<section id="paquetes-para-este-capítulo" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="paquetes-para-este-capítulo">Paquetes para este capítulo</h4>
+<div class="cell" data-hash="08-git_cache/html/setup_fc7207b1d40fc4ee6e6928a2012911b0">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://afex.singmann.science/">'afex'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'afex'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://afex.singmann.science/">'afex'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/correlation/">'correlation'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"correlation"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/correlation/">'correlation'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/tidymodels/corrr">'corrr'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'corrr'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/tidymodels/corrr">'corrr'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org">'dplyr'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'dplyr'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org">'dplyr'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/DT">'DT'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'DT'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/DT">'DT'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://ggraph.data-imaginist.com">'ggraph'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'ggraph'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ggraph.data-imaginist.com">'ggraph'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://here.r-lib.org/">'here'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'here'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://here.r-lib.org/">'here'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/ddsjoberg/gtsummary">'gtsummary'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'gtsummary'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/ddsjoberg/gtsummary">'gtsummary'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/">'knitr'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'knitr'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/">'knitr'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/crsh/papaja">'papaja'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"papaja"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/crsh/papaja">'papaja'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/parameters/">'parameters'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'parameters'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/parameters/">'parameters'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org">'remotes'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'remotes'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org">'remotes'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://rstudio.github.io/renv/">'renv'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"renv"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://rstudio.github.io/renv/">'renv'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/report/">'report'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"report"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/report/">'report'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/rticles">'rticles'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'rticles'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/rticles">'rticles'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/see/">'see'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"see"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/see/">'see'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://strengejacke.github.io/sjPlot/">'sjPlot'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'sjPlot'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://strengejacke.github.io/sjPlot/">'sjPlot'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://stringi.gagolewski.com/">'stringi'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'stringi'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://stringi.gagolewski.com/">'stringi'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/tinytex">'tinytex'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tinytex'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/tinytex">'tinytex'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://usethis.r-lib.org">'usethis'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'usethis'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://usethis.r-lib.org">'usethis'</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr></section><section id="dependencias" class="level2 parameters unnumbered"><h2 class="parameters unnumbered anchored" data-anchor-id="dependencias">Dependencias</h2>
+<p>Vamos a necesitar <a href="https://git-scm.com/">Git</a> y <a href="https://www.latex-project.org/">Latex</a> para poder trabajar:</p>
+<p><strong>Instalar Git</strong></p>
+<p>Ver instrucciones para <a href="https://happygitwithr.com/install-git.html#install-git-windows">Windows</a>, <a href="https://happygitwithr.com/install-git.html#macos">Mac</a> y <a href="https://happygitwithr.com/install-git.html#linux">Linux</a>.</p>
+<p>&nbsp;&nbsp;<span style="font-size: 10px;">Importante: en el paso <em>Adjusting your PATH environment</em> en en Windows, selecciona <em>Git from the command line and also from 3rd-party software</em></span></p>
+</section><section id="git" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="git">
+<span class="header-section-number">8.1</span> Git</h2>
+<div style="float:right;position: relative; margin:0px 0px 0px 50px;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="../data/images/git.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">SOURCE: https://xkcd.com/1597/</figcaption></figure>
+</div>
+</div>
+<p>Un segundo elemento que nos va a ayudar a trabajar en equipo, y a evitar problemas en proyectos relativamente complejos es el uso de un sistema de control de versiones como <a href="https://git-scm.com/">Git</a>. Los proyectos de RStudio hacen especialmente sencillo usar algunas funcionalidades básicas de Git.</p>
+<p>Algunas referencias útiles:</p>
+<ul>
+<li>
+<a href="http://ohshitgit.com/?utm_content=buffera425b&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">OhshitGit website</a><br>
+</li>
+<li>
+<a href="https://github.com/GitInPractice/GitInPractice#readme">Git in practice</a><br>
+</li>
+<li><a href="http://happygitwithr.com/"><strong>happygitwithr</strong></a></li>
+</ul>
+<div style="clear: both;">
+
+</div>
+</section><section id="github" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="github">
+<span class="header-section-number">8.2</span> Github</h2>
+<div style="float:left;position: relative; margin:0px 30px 0px 0px;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="../data/images/github-octocat.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">SOURCE: <a href="https://github.githubassets.com/images/modules/open_graph/github-octocat.png">github.githubassets.com</a></figcaption></figure>
+</div>
+</div>
+<p><a href="https://github.com">Github</a> es una plataforma web muy popular donde almacenar proyectos de programación que usa como motor. Muchos de los paquetes de R, el mismo <a href="https://github.com/rstudio">RStudio</a>, etc, tienen repositorios abiertos en Github. Una de las ventajas fundamentales de usar Github es que esta plataforma integra algunas herramientas para hacer más sencillo el control de versiones, como el <a href="https://help.github.com/en/articles/creating-a-pull-request">pull request</a>, que nos permite combinar ramas de proyectos sin apenas problemas.</p>
+<p>Github tiene un programa especial para estudiantes: https://education.github.com/</p>
+</section><section id="clonar-repo" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="clonar-repo">
+<span class="header-section-number">8.3</span> Clonar un repositorio existente</h2>
+<p>Algo que podemos hacer con todos los repositorios de Github es clonarlos localmente:</p>
+<section id="section" class="level4 parameters unnumbered"><h4 class="parameters unnumbered anchored" data-anchor-id="section"></h4>
+<p><strong>Primero</strong>, copiamos la <code>repository URL</code> del repo de <a href="https://github.com/">Github</a> (ver imagen de abajo). Será algo similar a <code>https://github.com/VUESTRO_NOMBRE_DE_USUARIO/NOMBRE_REPOSITORIO.git</code></p>
+<div style="float:left;position: relative; margin:0px 30px 0px 0px;">
+<p><img src="../data/images/git-clone.png" class="img-fluid"></p>
+</div>
+<div style="clear: both;">
+
+</div>
+<p><strong>Segundo</strong>, en RStudio: <code>File &gt; New Project &gt; Version Control &gt; Git</code></p>
+<p><img src="../data/images/rstudio-github.gif" class="img-fluid"></p>
+</section></section><section id="crear-un-proyecto-en-rstudio-asociado-a-github" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="crear-un-proyecto-en-rstudio-asociado-a-github">
+<span class="header-section-number">8.4</span> Crear un proyecto en RStudio asociado a Github</h2>
+<p>Podemos empezar creando un repositorio en Github, para después clonarlo localmente. Si necesitamos crear un <a href="https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">personal access token, podemos consultar la ayuda de Github</a>.</p>
+<pre><code><a href="https://usethis.r-lib.org/reference/github-token.html"># Puedes usar:  
+
+usethis::create_github_token()
+
+# O manualmente, como los animales:  
+
+  # En tu página de Github, haz click en tu icon (arriba a la derecha) -&gt; Settings -&gt; Developer settings -&gt; Personal access tokens -&gt; [Generate new token] -&gt; Give gist, repo and workflow permissions.</a></code></pre>
+<section id="versión-simple-recomendado" class="level3 parameters unnumbered"><h3 class="parameters unnumbered anchored" data-anchor-id="versión-simple-recomendado">Versión simple [recomendado]</h3>
+<p>En <a href="https://github.com/">Github</a>:</p>
+<ol type="1">
+<li><p>Creamos repositorio nuevo</p></li>
+<li><p>Initialize this repository with a README</p></li>
+<li><p><a href="#clonar-repo">Clonar repositorio</a></p></li>
+</ol></section><section id="section-1" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="section-1"></h3>
+<p>Alternativamente, si ya tenemos un proyecto de RStudio, podemos crear un repositorio de Github asociado automágicamente.</p>
+</section><section id="usando-el-terminal" class="level3 parameters unnumbered"><h3 class="parameters unnumbered anchored" data-anchor-id="usando-el-terminal">Usando el terminal</h3>
+<ol type="1">
+<li><p>Crear local git repo (solo si no lo tenemos aún): <code><a href="https://usethis.r-lib.org/reference/use_git.html">usethis::use_git()</a></code> (se crea una carpeta oculta llamada .git)</p></li>
+<li><p>Crear Github Token: <code><a href="https://usethis.r-lib.org/reference/github-token.html">usethis::create_github_token()</a></code></p></li>
+<li><p>Insertar token en archivo .Renviron: <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code></p></li>
+<li><p>Crear Github repo: <code><a href="https://usethis.r-lib.org/reference/use_github.html">usethis::use_github()</a></code></p></li>
+</ol>
+<ul>
+<li>Empujar el repositorio local a Github: <code>git push --set-upstream origin master</code>
+</li>
+</ul></section><section id="section-2" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="section-2"></h3>
+</section></section><section id="ejercicio-git-github" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-git-github">Ejercicio Git-Github</h2>
+<ol type="1">
+<li><p>Crea un proyecto de RStudio</p></li>
+<li><p>Abre una cuenta en <a href="https://github.com/">Github</a> y/o haz login</p></li>
+<li><p>Sigue los pasos de arriba para crear un repositorio público y asociarlo a un repositorio local</p></li>
+</ol></section><section id="workflow" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="workflow">
+<span class="header-section-number">8.5</span> Workflow</h2>
+<div style="float:left;position: relative; margin:0px 30px 0px 0px;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="../data/images/git-basic.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">SOURCE: <a href="https://nvie.com/posts/a-successful-git-branching-model/">nvie.com</a></figcaption></figure>
+</div>
+</div>
+<p>Hay diferentes filosofias sobre cual es la mejor manera de trabajar con Git.</p>
+<p>En <a href="https://nvie.com/posts/a-successful-git-branching-model/">este post</a> por Vincent Driessen podeis ver una explicación bien detallada, complementada con imagenes como la que se ve a continuación.</p>
+<p>El modelo básico implica la existencia de dos ramas. Una master (“producción”), que siempre debe funcionar, y una develop (para desarrollo), donde experimentamos, rompemos cosas, etc.</p>
+<p>Podeis ver un manual super completo llamado <a href="http://happygitwithr.com/">Happy Git and GitHub for the useR</a> elaborado por Jenny Bryan, Jim Hester, entre otros.</p>
+<div style="clear: both;">
+
+</div>
+<section id="modelo-básico" class="level3" data-number="8.5.1"><h3 data-number="8.5.1" class="anchored" data-anchor-id="modelo-básico">
+<span class="header-section-number">8.5.1</span> Modelo básico</h3>
+<p>En RStudio podemos trabajar gráficamente, Usando el panel <code>Git</code>.</p>
+<p><img src="../data/images/git-rstudio.png" class="img-fluid"></p>
+<p><strong>Usando el entorno gráfico</strong></p>
+<section id="section-3" class="level5 parameters unnumbered"><h5 class="parameters unnumbered anchored" data-anchor-id="section-3"></h5>
+<p><strong>Empezamos en la rama master</strong>:</p>
+<ol start="0" type="1">
+<li>
+<strong>Pull</strong> <img src="../data/images/git-pull.png" class="img-fluid"> : nos aseguramos que nuestro repositorio local esta actualizado<br>
+</li>
+<li>
+<strong>Branch</strong> <img src="../data/images/git-branch.png" class="img-fluid"> : Creamos nueva rama llamada <strong>development</strong><br>
+</li>
+<li>Hacemos cambios en nuestros scripts<br>
+</li>
+<li>
+<strong>Commit</strong> <img src="../data/images/git-commit.png" class="img-fluid"> : Commiteamos los cambios<br>
+</li>
+<li>
+<strong>Push</strong> <img src="../data/images/git-push.png" class="img-fluid"> : subimos la rama a Github<br>
+</li>
+<li>
+<strong>Pull request</strong> (En Github):</li>
+</ol>
+<ul>
+<li>Compare &amp; Pull request<br>
+</li>
+</ul>
+<ol start="6" type="1">
+<li>
+<strong>Pull</strong> <img src="../data/images/git-pull.png" class="img-fluid"> : nos aseguramos que nuestro repositorio local esta actualizado</li>
+</ol>
+<details><summary>
+Como hacerlo usando el <code>terminal</code> <img src="../data/images/hint.png" class="img-fluid"></summary><p><span style="color: orange;"></span></p>
+<ol start="0" type="1">
+<li>
+<strong>Pull</strong>: nos aseguramos que nuestro repositorio local esta actualizado: <code>git pull</code>
+</li>
+<li>
+<strong>Branch</strong>: Creamos nueva rama llamada <strong>development</strong>: <code>git checkout -b development</code><br>
+</li>
+<li>Hacemos cambios en nuestros scripts<br>
+</li>
+<li>
+<strong>Commit</strong>: Commiteamos los cambios<br>
+</li>
+</ol>
+<ul>
+<li>Añadimos archivos: <code>git add foo.txt</code><br>
+</li>
+<li>Hacemos el commit: <code>git commit --message "A commit message"</code><br>
+</li>
+</ul>
+<ol start="4" type="1">
+<li>
+<strong>Push</strong>: subimos la rama a Github: <code>git push origin development</code><br>
+</li>
+<li>
+<strong>Pull request</strong> (En Github):</li>
+</ol>
+<ul>
+<li>Compare &amp; Pull request</li>
+</ul>
+<ol start="6" type="1">
+<li>
+<strong>Pull</strong>: nos aseguramos que nuestro repositorio local esta actualizado: <code>git pull</code>
+</li>
+</ol></details></section></section><section id="pull-request-en-3-1-sencillos-pasos" class="level3" data-number="8.5.2"><h3 data-number="8.5.2" class="anchored" data-anchor-id="pull-request-en-3-1-sencillos-pasos">
+<span class="header-section-number">8.5.2</span> Pull request en 3 + 1 sencillos pasos</h3>
+<p>Después de hacer el push de arriba, al entrar en nuestro repositorio deberíamos ver algo parecido a lo siguiente (si no lo vemos, ir a <strong>branches</strong>). La única dificultad es saber cual de los botones verdes apretar:</p>
+<section id="paso-1.-compare-pull-request" class="level4" data-number="8.5.2.1"><h4 data-number="8.5.2.1" class="anchored" data-anchor-id="paso-1.-compare-pull-request">
+<span class="header-section-number">8.5.2.1</span> Paso 1. Compare &amp; pull request</h4>
+<!-- ##### {.parameters -}  -->
+<p><img src="../data/images/pull-request-1.png" class="img-fluid" style="width:70.0%"></p>
+<!-- ##### {-}   -->
+</section><section id="paso-2.-create-pull-request" class="level4" data-number="8.5.2.2"><h4 data-number="8.5.2.2" class="anchored" data-anchor-id="paso-2.-create-pull-request">
+<span class="header-section-number">8.5.2.2</span> Paso 2. Create pull request</h4>
+<!-- ##### {.parameters -}  -->
+<p><img src="../data/images/pull-request-2.png" class="img-fluid" style="width:70.0%"></p>
+<!-- ##### {-}  -->
+</section><section id="paso-3.-merge-pull-request" class="level4" data-number="8.5.2.3"><h4 data-number="8.5.2.3" class="anchored" data-anchor-id="paso-3.-merge-pull-request">
+<span class="header-section-number">8.5.2.3</span> Paso 3. Merge pull request</h4>
+<!-- ##### {.parameters -}  -->
+<p><img src="../data/images/pull-request-3.png" class="img-fluid" style="width:70.0%"></p>
+<ul>
+<li>Borrar rama antigua</li>
+</ul>
+<!-- ##### {-}  --><hr></section></section><section id="ejercicio" class="level3 ejercicio unnumbered"><h3 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio">Ejercicio</h3>
+<p><strong>Nuestro primer commit</strong></p>
+<ol type="1">
+<li><p>Usando el proyecto de RStudio de antes, crea una rama nueva llamada development</p></li>
+<li><p>Crea un nuevo archivo en formato .Rmd:</p></li>
+</ol>
+<p><img src="../data/images/new-Rmd-file.png" class="img-fluid"></p>
+<ol start="3" type="1">
+<li><p>Haz un commit de ese archivo y subelo (push) a Github (asegurate que esta allá!). No olvides hacer un pull!</p></li>
+<li><p>Ahora haz cambios en el archivo, commitealos, súbelos, y sincroniza tu repo local</p></li>
+</ol></section><section id="section-4" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="section-4"></h3>
+<!-- ### Feature branch  -->
+<!-- Para la versión más razonable deberiamos tener partir con las siguientes ramas: -->
+<!-- * master   -->
+<!-- * development   -->
+<!-- Queremos implementar un nuevo feature o arreglar algun problema:   -->
+<!-- 1. Creamos nueva rama (localmente feature_x)   -->
+<!-- `git checkout -b feature_x` -->
+<!-- 2. Hacemos cambios   -->
+<!-- - Vemos que cambios hay: `git status`, o las diferencias exactas `git diff`     -->
+<!-- - Commiteamos los cambios:   -->
+<!--   + Añadimos archivos: `git add foo.txt`   -->
+<!--   + Hacemos el commit: `git commit --message "A commit message"`   -->
+<!-- Ahora viene lo bueno... opción sencilla:   -->
+<!-- 3a. Subimos la rama a Github, donde podremos hacer un Pull request:      -->
+<!-- - `git push origin feature_x`   -->
+<!-- - Si todo ha ido bien, borramos la rama `feature_x`: `git branch -d feature_x`    -->
+<!-- La opción menos sencilla: -->
+<!-- 3b. Si no esperamos conflictos - mergeamos rama a development para poder probar que todo funciona bien.    -->
+<!-- `git checkout development`   -->
+<!-- `git pull origin development --ff-only`    -->
+<!-- `git merge feature_x`   -->
+<!-- `git push origin development`    -->
+<!-- ---   -->
+<!-- ### Stash   -->
+<!-- Hemos hecho algunos cambios pero no queremos hacer commit:   -->
+<!-- `git stash`   -->
+<!-- Recuperamos los cambios   -->
+<!-- `git checkout rama_en_la_que_recuperar_cambios`   -->
+<!-- `git stash apply`   -->
+<!-- Queremos destruir el stash   -->
+<!-- `git stash drop`   -->
+</section></section><section id="bibliografía" class="level2 bibliografia unnumbered"><h2 class="bibliografia unnumbered anchored" data-anchor-id="bibliografía">Bibliografía</h2>
+<p><a href="https://style.tidyverse.org/">Guia de estilo del tidyverse</a></p>
+<p><a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s Style guide</a></p>
+<p><a href="https://happygitwithr.com">Happy Git and GitHub for the useR</a></p>
+<p><a href="https://github.com/ropensci/targets">targets</a></p>
+<p>Scheel, A. M., Schijen, M., &amp; Lakens, D. (in press). An excess of positive results: Comparing the standard Psychology literature with Registered Reports. Advances in Methods and Practices in Psychological Science.</p>
+<p>Xie, Y., Allaire, J. J., &amp; Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. https://bookdown.org/yihui/rmarkdown/</p>
+<p>Yihui Xie (2018). bookdown: Authoring Books and Technical Documents with R Markdown https://bookdown.org/yihui/bookdown/markdown-syntax.html</p>
+<ul>
+<li>Mas cosas sobre reproducibilidad:
+<ul>
+<li><a href="https://osf.io/ezcuj/">Reproducibility project: Psychology</a></li>
+<li><a href="https://osf.io/8cd4r/">Many labs 2</a></li>
+</ul>
+</li>
+</ul>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../qmd/07-rmarkdown.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Trabajo con RMarkdown para reportes reproducibles</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../qmd/09-experimentos-reproducibles.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experimentos reproducibles</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

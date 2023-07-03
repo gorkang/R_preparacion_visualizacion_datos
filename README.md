@@ -35,4 +35,4 @@ Si las instrucciones del manual no tienen sentido:
 3. Abre el archivo: `R_preparacion_visualizacion_datos-master/_book/preparando-sistema.html`  
 4. Sigue las instrucciones que ahí aparecen  
 
-![](data/images/download_repo_manually.png)  
+![](../data/images/download_repo_manually.png)  

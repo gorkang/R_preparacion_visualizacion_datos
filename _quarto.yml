@@ -1,0 +1,42 @@
+project:
+  type: book
+  output-dir: docs
+
+execute:
+  cache: true
+  warning: false
+  message: false
+
+book:
+  title: "R para preparación y visualización de datos"
+  subtitle: "[Doctorado en Neurociencia Social y Cognición](https://www.uai.cl/doctorado/doctorado-en-neurociencia-social-y-cognicion-2/), [UAI](https://www.uai.cl/)"
+  author: "Gorka Navarrete [![](../data/images/24px-ORCID_iD.svg.png)](http://orcid.org/0000-0001-7678-8656) [![](../data/images/twitter_small.png)](https://twitter.com/gorkang)"
+  url: https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html
+  repo-url: https://github.com/gorkang/R_preparacion_visualizacion_datos
+  repo-branch: main
+  chapters:
+    - "index.qmd"
+    - "qmd/00-configuracion-sistema.qmd"
+    - "qmd/01-introduccion_visualizacion.qmd"
+    - "qmd/02-visualizacion-avanzada.qmd"
+    - "qmd/03-preparacion_transformacion.qmd"
+    - "qmd/04-combinar-datos.qmd"
+    - "qmd/05-analisis-datos-exploratorio.qmd"
+    - "qmd/06-analisis-datos-inferencial.qmd"
+    - "qmd/07-rmarkdown.qmd"
+    - "qmd/08-git.qmd"
+    - "qmd/09-experimentos-reproducibles.qmd"
+    - "qmd/10-ejercicios.qmd"
+    - "qmd/refs.qmd"
+
+bibliography: data/bib/pkg-refs.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - base.scss
+    code-link: true
+    fig-width: 12
+    fig-height: 8
+    toc-depth: 5

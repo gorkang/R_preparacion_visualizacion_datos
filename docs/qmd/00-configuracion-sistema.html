@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>R para preparación y visualización de datos - Preparando nuestro sistema</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../qmd/01-introduccion_visualizacion.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/00-configuracion-sistema.html">Preparando nuestro sistema</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">R para preparación y visualización de datos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/00-configuracion-sistema.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Preparando nuestro sistema</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/01-introduccion_visualizacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a R y visualización de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/02-visualizacion-avanzada.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Visualización avanzada</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/03-preparacion_transformacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Preparación y transformación de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/04-combinar-datos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Combinar datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/05-analisis-datos-exploratorio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Análisis de datos exploratorio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/06-analisis-datos-inferencial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análisis de datos inferencial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/07-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Trabajo con RMarkdown para reportes reproducibles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/08-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Control de cambios con Git y Github</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/09-experimentos-reproducibles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experimentos reproducibles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/10-ejercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ejercicios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/refs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Paquetes usados</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#empezando-en-a-b-c" id="toc-empezando-en-a-b-c" class="nav-link active" data-scroll-target="#empezando-en-a-b-c">Empezando en A-B-C</a>
+  <ul>
+<li><a href="#a-instalar-r" id="toc-a-instalar-r" class="nav-link" data-scroll-target="#a-instalar-r"><strong>(A)</strong> Instalar R</a></li>
+  <li><a href="#b-instalar-rstudio" id="toc-b-instalar-rstudio" class="nav-link" data-scroll-target="#b-instalar-rstudio"><strong>(B)</strong> Instalar RStudio</a></li>
+  <li><a href="#c-paquetes-para-el-workshop" id="toc-c-paquetes-para-el-workshop" class="nav-link" data-scroll-target="#c-paquetes-para-el-workshop"><strong>(C)</strong> Paquetes para el workshop</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#algo-m%C3%A1s-sobre-la-instalaci%C3%B3n-de-paquetes" id="toc-algo-más-sobre-la-instalación-de-paquetes" class="nav-link" data-scroll-target="#algo-m%C3%A1s-sobre-la-instalaci%C3%B3n-de-paquetes">Algo más sobre la instalación de paquetes</a>
+  <ul>
+<li><a href="#cargar-paquetes" id="toc-cargar-paquetes" class="nav-link" data-scroll-target="#cargar-paquetes">Cargar paquetes</a></li>
+  <li><a href="#todo-en-uno" id="toc-todo-en-uno" class="nav-link" data-scroll-target="#todo-en-uno">Todo en uno</a></li>
+  <li><a href="#instalar-paquetes-de-github" id="toc-instalar-paquetes-de-github" class="nav-link" data-scroll-target="#instalar-paquetes-de-github">Instalar paquetes de Github</a></li>
+  </ul>
+</li>
+  <li><a href="#bibliograf%C3%ADa" id="toc-bibliografía" class="nav-link" data-scroll-target="#bibliograf%C3%ADa">Bibliografía</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="preparando-sistema" class="quarto-section-identifier">Preparando nuestro sistema</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><section id="empezando-en-a-b-c" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="empezando-en-a-b-c">Empezando en A-B-C</h2>
+<p>Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además de algunas librerías. <strong>Para tener un sistema funcional, completa los pasos A, B y C</strong>. Si ya tienes R y Rstudio instalados (recientemente), puedes pasar directamente al paso <strong>(C)</strong>.</p>
+<section id="a-instalar-r" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="a-instalar-r">
+<strong>(A)</strong> Instalar R</h3>
+<p><a href="https://www.r-project.org/">R</a>, es un lenguaje de programación especializado en la computación estadística y visualización de datos. Es recomendable tener instalada la última versión de R. Puedes usar uno de los enlaces siguientes:</p>
+<ul>
+<li><p><strong>Windows</strong>: <a href="https://cran.r-project.org/bin/windows/base/">Descargar e instalar R para Windows</a></p></li>
+<li><p><strong>Mac</strong>: <a href="https://cran.r-project.org/bin/macosx/">Descargar e instalar R para Mac</a></p></li>
+<li><p><strong>Ubuntu Linux</strong>: <a href="https://cran.r-project.org/bin/linux/debian/">más detalles en la web de R</a>. <strong>En un terminal</strong>:</p></li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<code>sudo apt install r-base</code></p>
+</section><section id="b-instalar-rstudio" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="b-instalar-rstudio">
+<strong>(B)</strong> Instalar RStudio</h3>
+<p>RStudio es un entorno integrado de desarrollo (IDE) para la programación R.</p>
+<ul>
+<li>
+<a href="https://posit.co/download/rstudio-desktop/">Descargar e instalar RStudio</a>.</li>
+<li>Una vez descargado e instalado, <strong>abre</strong> RStudio. Deberías ver algo parecido a lo siguiente:</li>
+</ul>
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/unnamed-chunk-1_ed2d8a4f38e5445ea79498a314a85c98">
+<div class="cell-output-display">
+<p><img src="../data/images/empezando.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<ul>
+<li>Si encuentras un error de instalación en ubuntu, tendrás que instalar RStudio manualmente:
+<ul>
+<li><code>sudo dpkg -i rstudio-[VERSION_NUMBER]-amd64.deb</code></li>
+<li><code>sudo apt --fix-broken install</code></li>
+</ul>
+</li>
+</ul></section><section id="c-paquetes-para-el-workshop" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="c-paquetes-para-el-workshop">
+<strong>(C)</strong> Paquetes para el workshop</h3>
+<p>Para instalar los paquetes del workshop, ejecuta el código de más abajo (sección sombreada en gris claro) en la consola de RStudio.</p>
+<p>En este gif puedes ver como hacerlo:</p>
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/unnamed-chunk-2_69dc7b2206989fb6bc1844f9f22f2fc6">
+<div class="cell-output-display">
+<p><img src="../data/videos/rstudio_install_ALL.gif" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<p><strong>Copia y pega el código de abajo en la consola de RStudio y ejecútalo [tecla ENTER]</strong>:</p>
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_workshop_packages_9fdaa747914db77b18e506dd36b58429">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://rlang.r-lib.org">'rlang'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'rlang'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://rlang.r-lib.org">'rlang'</a></span><span class="op">)</span></span>
+<span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/is_installed.html">check_installed</a></span><span class="op">(</span></span>
+<span>    pkg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"afex"</span>, <span class="st">"correlation"</span>, <span class="st">"corrr"</span>, <span class="st">"cowplot"</span>, <span class="st">"dplyr"</span>, <span class="st">"DT"</span>, <span class="st">"esquisse"</span>,</span>
+<span>            <span class="st">"gapminder"</span>, <span class="st">"geomtextpath"</span>, <span class="st">"ggplot2"</span>, <span class="st">"ggraph"</span>, <span class="st">"ggridges"</span>, <span class="st">"ggthemes"</span>, </span>
+<span>            <span class="st">"ggtext"</span>, <span class="st">"googlesheets4"</span>, <span class="st">"gtsummary"</span>, <span class="st">"haven"</span>, <span class="st">"here"</span>, <span class="st">"hexbin"</span>, <span class="st">"inspectdf"</span>, </span>
+<span>            <span class="st">"janitor"</span>, <span class="st">"knitr"</span>, <span class="st">"lme4"</span>, <span class="st">"papaja"</span>, <span class="st">"parameters"</span>, <span class="st">"performance"</span>, <span class="st">"plotly"</span>, </span>
+<span>            <span class="st">"purrr"</span>, <span class="st">"readODS"</span>, <span class="st">"readr"</span>, <span class="st">"readxl"</span>, <span class="st">"remotes"</span>, <span class="st">"renv"</span>, <span class="st">"report"</span>, </span>
+<span>            <span class="st">"rticles"</span>, <span class="st">"see"</span>, <span class="st">"sjPlot"</span>, <span class="st">"stargazer"</span>, <span class="st">"tidyr"</span>, <span class="st">"usethis"</span>, <span class="st">"writexl"</span><span class="op">)</span>, </span>
+<span>    reason <span class="op">=</span> <span class="st">"to run the initial setup"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber completado el paso previo.</p>
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_workshop_packages2_bd27c78778d5dfcc006243f1e4ee2b1a">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gadenbuie/regexplain">'regexplain'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gadenbuie/regexplain"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gadenbuie/regexplain">'regexplain'</a></span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jorvlan/raincloudplots">'raincloudplots'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'jorvlan/raincloudplots'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jorvlan/raincloudplots">'raincloudplots'</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Usaremos un buen numero de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (<em>en algunos sistemas puede ser facilmente 1 hora</em>). Si tienes alguna dificultad en este punto, te recomiendo que veas algun <a href="https://www.youtube.com/watch?v=BvKETZ6kr9Q">tutorial básico de R o RStudio</a>.</p>
+<p>Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g.&nbsp;pacman, pak, renv, …), pero dejaremos eso para más adelante.</p>
+<hr></section></section><section id="algo-más-sobre-la-instalación-de-paquetes" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="algo-más-sobre-la-instalación-de-paquetes">Algo más sobre la instalación de paquetes</h2>
+<p>Los paquetes de R son una colección de funciones, datos y documentación que amplían las capacidades básicas de R.</p>
+<p>Gran parte de las funciones y paquetes que utilizaremos en este workshop se encuentran contenidas en el meta-paquete <a href="https://www.tidyverse.org/">tidyverse</a> (este es un paquete de paquetes). No lo instalamos en <strong>(C)</strong>, pero si quisieras instalarlo solo tendrías que ejecutar la siguiente linea en la <strong>consola</strong> de RStudio:</p>
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_gg_369afbd5bbb9a3838b050e4f505e3bdc">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para instalar otro paquete diferente de “tidyverse”, remplaza su nombre entre comillas dentro de la función:</p>
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_any_package_4ec3996e99b67718fd4ede0c0ee483fa">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"NOMBRE_DE_PAQUETE"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Una vez instalado un paquete, no es necesario volver hacerlo, a menos que reinstales R.</p>
+<section id="cargar-paquetes" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="cargar-paquetes">Cargar paquetes</h3>
+<p>Las funciones, datos y documentación dentro de nuestros paquetes no podrán ser utilizadas hasta que se carguen en R. Una vez instalados, para cargar los paquetes se usa la función <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>:</p>
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/load_library_45043a5029f2754518fbf06460409693">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En realidad las funciones también pueden ser llamadas usando su referencia absoluta <code>::</code>, sin necesidad de cargarlas antes. Por ejemplo: <code>dplyr::tibble(columna = 1)</code>. En general: <code>nombre_paquete::nombre_de_funcion(parametros)</code>).</p>
+</section><section id="todo-en-uno" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="todo-en-uno">Todo en uno</h3>
+<p>El siguiente código simplifica lo anterior. Comprueba que el paquete esta instalado; Si no se encuentra instalado, lo instala. Finalmente lo carga.</p>
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_ggplot2_d65304f89eb86a88cc5543cebcf9df3f">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">'tidyverse'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tidyverse'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">'tidyverse'</a></span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para instalar múltiples paquetes, podemos repetir la linea de mas arriba tantas veces como sea necesario, o usar una versión algo mas sofisticada como el código del apartado <strong>(C)</strong>:</p>
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_packages_9822f2a772a63e7a033311d825210a10">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">'tidyverse'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tidyverse'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">'tidyverse'</a></span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/bookdown">'bookdown'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'bookdown'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/bookdown">'bookdown'</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Al principio de cada capítulo, verás una sección llamada <code>Paquetes para este capítulo</code>. Si pegas el contenido de esa sección en un script de R al empezar cada capítulo, te asegurarás de tener disponibles todas las funciones que usaremos.</p>
+</section><section id="instalar-paquetes-de-github" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="instalar-paquetes-de-github">Instalar paquetes de Github</h3>
+<p>En ocasiones querremos instalar directamente la versión en desarrollo del paquete desde <a href="https://github.com/">Github</a>. Para eso podemos usar la función <code><a href="https://remotes.r-lib.org/reference/install_github.html">install_github()</a></code> del paquete <code>remotes</code>. Por ejemplo, para instalar el paquete {BayesianReasoning} desde su <a href="https://github.com/gorkang/BayesianReasoning">repositorio de Github</a>:</p>
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_packages_github_312e9b1bc5dbf014a12b02b6f523acf9">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org">'remotes'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'remotes'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org">'remotes'</a></span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gorkang/BayesianReasoning"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr></section></section><section id="bibliografía" class="level2 bibliografia unnumbered"><h2 class="bibliografia unnumbered anchored" data-anchor-id="bibliografía">Bibliografía</h2>
+<p><em>Algunos de los manuales que vamos a usar para el workshop son los siguientes:</em></p>
+<p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc.&nbsp;<a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></p>
+<p>Xie, Y., Allaire, J. J., &amp; Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. <a href="https://bookdown.org/yihui/rmarkdown/" class="uri">https://bookdown.org/yihui/rmarkdown/</a></p>
+<p>Bryan, J., &amp; Hester, J. What They Forgot to Teach You About R. <a href="https://whattheyforgot.org/" class="uri">https://whattheyforgot.org/</a></p>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introducción</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../qmd/01-introduccion_visualizacion.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a R y visualización de datos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

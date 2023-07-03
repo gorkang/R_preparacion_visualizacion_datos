@@ -1,0 +1,147 @@
+# Preparando nuestro sistema {#preparando-sistema .unnumbered}
+
+## Empezando en A-B-C {-}
+
+Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además de algunas librerías. **Para tener un sistema funcional, completa los pasos A, B y C**. Si ya tienes R y Rstudio instalados (recientemente), puedes pasar directamente al paso **(C)**.
+
+### **(A)** Instalar R {.unnumbered}
+
+[R](https://www.r-project.org/), es un lenguaje de programación especializado en la computación estadística y visualización de datos. Es recomendable tener instalada la última versión de R. Puedes usar uno de los enlaces siguientes:
+
+-   **Windows**: [Descargar e instalar R para Windows](https://cran.r-project.org/bin/windows/base/)
+
+-   **Mac**: [Descargar e instalar R para Mac](https://cran.r-project.org/bin/macosx/)
+
+-   **Ubuntu Linux**: [más detalles en la web de R](https://cran.r-project.org/bin/linux/debian/). **En un terminal**:
+
+|     `sudo apt install r-base`  
+
+
+### **(B)** Instalar RStudio {.unnumbered}
+
+RStudio es un entorno integrado de desarrollo (IDE) para la programación R.
+
+-   [Descargar e instalar RStudio](https://posit.co/download/rstudio-desktop/).
+-   Una vez descargado e instalado, **abre** RStudio. Deberías ver algo parecido a lo siguiente:
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="50%"}
+knitr::include_graphics(here::here("data/images/empezando.png"))
+```
+
+- Si encuentras un error de instalación en ubuntu, tendrás que instalar RStudio manualmente:
+    + `sudo dpkg -i rstudio-[VERSION_NUMBER]-amd64.deb`
+    + `sudo apt --fix-broken install`
+
+### **(C)** Paquetes para el workshop {.unnumbered}
+
+Para instalar los paquetes del workshop, ejecuta el código de más abajo (sección sombreada en gris claro) en la consola de RStudio.  
+
+En este gif puedes ver como hacerlo:  
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="50%"}
+knitr::include_graphics(here::here("data/videos/rstudio_install_ALL.gif"))
+```
+
+
+**Copia y pega el código de abajo en la consola de RStudio y ejecútalo [tecla ENTER]**:  
+
+```{r install_workshop_packages, message=FALSE, warning=FALSE}
+
+  if (!require('rlang')) install.packages('rlang'); library('rlang')
+  rlang::check_installed(
+    pkg = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
+            "gapminder", "geomtextpath", "ggplot2", "ggraph", "ggridges", "ggthemes", 
+            "ggtext", "googlesheets4", "gtsummary", "haven", "here", "hexbin", "inspectdf", 
+            "janitor", "knitr", "lme4", "papaja", "parameters", "performance", "plotly", 
+            "purrr", "readODS", "readr", "readxl", "remotes", "renv", "report", 
+            "rticles", "see", "sjPlot", "stargazer", "tidyr", "usethis", "writexl"), 
+    reason = "to run the initial setup")
+
+```
+
+
+Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber completado el paso previo.  
+
+```{r install_workshop_packages2, message=FALSE, warning=FALSE}
+
+  if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
+  if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
+
+```
+
+Usaremos un buen numero de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (_en algunos sistemas puede ser facilmente 1 hora_). Si tienes alguna dificultad en este punto, te recomiendo que veas algun [tutorial básico de R o RStudio](https://www.youtube.com/watch?v=BvKETZ6kr9Q).  
+
+Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, renv, ...), pero dejaremos eso para más adelante.  
+
+------------------------------------------------------------------------
+
+## Algo más sobre la instalación de paquetes {-}
+
+Los paquetes de R son una colección de funciones, datos y documentación que amplían las capacidades básicas de R.  
+
+Gran parte de las funciones y paquetes que utilizaremos en este workshop se encuentran contenidas en el meta-paquete [tidyverse](https://www.tidyverse.org/) (este es un paquete de paquetes). No lo instalamos en **(C)**, pero si quisieras instalarlo solo tendrías que ejecutar la siguiente linea en la **consola** de RStudio:  
+
+```{r install_gg, message=FALSE, warning=FALSE, eval=FALSE}
+install.packages("tidyverse")
+```
+
+Para instalar otro paquete diferente de "tidyverse", remplaza su nombre entre comillas dentro de la función:
+
+```{r install_any_package, message=FALSE, warning=FALSE, eval=FALSE}
+install.packages("NOMBRE_DE_PAQUETE")
+```
+
+Una vez instalado un paquete, no es necesario volver hacerlo, a menos que reinstales R.
+
+### Cargar paquetes {-}
+
+Las funciones, datos y documentación dentro de nuestros paquetes no podrán ser utilizadas hasta que se carguen en R. Una vez instalados, para cargar los paquetes se usa la función `library()`:
+
+```{r load_library, message=FALSE, warning=FALSE, eval=FALSE}
+library(ggplot2)  
+```
+
+En realidad las funciones también pueden ser llamadas usando su referencia absoluta `::`, sin necesidad de cargarlas antes. Por ejemplo: `dplyr::tibble(columna = 1)`. En general: `nombre_paquete::nombre_de_funcion(parametros)`).  
+
+### Todo en uno {-}
+
+El siguiente código simplifica lo anterior. Comprueba que el paquete esta instalado; Si no se encuentra instalado, lo instala. Finalmente lo carga.
+
+```{r install_ggplot2, message=FALSE, warning=FALSE, eval=FALSE}
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')  
+```
+
+Para instalar múltiples paquetes, podemos repetir la linea de mas arriba tantas veces como sea necesario, o usar una versión algo mas sofisticada como el código del apartado **(C)**:
+
+```{r install_packages, message=FALSE, warning=FALSE, eval=FALSE}
+if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
+if (!require('bookdown')) install.packages('bookdown'); library('bookdown')
+```
+
+
+Al principio de cada capítulo, verás una sección llamada `Paquetes para este capítulo`. Si pegas el contenido de esa sección en un script de R al empezar cada capítulo, te asegurarás de tener disponibles todas las funciones que usaremos.  
+
+
+
+### Instalar paquetes de Github {-}
+
+En ocasiones querremos instalar directamente la versión en desarrollo del paquete desde [Github](https://github.com/). Para eso podemos usar la función `install_github()` del paquete `remotes`. Por ejemplo, para instalar el paquete {BayesianReasoning} desde su [repositorio de Github](https://github.com/gorkang/BayesianReasoning):
+
+```{r install_packages_github, message=FALSE, warning=FALSE, eval=FALSE}
+if (!require('remotes')) install.packages('remotes'); library('remotes')
+remotes::install_github("gorkang/BayesianReasoning")
+```
+
+------------------------------------------------------------------------
+
+## Bibliografía {.bibliografia .unnumbered}
+
+*Algunos de los manuales que vamos a usar para el workshop son los siguientes:*
+
+Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O'Reilly Media, Inc. <https://r4ds.had.co.nz/>
+
+Xie, Y., Allaire, J. J., & Grolemund, G. (2018). R Markdown: The Definitive Guide. CRC Press. <https://bookdown.org/yihui/rmarkdown/>
+
+Bryan, J., & Hester, J. What They Forgot to Teach You About R. <https://whattheyforgot.org/>

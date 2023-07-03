@@ -1,0 +1,456 @@
+# Análisis de datos inferencial
+
+```{r}
+#| results: "asis"
+#| echo: false
+source("../_common.R")
+```
+
+---  
+
+#### Paquetes para este capítulo {-}
+
+```{r}
+#| label: setup
+#| echo: true
+
+if (!require('afex')) install.packages('afex'); library('afex')
+if (!require('correlation')) install.packages('correlation'); library('correlation')
+if (!require('corrr')) install.packages('corrr'); library('corrr')
+if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('ggridges')) install.packages('ggridges'); library('ggridges')
+if (!require('gtsummary')) install.packages('gtsummary'); library('gtsummary')
+if (!require('haven')) install.packages('haven'); library('haven')
+if (!require('inspectdf')) install.packages('inspectdf'); library('inspectdf')
+if (!require('knitr')) install.packages('knitr'); library('knitr')
+if (!require('lme4')) install.packages('lme4'); library('lme4')
+if (!require('papaja')) install.packages("papaja"); library('papaja')
+if (!require('parameters')) install.packages('parameters'); library('parameters')
+if (!require('performance')) install.packages('performance'); library('performance')
+if (!require('report')) install.packages('report'); library('report')
+if (!require('sjPlot')) install.packages('sjPlot'); library('sjPlot')
+if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
+
+```
+
+---  
+
+
+## Análisis de datos y reporte de resultados
+
+R es un lenguaje [creado por estadísicos](https://en.wikipedia.org/wiki/R_(programming_language)) que ha ido evolucionando hacia un lenguaje de programación completo. No obstante, una de sus fortalezas innegables es el análisis de datos, y el reporte de resultados. En esta sección vamos a ver de manera muy general algunas de las herramientas que tenemos a nuestra disposición.  
+
+
+### Tablas
+
+Hay numerosos paquetes para crear tablas descriptivas o para facilitar el reporte de resultados en R:  
+
+- {[gtsummary](https://www.danieldsjoberg.com/gtsummary/)}  
+- {[stargazer](https://cran.r-project.org/web/packages/stargazer/index.html)}  
+- {[papaja](https://github.com/crsh/papaja)}  
+- {[flextable](https://ardata-fr.github.io/flextable-book/)}  
+- {[huxtable](https://hughjonesd.github.io/huxtable/)}  
+
+
+Mostraremos algunos ejemplos usando gtsummary. Una ventaja interesante es que permite de manera sencilla [transformar nuestra tabla a otros formatos](https://www.danieldsjoberg.com/gtsummary/#gtsummary--r-markdown).  
+
+
+## Tablas descriptivos
+
+Podemos crear tablas con los descriptivos de nuestros datos usando la función `tbl_summary()` de {[gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html)}  
+
+
+```{r tablas, echo=TRUE, fig.height=18}
+
+# Por defecto, usa: mediana (rango inter cuartil)
+gapminder %>% 
+  select(-country) %>% 
+  gtsummary::tbl_summary() 
+```
+
+Usando el parámetro `by` podemos crear columnas para cada valor de una variable:  
+
+
+```{r tablas2, echo=TRUE, fig.height=18}
+# Por continente 
+gapminder %>% 
+  select(-country) %>% 
+  gtsummary::tbl_summary(by = continent)
+
+```
+
+El parámetro `statistic` nos permite controlar que estadísticos mostrar en función del tipo de variable:  
+
+```{r tablas3, echo=TRUE, fig.height=18}
+# Usando promedio (desviación estandard)
+gapminder %>% 
+  select(-country) %>% 
+  gtsummary::tbl_summary(by = continent,
+                         statistic = list(all_continuous() ~ "{mean} ({sd})",
+                                          all_categorical() ~ "{n} / {N} ({p}%)"),
+                         
+                       missing = "ifany") %>% 
+  gtsummary::add_n()
+```
+
+
+### Ejercicio - Descriptivos {.ejercicio -}
+
+
+Usando la base de datos del apartado anterior:  
+
+```{r ejercicios-tablas-descriptivas1, echo=TRUE}
+
+DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening risk literacy R1.sav")) %>% as_tibble() %>% 
+  select(IDparticipante, resident, screenbeliefs, compR1, numeracy) %>%  
+  rename(comprehension = compR1) 
+
+```
+
+Intenta reproducir la siguiente tabla:  
+
+<details><summary>Donde encontrar ayuda![](../data/images/hint.png)</summary><span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html) tienes ejemplos para todo lo que necesitarás. Busca a la función `tbl_summary()`</span></details>  
+
+<details><summary>Demasiado detalle, solo quiero los promedios[](../data/images/hint.png)</summary><span style="color: orange;">Puedes usar `type = list(everything() ~ 'continuous'),` dentro de `tbl_summary()` para forzar el tratamiento de variables con pocos niveles como continuas.</span></details>  
+
+<details><summary>Error al añadir valor p ![](../data/images/hint.png) </summary><span style="color: orange;">En la ayuda de la funcion: `?add_p.tbl_summary` encontrarás que puedes usar algo como: `add_p(test = everything() ~ "t.test</span></details>  
+
+
+```{r ejercicios-tablas-descriptivas2, echo=FALSE}
+
+ 
+DF_dafina %>% 
+  gtsummary::tbl_summary(
+    by = resident,
+    statistic = list(all_continuous() ~ "{mean} ({sd})",
+                     all_categorical() ~ "{n} / {N} ({p}%)"),
+    type = list(c("comprehension", "numeracy") ~ 'continuous'),
+    # type = list(everything() ~ 'continuous'),
+    missing = "ifany") %>% 
+  gtsummary::modify_spanning_header(c("stat_1", "stat_2") ~ "**Resident**") %>% 
+  gtsummary::add_n() %>% 
+  gtsummary::add_p(test = everything() ~ "t.test")
+
+```
+
+
+---  
+
+
+
+
+## Tablas resultados inferenciales
+
+Para tablas con los resultados de nuestros modelos estadísticos, usamos la función `tbl_regression()` de {[gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html)}  
+
+
+Primero preparamos los datos:  
+
+```{r tablas-lm, echo=TRUE, fig.height=18}
+
+  # Transform variables
+  DF_gapminder = gapminder %>% 
+    # Log
+    mutate(gdpPercap_log = log(gdpPercap),
+           pop_log = log(pop)
+           ) %>% 
+    # Mean center variables so the 0 values have meaning
+    mutate(year = year - mean(year, na.rm = TRUE),
+           gdpPercap_log = gdpPercap_log - mean(gdpPercap_log, na.rm = TRUE),
+           pop_log = pop_log - mean(pop_log, na.rm = TRUE)) %>% 
+    # Will use only last year
+    filter(year == max(year))
+  
+  
+
+```
+
+
+Creamos un modelo sencillo y mostramos la tabla de resultados.  
+
+```{r tablas-lm-tabla, echo=TRUE, fig.height=18}
+
+  model1 = lm(lifeExp ~ gdpPercap_log + pop_log, DF_gapminder)
+
+  table_model1 = gtsummary::tbl_regression(model1, intercept = TRUE) %>% 
+    add_global_p() %>%
+    bold_labels() %>% 
+    italicize_levels() %>% 
+    add_glance_table(include = c("nobs", "df.residual", "r.squared", "adj.r.squared"))
+
+
+  table_model1
+
+```
+
+
+
+## Unir tablas
+
+De manera muy sencilla podemos unir varias tablas:  
+
+```{r tablas-estadistica-merged_tables, echo=TRUE, fig.height=18}
+
+  # Primero creamos un modelo más sencillo, basado en el anterior
+  model10 = lm(lifeExp ~ gdpPercap_log, DF_gapminder)
+
+  # Creamos la tabla
+  table_model10 = gtsummary::tbl_regression(model10, intercept = TRUE) %>% 
+    add_global_p() %>%
+    bold_labels() %>% 
+    italicize_levels() %>% 
+    add_glance_table(include = c("nobs", "df.residual", "r.squared", "adj.r.squared"))
+  
+  # Combinamos ambas tablas
+  tbl_merge(
+    tbls = list(table_model10, table_model1),
+    tab_spanner = c("**Baseline**", "**Step 1**")) %>% 
+    # Necesario para que los parámetros globales de los modelos se muestren al final
+    modify_table_body(~.x %>% arrange(row_type == "glance_statistic")
+    )
+  
+```
+
+## Reporte de resultados
+
+Con la función `report()` podemos ver una descripción completa de los resultados de nuestro modelo:  
+
+
+```{r report-results, echo=TRUE, fig.height=18}
+  report::report(model1)
+```
+
+
+## Texto inline
+
+Algo genial de gtsummary, es que podemos usar las propias tablas para [extraer detalles de los resultados](https://www.danieldsjoberg.com/gtsummary/articles/inline_text.html) y usarlos directamente en el texto.  
+
+El paquete [report](https://github.com/easystats/report) tiene también funcionalidades muy potentes que merece la pena explorar.  
+
+La ventaja de escribir los resultados de esta manera es que si hacemos algun pequeño cambio en la preparación de datos, podemos volver a correr el script de generación del reporte de resultados, y los valores p, etc. se ajustarán automáticamente. Únicamente tenemos que asegurarnos que la interpretación cualitativa no cambia :)  
+
+
+```{r tablas-estadistica-inline, echo=TRUE, fig.height=18}
+
+paste0("Life expectancy was significantly associated with GDP per capita (log), beta = ", 
+       gtsummary::inline_text(table_model1, variable = gdpPercap_log))  
+
+```
+
+
+
+
+## Ejercicio - Resultados inferenciales {.ejercicio -}
+
+Usando la misma base de datos del ejercicio anterior:  
+
+```{r ejercicios-tablas-inferenciales1, echo=TRUE}
+
+DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening risk literacy R1.sav")) %>% as_tibble() %>% 
+  select(IDparticipante, resident, screenbeliefs, compR1, numeracy) %>%  
+  rename(comprehension = compR1) 
+
+```
+
+Haz una regresión lineal preciciendo compresion a partir de las variables de la base.  
+
+Finalmente, crea una tabla para reportar los resultados de tu análisis, como la siguiente:  
+
+<details><summary>Donde encontrar ayuda![](../data/images/hint.png)</summary><span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) tienes ejemplos para todo lo que necesitarás. `tbl_regression()` es tu amiga.</span></details>  
+
+
+<details><summary>Como añadir información en el pie de la tabla[](../data/images/hint.png)</summary><span style="color: orange;">Tendrás que usar la función `add_glance_source_note()` o `add_glance_table()`. Para saber que nombres poner en el paràmetro `include`, puedes usar la función `broom::glance(model)`
+</span></details>  
+
+
+```{r ejercicios-tablas-inferenciales2, echo=FALSE}
+
+model =  lm(comprehension ~ resident + screenbeliefs + numeracy, DF_dafina)
+# summary(model)
+
+# broom::glance(model)
+
+gtsummary::tbl_regression(model, intercept = TRUE) %>% 
+    add_global_p() %>%
+    bold_labels() %>% 
+    italicize_levels() %>% 
+    add_glance_source_note(include = c("nobs", "adj.r.squared", "df.residual", "statistic", "p.value", "df"))
+
+```
+
+
+
+---  
+
+
+
+## Otros análisis y sus tablas
+
+[Que test estadístico debería usar, con código en R](https://stats.idre.ucla.edu/other/mult-pkg/whatstat/)
+
+![](../data/images/statistical-tests.png)
+
+---  
+
+
+### Correlación simple
+
+
+```{r correlation-test}
+
+  # Data
+  iris %>% as_tibble()
+
+  # Test
+  simple_corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
+  
+  # Report
+  simple_corr_test %>% report::report()
+
+
+```
+
+### Multiples correlaciones
+
+```{r tablas-bonitas-correlation}
+
+  # Multiple correlations
+  table_correlations = iris %>% 
+    correlation(partial = FALSE, method = "spearman")
+
+  # Print table
+  TABLE_CORR = table_correlations %>% 
+    summary(stars = FALSE, include_significance = TRUE, p_digits = 3) 
+  
+  # Fancy table
+  TABLE_CORR %>% 
+    parameters::print_md()
+
+```
+
+<!-- ### LM   -->
+
+<!-- Usaremos un análisis de regresión sencillo tratando de predecir la longitud de los sépalos a partir de los efectos principales y la interacción entre la longitud y ancho de los pétalos.   -->
+
+<!-- ```{r tablas-bonitas-lm} -->
+
+<!--   model_lm <- lm(Sepal.Length ~ Petal.Length * Petal.Width, data = iris) -->
+<!--   #summary(model_lm) -->
+
+<!--   report::report(model_lm) -->
+
+<!--   parameters::model_parameters(model_lm) %>% parameters::print_md() -->
+
+<!-- ``` -->
+
+<!-- <BR>   -->
+
+<!-- Hay varias maneras de mostrar tablas en Rmarkdown. Arriba usamos el paquete {[parameters](https://github.com/easystats/parameters)}, pero también se puede hacer con {stargazer}, papaja, kable, etc.    -->
+
+<!-- ```{r eval=FALSE, include=FALSE} -->
+<!--   # table_lm = papaja::apa_print(model_lm)$table -->
+<!--   # knitr::kable(table_lm) -->
+<!--   #  -->
+<!--   # table_easystats = report::report(model_lm) -->
+<!--   # knitr::kable(table_easystats) -->
+
+<!-- ``` -->
+
+<!-- <BR> -->
+
+<!-- sjPlot es especialmente potente. El único detalle es que no genera outputs en pdf. Para usar las tablas generadas por sjPlot en pdf's ver el paquete {[html2latex](https://github.com/gorkang/html2latex/)}    -->
+
+<!-- ```{r sjplot, results='asis'} -->
+
+<!--   sjPlot::tab_model(model_lm) -->
+
+<!-- ``` -->
+<!-- <BR> -->
+
+
+### Anova
+
+* Ver paquete [{afex}](https://github.com/singmann/afex)
+
+```{r ejemplo-afex}
+
+data(obk.long, package = "afex")
+head(obk.long)
+
+# estimate mixed ANOVA on the full design:
+model = afex::aov_ez(id = "id", 
+                     dv = "value", 
+                     data = obk.long, between = c("treatment"), 
+        within = c("phase", "hour"))
+
+  
+  table_afex = papaja::apa_print(model)$table
+  knitr::kable(table_afex)
+
+```
+
+
+### Modelos mixtos
+
+Primero preparamos los datos:  
+
+```{r tablas-estadistica-preparation, echo=TRUE, fig.height=18}
+
+  # Transform variables
+  DF_gapminder2 = gapminder %>% 
+    # Log
+    mutate(gdpPercap_log = log(gdpPercap),
+           pop_log = log(pop)
+           ) %>% 
+    # Mean center variables so the 0 values have meaning
+    mutate(year = year - mean(year, na.rm = TRUE),
+           gdpPercap_log = gdpPercap_log - mean(gdpPercap_log, na.rm = TRUE),
+           pop_log = pop_log - mean(pop_log, na.rm = TRUE))
+  
+  # Reference levels and contrast coding
+  DF_gapminder2 <- within(DF_gapminder2, continent <- relevel(continent, ref = "Oceania"))
+  contrasts(DF_gapminder2$continent) = car::contr.Sum(levels(DF_gapminder2$continent))
+
+```
+
+
+Creamos un modelo sencillo:  
+
+```{r tablas-estadistica-models, echo=TRUE, fig.height=18}
+
+  model2 = lme4::lmer(lifeExp ~ gdpPercap_log + pop_log + year + (1|country), DF_gapminder2)
+
+  # Extraemos los R2 del modelo para usar en la tabla
+  R2_1 = performance::r2(model2)
+  
+```
+
+
+Y mostramos la tabla de resultados. Como se trata de modelos mixtos, tenemos que añadir manualmente los R2's.  
+
+```{r tablas-estadistica-table1, echo=TRUE, fig.height=18}
+
+  table_model2 = gtsummary::tbl_regression(model2, intercept = TRUE) %>% 
+    add_global_p() %>%
+    bold_labels() %>% 
+    italicize_levels() %>% 
+    add_glance_source_note(include = c("nobs", "df.residual"))
+
+# broomExtra::glance_performance(model2)
+  
+  table_model2 %>% 
+      as_gt() %>%
+      gt::tab_source_note(
+        gt::md(paste0(deparse1(model2@call$formula), "<BR> ", "R2 conditional = ", round(R2_1$R2_conditional, 3), ", R2 marginal = ", round(R2_1$R2_marginal, 3))))
+
+```
+
+
+
+
+## Bibliografía {.bibliografia -}
+
+Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O'Reilly Media, Inc. https://r4ds.had.co.nz/  

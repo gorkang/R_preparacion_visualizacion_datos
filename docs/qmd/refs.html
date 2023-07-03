@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R para preparación y visualización de datos - Paquetes usados</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../qmd/10-ejercicios.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/refs.html">Paquetes usados</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">R para preparación y visualización de datos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/00-configuracion-sistema.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparando nuestro sistema</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/01-introduccion_visualizacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a R y visualización de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/02-visualizacion-avanzada.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Visualización avanzada</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/03-preparacion_transformacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Preparación y transformación de datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/04-combinar-datos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Combinar datos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/05-analisis-datos-exploratorio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Análisis de datos exploratorio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/06-analisis-datos-inferencial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análisis de datos inferencial</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/07-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Trabajo con RMarkdown para reportes reproducibles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/08-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Control de cambios con Git y Github</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/09-experimentos-reproducibles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experimentos reproducibles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/10-ejercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ejercicios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/refs.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Paquetes usados</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Paquetes usados</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>En la documentación y ejercicios de este workshop se usaron los paquetes que se pueden ver abajo. Este listado se creó automáticamente usando <a href="https://github.com/Pakillo/grateful">{grateful}</a>:</p>
+<ul>
+<li>base <span class="citation" data-cites="base">(<a href="#ref-base" role="doc-biblioref">R Core Team 2019</a>)</span></li>
+<li>knitr <span class="citation" data-cites="knitr">(<a href="#ref-knitr" role="doc-biblioref">Xie 2014</a>)</span></li>
+<li>stargazer <span class="citation" data-cites="stargazer">(<a href="#ref-stargazer" role="doc-biblioref">Hlavac 2018</a>)</span></li>
+<li>rticles <span class="citation" data-cites="rticles">(<a href="#ref-rticles" role="doc-biblioref">Allaire et al. 2019</a>)</span></li>
+<li>renv <span class="citation" data-cites="renv">(<a href="#ref-renv" role="doc-biblioref">Ushey 2019</a>)</span></li>
+<li>remotes <span class="citation" data-cites="remotes">(<a href="#ref-remotes" role="doc-biblioref">Hester et al. 2019</a>)</span></li>
+<li>papaja <span class="citation" data-cites="papaja">(<a href="#ref-papaja" role="doc-biblioref">Aust and Barth 2018</a>)</span></li>
+<li>easystats <span class="citation" data-cites="easystats">(<a href="#ref-easystats" role="doc-biblioref">Lüdecke and Makowski 2019</a>)</span></li>
+<li>estimate <span class="citation" data-cites="estimate">(<a href="#ref-estimate" role="doc-biblioref">Makowski and Lüdecke 2019b</a>)</span></li>
+<li>see <span class="citation" data-cites="see">(<a href="#ref-see" role="doc-biblioref">Lüdecke et al. 2019</a>)</span></li>
+<li>report <span class="citation" data-cites="report">(<a href="#ref-report" role="doc-biblioref">Makowski et al. 2019</a>)</span></li>
+<li>correlation <span class="citation" data-cites="correlation">(<a href="#ref-correlation" role="doc-biblioref">Makowski 2019</a>)</span></li>
+<li>parameters <span class="citation" data-cites="parameters">(<a href="#ref-parameters" role="doc-biblioref">Makowski and Lüdecke 2019a</a>)</span></li>
+<li>bayestestR <span class="citation" data-cites="bayestestR">(<a href="#ref-bayestestR" role="doc-biblioref">Makowski, Ben-Shachar, and Lüdecke 2019</a>)</span></li>
+<li>performance <span class="citation" data-cites="performance">(<a href="#ref-performance" role="doc-biblioref">Lüdecke, Makowski, and Waggoner 2019</a>)</span></li>
+<li>insight <span class="citation" data-cites="insight">(<a href="#ref-insight" role="doc-biblioref">Lüdecke, Waggoner, and Makowski 2019</a>)</span></li>
+<li>corrr <span class="citation" data-cites="corrr">(<a href="#ref-corrr" role="doc-biblioref">Jackson, Cimentada, and Ruiz 2019</a>)</span></li>
+<li>afex <span class="citation" data-cites="afex">(<a href="#ref-afex" role="doc-biblioref">Singmann et al. 2019</a>)</span></li>
+<li>lme4 <span class="citation" data-cites="lme4">(<a href="#ref-lme4" role="doc-biblioref">Bates et al. 2015</a>)</span></li>
+<li>Matrix <span class="citation" data-cites="Matrix">(<a href="#ref-Matrix" role="doc-biblioref">Bates and Maechler 2019</a>)</span></li>
+<li>hexbin <span class="citation" data-cites="hexbin">(<a href="#ref-hexbin" role="doc-biblioref">Carr et al. 2019</a>)</span></li>
+<li>FFTrees <span class="citation" data-cites="FFTrees">(<a href="#ref-FFTrees" role="doc-biblioref">Phillips et al. 2018</a>)</span></li>
+<li>caret <span class="citation" data-cites="caret">(<a href="#ref-caret" role="doc-biblioref">Jed Wing et al. 2019</a>)</span></li>
+<li>lattice <span class="citation" data-cites="lattice">(<a href="#ref-lattice" role="doc-biblioref">Sarkar 2008</a>)</span></li>
+<li>janitor <span class="citation" data-cites="janitor">(<a href="#ref-janitor" role="doc-biblioref">Firke 2019</a>)</span></li>
+<li>gsheet <span class="citation" data-cites="gsheet">(<a href="#ref-gsheet" role="doc-biblioref">Conway 2016</a>)</span></li>
+<li>DT <span class="citation" data-cites="DT">(<a href="#ref-DT" role="doc-biblioref">Xie, Cheng, and Tan 2019</a>)</span></li>
+<li>writexl <span class="citation" data-cites="writexl">(<a href="#ref-writexl" role="doc-biblioref">Ooms 2018</a>)</span></li>
+<li>readODS <span class="citation" data-cites="readODS">(<a href="#ref-readODS" role="doc-biblioref">Schutten et al. 2018</a>)</span></li>
+<li>here <span class="citation" data-cites="here">(<a href="#ref-here" role="doc-biblioref">Müller 2017</a>)</span></li>
+<li>haven <span class="citation" data-cites="haven">(<a href="#ref-haven" role="doc-biblioref">Wickham and Miller 2019</a>)</span></li>
+<li>readxl <span class="citation" data-cites="readxl">(<a href="#ref-readxl" role="doc-biblioref">Wickham and Bryan 2019</a>)</span></li>
+<li>plotly <span class="citation" data-cites="plotly">(<a href="#ref-plotly" role="doc-biblioref">Sievert 2018</a>)</span></li>
+<li>ggridges <span class="citation" data-cites="ggridges">(<a href="#ref-ggridges" role="doc-biblioref">Wilke 2018</a>)</span></li>
+<li>ggthemes <span class="citation" data-cites="ggthemes">(<a href="#ref-ggthemes" role="doc-biblioref">Arnold 2019</a>)</span></li>
+<li>gganimate <span class="citation" data-cites="gganimate">(<a href="#ref-gganimate" role="doc-biblioref">Pedersen and Robinson 2019</a>)</span></li>
+<li>gapminder <span class="citation" data-cites="gapminder">(<a href="#ref-gapminder" role="doc-biblioref">Bryan 2017</a>)</span></li>
+<li>esquisse <span class="citation" data-cites="esquisse">(<a href="#ref-esquisse" role="doc-biblioref">Meyer and Perrier 2019</a>)</span></li>
+<li>cowplot <span class="citation" data-cites="cowplot">(<a href="#ref-cowplot" role="doc-biblioref">Wilke 2019</a>)</span></li>
+<li>forcats <span class="citation" data-cites="forcats">(<a href="#ref-forcats" role="doc-biblioref">Wickham 2019a</a>)</span></li>
+<li>stringr <span class="citation" data-cites="stringr">(<a href="#ref-stringr" role="doc-biblioref">Wickham 2019b</a>)</span></li>
+<li>dplyr <span class="citation" data-cites="dplyr">(<a href="#ref-dplyr" role="doc-biblioref">Wickham et al. 2019</a>)</span></li>
+<li>purrr <span class="citation" data-cites="purrr">(<a href="#ref-purrr" role="doc-biblioref">Henry and Wickham 2019</a>)</span></li>
+<li>readr <span class="citation" data-cites="readr">(<a href="#ref-readr" role="doc-biblioref">Wickham, Hester, and Francois 2018</a>)</span></li>
+<li>tidyr <span class="citation" data-cites="tidyr">(<a href="#ref-tidyr" role="doc-biblioref">Wickham and Henry 2019</a>)</span></li>
+<li>tibble <span class="citation" data-cites="tibble">(<a href="#ref-tibble" role="doc-biblioref">Müller and Wickham 2019</a>)</span></li>
+<li>ggplot2 <span class="citation" data-cites="ggplot2">(<a href="#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span></li>
+<li>tidyverse <span class="citation" data-cites="tidyverse">(<a href="#ref-tidyverse" role="doc-biblioref">Wickham 2017</a>)</span></li>
+</ul>
+<section id="references" class="level2 bibliografia unnumbered">
+<h2 class="bibliografia unnumbered anchored" data-anchor-id="references">References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-rticles" class="csl-entry" role="listitem">
+Allaire, JJ, Yihui Xie, R Foundation, Hadley Wickham, Journal of Statistical Software, Ramnath Vaidyanathan, Association for Computing Machinery, et al. 2019. <em>Rticles: Article Formats for r Markdown</em>. <a href="https://github.com/rstudio/rticles">https://github.com/rstudio/rticles</a>.
+</div>
+<div id="ref-ggthemes" class="csl-entry" role="listitem">
+Arnold, Jeffrey B. 2019. <em>Ggthemes: Extra Themes, Scales and Geoms for ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=ggthemes">https://CRAN.R-project.org/package=ggthemes</a>.
+</div>
+<div id="ref-papaja" class="csl-entry" role="listitem">
+Aust, Frederik, and Marius Barth. 2018. <em><span class="nocase">papaja</span>: <span>Create</span> <span>APA</span> Manuscripts with <span>R Markdown</span></em>. <a href="https://github.com/crsh/papaja">https://github.com/crsh/papaja</a>.
+</div>
+<div id="ref-lme4" class="csl-entry" role="listitem">
+Bates, Douglas, Martin Mächler, Ben Bolker, and Steve Walker. 2015. <span>“Fitting Linear Mixed-Effects Models Using <span class="nocase">lme4</span>.”</span> <em>Journal of Statistical Software</em> 67 (1): 1–48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>.
+</div>
+<div id="ref-Matrix" class="csl-entry" role="listitem">
+Bates, Douglas, and Martin Maechler. 2019. <em>Matrix: Sparse and Dense Matrix Classes and Methods</em>. <a href="https://CRAN.R-project.org/package=Matrix">https://CRAN.R-project.org/package=Matrix</a>.
+</div>
+<div id="ref-gapminder" class="csl-entry" role="listitem">
+Bryan, Jennifer. 2017. <em>Gapminder: Data from Gapminder</em>. <a href="https://CRAN.R-project.org/package=gapminder">https://CRAN.R-project.org/package=gapminder</a>.
+</div>
+<div id="ref-hexbin" class="csl-entry" role="listitem">
+Carr, Dan, ported by Nicholas Lewin-Koh, Martin Maechler, and contains copies of lattice functions written by Deepayan Sarkar. 2019. <em>Hexbin: Hexagonal Binning Routines</em>. <a href="https://CRAN.R-project.org/package=hexbin">https://CRAN.R-project.org/package=hexbin</a>.
+</div>
+<div id="ref-gsheet" class="csl-entry" role="listitem">
+Conway, Max. 2016. <em>Gsheet: Download Google Sheets Using Just the URL</em>. <a href="https://CRAN.R-project.org/package=gsheet">https://CRAN.R-project.org/package=gsheet</a>.
+</div>
+<div id="ref-janitor" class="csl-entry" role="listitem">
+Firke, Sam. 2019. <em>Janitor: Simple Tools for Examining and Cleaning Dirty Data</em>. <a href="https://CRAN.R-project.org/package=janitor">https://CRAN.R-project.org/package=janitor</a>.
+</div>
+<div id="ref-purrr" class="csl-entry" role="listitem">
+Henry, Lionel, and Hadley Wickham. 2019. <em>Purrr: Functional Programming Tools</em>. <a href="https://CRAN.R-project.org/package=purrr">https://CRAN.R-project.org/package=purrr</a>.
+</div>
+<div id="ref-remotes" class="csl-entry" role="listitem">
+Hester, Jim, Gábor Csárdi, Hadley Wickham, Winston Chang, Martin Morgan, and Dan Tenenbaum. 2019. <em>Remotes: R Package Installation from Remote Repositories, Including ’GitHub’</em>. <a href="https://CRAN.R-project.org/package=remotes">https://CRAN.R-project.org/package=remotes</a>.
+</div>
+<div id="ref-stargazer" class="csl-entry" role="listitem">
+Hlavac, Marek. 2018. <em>Stargazer: Well-Formatted Regression and Summary Statistics Tables</em>. Bratislava, Slovakia: Central European Labour Studies Institute (CELSI). <a href="https://CRAN.R-project.org/package=stargazer">https://CRAN.R-project.org/package=stargazer</a>.
+</div>
+<div id="ref-corrr" class="csl-entry" role="listitem">
+Jackson, Simon, Jorge Cimentada, and Edgar Ruiz. 2019. <em>Corrr: Correlations in r</em>. <a href="https://CRAN.R-project.org/package=corrr">https://CRAN.R-project.org/package=corrr</a>.
+</div>
+<div id="ref-caret" class="csl-entry" role="listitem">
+Jed Wing, Max Kuhn. Contributions from, Steve Weston, Andre Williams, Chris Keefer, Allan Engelhardt, Tony Cooper, Zachary Mayer, et al. 2019. <em>Caret: Classification and Regression Training</em>. <a href="https://CRAN.R-project.org/package=caret">https://CRAN.R-project.org/package=caret</a>.
+</div>
+<div id="ref-easystats" class="csl-entry" role="listitem">
+Lüdecke, Daniel, and Dominique Makowski. 2019. <em>Easystats: Jump in the Easyverse</em>. <a href="https://github.com/easystats/easystats">https://github.com/easystats/easystats</a>.
+</div>
+<div id="ref-performance" class="csl-entry" role="listitem">
+Lüdecke, Daniel, Dominique Makowski, and Philip Waggoner. 2019. <em>Performance: Assessment of Regression Models Performance</em>. <a href="https://easystats.github.io/performance/">https://easystats.github.io/performance/</a>.
+</div>
+<div id="ref-see" class="csl-entry" role="listitem">
+Lüdecke, Daniel, Dominique Makowski, Philip Waggoner, and Mattan S. Ben-Shachar. 2019. <em>See: Visualisation Toolbox for ’Easystats’ and Extra Geoms, Themes and Color Palettes for ’Ggplot2’</em>. <a href="https://easystats.github.io/see/">https://easystats.github.io/see/</a>.
+</div>
+<div id="ref-insight" class="csl-entry" role="listitem">
+Lüdecke, Daniel, Philip Waggoner, and Dominique Makowski. 2019. <span>“Insight: A Unified Interface to Access Information from Model Objects in r.”</span> <em>Journal of Open Source Software</em> 4 (38): 1412. <a href="https://doi.org/10.21105/joss.01412">https://doi.org/10.21105/joss.01412</a>.
+</div>
+<div id="ref-correlation" class="csl-entry" role="listitem">
+Makowski, Dominique. 2019. <em>Correlation: Easy Peasy Correlations</em>. <a href="https://github.com/easystats/correlation">https://github.com/easystats/correlation</a>.
+</div>
+<div id="ref-bayestestR" class="csl-entry" role="listitem">
+Makowski, Dominique, Mattan S. Ben-Shachar, and Daniel Lüdecke. 2019. <span>“Understand and Describe Bayesian Models and Posterior Distributions Using bayestestR.”</span> <em>CRAN</em>. <a href="https://doi.org/10.5281/zenodo.2556486">https://doi.org/10.5281/zenodo.2556486</a>.
+</div>
+<div id="ref-parameters" class="csl-entry" role="listitem">
+Makowski, Dominique, and Daniel Lüdecke. 2019a. <span>“Describe and Understand Your Model’s Parameters.”</span> <em>CRAN</em>. <a href="https://github.com/easystats/parameters">https://github.com/easystats/parameters</a>.
+</div>
+<div id="ref-estimate" class="csl-entry" role="listitem">
+———. 2019b. <em>Estimate: Estimate Effects, Contrasts and Means</em>. <a href="https://github.com/easystats/estimate">https://github.com/easystats/estimate</a>.
+</div>
+<div id="ref-report" class="csl-entry" role="listitem">
+Makowski, Dominique, Lüdecke, and Daniel. 2019. <span>“The Report Package for r: Ensuring the Use of Best Practices for Results Reporting.”</span> <em>CRAN</em>. <a href="https://github.com/easystats/report">https://github.com/easystats/report</a>.
+</div>
+<div id="ref-esquisse" class="csl-entry" role="listitem">
+Meyer, Fanny, and Victor Perrier. 2019. <em>Esquisse: Explore and Visualize Your Data Interactively</em>. <a href="https://CRAN.R-project.org/package=esquisse">https://CRAN.R-project.org/package=esquisse</a>.
+</div>
+<div id="ref-here" class="csl-entry" role="listitem">
+Müller, Kirill. 2017. <em>Here: A Simpler Way to Find Your Files</em>. <a href="https://CRAN.R-project.org/package=here">https://CRAN.R-project.org/package=here</a>.
+</div>
+<div id="ref-tibble" class="csl-entry" role="listitem">
+Müller, Kirill, and Hadley Wickham. 2019. <em>Tibble: Simple Data Frames</em>. <a href="https://CRAN.R-project.org/package=tibble">https://CRAN.R-project.org/package=tibble</a>.
+</div>
+<div id="ref-writexl" class="csl-entry" role="listitem">
+Ooms, Jeroen. 2018. <em>Writexl: Export Data Frames to Excel ’Xlsx’ Format</em>. <a href="https://CRAN.R-project.org/package=writexl">https://CRAN.R-project.org/package=writexl</a>.
+</div>
+<div id="ref-gganimate" class="csl-entry" role="listitem">
+Pedersen, Thomas Lin, and David Robinson. 2019. <em>Gganimate: A Grammar of Animated Graphics</em>. <a href="https://CRAN.R-project.org/package=gganimate">https://CRAN.R-project.org/package=gganimate</a>.
+</div>
+<div id="ref-FFTrees" class="csl-entry" role="listitem">
+Phillips, Nathaniel, Hansjoerg Neth, Jan Woike, and Wolfgang Gaissmaer. 2018. <em>FFTrees: Generate, Visualise, and Evaluate Fast-and-Frugal Decision Trees</em>. <a href="https://CRAN.R-project.org/package=FFTrees">https://CRAN.R-project.org/package=FFTrees</a>.
+</div>
+<div id="ref-base" class="csl-entry" role="listitem">
+R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-lattice" class="csl-entry" role="listitem">
+Sarkar, Deepayan. 2008. <em>Lattice: Multivariate Data Visualization with r</em>. New York: Springer. <a href="http://lmdvr.r-forge.r-project.org">http://lmdvr.r-forge.r-project.org</a>.
+</div>
+<div id="ref-readODS" class="csl-entry" role="listitem">
+Schutten, Gerrit-Jan, Chung-hong Chan, Thomas J. Leeper, and other contributors. 2018. <em>readODS: Read and Write ODS Files</em>. <a href="https://CRAN.R-project.org/package=readODS">https://CRAN.R-project.org/package=readODS</a>.
+</div>
+<div id="ref-plotly" class="csl-entry" role="listitem">
+Sievert, Carson. 2018. <em>Plotly for r</em>. <a href="https://plotly-r.com">https://plotly-r.com</a>.
+</div>
+<div id="ref-afex" class="csl-entry" role="listitem">
+Singmann, Henrik, Ben Bolker, Jake Westfall, Frederik Aust, and Mattan S. Ben-Shachar. 2019. <em>Afex: Analysis of Factorial Experiments</em>. <a href="https://CRAN.R-project.org/package=afex">https://CRAN.R-project.org/package=afex</a>.
+</div>
+<div id="ref-renv" class="csl-entry" role="listitem">
+Ushey, Kevin. 2019. <em>Renv: Project Environments for r</em>. <a href="https://github.com/rstudio/renv">https://github.com/rstudio/renv</a>.
+</div>
+<div id="ref-ggplot2" class="csl-entry" role="listitem">
+Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+</div>
+<div id="ref-tidyverse" class="csl-entry" role="listitem">
+———. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.
+</div>
+<div id="ref-forcats" class="csl-entry" role="listitem">
+———. 2019a. <em>Forcats: Tools for Working with Categorical Variables (Factors)</em>. <a href="https://CRAN.R-project.org/package=forcats">https://CRAN.R-project.org/package=forcats</a>.
+</div>
+<div id="ref-stringr" class="csl-entry" role="listitem">
+———. 2019b. <em>Stringr: Simple, Consistent Wrappers for Common String Operations</em>. <a href="https://CRAN.R-project.org/package=stringr">https://CRAN.R-project.org/package=stringr</a>.
+</div>
+<div id="ref-readxl" class="csl-entry" role="listitem">
+Wickham, Hadley, and Jennifer Bryan. 2019. <em>Readxl: Read Excel Files</em>. <a href="https://CRAN.R-project.org/package=readxl">https://CRAN.R-project.org/package=readxl</a>.
+</div>
+<div id="ref-dplyr" class="csl-entry" role="listitem">
+Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2019. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.
+</div>
+<div id="ref-tidyr" class="csl-entry" role="listitem">
+Wickham, Hadley, and Lionel Henry. 2019. <em>Tidyr: Easily Tidy Data with ’Spread()’ and ’Gather()’ Functions</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
+</div>
+<div id="ref-readr" class="csl-entry" role="listitem">
+Wickham, Hadley, Jim Hester, and Romain Francois. 2018. <em>Readr: Read Rectangular Text Data</em>. <a href="https://CRAN.R-project.org/package=readr">https://CRAN.R-project.org/package=readr</a>.
+</div>
+<div id="ref-haven" class="csl-entry" role="listitem">
+Wickham, Hadley, and Evan Miller. 2019. <em>Haven: Import and Export ’SPSS’, ’Stata’ and ’SAS’ Files</em>. <a href="https://CRAN.R-project.org/package=haven">https://CRAN.R-project.org/package=haven</a>.
+</div>
+<div id="ref-ggridges" class="csl-entry" role="listitem">
+Wilke, Claus O. 2018. <em>Ggridges: Ridgeline Plots in ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=ggridges">https://CRAN.R-project.org/package=ggridges</a>.
+</div>
+<div id="ref-cowplot" class="csl-entry" role="listitem">
+———. 2019. <em>Cowplot: Streamlined Plot Theme and Plot Annotations for ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=cowplot">https://CRAN.R-project.org/package=cowplot</a>.
+</div>
+<div id="ref-knitr" class="csl-entry" role="listitem">
+Xie, Yihui. 2014. <span>“Knitr: A Comprehensive Tool for Reproducible Research in <span>R</span>.”</span> In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. <a href="http://www.crcpress.com/product/isbn/9781466561595">http://www.crcpress.com/product/isbn/9781466561595</a>.
+</div>
+<div id="ref-DT" class="csl-entry" role="listitem">
+Xie, Yihui, Joe Cheng, and Xianying Tan. 2019. <em>DT: A Wrapper of the JavaScript Library ’DataTables’</em>. <a href="https://CRAN.R-project.org/package=DT">https://CRAN.R-project.org/package=DT</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../qmd/10-ejercicios.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ejercicios</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
