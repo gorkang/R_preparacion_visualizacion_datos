@@ -226,17 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#como-crear-una-nueva-tarea" id="toc-como-crear-una-nueva-tarea" class="nav-link" data-scroll-target="#como-crear-una-nueva-tarea"><span class="header-section-number">9.6</span> Como crear una nueva tarea</a>
   <ul>
-<li>
-<a href="#como-adaptar-la-tarea" id="toc-como-adaptar-la-tarea" class="nav-link" data-scroll-target="#como-adaptar-la-tarea"><span class="header-section-number">9.6.1</span> Como adaptar la tarea</a>
-  <ul>
-<li><a href="#nombre-de-la-tarea" id="toc-nombre-de-la-tarea" class="nav-link" data-scroll-target="#nombre-de-la-tarea"><span class="header-section-number">9.6.1.1</span> Nombre de la tarea</a></li>
-  <li><a href="#instrucciones" id="toc-instrucciones" class="nav-link" data-scroll-target="#instrucciones"><span class="header-section-number">9.6.1.2</span> Instrucciones</a></li>
-  <li><a href="#items" id="toc-items" class="nav-link" data-scroll-target="#items"><span class="header-section-number">9.6.1.3</span> Items</a></li>
-  <li><a href="#task-name-trialids" id="toc-task-name-trialids" class="nav-link" data-scroll-target="#task-name-trialids"><span class="header-section-number">9.6.1.4</span> Task name &amp; trialid’s</a></li>
-  <li><a href="#probar-la-tarea" id="toc-probar-la-tarea" class="nav-link" data-scroll-target="#probar-la-tarea"><span class="header-section-number">9.6.1.5</span> Probar la tarea</a></li>
-  <li><a href="#correcci%C3%B3n-de-la-tarea" id="toc-corrección-de-la-tarea" class="nav-link" data-scroll-target="#correcci%C3%B3n-de-la-tarea"><span class="header-section-number">9.6.1.6</span> Corrección de la tarea</a></li>
-  </ul>
-</li>
+<li><a href="#correcci%C3%B3n-de-la-tarea" id="toc-corrección-de-la-tarea" class="nav-link" data-scroll-target="#correcci%C3%B3n-de-la-tarea"><span class="header-section-number">9.6.1</span> Corrección de la tarea</a></li>
   <li><a href="#ejercicio-crear-nueva-tarea" id="toc-ejercicio-crear-nueva-tarea" class="nav-link" data-scroll-target="#ejercicio-crear-nueva-tarea">Ejercicio Crear nueva tarea</a></li>
   </ul>
 </li>
@@ -279,23 +269,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Sigue los siguientes 3 pasos para crear tu protocolo:</p>
 <hr>
 <ol type="1">
-<li>Descargamos el proyecto de RStudio jsPsychMaker:</li>
+<li>Instalamos jsPsychMaker:</li>
 </ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-2_7c746b0ba0969cc3fae899bc6efbe49b">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/zip-utils.html">use_course</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"gorkang/jsPsychMaker"</span>, destdir <span class="op">=</span> <span class="st">"~/Downloads/"</span><span class="op">)</span></span>
-<span><span class="co"># Select YES to delete zip</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gorkang/jsPsychMaker"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <ol start="2" type="1">
-<li>En a la carpeta <code>canonical_protocols</code>:</li>
+<li>Creamos un protocolo, indicándo que tareas queremos en <code>canonical_tasks</code>. Para ver un listado de las tareas disponibles: <code><a href="https://rdrr.io/pkg/jsPsychMaker/man/list_available_tasks.html">jsPsychMaker::list_available_tasks()</a></code>
+</li>
 </ol>
-<ul>
-<li><p>Editamos <code>config.js</code> para indicar las tareas que queremos usar en la sección <code>// ORDER OF TASKS</code></p></li>
-<li><p>Alternativamente, podemos usar la <a href="https://gorkang.shinyapps.io/jsPsychMaker_config/">jsPsychMaker Shiny APP</a> para crear nuestro archivo <code>config.js</code> (recuerda copiar el archivo <code>config.js</code> a la carpeta de tu protocolo)</p></li>
-<li><p>Finalmente, en <code>config.js</code> revisamos la sección <code>// Main parameters</code> para asegurarnos que todo esta bien (e.g.&nbsp;<code>online = false;</code>)</p></li>
-</ul>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychMaker</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMaker/man/create_protocol.html">create_protocol</a></span><span class="op">(</span>canonical_tasks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AIM"</span>, <span class="st">"EAR"</span>, <span class="st">"IRI"</span><span class="op">)</span>,</span>
+<span>                              folder_output <span class="op">=</span> <span class="st">"~/Downloads/protocol999"</span>, <span class="co"># El directorio tiene que incluir un número (se usará como pid)</span></span>
+<span>                              launch_browser <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <hr>
 <ol start="3" type="1">
+<li>Editamos la configuración del protocolo en la carpeta que hemos indicado en <code>folder_output</code>:</li>
+</ol>
+<ul>
+<li>En <code>config.js</code> revisamos la sección <code>// Main parameters</code> para asegurarnos que todo esta bien (e.g.&nbsp;<code>online = false;</code>)</li>
+</ul>
+<hr>
+<ol start="4" type="1">
 <li>El experimento esta listo para ser utilizado localmente. Podemos hacerlo ejecutando <code>index.html</code>
 </li>
 </ol>
@@ -317,77 +314,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev  --><p>De nuevo, podemos hacer esto en 3 pasos:</p>
 <hr>
 <ol type="1">
-<li>Instalamos docker (descarga de ~ 500MB):</li>
+<li>Completa el <a href="https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#setup">setup para tu sistema operativo</a>
+</li>
 </ol>
-<ul>
-<li>
-<a href="https://docs.docker.com/desktop/install/windows-install/">Windows</a>, o <a href="https://docs.docker.com/desktop/mac/apple-silicon/">Apple</a>
-</li>
-<li>Ubuntu: <code>sudo apt install docker</code>
-</li>
-</ul>
 <hr>
 <ol start="2" type="1">
-<li>Descargamos el proyecto de RStudio jsPsychMonkeys. En la Consola de RStudio:</li>
+<li>Instala jsPsychMonkeys:</li>
 </ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-3_857787a2e3021d8fec2595a34ee789b7">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/zip-utils.html">use_course</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"gorkang/jsPsychMonkeys"</span>, destdir <span class="op">=</span> <span class="st">"~/Downloads/"</span><span class="op">)</span></span>
-<span><span class="co"># Select YES to delete zip</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gorkang/jsPsychMonkeys"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <ol start="3" type="1">
-<li>Abrimos <code>run.R</code> y seguimos las instrucciones.</li>
+<li>Lanza monos localmente (puedes ver algunos de los parametros disponibles en el <a href="https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#parameters-available">Manual de jsPsychMonkeys</a>):</li>
 </ol>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychMonkeys</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMonkeys/man/release_the_monkeys.html">release_the_monkeys</a></span><span class="op">(</span>uid <span class="op">=</span> <span class="st">"1"</span>, <span class="co"># Lanza un monos con el user id 1</span></span>
+<span>                                    local_folder_tasks <span class="op">=</span> <span class="st">"~/Downloads/protocol999"</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co">#  Puedes lanzar los monos en paralelo</span></span>
+<span><span class="fu">jsPsychMonkeys</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMonkeys/man/release_the_monkeys.html">release_the_monkeys</a></span><span class="op">(</span>uid <span class="op">=</span> <span class="st">"1:5"</span>, <span class="co"># Lanza monos desde el uid 1 hasta el 5</span></span>
+<span>                                    local_folder_tasks <span class="op">=</span> <span class="st">"~/Downloads/protocol999"</span>,</span>
+<span>                                    sequential_parallel <span class="op">=</span> <span class="st">"parallel"</span>, <span class="co"># Lanza los monos en paralelo</span></span>
+<span>                                    number_of_cores <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="co"># Usando este número de CPUs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <hr></section><section id="como-preparar-datos" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="como-preparar-datos">
 <span class="header-section-number">9.4</span> Como preparar datos</h2>
 <p>Cada tarea de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a> debería tener un script hermano en <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a> para automatizar la preparación de datos. Una vez tengamos nuestro protocolo listo para el pilotaje, con una función de jsPsychHelpeR crearemos todo lo necesario para que la preparación de datos corra automáticamente.</p>
 <p>Una vez más, nuestros 3 pasos:</p>
 <hr>
 <ol type="1">
-<li>Descargamos el proyecto de RStudio jsPsychHelper:</li>
+<li>Instalamos jsPsychHelper:</li>
 </ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-4_148c65844268bffea59f3d54203e4129">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/zip-utils.html">use_course</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"gorkang/jsPsychHelper"</span>, destdir <span class="op">=</span> <span class="st">"~/Downloads/"</span><span class="op">)</span></span>
-<span><span class="co"># Select YES to delete zip</span></span>
-<span></span>
-<span><span class="co">#Si es la primera vez que abrimos jsPsychHelper: </span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"setup/setup.R"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gorkang/jsPsychHelpeR"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <ol start="2" type="1">
-<li>
-<p>Abrimos <code>run.R</code> y seguimos las instrucciones. En esencia:</p>
-<ol type="A">
-<li>Averiguamos cual es nuestro número de protocolo:</li>
+<li>Usando <code>run_initial_setup()</code>, se creará y abrirá un nuevo proyecto de RStudio con todo listo para correr la preparación de datos:</li>
 </ol>
-<ul>
-<li>Si lo desconoces, es el primer número de los archivos de datos, antes del “_“. Por ejemplo, <strong>134</strong>_Consent_original_2022-04-02T205622_18840434.csv -&gt; número de protocolo 134</li>
-</ul>
-<ol start="2" type="A">
-<li>Ponemos los datos (archivos csv) en la carpeta <code>data/ID_PROTOCOLO</code> (<strong>reemplazar ID_PROTOCOLO por el número de nuestro protocolo</strong>.</li>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychHelpeR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychHelpeR/man/run_initial_setup.html">run_initial_setup</a></span><span class="op">(</span>pid <span class="op">=</span> <span class="st">'999'</span>, </span>
+<span>                                 data_location <span class="op">=</span> <span class="st">"~/Downloads/protocol999/.data"</span>, </span>
+<span>                                 folder <span class="op">=</span> <span class="st">"~/Downloads/jsPsychHelpeR999"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li>En el nuevo proyecto, tendremos que correr la preparación de datos. Puedes abrir el archivo <code>run.R</code>, donde encontrarás algunas instrucciones básicas.</li>
 </ol>
-<ul>
-<li>Si la carpeta <code>data/ID_PROTOCOLO</code> contiene algun archivo, borrar antes de copiar nuestros datos: Por ejemplo, si usas el 999, BORRA el archivo 999.zip que hay en <code>data/999</code> antes de copiar tus datos.</li>
-</ul>
-<ol start="3" type="A">
-<li>Correr las líneas de abajo (<strong>el parametro <code>pid</code> en <code>run_initial_setup()</code> tiene que tener tu número de protocolo</strong>. Por ejemplo, si mi protocolo es el 134, <code>pid = 134</code>)</li>
-</ol>
-</li>
-</ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-5_2884e8cb43ac87192bf963ca57972c4e">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Setup de nuestro sistema</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"./R"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span>, pattern <span class="op">=</span> <span class="st">".R$"</span><span class="op">)</span>, <span class="va">source</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">run_initial_setup</span><span class="op">(</span>pid <span class="op">=</span> <span class="fl">999</span>, download_files <span class="op">=</span> <span class="cn">FALSE</span>, download_task_script <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Corremos el pipeline de preparación de datos</span></span>
 <span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_make.html">tar_make</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
-<ol start="3" type="1">
+<ol start="4" type="1">
 <li>Para ver el data frame final listo para el análisis</li>
 </ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-6_57f1577dabccbac4f8af6f9cb97b11bf">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># List available objects</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span>  <span class="co"># List available objects</span></span>
 <span>  <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_objects.html">tar_objects</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Load DF_analysis file</span></span>
@@ -422,173 +408,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr></section></section><section id="como-crear-una-nueva-tarea" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="como-crear-una-nueva-tarea">
 <span class="header-section-number">9.6</span> Como crear una nueva tarea</h2>
 <p>Tenemos un buen número de tareas disponibles para usar (puedes verlas en el <a href="https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks">manual de jsPsychR</a>). Si la tarea que necesitas no está disponible, puedes crearla usando una de las plantillas que encontrarás en <a href="https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol_clean">canonical_protocol_clean</a>. Están preparadas para que puedas modificarlas fácilmente y crear tu propia tarea. Alternativamente, también puedes usar como punto de partida las <a href="https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks">tareas que tenemos en jsPSychMaker</a>.</p>
-<p>Veamos como usar las plantillas de <a href="https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol_clean">canonical_protocol_clean</a> para crear nuestra tarea:</p>
+<p>Veamos como crear una nueva tarea a partir de documentos excel usando las plantillas disponibles. <a href="https://gorkang.github.io/jsPsychR-manual/qmd/07-NEWtasks.html#create-tasks">Ver ayuda</a>:</p>
 <hr>
 <ol type="1">
-<li>Descargamos el proyecto de RStudio jsPsychMaker. En la Consola de RStudio:</li>
+<li>Instalamos jsPsychMaker:</li>
 </ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-7_000d8d2792f9e7f16998ba5b5f895a0d">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/zip-utils.html">use_course</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"gorkang/jsPsychMaker"</span>, destdir <span class="op">=</span> <span class="st">"~/Downloads/"</span><span class="op">)</span></span>
-<span><span class="co"># Select YES to delete zip</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gorkang/jsPsychMaker"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
-<li><p>Ve a la carpeta <code>canonical_protocols_clean</code> del proyecto RStudio jsPsychMaker</p></li>
-<li>
-<p>En la carpeta <code>tasks</code> tienes tareas que empiezan por <code>SHORNAMETASK</code>, por ejemplo:</p>
-<ul>
-<li><p><code>SHORNAMETASKmultichoice.js</code></p></li>
-<li><p><code>SHORNAMETASKslider.js</code></p></li>
-</ul>
-</li>
+<li>Copia las plantillas de tareas de ejemplo:</li>
 </ol>
-<ul>
-<li>Elige el tipo de tarea que quieres, y modifica el archivo para adaptar las instrucciones y los ítems.</li>
-</ul>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychMaker</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMaker/man/copy_example_tasks.html">copy_example_tasks</a></span><span class="op">(</span>destination_folder <span class="op">=</span> <span class="st">"~/Downloads/TEST"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li>Ve a la carpeta <code>~/Downloads/TEST</code> y borra todas las carpetas menos aquellas que correspondan al <a href="https://www.jspsych.org/7.0/plugins/list-of-plugins/">plugin</a> que quieras usar. Por ejemplo, <code>Slider</code>.</li>
+</ol>
+<p>Adapta <code>Slider.csv</code> y los .html con instrucciones a tu nueva tarea.</p>
+<ol start="4" type="1">
+<li>Si corres <code>create_protocol()</code> con los parámetros de abajo, se creará un nuevo protocolo con tu/tus tareas.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">jsPsychMaker</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMaker/man/create_protocol.html">create_protocol</a></span><span class="op">(</span>folder_tasks <span class="op">=</span> <span class="st">"~/Downloads/TEST/"</span>, </span>
+<span>                                folder_output <span class="op">=</span> <span class="st">"~/Downloads/TEST/new_protocol"</span>, </span>
+<span>                                launch_browser <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <hr>
-<section id="como-adaptar-la-tarea" class="level3" data-number="9.6.1"><h3 data-number="9.6.1" class="anchored" data-anchor-id="como-adaptar-la-tarea">
-<span class="header-section-number">9.6.1</span> Como adaptar la tarea</h3>
-<section id="nombre-de-la-tarea" class="level4" data-number="9.6.1.1"><h4 data-number="9.6.1.1" class="anchored" data-anchor-id="nombre-de-la-tarea">
-<span class="header-section-number">9.6.1.1</span> Nombre de la tarea</h4>
-<ol type="1">
-<li>Lo primero es elegir el nombre de la tarea, para ello, recuerda:
-<ul>
-<li><p>Generalmente será un acrónimo, breve, por ejemplo, EA.</p></li>
-<li><p>El nombre NO debe contener espacios ni caracteres extraños. NO: (?!“#$%&amp;/=?¡¿;:_.,-).</p></li>
-<li>
-<p>Puedes hacer una mínima verificación con esta función:</p>
-<p><code>janitor::make_clean_names("NOMBRE tarea!", case = "upper_lower")</code> : NOMBREtarea</p>
-</li>
-<li>
-<p>Deber ser un nombre UNICO. Comprueba que no existe en:</p>
-<ul>
-<li><p><a href="https://docs.google.com/spreadsheets/d/1Eo0F4GcmqWZ1cghTpQlA4aHsc8kTABss-HAeimE2IqA/edit#gid=0">Tareas jsPsychR</a></p></li>
-<li><p><a href="https://docs.google.com/spreadsheets/d/1LAsyTZ2ZRP_xLiUBkqmawwnKWgy8OCwq4mmWrrc_rpQ/edit#gid=0">NUEVAS Tareas jsPsychR</a></p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Renombra el archivo para que coincida con el nombre de tu tarea</li>
-</ol></section><section id="instrucciones" class="level4" data-number="9.6.1.2"><h4 data-number="9.6.1.2" class="anchored" data-anchor-id="instrucciones">
-<span class="header-section-number">9.6.1.2</span> Instrucciones</h4>
-<p>Puedes tener tantas páginas de instrucciones como desees, simplemente, modifica la variables <code>pages: []</code> para que contenga lo que necesitas. Cada página de instrucciones estará separada por <code>,</code>:</p>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-8_e60810d93b9ce55caf686930ea2e089d">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pages<span class="op">:</span> [<span class="vs">`pagina1`</span><span class="op">,</span> <span class="vs">`pagina2`</span><span class="op">,</span> <span class="vs">`pagina3`</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<script type="text/javascript">
-pages: [`pagina1`, `pagina2`, `pagina3`] 
-</script>
-</div>
-<p>Para darle formato tendrás que usar lenguaje <a href="https://www.w3schools.com/html/html_formatting.asp">HTML</a>.</p>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-9_444340afa1b2a8c75bcf3fdf245774cf">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> instruction_screen_experiment <span class="op">=</span> {</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">type</span><span class="op">:</span> <span class="st">'instructions'</span><span class="op">,</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">pages</span><span class="op">:</span> [<span class="vs">`&lt;p&gt;&lt;left&gt;&lt;b&gt;&lt;big&gt;NAME TASK&lt;/big&gt;&lt;/b&gt;&lt;br/&gt;&lt;br&gt; Instrucciones detalladas de tarea con slider&lt;br&gt;&lt;br&gt; Muchas gracias por tu colaboración.&lt;/p&gt;`</span><span class="op">,</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`&lt;p&gt;Pagina 2 de instrucciones. &lt;BR&gt;&lt;BR&gt;Dale a siguiente para empezar la tarea&lt;/p&gt;`</span>]<span class="op">,</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">data</span><span class="op">:</span>{<span class="dt">trialid</span><span class="op">:</span> <span class="st">'SHORNAMETASKslider_000'</span><span class="op">,</span> <span class="dt">procedure</span><span class="op">:</span> <span class="st">'SHORNAMETASKslider'</span>}<span class="op">,</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">show_clickable_nav</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">on_trial_start</span><span class="op">:</span> <span class="kw">function</span>(){</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        bloquear_enter <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<script type="text/javascript">
-
-var instruction_screen_experiment = {
-    type: 'instructions',
-    pages: [`<p><left><b><big>NAME TASK</big></b><br/><br> Instrucciones detalladas de tarea con slider<br><br> Muchas gracias por tu colaboración.</p>`,
-    `<p>Pagina 2 de instrucciones. <BR><BR>Dale a siguiente para empezar la tarea</p>`],
-    data:{trialid: 'SHORNAMETASKslider_000', procedure: 'SHORNAMETASKslider'},
-    show_clickable_nav: true,
-    on_trial_start: function(){
-        bloquear_enter = 0;
-    }
-};
-</script>
-</div>
-</section><section id="items" class="level4" data-number="9.6.1.3"><h4 data-number="9.6.1.3" class="anchored" data-anchor-id="items">
-<span class="header-section-number">9.6.1.3</span> Items</h4>
-<p>En las plantillas encontrarás dos ítems. Si necesitas mas de dos:</p>
-<ul>
-<li><p>Copia la definición del ítem <code>var question01 = {…}</code>, más la línea <code>SHORNAMETASKslider.push(...)</code> tantas veces como ítems necesites</p></li>
-<li>
-<p>Incrementa en 1 los números de <code>question0X</code> y <code>SHORNAMETASKslider_00X</code> para que sean correlativos</p>
-<ul>
-<li>
-<p>Fijate que <code>question0X</code> aparece en dos lugares. En el ejemplo de abajo:</p>
-<ul>
-<li><p><code>var question01 = {</code></p></li>
-<li><p><code>SHORNAMETASKslider.push(question01);</code></p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Modifica el contenido de <code>stimulus:</code> en los ítems.</p></li>
-<li>
-<p>Modifica las <code>labels</code> o <code>options</code></p>
-<ul>
-<li><p>Recuerda que estamos usando javascript. Los vectores son: <code>labels: ["una cosa", "otra cosa"]</code></p></li>
-<li><p>Puedes usar buscar y reemplazar todos para hacerlo de un solo paso.</p></li>
-</ul>
-</li>
-</ul>
-<p>Cada uno de los plugins de jsPsych tiene múltiples parámetros que podemos definir. Puedes ver la <a href="https://www.jspsych.org/7.0/plugins/list-of-plugins/">ayuda de jsPsych aquí</a>. Por ejemplo, si se trata de un slider, modificando la variable <code>labels: []</code> controlarás los anclajes de la escala. Si se trata de un multichoice, podrás establecer las alternativas con la variable <code>options: []</code>.</p>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-10_2a7adf40090405f2bac6b68f1de70b99">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">//Un item</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> question01 <span class="op">=</span> {</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">type</span><span class="op">:</span> <span class="st">'html-slider-response'</span><span class="op">,</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">stimulus</span><span class="op">:</span> <span class="st">"&lt;div class='justified'&gt;Una pregunta&lt;/div&gt;&lt;/br&gt;"</span><span class="op">,</span> <span class="dt">require_movement</span><span class="op">:</span><span class="kw">true</span><span class="op">,</span> <span class="dt">required</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span> <span class="dt">slider_width</span><span class="op">:</span> <span class="dv">500</span><span class="op">,</span> <span class="dt">slider_start</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">labels</span><span class="op">:</span> [<span class="st">"No me describe bien"</span><span class="op">,</span> <span class="st">"Me describe muy bien"</span>]<span class="op">,</span> <span class="dt">button_label</span><span class="op">:</span> <span class="st">"Siguiente"</span><span class="op">,</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">data</span><span class="op">:</span> {<span class="dt">trialid</span><span class="op">:</span> <span class="st">'SHORNAMETASKslider_001'</span><span class="op">,</span> <span class="dt">procedure</span><span class="op">:</span> <span class="st">'SHORNAMETASKslider'</span>}</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>SHORNAMETASKslider<span class="op">.</span><span class="fu">push</span>(question01)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<script type="text/javascript">
-//Un item
-var question01 = {
-  type: 'html-slider-response',
-  stimulus: "<div class='justified'>Una pregunta</div></br>", require_movement:true, required: true, min: 0, max: 4, slider_width: 500, slider_start: 2, step: 1, labels: ["No me describe bien", "Me describe muy bien"], button_label: "Siguiente",
-  data: {trialid: 'SHORNAMETASKslider_001', procedure: 'SHORNAMETASKslider'}
-};
-SHORNAMETASKslider.push(question01);
-</script>
-</div>
-</section><section id="task-name-trialids" class="level4" data-number="9.6.1.4"><h4 data-number="9.6.1.4" class="anchored" data-anchor-id="task-name-trialids">
-<span class="header-section-number">9.6.1.4</span> Task name &amp; trialid’s</h4>
-<p>Por último, tienes que hacer una cosa muy sencilla:</p>
-<ol type="1">
-<li>Buscar y reemplazar (<code>CONTROL + F</code>) todas las instancias de <code>SHORNAMETASKslider</code> o <code>SHORNAMETASKmultichoice</code> por el nombre de tu tarea.</li>
-</ol>
-<hr></section><section id="probar-la-tarea" class="level4" data-number="9.6.1.5"><h4 data-number="9.6.1.5" class="anchored" data-anchor-id="probar-la-tarea">
-<span class="header-section-number">9.6.1.5</span> Probar la tarea</h4>
-<p>Ve a <code>config.js</code> y haz lo siguiente:</p>
-<ul>
-<li><p>cambia la línea: <code>randomly_ordered_tasks_1 = ['SHORNAMETASKslider', 'SHORNAMETASKmultichoice'];</code> por <code>randomly_ordered_tasks_1 = ['NOMBREtarea'];</code></p></li>
-<li><p>Asegurate que <code>online = false;</code></p></li>
-</ul>
-<p>Ahora ya puedes abrir el archivo <code>index.html</code> en tu navegador</p>
-<ul>
-<li>Es recomendable usar el modo incógnito (en Google Chrome: <code>CONTROL  + ALT + N</code>)</li>
-</ul></section><section id="corrección-de-la-tarea" class="level4" data-number="9.6.1.6"><h4 data-number="9.6.1.6" class="anchored" data-anchor-id="corrección-de-la-tarea">
-<span class="header-section-number">9.6.1.6</span> Corrección de la tarea</h4>
+<section id="corrección-de-la-tarea" class="level3" data-number="9.6.1"><h3 data-number="9.6.1" class="anchored" data-anchor-id="corrección-de-la-tarea">
+<span class="header-section-number">9.6.1</span> Corrección de la tarea</h3>
 <p>Para cada tarea en jsPsychMaker, aspiramos a tener un script de corrección en jsPsychHelpeR. Si has creado una nueva tarea, por favor, completa la información de <a href="https://docs.google.com/spreadsheets/d/1LAsyTZ2ZRP_xLiUBkqmawwnKWgy8OCwq4mmWrrc_rpQ/edit#gid=0">NUEVAS Tareas jsPsychR</a> para que podamos integrar tu tarea en el repositorio común.</p>
-</section></section><section id="ejercicio-crear-nueva-tarea" class="level3 ejercicio unnumbered"><h3 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-crear-nueva-tarea">Ejercicio Crear nueva tarea</h3>
-<p>Ve al <a href="ejercicios-7.html#ejercicio-2-1">ejercicio 2 del siguiente capítulo</a></p>
+</section><section id="ejercicio-crear-nueva-tarea" class="level3 ejercicio unnumbered"><h3 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-crear-nueva-tarea">Ejercicio Crear nueva tarea</h3>
+<p>Ve al <a href="10-ejercicios.html#ejercicio-2---opcional">ejercicio 2 del siguiente capítulo</a></p>
 </section></section><section id="como-preparar-datos-para-una-tarea-nueva" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="como-preparar-datos-para-una-tarea-nueva">
 <span class="header-section-number">9.7</span> Como preparar datos para una tarea nueva</h2>
 <p>Tendremos que crear primero el script de preparación para la nueva tarea. En jsPsychHelpeR tienes una tarea que te ayudará con esto. Si has completado los datos en <a href="https://docs.google.com/spreadsheets/d/1LAsyTZ2ZRP_xLiUBkqmawwnKWgy8OCwq4mmWrrc_rpQ/edit#gid=0">NUEVAS Tareas jsPsychR</a>, el proceso será muy sencillo.</p>
 <ol type="1">
-<li>Descargamos el proyecto de RStudio jsPsychHelper. En la Consola de RStudio:</li>
+<li>Instalamos jsPsychHelper:</li>
 </ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-11_c1676618f16205b3d515977cd2d3a603">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/zip-utils.html">use_course</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"gorkang/jsPsychHelper"</span>, destdir <span class="op">=</span> <span class="st">"~/Downloads/"</span><span class="op">)</span></span>
-<span><span class="co"># Select YES to delete zip</span></span>
-<span></span>
-<span><span class="co">#Si es la primera vez que abrimos jsPsychHelper: </span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"setup/setup.R"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gorkang/jsPsychHelpeR"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>Creamos el nuevo archivo <code>prepare_NOMBRETAREA()</code>:</li>
 </ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-12_625299bfd8036b8cca32561499491a08">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"./R"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span>, pattern <span class="op">=</span> <span class="st">".R$"</span><span class="op">)</span>, <span class="va">source</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">create_new_task</span><span class="op">(</span>short_name_task <span class="op">=</span> <span class="st">"NAMETASK"</span>, get_info_googledoc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychHelpeR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychHelpeR/man/create_new_task.html">create_new_task</a></span><span class="op">(</span>short_name_task <span class="op">=</span> <span class="st">"NAMETASK"</span>, get_info_googledoc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Esta función:</p>
 <ol type="1">

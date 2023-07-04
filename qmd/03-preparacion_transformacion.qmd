@@ -6,7 +6,7 @@
 source("../_common.R")
 ```
 
-En este capítulo vamos a aprender a importar y exportar todo tipo de archivos, ademas de pasar de una base de datos no especialmente amigable, a una base de datos `tidy`, esto es, siguiendo algunas reglas bien sencillas que harán más fácil trabajar con los datos.
+En este capítulo vamos a aprender a importar y exportar todo tipo de archivos, ademas de transformar una base de datos en un formato no especialmente amigable, a un formato `tidy`, esto es, siguiendo algunas reglas bien sencillas que harán más fácil trabajar con los datos.
 
 ---  
 
@@ -146,9 +146,9 @@ googlesheets4::read_sheet(name_of_sheet)
 ### Ejercicios - Importar datos {.ejercicio -} 
 
 
-En el repositorio [R para preparación y visualización de datos - DNSC - UAI](https://osf.io/jdn37/) de la Open Science Foundation podrás ver una carpeta llamada `Capitulo 2`. Si no tenéis conexión a internet, podéis encontrar los archivos en `data/files/OSF_files`.  
+En el repositorio [R para preparación y visualización de datos - DNSC - UAI](https://osf.io/jdn37/) de la Open Science Foundation podrás ver una carpeta llamada `Capitulo 3`. Si no tenéis conexión a internet, podéis encontrar los archivos en `data/files/OSF_files`.  
 
-Importa los archivos que ahí aparecen, asegurándote que los nombres de columna se leen adecuadamente:  
+Descarga e importa los archivos que ahí aparecen, asegurándote que los nombres de columna se leen adecuadamente:  
 <details><summary>Solucion: ![](../data/images/hint.png)</summary><span style="color: orange;">La función `read_excel()` tiene parámetros como `skip`, que permite no leer las primeras n lineas, o `sheet`, con la que puedes indicar que pestaña leer.</span></details>
 
 + 02-extralines-1.xlsx
@@ -159,10 +159,10 @@ Importa los archivos que ahí aparecen, asegurándote que los nombres de columna
 
 ```{r ejercicios-importar-datos, eval=FALSE, include=FALSE}
 
-  read_excel("data/files/OSF_files/02-extralines-1.xlsx")
-  read_excel("data/files/OSF_files/02-extralines-2.xlsx", skip = 2)
-  read_excel("data/files/OSF_files/02-extralines-3.xlsx", skip = 2, sheet = 2)
-  read_csv2("data/files/OSF_files/02-spanish.csv", skip = 2)
+  read_excel("../data/files/OSF_files/02-extralines-1.xlsx")
+  read_excel("../data/files/OSF_files/02-extralines-2.xlsx", skip = 2)
+  read_excel("../data/files/OSF_files/02-extralines-3.xlsx", skip = 2, sheet = 2)
+  read_csv2("../data/files/OSF_files/02-spanish.csv", skip = 2)
 
 ```
 
@@ -170,10 +170,12 @@ Importa los archivos que ahí aparecen, asegurándote que los nombres de columna
 
 ### Importar múltiples archivos
 
-En ocasiones tenemos múltiples archivos en una carpeta (e.g. uno por participante) y queremos combinarlos todos en un solo DF.    
+En ocasiones tenemos múltiples archivos en una carpeta (e.g. uno por participante) y queremos combinarlos todos en un solo DF.  
 
+Por suerte, las funciones como `read_csv()` admiten un vector con varios archivos.  
 
-Importamos los archivos que están en la carpeta `data/files/02-CSVs`  
+Para importar todos los archivos que están en la carpeta `data/files/02-CSVs`:  
+
 
 ```{r importar-multiples-archivos}
 
@@ -184,10 +186,31 @@ name_of_folder = here::here("data/files/02-CSVs")
 files <- list.files(name_of_folder, full.names = TRUE)
 
 # Leemos todos los archivos, combinandolos en un dataframe
-full <- purrr::map_df(files, read_csv)
+full <- read_csv(files)
+
 full
 
 ```
+
+Lamentablemente, cuando leamos otro tipo de archivos, como archivos `.xlsx`, no podemos usar la funcion `read_csv()`. Veamos una manera de hacer lo mismo, con la que se puede usar cualquier función para leer datos.  
+
+Usaremos `map_df()`, que aplica la función que queramos a cada uno de los archivos que le indiquemos, de uno en uno: 
+
+```{r importar-multiples-archivos-map_df}
+
+# Directorio donde se encuentran los archivos
+name_of_folder = here::here("data/files/02-CSVs")
+
+# Listamos los archivos a leer
+files <- list.files(name_of_folder, full.names = TRUE)
+
+# Leemos todos los archivos de uno en uno, combinandolos en un dataframe
+full <- purrr::map_df(files, read_csv)
+
+full
+
+```
+
 
 
 #### Incluir nombres de archivos
@@ -265,6 +288,8 @@ full
 
 
 2. Leed los archivos .xlsx de la carpeta `data/files/02-XLSs`, combinándolos en un único DF. El resultado final debería ser como se ve a continuación:  
+
+- <details><summary>- Tendréis que `list.files()` usando el parámetro `pattern` <BR - Os recomiendo abrir los archivos excel para ver su estructura, las pestañas que tienen... ahí os daréis cuenta de que necesitareis otros parámetros de `read_xlsx()` como `sheet`, `skip`></span></details>  
 
 ```{r ejercicios-importar-multiples-2, echo=FALSE}
 
@@ -379,9 +404,8 @@ Usando pipes **%>%** (CONTROL + SHIFT + M) podemos enlazar operaciones de transf
 
 Podemos ver más detalle y ejemplos en la [Cheatsheet de dplyr](https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf).   
 
-**Verbos esenciales**:  
 
-###### {.parameters -}    
+##### Verbos esenciales {.parameters -}    
 
 * filter(): filtrar filas  
 * arrange(): ordenar filas  
@@ -389,20 +413,23 @@ Podemos ver más detalle y ejemplos en la [Cheatsheet de dplyr](https://github.c
 * rename(): renombrar columnas  
 * mutate(): crear columnas, modificar columnas, etc.   
 
+##### {-}    
 
 
 #### Tabla resumen dplyr {-}  
 
 ```{r tabla-dp, echo=FALSE}
 
-DT::datatable(data.frame(
+DF = data.frame(
   tarea = c("Filtrar", "Ordenar", "Seleccionar/eliminar variables", "Renombrar variables", "Separar contenidos de variable", 
             "Extraer valores únicos", "Crear/modificar variables", "Omitir NAs", "Wide to long", "Long to wide", "Combinar bases de datos", "Recodificar valores", "Recodificar valores"),
   funcion = c("filter()", "arrange()", "select()", "rename()", "separate()", "distinct()", "mutate()", "drop_na()", "pivot_longer()", "pivot_wider()", "left_join()", "ifelse()", "case_when()"),
   ejemplo = c("datos %>% filter(Sexo == 1)", "datos %>% arrange(Sexo)", "datos %>% select(-Sexo)", "datos %>% rename(Genero = Sexo)", 
               "datos %>% separate(var_name, c('First', 'Second'), sep = '_')", "datos %>% distinct(Edad, .keep_all = T)", "datos %>% mutate(Viejo = Edad > 30)", 
               "datos %>% drop_na(Sexo)", "datos %>% pivot_longer(4:6, names_to = 'Condition', values_to = 'VD')", "datos %>% pivot_wider(names_from = Condition, values_from = VD)", "left_join(datos1, datos2, by = 'ID')", 
-              "datos %>%  mutate(Edad = ifelse(Edad > 30, 'Viejo', 'Joven'))", "datos %>%  mutate(Edad = case_when(.$Edad > 30 ~ 'Viejo', 'Joven')")))
+              "datos %>%  mutate(Edad = ifelse(Edad > 30, 'Viejo', 'Joven'))", "datos %>%  mutate(Edad = case_when(.$Edad > 30 ~ 'Viejo', 'Joven')"))
+
+DT::datatable(DF, options = list(pageLength = 20, dom = 't'))
 
 ```
 
@@ -478,7 +505,7 @@ DF_name %>% rename_at(all_of(oldnames), ~ newnames)
 - `mpg %>% filter(year == 1999)`  
 - `mpg %>% rename(engine displacement = displ)` #ERROR  
 - `mpg %>% rename(engine_displacement = displ)` #SOLUCION1  
-- mpg %>% rename(`engine displacement` = displ) #SOLUCION2  
+- mpg %>% rename(\`engine displacement\` = displ) #SOLUCION2  
 - `mpg %>% arrange(cty, class)`  
 - `mpg %>% select(-model)`
 
@@ -505,7 +532,7 @@ mpg %>% select(-model)
 
 El `everything()` que usamos dentro de `select()` más arriba es uno de los `select_helpers()` existentes. Estos nos ayudan a realizar operaciones de selección de variables sin necesidad de escribir a mano todas las variables.  
 
-###### select_helpers() {.parameters -}   
+##### select_helpers() {.parameters -}   
 
 * starts_with(): Empieza con un prefijo (e.g. starts_with("CI_"))  
 * ends_with(): Acaba con un sufijo  
@@ -517,7 +544,7 @@ El `everything()` que usamos dentro de `select()` más arriba es uno de los `sel
 * last_col(): Select last variable  
 
 
-###### {-}  
+##### {-}  
 
 
 Trabajaremos con los datos del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al. Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base RAW en formato wide.    
@@ -768,23 +795,23 @@ Ahora pasemos a un ejemplo mas complejo. Tenemos las puntuaciones a los 11 items
 ```{r wide-to-long2}
 
 # Leemos documento en formato WIDE
-df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv") %>% 
+df_wide_complex = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv") %>% 
   # Seleccionamos solo algunas de las filas
   select(ID, dem_genero, dem_edad, dem_nivedu, matches("lkns_[0-9]{2}_raw"))
 
-DT::datatable(df_wide)
+DT::datatable(df_wide_complex)
   
 
 # Wide to long
-df_long = 
-  df_wide %>% 
+df_long_complex = 
+  df_wide_complex %>% 
   pivot_longer(cols = lkns_01_raw:lkns_11_raw, names_to = "Item", values_to = "Response", values_transform = list(Response = as.character))
 
 # Podemos usar select_helpers!
   # Reemplaza lkns_01_raw:lkns_11_raw por matches("lkns")
 
 
-DT::datatable(df_long)
+DT::datatable(df_long_complex)
 
 ```
 
@@ -796,7 +823,7 @@ Nos sirve el mismo código que con el ejemplo más simple:
 ```{r long-to-wide-2}
 
 # Long to wide
-df_long %>%  
+df_long_complex %>%  
   pivot_wider(names_from = Item, values_from = Response)
 
 ```
@@ -907,25 +934,24 @@ DF_name %>%
              TRUE ~ NA_character_)
          )
 
-
-# Función recode
-DF_name %>%
-  
-  # De número a texto
-  mutate(Genero = recode(
-    Genero,
-    `1` = "Hombre",
-    `2` = "Mujer",
-    .default = "No definido"
-  )) %>% 
-
-  # De texto a número
-  mutate(Genero2 = recode(
-    Genero,
-    "Hombre" = 1,
-    "Mujer" = 2,
-    .default = 999
-  ))
+  # Función recode
+  DF_name %>%
+    
+    # De número a texto
+    mutate(Genero = recode(
+      Genero,
+      `1` = "Hombre",
+      `2` = "Mujer",
+      .default = "No definido"
+    )) %>%
+    
+    # De texto a número
+    mutate(Genero2 = recode(
+      Genero,
+      "Hombre" = 1,
+      "Mujer" = 2,
+      .default = 999
+    ))
 
 ```
 

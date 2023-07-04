@@ -106,9 +106,17 @@ ggplot(mpg, aes(hwy)) +
 
 ### Ejercicios {.ejercicio -} 
 
+Usando como base éste código:  
+
+```
+ggplot(gapminder, aes(lifeExp, fill = continent)) +
+  geom_histogram(binwidth = 1)
+```
+
+
 ¿Podrías replicar la visualización de abajo? Queremos mostrar un histograma por continente.
 
-<details><summary>Lo mejor es dividir el proceso en varios pasos![](../data/images/hint.png)</summary><span style="color: orange;">1) Empieza con el histograma de arriba [variables-continuas](#variables-continuas). <BR>2) recuerda que puedes usar el parámetro `fill` (dentro de aes), para asignar un color de relleno por nivel de una variable categórica. <BR>3) Finalmente, usando facetas podrás crear una gráfica para cada nivel de la variable categórica [facet_wrap()!](#facet_wrap)</span></details>  
+<details><summary>Lo mejor es dividir el proceso en varios pasos![](../data/images/hint.png)</summary><span style="color: orange;">1) Empieza con el histograma de arriba. <BR>2) recuerda que puedes usar el parámetro `fill` (dentro de aes), para asignar un color de relleno por nivel de una variable categórica. <BR>3) Finalmente, usando facetas podrás crear una gráfica para cada nivel de la variable categórica [facet_wrap()!](#facet_wrap)</span></details>  
 
 
 ```{r ejercicio-variables-individuales-1, echo=FALSE}
@@ -408,6 +416,9 @@ DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening ri
 ```
 
 ```{r ejercicio-final-analisis-exploratorio2, echo=FALSE, fig.height=18}
+#| column: page
+#| fig-align: center
+
 
 
 # * histogramas de todas las variables numéricas y no-numéricas
@@ -431,8 +442,12 @@ d %>%
   facet_wrap(~ name, scales = "free") + 
   geom_bar() +
   coord_flip()
+  
+```
 
 
+
+```{r ejercicio-final-analisis-exploratorio3, echo=FALSE, fig.height=14}
 
 
 # * scatterplots de la relación entre comprensión y numeracy, y entre comprensión y screenbeliefs  
@@ -460,7 +475,7 @@ d %>%
   Figure
   
 ```
-
+### {-} 
 
 
 ## Bibliografía {.bibliografia -}

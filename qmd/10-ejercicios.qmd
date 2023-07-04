@@ -7,47 +7,7 @@
 source("../_common.R")
 ```
 
-<!-- ## Ejercicio 1 -->
 
-<!-- Crea un script en el que hagas lo siguiente: -->
-
-<!-- -   Cargar librerías necesarias -->
-<!-- -   Importar datos -->
-<!-- -   Preparar datos -->
-<!-- -   Crear gráfica -->
-<!-- -   Crear tabla -->
-
-<!-- Tendrás que mostrar como corre el script con una sesión limpia de RStudio (CONTROL + SHIFT + F10) -->
-
-<!-- #### Notas {.ejercicio .unnumbered} -->
-
-<!-- (importar datos): Los datos deberían ser, idealmente, de un proyecto en el que estés trabajando. Si no tienes datos disponibles, puedes encontrar bases de datos abiertas de varias maneras: -->
-
-<!-- -   Tidytuesday: <https://github.com/rfordatascience/tidytuesday> -->
-<!-- -   Buscando en Google Scholar papers que comparten sus datos: <https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=data+available+%22osf.io%22+psychology&btnG=> -->
-<!-- -   Buscando directamente en Open Science Foundation: <https://osf.io/> -->
-
-<!-- (preparación de datos): Algunos ejemplos de preparación de datos: renombrar variables, filtrar, computar nuevas variables, combinar bases... -->
-
-<!-- (gráfica): Algunos ejemplos de gráficas: distribución de variable/s, relación entre variables, ... -->
-
-<!-- (tabla): Algunos ejemplos de tablas: promedios por condición, media, mediana, max y min para algunas variables claves... -->
-
-------------------------------------------------------------------------
-
-<!-- ## Ejercicio 2 -->
-
-<!-- Crea la siguiente tarea en jsPsychMaker: -->
-
-<!-- -   [The Brief Resilience Scale](https://sci-hub.ru/10.1080/10705500802222972) (PDF version inglesa), o en su [versión española](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S0212-97282021000200006&lng=es&tlng=es) -->
-
-<!-- #### Notas {.ejercicio .unnumbered} -->
-
-<!-- (tareas jsPsychMaker): Ver instrucciones en [experimentos-reproducibles](#experimentos-reproducibles) -->
-
-<!-- Si prefieres puedes implementar una tarea distinta. Los únicos requisitos son que sea breve y sencilla. -->
-
-<!-- ------------------------------------------------------------------------ -->
 
 ## Ejercicio 1
 
@@ -66,9 +26,27 @@ Tendrás que hacer una breve presentación contándonos el diseño experimental.
 
 ------------------------------------------------------------------------
 
+
+
+
+## Ejercicio 2 - Opcional
+
+Crea la siguiente tarea en jsPsychMaker:
+
+-   [The Brief Resilience Scale](https://sci-hub.ru/10.1080/10705500802222972) (PDF version inglesa), o en su [versión española](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S0212-97282021000200006&lng=es&tlng=es)
+
+#### Notas {.ejercicio .unnumbered}
+
+(tareas jsPsychMaker): Ver instrucciones en [experimentos-reproducibles](#experimentos-reproducibles)
+
+Si prefieres puedes implementar una tarea distinta. Los únicos requisitos son que sea breve y sencilla.
+
+------------------------------------------------------------------------
+
+
 ## Ejercicio FINAL
 
-El profesor os ayudará a simular datos para tu experimento con jsPsychMonkeys.
+Si no os funciona jsPsychMonkeys en vuestro sistema, el profesor os ayudará a simular datos para vuestro experimento con jsPsychMonkeys.
 
 Una vez tengamos los datos:
 

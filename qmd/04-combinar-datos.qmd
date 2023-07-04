@@ -6,9 +6,7 @@
 source("../_common.R")
 ```
 
-Combinar distintos data frames es una tarea muy común cuando preparamos datos. En ocasiones trabajaremos con distintos archivos que tendremos que combinar, y otras veces, separararemos nuestra base original en distintos data frames, para realizar procesamientos diferenciados, y más adelante volver a combinar los data frames en una base final.    
-
-
+Combinar distintos data frames es una tarea muy común cuando preparamos datos. En ocasiones trabajaremos con distintos archivos que tendremos que combinar, y otras veces, separararemos nuestra base original en distintos data frames, para realizar procesamientos diferenciados, y más adelante volver a combinar los data frames en una base final.  
 
 ---  
 
@@ -170,6 +168,12 @@ DF_results2 = DF_results |> rename(Identificador = ID)
 DF_left_joined = DF_IDs %>%
    left_join(DF_results2, by = c("ID" = "Identificador"))
 
+# En las últimas versiones de dplyr, han implementado la función `join_by()` que permite usar una sintaxis algo más natural:
+  DF_left_joined2 = DF_IDs %>% 
+    left_join(DF_results2, by = join_by(ID == Identificador))
+
+# Comparar si todo es =
+  # waldo::compare(DF_left_joined, DF_left_joined2)
 ```
 
 

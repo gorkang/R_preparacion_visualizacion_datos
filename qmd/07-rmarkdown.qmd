@@ -26,6 +26,7 @@ source("../_common.R")
   if (!require('knitr')) install.packages('knitr'); library('knitr')
   if (!require('papaja')) install.packages("papaja"); library('papaja')
   if (!require('parameters')) install.packages('parameters'); library('parameters')
+  if (!require('quarto')) install.packages("quarto"); library('quarto')
   if (!require('remotes')) install.packages('remotes'); library('remotes')
   if (!require('renv')) install.packages("renv"); library('renv')
   if (!require('report')) install.packages("report"); library('report')
@@ -44,6 +45,16 @@ source("../_common.R")
 
 
 ## Dependencias {.parameters -}
+
+**Instalar Quarto**
+
+Quarto es un sistema de publicación de código abierto que funciona con diferentes lenguajes de programación como R o python.  
+
+[Descarga e instala Quarto](https://quarto.org/docs/get-started/)  
+
+--- 
+
+
 
 **Instalar latex:**  
 
@@ -91,7 +102,7 @@ La sintáxis básica de RMarkdown es sorprendentemente sencilla, como se puede v
 
 Y como no, tenemos mucha ayuda: 
 
-* [R Markdown cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf)  
+* [Markdown basics](https://quarto.org/docs/authoring/markdown-basics.html)  
 * [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)  
 * [Web oficial de Rmarkdown dentro de RStudio](https://rmarkdown.rstudio.com/)  y
 * [quarto](https://quarto.org/)  
@@ -102,23 +113,20 @@ Resumiendo, tienes tres elementos básicos:
 
 ### Cabecera YAML  
 
-Cuando creas un documento .Rmd nuevo verás algo similar a lo siguiente en las primeras lineas:  
+Cuando creas un documento .qmd nuevo verás algo similar a lo siguiente en las primeras lineas:  
 
 ```
 ---
 title: "Untitled"
-author: "G"
-date: "6/1/2019"
-output: pdf_document
 ---
 ```
 
-Esta es la cabecera [YAML](https://yaml.org/), en la cual se le pueden pasar parámetros para añadir un índice, cambiar formato, y [muchas otras cosas](https://bookdown.org/yihui/rmarkdown/pdf-document.html).
+Esta es la cabecera [YAML](https://yaml.org/), en la cual se le pueden pasar parámetros para añadir un índice, cambiar formato, y [muchas otras cosas](https://bookdown.org/yihui/rmarkdown/pdf-document.html).  
 
 
 ### Rmarkdown 
 
-En el resto del documento (con la excepción de los chunks de código), el formato que usaremos será Rmarkdown. Su sintaxis es muy sencilla pero nada tolerante. Podéis ver las bases en la [R Markdown cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf).  
+En el resto del documento (con la excepción de los chunks de código), el formato que usaremos será Rmarkdown. Su sintaxis es muy sencilla pero nada tolerante. Podéis ver las bases en la [Markdown basics](https://quarto.org/docs/authoring/markdown-basics.html).  
 
 IMPORTANTE. Si algo no funciona como esperas:  
 
@@ -182,7 +190,7 @@ Haciendo click en la herramienta de la derecha del chunk ![](../data/images/tool
 
 ## Ejercicio básico RMarkdown {.ejercicio -}
 
-Volvamos al archivo .Rmd que creamos antes. Hagamos lo siguiente:  
+Volvamos al archivo .Rmd/.qmd que creamos antes. Hagamos lo siguiente:  
 
 1. Dale formato de artículo científico, creando las siguientes secciones:  
 
@@ -266,7 +274,6 @@ Puedes crear artículos en formato APA, añadir bibliografía a tus documentos f
 
 ```{r papaja, eval=FALSE}
 
-# remotes::install_github("crsh/papaja")
 install.packages("papaja")
 
 # Create new R Markdown file

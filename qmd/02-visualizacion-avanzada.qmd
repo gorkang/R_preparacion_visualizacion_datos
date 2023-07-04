@@ -12,12 +12,11 @@ Veamos algunas funcionalidades más avanzadas con ggplot y otros paquetes.
 
 #### Paquetes para este capítulo {-}
 
-Como en cada capítulo, abre un script de R, pega estas líneas al principio y ejecútalas (CNTRL + ENTER para ejecutar linea a linea).    
+Como en cada capítulo, crea un nuevo script de R (CNTRL+ SHIFT + N), guardalo como `capitulo2.R`, copia y pega las líneas de abajo y ejecútalas (CNTRL + ENTER para ejecutar linea a linea).    
 
 ```{r}
 #| label: setup
 #| echo: true
-
 
 if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
@@ -75,8 +74,8 @@ Cuando queremos separar en gráficos independientes distintas categorías dentro
   
   # Añadimos una segunda variable
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = country)) +
-    geom_line(alpha = .2) +
-    facet_grid(continent ~ pop > 5000000) +
+    geom_point(alpha = .2) +
+    facet_grid(continent ~ pop > 5000000) + # pop > 5000000 es una condición lógica que será TRUE or FALSE
     guides(color = "none")
 
 ```
@@ -102,7 +101,7 @@ Cuando queremos separar en gráficos independientes distintas categorías dentro
 
 ### gghighlight y facet_wrap
 
-Con la función `gghighlight()` podemos añadir una capa para facilitar la comparación de cada faceta con los datos completos.  
+Con la función `gghighlight()` del paquete `[{gghighlight}](https://cran.r-project.org/web/packages/gghighlight/index.html)` podemos añadir una capa para facilitar la comparación de cada faceta con los datos completos.  
 
 ```{r facet_wrap-gghighlight}
   ggplot(gapminder, aes(lifeExp, fill = continent)) +
@@ -126,7 +125,7 @@ ggplot(mpg, aes(displ, hwy)) +
 - Crea un panel para cada tipo de coche (`class`) en una rejilla simétrica  
 - Crea un panel para cada tipo de coche (`class`), mostrando paneles en 3 filas    
 
-<details><summary>Solucion: ![](../data/images/hint.png)</summary><span style="color: orange;">`facet_grid()` permite crear rejullas simétricas de panekes, y el parámetro `nrow` de `facet_wrap()` nos ayuda con paneles con números de filas definidos.</span></details>
+<details><summary>Solucion: ![](../data/images/hint.png)</summary><span style="color: orange;">`facet_grid()` permite crear rejillas simétricas de paneles, y el parámetro `nrow` de `facet_wrap()` nos ayuda con paneles con números de filas definidos.</span></details>
 
 
 ```{r ejercicio_facetas, echo=FALSE}
@@ -152,13 +151,14 @@ ggplot(mpg, aes(displ, hwy)) +
 ggplot2 nos permite hacer algunas transformaciones estadísticas al crear los gráficos. Para más detalles, ver [r4ds](https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations).  
 
 
-### Computaciones con ggplot 
+### Computaciones con ggplot: stat_summary()
 
-Generalmente trabajaremos con data-frames en formato long (una observación por fila), pero en ocasiones queremos visualizar estadísticas descriptivas asociadas a los datos. Para eso podemos preparar nuevos data-frames antes de pasar a la visualización, o directamente realizar la computación con ggplot.  
+En ocasiones queremos visualizar estadísticas descriptivas asociadas a los datos (e.g. promedio, mínimo y máximo por condición), pero como generalmente trabajaremos con data-frames en formato long (una observación por fila), no podremos usar los geoms que hemos visto hasta ahora.    
 
-Algunas funciones que podemos usar en los gráficos:  
+Tenemos dos opciones, la primera es preparar nuevos data-frames antes de pasar a la visualización. La segunda, realizar la computación directamente con ggplot, usando `stat_summary()` junto con alguna de las funciones tradicionales para extraer estadísticas descriptivas.  
 
-###### {.parameters -}  
+
+###### Ejemplos de funciones que podemos usar en los gráficos {.parameters -}
 
 - **min()**: mínimo
 - **max()**: máximo
@@ -166,21 +166,32 @@ Algunas funciones que podemos usar en los gráficos:
 - **median()**: mediana
 - **sd()**: desviación estandar
 
-<BR>  
+###### {-}  
 
 
 
-#### stat_summary
-
-Con `stat_summary()` podemos usar funciones simples de manera directa. En este caso, mostramos un punto con la mediana, y barras que muestran el rango completo de los datos:  
+Con `stat_summary()` podemos usar funciones simples de manera directa. Por ejemplo, si queremos visualizar la mediana de `lifeExp` para cada continente, podemos hacer lo siguiente:  
 
 ```{r transformaciones-estadisticas-stat_summary-1}
 
   ggplot(gapminder, aes(continent, lifeExp)) + 
+    stat_summary(fun = median) +
+  labs(caption = "Mediana")
+
+```  
+
+`stat_summary()` tiene un buen número de parámetros (F1 sobre la función para ver la ayuda). Por ejemplo, `fun.min` y `fun.max` nos permitiran añadir a la gráfica anterior el rango completo de los datos:  
+
+```{r transformaciones-estadisticas-stat_summary-2}
+
+  ggplot(gapminder, aes(continent, lifeExp)) + 
     stat_summary(
+      fun = median,
       fun.min = min,
-      fun.max = max,
-      fun = median)
+      fun.max = max
+      ) +
+    labs(caption = "Mediana y rango (mínimo/máximo) de los datos")
+
 ```
 
 <BR>  
@@ -189,53 +200,54 @@ Con `stat_summary()` podemos usar funciones simples de manera directa. En este c
   
 Si queremos usar funciones algo más complejas, la sintaxis es diferente. En este caso mostramos media ± desviación estandar:  
 
-```{r transformaciones-estadisticas-stat_summary-2}
+```{r transformaciones-estadisticas-stat_summary-3}
 
   ggplot(gapminder, aes(continent, lifeExp)) +
     stat_summary(
-      fun.min = function(x) mean(x) - sd(x),
-      fun.max = function(x) mean(x) + sd(x),
-      fun = mean)
+      fun = median,
+      fun.min = function(x) median(x) - sd(x),
+      fun.max = function(x) median(x) + sd(x)
+      ) +
+  labs(caption = "Mediana más/menos desviación estandard")
 
 ```
 
 
 ### Promedios por grupo
 
-Lo interesante es que podemos añadir estas transformaciones estadísticas como una capa más en los gráficos. Así que, a este gráfico inicial...  
+Lo interesante es que podemos añadir estas transformaciones estadísticas como una capa más en los gráficos. Esto es ideal para mostrar los puntos individuales de nuestros datos, algo crítico como vimos en el tema anterior. Así que, a este gráfico inicial...  
 
 ```{r transformaciones-estadisticas-promedios-grupo-1}
-ggplot(mpg) + 
-  geom_jitter(aes(x = class, y = hwy), width = 0.2) +
-  theme_minimal()
+
+ ggplot(gapminder, aes(continent, lifeExp)) +
+  geom_jitter()
+
 ```
 
-Le podemos añadir el promedio por grupo:  
+Le podemos añadir un punto mostrando la mediana por grupo:  
 
 ```{r transformaciones-estadisticas-promedios-grupo-2}
-ggplot(mpg, aes(x = class, y = hwy)) + 
-  geom_jitter(width = 0.2) +
-  stat_summary(fun = mean, color = "red", geom = "point", size = 4, alpha = .7) + 
-  theme_minimal()
+
+ ggplot(gapminder, aes(continent, lifeExp)) +
+  geom_jitter() +
+  stat_summary(fun = median, 
+               color = "red", size = 1, alpha = .7)
+
 ```
 
 
-<!-- O cosas aún más elaboradas:   -->
+O la mediana más la desviación estandard:  
 
-<!-- ```{r transformaciones-estadisticas-promedios-grupo-02} -->
+```{r transformaciones-estadisticas-promedios-grupo-3}
 
-<!-- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + -->
-<!--   geom_point(alpha = .1) + -->
-<!--   stat_summary(data = gapminder %>%  -->
-<!--                  group_by(continent) %>%  -->
-<!--                  summarise(gdpPercap = mean(gdpPercap), -->
-<!--                            lifeExp  = mean(lifeExp)), -->
-<!--                fun = mean, -->
-<!--                geom = "point", -->
-<!--                size = 4) -->
+ ggplot(gapminder, aes(continent, lifeExp)) +
+  geom_jitter() +
+  stat_summary(fun = median, 
+               color = "red", size = 1, alpha = .7,
+               fun.min = function(x) median(x) - sd(x),
+               fun.max = function(x) median(x) + sd(x))
 
-<!-- ``` -->
-
+```
 
 
 
@@ -256,7 +268,12 @@ plotB = ggplot(mpg, aes(displ, hwy, color = class)) +
 cowplot::plot_grid(plotA, plotB, labels = c("A", "B"))
 ```
 
-Pero en realidad no quiero que las líneas pasen por todos los puntos, sino que muestren el promedio en cada nivel de `displ` para cada `class` de vehículo. ¿Podrías reproducir el gráfico de abajo?  
+Pero en realidad no quiero que las líneas pasen por todos los puntos, sino que muestren el promedio en cada nivel de `displ` para cada `class` de vehículo. 
+
+1) ¿Podrías reproducir el gráfico de abajo?  
+
+<details><summary>Pista: ![](../data/images/hint.png)</summary><span style="color: orange;">Tendrás que reemplazar `geom_line()` por `stat_summary()`, usando el parámetro `geom = "line"` para indicarle que quieres usar lineas en lugar de puntos.</span></details>
+
 
 ```{r ejercicio-7b, echo=FALSE}
   ggplot(mpg, aes(displ, hwy, color = class)) +
@@ -265,16 +282,22 @@ Pero en realidad no quiero que las líneas pasen por todos los puntos, sino que 
     theme(legend.position = "bottom")
 ```
 
-Usando como base:
+
+
+2) Usando como base:
 
 ```
 ggplot(gapminder, aes(country, lifeExp, color = continent)) +
   stat_summary(...) +
   facet_grid(...) +
-  theme(axis.text.x = element_blank()) # Eliminamos etiquetas de nombres de paises
+  theme(axis.text.x = element_blank(), # Eliminamos etiquetas de nombres de paises del eje x
+        legend.position = "none") # Elimina la leyenda
 
 ```
-Podrías crear este gráfico? Mostramos mediana ± sd para cada país, organizado por continente.
+Podrías crear este gráfico? Mostramos mediana ± sd para cada país, organizado por continente.  
+
+<details><summary>Pista: ![](../data/images/hint.png)</summary><span style="color: orange;">Tienes que encontrar los parámetros adecuados para `stat_summary()` y `facet_grid()`. Puedes ver ejemplos en: <BR> - [computaciones con ggplot: stat_summary()](02-visualizacion-avanzada.html#computaciones-con-ggplot-stat_summary)  <BR> - [Facet_grid](02-visualizacion-avanzada.html#facet_grid).</span></details>
+
 
 ```{r ejercicio-8, echo=FALSE}
 
@@ -284,12 +307,14 @@ Podrías crear este gráfico? Mostramos mediana ± sd para cada país, organizad
       fun.max = function(x) median(x) + sd(x),
       fun = mean) +
   facet_grid(~ continent) +
-  theme(axis.text.x = element_blank())
+  theme(axis.text.x = element_blank(),
+        legend.position = "none")
 
 ```
-<BR>
+### {-}
 
-## Personalización de gráficas
+
+## Personalización avanzada de gráficas
 
 Habitualmente, un vez hemos creado la gráfica, querremos personalizar varias cosas, como las escalas, colores, estilos, título,  etc.  
 
@@ -325,61 +350,93 @@ Usaremos las funciones que empiezan por `scale_` para multitud de cosas, por eje
 ```{r personalizacion-graficas-axis}
   
   # Grafico inicial
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
+  plot_base = ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
     geom_point(alpha = .1) 
+  plot_base
   
-  # Añadimos breaks en eje y
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
-    geom_point(alpha = .1) +
-    scale_y_continuous(breaks = seq(0, 100, 5))
-  
-  # Definimos cuantos breaks queremos
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
-    geom_point(alpha = .1) +
-    scale_x_continuous(n.breaks = 20, guide = guide_axis(angle = 90)) +
-    scale_y_continuous(n.breaks = 20)
+  # Definimos cuantos breaks queremos en cada eje, y rotamos las etiquetas del eje x
+  plot_base + 
+    scale_x_continuous(n.breaks = 15, guide = guide_axis(angle = 90)) +
+    scale_y_continuous(n.breaks = 15)
   
   # Separador de miles y breaks en x
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
-    geom_point(alpha = .1) +
-    scale_y_continuous(breaks = seq(0, 100, 5)) +
-    scale_x_continuous(labels = scales::comma, n.breaks = 10)
+  plot_base + 
+    scale_y_continuous(n.breaks = 15) +
+    scale_x_continuous(n.breaks = 6, labels = scales::comma)
   
-  # Formato de $ ($M)
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
-    geom_point(alpha = .1) +
-    scale_y_continuous(breaks = seq(0, 100, 5)) +
-    scale_x_continuous(labels = scales::dollar_format(prefix = "$", suffix = "M"),
-                       breaks = seq(0, 100000, 20000))
+  # Con scales::dollar_format() le damos formato de $ ($M)
+  plot_base + 
+    scale_y_continuous(n.breaks = 15) +
+    scale_x_continuous(n.breaks = 6, labels = scales::dollar_format(prefix = "$", suffix = "M"))
   
   # Escala log
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
-    geom_point(alpha = .1) +
-    scale_y_continuous(breaks = seq(0, 100, 5)) +
-    scale_x_log10(labels = scales::dollar_format(prefix = "$", suffix = "M"))
+  plot_base + 
+    scale_y_continuous(n.breaks = 15) +
+    scale_x_log10(n.breaks = 4, labels = scales::dollar_format(prefix = "$", suffix = "M"))
   
   # Invertimos escala
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
-    geom_point(alpha = .1) +
+  plot_base + 
     scale_y_reverse()
 
-  # No mostramos el texto de los breaks de x
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
-    geom_point(alpha = .1) +
+  # No mostramos el texto ni los ticks de los breaks de x
+  plot_base + 
     scale_y_reverse() +
-    theme(axis.text.x = element_blank())
+    theme(axis.text.x = element_blank(),
+          axis.ticks.x = element_blank())
 
   # Porcentaje
   ggplot(gapminder, aes(continent, ..prop.., group = 1)) + 
-  geom_bar() +
-  scale_y_continuous(labels = scales::percent)
-  
-
-
+    geom_bar() +
+    scale_y_continuous(labels = scales::percent)
 
 ```
 
-Usar eje secundario (derecho) para mostrar etiquetas:  
+### Legends  
+
+La leyenda de las gráficas nos muestra, por defecto, los colores, rellenos, tipos de linea, etc. que hayamos usado. Por ejemplo, abajo nos muestra la leyenda asociada al color.  
+
+```{r leyendas1}
+
+ggplot(gapminder, aes(year, lifeExp, color = continent)) + 
+  geom_jitter()
+
+```
+
+Podemos hacer algunas cosas básicas como cambiar el nombre de la leyenda, o no mostrarla:
+
+
+```{r leyendas2}
+
+# Usamos labs(color = "") o labs(fill = "") para cambiar el título de las leyendas
+ggplot(gapminder, aes(year, lifeExp, color = continent)) + 
+  geom_jitter() +
+  labs(color = "My new legend")
+
+# Con guides(color = "none") hacemos desaparecer la leyenda asociada al color 
+ggplot(gapminder, aes(year, lifeExp, color = continent)) + 
+  geom_jitter() +
+  guides(color = "none")
+
+```
+  
+
+
+#### Fancy pants legends  
+
+En ocasiones podemos simplificar notablemente las gráficas reemplazando la leyenda clásica por algo más moderno.  
+
+
+Podemos usar el eje secundario (derecho) para mostrar etiquetas. Partimos del gráfico siguiente:
+
+
+```{r advanced-scales0}
+ggplot(gapminder, aes(year, lifeExp, linetype = continent, color = continent)) + 
+  stat_summary(fun = mean, geom = "line")
+```
+
+
+Usando un poco de vodoo, podemos convertirlo en esto:  
+
 
 ```{r advanced-scales}
 
@@ -404,11 +461,9 @@ ggplot(gapminder, aes(year, lifeExp, linetype = continent, color = continent)) +
 ```
 
 
-Usar {geomtextpath} para ubicar las etiquetas en el camino de las líneas:  
+Otra estrategia interesante es colocar las etiquetas en el camino de las líneas. Para ello, necesitaremos la función `geom_labelsmooth()` del paquete [{geomtextpath}](https://allancameron.github.io/geomtextpath/):  
 
 ```{r geomtextpath}
-
-# https://allancameron.github.io/geomtextpath/
 
 ggplot(gapminder, aes(year, lifeExp, linetype = continent, color = continent)) + 
   
@@ -427,27 +482,30 @@ ggplot(gapminder, aes(year, lifeExp, linetype = continent, color = continent)) +
 
 El plot del panel (A) tiene varios problemas:  
 
-- los años no son enteros o factores
 - los casos no se muestran con un separador de miles  
-- la leyenda esta a la derecha ocupado un espacio precioso, ...  
+- la leyenda esta a la derecha ocupado un espacio precioso, debería estar abajo  
+- al gráfico le falta el título, y caption
+- la etiqueta del eje x debería ser `year` en lugar de `as.factor(year)`
 
 Usando el plot base (A):  
 
 ```
-ggplot(table1, aes(year, cases)) + 
+ggplot(table1, aes(as.factor(year), cases)) + # Usamos as.factor(year) para evitar que se muestren decimales
   geom_line(aes(group = country), colour = "grey50") + 
-  geom_point(aes(colour = country))
+  geom_point(aes(colour = country)) +
+  scale_x_discrete(expand = c(.05, 0)) # Movemos las etiquetas del eje x hacia los extremos
 ```
 
 Trata de resolver los problemas e intenta llegar al resultado que se ve en el panel (B). 
 
-<details><summary>Soluciones: ![](../data/images/hint.png)</summary><span style="color: orange;">- `as.factor(VARIABLE)`: convierte una variable en categórica  <BR>- `scale_x_discrete(expand = c(.05, 0))` nos ayuda a posicionar los niveles de `year` cerca de los extremos de la gráfica.  </span></details>
+<details><summary>Soluciones: ![](../data/images/hint.png)</summary><span style="color: orange;">- Recuerda la función`scales::comma()` que vimos más arriba <BR>- `theme(legend.position = "ALGO AQUI")` nos permite mover la leyenda. Si vas la ayuda de `theme()` y buscas `legend.position`, encontrarás sus opciones. <BR>- Los parámetros de `labs()` nos permiten añadir títulos, subtítulos, editar los valores de las etiquetas de `x` e `y`, añadir `caption`, etc. </span></details>
 
 ```{r geoms-ejercicios-03, echo=FALSE, fig.height=10, fig.width=8}
 
-plot1 = ggplot(table1, aes(year, cases)) + 
+plot1 = ggplot(table1, aes(as.factor(year), cases)) + 
   geom_line(aes(group = country), colour = "grey50") + 
-  geom_point(aes(colour = country))
+  geom_point(aes(colour = country)) +
+  scale_x_discrete(expand = c(.05, 0))
 
 plot2 =
   ggplot(table1, aes(as.factor(year), cases)) + 
@@ -468,6 +526,8 @@ cowplot::plot_grid(plot1, plot2,
 ```
 
 Si te sobra tiempo, puedes tratar de reproducir la siguiente versión mejorada...  
+
+<details><summary>Soluciones: ![](../data/images/hint.png)</summary><span style="color: orange;">Hemos visto como hacer esto en el primer ejemplo de [fancy pants legends](02-visualizacion-avanzada.html#fancy-pants-legends) </span></details>
 
 ```{r geoms-ejercicios-extra,, echo=FALSE, fig.height=5, fig.width=8}
 
@@ -620,7 +680,8 @@ cowplot::plot_grid(plot1, plot2, rel_widths = c(.3, 0.7))
 
 ```
 
----  
+##### {-}
+
 
 #### Combinando múltiples gráficas
 
@@ -709,7 +770,7 @@ p +
 
 ### Ejercicios {.ejercicio -}
 
-Serías capaz de reproducir este gráfico, usando el dataframe `diamonds` y el `theme_economist`?  
+1) Serías capaz de reproducir este gráfico, usando el dataframe `diamonds` y el `theme_economist`?  
 
 Gráfica inicial:  
 
@@ -739,7 +800,7 @@ ggplot(diamonds, aes(price, cut, fill = cut, color = cut)) +
 
 ---  
 
-Serías capaz de reproducir este gráfico, usando el dataframe `gapminder` y la paleta `Accent`? 
+2) Serías capaz de reproducir este gráfico, usando el dataframe `gapminder` y la paleta `Accent`? 
 
 
 Gráfica inicial:  
@@ -889,7 +950,7 @@ plot1 = plotly::plot_ly(x = ~ colnames(DF),
                 y = ~ rownames(DF),
                 z = ~ DF) %>% 
   plotly::add_surface(name = "3D mesh",
-                      connectgaps = TRUE, hidesurface = TRUE,
+                      connectgaps = TRUE, hidesurface = TRUE, showscale = FALSE,
                       contours = list(
                         x = list(show = TRUE, width = 1,  highlightwidth = 2, highlightcolor = "#41a7b3", highlight = TRUE),
                         y = list(show = TRUE, width = 1,  highlightwidth = 2, highlightcolor = "#41a7b3", highlight = TRUE),

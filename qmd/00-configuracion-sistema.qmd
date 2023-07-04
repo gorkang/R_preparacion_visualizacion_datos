@@ -12,9 +12,9 @@ Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además
 
 -   **Mac**: [Descargar e instalar R para Mac](https://cran.r-project.org/bin/macosx/)
 
--   **Ubuntu Linux**: [más detalles en la web de R](https://cran.r-project.org/bin/linux/debian/). **En un terminal**:
+-   **Ubuntu Linux**: [más detalles en la web de R](https://cran.r-project.org/bin/linux/debian/). 
 
-|     `sudo apt install r-base`  
+  + **En un terminal**: `sudo apt install r-base`  
 
 
 ### **(B)** Instalar RStudio {.unnumbered}
@@ -26,7 +26,7 @@ RStudio es un entorno integrado de desarrollo (IDE) para la programación R.
 
 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="50%"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="75%"}
 knitr::include_graphics(here::here("data/images/empezando.png"))
 ```
 
@@ -40,7 +40,7 @@ Para instalar los paquetes del workshop, ejecuta el código de más abajo (secci
 
 En este gif puedes ver como hacerlo:  
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="50%"}
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="100%"}
 knitr::include_graphics(here::here("data/videos/rstudio_install_ALL.gif"))
 ```
 
@@ -55,7 +55,7 @@ knitr::include_graphics(here::here("data/videos/rstudio_install_ALL.gif"))
             "gapminder", "geomtextpath", "ggplot2", "ggraph", "ggridges", "ggthemes", 
             "ggtext", "googlesheets4", "gtsummary", "haven", "here", "hexbin", "inspectdf", 
             "janitor", "knitr", "lme4", "papaja", "parameters", "performance", "plotly", 
-            "purrr", "readODS", "readr", "readxl", "remotes", "renv", "report", 
+            "purrr", "quarto", "readODS", "readr", "readxl", "remotes", "renv", "report", 
             "rticles", "see", "sjPlot", "stargazer", "tidyr", "usethis", "writexl"), 
     reason = "to run the initial setup")
 
@@ -66,14 +66,33 @@ Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber comp
 
 ```{r install_workshop_packages2, message=FALSE, warning=FALSE}
 
+  if (!require('remotes')) install.packages('remotes'); remotes::install_github('gorkang/jsPsychAdmin')
   if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
   if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
 
 ```
 
-Usaremos un buen numero de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (_en algunos sistemas puede ser facilmente 1 hora_). Si tienes alguna dificultad en este punto, te recomiendo que veas algun [tutorial básico de R o RStudio](https://www.youtube.com/watch?v=BvKETZ6kr9Q).  
+Usaremos un buen numero de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (_en algunos sistemas puede llegar a 1 hora_). Si tienes alguna dificultad en este punto, te recomiendo que veas algun [tutorial básico de R o RStudio](https://www.youtube.com/watch?v=BvKETZ6kr9Q).  
 
-Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, renv, ...), pero dejaremos eso para más adelante.  
+Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, renv, ...), pero dejaremos eso para más adelante.   
+
+
+
+**Instalar Quarto**
+
+Quarto es un sistema de publicación de código abierto que funciona con diferentes lenguajes de programación como R o python. Lo usaremos a partir del capítulo 6.    
+
+[Descarga e instala Quarto](https://quarto.org/docs/get-started/)  
+
+
+**Instalar latex**
+
+Para generar pdf’s necesitaremos tener instalado Latex. tinytex nos ayudará a simplificar el proceso:
+
+```{r, eval=FALSE}
+  if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
+  tinytex::install_tinytex() # Llevará un buen rato
+```
 
 ------------------------------------------------------------------------
 

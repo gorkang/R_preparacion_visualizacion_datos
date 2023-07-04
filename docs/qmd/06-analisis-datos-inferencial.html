@@ -257,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header><hr>
 <section id="paquetes-para-este-capítulo" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="paquetes-para-este-capítulo">Paquetes para este capítulo</h4>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/setup_e94ccc28c7f8ded189f2d48f47cbd7f7">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://afex.singmann.science/">'afex'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'afex'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://afex.singmann.science/">'afex'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/correlation/">'correlation'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'correlation'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/correlation/">'correlation'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/tidymodels/corrr">'corrr'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'corrr'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/tidymodels/corrr">'corrr'</a></span><span class="op">)</span></span>
@@ -299,30 +299,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section></section><section id="tablas-descriptivos" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="tablas-descriptivos">
 <span class="header-section-number">6.2</span> Tablas descriptivos</h2>
 <p>Podemos crear tablas con los descriptivos de nuestros datos usando la función <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary()</a></code> de {<a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html">gtsummary</a>}</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/tablas_95bad9f4bb0175ad61ece9df69bfa5b3">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Por defecto, usa: mediana (rango inter cuartil)</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Por defecto, usa: mediana (rango inter cuartil)</span></span>
 <span><span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">country</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="cpihmqyoid" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cpihmqyoid table {
+<div id="hszlbqaqqe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hszlbqaqqe table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cpihmqyoid thead, #cpihmqyoid tbody, #cpihmqyoid tfoot, #cpihmqyoid tr, #cpihmqyoid td, #cpihmqyoid th {
+#hszlbqaqqe thead, #hszlbqaqqe tbody, #hszlbqaqqe tfoot, #hszlbqaqqe tr, #hszlbqaqqe td, #hszlbqaqqe th {
   border-style: none;
 }
 
-#cpihmqyoid p {
+#hszlbqaqqe p {
   margin: 0;
   padding: 0;
 }
 
-#cpihmqyoid .gt_table {
+#hszlbqaqqe .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -348,12 +349,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#cpihmqyoid .gt_caption {
+#hszlbqaqqe .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cpihmqyoid .gt_title {
+#hszlbqaqqe .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -365,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#cpihmqyoid .gt_subtitle {
+#hszlbqaqqe .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -377,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#cpihmqyoid .gt_heading {
+#hszlbqaqqe .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -389,13 +390,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cpihmqyoid .gt_bottom_border {
+#hszlbqaqqe .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cpihmqyoid .gt_col_headings {
+#hszlbqaqqe .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -410,7 +411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cpihmqyoid .gt_col_heading {
+#hszlbqaqqe .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -430,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#cpihmqyoid .gt_column_spanner_outer {
+#hszlbqaqqe .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -442,15 +443,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#cpihmqyoid .gt_column_spanner_outer:first-child {
+#hszlbqaqqe .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cpihmqyoid .gt_column_spanner_outer:last-child {
+#hszlbqaqqe .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cpihmqyoid .gt_column_spanner {
+#hszlbqaqqe .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -462,11 +463,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#cpihmqyoid .gt_spanner_row {
+#hszlbqaqqe .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cpihmqyoid .gt_group_heading {
+#hszlbqaqqe .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -492,7 +493,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#cpihmqyoid .gt_empty_group_heading {
+#hszlbqaqqe .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -507,15 +508,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#cpihmqyoid .gt_from_md > :first-child {
+#hszlbqaqqe .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cpihmqyoid .gt_from_md > :last-child {
+#hszlbqaqqe .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cpihmqyoid .gt_row {
+#hszlbqaqqe .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -534,7 +535,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#cpihmqyoid .gt_stub {
+#hszlbqaqqe .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -547,7 +548,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cpihmqyoid .gt_stub_row_group {
+#hszlbqaqqe .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -561,15 +562,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#cpihmqyoid .gt_row_group_first td {
+#hszlbqaqqe .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cpihmqyoid .gt_row_group_first th {
+#hszlbqaqqe .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cpihmqyoid .gt_summary_row {
+#hszlbqaqqe .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -579,16 +580,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cpihmqyoid .gt_first_summary_row {
+#hszlbqaqqe .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cpihmqyoid .gt_first_summary_row.thick {
+#hszlbqaqqe .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cpihmqyoid .gt_last_summary_row {
+#hszlbqaqqe .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -598,7 +599,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#cpihmqyoid .gt_grand_summary_row {
+#hszlbqaqqe .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -608,7 +609,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cpihmqyoid .gt_first_grand_summary_row {
+#hszlbqaqqe .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -618,7 +619,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#cpihmqyoid .gt_last_grand_summary_row_top {
+#hszlbqaqqe .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -628,11 +629,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#cpihmqyoid .gt_striped {
+#hszlbqaqqe .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cpihmqyoid .gt_table_body {
+#hszlbqaqqe .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -641,7 +642,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#cpihmqyoid .gt_footnotes {
+#hszlbqaqqe .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -655,7 +656,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cpihmqyoid .gt_footnote {
+#hszlbqaqqe .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -664,7 +665,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cpihmqyoid .gt_sourcenotes {
+#hszlbqaqqe .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -678,7 +679,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cpihmqyoid .gt_sourcenote {
+#hszlbqaqqe .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -686,63 +687,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cpihmqyoid .gt_left {
+#hszlbqaqqe .gt_left {
   text-align: left;
 }
 
-#cpihmqyoid .gt_center {
+#hszlbqaqqe .gt_center {
   text-align: center;
 }
 
-#cpihmqyoid .gt_right {
+#hszlbqaqqe .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cpihmqyoid .gt_font_normal {
+#hszlbqaqqe .gt_font_normal {
   font-weight: normal;
 }
 
-#cpihmqyoid .gt_font_bold {
+#hszlbqaqqe .gt_font_bold {
   font-weight: bold;
 }
 
-#cpihmqyoid .gt_font_italic {
+#hszlbqaqqe .gt_font_italic {
   font-style: italic;
 }
 
-#cpihmqyoid .gt_super {
+#hszlbqaqqe .gt_super {
   font-size: 65%;
 }
 
-#cpihmqyoid .gt_footnote_marks {
+#hszlbqaqqe .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cpihmqyoid .gt_asterisk {
+#hszlbqaqqe .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cpihmqyoid .gt_indent_1 {
+#hszlbqaqqe .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cpihmqyoid .gt_indent_2 {
+#hszlbqaqqe .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cpihmqyoid .gt_indent_3 {
+#hszlbqaqqe .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cpihmqyoid .gt_indent_4 {
+#hszlbqaqqe .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cpihmqyoid .gt_indent_5 {
+#hszlbqaqqe .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -804,30 +805,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Usando el parámetro <code>by</code> podemos crear columnas para cada valor de una variable:</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/tablas2_bff68db43a20d979b818b868a55855e8">
+<div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Por continente </span></span>
 <span><span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">country</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">continent</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="pklrrbgttz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pklrrbgttz table {
+<div id="hbcomdexiw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hbcomdexiw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pklrrbgttz thead, #pklrrbgttz tbody, #pklrrbgttz tfoot, #pklrrbgttz tr, #pklrrbgttz td, #pklrrbgttz th {
+#hbcomdexiw thead, #hbcomdexiw tbody, #hbcomdexiw tfoot, #hbcomdexiw tr, #hbcomdexiw td, #hbcomdexiw th {
   border-style: none;
 }
 
-#pklrrbgttz p {
+#hbcomdexiw p {
   margin: 0;
   padding: 0;
 }
 
-#pklrrbgttz .gt_table {
+#hbcomdexiw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -853,12 +854,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#pklrrbgttz .gt_caption {
+#hbcomdexiw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pklrrbgttz .gt_title {
+#hbcomdexiw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -870,7 +871,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#pklrrbgttz .gt_subtitle {
+#hbcomdexiw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -882,7 +883,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#pklrrbgttz .gt_heading {
+#hbcomdexiw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -894,13 +895,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#pklrrbgttz .gt_bottom_border {
+#hbcomdexiw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pklrrbgttz .gt_col_headings {
+#hbcomdexiw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -915,7 +916,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#pklrrbgttz .gt_col_heading {
+#hbcomdexiw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -935,7 +936,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#pklrrbgttz .gt_column_spanner_outer {
+#hbcomdexiw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -947,15 +948,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#pklrrbgttz .gt_column_spanner_outer:first-child {
+#hbcomdexiw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pklrrbgttz .gt_column_spanner_outer:last-child {
+#hbcomdexiw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pklrrbgttz .gt_column_spanner {
+#hbcomdexiw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -967,11 +968,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#pklrrbgttz .gt_spanner_row {
+#hbcomdexiw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pklrrbgttz .gt_group_heading {
+#hbcomdexiw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -997,7 +998,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#pklrrbgttz .gt_empty_group_heading {
+#hbcomdexiw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1012,15 +1013,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#pklrrbgttz .gt_from_md > :first-child {
+#hbcomdexiw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pklrrbgttz .gt_from_md > :last-child {
+#hbcomdexiw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pklrrbgttz .gt_row {
+#hbcomdexiw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1039,7 +1040,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#pklrrbgttz .gt_stub {
+#hbcomdexiw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1052,7 +1053,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#pklrrbgttz .gt_stub_row_group {
+#hbcomdexiw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1066,15 +1067,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#pklrrbgttz .gt_row_group_first td {
+#hbcomdexiw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pklrrbgttz .gt_row_group_first th {
+#hbcomdexiw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pklrrbgttz .gt_summary_row {
+#hbcomdexiw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1084,16 +1085,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#pklrrbgttz .gt_first_summary_row {
+#hbcomdexiw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pklrrbgttz .gt_first_summary_row.thick {
+#hbcomdexiw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pklrrbgttz .gt_last_summary_row {
+#hbcomdexiw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1103,7 +1104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#pklrrbgttz .gt_grand_summary_row {
+#hbcomdexiw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1113,7 +1114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#pklrrbgttz .gt_first_grand_summary_row {
+#hbcomdexiw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1123,7 +1124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#pklrrbgttz .gt_last_grand_summary_row_top {
+#hbcomdexiw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1133,11 +1134,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#pklrrbgttz .gt_striped {
+#hbcomdexiw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pklrrbgttz .gt_table_body {
+#hbcomdexiw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1146,7 +1147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#pklrrbgttz .gt_footnotes {
+#hbcomdexiw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1160,7 +1161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#pklrrbgttz .gt_footnote {
+#hbcomdexiw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1169,7 +1170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#pklrrbgttz .gt_sourcenotes {
+#hbcomdexiw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1183,7 +1184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#pklrrbgttz .gt_sourcenote {
+#hbcomdexiw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1191,63 +1192,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#pklrrbgttz .gt_left {
+#hbcomdexiw .gt_left {
   text-align: left;
 }
 
-#pklrrbgttz .gt_center {
+#hbcomdexiw .gt_center {
   text-align: center;
 }
 
-#pklrrbgttz .gt_right {
+#hbcomdexiw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pklrrbgttz .gt_font_normal {
+#hbcomdexiw .gt_font_normal {
   font-weight: normal;
 }
 
-#pklrrbgttz .gt_font_bold {
+#hbcomdexiw .gt_font_bold {
   font-weight: bold;
 }
 
-#pklrrbgttz .gt_font_italic {
+#hbcomdexiw .gt_font_italic {
   font-style: italic;
 }
 
-#pklrrbgttz .gt_super {
+#hbcomdexiw .gt_super {
   font-size: 65%;
 }
 
-#pklrrbgttz .gt_footnote_marks {
+#hbcomdexiw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pklrrbgttz .gt_asterisk {
+#hbcomdexiw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pklrrbgttz .gt_indent_1 {
+#hbcomdexiw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pklrrbgttz .gt_indent_2 {
+#hbcomdexiw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pklrrbgttz .gt_indent_3 {
+#hbcomdexiw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pklrrbgttz .gt_indent_4 {
+#hbcomdexiw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pklrrbgttz .gt_indent_5 {
+#hbcomdexiw .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1313,7 +1314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>El parámetro <code>statistic</code> nos permite controlar que estadísticos mostrar en función del tipo de variable:</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/tablas3_56ba00800b0bd826e8b31bdeebf25dca">
+<div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Usando promedio (desviación estandard)</span></span>
 <span><span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">country</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -1325,23 +1326,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_n.html">add_n</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="zohlvibvfs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zohlvibvfs table {
+<div id="ynbpfuirgg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ynbpfuirgg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zohlvibvfs thead, #zohlvibvfs tbody, #zohlvibvfs tfoot, #zohlvibvfs tr, #zohlvibvfs td, #zohlvibvfs th {
+#ynbpfuirgg thead, #ynbpfuirgg tbody, #ynbpfuirgg tfoot, #ynbpfuirgg tr, #ynbpfuirgg td, #ynbpfuirgg th {
   border-style: none;
 }
 
-#zohlvibvfs p {
+#ynbpfuirgg p {
   margin: 0;
   padding: 0;
 }
 
-#zohlvibvfs .gt_table {
+#ynbpfuirgg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1367,12 +1368,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#zohlvibvfs .gt_caption {
+#ynbpfuirgg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zohlvibvfs .gt_title {
+#ynbpfuirgg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1384,7 +1385,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#zohlvibvfs .gt_subtitle {
+#ynbpfuirgg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1396,7 +1397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#zohlvibvfs .gt_heading {
+#ynbpfuirgg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1408,13 +1409,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zohlvibvfs .gt_bottom_border {
+#ynbpfuirgg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zohlvibvfs .gt_col_headings {
+#ynbpfuirgg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1429,7 +1430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zohlvibvfs .gt_col_heading {
+#ynbpfuirgg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1449,7 +1450,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#zohlvibvfs .gt_column_spanner_outer {
+#ynbpfuirgg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1461,15 +1462,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#zohlvibvfs .gt_column_spanner_outer:first-child {
+#ynbpfuirgg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zohlvibvfs .gt_column_spanner_outer:last-child {
+#ynbpfuirgg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zohlvibvfs .gt_column_spanner {
+#ynbpfuirgg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1481,11 +1482,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#zohlvibvfs .gt_spanner_row {
+#ynbpfuirgg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zohlvibvfs .gt_group_heading {
+#ynbpfuirgg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1511,7 +1512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#zohlvibvfs .gt_empty_group_heading {
+#ynbpfuirgg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1526,15 +1527,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#zohlvibvfs .gt_from_md > :first-child {
+#ynbpfuirgg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zohlvibvfs .gt_from_md > :last-child {
+#ynbpfuirgg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zohlvibvfs .gt_row {
+#ynbpfuirgg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1553,7 +1554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#zohlvibvfs .gt_stub {
+#ynbpfuirgg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1566,7 +1567,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zohlvibvfs .gt_stub_row_group {
+#ynbpfuirgg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1580,15 +1581,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#zohlvibvfs .gt_row_group_first td {
+#ynbpfuirgg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zohlvibvfs .gt_row_group_first th {
+#ynbpfuirgg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zohlvibvfs .gt_summary_row {
+#ynbpfuirgg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1598,16 +1599,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zohlvibvfs .gt_first_summary_row {
+#ynbpfuirgg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zohlvibvfs .gt_first_summary_row.thick {
+#ynbpfuirgg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zohlvibvfs .gt_last_summary_row {
+#ynbpfuirgg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1617,7 +1618,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#zohlvibvfs .gt_grand_summary_row {
+#ynbpfuirgg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1627,7 +1628,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zohlvibvfs .gt_first_grand_summary_row {
+#ynbpfuirgg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1637,7 +1638,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#zohlvibvfs .gt_last_grand_summary_row_top {
+#ynbpfuirgg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1647,11 +1648,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#zohlvibvfs .gt_striped {
+#ynbpfuirgg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zohlvibvfs .gt_table_body {
+#ynbpfuirgg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1660,7 +1661,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#zohlvibvfs .gt_footnotes {
+#ynbpfuirgg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1674,7 +1675,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zohlvibvfs .gt_footnote {
+#ynbpfuirgg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1683,7 +1684,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zohlvibvfs .gt_sourcenotes {
+#ynbpfuirgg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1697,7 +1698,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zohlvibvfs .gt_sourcenote {
+#ynbpfuirgg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1705,63 +1706,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zohlvibvfs .gt_left {
+#ynbpfuirgg .gt_left {
   text-align: left;
 }
 
-#zohlvibvfs .gt_center {
+#ynbpfuirgg .gt_center {
   text-align: center;
 }
 
-#zohlvibvfs .gt_right {
+#ynbpfuirgg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zohlvibvfs .gt_font_normal {
+#ynbpfuirgg .gt_font_normal {
   font-weight: normal;
 }
 
-#zohlvibvfs .gt_font_bold {
+#ynbpfuirgg .gt_font_bold {
   font-weight: bold;
 }
 
-#zohlvibvfs .gt_font_italic {
+#ynbpfuirgg .gt_font_italic {
   font-style: italic;
 }
 
-#zohlvibvfs .gt_super {
+#ynbpfuirgg .gt_super {
   font-size: 65%;
 }
 
-#zohlvibvfs .gt_footnote_marks {
+#ynbpfuirgg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zohlvibvfs .gt_asterisk {
+#ynbpfuirgg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zohlvibvfs .gt_indent_1 {
+#ynbpfuirgg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zohlvibvfs .gt_indent_2 {
+#ynbpfuirgg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zohlvibvfs .gt_indent_3 {
+#ynbpfuirgg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zohlvibvfs .gt_indent_4 {
+#ynbpfuirgg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zohlvibvfs .gt_indent_5 {
+#ynbpfuirgg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1833,8 +1834,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="ejercicio---descriptivos" class="level3 ejercicio unnumbered"><h3 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio---descriptivos">Ejercicio - Descriptivos</h3>
 <p>Usando la base de datos del apartado anterior:</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/ejercicios-tablas-descriptivas1_5c9ec5c88d60cce7d6d078a6b71fb1dd">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_dafina</span> <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/Dafina"</span>, <span class="st">"Cancer screening risk literacy R1.sav"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF_dafina</span> <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/Dafina"</span>, <span class="st">"Cancer screening risk literacy R1.sav"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">IDparticipante</span>, <span class="va">resident</span>, <span class="va">screenbeliefs</span>, <span class="va">compR1</span>, <span class="va">numeracy</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>comprehension <span class="op">=</span> <span class="va">compR1</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1846,26 +1848,26 @@ Demasiado detalle, solo quiero los promedios<a href="../data/images/hint.png"></
 </summary><span style="color: orange;">Puedes usar <code>type = list(everything() ~ 'continuous'),</code> dentro de <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary()</a></code> para forzar el tratamiento de variables con pocos niveles como continuas.</span>
 </details><details><summary>
 Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">En la ayuda de la funcion: <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.tbl_summary.html">?add_p.tbl_summary</a></code> encontrarás que puedes usar algo como: `add_p(test = everything() ~ “t.test</span>
-</details><div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/ejercicios-tablas-descriptivas2_e70727c24ec910e9f2acc807abd778e2">
+</details><div class="cell">
 <div class="cell-output-display">
 
-<div id="viksuwtldc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#viksuwtldc table {
+<div id="qulpafdffr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qulpafdffr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#viksuwtldc thead, #viksuwtldc tbody, #viksuwtldc tfoot, #viksuwtldc tr, #viksuwtldc td, #viksuwtldc th {
+#qulpafdffr thead, #qulpafdffr tbody, #qulpafdffr tfoot, #qulpafdffr tr, #qulpafdffr td, #qulpafdffr th {
   border-style: none;
 }
 
-#viksuwtldc p {
+#qulpafdffr p {
   margin: 0;
   padding: 0;
 }
 
-#viksuwtldc .gt_table {
+#qulpafdffr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1891,12 +1893,12 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-left-color: #D3D3D3;
 }
 
-#viksuwtldc .gt_caption {
+#qulpafdffr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#viksuwtldc .gt_title {
+#qulpafdffr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1908,7 +1910,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-width: 0;
 }
 
-#viksuwtldc .gt_subtitle {
+#qulpafdffr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1920,7 +1922,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-top-width: 0;
 }
 
-#viksuwtldc .gt_heading {
+#qulpafdffr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1932,13 +1934,13 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#viksuwtldc .gt_bottom_border {
+#qulpafdffr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#viksuwtldc .gt_col_headings {
+#qulpafdffr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1953,7 +1955,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#viksuwtldc .gt_col_heading {
+#qulpafdffr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1973,7 +1975,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   overflow-x: hidden;
 }
 
-#viksuwtldc .gt_column_spanner_outer {
+#qulpafdffr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1985,15 +1987,15 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 4px;
 }
 
-#viksuwtldc .gt_column_spanner_outer:first-child {
+#qulpafdffr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#viksuwtldc .gt_column_spanner_outer:last-child {
+#qulpafdffr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#viksuwtldc .gt_column_spanner {
+#qulpafdffr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2005,11 +2007,11 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   width: 100%;
 }
 
-#viksuwtldc .gt_spanner_row {
+#qulpafdffr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#viksuwtldc .gt_group_heading {
+#qulpafdffr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2035,7 +2037,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   text-align: left;
 }
 
-#viksuwtldc .gt_empty_group_heading {
+#qulpafdffr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2050,15 +2052,15 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   vertical-align: middle;
 }
 
-#viksuwtldc .gt_from_md > :first-child {
+#qulpafdffr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#viksuwtldc .gt_from_md > :last-child {
+#qulpafdffr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#viksuwtldc .gt_row {
+#qulpafdffr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2077,7 +2079,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   overflow-x: hidden;
 }
 
-#viksuwtldc .gt_stub {
+#qulpafdffr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2090,7 +2092,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#viksuwtldc .gt_stub_row_group {
+#qulpafdffr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2104,15 +2106,15 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   vertical-align: top;
 }
 
-#viksuwtldc .gt_row_group_first td {
+#qulpafdffr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#viksuwtldc .gt_row_group_first th {
+#qulpafdffr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#viksuwtldc .gt_summary_row {
+#qulpafdffr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2122,16 +2124,16 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#viksuwtldc .gt_first_summary_row {
+#qulpafdffr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#viksuwtldc .gt_first_summary_row.thick {
+#qulpafdffr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#viksuwtldc .gt_last_summary_row {
+#qulpafdffr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2141,7 +2143,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-color: #D3D3D3;
 }
 
-#viksuwtldc .gt_grand_summary_row {
+#qulpafdffr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2151,7 +2153,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#viksuwtldc .gt_first_grand_summary_row {
+#qulpafdffr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2161,7 +2163,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-top-color: #D3D3D3;
 }
 
-#viksuwtldc .gt_last_grand_summary_row_top {
+#qulpafdffr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2171,11 +2173,11 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-color: #D3D3D3;
 }
 
-#viksuwtldc .gt_striped {
+#qulpafdffr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#viksuwtldc .gt_table_body {
+#qulpafdffr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2184,7 +2186,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-color: #D3D3D3;
 }
 
-#viksuwtldc .gt_footnotes {
+#qulpafdffr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2198,7 +2200,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#viksuwtldc .gt_footnote {
+#qulpafdffr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2207,7 +2209,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#viksuwtldc .gt_sourcenotes {
+#qulpafdffr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2221,7 +2223,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#viksuwtldc .gt_sourcenote {
+#qulpafdffr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2229,63 +2231,63 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#viksuwtldc .gt_left {
+#qulpafdffr .gt_left {
   text-align: left;
 }
 
-#viksuwtldc .gt_center {
+#qulpafdffr .gt_center {
   text-align: center;
 }
 
-#viksuwtldc .gt_right {
+#qulpafdffr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#viksuwtldc .gt_font_normal {
+#qulpafdffr .gt_font_normal {
   font-weight: normal;
 }
 
-#viksuwtldc .gt_font_bold {
+#qulpafdffr .gt_font_bold {
   font-weight: bold;
 }
 
-#viksuwtldc .gt_font_italic {
+#qulpafdffr .gt_font_italic {
   font-style: italic;
 }
 
-#viksuwtldc .gt_super {
+#qulpafdffr .gt_super {
   font-size: 65%;
 }
 
-#viksuwtldc .gt_footnote_marks {
+#qulpafdffr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#viksuwtldc .gt_asterisk {
+#qulpafdffr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#viksuwtldc .gt_indent_1 {
+#qulpafdffr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#viksuwtldc .gt_indent_2 {
+#qulpafdffr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#viksuwtldc .gt_indent_3 {
+#qulpafdffr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#viksuwtldc .gt_indent_4 {
+#qulpafdffr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#viksuwtldc .gt_indent_5 {
+#qulpafdffr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2358,8 +2360,9 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
 <span class="header-section-number">6.3</span> Tablas resultados inferenciales</h2>
 <p>Para tablas con los resultados de nuestros modelos estadísticos, usamos la función <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression()</a></code> de {<a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html">gtsummary</a>}</p>
 <p>Primero preparamos los datos:</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/tablas-lm_7a6706aefeadb92c1806726f6ed84f92">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># Transform variables</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span>  <span class="co"># Transform variables</span></span>
 <span>  <span class="va">DF_gapminder</span> <span class="op">=</span> <span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="co"># Log</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gdpPercap_log <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">gdpPercap</span><span class="op">)</span>,</span>
@@ -2370,11 +2373,14 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
 <span>           gdpPercap_log <span class="op">=</span> <span class="va">gdpPercap_log</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gdpPercap_log</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>           pop_log <span class="op">=</span> <span class="va">pop_log</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">pop_log</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="co"># Will use only last year</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Creamos un modelo sencillo y mostramos la tabla de resultados.</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/tablas-lm-tabla_74f017504281fe872321d6f42aa60983">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="va">model1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">lifeExp</span> <span class="op">~</span> <span class="va">gdpPercap_log</span> <span class="op">+</span> <span class="va">pop_log</span>, <span class="va">DF_gapminder</span><span class="op">)</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span>  <span class="va">model1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">lifeExp</span> <span class="op">~</span> <span class="va">gdpPercap_log</span> <span class="op">+</span> <span class="va">pop_log</span>, <span class="va">DF_gapminder</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">table_model1</span> <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">model1</span>, intercept <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_global_p.html">add_global_p</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -2386,23 +2392,23 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
 <span>  <span class="va">table_model1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="aaoxnieusk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aaoxnieusk table {
+<div id="bchtxgnamn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bchtxgnamn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aaoxnieusk thead, #aaoxnieusk tbody, #aaoxnieusk tfoot, #aaoxnieusk tr, #aaoxnieusk td, #aaoxnieusk th {
+#bchtxgnamn thead, #bchtxgnamn tbody, #bchtxgnamn tfoot, #bchtxgnamn tr, #bchtxgnamn td, #bchtxgnamn th {
   border-style: none;
 }
 
-#aaoxnieusk p {
+#bchtxgnamn p {
   margin: 0;
   padding: 0;
 }
 
-#aaoxnieusk .gt_table {
+#bchtxgnamn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2428,12 +2434,12 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-left-color: #D3D3D3;
 }
 
-#aaoxnieusk .gt_caption {
+#bchtxgnamn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aaoxnieusk .gt_title {
+#bchtxgnamn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2445,7 +2451,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-width: 0;
 }
 
-#aaoxnieusk .gt_subtitle {
+#bchtxgnamn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2457,7 +2463,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-top-width: 0;
 }
 
-#aaoxnieusk .gt_heading {
+#bchtxgnamn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2469,13 +2475,13 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#aaoxnieusk .gt_bottom_border {
+#bchtxgnamn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aaoxnieusk .gt_col_headings {
+#bchtxgnamn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2490,7 +2496,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#aaoxnieusk .gt_col_heading {
+#bchtxgnamn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2510,7 +2516,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   overflow-x: hidden;
 }
 
-#aaoxnieusk .gt_column_spanner_outer {
+#bchtxgnamn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2522,15 +2528,15 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 4px;
 }
 
-#aaoxnieusk .gt_column_spanner_outer:first-child {
+#bchtxgnamn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aaoxnieusk .gt_column_spanner_outer:last-child {
+#bchtxgnamn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aaoxnieusk .gt_column_spanner {
+#bchtxgnamn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2542,11 +2548,11 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   width: 100%;
 }
 
-#aaoxnieusk .gt_spanner_row {
+#bchtxgnamn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aaoxnieusk .gt_group_heading {
+#bchtxgnamn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2572,7 +2578,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   text-align: left;
 }
 
-#aaoxnieusk .gt_empty_group_heading {
+#bchtxgnamn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2587,15 +2593,15 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   vertical-align: middle;
 }
 
-#aaoxnieusk .gt_from_md > :first-child {
+#bchtxgnamn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aaoxnieusk .gt_from_md > :last-child {
+#bchtxgnamn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aaoxnieusk .gt_row {
+#bchtxgnamn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2614,7 +2620,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   overflow-x: hidden;
 }
 
-#aaoxnieusk .gt_stub {
+#bchtxgnamn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2627,7 +2633,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#aaoxnieusk .gt_stub_row_group {
+#bchtxgnamn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2641,15 +2647,15 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   vertical-align: top;
 }
 
-#aaoxnieusk .gt_row_group_first td {
+#bchtxgnamn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aaoxnieusk .gt_row_group_first th {
+#bchtxgnamn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aaoxnieusk .gt_summary_row {
+#bchtxgnamn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2659,16 +2665,16 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#aaoxnieusk .gt_first_summary_row {
+#bchtxgnamn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aaoxnieusk .gt_first_summary_row.thick {
+#bchtxgnamn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aaoxnieusk .gt_last_summary_row {
+#bchtxgnamn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2678,7 +2684,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-color: #D3D3D3;
 }
 
-#aaoxnieusk .gt_grand_summary_row {
+#bchtxgnamn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2688,7 +2694,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#aaoxnieusk .gt_first_grand_summary_row {
+#bchtxgnamn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2698,7 +2704,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-top-color: #D3D3D3;
 }
 
-#aaoxnieusk .gt_last_grand_summary_row_top {
+#bchtxgnamn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2708,11 +2714,11 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-color: #D3D3D3;
 }
 
-#aaoxnieusk .gt_striped {
+#bchtxgnamn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aaoxnieusk .gt_table_body {
+#bchtxgnamn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2721,7 +2727,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-color: #D3D3D3;
 }
 
-#aaoxnieusk .gt_footnotes {
+#bchtxgnamn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2735,7 +2741,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#aaoxnieusk .gt_footnote {
+#bchtxgnamn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2744,7 +2750,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#aaoxnieusk .gt_sourcenotes {
+#bchtxgnamn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2758,7 +2764,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#aaoxnieusk .gt_sourcenote {
+#bchtxgnamn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2766,63 +2772,63 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#aaoxnieusk .gt_left {
+#bchtxgnamn .gt_left {
   text-align: left;
 }
 
-#aaoxnieusk .gt_center {
+#bchtxgnamn .gt_center {
   text-align: center;
 }
 
-#aaoxnieusk .gt_right {
+#bchtxgnamn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aaoxnieusk .gt_font_normal {
+#bchtxgnamn .gt_font_normal {
   font-weight: normal;
 }
 
-#aaoxnieusk .gt_font_bold {
+#bchtxgnamn .gt_font_bold {
   font-weight: bold;
 }
 
-#aaoxnieusk .gt_font_italic {
+#bchtxgnamn .gt_font_italic {
   font-style: italic;
 }
 
-#aaoxnieusk .gt_super {
+#bchtxgnamn .gt_super {
   font-size: 65%;
 }
 
-#aaoxnieusk .gt_footnote_marks {
+#bchtxgnamn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aaoxnieusk .gt_asterisk {
+#bchtxgnamn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aaoxnieusk .gt_indent_1 {
+#bchtxgnamn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aaoxnieusk .gt_indent_2 {
+#bchtxgnamn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aaoxnieusk .gt_indent_3 {
+#bchtxgnamn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aaoxnieusk .gt_indent_4 {
+#bchtxgnamn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aaoxnieusk .gt_indent_5 {
+#bchtxgnamn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2890,8 +2896,9 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
 </section><section id="unir-tablas" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="unir-tablas">
 <span class="header-section-number">6.4</span> Unir tablas</h2>
 <p>De manera muy sencilla podemos unir varias tablas:</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/tablas-estadistica-merged_tables_67a8a243a269ed1280d9f0063832bb8a">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># Primero creamos un modelo más sencillo, basado en el anterior</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span>  <span class="co"># Primero creamos un modelo más sencillo, basado en el anterior</span></span>
 <span>  <span class="va">model10</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">lifeExp</span> <span class="op">~</span> <span class="va">gdpPercap_log</span>, <span class="va">DF_gapminder</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># Creamos la tabla</span></span>
@@ -2910,23 +2917,23 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="bilbgftrsu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bilbgftrsu table {
+<div id="jldqejsqzo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jldqejsqzo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bilbgftrsu thead, #bilbgftrsu tbody, #bilbgftrsu tfoot, #bilbgftrsu tr, #bilbgftrsu td, #bilbgftrsu th {
+#jldqejsqzo thead, #jldqejsqzo tbody, #jldqejsqzo tfoot, #jldqejsqzo tr, #jldqejsqzo td, #jldqejsqzo th {
   border-style: none;
 }
 
-#bilbgftrsu p {
+#jldqejsqzo p {
   margin: 0;
   padding: 0;
 }
 
-#bilbgftrsu .gt_table {
+#jldqejsqzo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2952,12 +2959,12 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-left-color: #D3D3D3;
 }
 
-#bilbgftrsu .gt_caption {
+#jldqejsqzo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bilbgftrsu .gt_title {
+#jldqejsqzo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2969,7 +2976,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-width: 0;
 }
 
-#bilbgftrsu .gt_subtitle {
+#jldqejsqzo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2981,7 +2988,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-top-width: 0;
 }
 
-#bilbgftrsu .gt_heading {
+#jldqejsqzo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2993,13 +3000,13 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#bilbgftrsu .gt_bottom_border {
+#jldqejsqzo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bilbgftrsu .gt_col_headings {
+#jldqejsqzo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3014,7 +3021,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#bilbgftrsu .gt_col_heading {
+#jldqejsqzo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3034,7 +3041,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   overflow-x: hidden;
 }
 
-#bilbgftrsu .gt_column_spanner_outer {
+#jldqejsqzo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3046,15 +3053,15 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 4px;
 }
 
-#bilbgftrsu .gt_column_spanner_outer:first-child {
+#jldqejsqzo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bilbgftrsu .gt_column_spanner_outer:last-child {
+#jldqejsqzo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bilbgftrsu .gt_column_spanner {
+#jldqejsqzo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3066,11 +3073,11 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   width: 100%;
 }
 
-#bilbgftrsu .gt_spanner_row {
+#jldqejsqzo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bilbgftrsu .gt_group_heading {
+#jldqejsqzo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3096,7 +3103,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   text-align: left;
 }
 
-#bilbgftrsu .gt_empty_group_heading {
+#jldqejsqzo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3111,15 +3118,15 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   vertical-align: middle;
 }
 
-#bilbgftrsu .gt_from_md > :first-child {
+#jldqejsqzo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bilbgftrsu .gt_from_md > :last-child {
+#jldqejsqzo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bilbgftrsu .gt_row {
+#jldqejsqzo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3138,7 +3145,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   overflow-x: hidden;
 }
 
-#bilbgftrsu .gt_stub {
+#jldqejsqzo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3151,7 +3158,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#bilbgftrsu .gt_stub_row_group {
+#jldqejsqzo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3165,15 +3172,15 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   vertical-align: top;
 }
 
-#bilbgftrsu .gt_row_group_first td {
+#jldqejsqzo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bilbgftrsu .gt_row_group_first th {
+#jldqejsqzo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bilbgftrsu .gt_summary_row {
+#jldqejsqzo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3183,16 +3190,16 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#bilbgftrsu .gt_first_summary_row {
+#jldqejsqzo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bilbgftrsu .gt_first_summary_row.thick {
+#jldqejsqzo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bilbgftrsu .gt_last_summary_row {
+#jldqejsqzo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3202,7 +3209,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-color: #D3D3D3;
 }
 
-#bilbgftrsu .gt_grand_summary_row {
+#jldqejsqzo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3212,7 +3219,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#bilbgftrsu .gt_first_grand_summary_row {
+#jldqejsqzo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3222,7 +3229,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-top-color: #D3D3D3;
 }
 
-#bilbgftrsu .gt_last_grand_summary_row_top {
+#jldqejsqzo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3232,11 +3239,11 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-color: #D3D3D3;
 }
 
-#bilbgftrsu .gt_striped {
+#jldqejsqzo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bilbgftrsu .gt_table_body {
+#jldqejsqzo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3245,7 +3252,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-bottom-color: #D3D3D3;
 }
 
-#bilbgftrsu .gt_footnotes {
+#jldqejsqzo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3259,7 +3266,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#bilbgftrsu .gt_footnote {
+#jldqejsqzo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3268,7 +3275,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#bilbgftrsu .gt_sourcenotes {
+#jldqejsqzo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3282,7 +3289,7 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   border-right-color: #D3D3D3;
 }
 
-#bilbgftrsu .gt_sourcenote {
+#jldqejsqzo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3290,63 +3297,63 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
   padding-right: 5px;
 }
 
-#bilbgftrsu .gt_left {
+#jldqejsqzo .gt_left {
   text-align: left;
 }
 
-#bilbgftrsu .gt_center {
+#jldqejsqzo .gt_center {
   text-align: center;
 }
 
-#bilbgftrsu .gt_right {
+#jldqejsqzo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bilbgftrsu .gt_font_normal {
+#jldqejsqzo .gt_font_normal {
   font-weight: normal;
 }
 
-#bilbgftrsu .gt_font_bold {
+#jldqejsqzo .gt_font_bold {
   font-weight: bold;
 }
 
-#bilbgftrsu .gt_font_italic {
+#jldqejsqzo .gt_font_italic {
   font-style: italic;
 }
 
-#bilbgftrsu .gt_super {
+#jldqejsqzo .gt_super {
   font-size: 65%;
 }
 
-#bilbgftrsu .gt_footnote_marks {
+#jldqejsqzo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bilbgftrsu .gt_asterisk {
+#jldqejsqzo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bilbgftrsu .gt_indent_1 {
+#jldqejsqzo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bilbgftrsu .gt_indent_2 {
+#jldqejsqzo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bilbgftrsu .gt_indent_3 {
+#jldqejsqzo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bilbgftrsu .gt_indent_4 {
+#jldqejsqzo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bilbgftrsu .gt_indent_5 {
+#jldqejsqzo .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3452,44 +3459,42 @@ Error al añadir valor p <img src="../data/images/hint.png" class="img-fluid"></
 </section><section id="reporte-de-resultados" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="reporte-de-resultados">
 <span class="header-section-number">6.5</span> Reporte de resultados</h2>
 <p>Con la función <code><a href="https://easystats.github.io/report/reference/report.html">report()</a></code> podemos ver una descripción completa de los resultados de nuestro modelo:</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/report-results_cb96a720fc231e75c2728ec9952f1450">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">model1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>We fitted a linear model (estimated using OLS) to predict lifeExp with
-gdpPercap_log and pop_log (formula: lifeExp ~ gdpPercap_log + pop_log). The
-model explains a statistically significant and substantial proportion of
-variance (R2 = 0.66, F(2, 139) = 137.93, p &lt; .001, adj. R2 = 0.66). The model's
-intercept, corresponding to gdpPercap_log = 0 and pop_log = 0, is at 63.28 (95%
-CI [61.98, 64.58], t(139) = 96.30, p &lt; .001). Within this model:
-
-  - The effect of gdpPercap log is statistically significant and positive (beta =
-7.24, 95% CI [6.38, 8.11], t(139) = 16.56, p &lt; .001; Std. beta = 0.81, 95% CI
-[0.72, 0.91])
-  - The effect of pop log is statistically significant and positive (beta = 0.81,
-95% CI [0.04, 1.58], t(139) = 2.09, p = 0.039; Std. beta = 0.10, 95% CI
-[5.35e-03, 0.20])
-
-Standardized parameters were obtained by fitting the model on a standardized
-version of the dataset. 95% Confidence Intervals (CIs) and p-values were
-computed using a Wald t-distribution approximation.</code></pre>
-</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">model1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; We fitted a linear model (estimated using OLS) to predict lifeExp with</span></span>
+<span><span class="co">#&gt; gdpPercap_log and pop_log (formula: lifeExp ~ gdpPercap_log + pop_log). The</span></span>
+<span><span class="co">#&gt; model explains a statistically significant and substantial proportion of</span></span>
+<span><span class="co">#&gt; variance (R2 = 0.66, F(2, 139) = 137.93, p &lt; .001, adj. R2 = 0.66). The</span></span>
+<span><span class="co">#&gt; model's intercept, corresponding to gdpPercap_log = 0 and pop_log = 0, is at</span></span>
+<span><span class="co">#&gt; 63.28 (95% CI [61.98, 64.58], t(139) = 96.30, p &lt; .001). Within this model:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   - The effect of gdpPercap log is statistically significant and positive</span></span>
+<span><span class="co">#&gt; (beta = 7.24, 95% CI [6.38, 8.11], t(139) = 16.56, p &lt; .001; Std. beta =</span></span>
+<span><span class="co">#&gt; 0.81, 95% CI [0.72, 0.91])</span></span>
+<span><span class="co">#&gt;   - The effect of pop log is statistically significant and positive (beta =</span></span>
+<span><span class="co">#&gt; 0.81, 95% CI [0.04, 1.58], t(139) = 2.09, p = 0.039; Std. beta = 0.10, 95%</span></span>
+<span><span class="co">#&gt; CI [5.35e-03, 0.20])</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Standardized parameters were obtained by fitting the model on a standardized</span></span>
+<span><span class="co">#&gt; version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span></span>
+<span><span class="co">#&gt; computed using a Wald t-distribution approximation.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="texto-inline" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="texto-inline">
 <span class="header-section-number">6.6</span> Texto inline</h2>
 <p>Algo genial de gtsummary, es que podemos usar las propias tablas para <a href="https://www.danieldsjoberg.com/gtsummary/articles/inline_text.html">extraer detalles de los resultados</a> y usarlos directamente en el texto.</p>
 <p>El paquete <a href="https://github.com/easystats/report">report</a> tiene también funcionalidades muy potentes que merece la pena explorar.</p>
 <p>La ventaja de escribir los resultados de esta manera es que si hacemos algun pequeño cambio en la preparación de datos, podemos volver a correr el script de generación del reporte de resultados, y los valores p, etc. se ajustarán automáticamente. Únicamente tenemos que asegurarnos que la interpretación cualitativa no cambia :)</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/tablas-estadistica-inline_a3d37c3e115e56ef9dc9f95bdb306c95">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Life expectancy was significantly associated with GDP per capita (log), beta = "</span>, </span>
-<span>       <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/inline_text.html">inline_text</a></span><span class="op">(</span><span class="va">table_model1</span>, variable <span class="op">=</span> <span class="va">gdpPercap_log</span><span class="op">)</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Life expectancy was significantly associated with GDP per capita (log), beta = 7.2 (95% CI 6.4, 8.1; p&lt;0.001)"</code></pre>
-</div>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Life expectancy was significantly associated with GDP per capita (log), beta = "</span>, </span>
+<span>       <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/inline_text.html">inline_text</a></span><span class="op">(</span><span class="va">table_model1</span>, variable <span class="op">=</span> <span class="va">gdpPercap_log</span><span class="op">)</span><span class="op">)</span>  </span>
+<span><span class="co">#&gt; [1] "Life expectancy was significantly associated with GDP per capita (log), beta = 7.2 (95% CI 6.4, 8.1; p&lt;0.001)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="ejercicio---resultados-inferenciales" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio---resultados-inferenciales">Ejercicio - Resultados inferenciales</h2>
 <p>Usando la misma base de datos del ejercicio anterior:</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/ejercicios-tablas-inferenciales1_896f3cd40570e46e3fc809a92cad2210">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_dafina</span> <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/Dafina"</span>, <span class="st">"Cancer screening risk literacy R1.sav"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF_dafina</span> <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/Dafina"</span>, <span class="st">"Cancer screening risk literacy R1.sav"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">IDparticipante</span>, <span class="va">resident</span>, <span class="va">screenbeliefs</span>, <span class="va">compR1</span>, <span class="va">numeracy</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>comprehension <span class="op">=</span> <span class="va">compR1</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -3500,26 +3505,26 @@ Donde encontrar ayuda<img src="../data/images/hint.png" class="img-fluid"></summ
 </details><details><summary>
 Como añadir información en el pie de la tabla<a href="../data/images/hint.png"></a>
 </summary><span style="color: orange;">Tendrás que usar la función <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html">add_glance_source_note()</a></code> o <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html">add_glance_table()</a></code>. Para saber que nombres poner en el paràmetro <code>include</code>, puedes usar la función <code>broom::glance(model)</code> </span>
-</details><div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/ejercicios-tablas-inferenciales2_da44e2154ec3b1973dfab3f822787990">
+</details><div class="cell">
 <div class="cell-output-display">
 
-<div id="zewacuirrw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zewacuirrw table {
+<div id="urllkiykvp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#urllkiykvp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zewacuirrw thead, #zewacuirrw tbody, #zewacuirrw tfoot, #zewacuirrw tr, #zewacuirrw td, #zewacuirrw th {
+#urllkiykvp thead, #urllkiykvp tbody, #urllkiykvp tfoot, #urllkiykvp tr, #urllkiykvp td, #urllkiykvp th {
   border-style: none;
 }
 
-#zewacuirrw p {
+#urllkiykvp p {
   margin: 0;
   padding: 0;
 }
 
-#zewacuirrw .gt_table {
+#urllkiykvp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3545,12 +3550,12 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   border-left-color: #D3D3D3;
 }
 
-#zewacuirrw .gt_caption {
+#urllkiykvp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zewacuirrw .gt_title {
+#urllkiykvp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3562,7 +3567,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   border-bottom-width: 0;
 }
 
-#zewacuirrw .gt_subtitle {
+#urllkiykvp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3574,7 +3579,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   border-top-width: 0;
 }
 
-#zewacuirrw .gt_heading {
+#urllkiykvp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3586,13 +3591,13 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   border-right-color: #D3D3D3;
 }
 
-#zewacuirrw .gt_bottom_border {
+#urllkiykvp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zewacuirrw .gt_col_headings {
+#urllkiykvp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3607,7 +3612,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   border-right-color: #D3D3D3;
 }
 
-#zewacuirrw .gt_col_heading {
+#urllkiykvp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3627,7 +3632,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   overflow-x: hidden;
 }
 
-#zewacuirrw .gt_column_spanner_outer {
+#urllkiykvp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3639,15 +3644,15 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   padding-right: 4px;
 }
 
-#zewacuirrw .gt_column_spanner_outer:first-child {
+#urllkiykvp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zewacuirrw .gt_column_spanner_outer:last-child {
+#urllkiykvp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zewacuirrw .gt_column_spanner {
+#urllkiykvp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3659,11 +3664,11 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   width: 100%;
 }
 
-#zewacuirrw .gt_spanner_row {
+#urllkiykvp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zewacuirrw .gt_group_heading {
+#urllkiykvp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3689,7 +3694,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   text-align: left;
 }
 
-#zewacuirrw .gt_empty_group_heading {
+#urllkiykvp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3704,15 +3709,15 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   vertical-align: middle;
 }
 
-#zewacuirrw .gt_from_md > :first-child {
+#urllkiykvp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zewacuirrw .gt_from_md > :last-child {
+#urllkiykvp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zewacuirrw .gt_row {
+#urllkiykvp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3731,7 +3736,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   overflow-x: hidden;
 }
 
-#zewacuirrw .gt_stub {
+#urllkiykvp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3744,7 +3749,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   padding-right: 5px;
 }
 
-#zewacuirrw .gt_stub_row_group {
+#urllkiykvp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3758,15 +3763,15 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   vertical-align: top;
 }
 
-#zewacuirrw .gt_row_group_first td {
+#urllkiykvp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zewacuirrw .gt_row_group_first th {
+#urllkiykvp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zewacuirrw .gt_summary_row {
+#urllkiykvp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3776,16 +3781,16 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   padding-right: 5px;
 }
 
-#zewacuirrw .gt_first_summary_row {
+#urllkiykvp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zewacuirrw .gt_first_summary_row.thick {
+#urllkiykvp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zewacuirrw .gt_last_summary_row {
+#urllkiykvp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3795,7 +3800,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   border-bottom-color: #D3D3D3;
 }
 
-#zewacuirrw .gt_grand_summary_row {
+#urllkiykvp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3805,7 +3810,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   padding-right: 5px;
 }
 
-#zewacuirrw .gt_first_grand_summary_row {
+#urllkiykvp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3815,7 +3820,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   border-top-color: #D3D3D3;
 }
 
-#zewacuirrw .gt_last_grand_summary_row_top {
+#urllkiykvp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3825,11 +3830,11 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   border-bottom-color: #D3D3D3;
 }
 
-#zewacuirrw .gt_striped {
+#urllkiykvp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zewacuirrw .gt_table_body {
+#urllkiykvp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3838,7 +3843,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   border-bottom-color: #D3D3D3;
 }
 
-#zewacuirrw .gt_footnotes {
+#urllkiykvp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3852,7 +3857,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   border-right-color: #D3D3D3;
 }
 
-#zewacuirrw .gt_footnote {
+#urllkiykvp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3861,7 +3866,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   padding-right: 5px;
 }
 
-#zewacuirrw .gt_sourcenotes {
+#urllkiykvp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3875,7 +3880,7 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   border-right-color: #D3D3D3;
 }
 
-#zewacuirrw .gt_sourcenote {
+#urllkiykvp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3883,63 +3888,63 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
   padding-right: 5px;
 }
 
-#zewacuirrw .gt_left {
+#urllkiykvp .gt_left {
   text-align: left;
 }
 
-#zewacuirrw .gt_center {
+#urllkiykvp .gt_center {
   text-align: center;
 }
 
-#zewacuirrw .gt_right {
+#urllkiykvp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zewacuirrw .gt_font_normal {
+#urllkiykvp .gt_font_normal {
   font-weight: normal;
 }
 
-#zewacuirrw .gt_font_bold {
+#urllkiykvp .gt_font_bold {
   font-weight: bold;
 }
 
-#zewacuirrw .gt_font_italic {
+#urllkiykvp .gt_font_italic {
   font-style: italic;
 }
 
-#zewacuirrw .gt_super {
+#urllkiykvp .gt_super {
   font-size: 65%;
 }
 
-#zewacuirrw .gt_footnote_marks {
+#urllkiykvp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zewacuirrw .gt_asterisk {
+#urllkiykvp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zewacuirrw .gt_indent_1 {
+#urllkiykvp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zewacuirrw .gt_indent_2 {
+#urllkiykvp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zewacuirrw .gt_indent_3 {
+#urllkiykvp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zewacuirrw .gt_indent_4 {
+#urllkiykvp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zewacuirrw .gt_indent_5 {
+#urllkiykvp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3996,42 +4001,37 @@ Como añadir información en el pie de la tabla<a href="../data/images/hint.png"
 <hr>
 <section id="correlación-simple" class="level3" data-number="6.7.1"><h3 data-number="6.7.1" class="anchored" data-anchor-id="correlación-simple">
 <span class="header-section-number">6.7.1</span> Correlación simple</h3>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/correlation-test_4546ce43aa6428c7bff6521b8b84659e">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># Data</span></span>
-<span>  <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 150 × 5
-   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
- 1          5.1         3.5          1.4         0.2 setosa 
- 2          4.9         3            1.4         0.2 setosa 
- 3          4.7         3.2          1.3         0.2 setosa 
- 4          4.6         3.1          1.5         0.2 setosa 
- 5          5           3.6          1.4         0.2 setosa 
- 6          5.4         3.9          1.7         0.4 setosa 
- 7          4.6         3.4          1.4         0.3 setosa 
- 8          5           3.4          1.5         0.2 setosa 
- 9          4.4         2.9          1.4         0.2 setosa 
-10          4.9         3.1          1.5         0.1 setosa 
-# ℹ 140 more rows</code></pre>
-</div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># Test</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span>  <span class="co"># Data</span></span>
+<span>  <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 150 × 5</span></span>
+<span><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
+<span><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span></span>
+<span><span class="co">#&gt; 1          5.1         3.5          1.4         0.2 setosa </span></span>
+<span><span class="co">#&gt; 2          4.9         3            1.4         0.2 setosa </span></span>
+<span><span class="co">#&gt; 3          4.7         3.2          1.3         0.2 setosa </span></span>
+<span><span class="co">#&gt; 4          4.6         3.1          1.5         0.2 setosa </span></span>
+<span><span class="co">#&gt; 5          5           3.6          1.4         0.2 setosa </span></span>
+<span><span class="co">#&gt; 6          5.4         3.9          1.7         0.4 setosa </span></span>
+<span><span class="co">#&gt; # ℹ 144 more rows</span></span>
+<span></span>
+<span>  <span class="co"># Test</span></span>
 <span>  <span class="va">simple_corr_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Report</span></span>
-<span>  <span class="va">simple_corr_test</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Effect sizes were labelled following Funder's (2019) recommendations.
-
-The Spearman's rank correlation rho between iris$Sepal.Width and
-iris$Sepal.Length is negative, statistically significant, and small (rho =
--0.17, S = 6.56e+05, p = 0.041)</code></pre>
-</div>
+<span>  <span class="va">simple_corr_test</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Effect sizes were labelled following Funder's (2019) recommendations.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; The Spearman's rank correlation rho between iris$Sepal.Width and</span></span>
+<span><span class="co">#&gt; iris$Sepal.Length is negative, statistically significant, and small (rho =</span></span>
+<span><span class="co">#&gt; -0.17, S = 6.56e+05, p = 0.041)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="multiples-correlaciones" class="level3" data-number="6.7.2"><h3 data-number="6.7.2" class="anchored" data-anchor-id="multiples-correlaciones">
 <span class="header-section-number">6.7.2</span> Multiples correlaciones</h3>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/tablas-bonitas-correlation_b96fdf0fdbd56314fb3a408e6eccb5fe">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># Multiple correlations</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span>  <span class="co"># Multiple correlations</span></span>
 <span>  <span class="va">table_correlations</span> <span class="op">=</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://easystats.github.io/correlation/reference/correlation.html">correlation</a></span><span class="op">(</span>partial <span class="op">=</span> <span class="cn">FALSE</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></span>
 <span></span>
@@ -4112,19 +4112,19 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
 <li>Ver paquete <a href="https://github.com/singmann/afex">{afex}</a>
 </li>
 </ul>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/ejemplo-afex_bf13e3ff40a711a3329d985cea140cbc">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">obk.long</span>, package <span class="op">=</span> <span class="st">"afex"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">obk.long</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  id treatment gender   age phase hour value
-1  1   control      M -4.75   pre    1     1
-2  1   control      M -4.75   pre    2     2
-3  1   control      M -4.75   pre    3     4
-4  1   control      M -4.75   pre    4     2
-5  1   control      M -4.75   pre    5     1
-6  1   control      M -4.75  post    1     3</code></pre>
-</div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># estimate mixed ANOVA on the full design:</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">obk.long</span>, package <span class="op">=</span> <span class="st">"afex"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">obk.long</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   id treatment gender   age phase hour value</span></span>
+<span><span class="co">#&gt; 1  1   control      M -4.75   pre    1     1</span></span>
+<span><span class="co">#&gt; 2  1   control      M -4.75   pre    2     2</span></span>
+<span><span class="co">#&gt; 3  1   control      M -4.75   pre    3     4</span></span>
+<span><span class="co">#&gt; 4  1   control      M -4.75   pre    4     2</span></span>
+<span><span class="co">#&gt; 5  1   control      M -4.75   pre    5     1</span></span>
+<span><span class="co">#&gt; 6  1   control      M -4.75  post    1     3</span></span>
+<span></span>
+<span><span class="co"># estimate mixed ANOVA on the full design:</span></span>
 <span><span class="va">model</span> <span class="op">=</span> <span class="fu">afex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/afex/man/aov_car.html">aov_ez</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id"</span>, </span>
 <span>                     dv <span class="op">=</span> <span class="st">"value"</span>, </span>
 <span>                     data <span class="op">=</span> <span class="va">obk.long</span>, between <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"treatment"</span><span class="op">)</span>, </span>
@@ -4224,8 +4224,9 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
 </section><section id="modelos-mixtos" class="level3" data-number="6.7.4"><h3 data-number="6.7.4" class="anchored" data-anchor-id="modelos-mixtos">
 <span class="header-section-number">6.7.4</span> Modelos mixtos</h3>
 <p>Primero preparamos los datos:</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/tablas-estadistica-preparation_6156792b89187d5f560718bc86b91e07">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># Transform variables</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span>  <span class="co"># Transform variables</span></span>
 <span>  <span class="va">DF_gapminder2</span> <span class="op">=</span> <span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="co"># Log</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gdpPercap_log <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">gdpPercap</span><span class="op">)</span>,</span>
@@ -4241,15 +4242,18 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/contrasts.html">contrasts</a></span><span class="op">(</span><span class="va">DF_gapminder2</span><span class="op">$</span><span class="va">continent</span><span class="op">)</span> <span class="op">=</span> <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Contrasts.html">contr.Sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">DF_gapminder2</span><span class="op">$</span><span class="va">continent</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Creamos un modelo sencillo:</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/tablas-estadistica-models_f30973f627f47af42ac11cd2c5007631">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="va">model2</span> <span class="op">=</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">lifeExp</span> <span class="op">~</span> <span class="va">gdpPercap_log</span> <span class="op">+</span> <span class="va">pop_log</span> <span class="op">+</span> <span class="va">year</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">country</span><span class="op">)</span>, <span class="va">DF_gapminder2</span><span class="op">)</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span>  <span class="va">model2</span> <span class="op">=</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">lifeExp</span> <span class="op">~</span> <span class="va">gdpPercap_log</span> <span class="op">+</span> <span class="va">pop_log</span> <span class="op">+</span> <span class="va">year</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">country</span><span class="op">)</span>, <span class="va">DF_gapminder2</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># Extraemos los R2 del modelo para usar en la tabla</span></span>
-<span>  <span class="va">R2_1</span> <span class="op">=</span> <span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/r2.html">r2</a></span><span class="op">(</span><span class="va">model2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="va">R2_1</span> <span class="op">=</span> <span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/r2.html">r2</a></span><span class="op">(</span><span class="va">model2</span><span class="op">)</span></span>
+<span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Y mostramos la tabla de resultados. Como se trata de modelos mixtos, tenemos que añadir manualmente los R2’s.</p>
-<div class="cell" data-hash="06-analisis-datos-inferencial_cache/html/tablas-estadistica-table1_34544aa59234f4cbead028e20c5cbaa4">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="va">table_model2</span> <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">model2</span>, intercept <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span>  <span class="va">table_model2</span> <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">model2</span>, intercept <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_global_p.html">add_global_p</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">bold_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">italicize_levels</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -4263,23 +4267,23 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
 <span>        <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/deparse.html">deparse1</a></span><span class="op">(</span><span class="va">model2</span><span class="op">@</span><span class="va">call</span><span class="op">$</span><span class="va">formula</span><span class="op">)</span>, <span class="st">"&lt;BR&gt; "</span>, <span class="st">"R2 conditional = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">R2_1</span><span class="op">$</span><span class="va">R2_conditional</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">", R2 marginal = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">R2_1</span><span class="op">$</span><span class="va">R2_marginal</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="ypncjhzlwl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ypncjhzlwl table {
+<div id="jtzcmttqvr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jtzcmttqvr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ypncjhzlwl thead, #ypncjhzlwl tbody, #ypncjhzlwl tfoot, #ypncjhzlwl tr, #ypncjhzlwl td, #ypncjhzlwl th {
+#jtzcmttqvr thead, #jtzcmttqvr tbody, #jtzcmttqvr tfoot, #jtzcmttqvr tr, #jtzcmttqvr td, #jtzcmttqvr th {
   border-style: none;
 }
 
-#ypncjhzlwl p {
+#jtzcmttqvr p {
   margin: 0;
   padding: 0;
 }
 
-#ypncjhzlwl .gt_table {
+#jtzcmttqvr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4305,12 +4309,12 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   border-left-color: #D3D3D3;
 }
 
-#ypncjhzlwl .gt_caption {
+#jtzcmttqvr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ypncjhzlwl .gt_title {
+#jtzcmttqvr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4322,7 +4326,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   border-bottom-width: 0;
 }
 
-#ypncjhzlwl .gt_subtitle {
+#jtzcmttqvr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4334,7 +4338,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   border-top-width: 0;
 }
 
-#ypncjhzlwl .gt_heading {
+#jtzcmttqvr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4346,13 +4350,13 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   border-right-color: #D3D3D3;
 }
 
-#ypncjhzlwl .gt_bottom_border {
+#jtzcmttqvr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ypncjhzlwl .gt_col_headings {
+#jtzcmttqvr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4367,7 +4371,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   border-right-color: #D3D3D3;
 }
 
-#ypncjhzlwl .gt_col_heading {
+#jtzcmttqvr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4387,7 +4391,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   overflow-x: hidden;
 }
 
-#ypncjhzlwl .gt_column_spanner_outer {
+#jtzcmttqvr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4399,15 +4403,15 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   padding-right: 4px;
 }
 
-#ypncjhzlwl .gt_column_spanner_outer:first-child {
+#jtzcmttqvr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ypncjhzlwl .gt_column_spanner_outer:last-child {
+#jtzcmttqvr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ypncjhzlwl .gt_column_spanner {
+#jtzcmttqvr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4419,11 +4423,11 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   width: 100%;
 }
 
-#ypncjhzlwl .gt_spanner_row {
+#jtzcmttqvr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ypncjhzlwl .gt_group_heading {
+#jtzcmttqvr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4449,7 +4453,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   text-align: left;
 }
 
-#ypncjhzlwl .gt_empty_group_heading {
+#jtzcmttqvr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4464,15 +4468,15 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   vertical-align: middle;
 }
 
-#ypncjhzlwl .gt_from_md > :first-child {
+#jtzcmttqvr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ypncjhzlwl .gt_from_md > :last-child {
+#jtzcmttqvr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ypncjhzlwl .gt_row {
+#jtzcmttqvr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4491,7 +4495,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   overflow-x: hidden;
 }
 
-#ypncjhzlwl .gt_stub {
+#jtzcmttqvr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4504,7 +4508,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   padding-right: 5px;
 }
 
-#ypncjhzlwl .gt_stub_row_group {
+#jtzcmttqvr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4518,15 +4522,15 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   vertical-align: top;
 }
 
-#ypncjhzlwl .gt_row_group_first td {
+#jtzcmttqvr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ypncjhzlwl .gt_row_group_first th {
+#jtzcmttqvr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ypncjhzlwl .gt_summary_row {
+#jtzcmttqvr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4536,16 +4540,16 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   padding-right: 5px;
 }
 
-#ypncjhzlwl .gt_first_summary_row {
+#jtzcmttqvr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ypncjhzlwl .gt_first_summary_row.thick {
+#jtzcmttqvr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ypncjhzlwl .gt_last_summary_row {
+#jtzcmttqvr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4555,7 +4559,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   border-bottom-color: #D3D3D3;
 }
 
-#ypncjhzlwl .gt_grand_summary_row {
+#jtzcmttqvr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4565,7 +4569,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   padding-right: 5px;
 }
 
-#ypncjhzlwl .gt_first_grand_summary_row {
+#jtzcmttqvr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4575,7 +4579,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   border-top-color: #D3D3D3;
 }
 
-#ypncjhzlwl .gt_last_grand_summary_row_top {
+#jtzcmttqvr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4585,11 +4589,11 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   border-bottom-color: #D3D3D3;
 }
 
-#ypncjhzlwl .gt_striped {
+#jtzcmttqvr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ypncjhzlwl .gt_table_body {
+#jtzcmttqvr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4598,7 +4602,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   border-bottom-color: #D3D3D3;
 }
 
-#ypncjhzlwl .gt_footnotes {
+#jtzcmttqvr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4612,7 +4616,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   border-right-color: #D3D3D3;
 }
 
-#ypncjhzlwl .gt_footnote {
+#jtzcmttqvr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4621,7 +4625,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   padding-right: 5px;
 }
 
-#ypncjhzlwl .gt_sourcenotes {
+#jtzcmttqvr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4635,7 +4639,7 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   border-right-color: #D3D3D3;
 }
 
-#ypncjhzlwl .gt_sourcenote {
+#jtzcmttqvr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4643,63 +4647,63 @@ iris$Sepal.Length is negative, statistically significant, and small (rho =
   padding-right: 5px;
 }
 
-#ypncjhzlwl .gt_left {
+#jtzcmttqvr .gt_left {
   text-align: left;
 }
 
-#ypncjhzlwl .gt_center {
+#jtzcmttqvr .gt_center {
   text-align: center;
 }
 
-#ypncjhzlwl .gt_right {
+#jtzcmttqvr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ypncjhzlwl .gt_font_normal {
+#jtzcmttqvr .gt_font_normal {
   font-weight: normal;
 }
 
-#ypncjhzlwl .gt_font_bold {
+#jtzcmttqvr .gt_font_bold {
   font-weight: bold;
 }
 
-#ypncjhzlwl .gt_font_italic {
+#jtzcmttqvr .gt_font_italic {
   font-style: italic;
 }
 
-#ypncjhzlwl .gt_super {
+#jtzcmttqvr .gt_super {
   font-size: 65%;
 }
 
-#ypncjhzlwl .gt_footnote_marks {
+#jtzcmttqvr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ypncjhzlwl .gt_asterisk {
+#jtzcmttqvr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ypncjhzlwl .gt_indent_1 {
+#jtzcmttqvr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ypncjhzlwl .gt_indent_2 {
+#jtzcmttqvr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ypncjhzlwl .gt_indent_3 {
+#jtzcmttqvr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ypncjhzlwl .gt_indent_4 {
+#jtzcmttqvr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ypncjhzlwl .gt_indent_5 {
+#jtzcmttqvr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

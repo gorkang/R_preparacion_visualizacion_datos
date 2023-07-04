@@ -27,15 +27,11 @@ img.quarto-cover-image {
   margin-bottom: 0.5rem;
 }
 
-h2 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-size: 1.4rem;
-  font-weight: 600;
-}
-h3 { margin-top: 1.5em; font-size: 1.2rem; font-weight: 500; }
-h4 { margin-top: 1.5em; font-size: 1.1rem; }
-h5 { margin-top: 1.5em; font-size: 1rem; }
+h2 {  margin-top: 1.5rem;  margin-bottom: 1rem;  font-size: 1.4rem; font-weight: 700; margin-left: -0.8em; }
+h3 { margin-top: 1em; font-size: 1.2rem; font-weight: 600; margin-left: -0.8em; }
+h4 { margin-top: 1em; font-size: 1.1rem; font-weight: 600; margin-left: -0.8em; }
+h5 { margin-top: 1em; font-size: 1rem; font-weight: 600; margin-left: -0.8em; }
+h6 { margin-top: 0.5em; margin-bottom: 0.5em; font-size: 1rem; font-weight: 600; margin-left: -0.8em; }
 
 .quarto-section-identifier {
   color: #6C6C6C;

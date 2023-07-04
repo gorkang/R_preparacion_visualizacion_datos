@@ -10,6 +10,7 @@ source("../_common.R")
 
 ![](../data/images/jsPsych-trinity.png)  
 
+
 En el CSCN usamos distintas tecnologías para desarrollar experimentos. Algunos ejemplos son [Psychopy](https://www.psychopy.org/), [Qualtrics](https://www.qualtrics.com/), [Limesurvey](https://www.limesurvey.org/), [jsPsych](https://www.jspsych.org/plugins/jspsych-preload/), [Gorilla](https://gorilla.sc/), etc. Cada una de estas tiene ventajas y desventajas, y en general es importante tener en cuenta aspectos pragmáticos a la hora de adoptar una u otra tecnología (costo económico, tipo de experimento [EEG/conductual, laboratorio/online]).
 
 Algunos de nosotros hemos optado principalmente por [jsPsych](https://www.jspsych.org/) para experimentos conductuales por tratarse de una librería javascript de **código abierto**, basada en tecnologías web standard, y que puede ser usada online y offline. Dado que en el CSCN disponemos de servidor propio, los costos habituales de hosting no se aplican.
@@ -43,27 +44,32 @@ Sigue los siguientes 3 pasos para crear tu protocolo:
 
 ------------------------------------------------------------------------
 
-1)  Descargamos el proyecto de RStudio jsPsychMaker:
+1) Instalamos jsPsychMaker:
 
 ```{r, eval=FALSE}
-
-usethis::use_course(url = "gorkang/jsPsychMaker", destdir = "~/Downloads/")
-# Select YES to delete zip
+remotes::install_github("gorkang/jsPsychMaker")
 ```
 
 ------------------------------------------------------------------------
 
-2)  En a la carpeta `canonical_protocols`:
+2) Creamos un protocolo, indicándo que tareas queremos en `canonical_tasks`. Para ver un listado de las tareas disponibles: `jsPsychMaker::list_available_tasks()`
 
--   Editamos `config.js` para indicar las tareas que queremos usar en la sección `// ORDER OF TASKS`
 
--   Alternativamente, podemos usar la [jsPsychMaker Shiny APP](https://gorkang.shinyapps.io/jsPsychMaker_config/) para crear nuestro archivo `config.js` (recuerda copiar el archivo `config.js` a la carpeta de tu protocolo)  
-
--   Finalmente, en `config.js` revisamos la sección `// Main parameters` para asegurarnos que todo esta bien (e.g. `online = false;`)  
+```{r, eval=FALSE}
+jsPsychMaker::create_protocol(canonical_tasks = c("AIM", "EAR", "IRI"),
+                              folder_output = "~/Downloads/protocol999", # El directorio tiene que incluir un número (se usará como pid)
+                              launch_browser = TRUE)
+```
 
 ------------------------------------------------------------------------
 
-3)  El experimento esta listo para ser utilizado localmente. Podemos hacerlo ejecutando `index.html`
+3)  Editamos la configuración del protocolo en la carpeta que hemos indicado en `folder_output`:
+
+-   En `config.js` revisamos la sección `// Main parameters` para asegurarnos que todo esta bien (e.g. `online = false;`)  
+
+------------------------------------------------------------------------
+
+4)  El experimento esta listo para ser utilizado localmente. Podemos hacerlo ejecutando `index.html`
 
 ------------------------------------------------------------------------
 
@@ -93,24 +99,33 @@ De nuevo, podemos hacer esto en 3 pasos:
 
 ------------------------------------------------------------------------
 
-1)  Instalamos docker (descarga de \~ 500MB):
-
-- [Windows](https://docs.docker.com/desktop/install/windows-install/), o [Apple](https://docs.docker.com/desktop/mac/apple-silicon/)
-- Ubuntu: `sudo apt install docker`
+1)  Completa el [setup para tu sistema operativo](https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#setup)
 
 ------------------------------------------------------------------------
 
-2)  Descargamos el proyecto de RStudio jsPsychMonkeys. En la Consola de RStudio:
+2)  Instala jsPsychMonkeys:  
 
 ```{r, eval=FALSE}
-usethis::use_course(url = "gorkang/jsPsychMonkeys", destdir = "~/Downloads/")
-# Select YES to delete zip
-
+remotes::install_github("gorkang/jsPsychMonkeys")
 ```
 
 ------------------------------------------------------------------------
 
-3)  Abrimos `run.R` y seguimos las instrucciones.
+3)  Lanza monos localmente (puedes ver algunos de los parametros disponibles en el [Manual de jsPsychMonkeys](https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#parameters-available)):
+
+```{r, eval=FALSE}
+jsPsychMonkeys::release_the_monkeys(uid = "1", # Lanza un monos con el user id 1
+                                    local_folder_tasks = "~/Downloads/protocol999")
+
+
+#  Puedes lanzar los monos en paralelo
+jsPsychMonkeys::release_the_monkeys(uid = "1:5", # Lanza monos desde el uid 1 hasta el 5
+                                    local_folder_tasks = "~/Downloads/protocol999",
+                                    sequential_parallel = "parallel", # Lanza los monos en paralelo
+                                    number_of_cores = 5) # Usando este número de CPUs
+
+```
+
 
 ------------------------------------------------------------------------
 
@@ -122,35 +137,27 @@ Una vez más, nuestros 3 pasos:
 
 ------------------------------------------------------------------------
 
-1)  Descargamos el proyecto de RStudio jsPsychHelper:
+1) Instalamos jsPsychHelper:
 
 ```{r, eval=FALSE}
-usethis::use_course(url = "gorkang/jsPsychHelper", destdir = "~/Downloads/")
-# Select YES to delete zip
-
-#Si es la primera vez que abrimos jsPsychHelper: 
-source("setup/setup.R")
+remotes::install_github("gorkang/jsPsychHelpeR")
 ```
+
 
 ------------------------------------------------------------------------
 
-2)  Abrimos `run.R` y seguimos las instrucciones. En esencia:
+2)  Usando `run_initial_setup()`, se creará y abrirá un nuevo proyecto de RStudio con todo listo para correr la preparación de datos:
 
-    A) Averiguamos cual es nuestro número de protocolo:   
-    
-      - Si lo desconoces, es el primer número de los archivos de datos, antes del "_". Por ejemplo, **134**_Consent_original_2022-04-02T205622_18840434.csv -> número de protocolo 134  
-      
-    B) Ponemos los datos (archivos csv) en la carpeta `data/ID_PROTOCOLO` (**reemplazar ID_PROTOCOLO por el número de nuestro protocolo**.  
-    
-      + Si la carpeta `data/ID_PROTOCOLO` contiene algun archivo, borrar antes de copiar nuestros datos: Por ejemplo, si usas el 999, BORRA el archivo 999.zip que hay en `data/999` antes de copiar tus datos.  
-
-    C) Correr las líneas de abajo (**el parametro `pid` en `run_initial_setup()` tiene que tener tu número de protocolo**. Por ejemplo, si mi protocolo es el 134, `pid = 134`)  
 
 ```{r, eval=FALSE}
+jsPsychHelpeR::run_initial_setup(pid = '999', 
+                                 data_location = "~/Downloads/protocol999/.data", 
+                                 folder = "~/Downloads/jsPsychHelpeR999")
+```
 
-# Setup de nuestro sistema
-invisible(lapply(list.files("./R", full.names = TRUE, pattern = ".R$"), source))
-run_initial_setup(pid = 999, download_files = FALSE, download_task_script = FALSE)
+
+3) En el nuevo proyecto, tendremos que correr la preparación de datos. Puedes abrir el archivo `run.R`, donde encontrarás algunas instrucciones básicas.    
+```{r, eval=FALSE}
 
 # Corremos el pipeline de preparación de datos
 targets::tar_make()
@@ -160,7 +167,7 @@ targets::tar_make()
 ------------------------------------------------------------------------
 
 
-3)  Para ver el data frame final listo para el análisis
+4)  Para ver el data frame final listo para el análisis
 
 ```{r, eval=FALSE}
 
@@ -223,135 +230,49 @@ Ya estáis listas/os para enfrentaros al  [ejercicio FINAL](10-ejercicios.html#e
 
 Tenemos un buen número de tareas disponibles para usar (puedes verlas en el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks)). Si la tarea que necesitas no está disponible, puedes crearla usando una de las plantillas que encontrarás en [canonical_protocol_clean](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol_clean). Están preparadas para que puedas modificarlas fácilmente y crear tu propia tarea. Alternativamente, también puedes usar como punto de partida las [tareas que tenemos en jsPSychMaker](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks).
 
-Veamos como usar las plantillas de [canonical_protocol_clean](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol_clean) para crear nuestra tarea:
+Veamos como crear una nueva tarea a partir de documentos excel usando las plantillas disponibles. [Ver ayuda](https://gorkang.github.io/jsPsychR-manual/qmd/07-NEWtasks.html#create-tasks):
 
 ------------------------------------------------------------------------
 
-1)  Descargamos el proyecto de RStudio jsPsychMaker. En la Consola de RStudio:
+
+1) Instalamos jsPsychMaker:
 
 ```{r, eval=FALSE}
-usethis::use_course(url = "gorkang/jsPsychMaker", destdir = "~/Downloads/")
-# Select YES to delete zip
+remotes::install_github("gorkang/jsPsychMaker")
 ```
 
-2.  Ve a la carpeta `canonical_protocols_clean` del proyecto RStudio jsPsychMaker
+2) Copia las plantillas de tareas de ejemplo:
 
-3.  En la carpeta `tasks` tienes tareas que empiezan por `SHORNAMETASK`, por ejemplo:
+```{r, eval=FALSE}
+jsPsychMaker::copy_example_tasks(destination_folder = "~/Downloads/TEST")
+```
 
-    -   `SHORNAMETASKmultichoice.js`
 
-    -   `SHORNAMETASKslider.js`
+3)  Ve a la carpeta `~/Downloads/TEST` y borra todas las carpetas menos aquellas que correspondan al [plugin](https://www.jspsych.org/7.0/plugins/list-of-plugins/) que quieras usar. Por ejemplo, `Slider`.   
 
--   Elige el tipo de tarea que quieres, y modifica el archivo para adaptar las instrucciones y los ítems.
+Adapta `Slider.csv` y los .html con instrucciones a tu nueva tarea.  
+
+
+4) Si corres `create_protocol()` con los parámetros de abajo, se creará un nuevo protocolo con tu/tus tareas.  
+
+```{r, eval=FALSE}
+  jsPsychMaker::create_protocol(folder_tasks = "~/Downloads/TEST/", 
+                                folder_output = "~/Downloads/TEST/new_protocol", 
+                                launch_browser = TRUE)
+```
+
 
 ------------------------------------------------------------------------
 
-### Como adaptar la tarea
 
-#### Nombre de la tarea
-
-1.  Lo primero es elegir el nombre de la tarea, para ello, recuerda:
-    -   Generalmente será un acrónimo, breve, por ejemplo, EA.
-
-    -   El nombre NO debe contener espacios ni caracteres extraños. NO: (?!"#\$%&/=?¡¿;:\_.,-).
-
-    -   Puedes hacer una mínima verificación con esta función:
-
-        `janitor::make_clean_names("NOMBRE tarea!", case = "upper_lower")` : NOMBREtarea
-
-    -   Deber ser un nombre UNICO. Comprueba que no existe en:
-
-        -   [Tareas jsPsychR](https://docs.google.com/spreadsheets/d/1Eo0F4GcmqWZ1cghTpQlA4aHsc8kTABss-HAeimE2IqA/edit#gid=0)
-
-        -   [NUEVAS Tareas jsPsychR](https://docs.google.com/spreadsheets/d/1LAsyTZ2ZRP_xLiUBkqmawwnKWgy8OCwq4mmWrrc_rpQ/edit#gid=0)
-2.  Renombra el archivo para que coincida con el nombre de tu tarea
-
-#### Instrucciones
-
-Puedes tener tantas páginas de instrucciones como desees, simplemente, modifica la variables `pages: []` para que contenga lo que necesitas. Cada página de instrucciones estará separada por `,`:
-
-```{js}
-pages: [`pagina1`, `pagina2`, `pagina3`] 
-```
-
-Para darle formato tendrás que usar lenguaje [HTML](https://www.w3schools.com/html/html_formatting.asp).
-
-```{js}
-
-var instruction_screen_experiment = {
-    type: 'instructions',
-    pages: [`<p><left><b><big>NAME TASK</big></b><br/><br> Instrucciones detalladas de tarea con slider<br><br> Muchas gracias por tu colaboración.</p>`,
-    `<p>Pagina 2 de instrucciones. <BR><BR>Dale a siguiente para empezar la tarea</p>`],
-    data:{trialid: 'SHORNAMETASKslider_000', procedure: 'SHORNAMETASKslider'},
-    show_clickable_nav: true,
-    on_trial_start: function(){
-        bloquear_enter = 0;
-    }
-};
-```
-
-#### Items
-
-En las plantillas encontrarás dos ítems. Si necesitas mas de dos:
-
--   Copia la definición del ítem `var question01 = {…}`, más la línea `SHORNAMETASKslider.push(...)` tantas veces como ítems necesites
-
--   Incrementa en 1 los números de `question0X` y `SHORNAMETASKslider_00X` para que sean correlativos
-
-    -   Fijate que `question0X` aparece en dos lugares. En el ejemplo de abajo:
-
-        -   `var question01 = {`
-
-        -   `SHORNAMETASKslider.push(question01);`
-
--   Modifica el contenido de `stimulus:` en los ítems.
-
--   Modifica las `labels` o `options`
-
-    -   Recuerda que estamos usando javascript. Los vectores son: `labels: ["una cosa", "otra cosa"]`
-
-    -   Puedes usar buscar y reemplazar todos para hacerlo de un solo paso.
-
-Cada uno de los plugins de jsPsych tiene múltiples parámetros que podemos definir. Puedes ver la [ayuda de jsPsych aquí](https://www.jspsych.org/7.0/plugins/list-of-plugins/). Por ejemplo, si se trata de un slider, modificando la variable `labels: []` controlarás los anclajes de la escala. Si se trata de un multichoice, podrás establecer las alternativas con la variable `options: []`.
-
-```{js}
-//Un item
-var question01 = {
-  type: 'html-slider-response',
-  stimulus: "<div class='justified'>Una pregunta</div></br>", require_movement:true, required: true, min: 0, max: 4, slider_width: 500, slider_start: 2, step: 1, labels: ["No me describe bien", "Me describe muy bien"], button_label: "Siguiente",
-  data: {trialid: 'SHORNAMETASKslider_001', procedure: 'SHORNAMETASKslider'}
-};
-SHORNAMETASKslider.push(question01);
-```
-
-#### Task name & trialid's
-
-Por último, tienes que hacer una cosa muy sencilla:
-
-1.  Buscar y reemplazar (`CONTROL + F`) todas las instancias de `SHORNAMETASKslider` o `SHORNAMETASKmultichoice` por el nombre de tu tarea.
-
-------------------------------------------------------------------------
-
-#### Probar la tarea
-
-Ve a `config.js` y haz lo siguiente:
-
--    cambia la línea: `randomly_ordered_tasks_1 = ['SHORNAMETASKslider', 'SHORNAMETASKmultichoice'];` por `randomly_ordered_tasks_1 = ['NOMBREtarea'];`
-
--   Asegurate que `online = false;`
-
-Ahora ya puedes abrir el archivo `index.html` en tu navegador
-
--   Es recomendable usar el modo incógnito (en Google Chrome: `CONTROL  + ALT + N`)
-
-#### Corrección de la tarea
+### Corrección de la tarea
 
 Para cada tarea en jsPsychMaker, aspiramos a tener un script de corrección en jsPsychHelpeR. Si has creado una nueva tarea, por favor, completa la información de [NUEVAS Tareas jsPsychR](https://docs.google.com/spreadsheets/d/1LAsyTZ2ZRP_xLiUBkqmawwnKWgy8OCwq4mmWrrc_rpQ/edit#gid=0) para que podamos integrar tu tarea en el repositorio común.
 
 
 ### Ejercicio Crear nueva tarea {.ejercicio -}
 
-Ve al [ejercicio 2 del siguiente capítulo](ejercicios-7.html#ejercicio-2-1) 
+Ve al [ejercicio 2 del siguiente capítulo](10-ejercicios.html#ejercicio-2---opcional) 
 
 
 
@@ -361,22 +282,17 @@ Ve al [ejercicio 2 del siguiente capítulo](ejercicios-7.html#ejercicio-2-1)
 
 Tendremos que crear primero el script de preparación para la nueva tarea. En jsPsychHelpeR tienes una tarea que te ayudará con esto. Si has completado los datos en [NUEVAS Tareas jsPsychR](https://docs.google.com/spreadsheets/d/1LAsyTZ2ZRP_xLiUBkqmawwnKWgy8OCwq4mmWrrc_rpQ/edit#gid=0), el proceso será muy sencillo.
 
-1)  Descargamos el proyecto de RStudio jsPsychHelper. En la Consola de RStudio:
+
+1) Instalamos jsPsychHelper:
 
 ```{r, eval=FALSE}
-usethis::use_course(url = "gorkang/jsPsychHelper", destdir = "~/Downloads/")
-# Select YES to delete zip
-
-#Si es la primera vez que abrimos jsPsychHelper: 
-source("setup/setup.R")
-
+remotes::install_github("gorkang/jsPsychHelpeR")
 ```
 
 2)  Creamos el nuevo archivo `prepare_NOMBRETAREA()`:
 
 ```{r, eval=FALSE}
-invisible(lapply(list.files("./R", full.names = TRUE, pattern = ".R$"), source))
-create_new_task(short_name_task = "NAMETASK", get_info_googledoc = TRUE)
+jsPsychHelpeR::create_new_task(short_name_task = "NAMETASK", get_info_googledoc = TRUE)
 ```
 
 Esta función:

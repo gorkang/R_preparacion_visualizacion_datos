@@ -7,6 +7,34 @@
 source("../_common.R")
 ```
 
+
+<!-- ## Ejercicio 1 -->
+
+<!-- Crea un script en el que hagas lo siguiente: -->
+
+<!-- -   Cargar librerías necesarias -->
+<!-- -   Importar datos -->
+<!-- -   Preparar datos -->
+<!-- -   Crear gráfica -->
+<!-- -   Crear tabla -->
+
+<!-- Tendrás que mostrar como corre el script con una sesión limpia de RStudio (CONTROL + SHIFT + F10) -->
+
+<!-- #### Notas {.ejercicio .unnumbered} -->
+
+<!-- (importar datos): Los datos deberían ser, idealmente, de un proyecto en el que estés trabajando. Si no tienes datos disponibles, puedes encontrar bases de datos abiertas de varias maneras: -->
+
+<!-- -   Tidytuesday: <https://github.com/rfordatascience/tidytuesday> -->
+<!-- -   Buscando en Google Scholar papers que comparten sus datos: <https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=data+available+%22osf.io%22+psychology&btnG=> -->
+<!-- -   Buscando directamente en Open Science Foundation: <https://osf.io/> -->
+
+<!-- (preparación de datos): Algunos ejemplos de preparación de datos: renombrar variables, filtrar, computar nuevas variables, combinar bases... -->
+
+<!-- (gráfica): Algunos ejemplos de gráficas: distribución de variable/s, relación entre variables, ... -->
+
+<!-- (tabla): Algunos ejemplos de tablas: promedios por condición, media, mediana, max y min para algunas variables claves... -->
+
+
 El objetivo **evaluable** de este workshop es escribir CONJUNTAMENTE un mini-paper (tan sólo título, abstract, método y resultados) en inglés, en formato APA usando {papaja} o algún formato de {rticles}.  
 
 

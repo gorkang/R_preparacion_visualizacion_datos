@@ -8,9 +8,21 @@ source("../_common.R")
 
 ---  
 
-#### Paquetes para este capítulo {-}
+### Paquetes para este capítulo {.parameters -} 
 
-Para poder ejecutar en tu ordenador el código de los ejemplos y ejercicios de este capítulo vas a necesitar los paquetes siguientes. Te recomiendo que abras un script de R, pegues estas líneas al principio y las ejecutes (CNTRL + ENTER para ejecutar linea a linea).    
+Para poder ejecutar en tu ordenador el código de los ejemplos y ejercicios de este capítulo vas a necesitar los paquetes del recuadro siguiente.  
+
+Cuando empecemos **cada capítulo**:  
+
+- Abre un script de R y guardalo con el nombre del capítulo: `capitulo1.R`  
+
+- Pega las líneas de abajo en el script  
+
+- Ejecútalas: CNTRL + ENTER para ejecutar linea a linea  
+
+
+### {-}  
+
 
 ```{r setup, echo=TRUE}
 
@@ -405,17 +417,22 @@ Los ingredientes esenciales de una gráfica son:
 
 ---  
 
-### Mi primera gráfica 1-2-3
+#### Mi primera gráfica 1-2-3
 
-Para crear una gráfica con ggplot, tenemos que indicar donde están nuestros datos, qué mostraremos en el eje `x` e `y`, además de que geometrias queremos (`geoms`).  Usaremos `+` para sumar instrucciones, con una lógica de capas superpuestas.  
+Para crear una gráfica con ggplot, tenemos que:  
+
+- indicar donde están nuestros datos y que mostraremos en los ejes `x` e `y`  
+- añadir la o las geometrias (`geoms`) que queramos  
+
+Usaremos `+` para sumar instrucciones, con una lógica de capas superpuestas.  
 
 Por ejemplo:  
 
-1) Indicamos los datos y coordenadas: `ggplot(data = mpg, aes(x = displ, y = hwy))`  
+A) Indicamos los datos y coordenadas: `ggplot(data = mpg, aes(x = displ, y = hwy))`  
 
-2) Añadimos el `geom` de puntos para mostrar la relación entre x e y: ` + geom_point()`  
+B) Añadimos el `geom` de puntos para mostrar la relación entre x e y: ` + geom_point()`  
 
-3) Añadimos un segundo `geom` para trazar  una línea de tendencia: `+ geom_smooth()`  
+C) Añadimos un segundo `geom` para trazar  una línea de tendencia: `+ geom_smooth()`  
 
 
 ```{r geoms-example-01, echo=FALSE}
@@ -438,7 +455,7 @@ Por ejemplo:
     geom_smooth()")
 
 
-  cowplot::plot_grid(plot1, plot2, plot3, nrow = 1)
+  cowplot::plot_grid(plot1, plot2, plot3, nrow = 1, labels = c("A", "B", "C"))
   
 ```
 
@@ -554,7 +571,15 @@ Empecemos a cambiar parámetros de nuestro gráfico inicial:
 
 #### Ejercicios {.ejercicio -}
 
-Usando como base el plot del ejercicio anterior (GDP x población), ¿podrías hacer lo siguiente?  
+Usando como base el plot siguiente (GDP x población):  
+
+```
+ggplot(gapminder, aes(gdpPercap, pop)) + 
+    geom_point()
+```
+
+
+¿Podrías hacer lo siguiente?:  
 
 - Colorear los puntos por continente
 - Tamaño del punto 4
@@ -614,15 +639,14 @@ En este ejemplo usamos la variable `continent` para que cada asignar una forma d
 
 #### Linetype  
 
-**Códigos para los distintos estilos de linea**:  
 
-###### {.parameters -}    
+###### Códigos para los distintos estilos de linea {.parameters -}    
 
 ![SOURCE: http://sape.inf.usi.ch/quick-reference/ggplot2/linetype](../data/images/ggplot2-linetype-identity.png)  
 
 ###### {-}    
 
-<BR>
+
 Podemos definir directamente el tipo de línea que queremos en `geom_line()`:  
 
 ```{r linetype-1}
@@ -643,26 +667,25 @@ O que el tipo de línea dependa de una variable:
 ```
 
 
-## Geoms
+### Geoms
 
 Una de las cosas más difíciles cuando nos enfrentamos a nuevos datos es elegir el método más efectivo para visualizarlos. Hay varios recursos interesantes sobre [cómo elegir una gráfica](https://github.com/widged/data-for-good/wiki/Visualisation-::-Choosing-a-chart). En esta sección veremos distintos tipos de geometría, o `geoms_()`.  
 
 ---  
 
 
-**Algunos tipos de geoms**  
 
-Para una lista exhaustiva ver el [manual de ggplot2](https://ggplot2.tidyverse.org/reference/).  
+###### Algunos tipos de geoms {.parameters -}    
 
-###### {.parameters -}    
+Para una lista exhaustiva ver el [manual de ggplot2](https://ggplot2.tidyverse.org/reference/#geoms).  
 
-![SOURCE: https://nbisweden.github.io/RaukR-2019/ggplot/presentation/ggplot_presentation_assets/geoms.png](../data/images/geoms.png)  
+![SOURCE: https://nbisweden.github.io/RaukR-2019/ggplot/presentation/ggplot_presentation_assets/geoms.png](../data/images/geoms.png)
 
 <!-- `geom_abline()`, `geom_area()`, `geom_bar()`, `geom_bin2d()`, `geom_blank()`, `geom_boxplot()`, `geom_col()`, `geom_contour()`, `geom_contour_filled()`, `geom_count()`, `geom_crossbar()`, `geom_curve()`, `geom_density()`, `geom_density2d()`, `geom_density2d_filled()`, `geom_density_2d()`, `geom_density_2d_filled()`, `geom_dotplot()`, `geom_errorbar()`, `geom_errorbarh()`, `geom_freqpoly()`, `geom_function()`, `geom_hex()`, `geom_histogram()`, `geom_hline()`, `geom_jitter()`, `geom_label()`, `geom_line()`, `geom_linerange()`, `geom_map()`, `geom_path()`, `geom_point()`, `geom_pointrange()`, `geom_polygon()`, `geom_qq()`, `geom_qq_line()`, `geom_quantile()`, `geom_raster()`, `geom_rect()`, `geom_ribbon()`, `geom_rug()`, `geom_segment()`, `geom_sf()`, `geom_sf_label()`, `geom_sf_text()`, `geom_smooth()`, `geom_spoke()`, `geom_step()`, `geom_text()`, `geom_tile()`, `geom_violin()`, `geom_vline()`   -->
 
-<BR> 
+###### {-}
 
-### geom_point y geom_jitter
+#### geom_point y geom_jitter
 
 Si queremos un gráfico de dispersión o scatterplot, podemos usar el `geom_point()`  
 
@@ -679,7 +702,7 @@ En algunos casos, tenemos muchos puntos que se superponen. Si usamos `geom_jitte
 ```
 
 
-### geom_smooth
+#### geom_smooth
 
 Podemos usar líneas de tendencia con `geom_smooth()`. El `method` por defecto es [loess](https://en.wikipedia.org/wiki/Local_regression), pero podemos usar otros métodos (e.g. `geom_smooth(method = "lm")` para usar una regresión lineal).  
 
@@ -711,7 +734,7 @@ Recuerda que las funciones que usamos (todo lo que contiene `()` e.g. `geom_smoo
 ```
 
 
-### Ejercicios {.ejercicio -}
+#### Ejercicios {.ejercicio -}
 
 Usando como base el plot de la sección [Shape](#shape):  
 
@@ -751,7 +774,7 @@ ggplot(mpg, aes(displ, hwy)) +
 
 Además de generar uno a uno los 6 plots, serías capaz de generar la figura que se ve abajo? Esto es, un plot que incluye los 6 plots juntos.  
 
-<details><summary>Solucion para combinar plots: ![](../data/images/hint.png)</summary><span style="color: orange;">En la sección [Combinando gráficas](#combinando-graficas) veras un ejemplo del uso de la función cowplot::plot_grid()</span></details>  
+<details><summary>Solucion para combinar plots: ![](../data/images/hint.png)</summary><span style="color: orange;">En la sección [Combinando gráficas](02-visualizacion-avanzada.html#combinando-graficas) veras un ejemplo del uso de la función cowplot::plot_grid()</span></details>  
 
 
 
@@ -795,9 +818,10 @@ cowplot::plot_grid(plot1, plot2, plot3, plot4, plot5, plot6,
 
 ```
 
-<BR> 
+#### {-}
 
-### geom_boxplot y geom_violin
+
+#### geom_boxplot y geom_violin
 
 Podemos crear diagramas de cajas (boxplots) con `geom_boxplot` o violines con `geom_violin` para visualizar como cambian los datos por grupo.  
 
@@ -819,7 +843,7 @@ Podemos crear diagramas de cajas (boxplots) con `geom_boxplot` o violines con `g
 ```
 
 
-### geom_histogram y geom_bar {#histogramas}
+#### geom_histogram y geom_bar {#histogramas}
 
 Podemos usar histogramas `geom_histogram()` con variables continuas. Como puedes ver, ahora solo le pasamos una variable a `aes()`  
 
@@ -836,7 +860,7 @@ O si tenemos variables categóricas, `geom_bar()`.
 ```
 
 
-### geom_density
+#### geom_density
 
 Para visualizar distribuciones (cuando tenemos muchos datos), podemos usar `geom_density()`.  
 
@@ -849,7 +873,7 @@ Para visualizar distribuciones (cuando tenemos muchos datos), podemos usar `geom
 ```
 
 
-### Ejercicio {.ejercicio -}
+#### Ejercicio {.ejercicio -}
 
 Añadiendo un parámetro a la gráfica de arriba, podemos transformarla en las versiones de abajo. ¿Podrías hacerlo? (recuerda que poníendote encima de `geom_density()` y tecleando `F1` puedes ver la ayuda de la función).  
 
@@ -873,7 +897,7 @@ ggplot(gapminder, aes(lifeExp, fill = continent)) +
 ```
 
 
-### geom_density_ridges
+#### geom_density_ridges
 
 Uno de mis geoms favoritos para comparar distribuciones es `geom_density_ridges`:   
 
@@ -898,7 +922,7 @@ Especialmente porque podemos incluir en el mismo gráfico información sobre dis
 
 
 
-### Ejercicios {.ejercicio -}
+#### Ejercicios {.ejercicio -}
 
 Usando como base el plot de la seccion [geom_histogram()](#histogramas):  
 
@@ -936,6 +960,64 @@ ggplot(diamonds, aes(cut, fill = clarity)) +
   geom_bar()
 
 ```
+
+#### {-}
+
+
+### Personalización básica
+
+Una gráfica sin elementos básicos como un título no resulta tan útil. Usaremos la función `labs()` para incluir o editar los siguientes elementos:
+
+- `title`: título de la gráfica
+- `subtitle`: subtítulo
+- `caption`: pie de gráfica (abajo a la derecha)
+- `tag`: etiqueta de la gráfica (arriba a la izquierda)
+- `x`: eje horizontal
+- `y`: eje vertical
+- `alt`: alt-text, importante para que los lectores de pantalla usados por personas ciegas describan las gráficas
+
+
+En el siguiente ejemplo, vamos a personalizar la gráfica del ejercicio anterior:  
+
+```{r, personalizacion-basica}
+ggplot(diamonds, aes(cut, fill = clarity)) + 
+  geom_bar() +
+  labs(title = "How many diamons do we have?",
+       subtitle = "A lot", 
+       caption = "Source, the ggplot2::diamonds dataset",
+       tag = "a)",
+       x = "How many diamonds",
+       y = "Type of cut of the diamond", 
+       alt = "Alt text for the plot. Very useful for blind people"
+       )
+```
+
+
+
+
+
+#### Ejercicio {.ejercicio -}
+
+Usando como base este plot:  
+
+```{r ejercicio_personalizacion_basica, echo=TRUE}
+   ggplot(mpg, aes(displ, hwy)) + 
+    geom_point() +
+    geom_smooth(se = FALSE) +
+    theme_grey()
+```
+
+Personalizalo añadiendo y modificando: 
+
+- título  
+- subtítulo  
+- caption  
+- ejes x e y
+
+
+
+#### {-}
+
 
 
 ## Bibliografía {.bibliografia -}
