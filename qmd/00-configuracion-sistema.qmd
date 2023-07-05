@@ -6,7 +6,7 @@ Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además
 
 ### **(A)** Instalar R {.unnumbered}
 
-[R](https://www.r-project.org/), es un lenguaje de programación especializado en la computación estadística y visualización de datos. Es recomendable tener instalada la última versión de R. Puedes usar uno de los enlaces siguientes:
+[R](https://www.r-project.org/), es un lenguaje de programación especializado en la computación estadística y visualización de datos. Es recomendable tener instalada la última versión de R (necesitarás al menos la versión 4.2). Puedes usar uno de los enlaces siguientes:
 
 -   **Windows**: [Descargar e instalar R para Windows](https://cran.r-project.org/bin/windows/base/)
 
@@ -78,14 +78,16 @@ Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes
 
 
 
-**Instalar Quarto**
+### Otras dependencias a instalar
+
+#### **Instalar Quarto**
 
 Quarto es un sistema de publicación de código abierto que funciona con diferentes lenguajes de programación como R o python. Lo usaremos a partir del capítulo 6.    
 
 [Descarga e instala Quarto](https://quarto.org/docs/get-started/)  
 
 
-**Instalar latex**
+#### **Instalar latex**
 
 Para generar pdf’s necesitaremos tener instalado Latex. tinytex nos ayudará a simplificar el proceso:
 
@@ -93,6 +95,38 @@ Para generar pdf’s necesitaremos tener instalado Latex. tinytex nos ayudará a
   if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
   tinytex::install_tinytex() # Llevará un buen rato
 ```
+
+
+#### Docker
+
+Necesitaremos [Docker](https://www.docker.com/) para simular datos de participantes online.
+
+Instala Docker en:
+  -   [Linux](https://docs.docker.com/desktop/install/linux-install/)  
+  -   [Mac](https://docs.docker.com/desktop/install/mac-install/)  
+  -   [Windows](https://docs.docker.com/desktop/install/windows-install/)  
+
+
+Adicionalmente: 
+
+- **Windows**: Update wsl (in a command prompt): wsl - update
+
+- **Ubuntu**: 
+    + En un terminal: `sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev docker`
+    + Si los monos hacen su trabajo pero no aparecen los csv's, asegúrate que el usuario `docker` tiene acceso al directorio ~/Downloads
+
+Para más detalles, puedes consultar [jsPsychMonkeys setup](https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#setup)
+
+
+
+#### Git
+
+Ver instrucciones para [Windows](https://happygitwithr.com/install-git.html#install-git-windows), [Mac](https://happygitwithr.com/install-git.html#macos) y [Linux](https://happygitwithr.com/install-git.html#linux).  
+
+|   <span style = "font-size: 11px;">Importante: en el paso *Adjusting your PATH environment* en en Windows, selecciona *Git from the command line and also from 3rd-party software*</span>  
+
+
+
 
 ------------------------------------------------------------------------
 

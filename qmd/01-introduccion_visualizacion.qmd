@@ -24,7 +24,9 @@ Cuando empecemos **cada capítulo**:
 ### {-}  
 
 
-```{r setup, echo=TRUE}
+```{r}
+#| label: setup
+#| echo: true
 
 if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
@@ -88,17 +90,20 @@ hipergeometric_formula <- function(temas_totales = 80,
 }
 
 temas_totales = 80
-data_plot = 1:temas_totales %>% purrr::map_dfr(~ hipergeometric_formula(temas_totales = temas_totales, temas_estudiados = .x) %>% as_tibble() %>% mutate(N = .x))
+data_plot = 1:temas_totales |> 
+  purrr::map_dfr(~ hipergeometric_formula(temas_totales = temas_totales, temas_estudiados = .x) |> 
+                   tibble::as_tibble()  |> 
+                   dplyr::mutate(N = .x))
 
 
 plotly::ggplotly(
-  ggplot(data_plot, aes(N, value)) +
-    geom_line() +
-    geom_vline(xintercept = 30, linetype = "dashed") +
-    geom_hline(yintercept = 1, linetype = "dashed") +
-    scale_x_continuous(n.breaks = 10) +
-    scale_y_continuous(breaks = seq(0, 1, .05), labels = scales::percent(x = seq(0, 1, .05), accuracy = 1)) +
-    labs(title = "Probabilidad de que uno de los temas estudiados aparezca",
+  ggplot2::ggplot(data_plot, ggplot2::aes(N, value)) +
+    ggplot2::geom_line() +
+    ggplot2::geom_vline(xintercept = 30, linetype = "dashed") +
+    ggplot2::geom_hline(yintercept = 1, linetype = "dashed") +
+    ggplot2::scale_x_continuous(n.breaks = 10) +
+    ggplot2::scale_y_continuous(breaks = seq(0, 1, .05), labels = scales::percent(x = seq(0, 1, .05), accuracy = 1)) +
+    ggplot2::labs(title = "Probabilidad de que uno de los temas estudiados aparezca",
          x = "Temas estudiados",
          y = "Probabilidad"))
 

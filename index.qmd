@@ -2,7 +2,7 @@
 
 El objetivo de este seminario es aprender a usar [R](https://www.r-project.org/) para preparar y visualizar datos, además de generar reportes reproducibles. Está pensado para alumnos de postgrado con conocimientos básicos de programación.  
 
-A lo largo del seminario aprenderemos a usar [jsPsychR](https://gorkang.github.io/jsPsychR-manual/index.html), un conjunto de herramientas creado en el [CSCN](https://cscn.uai.cl/) para ayudar a crear paradigmas experimentales con [jsPsych](https://www.jspsych.org/), simular participantes, y estandarizar el proceso de preparación y análisis de datos.  
+También conoceremos [jsPsychR](https://gorkang.github.io/jsPsychR-manual/index.html), un conjunto de herramientas creado en el [CSCN](https://cscn.uai.cl/) para ayudar a crear paradigmas experimentales con [jsPsych](https://www.jspsych.org/), simular participantes, y estandarizar el proceso de preparación y análisis de datos.  
 
 [R](https://www.r-project.org/) es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.  
 

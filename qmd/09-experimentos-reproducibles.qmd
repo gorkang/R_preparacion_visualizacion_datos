@@ -52,7 +52,7 @@ remotes::install_github("gorkang/jsPsychMaker")
 
 ------------------------------------------------------------------------
 
-2) Creamos un protocolo, indicándo que tareas queremos en `canonical_tasks`. Para ver un listado de las tareas disponibles: `jsPsychMaker::list_available_tasks()`
+2) Creamos un protocolo, indicando que tareas queremos en `canonical_tasks`. Para ver un listado de las [tareas disponibles](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) : `jsPsychMaker::list_available_tasks()`
 
 
 ```{r, eval=FALSE}
@@ -61,15 +61,11 @@ jsPsychMaker::create_protocol(canonical_tasks = c("AIM", "EAR", "IRI"),
                               launch_browser = TRUE)
 ```
 
-------------------------------------------------------------------------
-
-3)  Editamos la configuración del protocolo en la carpeta que hemos indicado en `folder_output`:
-
--   En `config.js` revisamos la sección `// Main parameters` para asegurarnos que todo esta bien (e.g. `online = false;`)  
+- Podemos editar la configuración del protocolo en la carpeta que hemos indicado en `folder_output`, abriendo el archivo `config.js`. Puedes consultar la ayuda sobre la [configuración de experimentos](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#experiment-configuration).  
 
 ------------------------------------------------------------------------
 
-4)  El experimento esta listo para ser utilizado localmente. Podemos hacerlo ejecutando `index.html`
+3)  El experimento esta listo para ser utilizado localmente. Si `launch_browser = TRUE` se abrirá el navegador. En cualquier caso, podemos iniciar el experimento abriendo `index.html` en tu navegador preferido.  
 
 ------------------------------------------------------------------------
 
