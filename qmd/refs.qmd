@@ -2,54 +2,18 @@
 
 En la documentación y ejercicios de este workshop se usaron los paquetes que se pueden ver abajo. Este listado se creó automáticamente usando [{grateful}](https://github.com/Pakillo/grateful):  
 
+```{r jsPsychR_citations, include=FALSE}
+# So they will be cited by grateful
+library(jsPsychHelpeR)
+library(jsPsychMaker)
+library(jsPsychMonkeys)
+```
 
-- base [@base]
-- knitr [@knitr]
-- stargazer [@stargazer]
-- rticles [@rticles]
-- renv [@renv]
-- remotes [@remotes]
-- papaja [@papaja]
-- easystats [@easystats]
-- estimate [@estimate]
-- see [@see]
-- report [@report]
-- correlation [@correlation]
-- parameters [@parameters]
-- bayestestR [@bayestestR]
-- performance [@performance]
-- insight [@insight]
-- corrr [@corrr]
-- afex [@afex]
-- lme4 [@lme4]
-- Matrix [@Matrix]
-- hexbin [@hexbin]
-- FFTrees [@FFTrees]
-- caret [@caret]
-- lattice [@lattice]
-- janitor [@janitor]
-- gsheet [@gsheet]
-- DT [@DT]
-- writexl [@writexl]
-- readODS [@readODS]
-- here [@here]
-- haven [@haven]
-- readxl [@readxl]
-- plotly [@plotly]
-- ggridges [@ggridges]
-- ggthemes [@ggthemes]
-- gganimate [@gganimate]
-- gapminder [@gapminder]
-- esquisse [@esquisse]
-- cowplot [@cowplot]
-- forcats [@forcats]
-- stringr [@stringr]
-- dplyr [@dplyr]
-- purrr [@purrr]
-- readr [@readr]
-- tidyr [@tidyr]
-- tibble [@tibble]
-- ggplot2 [@ggplot2]
-- tidyverse [@tidyverse]
+```{r grateful, include=TRUE, eval=TRUE}
+
+grateful::cite_packages(pkgs = "All", output = "paragraph", out.format = "Rmd", include.RStudio = FALSE, out.dir = "../data/bib/")
+
+```
+
 
 ## References  {.bibliografia -}

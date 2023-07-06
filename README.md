@@ -24,15 +24,3 @@ Al finalizar el curso deberíamos ser capaces de:
 ## Como empezar
 
 Consulta las [instrucciones sobre como empezar en el libro online del workshop](https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html#como-empezar).  
-
-
-### Whoooot?
-
-Si las instrucciones del manual no tienen sentido:  
-
-1. Descargate este workshop (`Download ZIP`; ver abajo)
-2. Descomprime el ZIP  
-3. Abre el archivo: `R_preparacion_visualizacion_datos-master/_book/preparando-sistema.html`  
-4. Sigue las instrucciones que ahí aparecen  
-
-![](../data/images/download_repo_manually.png)  

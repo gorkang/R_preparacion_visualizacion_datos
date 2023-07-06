@@ -175,24 +175,12 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
 <li>
-<a href="#ejercicio-1" id="toc-ejercicio-1" class="nav-link active" data-scroll-target="#ejercicio-1"><span class="header-section-number">10.1</span> Ejercicio 1</a>
-  <ul>
-<li><a href="#notas" id="toc-notas" class="nav-link" data-scroll-target="#notas">Notas</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#ejercicio-2---opcional" id="toc-ejercicio-2---opcional" class="nav-link" data-scroll-target="#ejercicio-2---opcional"><span class="header-section-number">10.2</span> Ejercicio 2 - Opcional</a>
-  <ul>
-<li><a href="#notas-1" id="toc-notas-1" class="nav-link" data-scroll-target="#notas-1">Notas</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#ejercicio-final" id="toc-ejercicio-final" class="nav-link" data-scroll-target="#ejercicio-final"><span class="header-section-number">10.3</span> Ejercicio FINAL</a>
+<a href="#ejercicio-final" id="toc-ejercicio-final" class="nav-link active" data-scroll-target="#ejercicio-final"><span class="header-section-number">10.1</span> Ejercicio FINAL</a>
   <ul>
 <li>
 <a href="#importante" id="toc-importante" class="nav-link" data-scroll-target="#importante">IMPORTANTE</a>
   <ul>
-<li><a href="#notas-2" id="toc-notas-2" class="nav-link" data-scroll-target="#notas-2">Notas</a></li>
+<li><a href="#notas" id="toc-notas" class="nav-link" data-scroll-target="#notas">Notas</a></li>
   </ul>
 </li>
   </ul>
@@ -216,51 +204,41 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header><section id="ejercicio-1" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="ejercicio-1">
-<span class="header-section-number">10.1</span> Ejercicio 1</h2>
-<p>Diseña un <strong>sencillo</strong> experimento:</p>
+</header><section id="ejercicio-final" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="ejercicio-final">
+<span class="header-section-number">10.1</span> Ejercicio FINAL</h2>
+<p>Para el ejercicio final (evaluable), usaremos el protocolo que has creado en el ejercicio anterior. Usando datos simulados, con la ayuda de jsPsychHelpeR vamos a crear un proyecto de RStudio que procese los datos automáticamente, y adaptar un archivo Rmarkdown para generar un reporte automatizado con tablas, gráficas y una descripción semi-automática de nuestros resultados simulados.</p>
+<ol type="1">
+<li>El primer paso consiste en obtener datos de participantes virtuales.</li>
+</ol>
 <ul>
-<li>Debes usar alguna de las <a href="https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks">tareas que aparecen en en manual</a> (máximo 2) <!-- -   Además, debes diseñar una nueva tarea **muy sencilla** o adaptar una nueva escala -->
+<li>Podéis intentarlo <a href="09-experimentos-reproducibles.html#jspsychmonkeys-como-simular-datos">simulando datos</a>
 </li>
-<li>La duración total del “experimento” no debería superar los 5 minutos</li>
+<li>Si no os funciona jsPsychMonkeys en vuestro sistema, el profesor os ayudará a simular datos para vuestro experimento.</li>
+<li>Alternativamente, podéis correr el experimento un par de veces (abriendo el index.html)</li>
 </ul>
-<p>Tendrás que hacer una breve presentación contándonos el diseño experimental.</p>
-<section id="notas" class="level4 ejercicio unnumbered"><h4 class="ejercicio unnumbered anchored" data-anchor-id="notas">Notas</h4>
-<p>(tareas jsPsychMaker): Usa un máximo de 2 tareas<br><!-- (tarea nueva): Puedes diseñar una tarea con una sola pregunta para dos condiciones experimentales, o adaptar un cuestionario breve ya existente (que no tengamos en jsPsychMaker). --></p>
-<hr></section></section><section id="ejercicio-2---opcional" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="ejercicio-2---opcional">
-<span class="header-section-number">10.2</span> Ejercicio 2 - Opcional</h2>
-<p>Crea la siguiente tarea en jsPsychMaker:</p>
+<ol start="2" type="1">
+<li>Una vez tengamos los datos:</li>
+</ol>
 <ul>
+<li><p>Crearemos un proyecto que procesará los datos automáticamente usando <a href="09-experimentos-reproducibles.html#jspsychhelper-como-preparar-datos">jsPsychHelpeR - como preparar datos</a></p></li>
 <li>
-<a href="https://sci-hub.ru/10.1080/10705500802222972">The Brief Resilience Scale</a> (PDF version inglesa), o en su <a href="https://scielo.isciii.es/scielo.php?script=sci_arttext&amp;pid=S0212-97282021000200006&amp;lng=es&amp;tlng=es">versión española</a>
-</li>
-</ul>
-<section id="notas-1" class="level4 ejercicio unnumbered"><h4 class="ejercicio unnumbered anchored" data-anchor-id="notas-1">Notas</h4>
-<p>(tareas jsPsychMaker): Ver instrucciones en <a href="#experimentos-reproducibles">experimentos-reproducibles</a></p>
-<p>Si prefieres puedes implementar una tarea distinta. Los únicos requisitos son que sea breve y sencilla.</p>
-<hr></section></section><section id="ejercicio-final" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="ejercicio-final">
-<span class="header-section-number">10.3</span> Ejercicio FINAL</h2>
-<p>Si no os funciona jsPsychMonkeys en vuestro sistema, el profesor os ayudará a simular datos para vuestro experimento con jsPsychMonkeys.</p>
-<p>Una vez tengamos los datos:</p>
+<p><a href="09-experimentos-reproducibles.html#como-crear-un-reporte-dentro-del-jspsychhelper">Crearemos un reporte en Rmd como parte del pipeline de jsPsychHelpeR</a> donde incluiremos:</p>
 <ul>
-<li><p>Crearemos un proyecto de jsPsychHelpeR que procesará los datos automáticamente</p></li>
-<li>
-<p>Crearemos un reporte en Rmd como parte del pipeline de jsPsychHelpeR donde incluiremos:</p>
-<ul>
-<li><p>Tabla/s con descriptivos</p></li>
-<li><p>Gráfico/s con resultado</p></li>
-<li><p>Tabla/s con resultados de un análisis sencillo</p></li>
+<li><p>Tabla/s con descriptivos <a href="06-analisis-datos-inferencial.html#tablas-descriptivos">ver ayuda</a></p></li>
+<li><p>Gráfico/s con resultado <a href="01-introduccion_visualizacion.html#visualización-de-datos-con-ggplot2">ver ayuda</a> <a href="02-visualizacion-avanzada.html">y ayuda</a></p></li>
+<li><p>Tabla/s con resultados de un análisis sencillo <a href="06-analisis-datos-inferencial.html#tablas-resultados-inferenciales">ver ayuda</a></p></li>
 <li><p>Una frase reportando resultados del análisis (usando <a href="06-analisis-datos-inferencial.html#texto-inline">Texto inline de gtsummary</a>)</p></li>
 </ul>
 </li>
 </ul>
 <p>El proyecto tiene que correr en cualquier computador.</p>
 <section id="importante" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="importante">IMPORTANTE</h3>
-<p>La nota del workshop estará basada en el resultado de esta tarea.</p>
+<p><strong>La nota del workshop estará basada en el resultado de esta tarea.</strong></p>
 <p>Tendréis que compartir el proyecto completo con el profesor, y él deberá poder correrlo y ver como resultado el reporte en pdf incluyendo los elementos detallados arriba.</p>
-<section id="notas-2" class="level4 ejercicio unnumbered"><h4 class="ejercicio unnumbered anchored" data-anchor-id="notas-2">Notas</h4>
-<p>(simulación datos): El profesor os ayudara con esto y/o os compartirá los datos<br>
-(procesamiento datos): Ver <a href="https://gorkang.github.io/jsPsychR-manual/qmd/02-QuickGuide.html#QuickGuidejsPsychHelpeR">el manual de jsPsychR</a></p>
+<section id="notas" class="level4 ejercicio unnumbered"><h4 class="ejercicio unnumbered anchored" data-anchor-id="notas">Notas</h4>
+<p>(simulación datos): Sigue las instrucciones de <a href="09-experimentos-reproducibles.html#jspsychmonkeys-como-simular-datos">simulando datos</a><br></p>
+<p>(preparando datos): Ver <a href="09-experimentos-reproducibles.html#jspsychhelper-como-preparar-datos">como preparar datos</a><br></p>
+<p>Para más información, ver <a href="https://gorkang.github.io/jsPsychR-manual/qmd/02-QuickGuide.html#QuickGuidejsPsychHelpeR">el manual de jsPsychR</a><br></p>
 
 
 </section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

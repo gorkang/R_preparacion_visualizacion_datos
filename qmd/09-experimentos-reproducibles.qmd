@@ -8,7 +8,20 @@ source("../_common.R")
 ```
 
 
-![](../data/images/jsPsych-trinity.png)  
+
+#### Paquetes para este capítulo {-}
+
+```{r}
+#| label: setup
+#| echo: true
+
+if (!require('jsPsychMaker')) remotes::install_github("gorkang/jsPsychMaker"); library('jsPsychMaker')
+if (!require('jsPsychMonkeys')) remotes::install_github("gorkang/jsPsychMonkeys"); library('jsPsychMonkeys')
+if (!require('jsPsychHelpeR')) remotes::install_github("gorkang/jsPsychHelpeR"); library('jsPsychHelpeR')
+
+```
+
+---  
 
 
 En el CSCN usamos distintas tecnologías para desarrollar experimentos. Algunos ejemplos son [Psychopy](https://www.psychopy.org/), [Qualtrics](https://www.qualtrics.com/), [Limesurvey](https://www.limesurvey.org/), [jsPsych](https://www.jspsych.org/plugins/jspsych-preload/), [Gorilla](https://gorilla.sc/), etc. Cada una de estas tiene ventajas y desventajas, y en general es importante tener en cuenta aspectos pragmáticos a la hora de adoptar una u otra tecnología (costo económico, tipo de experimento [EEG/conductual, laboratorio/online]).
@@ -17,13 +30,18 @@ Algunos de nosotros hemos optado principalmente por [jsPsych](https://www.jspsyc
 
 En los últimos años, hemos empezado a trabajar en un conjunto de herramientas ([jsPsychR](https://gorkang.github.io/jsPsychR-manual/)) para crear experimentos usando la librería [jsPsych](https://www.jspsych.org/) con [jsPsychMaker](https://github.com/gorkang/jsPsychMaker), simular participantes con [jspsychMonkeys](https://github.com/gorkang/jsPsychMonkeys) y estandarizar y automatizar la preparación de datos con [jsPsychHelpeR](https://github.com/gorkang/jsPsychHelpeR).
 
+
+![](../data/images/jsPsych-trinity.png)  
+
+
 Nuestro objetivo final es tener un gran número de tareas disponibles para ser usadas en el repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker). Cada una de estas tareas funcionará en [jspsychMonkeys](https://github.com/gorkang/jsPsychMonkeys) para crear participantes virtuales. Cada tarea tendrá un script hermano en [jsPsychHelpeR](https://github.com/gorkang/jsPsychHelpeR) para automatizar la preparación de datos.
 
 Puedes consultar [las tareas disponibles en el manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) para más detalles.
 
+
 ## Pipeline experimental abierto y reproducible
 
-Replicar el experimento a partir de una publicación no es trivial. Una de las fortalezas fundamentales de este sistema es que compartir y reproducir un experimento y los análisis asociados se convierte en algo muy sencillo.
+Replicar el experimento de una publicación no es trivial. Una de las fortalezas fundamentales de nuestro sistema es que compartir y reproducir un experimento y los análisis asociados se convierte en algo muy sencillo.
 
 Además, todos los componentes del proceso son código abierto, lo que permite que revisores, colaboradores, etc. puedan verificar que no hay errores en el código.
 
@@ -33,56 +51,63 @@ El output del sistema es estandarizado, lo que implica que los [nombres de las v
 
 
 
-## Como crear un protocolo experimental
+## jsPsychMaker: Como crear un protocolo experimental
 
-En el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) puedes ver las tareas disponibles junto con una breve descripción de cada una de ellas. Alternativamente, puedes ver [el documento con todos los detalles de las tareas disponibles](https://docs.google.com/spreadsheets/d/1Eo0F4GcmqWZ1cghTpQlA4aHsc8kTABss-HAeimE2IqA/edit#gid=0).  
+En el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) puedes ver las tareas disponibles junto con una breve descripción de cada una de ellas. Alternativamente, puedes ver [el documento con todos los detalles de las tareas disponibles](https://docs.google.com/spreadsheets/d/1Eo0F4GcmqWZ1cghTpQlA4aHsc8kTABss-HAeimE2IqA/edit#gid=0), o simplemente ejecutar `jsPsychMaker::list_available_tasks()`.  
 
-Si quieres consultar los [scripts de las tareas](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks) puedes hacerlo en la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker).  
+Si quieres consultar los [scripts de las tareas](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks) puedes hacerlo en la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker). Si quieres crear una nueva tarea para añadir a tu protocolo, puedes seguir las [instrucciones de más abajo](09-experimentos-reproducibles.html#como-crear-una-nueva-tarea).  
 
-
-Sigue los siguientes 3 pasos para crear tu protocolo:  
 
 ------------------------------------------------------------------------
 
-1) Instalamos jsPsychMaker:
-
-```{r, eval=FALSE}
-remotes::install_github("gorkang/jsPsychMaker")
-```
-
-------------------------------------------------------------------------
-
-2) Creamos un protocolo, indicando que tareas queremos en `canonical_tasks`. Para ver un listado de las [tareas disponibles](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) : `jsPsychMaker::list_available_tasks()`
+**Para crear un protocolo con las tareas `AIM`, `EAR` e `IRI`, y abrirlo en un navegador:**  
 
 
 ```{r, eval=FALSE}
-jsPsychMaker::create_protocol(canonical_tasks = c("AIM", "EAR", "IRI"),
+jsPsychMaker::create_protocol(canonical_tasks = c("AIM", "EAR", "IRI"), # Pruebas a incluir
                               folder_output = "~/Downloads/protocol999", # El directorio tiene que incluir un número (se usará como pid)
-                              launch_browser = TRUE)
+                              launch_browser = TRUE) # Abre el navegador con el protocolo
 ```
 
 - Podemos editar la configuración del protocolo en la carpeta que hemos indicado en `folder_output`, abriendo el archivo `config.js`. Puedes consultar la ayuda sobre la [configuración de experimentos](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#experiment-configuration).  
 
-------------------------------------------------------------------------
-
-3)  El experimento esta listo para ser utilizado localmente. Si `launch_browser = TRUE` se abrirá el navegador. En cualquier caso, podemos iniciar el experimento abriendo `index.html` en tu navegador preferido.  
-
-------------------------------------------------------------------------
+- El experimento esta listo para ser utilizado localmente. Si `launch_browser = TRUE` se abrirá el navegador. En cualquier caso, podemos iniciar el experimento abriendo `index.html` en tu navegador preferido.  
 
 
 
 ### Ejercicio 1 {.ejercicio -}
 
-Ve al [ejercicio 1 del siguiente capítulo](10-ejercicios.html#ejercicio-1) 
+Diseña un **sencillo** protocolo:  
+
+-   Debes usar alguna de las [tareas que aparecen en en manual](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) (máximo 2)
+
+-   Opcionalmente, puedes hacer primero el Ejercicio 2 de abajo, para añadir o adaptar una nueva tarea/escala **muy sencilla** 
+
+-   La duración total del "experimento" no debería superar los 5 minutos
+
+Tendrás que hacer una breve presentación contándonos el diseño experimental.
+
+**Notas**  
+
+(tareas jsPsychMaker): Usa un máximo de 2 tareas\
+<!-- (tarea nueva): Puedes diseñar una tarea con una sola pregunta para dos condiciones experimentales, o adaptar un cuestionario breve ya existente (que no tengamos en jsPsychMaker). -->
+
+<!-- Ve al [ejercicio 1 del siguiente capítulo](10-ejercicios.html#ejercicio-1)  -->
+
+### {-}
 
 
-
-
-## Como simular datos
+## jsPsychMonkeys: Como simular datos
 
 El sistema para simular participantes utiliza [Selenium](https://www.selenium.dev/) dentro de un contenedor de [Docker](https://www.docker.com/). En Linux es trivial su uso, pero en Windows su configuración puede ser más compleja.
 
-Puedes seguir los siguientes pasos, pero si no tienes una instalación funcional de Docker que utilice contenedores Linux, el sistema fallará. En ese caso, quedan las siguientes opciones:
+Puedes seguir los siguientes pasos para preparar tu sistema:
+
+------------------------------------------------------------------------
+
+Completa el [setup para tu sistema operativo](https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#setup)
+
+Si no funciona, te, quedan las siguientes opciones:
 
 -   Correr un par de participantes manualmente\
 -   Usar un ordenador con Linux o crear una partición Linux\
@@ -90,31 +115,19 @@ Puedes seguir los siguientes pasos, pero si no tienes una instalación funcional
 
 <!-- sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev  -->
 
-
-De nuevo, podemos hacer esto en 3 pasos:  
-
 ------------------------------------------------------------------------
 
-1)  Completa el [setup para tu sistema operativo](https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#setup)
 
-------------------------------------------------------------------------
-
-2)  Instala jsPsychMonkeys:  
+**Para lanzar monos localmente:**  
 
 ```{r, eval=FALSE}
-remotes::install_github("gorkang/jsPsychMonkeys")
-```
 
-------------------------------------------------------------------------
-
-3)  Lanza monos localmente (puedes ver algunos de los parametros disponibles en el [Manual de jsPsychMonkeys](https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#parameters-available)):
-
-```{r, eval=FALSE}
+# Un solo mono
 jsPsychMonkeys::release_the_monkeys(uid = "1", # Lanza un monos con el user id 1
                                     local_folder_tasks = "~/Downloads/protocol999")
 
 
-#  Puedes lanzar los monos en paralelo
+#  Monos del 1 al 5 simultaneamente
 jsPsychMonkeys::release_the_monkeys(uid = "1:5", # Lanza monos desde el uid 1 hasta el 5
                                     local_folder_tasks = "~/Downloads/protocol999",
                                     sequential_parallel = "parallel", # Lanza los monos en paralelo
@@ -123,27 +136,18 @@ jsPsychMonkeys::release_the_monkeys(uid = "1:5", # Lanza monos desde el uid 1 ha
 ```
 
 
+Puedes ver de los parametros disponibles en el [Manual de jsPsychMonkeys](https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#parameters-available).  
+
+
 ------------------------------------------------------------------------
 
-## Como preparar datos
+## jsPsychHelpeR: Como preparar datos
 
 Cada tarea de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker) debería tener un script hermano en [jsPsychHelpeR](https://github.com/gorkang/jsPsychHelpeR) para automatizar la preparación de datos. Una vez tengamos nuestro protocolo listo para el pilotaje, con una función de jsPsychHelpeR crearemos todo lo necesario para que la preparación de datos corra automáticamente.
 
-Una vez más, nuestros 3 pasos:  
-
 ------------------------------------------------------------------------
 
-1) Instalamos jsPsychHelper:
-
-```{r, eval=FALSE}
-remotes::install_github("gorkang/jsPsychHelpeR")
-```
-
-
-------------------------------------------------------------------------
-
-2)  Usando `run_initial_setup()`, se creará y abrirá un nuevo proyecto de RStudio con todo listo para correr la preparación de datos:
-
+**Para crear y abrir un nuevo proyecto de RStudio con todo listo para correr la preparación de datos de tu protocolo:**  
 
 ```{r, eval=FALSE}
 jsPsychHelpeR::run_initial_setup(pid = '999', 
@@ -151,8 +155,8 @@ jsPsychHelpeR::run_initial_setup(pid = '999',
                                  folder = "~/Downloads/jsPsychHelpeR999")
 ```
 
+En el nuevo proyecto, tendremos que correr la preparación de datos. Puedes abrir el archivo `run.R`, donde encontrarás algunas instrucciones básicas.    
 
-3) En el nuevo proyecto, tendremos que correr la preparación de datos. Puedes abrir el archivo `run.R`, donde encontrarás algunas instrucciones básicas.    
 ```{r, eval=FALSE}
 
 # Corremos el pipeline de preparación de datos
@@ -163,7 +167,7 @@ targets::tar_make()
 ------------------------------------------------------------------------
 
 
-4)  Para ver el data frame final listo para el análisis
+Para ver el data frame final listo para el análisis
 
 ```{r, eval=FALSE}
 
@@ -175,13 +179,14 @@ targets::tar_make()
   
   # See DF_analysis dataframe
   DF_analysis
+  
 ```
 
 ------------------------------------------------------------------------
 
 
 
-## Como crear un reporte dentro del jsPsychHelpeR
+### Como crear un reporte dentro del jsPsychHelpeR
 
 Dentro del proyecto en el que has preparado los datos, simplemente tienes que:  
 
@@ -212,69 +217,86 @@ Dentro del proyecto en el que has preparado los datos, simplemente tienes que:
 
 
 
-### Ejercicio FINAL {.ejercicio -}
+## Ejercicio FINAL {.ejercicio -}
 
 Ya estáis listas/os para enfrentaros al  [ejercicio FINAL](10-ejercicios.html#ejercicio-final)  
 
 
----  
 
 
+## Avanzado
+
+### Como crear una nueva tarea
 
 
-## Como crear una nueva tarea
+Tenemos un buen número de tareas disponibles para usar (puedes verlas en el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks)). Si la tarea que necesitas no está disponible, puedes crearla de distintas maneras:  
 
-Tenemos un buen número de tareas disponibles para usar (puedes verlas en el [manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks)). Si la tarea que necesitas no está disponible, puedes crearla usando una de las plantillas que encontrarás en [canonical_protocol_clean](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol_clean). Están preparadas para que puedas modificarlas fácilmente y crear tu propia tarea. Alternativamente, también puedes usar como punto de partida las [tareas que tenemos en jsPSychMaker](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks).
+- Modificando alguna de las tareas que ya existen: [tareas en jsPsychMaker](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks)  
+
+- Usando las plantillas disponibles: `jsPsychMaker::copy_example_tasks(destination_folder = "~/Downloads/TEST")`
+
 
 Veamos como crear una nueva tarea a partir de documentos excel usando las plantillas disponibles. [Ver ayuda](https://gorkang.github.io/jsPsychR-manual/qmd/07-NEWtasks.html#create-tasks):
 
 ------------------------------------------------------------------------
 
-
-1) Instalamos jsPsychMaker:
-
-```{r, eval=FALSE}
-remotes::install_github("gorkang/jsPsychMaker")
-```
-
-2) Copia las plantillas de tareas de ejemplo:
+1) Copia las plantillas de tareas de ejemplo:
 
 ```{r, eval=FALSE}
 jsPsychMaker::copy_example_tasks(destination_folder = "~/Downloads/TEST")
 ```
 
 
-3)  Ve a la carpeta `~/Downloads/TEST` y borra todas las carpetas menos aquellas que correspondan al [plugin](https://www.jspsych.org/7.0/plugins/list-of-plugins/) que quieras usar. Por ejemplo, `Slider`.   
+2)  Ve a la carpeta indicada en `destination_folder`, en este ejemplo `~/Downloads/TEST`, y borra todas las carpetas menos aquellas que correspondan al [plugin](https://www.jspsych.org/7.0/plugins/list-of-plugins/) que quieras usar. Por ejemplo, `Slider`.   
 
-Adapta `Slider.csv` y los .html con instrucciones a tu nueva tarea.  
+3) Adapta `Slider.csv` a tu nueva tarea:    
 
+    + Adapta `min`, `max`, `slider_start`  
+    + Copia las filas existentes tantas veces como ítems necesites  
+    + Asegurate que los valores en la columna ID son correlativos  
+    + Adapta `stimulus`, `labels` a tus items  
+    
+4) Adapta los .html con tus instrucciones:  
 
-4) Si corres `create_protocol()` con los parámetros de abajo, se creará un nuevo protocolo con tu/tus tareas.  
+    + Si necesitas más páginas de instrucciones, simplemente haz copias de las existentes
+    + Edita el contenido de los archivos html
+    
+5) Ejecuta `create_protocol()` con los parámetros de abajo, se creará un nuevo protocolo con tu/tus tareas.  
 
 ```{r, eval=FALSE}
-  jsPsychMaker::create_protocol(folder_tasks = "~/Downloads/TEST/", 
-                                folder_output = "~/Downloads/TEST/new_protocol", 
-                                launch_browser = TRUE)
+  jsPsychMaker::create_protocol(canonical_tasks = "EAR", # Incluye la tarea EAR
+                                folder_tasks = "~/Downloads/TEST/", # Crea e incluye las tareas que estan en esta carpeta
+                                folder_output = "~/Downloads/TEST/new_protocol", # Crea el protocolo aquí
+                                launch_browser = TRUE) # Lanza un navegador
 ```
 
 
 ------------------------------------------------------------------------
 
+#### Ejercicio Optativo: Crear nueva tarea {.ejercicio -}
 
-### Corrección de la tarea
+
+Crea la siguiente tarea en jsPsychMaker:
+
+-   [The Brief Resilience Scale](https://sci-hub.ru/10.1080/10705500802222972) (PDF version inglesa), o en su [versión española](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S0212-97282021000200006&lng=es&tlng=es)
+
+ **Notas**  
+
+(tareas jsPsychMaker): Ver instrucciones en [experimentos-reproducibles - como crear una nueva tarea](09-experimentos-reproducibles.html#como-crear-una-nueva-tarea)
+
+Si prefieres puedes implementar una tarea distinta a The Brief Resilience Scale. Los únicos requisitos son que sea breve y sencilla.
+
+#### {-}
+
+
+
+#### Corrección de la tarea
 
 Para cada tarea en jsPsychMaker, aspiramos a tener un script de corrección en jsPsychHelpeR. Si has creado una nueva tarea, por favor, completa la información de [NUEVAS Tareas jsPsychR](https://docs.google.com/spreadsheets/d/1LAsyTZ2ZRP_xLiUBkqmawwnKWgy8OCwq4mmWrrc_rpQ/edit#gid=0) para que podamos integrar tu tarea en el repositorio común.
 
 
-### Ejercicio Crear nueva tarea {.ejercicio -}
 
-Ve al [ejercicio 2 del siguiente capítulo](10-ejercicios.html#ejercicio-2---opcional) 
-
-
-
-
-
-## Como preparar datos para una tarea nueva
+#### Como preparar datos para una tarea nueva
 
 Tendremos que crear primero el script de preparación para la nueva tarea. En jsPsychHelpeR tienes una tarea que te ayudará con esto. Si has completado los datos en [NUEVAS Tareas jsPsychR](https://docs.google.com/spreadsheets/d/1LAsyTZ2ZRP_xLiUBkqmawwnKWgy8OCwq4mmWrrc_rpQ/edit#gid=0), el proceso será muy sencillo.
 
@@ -282,7 +304,7 @@ Tendremos que crear primero el script de preparación para la nueva tarea. En js
 1) Instalamos jsPsychHelper:
 
 ```{r, eval=FALSE}
-remotes::install_github("gorkang/jsPsychHelpeR")
+if (!require('jsPsychHelpeR')) remotes::install_github("gorkang/jsPsychHelpeR"); library('jsPsychHelpeR')
 ```
 
 2)  Creamos el nuevo archivo `prepare_NOMBRETAREA()`:

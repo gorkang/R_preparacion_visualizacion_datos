@@ -5,6 +5,7 @@
 <meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gorka Navarrete  ">
+<meta name="dcterms.date" content="2023-07-06">
 <title>R para preparación y visualización de datos</title>
 <style>
 code{white-space: pre-wrap;}
@@ -235,6 +236,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 6, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -242,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header><section id="introducción" class="level1 unnumbered"><h1 class="unnumbered">Introducción</h1>
 <p>El objetivo de este seminario es aprender a usar <a href="https://www.r-project.org/">R</a> para preparar y visualizar datos, además de generar reportes reproducibles. Está pensado para alumnos de postgrado con conocimientos básicos de programación.</p>
-<p>A lo largo del seminario aprenderemos a usar <a href="https://gorkang.github.io/jsPsychR-manual/index.html">jsPsychR</a>, un conjunto de herramientas creado en el <a href="https://cscn.uai.cl/">CSCN</a> para ayudar a crear paradigmas experimentales con <a href="https://www.jspsych.org/">jsPsych</a>, simular participantes, y estandarizar el proceso de preparación y análisis de datos.</p>
+<p>También conoceremos <a href="https://gorkang.github.io/jsPsychR-manual/index.html">jsPsychR</a>, un conjunto de herramientas creado en el <a href="https://cscn.uai.cl/">CSCN</a> para ayudar a crear paradigmas experimentales con <a href="https://www.jspsych.org/">jsPsych</a>, simular participantes, y estandarizar el proceso de preparación y análisis de datos.</p>
 <p><a href="https://www.r-project.org/">R</a> es un lenguaje de programación abierto, con una gran comunidad orientada al trabajo, visualización y modelado de datos en contextos científicos y técnicos. Nos introduciremos de manera práctica a R, resolviendo problemas que encontramos habitualmente durante el quehacer científico, focalizándonos en el trabajo abierto, colaborativo y reproducible.</p>
 <section id="objetivos" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="objetivos">Objetivos</h2>
 <p>Dar las herramientas básicas a los alumnos para que puedan trabajar de manera autónoma con R y RStudio para el proceso de importación, transformación, visualización y reporte de datos.</p>
@@ -253,19 +260,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Generar reportes reproducibles con RMarkdown.</li>
 <li>Crear paradigmas experimentales y un pipeline completo para la preparación de datos con <a href="https://gorkang.github.io/jsPsychR-manual/index.html">jsPsychR</a>.</li>
 </ul></section><section id="como-empezar" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="como-empezar">Como empezar</h2>
-<p>Si ya has completado los pasos indicados en <strong><a href="qmd/00-configuracion-sistema.html">preparando nuestro sistema</a></strong>, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:</p>
-<div class="cell">
+<p>Si ya has completado los pasos <a href="qmd/00-configuracion-sistema.html#empezando-en-a-b-c">A-B-C</a> y <a href="qmd/00-configuracion-sistema.html#otras-dependencias-a-instalar">otras dependencias a instalar</a> indicados en <strong><a href="qmd/00-configuracion-sistema.html">preparando nuestro sistema</a></strong>, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:</p>
+<div class="cell" data-hash="index_cache/html/como-empezar_a1a0d6c1a52942e36d32ee5226b04f24">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://usethis.r-lib.org">'usethis'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'usethis'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://usethis.r-lib.org">'usethis'</a></span><span class="op">)</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/zip-utils.html">use_course</a></span><span class="op">(</span><span class="st">"gorkang/R_preparacion_visualizacion_datos"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Sigue las instrucciones que aparecen en la Consola para tener un nuevo proyecto de RStudio con todos los materiales del curso. El código anterior creará una carpeta llamada <code>R_preparacion_visualizacion_datos-master</code>. Dentro de esa carpeta tendrás un archivo llamado <code>R_preparacion_visualizacion_datos.Rproj</code> que te permitirá abrir el proyecto de RStudio del workshop.</p>
+<p>Sigue las instrucciones que aparecen en la Consola para tener un <strong>nuevo proyecto de RStudio con todos los materiales del curso</strong>. El código anterior creará una carpeta llamada <code>R_preparacion_visualizacion_datos-master</code>.</p>
 <p>La carpeta <code>R_preparacion_visualizacion_datos-master</code> contiene varias cosas. Las mas importantes son:</p>
 <ul>
-<li>Carpeta <code>docs</code>: puedes abrir <code>docs/index.html</code> en tu navegador para ver el “libro” de este curso. Alternativamente, puedes consultar una <a href="https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html">version online del libro</a><br>
-</li>
-<li>Carpeta <code>qmd</code>: En esa carpeta esta el código fuente de los capítulos del libro<br>
-</li>
-<li>Carpeta <code>data</code>: Cuando usemos archivos de datos, vendrán de aquí</li>
+<li><p><code>R_preparacion_visualizacion_datos.Rproj</code>: para abrir el proyecto de RStudio del curso. <strong>Abrelo siempre usando este archivo</strong>.</p></li>
+<li><p>Carpeta <code>docs</code>: puedes abrir <code>docs/index.html</code> en tu navegador para ver el “libro” de este curso. Alternativamente, puedes consultar una <a href="https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html">version online del libro</a></p></li>
+<li><p>Carpeta <code>qmd</code>: En esa carpeta esta el código fuente de los capítulos del libro</p></li>
+<li><p>Carpeta <code>data</code>: Cuando usemos archivos de datos, vendrán de aquí</p></li>
 </ul>
 <details><summary>
 En ocasiones encontraras una bombilla como esta: <img src="../data/images/hint.png" class="img-fluid"> Si haces click sobre ella aparecerá una pista sobre como resolver el ejercicio.

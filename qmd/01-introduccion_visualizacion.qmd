@@ -11,8 +11,8 @@ source("../_common.R")
 ### Paquetes para este capítulo {.parameters -} 
 
 Para poder ejecutar en tu ordenador el código de los ejemplos y ejercicios de este capítulo vas a necesitar los paquetes del recuadro siguiente.  
-
 Cuando empecemos **cada capítulo**:  
+
 
 - Abre un script de R y guardalo con el nombre del capítulo: `capitulo1.R`  
 

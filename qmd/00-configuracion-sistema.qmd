@@ -26,7 +26,7 @@ RStudio es un entorno integrado de desarrollo (IDE) para la programación R.
 
 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="75%"}
+```{r image_1, echo=FALSE, message=FALSE, warning=FALSE, out.width="75%"}
 knitr::include_graphics(here::here("data/images/empezando.png"))
 ```
 
@@ -40,7 +40,7 @@ Para instalar los paquetes del workshop, ejecuta el código de más abajo (secci
 
 En este gif puedes ver como hacerlo:  
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="100%"}
+```{r image_2, echo=FALSE, message=FALSE, warning=FALSE, out.width="100%"}
 knitr::include_graphics(here::here("data/videos/rstudio_install_ALL.gif"))
 ```
 
@@ -53,7 +53,7 @@ knitr::include_graphics(here::here("data/videos/rstudio_install_ALL.gif"))
   rlang::check_installed(
     pkg = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
             "gapminder", "geomtextpath", "ggplot2", "ggraph", "ggridges", "ggthemes", 
-            "ggtext", "googlesheets4", "gtsummary", "haven", "here", "hexbin", "inspectdf", 
+            "ggtext", "googlesheets4", "grateful", "gtsummary", "haven", "here", "hexbin", "inspectdf", 
             "janitor", "knitr", "lme4", "papaja", "parameters", "performance", "plotly", 
             "purrr", "quarto", "readODS", "readr", "readxl", "remotes", "renv", "report", 
             "rticles", "see", "sjPlot", "stargazer", "tidyr", "usethis", "writexl"), 
@@ -91,7 +91,7 @@ Quarto es un sistema de publicación de código abierto que funciona con diferen
 
 Para generar pdf’s necesitaremos tener instalado Latex. tinytex nos ayudará a simplificar el proceso:
 
-```{r, eval=FALSE}
+```{r intall_latex, eval=FALSE}
   if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
   tinytex::install_tinytex() # Llevará un buen rato
 ```

@@ -214,6 +214,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#a-instalar-r" id="toc-a-instalar-r" class="nav-link" data-scroll-target="#a-instalar-r"><strong>(A)</strong> Instalar R</a></li>
   <li><a href="#b-instalar-rstudio" id="toc-b-instalar-rstudio" class="nav-link" data-scroll-target="#b-instalar-rstudio"><strong>(B)</strong> Instalar RStudio</a></li>
   <li><a href="#c-paquetes-para-el-workshop" id="toc-c-paquetes-para-el-workshop" class="nav-link" data-scroll-target="#c-paquetes-para-el-workshop"><strong>(C)</strong> Paquetes para el workshop</a></li>
+  <li>
+<a href="#otras-dependencias-a-instalar" id="toc-otras-dependencias-a-instalar" class="nav-link" data-scroll-target="#otras-dependencias-a-instalar">Otras dependencias a instalar</a>
+  <ul>
+<li><a href="#instalar-quarto" id="toc-instalar-quarto" class="nav-link" data-scroll-target="#instalar-quarto"><strong>Instalar Quarto</strong></a></li>
+  <li><a href="#instalar-latex" id="toc-instalar-latex" class="nav-link" data-scroll-target="#instalar-latex"><strong>Instalar latex</strong></a></li>
+  <li><a href="#docker" id="toc-docker" class="nav-link" data-scroll-target="#docker">Docker</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git">Git</a></li>
+  </ul>
+</li>
   </ul>
 </li>
   <li>
@@ -246,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además de algunas librerías. <strong>Para tener un sistema funcional, completa los pasos A, B y C</strong>. Si ya tienes R y Rstudio instalados (recientemente), puedes pasar directamente al paso <strong>(C)</strong>.</p>
 <section id="a-instalar-r" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="a-instalar-r">
 <strong>(A)</strong> Instalar R</h3>
-<p><a href="https://www.r-project.org/">R</a>, es un lenguaje de programación especializado en la computación estadística y visualización de datos. Es recomendable tener instalada la última versión de R. Puedes usar uno de los enlaces siguientes:</p>
+<p><a href="https://www.r-project.org/">R</a>, es un lenguaje de programación especializado en la computación estadística y visualización de datos. Es recomendable tener instalada la última versión de R (necesitarás al menos la versión 4.2). Puedes usar uno de los enlaces siguientes:</p>
 <ul>
 <li><p><strong>Windows</strong>: <a href="https://cran.r-project.org/bin/windows/base/">Descargar e instalar R para Windows</a></p></li>
 <li><p><strong>Mac</strong>: <a href="https://cran.r-project.org/bin/macosx/">Descargar e instalar R para Mac</a></p></li>
@@ -260,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <a href="https://posit.co/download/rstudio-desktop/">Descargar e instalar RStudio</a>.</li>
 <li>Una vez descargado e instalado, <strong>abre</strong> RStudio. Deberías ver algo parecido a lo siguiente:</li>
 </ul>
-<div class="cell">
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/image_1_31b816f9e081164eafa6e0324400dbab">
 <div class="cell-output-display">
 <p><img src="../data/images/empezando.png" class="img-fluid" style="width:75.0%"></p>
 </div>
@@ -276,71 +285,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <strong>(C)</strong> Paquetes para el workshop</h3>
 <p>Para instalar los paquetes del workshop, ejecuta el código de más abajo (sección sombreada en gris claro) en la consola de RStudio.</p>
 <p>En este gif puedes ver como hacerlo:</p>
-<div class="cell">
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/image_2_b161ab778b04e650d3183d0f11b1b3c8">
 <div class="cell-output-display">
 <p><img src="../data/videos/rstudio_install_ALL.gif" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 <p><strong>Copia y pega el código de abajo en la consola de RStudio y ejecútalo [tecla ENTER]</strong>:</p>
-<div class="cell">
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_workshop_packages_5d4847d25ecd8c955a2eb17c81498cbc">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://rlang.r-lib.org">'rlang'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'rlang'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://rlang.r-lib.org">'rlang'</a></span><span class="op">)</span></span>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/is_installed.html">check_installed</a></span><span class="op">(</span></span>
 <span>    pkg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"afex"</span>, <span class="st">"correlation"</span>, <span class="st">"corrr"</span>, <span class="st">"cowplot"</span>, <span class="st">"dplyr"</span>, <span class="st">"DT"</span>, <span class="st">"esquisse"</span>,</span>
 <span>            <span class="st">"gapminder"</span>, <span class="st">"geomtextpath"</span>, <span class="st">"ggplot2"</span>, <span class="st">"ggraph"</span>, <span class="st">"ggridges"</span>, <span class="st">"ggthemes"</span>, </span>
-<span>            <span class="st">"ggtext"</span>, <span class="st">"googlesheets4"</span>, <span class="st">"gtsummary"</span>, <span class="st">"haven"</span>, <span class="st">"here"</span>, <span class="st">"hexbin"</span>, <span class="st">"inspectdf"</span>, </span>
+<span>            <span class="st">"ggtext"</span>, <span class="st">"googlesheets4"</span>, <span class="st">"grateful"</span>, <span class="st">"gtsummary"</span>, <span class="st">"haven"</span>, <span class="st">"here"</span>, <span class="st">"hexbin"</span>, <span class="st">"inspectdf"</span>, </span>
 <span>            <span class="st">"janitor"</span>, <span class="st">"knitr"</span>, <span class="st">"lme4"</span>, <span class="st">"papaja"</span>, <span class="st">"parameters"</span>, <span class="st">"performance"</span>, <span class="st">"plotly"</span>, </span>
 <span>            <span class="st">"purrr"</span>, <span class="st">"quarto"</span>, <span class="st">"readODS"</span>, <span class="st">"readr"</span>, <span class="st">"readxl"</span>, <span class="st">"remotes"</span>, <span class="st">"renv"</span>, <span class="st">"report"</span>, </span>
 <span>            <span class="st">"rticles"</span>, <span class="st">"see"</span>, <span class="st">"sjPlot"</span>, <span class="st">"stargazer"</span>, <span class="st">"tidyr"</span>, <span class="st">"usethis"</span>, <span class="st">"writexl"</span><span class="op">)</span>, </span>
 <span>    reason <span class="op">=</span> <span class="st">"to run the initial setup"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber completado el paso previo.</p>
-<div class="cell">
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_workshop_packages2_f1eb4e5da3c4772d61775b12123d07e1">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org">'remotes'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'remotes'</span><span class="op">)</span>; <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'gorkang/jsPsychAdmin'</span><span class="op">)</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gadenbuie/regexplain">'regexplain'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gadenbuie/regexplain"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gadenbuie/regexplain">'regexplain'</a></span><span class="op">)</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jorvlan/raincloudplots">'raincloudplots'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'jorvlan/raincloudplots'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jorvlan/raincloudplots">'raincloudplots'</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Usaremos un buen numero de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (<em>en algunos sistemas puede llegar a 1 hora</em>). Si tienes alguna dificultad en este punto, te recomiendo que veas algun <a href="https://www.youtube.com/watch?v=BvKETZ6kr9Q">tutorial básico de R o RStudio</a>.</p>
 <p>Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g.&nbsp;pacman, pak, renv, …), pero dejaremos eso para más adelante.</p>
-<p><strong>Instalar Quarto</strong></p>
+</section><section id="otras-dependencias-a-instalar" class="level3"><h3 class="anchored" data-anchor-id="otras-dependencias-a-instalar">Otras dependencias a instalar</h3>
+<section id="instalar-quarto" class="level4"><h4 class="anchored" data-anchor-id="instalar-quarto"><strong>Instalar Quarto</strong></h4>
 <p>Quarto es un sistema de publicación de código abierto que funciona con diferentes lenguajes de programación como R o python. Lo usaremos a partir del capítulo 6.</p>
 <p><a href="https://quarto.org/docs/get-started/">Descarga e instala Quarto</a></p>
-<p><strong>Instalar latex</strong></p>
+</section><section id="instalar-latex" class="level4"><h4 class="anchored" data-anchor-id="instalar-latex"><strong>Instalar latex</strong></h4>
 <p>Para generar pdf’s necesitaremos tener instalado Latex. tinytex nos ayudará a simplificar el proceso:</p>
-<div class="cell">
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/intall_latex_ef8c319c5b905d8071d79a6f5d99fdd4">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/tinytex">'tinytex'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tinytex'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/tinytex">'tinytex'</a></span><span class="op">)</span></span>
 <span>  <span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">install_tinytex</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Llevará un buen rato</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr></section></section><section id="algo-más-sobre-la-instalación-de-paquetes" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="algo-más-sobre-la-instalación-de-paquetes">Algo más sobre la instalación de paquetes</h2>
+</section><section id="docker" class="level4"><h4 class="anchored" data-anchor-id="docker">Docker</h4>
+<p>Necesitaremos <a href="https://www.docker.com/">Docker</a> para simular datos de participantes online.</p>
+<p>Instala Docker en: - <a href="https://docs.docker.com/desktop/install/linux-install/">Linux</a><br>
+- <a href="https://docs.docker.com/desktop/install/mac-install/">Mac</a><br>
+- <a href="https://docs.docker.com/desktop/install/windows-install/">Windows</a></p>
+<p>Adicionalmente:</p>
+<ul>
+<li><p><strong>Windows</strong>: Update wsl (in a command prompt): wsl - update</p></li>
+<li>
+<p><strong>Ubuntu</strong>:</p>
+<ul>
+<li>En un terminal: <code>sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev docker</code>
+</li>
+<li>Si los monos hacen su trabajo pero no aparecen los csv’s, asegúrate que el usuario <code>docker</code> tiene acceso al directorio ~/Downloads</li>
+</ul>
+</li>
+</ul>
+<p>Para más detalles, puedes consultar <a href="https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#setup">jsPsychMonkeys setup</a></p>
+</section><section id="git" class="level4"><h4 class="anchored" data-anchor-id="git">Git</h4>
+<p>Ver instrucciones para <a href="https://happygitwithr.com/install-git.html#install-git-windows">Windows</a>, <a href="https://happygitwithr.com/install-git.html#macos">Mac</a> y <a href="https://happygitwithr.com/install-git.html#linux">Linux</a>.</p>
+<p>&nbsp;&nbsp;<span style="font-size: 11px;">Importante: en el paso <em>Adjusting your PATH environment</em> en en Windows, selecciona <em>Git from the command line and also from 3rd-party software</em></span></p>
+<hr></section></section></section><section id="algo-más-sobre-la-instalación-de-paquetes" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="algo-más-sobre-la-instalación-de-paquetes">Algo más sobre la instalación de paquetes</h2>
 <p>Los paquetes de R son una colección de funciones, datos y documentación que amplían las capacidades básicas de R.</p>
 <p>Gran parte de las funciones y paquetes que utilizaremos en este workshop se encuentran contenidas en el meta-paquete <a href="https://www.tidyverse.org/">tidyverse</a> (este es un paquete de paquetes). No lo instalamos en <strong>(C)</strong>, pero si quisieras instalarlo solo tendrías que ejecutar la siguiente linea en la <strong>consola</strong> de RStudio:</p>
-<div class="cell">
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_gg_369afbd5bbb9a3838b050e4f505e3bdc">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para instalar otro paquete diferente de “tidyverse”, remplaza su nombre entre comillas dentro de la función:</p>
-<div class="cell">
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_any_package_4ec3996e99b67718fd4ede0c0ee483fa">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"NOMBRE_DE_PAQUETE"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Una vez instalado un paquete, no es necesario volver hacerlo, a menos que reinstales R.</p>
 <section id="cargar-paquetes" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="cargar-paquetes">Cargar paquetes</h3>
 <p>Las funciones, datos y documentación dentro de nuestros paquetes no podrán ser utilizadas hasta que se carguen en R. Una vez instalados, para cargar los paquetes se usa la función <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>:</p>
-<div class="cell">
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/load_library_45043a5029f2754518fbf06460409693">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>En realidad las funciones también pueden ser llamadas usando su referencia absoluta <code>::</code>, sin necesidad de cargarlas antes. Por ejemplo: <code>dplyr::tibble(columna = 1)</code>. En general: <code>nombre_paquete::nombre_de_funcion(parametros)</code>).</p>
 </section><section id="todo-en-uno" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="todo-en-uno">Todo en uno</h3>
 <p>El siguiente código simplifica lo anterior. Comprueba que el paquete esta instalado; Si no se encuentra instalado, lo instala. Finalmente lo carga.</p>
-<div class="cell">
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_ggplot2_d65304f89eb86a88cc5543cebcf9df3f">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">'tidyverse'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tidyverse'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">'tidyverse'</a></span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para instalar múltiples paquetes, podemos repetir la linea de mas arriba tantas veces como sea necesario, o usar una versión algo mas sofisticada como el código del apartado <strong>(C)</strong>:</p>
-<div class="cell">
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_packages_9822f2a772a63e7a033311d825210a10">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">'tidyverse'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tidyverse'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">'tidyverse'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/bookdown">'bookdown'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'bookdown'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/bookdown">'bookdown'</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Al principio de cada capítulo, verás una sección llamada <code>Paquetes para este capítulo</code>. Si pegas el contenido de esa sección en un script de R al empezar cada capítulo, te asegurarás de tener disponibles todas las funciones que usaremos.</p>
 </section><section id="instalar-paquetes-de-github" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="instalar-paquetes-de-github">Instalar paquetes de Github</h3>
 <p>En ocasiones querremos instalar directamente la versión en desarrollo del paquete desde <a href="https://github.com/">Github</a>. Para eso podemos usar la función <code><a href="https://remotes.r-lib.org/reference/install_github.html">install_github()</a></code> del paquete <code>remotes</code>. Por ejemplo, para instalar el paquete {BayesianReasoning} desde su <a href="https://github.com/gorkang/BayesianReasoning">repositorio de Github</a>:</p>
-<div class="cell">
+<div class="cell" data-hash="00-configuracion-sistema_cache/html/install_packages_github_312e9b1bc5dbf014a12b02b6f523acf9">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org">'remotes'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'remotes'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org">'remotes'</a></span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gorkang/BayesianReasoning"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

@@ -21,6 +21,7 @@ source("../_common.R")
   if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
   if (!require('DT')) install.packages('DT'); library('DT')
   if (!require('ggraph')) install.packages('ggraph'); library('ggraph')
+  if (!require('grateful')) install.packages('grateful'); library('grateful')
   if (!require('here')) install.packages('here'); library('here')
   if (!require('gtsummary')) install.packages('gtsummary'); library('gtsummary')
   if (!require('knitr')) install.packages('knitr'); library('knitr')
@@ -37,7 +38,7 @@ source("../_common.R")
   if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
   if (!require('usethis')) install.packages('usethis'); library('usethis')
   
-  # if (!require('grateful')) remotes::install_github("Pakillo/grateful"); library('grateful')
+  
 
 ```
 
@@ -60,7 +61,7 @@ Quarto es un sistema de publicación de código abierto que funciona con diferen
 
 Para generar pdf's necesitaremos tener instalado Latex. `tinytex` nos ayudará a simplificar el proceso:  
 
-```{r eval=FALSE}
+```{r inst_tinytex, eval=FALSE}
 tinytex::install_tinytex() # Llevará un rato
 ```
 
@@ -149,7 +150,7 @@ Los chunks de código están delimitados por:
 
 
 En su interior, puedes usar código R como si estuvieras en un script de R normal.  
-```{r include=TRUE}
+```{r ejemplo_chunk_1, include=TRUE}
 
 library(dplyr)
 
@@ -323,11 +324,11 @@ Para saber más:
 - Respuesta larga, [la mayoría de los paquetes](https://academia.stackexchange.com/a/27922/35580)  
 
 
-```{r grateful, eval=FALSE, include=TRUE}
+Una manera muy sencilla de hacer esto es usando [{grateful}](https://pakillo.github.io/grateful/).  
 
-# grateful::cite_packages(all.pkg = FALSE,
-#                         out.format = "rmd",
-#                         out.dir = "dev")
+```{r inst_grateful, include=TRUE, eval=FALSE}
+
+grateful::cite_packages(pkgs = "All", output = "file", out.format = "Rmd", include.RStudio = TRUE, out.dir = "~/Downloads")
 
 ```
 

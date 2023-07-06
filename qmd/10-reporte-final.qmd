@@ -157,9 +157,15 @@ Se evaluará específicamente lo siguiente:
 La historia completa de commits de todas las ramas (master, development, y las 3 individuales) deberá estar disponible.  
 
 
-```{r include=FALSE}
 
-# grateful::cite_packages(all.pkg = FALSE,
-#                         out.format = "rmd",
-#                         out.dir = "dev")
+```{r include=FALSE}
+library(jsPsychHelpeR)
+library(jsPsychMaker)
+library(jsPsychMonkeys)
+```
+
+```{r include=FALSE, eval=FALSE}
+
+grateful::cite_packages(pkgs = "All", output = "file", out.format = "Rmd", include.RStudio = TRUE, out.dir = "../dev")
+
 ```

@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.361">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>R para preparación y visualización de datos - Paquetes usados</title>
 <style>
 code{white-space: pre-wrap;}
@@ -19,6 +16,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -41,7 +72,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -58,8 +88,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -79,16 +108,11 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -99,13 +123,9 @@ div.csl-indent {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">R para preparación y visualización de datos</a> 
         <div class="sidebar-tools-main">
@@ -120,7 +140,7 @@ div.csl-indent {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introducción</span></a>
@@ -199,24 +219,18 @@ div.csl-indent {
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
-  </ul>
-</nav>
+<li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Paquetes usados</h1>
 </div>
 
@@ -230,213 +244,178 @@ div.csl-indent {
   </div>
   
 
-</header>
-
-<p>En la documentación y ejercicios de este workshop se usaron los paquetes que se pueden ver abajo. Este listado se creó automáticamente usando <a href="https://github.com/Pakillo/grateful">{grateful}</a>:</p>
-<ul>
-<li>base <span class="citation" data-cites="base">(<a href="#ref-base" role="doc-biblioref">R Core Team 2019</a>)</span></li>
-<li>knitr <span class="citation" data-cites="knitr">(<a href="#ref-knitr" role="doc-biblioref">Xie 2014</a>)</span></li>
-<li>stargazer <span class="citation" data-cites="stargazer">(<a href="#ref-stargazer" role="doc-biblioref">Hlavac 2018</a>)</span></li>
-<li>rticles <span class="citation" data-cites="rticles">(<a href="#ref-rticles" role="doc-biblioref">Allaire et al. 2019</a>)</span></li>
-<li>renv <span class="citation" data-cites="renv">(<a href="#ref-renv" role="doc-biblioref">Ushey 2019</a>)</span></li>
-<li>remotes <span class="citation" data-cites="remotes">(<a href="#ref-remotes" role="doc-biblioref">Hester et al. 2019</a>)</span></li>
-<li>papaja <span class="citation" data-cites="papaja">(<a href="#ref-papaja" role="doc-biblioref">Aust and Barth 2018</a>)</span></li>
-<li>easystats <span class="citation" data-cites="easystats">(<a href="#ref-easystats" role="doc-biblioref">Lüdecke and Makowski 2019</a>)</span></li>
-<li>estimate <span class="citation" data-cites="estimate">(<a href="#ref-estimate" role="doc-biblioref">Makowski and Lüdecke 2019b</a>)</span></li>
-<li>see <span class="citation" data-cites="see">(<a href="#ref-see" role="doc-biblioref">Lüdecke et al. 2019</a>)</span></li>
-<li>report <span class="citation" data-cites="report">(<a href="#ref-report" role="doc-biblioref">Makowski et al. 2019</a>)</span></li>
-<li>correlation <span class="citation" data-cites="correlation">(<a href="#ref-correlation" role="doc-biblioref">Makowski 2019</a>)</span></li>
-<li>parameters <span class="citation" data-cites="parameters">(<a href="#ref-parameters" role="doc-biblioref">Makowski and Lüdecke 2019a</a>)</span></li>
-<li>bayestestR <span class="citation" data-cites="bayestestR">(<a href="#ref-bayestestR" role="doc-biblioref">Makowski, Ben-Shachar, and Lüdecke 2019</a>)</span></li>
-<li>performance <span class="citation" data-cites="performance">(<a href="#ref-performance" role="doc-biblioref">Lüdecke, Makowski, and Waggoner 2019</a>)</span></li>
-<li>insight <span class="citation" data-cites="insight">(<a href="#ref-insight" role="doc-biblioref">Lüdecke, Waggoner, and Makowski 2019</a>)</span></li>
-<li>corrr <span class="citation" data-cites="corrr">(<a href="#ref-corrr" role="doc-biblioref">Jackson, Cimentada, and Ruiz 2019</a>)</span></li>
-<li>afex <span class="citation" data-cites="afex">(<a href="#ref-afex" role="doc-biblioref">Singmann et al. 2019</a>)</span></li>
-<li>lme4 <span class="citation" data-cites="lme4">(<a href="#ref-lme4" role="doc-biblioref">Bates et al. 2015</a>)</span></li>
-<li>Matrix <span class="citation" data-cites="Matrix">(<a href="#ref-Matrix" role="doc-biblioref">Bates and Maechler 2019</a>)</span></li>
-<li>hexbin <span class="citation" data-cites="hexbin">(<a href="#ref-hexbin" role="doc-biblioref">Carr et al. 2019</a>)</span></li>
-<li>FFTrees <span class="citation" data-cites="FFTrees">(<a href="#ref-FFTrees" role="doc-biblioref">Phillips et al. 2018</a>)</span></li>
-<li>caret <span class="citation" data-cites="caret">(<a href="#ref-caret" role="doc-biblioref">Jed Wing et al. 2019</a>)</span></li>
-<li>lattice <span class="citation" data-cites="lattice">(<a href="#ref-lattice" role="doc-biblioref">Sarkar 2008</a>)</span></li>
-<li>janitor <span class="citation" data-cites="janitor">(<a href="#ref-janitor" role="doc-biblioref">Firke 2019</a>)</span></li>
-<li>gsheet <span class="citation" data-cites="gsheet">(<a href="#ref-gsheet" role="doc-biblioref">Conway 2016</a>)</span></li>
-<li>DT <span class="citation" data-cites="DT">(<a href="#ref-DT" role="doc-biblioref">Xie, Cheng, and Tan 2019</a>)</span></li>
-<li>writexl <span class="citation" data-cites="writexl">(<a href="#ref-writexl" role="doc-biblioref">Ooms 2018</a>)</span></li>
-<li>readODS <span class="citation" data-cites="readODS">(<a href="#ref-readODS" role="doc-biblioref">Schutten et al. 2018</a>)</span></li>
-<li>here <span class="citation" data-cites="here">(<a href="#ref-here" role="doc-biblioref">Müller 2017</a>)</span></li>
-<li>haven <span class="citation" data-cites="haven">(<a href="#ref-haven" role="doc-biblioref">Wickham and Miller 2019</a>)</span></li>
-<li>readxl <span class="citation" data-cites="readxl">(<a href="#ref-readxl" role="doc-biblioref">Wickham and Bryan 2019</a>)</span></li>
-<li>plotly <span class="citation" data-cites="plotly">(<a href="#ref-plotly" role="doc-biblioref">Sievert 2018</a>)</span></li>
-<li>ggridges <span class="citation" data-cites="ggridges">(<a href="#ref-ggridges" role="doc-biblioref">Wilke 2018</a>)</span></li>
-<li>ggthemes <span class="citation" data-cites="ggthemes">(<a href="#ref-ggthemes" role="doc-biblioref">Arnold 2019</a>)</span></li>
-<li>gganimate <span class="citation" data-cites="gganimate">(<a href="#ref-gganimate" role="doc-biblioref">Pedersen and Robinson 2019</a>)</span></li>
-<li>gapminder <span class="citation" data-cites="gapminder">(<a href="#ref-gapminder" role="doc-biblioref">Bryan 2017</a>)</span></li>
-<li>esquisse <span class="citation" data-cites="esquisse">(<a href="#ref-esquisse" role="doc-biblioref">Meyer and Perrier 2019</a>)</span></li>
-<li>cowplot <span class="citation" data-cites="cowplot">(<a href="#ref-cowplot" role="doc-biblioref">Wilke 2019</a>)</span></li>
-<li>forcats <span class="citation" data-cites="forcats">(<a href="#ref-forcats" role="doc-biblioref">Wickham 2019a</a>)</span></li>
-<li>stringr <span class="citation" data-cites="stringr">(<a href="#ref-stringr" role="doc-biblioref">Wickham 2019b</a>)</span></li>
-<li>dplyr <span class="citation" data-cites="dplyr">(<a href="#ref-dplyr" role="doc-biblioref">Wickham et al. 2019</a>)</span></li>
-<li>purrr <span class="citation" data-cites="purrr">(<a href="#ref-purrr" role="doc-biblioref">Henry and Wickham 2019</a>)</span></li>
-<li>readr <span class="citation" data-cites="readr">(<a href="#ref-readr" role="doc-biblioref">Wickham, Hester, and Francois 2018</a>)</span></li>
-<li>tidyr <span class="citation" data-cites="tidyr">(<a href="#ref-tidyr" role="doc-biblioref">Wickham and Henry 2019</a>)</span></li>
-<li>tibble <span class="citation" data-cites="tibble">(<a href="#ref-tibble" role="doc-biblioref">Müller and Wickham 2019</a>)</span></li>
-<li>ggplot2 <span class="citation" data-cites="ggplot2">(<a href="#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span></li>
-<li>tidyverse <span class="citation" data-cites="tidyverse">(<a href="#ref-tidyverse" role="doc-biblioref">Wickham 2017</a>)</span></li>
-</ul>
-<section id="references" class="level2 bibliografia unnumbered">
-<h2 class="bibliografia unnumbered anchored" data-anchor-id="references">References</h2>
+</header><p>En la documentación y ejercicios de este workshop se usaron los paquetes que se pueden ver abajo. Este listado se creó automáticamente usando <a href="https://github.com/Pakillo/grateful">{grateful}</a>:</p>
+<div class="cell" data-hash="refs_cache/html/grateful_58cfbf6a06724466ccdb6dc2a3831232">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">grateful</span><span class="fu">::</span><span class="fu"><a href="https://pakillo.github.io/grateful/reference/cite_packages.html">cite_packages</a></span><span class="op">(</span>pkgs <span class="op">=</span> <span class="st">"All"</span>, output <span class="op">=</span> <span class="st">"paragraph"</span>, out.format <span class="op">=</span> <span class="st">"Rmd"</span>, include.RStudio <span class="op">=</span> <span class="cn">FALSE</span>, out.dir <span class="op">=</span> <span class="st">"../data/bib/"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p>We used R version 4.3.1 <span class="citation" data-cites="base">(<a href="#ref-base" role="doc-biblioref">R Core Team 2023</a>)</span> and the following R packages: afex v. 1.3.0 <span class="citation" data-cites="afex">(<a href="#ref-afex" role="doc-biblioref">Singmann et al. 2023</a>)</span>, car v. 3.1.2 <span class="citation" data-cites="car">(<a href="#ref-car" role="doc-biblioref">Fox and Weisberg 2019</a>)</span>, correlation v. 0.8.4 [@], corrr v. 0.4.4 <span class="citation" data-cites="corrr">(<a href="#ref-corrr" role="doc-biblioref">Kuhn, Jackson, and Cimentada 2022</a>)</span>, cowplot v. 1.1.1 <span class="citation" data-cites="cowplot">(<a href="#ref-cowplot" role="doc-biblioref">Wilke 2020</a>)</span>, DT v. 0.28 <span class="citation" data-cites="DT">(<a href="#ref-DT" role="doc-biblioref">Xie, Cheng, and Tan 2023</a>)</span>, esquisse v. 1.1.2 <span class="citation" data-cites="esquisse">(<a href="#ref-esquisse" role="doc-biblioref">Meyer and Perrier 2022</a>)</span>, gapminder v. 1.0.0 <span class="citation" data-cites="gapminder">(<a href="#ref-gapminder" role="doc-biblioref">Bryan 2023</a>)</span>, geomtextpath v. 0.1.1 <span class="citation" data-cites="geomtextpath">(<a href="#ref-geomtextpath" role="doc-biblioref">Cameron and van den Brand 2022</a>)</span>, gghighlight v. 0.4.0 <span class="citation" data-cites="gghighlight">(<a href="#ref-gghighlight" role="doc-biblioref">Yutani 2022</a>)</span>, ggraph v. 2.1.0 <span class="citation" data-cites="ggraph">(<a href="#ref-ggraph" role="doc-biblioref">Pedersen 2022</a>)</span>, ggridges v. 0.5.4 <span class="citation" data-cites="ggridges">(<a href="#ref-ggridges" role="doc-biblioref">Wilke 2022</a>)</span>, ggtext v. 0.1.2 <span class="citation" data-cites="ggtext">(<a href="#ref-ggtext" role="doc-biblioref">Wilke and Wiernik 2022</a>)</span>, ggthemes v. 4.2.4 <span class="citation" data-cites="ggthemes">(<a href="#ref-ggthemes" role="doc-biblioref">Arnold 2021</a>)</span>, gt v. 0.9.0 <span class="citation" data-cites="gt">(<a href="#ref-gt" role="doc-biblioref">Iannone et al. 2023</a>)</span>, gtsummary v. 1.7.1 <span class="citation" data-cites="gtsummary">(<a href="#ref-gtsummary" role="doc-biblioref">Sjoberg et al. 2021</a>)</span>, here v. 1.0.1 <span class="citation" data-cites="here">(<a href="#ref-here" role="doc-biblioref">Müller 2020</a>)</span>, hexbin v. 1.28.3 <span class="citation" data-cites="hexbin">(<a href="#ref-hexbin" role="doc-biblioref">Carr et al. 2023</a>)</span>, inspectdf v. 0.0.12 <span class="citation" data-cites="inspectdf">(<a href="#ref-inspectdf" role="doc-biblioref">Rushworth 2022</a>)</span>, janitor v. 2.2.0 <span class="citation" data-cites="janitor">(<a href="#ref-janitor" role="doc-biblioref">Firke 2023</a>)</span>, jsPsychHelpeR v. 0.2.5 <span class="citation" data-cites="jsPsychHelpeR">(<a href="#ref-jsPsychHelpeR" role="doc-biblioref">Navarrete 2023a</a>)</span>, jsPsychMaker v. 0.2.5 <span class="citation" data-cites="jsPsychMaker">(<a href="#ref-jsPsychMaker" role="doc-biblioref">Navarrete 2023b</a>)</span>, jsPsychMonkeys v. 0.2.5 <span class="citation" data-cites="jsPsychMonkeys">(<a href="#ref-jsPsychMonkeys" role="doc-biblioref">Navarrete 2023c</a>)</span>, knitr v. 1.43 <span class="citation" data-cites="knitr2014 knitr2015 knitr2023">(<a href="#ref-knitr2014" role="doc-biblioref">Xie 2014</a>, <a href="#ref-knitr2015" role="doc-biblioref">2015</a>, <a href="#ref-knitr2023" role="doc-biblioref">2023a</a>)</span>, lme4 v. 1.1.34 <span class="citation" data-cites="lme4">(<a href="#ref-lme4" role="doc-biblioref">Bates et al. 2015</a>)</span>, papaja v. 0.1.1 <span class="citation" data-cites="papaja">(<a href="#ref-papaja" role="doc-biblioref">Aust and Barth 2022</a>)</span>, parameters v. 0.21.1 <span class="citation" data-cites="parameters">(<a href="#ref-parameters" role="doc-biblioref">Lüdecke et al. 2020</a>)</span>, performance v. 0.10.4 <span class="citation" data-cites="performance">(<a href="#ref-performance" role="doc-biblioref">Lüdecke, Ben-Shachar, et al. 2021</a>)</span>, plotly v. 4.10.2 <span class="citation" data-cites="plotly">(<a href="#ref-plotly" role="doc-biblioref">Sievert 2020</a>)</span>, quarto v. 1.2 <span class="citation" data-cites="quarto">(<a href="#ref-quarto" role="doc-biblioref">Allaire 2022</a>)</span>, raincloudplots v. 0.2.0 <span class="citation" data-cites="raincloudplots">(<a href="#ref-raincloudplots" role="doc-biblioref">person) 2023</a>)</span>, readODS v. 1.8.0 <span class="citation" data-cites="readODS">(<a href="#ref-readODS" role="doc-biblioref">Schutten et al. 2023</a>)</span>, regexplain v. 0.2.2.9000 <span class="citation" data-cites="regexplain">(<a href="#ref-regexplain" role="doc-biblioref">Aden-Buie 2023</a>)</span>, remotes v. 2.4.2 <span class="citation" data-cites="remotes">(<a href="#ref-remotes" role="doc-biblioref">Csárdi et al. 2021</a>)</span>, renv v. 0.17.3 <span class="citation" data-cites="renv">(<a href="#ref-renv" role="doc-biblioref">Ushey 2023</a>)</span>, report v. 0.5.7.4 <span class="citation" data-cites="report">(<a href="#ref-report" role="doc-biblioref">Makowski et al. 2023</a>)</span>, rmarkdown v. 2.23 <span class="citation" data-cites="rmarkdown2018 rmarkdown2020 rmarkdown2023">(<a href="#ref-rmarkdown2018" role="doc-biblioref">Xie, Allaire, and Grolemund 2018</a>; <a href="#ref-rmarkdown2020" role="doc-biblioref">Xie, Dervieux, and Riederer 2020</a>; <a href="#ref-rmarkdown2023" role="doc-biblioref">Allaire, Xie, Dervieux, McPherson, et al. 2023</a>)</span>, rticles v. 0.25 <span class="citation" data-cites="rticles">(<a href="#ref-rticles" role="doc-biblioref">Allaire, Xie, Dervieux, R Foundation, et al. 2023</a>)</span>, scales v. 1.2.1 <span class="citation" data-cites="scales">(<a href="#ref-scales" role="doc-biblioref">Wickham and Seidel 2022</a>)</span>, see v. 0.8.0 <span class="citation" data-cites="see">(<a href="#ref-see" role="doc-biblioref">Lüdecke, Patil, et al. 2021</a>)</span>, sjPlot v. 2.8.14 <span class="citation" data-cites="sjPlot">(<a href="#ref-sjPlot" role="doc-biblioref">Lüdecke 2023</a>)</span>, skimr v. 2.1.5 <span class="citation" data-cites="skimr">(<a href="#ref-skimr" role="doc-biblioref">Waring et al. 2022</a>)</span>, stringi v. 1.7.12 <span class="citation" data-cites="stringi">(<a href="#ref-stringi" role="doc-biblioref">Gagolewski 2022</a>)</span>, tidyverse v. 2.0.0 <span class="citation" data-cites="tidyverse">(<a href="#ref-tidyverse" role="doc-biblioref">Wickham et al. 2019</a>)</span>, tinytex v. 0.45 <span class="citation" data-cites="tinytex2019 tinytex2023">(<a href="#ref-tinytex2019" role="doc-biblioref">Xie 2019</a>, <a href="#ref-tinytex2023" role="doc-biblioref">2023b</a>)</span>, usethis v. 2.2.2 <span class="citation" data-cites="usethis">(<a href="#ref-usethis" role="doc-biblioref">Wickham et al. 2023</a>)</span>, waldo v. 0.5.1 <span class="citation" data-cites="waldo">(<a href="#ref-waldo" role="doc-biblioref">Wickham 2023</a>)</span>, writexl v. 1.4.2 <span class="citation" data-cites="writexl">(<a href="#ref-writexl" role="doc-biblioref">Ooms 2023</a>)</span>.</p>
+</div>
+</div>
+<section id="references" class="level2 bibliografia unnumbered"><h2 class="bibliografia unnumbered anchored" data-anchor-id="references">References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-regexplain" class="csl-entry" role="listitem">
+Aden-Buie, Garrick. 2023. <em><span class="nocase">regexplain</span>: Rstudio Addin to Explain, Test and Build Regular Expressions</em>. <a href="https://github.com/gadenbuie/regexplain">https://github.com/gadenbuie/regexplain</a>.
+</div>
+<div id="ref-quarto" class="csl-entry" role="listitem">
+Allaire, JJ. 2022. <em><span class="nocase">quarto</span>: R Interface to <span>“<span>Quarto</span>”</span> Markdown Publishing System</em>. <a href="https://github.com/quarto-dev/quarto-r">https://github.com/quarto-dev/quarto-r</a>.
+</div>
+<div id="ref-rmarkdown2023" class="csl-entry" role="listitem">
+Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, et al. 2023. <em><span class="nocase">rmarkdown</span>: Dynamic Documents for r</em>. <a href="https://github.com/rstudio/rmarkdown">https://github.com/rstudio/rmarkdown</a>.
+</div>
 <div id="ref-rticles" class="csl-entry" role="listitem">
-Allaire, JJ, Yihui Xie, R Foundation, Hadley Wickham, Journal of Statistical Software, Ramnath Vaidyanathan, Association for Computing Machinery, et al. 2019. <em>Rticles: Article Formats for r Markdown</em>. <a href="https://github.com/rstudio/rticles">https://github.com/rstudio/rticles</a>.
+Allaire, JJ, Yihui Xie, Christophe Dervieux, R Foundation, Hadley Wickham, Journal of Statistical Software, Ramnath Vaidyanathan, et al. 2023. <em><span class="nocase">rticles</span>: Article Formats for r Markdown</em>. <a href="https://CRAN.R-project.org/package=rticles">https://CRAN.R-project.org/package=rticles</a>.
 </div>
 <div id="ref-ggthemes" class="csl-entry" role="listitem">
-Arnold, Jeffrey B. 2019. <em>Ggthemes: Extra Themes, Scales and Geoms for ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=ggthemes">https://CRAN.R-project.org/package=ggthemes</a>.
+Arnold, Jeffrey B. 2021. <em><span class="nocase">ggthemes</span>: Extra Themes, Scales and Geoms for <span>“<span class="nocase">ggplot2</span>”</span></em>. <a href="https://github.com/jrnold/ggthemes">https://github.com/jrnold/ggthemes</a>.
 </div>
 <div id="ref-papaja" class="csl-entry" role="listitem">
-Aust, Frederik, and Marius Barth. 2018. <em><span class="nocase">papaja</span>: <span>Create</span> <span>APA</span> Manuscripts with <span>R Markdown</span></em>. <a href="https://github.com/crsh/papaja">https://github.com/crsh/papaja</a>.
+Aust, Frederik, and Marius Barth. 2022. <em><span class="nocase">papaja</span>: <span>Prepare</span> Reproducible <span>APA</span> Journal Articles with <span>R Markdown</span></em>. <a href="https://github.com/crsh/papaja">https://github.com/crsh/papaja</a>.
 </div>
 <div id="ref-lme4" class="csl-entry" role="listitem">
 Bates, Douglas, Martin Mächler, Ben Bolker, and Steve Walker. 2015. <span>“Fitting Linear Mixed-Effects Models Using <span class="nocase">lme4</span>.”</span> <em>Journal of Statistical Software</em> 67 (1): 1–48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>.
 </div>
-<div id="ref-Matrix" class="csl-entry" role="listitem">
-Bates, Douglas, and Martin Maechler. 2019. <em>Matrix: Sparse and Dense Matrix Classes and Methods</em>. <a href="https://CRAN.R-project.org/package=Matrix">https://CRAN.R-project.org/package=Matrix</a>.
-</div>
 <div id="ref-gapminder" class="csl-entry" role="listitem">
-Bryan, Jennifer. 2017. <em>Gapminder: Data from Gapminder</em>. <a href="https://CRAN.R-project.org/package=gapminder">https://CRAN.R-project.org/package=gapminder</a>.
+Bryan, Jennifer. 2023. <em><span class="nocase">gapminder</span>: Data from Gapminder</em>.
+</div>
+<div id="ref-geomtextpath" class="csl-entry" role="listitem">
+Cameron, Allan, and Teun van den Brand. 2022. <em><span class="nocase">geomtextpath</span>: Curved Text in <span>“<span class="nocase">ggplot2</span>”</span></em>. <a href="https://allancameron.github.io/geomtextpath/">https://allancameron.github.io/geomtextpath/</a>.
 </div>
 <div id="ref-hexbin" class="csl-entry" role="listitem">
-Carr, Dan, ported by Nicholas Lewin-Koh, Martin Maechler, and contains copies of lattice functions written by Deepayan Sarkar. 2019. <em>Hexbin: Hexagonal Binning Routines</em>. <a href="https://CRAN.R-project.org/package=hexbin">https://CRAN.R-project.org/package=hexbin</a>.
-</div>
-<div id="ref-gsheet" class="csl-entry" role="listitem">
-Conway, Max. 2016. <em>Gsheet: Download Google Sheets Using Just the URL</em>. <a href="https://CRAN.R-project.org/package=gsheet">https://CRAN.R-project.org/package=gsheet</a>.
-</div>
-<div id="ref-janitor" class="csl-entry" role="listitem">
-Firke, Sam. 2019. <em>Janitor: Simple Tools for Examining and Cleaning Dirty Data</em>. <a href="https://CRAN.R-project.org/package=janitor">https://CRAN.R-project.org/package=janitor</a>.
-</div>
-<div id="ref-purrr" class="csl-entry" role="listitem">
-Henry, Lionel, and Hadley Wickham. 2019. <em>Purrr: Functional Programming Tools</em>. <a href="https://CRAN.R-project.org/package=purrr">https://CRAN.R-project.org/package=purrr</a>.
+Carr, Dan, ported by Nicholas Lewin-Koh, Martin Maechler, and contains copies of lattice functions written by Deepayan Sarkar. 2023. <em><span class="nocase">hexbin</span>: Hexagonal Binning Routines</em>. <a href="https://github.com/edzer/hexbin">https://github.com/edzer/hexbin</a>.
 </div>
 <div id="ref-remotes" class="csl-entry" role="listitem">
-Hester, Jim, Gábor Csárdi, Hadley Wickham, Winston Chang, Martin Morgan, and Dan Tenenbaum. 2019. <em>Remotes: R Package Installation from Remote Repositories, Including ’GitHub’</em>. <a href="https://CRAN.R-project.org/package=remotes">https://CRAN.R-project.org/package=remotes</a>.
+Csárdi, Gábor, Jim Hester, Hadley Wickham, Winston Chang, Martin Morgan, and Dan Tenenbaum. 2021. <em><span class="nocase">remotes</span>: R Package Installation from Remote Repositories, Including <span>“<span>GitHub</span>”</span></em>.
 </div>
-<div id="ref-stargazer" class="csl-entry" role="listitem">
-Hlavac, Marek. 2018. <em>Stargazer: Well-Formatted Regression and Summary Statistics Tables</em>. Bratislava, Slovakia: Central European Labour Studies Institute (CELSI). <a href="https://CRAN.R-project.org/package=stargazer">https://CRAN.R-project.org/package=stargazer</a>.
+<div id="ref-janitor" class="csl-entry" role="listitem">
+Firke, Sam. 2023. <em><span class="nocase">janitor</span>: Simple Tools for Examining and Cleaning Dirty Data</em>.
+</div>
+<div id="ref-car" class="csl-entry" role="listitem">
+Fox, John, and Sanford Weisberg. 2019. <em>An <span>R</span> Companion to Applied Regression</em>. Third. Thousand Oaks <span>CA</span>: Sage. <a href="https://socialsciences.mcmaster.ca/jfox/Books/Companion/">https://socialsciences.mcmaster.ca/jfox/Books/Companion/</a>.
+</div>
+<div id="ref-stringi" class="csl-entry" role="listitem">
+Gagolewski, Marek. 2022. <span>“<span class="nocase">stringi</span>: <span>F</span>ast and Portable Character String Processing in <span>R</span>.”</span> <em>Journal of Statistical Software</em> 103 (2): 1–59. <a href="https://doi.org/10.18637/jss.v103.i02">https://doi.org/10.18637/jss.v103.i02</a>.
+</div>
+<div id="ref-gt" class="csl-entry" role="listitem">
+Iannone, Richard, Joe Cheng, Barret Schloerke, Ellis Hughes, Alexandra Lauer, and JooYoung Seo. 2023. <em><span class="nocase">gt</span>: Easily Create Presentation-Ready Display Tables</em>.
 </div>
 <div id="ref-corrr" class="csl-entry" role="listitem">
-Jackson, Simon, Jorge Cimentada, and Edgar Ruiz. 2019. <em>Corrr: Correlations in r</em>. <a href="https://CRAN.R-project.org/package=corrr">https://CRAN.R-project.org/package=corrr</a>.
+Kuhn, Max, Simon Jackson, and Jorge Cimentada. 2022. <em><span class="nocase">corrr</span>: Correlations in r</em>.
 </div>
-<div id="ref-caret" class="csl-entry" role="listitem">
-Jed Wing, Max Kuhn. Contributions from, Steve Weston, Andre Williams, Chris Keefer, Allan Engelhardt, Tony Cooper, Zachary Mayer, et al. 2019. <em>Caret: Classification and Regression Training</em>. <a href="https://CRAN.R-project.org/package=caret">https://CRAN.R-project.org/package=caret</a>.
-</div>
-<div id="ref-easystats" class="csl-entry" role="listitem">
-Lüdecke, Daniel, and Dominique Makowski. 2019. <em>Easystats: Jump in the Easyverse</em>. <a href="https://github.com/easystats/easystats">https://github.com/easystats/easystats</a>.
-</div>
-<div id="ref-performance" class="csl-entry" role="listitem">
-Lüdecke, Daniel, Dominique Makowski, and Philip Waggoner. 2019. <em>Performance: Assessment of Regression Models Performance</em>. <a href="https://easystats.github.io/performance/">https://easystats.github.io/performance/</a>.
-</div>
-<div id="ref-see" class="csl-entry" role="listitem">
-Lüdecke, Daniel, Dominique Makowski, Philip Waggoner, and Mattan S. Ben-Shachar. 2019. <em>See: Visualisation Toolbox for ’Easystats’ and Extra Geoms, Themes and Color Palettes for ’Ggplot2’</em>. <a href="https://easystats.github.io/see/">https://easystats.github.io/see/</a>.
-</div>
-<div id="ref-insight" class="csl-entry" role="listitem">
-Lüdecke, Daniel, Philip Waggoner, and Dominique Makowski. 2019. <span>“Insight: A Unified Interface to Access Information from Model Objects in r.”</span> <em>Journal of Open Source Software</em> 4 (38): 1412. <a href="https://doi.org/10.21105/joss.01412">https://doi.org/10.21105/joss.01412</a>.
-</div>
-<div id="ref-correlation" class="csl-entry" role="listitem">
-Makowski, Dominique. 2019. <em>Correlation: Easy Peasy Correlations</em>. <a href="https://github.com/easystats/correlation">https://github.com/easystats/correlation</a>.
-</div>
-<div id="ref-bayestestR" class="csl-entry" role="listitem">
-Makowski, Dominique, Mattan S. Ben-Shachar, and Daniel Lüdecke. 2019. <span>“Understand and Describe Bayesian Models and Posterior Distributions Using bayestestR.”</span> <em>CRAN</em>. <a href="https://doi.org/10.5281/zenodo.2556486">https://doi.org/10.5281/zenodo.2556486</a>.
+<div id="ref-sjPlot" class="csl-entry" role="listitem">
+Lüdecke, Daniel. 2023. <em><span class="nocase">sjPlot</span>: Data Visualization for Statistics in Social Science</em>. <a href="https://CRAN.R-project.org/package=sjPlot">https://CRAN.R-project.org/package=sjPlot</a>.
 </div>
 <div id="ref-parameters" class="csl-entry" role="listitem">
-Makowski, Dominique, and Daniel Lüdecke. 2019a. <span>“Describe and Understand Your Model’s Parameters.”</span> <em>CRAN</em>. <a href="https://github.com/easystats/parameters">https://github.com/easystats/parameters</a>.
+Lüdecke, Daniel, Mattan S. Ben-Shachar, Indrajeet Patil, and Dominique Makowski. 2020. <span>“Extracting, Computing and Exploring the Parameters of Statistical Models Using <span>R</span>.”</span> <em>Journal of Open Source Software</em> 5 (53): 2445. <a href="https://doi.org/10.21105/joss.02445">https://doi.org/10.21105/joss.02445</a>.
 </div>
-<div id="ref-estimate" class="csl-entry" role="listitem">
-———. 2019b. <em>Estimate: Estimate Effects, Contrasts and Means</em>. <a href="https://github.com/easystats/estimate">https://github.com/easystats/estimate</a>.
+<div id="ref-performance" class="csl-entry" role="listitem">
+Lüdecke, Daniel, Mattan S. Ben-Shachar, Indrajeet Patil, Philip Waggoner, and Dominique Makowski. 2021. <span>“<span class="nocase">performance</span>: An <span>R</span> Package for Assessment, Comparison and Testing of Statistical Models.”</span> <em>Journal of Open Source Software</em> 6 (60): 3139. <a href="https://doi.org/10.21105/joss.03139">https://doi.org/10.21105/joss.03139</a>.
+</div>
+<div id="ref-see" class="csl-entry" role="listitem">
+Lüdecke, Daniel, Indrajeet Patil, Mattan S. Ben-Shachar, Brenton M. Wiernik, Philip Waggoner, and Dominique Makowski. 2021. <span>“<span class="nocase">see</span>: An <span>R</span> Package for Visualizing Statistical Models.”</span> <em>Journal of Open Source Software</em> 6 (64): 3393. <a href="https://doi.org/10.21105/joss.03393">https://doi.org/10.21105/joss.03393</a>.
 </div>
 <div id="ref-report" class="csl-entry" role="listitem">
-Makowski, Dominique, Lüdecke, and Daniel. 2019. <span>“The Report Package for r: Ensuring the Use of Best Practices for Results Reporting.”</span> <em>CRAN</em>. <a href="https://github.com/easystats/report">https://github.com/easystats/report</a>.
+Makowski, Dominique, Daniel Lüdecke, Indrajeet Patil, Rémi Thériault, Mattan S. Ben-Shachar, and Brenton M. Wiernik. 2023. <span>“Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption.”</span> <em>CRAN</em>. <a href="https://easystats.github.io/report/">https://easystats.github.io/report/</a>.
 </div>
 <div id="ref-esquisse" class="csl-entry" role="listitem">
-Meyer, Fanny, and Victor Perrier. 2019. <em>Esquisse: Explore and Visualize Your Data Interactively</em>. <a href="https://CRAN.R-project.org/package=esquisse">https://CRAN.R-project.org/package=esquisse</a>.
+Meyer, Fanny, and Victor Perrier. 2022. <em><span class="nocase">esquisse</span>: Explore and Visualize Your Data Interactively</em>.
 </div>
 <div id="ref-here" class="csl-entry" role="listitem">
-Müller, Kirill. 2017. <em>Here: A Simpler Way to Find Your Files</em>. <a href="https://CRAN.R-project.org/package=here">https://CRAN.R-project.org/package=here</a>.
+Müller, Kirill. 2020. <em><span class="nocase">here</span>: A Simpler Way to Find Your Files</em>. <a href="https://CRAN.R-project.org/package=here">https://CRAN.R-project.org/package=here</a>.
 </div>
-<div id="ref-tibble" class="csl-entry" role="listitem">
-Müller, Kirill, and Hadley Wickham. 2019. <em>Tibble: Simple Data Frames</em>. <a href="https://CRAN.R-project.org/package=tibble">https://CRAN.R-project.org/package=tibble</a>.
+<div id="ref-jsPsychHelpeR" class="csl-entry" role="listitem">
+Navarrete, Gorka. 2023a. <em><span class="nocase">jsPsychHelpeR</span>: Standardize and Automatize Data Preparation and Analysis of jsPsych Experiments Created with jsPsychMaker</em>. <a href="https://github.com/gorkang/jsPsychHelpeR">https://github.com/gorkang/jsPsychHelpeR</a>.
+</div>
+<div id="ref-jsPsychMaker" class="csl-entry" role="listitem">
+———. 2023b. <em><span class="nocase">jsPsychMaker</span>: Create Behavioral Experiments and Surveys Using jsPsych and r</em>. <a href="https://github.com/gorkang/jsPsychMaker">https://github.com/gorkang/jsPsychMaker</a>.
+</div>
+<div id="ref-jsPsychMonkeys" class="csl-entry" role="listitem">
+———. 2023c. <em><span class="nocase">jsPsychMonkeys</span>: Release Monkeys to a jsPsych Experiment Using the r Package <span class="nocase">targets</span>, Docker and <span>RSelenium</span></em>. <a href="https://github.com/gorkang/jsPsychMonkeys">https://github.com/gorkang/jsPsychMonkeys</a>.
 </div>
 <div id="ref-writexl" class="csl-entry" role="listitem">
-Ooms, Jeroen. 2018. <em>Writexl: Export Data Frames to Excel ’Xlsx’ Format</em>. <a href="https://CRAN.R-project.org/package=writexl">https://CRAN.R-project.org/package=writexl</a>.
+Ooms, Jeroen. 2023. <em><span class="nocase">writexl</span>: Export Data Frames to Excel <span>“<span class="nocase">xlsx</span>”</span> Format</em>.
 </div>
-<div id="ref-gganimate" class="csl-entry" role="listitem">
-Pedersen, Thomas Lin, and David Robinson. 2019. <em>Gganimate: A Grammar of Animated Graphics</em>. <a href="https://CRAN.R-project.org/package=gganimate">https://CRAN.R-project.org/package=gganimate</a>.
+<div id="ref-ggraph" class="csl-entry" role="listitem">
+Pedersen, Thomas Lin. 2022. <em><span class="nocase">ggraph</span>: An Implementation of Grammar of Graphics for Graphs and Networks</em>.
 </div>
-<div id="ref-FFTrees" class="csl-entry" role="listitem">
-Phillips, Nathaniel, Hansjoerg Neth, Jan Woike, and Wolfgang Gaissmaer. 2018. <em>FFTrees: Generate, Visualise, and Evaluate Fast-and-Frugal Decision Trees</em>. <a href="https://CRAN.R-project.org/package=FFTrees">https://CRAN.R-project.org/package=FFTrees</a>.
+<div id="ref-raincloudplots" class="csl-entry" role="listitem">
+person). 2023. <em><span class="nocase">raincloudplots</span>: The Easy Way to Create Raincloud Plots</em>. <a href="https://github.com/jorvlan/raincloudplots">https://github.com/jorvlan/raincloudplots</a>.
 </div>
 <div id="ref-base" class="csl-entry" role="listitem">
-R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+R Core Team. 2023. <em><span>R</span>: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </div>
-<div id="ref-lattice" class="csl-entry" role="listitem">
-Sarkar, Deepayan. 2008. <em>Lattice: Multivariate Data Visualization with r</em>. New York: Springer. <a href="http://lmdvr.r-forge.r-project.org">http://lmdvr.r-forge.r-project.org</a>.
+<div id="ref-inspectdf" class="csl-entry" role="listitem">
+Rushworth, Alastair. 2022. <em><span class="nocase">inspectdf</span>: Inspection, Comparison and Visualisation of Data Frames</em>. <a href="https://alastairrushworth.github.io/inspectdf/">https://alastairrushworth.github.io/inspectdf/</a>.
 </div>
 <div id="ref-readODS" class="csl-entry" role="listitem">
-Schutten, Gerrit-Jan, Chung-hong Chan, Thomas J. Leeper, and other contributors. 2018. <em>readODS: Read and Write ODS Files</em>. <a href="https://CRAN.R-project.org/package=readODS">https://CRAN.R-project.org/package=readODS</a>.
+Schutten, Gerrit-Jan, Chung-hong Chan, Thomas J. Leeper, and Detlef Steuer. 2023. <em><span class="nocase">readODS</span>: Read and Write ODS Files</em>. <a href="https://github.com/ropensci/readODS">https://github.com/ropensci/readODS</a>.
 </div>
 <div id="ref-plotly" class="csl-entry" role="listitem">
-Sievert, Carson. 2018. <em>Plotly for r</em>. <a href="https://plotly-r.com">https://plotly-r.com</a>.
+Sievert, Carson. 2020. <em>Interactive Web-Based Data Visualization with r, Plotly, and Shiny</em>. Chapman; Hall/CRC. <a href="https://plotly-r.com">https://plotly-r.com</a>.
 </div>
 <div id="ref-afex" class="csl-entry" role="listitem">
-Singmann, Henrik, Ben Bolker, Jake Westfall, Frederik Aust, and Mattan S. Ben-Shachar. 2019. <em>Afex: Analysis of Factorial Experiments</em>. <a href="https://CRAN.R-project.org/package=afex">https://CRAN.R-project.org/package=afex</a>.
+Singmann, Henrik, Ben Bolker, Jake Westfall, Frederik Aust, and Mattan S. Ben-Shachar. 2023. <em><span class="nocase">afex</span>: Analysis of Factorial Experiments</em>.
+</div>
+<div id="ref-gtsummary" class="csl-entry" role="listitem">
+Sjoberg, Daniel D., Karissa Whiting, Michael Curry, Jessica A. Lavery, and Joseph Larmarange. 2021. <span>“Reproducible Summary Tables with the Gtsummary Package.”</span> <em><span>The R Journal</span></em> 13: 570–80. <a href="https://doi.org/10.32614/RJ-2021-053">https://doi.org/10.32614/RJ-2021-053</a>.
 </div>
 <div id="ref-renv" class="csl-entry" role="listitem">
-Ushey, Kevin. 2019. <em>Renv: Project Environments for r</em>. <a href="https://github.com/rstudio/renv">https://github.com/rstudio/renv</a>.
+Ushey, Kevin. 2023. <em><span class="nocase">renv</span>: Project Environments</em>. <a href="https://rstudio.github.io/renv/">https://rstudio.github.io/renv/</a>.
 </div>
-<div id="ref-ggplot2" class="csl-entry" role="listitem">
-Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+<div id="ref-skimr" class="csl-entry" role="listitem">
+Waring, Elin, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, and Shannon Ellis. 2022. <em><span class="nocase">skimr</span>: Compact and Flexible Summaries of Data</em>.
+</div>
+<div id="ref-waldo" class="csl-entry" role="listitem">
+Wickham, Hadley. 2023. <em><span class="nocase">waldo</span>: Find Differences Between r Objects</em>. <a href="https://CRAN.R-project.org/package=waldo">https://CRAN.R-project.org/package=waldo</a>.
 </div>
 <div id="ref-tidyverse" class="csl-entry" role="listitem">
-———. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the <span class="nocase">tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
 </div>
-<div id="ref-forcats" class="csl-entry" role="listitem">
-———. 2019a. <em>Forcats: Tools for Working with Categorical Variables (Factors)</em>. <a href="https://CRAN.R-project.org/package=forcats">https://CRAN.R-project.org/package=forcats</a>.
+<div id="ref-usethis" class="csl-entry" role="listitem">
+Wickham, Hadley, Jennifer Bryan, Malcolm Barrett, and Andy Teucher. 2023. <em><span class="nocase">usethis</span>: Automate Package and Project Setup</em>. <a href="https://CRAN.R-project.org/package=usethis">https://CRAN.R-project.org/package=usethis</a>.
 </div>
-<div id="ref-stringr" class="csl-entry" role="listitem">
-———. 2019b. <em>Stringr: Simple, Consistent Wrappers for Common String Operations</em>. <a href="https://CRAN.R-project.org/package=stringr">https://CRAN.R-project.org/package=stringr</a>.
-</div>
-<div id="ref-readxl" class="csl-entry" role="listitem">
-Wickham, Hadley, and Jennifer Bryan. 2019. <em>Readxl: Read Excel Files</em>. <a href="https://CRAN.R-project.org/package=readxl">https://CRAN.R-project.org/package=readxl</a>.
-</div>
-<div id="ref-dplyr" class="csl-entry" role="listitem">
-Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2019. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.
-</div>
-<div id="ref-tidyr" class="csl-entry" role="listitem">
-Wickham, Hadley, and Lionel Henry. 2019. <em>Tidyr: Easily Tidy Data with ’Spread()’ and ’Gather()’ Functions</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
-</div>
-<div id="ref-readr" class="csl-entry" role="listitem">
-Wickham, Hadley, Jim Hester, and Romain Francois. 2018. <em>Readr: Read Rectangular Text Data</em>. <a href="https://CRAN.R-project.org/package=readr">https://CRAN.R-project.org/package=readr</a>.
-</div>
-<div id="ref-haven" class="csl-entry" role="listitem">
-Wickham, Hadley, and Evan Miller. 2019. <em>Haven: Import and Export ’SPSS’, ’Stata’ and ’SAS’ Files</em>. <a href="https://CRAN.R-project.org/package=haven">https://CRAN.R-project.org/package=haven</a>.
-</div>
-<div id="ref-ggridges" class="csl-entry" role="listitem">
-Wilke, Claus O. 2018. <em>Ggridges: Ridgeline Plots in ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=ggridges">https://CRAN.R-project.org/package=ggridges</a>.
+<div id="ref-scales" class="csl-entry" role="listitem">
+Wickham, Hadley, and Dana Seidel. 2022. <em><span class="nocase">scales</span>: Scale Functions for Visualization</em>.
 </div>
 <div id="ref-cowplot" class="csl-entry" role="listitem">
-———. 2019. <em>Cowplot: Streamlined Plot Theme and Plot Annotations for ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=cowplot">https://CRAN.R-project.org/package=cowplot</a>.
+Wilke, Claus O. 2020. <em><span class="nocase">cowplot</span>: Streamlined Plot Theme and Plot Annotations for <span>“<span class="nocase">ggplot2</span>”</span></em>. <a href="https://wilkelab.org/cowplot/">https://wilkelab.org/cowplot/</a>.
 </div>
-<div id="ref-knitr" class="csl-entry" role="listitem">
-Xie, Yihui. 2014. <span>“Knitr: A Comprehensive Tool for Reproducible Research in <span>R</span>.”</span> In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. <a href="http://www.crcpress.com/product/isbn/9781466561595">http://www.crcpress.com/product/isbn/9781466561595</a>.
+<div id="ref-ggridges" class="csl-entry" role="listitem">
+———. 2022. <em><span class="nocase">ggridges</span>: Ridgeline Plots in <span>“<span class="nocase">ggplot2</span>”</span></em>. <a href="https://wilkelab.org/ggridges/">https://wilkelab.org/ggridges/</a>.
+</div>
+<div id="ref-ggtext" class="csl-entry" role="listitem">
+Wilke, Claus O., and Brenton M. Wiernik. 2022. <em><span class="nocase">ggtext</span>: Improved Text Rendering Support for <span>“<span class="nocase">ggplot2</span>”</span></em>. <a href="https://wilkelab.org/ggtext/">https://wilkelab.org/ggtext/</a>.
+</div>
+<div id="ref-knitr2014" class="csl-entry" role="listitem">
+Xie, Yihui. 2014. <span>“<span class="nocase">knitr</span>: A Comprehensive Tool for Reproducible Research in <span>R</span>.”</span> In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC.
+</div>
+<div id="ref-knitr2015" class="csl-entry" role="listitem">
+———. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
+</div>
+<div id="ref-tinytex2019" class="csl-entry" role="listitem">
+———. 2019. <span>“<span>TinyTeX</span>: A Lightweight, Cross-Platform, and Easy-to-Maintain LaTeX Distribution Based on TeX Live.”</span> <em>TUGboat</em> 40 (1): 30–32. <a href="https://tug.org/TUGboat/Contents/contents40-1.html">https://tug.org/TUGboat/Contents/contents40-1.html</a>.
+</div>
+<div id="ref-knitr2023" class="csl-entry" role="listitem">
+———. 2023a. <em><span class="nocase">knitr</span>: A General-Purpose Package for Dynamic Report Generation in r</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
+</div>
+<div id="ref-tinytex2023" class="csl-entry" role="listitem">
+———. 2023b. <em><span class="nocase">tinytex</span>: Helper Functions to Install and Maintain TeX Live, and Compile LaTeX Documents</em>. <a href="https://github.com/rstudio/tinytex">https://github.com/rstudio/tinytex</a>.
+</div>
+<div id="ref-rmarkdown2018" class="csl-entry" role="listitem">
+Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. <em>R Markdown: The Definitive Guide</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown">https://bookdown.org/yihui/rmarkdown</a>.
 </div>
 <div id="ref-DT" class="csl-entry" role="listitem">
-Xie, Yihui, Joe Cheng, and Xianying Tan. 2019. <em>DT: A Wrapper of the JavaScript Library ’DataTables’</em>. <a href="https://CRAN.R-project.org/package=DT">https://CRAN.R-project.org/package=DT</a>.
+Xie, Yihui, Joe Cheng, and Xianying Tan. 2023. <em><span>DT</span>: A Wrapper of the JavaScript Library <span>“<span>DataTables</span>”</span></em>. <a href="https://github.com/rstudio/DT">https://github.com/rstudio/DT</a>.
+</div>
+<div id="ref-rmarkdown2020" class="csl-entry" role="listitem">
+Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. <em>R Markdown Cookbook</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown-cookbook">https://bookdown.org/yihui/rmarkdown-cookbook</a>.
+</div>
+<div id="ref-gghighlight" class="csl-entry" role="listitem">
+Yutani, Hiroaki. 2022. <em><span class="nocase">gghighlight</span>: Highlight Lines and Points in <span>“<span class="nocase">ggplot2</span>”</span></em>.
 </div>
 </div>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -668,9 +647,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../qmd/10-ejercicios.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ejercicios</span></span>
       </a>          

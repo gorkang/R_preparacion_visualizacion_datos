@@ -21,7 +21,7 @@ Al finalizar el curso deberíamos ser capaces de:
 
 ## Como empezar {-}
 
-Si ya has completado los pasos indicados en **[preparando nuestro sistema](#preparando-sistema)**, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:  
+Si ya has completado los pasos [A-B-C](#empezando-en-a-b-c) y [otras dependencias a instalar](#otras-dependencias-a-instalar) indicados en **[preparando nuestro sistema](#preparando-sistema)**, puedes lanzar el siguiente código en tu ordenador para descargar los materiales del curso:  
 
 ```{r como-empezar, eval=FALSE}
 
@@ -30,13 +30,18 @@ usethis::use_course("gorkang/R_preparacion_visualizacion_datos")
 
 ```
 
-Sigue las instrucciones que aparecen en la Consola para tener un nuevo proyecto de RStudio con todos los materiales del curso. El código anterior creará una carpeta llamada `R_preparacion_visualizacion_datos-master`. Dentro de esa carpeta tendrás un archivo llamado `R_preparacion_visualizacion_datos.Rproj` que te permitirá abrir el proyecto de RStudio del workshop.  
+Sigue las instrucciones que aparecen en la Consola para tener un **nuevo proyecto de RStudio con todos los materiales del curso**. El código anterior creará una carpeta llamada `R_preparacion_visualizacion_datos-master`.  
 
 La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las mas importantes son:  
 
+- `R_preparacion_visualizacion_datos.Rproj`: para abrir el proyecto de RStudio del curso. **Abrelo siempre usando este archivo**.  
+
 - Carpeta `docs`: puedes abrir `docs/index.html` en tu navegador para ver el "libro" de este curso. Alternativamente, puedes consultar una [version online del libro](https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html)  
-- Carpeta `qmd`: En esa carpeta esta el código fuente de los capítulos del libro  
+
+- Carpeta `qmd`: En esa carpeta esta el código fuente de los capítulos del libro   
+
 - Carpeta `data`: Cuando usemos archivos de datos, vendrán de aquí  
+
 
 
 <details><summary>En ocasiones encontraras una bombilla como esta: ![](../data/images/hint.png) Si haces click sobre ella aparecerá una pista sobre como resolver el ejercicio.</summary><span style="color: orange;">¡No hagas click en mi sin antes haber intentado resolver el ejercicio sin ayuda!</span></details>

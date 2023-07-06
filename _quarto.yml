@@ -7,13 +7,19 @@ execute:
   warning: false
   message: false
 
+editor_options:
+  chunk_output_type: console
+
 book:
+  # title: "<a href='/index.html'>R para preparación y visualización de datos</a>"
   title: "R para preparación y visualización de datos"
   subtitle: "[Doctorado en Neurociencia Social y Cognición](https://www.uai.cl/doctorado/doctorado-en-neurociencia-social-y-cognicion-2/), [UAI](https://www.uai.cl/)"
   author: "Gorka Navarrete [![](../data/images/24px-ORCID_iD.svg.png)](http://orcid.org/0000-0001-7678-8656) [![](../data/images/twitter_small.png)](https://twitter.com/gorkang)"
-  url: https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html
+  date: today
+  site-url: https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html
   repo-url: https://github.com/gorkang/R_preparacion_visualizacion_datos
   repo-branch: main
+  # downloads: [pdf]
   chapters:
     - "index.qmd"
     - "qmd/00-configuracion-sistema.qmd"
@@ -29,7 +35,7 @@ book:
     - "qmd/10-ejercicios.qmd"
     - "qmd/refs.qmd"
 
-bibliography: data/bib/pkg-refs.bib
+bibliography: data/bib/grateful-refs.bib
 
 format:
   html:
@@ -40,3 +46,5 @@ format:
     fig-width: 12
     fig-height: 8
     toc-depth: 5
+  # pdf:
+  #   documentclass: scrreprt

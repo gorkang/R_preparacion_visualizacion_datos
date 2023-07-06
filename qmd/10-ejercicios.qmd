@@ -8,61 +8,28 @@ source("../_common.R")
 ```
 
 
-
-## Ejercicio 1
-
-Diseña un **sencillo** experimento:
-
--   Debes usar alguna de las [tareas que aparecen en en manual](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#available-tasks) (máximo 2)
-
--   Opcionalmente, puedes hacer primero el Ejercicio 2 de abajo, para añadir o adaptar una nueva tarea/escala **muy sencilla** 
-
--   La duración total del "experimento" no debería superar los 5 minutos
-
-Tendrás que hacer una breve presentación contándonos el diseño experimental.
-
-#### Notas {.ejercicio .unnumbered}
-
-(tareas jsPsychMaker): Usa un máximo de 2 tareas\
-<!-- (tarea nueva): Puedes diseñar una tarea con una sola pregunta para dos condiciones experimentales, o adaptar un cuestionario breve ya existente (que no tengamos en jsPsychMaker). -->
-
-------------------------------------------------------------------------
-
-
-## Ejercicio 2 - Opcional
-
-Crea la siguiente tarea en jsPsychMaker:
-
--   [The Brief Resilience Scale](https://sci-hub.ru/10.1080/10705500802222972) (PDF version inglesa), o en su [versión española](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S0212-97282021000200006&lng=es&tlng=es)
-
-#### Notas {.ejercicio .unnumbered}
-
-(tareas jsPsychMaker): Ver instrucciones en [experimentos-reproducibles - como crear una nueva tarea](09-experimentos-reproducibles.html#como-crear-una-nueva-tarea)
-
-Si prefieres puedes implementar una tarea distinta a The Brief Resilience Scale. Los únicos requisitos son que sea breve y sencilla.
-
-------------------------------------------------------------------------
-
-
 ## Ejercicio FINAL
+
+Para el ejercicio final (evaluable), usaremos el protocolo que has creado en el ejercicio anterior. Usando datos simulados, con la ayuda de jsPsychHelpeR vamos a crear un proyecto de RStudio que procese los datos automáticamente, y adaptar un archivo Rmarkdown para generar un reporte automatizado con tablas, gráficas y una descripción semi-automática de nuestros resultados simulados.  
+
 
 1) El primer paso consiste en obtener datos de participantes virtuales.
 
-- Podéis intentarlo [simulando datos](09-experimentos-reproducibles.html#como-simular-datos)
+- Podéis intentarlo [simulando datos](09-experimentos-reproducibles.html#jspsychmonkeys-como-simular-datos)
 - Si no os funciona jsPsychMonkeys en vuestro sistema, el profesor os ayudará a simular datos para vuestro experimento.
 - Alternativamente, podéis correr el experimento un par de veces (abriendo el index.html)
 
 2) Una vez tengamos los datos:
 
--   Crearemos un proyecto que procesará los datos automáticamente usando [jsPsychHelpeR - como preparar datos](09-experimentos-reproducibles.html#como-preparar-datos)
+-   Crearemos un proyecto que procesará los datos automáticamente usando [jsPsychHelpeR - como preparar datos](09-experimentos-reproducibles.html#jspsychhelper-como-preparar-datos)
 
 -   [Crearemos un reporte en Rmd como parte del pipeline de jsPsychHelpeR](09-experimentos-reproducibles.html#como-crear-un-reporte-dentro-del-jspsychhelper) donde incluiremos:
 
-    -   Tabla/s con descriptivos
+    -   Tabla/s con descriptivos [ver ayuda](#tablas-descriptivos)
 
-    -   Gráfico/s con resultado
+    -   Gráfico/s con resultado [ver ayuda](01-introduccion_visualizacion.html#visualización-de-datos-con-ggplot2) [y ayuda](02-visualizacion-avanzada.html)
 
-    -   Tabla/s con resultados de un análisis sencillo
+    -   Tabla/s con resultados de un análisis sencillo [ver ayuda](#tablas-resultados-inferenciales)
 
     -   Una frase reportando resultados del análisis (usando [Texto inline de gtsummary](06-analisis-datos-inferencial.html#texto-inline))
 
@@ -71,12 +38,15 @@ El proyecto tiene que correr en cualquier computador.
 
 ### IMPORTANTE {-}
 
-La nota del workshop estará basada en el resultado de esta tarea.  
+**La nota del workshop estará basada en el resultado de esta tarea.**  
 
 Tendréis que compartir el proyecto completo con el profesor, y él deberá poder correrlo y ver como resultado el reporte en pdf incluyendo los elementos detallados arriba.  
 
 
 #### Notas {.ejercicio .unnumbered}
 
-(simulación datos): Seguid las instrucciones de [simulando datos](09-experimentos-reproducibles.html#como-simular-datos)\
-(procesamiento datos): Ver [el manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/02-QuickGuide.html#QuickGuidejsPsychHelpeR)
+(simulación datos): Sigue las instrucciones de [simulando datos](09-experimentos-reproducibles.html#jspsychmonkeys-como-simular-datos)\
+
+(preparando datos): Ver [como preparar datos](09-experimentos-reproducibles.html#jspsychhelper-como-preparar-datos)\
+
+Para más información, ver [el manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/02-QuickGuide.html#QuickGuidejsPsychHelpeR)\
