@@ -546,28 +546,45 @@ Para asignar colores podemos usar nombres de colores en inglés, o algo llamado 
 
 Empecemos a cambiar parámetros de nuestro gráfico inicial:  
 
-```{r color}
+```{r color_1}
 
   # Gráfico inicial
   ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
     geom_point()
-  
-  # Color "rojo" para los puntos
+
+```
+
+Color "rojo" para los puntos con `color = "red"`.  
+
+```{r color_2}
+
   ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
     geom_point(color = "red")
-  
-  # Color en función de la variable 'continent'
+
+```
+
+Color en función de la variable 'continent'. Al usar la variable continent, tenemos que ponerlo dentro de `aes()`.  
+
+```{r color_3}
+
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + 
     geom_point()
   
-  # Color en función de la variable 'continent'
-  # Cambiamos el tamaño de los puntos a 2
+```
+
+Color en función de la variable 'continent'. Cambiamos el tamaño de los puntos a 2.  
+
+```{r color_4}
+
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent, size = 2)) + 
     geom_point()
+
+```
+
+Color en función de la variable 'continent'. Cambiamos el tamaño de los puntos a 2. Añadimos transparencia usando el parámetro 'alpha'.  
   
-  # Color en función de la variable 'continent'
-  # Cambiamos el tamaño de los puntos a 2
-  # Añadimos transparencia usando el parámetro 'alpha'
+```{r color_5}
+
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent, size = 2, alpha = .1)) + 
     geom_point()
   
@@ -713,31 +730,45 @@ Podemos usar líneas de tendencia con `geom_smooth()`. El `method` por defecto e
 
 Recuerda que las funciones que usamos (todo lo que contiene `()` e.g. `geom_smooth()`) tienen parámetros, que son instrucciones addicionales que nos permiten modificar como se comportan. Para ver que opciones tenemos, podemos ver la ayuda de las funciones : `?geom_smooth()`, o poner el cursor encima y presionar F1 (ayuda).  
 
-```{r geom-smooth}
+```{r geom-smooth_1}
   
   # Linea de tendencia (default loess)
   ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
     geom_point() +
     geom_smooth()
+    
+```
 
-  # Usamos lm
+Usamos "lm".  
+
+```{r geom-smooth_2}
+
   ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
     geom_point() +
     geom_smooth(method = "lm")
+ 
+```
 
-  # Un smooth por cada clase
+Un smooth por cada color (`continent`).  
+
+```{r geom-smooth_3}
+
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + 
     geom_point() +
     geom_smooth()
+ 
+```
 
-  # Coloreamos puntos pero mantenemos un solo smooth
+Coloreamos puntos pero mantenemos un solo smooth introduciendo el parámetro `aes(color = continent)` dentro de `geom_point()`.  
+
+```{r geom-smooth_4}
+
   ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
     geom_point(aes(color = continent)) +
     geom_smooth()
 
     
 ```
-
 
 #### Ejercicios {.ejercicio -}
 
@@ -830,17 +861,28 @@ cowplot::plot_grid(plot1, plot2, plot3, plot4, plot5, plot6,
 
 Podemos crear diagramas de cajas (boxplots) con `geom_boxplot` o violines con `geom_violin` para visualizar como cambian los datos por grupo.  
 
-```{r geoms-boxplot-violin}
+Boxplot con fill.  
 
-  # Boxplot con fill
+```{r geoms-boxplot-violin_1}
+
   ggplot(gapminder, aes(continent, lifeExp, fill = continent)) + 
     geom_boxplot(alpha = .2)
 
-  # Violins  
+```
+
+Violins.  
+
+```{r geoms-boxplot-violin_2}
+
   ggplot(gapminder, aes(continent, lifeExp, fill = continent)) + 
     geom_violin(alpha = .2)
-  
-  # Combinamos ambos  
+
+```
+
+Combinando ambos.  
+
+```{r geoms-boxplot-violin_3}
+
   ggplot(gapminder, aes(continent, lifeExp)) + 
     geom_boxplot(alpha = .2) +
     geom_violin(alpha = .2, aes(fill = continent))

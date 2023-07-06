@@ -53,33 +53,46 @@ Cuando queremos separar en gráficos independientes distintas categorías dentro
 
 `facet_grid(~ variable)` nos devuelve una matriz simétrica de gráficas.  
 
-```{r facet_grid}
+```{r facet_grid_1}
  
-  # Plot inicial
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
     geom_point(alpha = .2)
 
-  # Un grafico para cada continente
+```
+
+Un gráfico para cada continente.  
+
+```{r facet_grid_2}
+ 
   ## Tip: usamos guides(color = "none") para que no se vea la leyenda asociada a color
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
     geom_point(alpha = .2) +
     facet_grid(~ continent) +
     guides(color = "none")
 
-  # Cambiamos ejes
+```
+
+Cambiamos los ejes.  
+
+```{r facet_grid_3}
+ 
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
     geom_point(alpha = .2) +
     facet_grid(continent ~ .) +
     guides(color = "none")
   
-  # Añadimos una segunda variable
+```
+
+Añadimos una segunda variable. Podemos usar variables categóricas, o dicotomizar variables usando condiciones lógicas (`pop > 5000000`).  
+
+```{r facet_grid_4}
+
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = country)) +
     geom_point(alpha = .2) +
-    facet_grid(continent ~ pop > 5000000) + # pop > 5000000 es una condición lógica que será TRUE or FALSE
+    facet_grid(continent ~ pop > 5000000) + 
     guides(color = "none")
 
 ```
-
 
 ### facet_wrap
 
@@ -90,13 +103,19 @@ Cuando queremos separar en gráficos independientes distintas categorías dentro
   ggplot(gapminder, aes(lifeExp, fill = continent)) +
     geom_histogram(alpha = .5)
 
-  # Facetas por continente
+```
+
+Facetas por continente.  
+
+```{r facet_wrap_2}
+  
   ## En 2 columnas
   ggplot(gapminder, aes(lifeExp, fill = continent)) +
     geom_histogram(alpha = .5) +
     facet_wrap( ~ continent, ncol = 2) +
     guides(fill = "none")
 ```
+
 
 
 ### gghighlight y facet_wrap
