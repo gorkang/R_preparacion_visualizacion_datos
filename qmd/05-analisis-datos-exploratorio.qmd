@@ -161,7 +161,7 @@ gapminder %>%
 Cuando nos llega una nueva base de datos, una de las primeras cosas que haremos será familiarizarnos con los datos. Cómo se distribuyen, cual es la relación entre distintas variables, etc. 
 
 
-```{r initial exploration, fig.height=18}
+```{r initial exploration, fig.height=12}
 
 # Wide to long
 d <- gapminder %>% 

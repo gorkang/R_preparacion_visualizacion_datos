@@ -482,7 +482,7 @@ En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el co
 * **fill**: fill = continent; fill = "red"; fill = "#FAA627"
 * **alpha**: alpha = continent; alpha = 0.2
 * **size**: size = continent; size = 5
-* **shape**:  shape = continent; shape = 0 [ver codigo de las distintas formas](https://r4ds.had.co.nz/data-visualisation.html#fig:shapes)
+* **shape**:  shape = continent; shape = 0 [ver codigo de las distintas formas](01-introduccion_visualizacion.html#shape)
 * **linetype**: linetype = continent; linetype = "dashed"
 * **group**: group = continent
 

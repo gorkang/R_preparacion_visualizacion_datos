@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 execute:
-  cache: true
+  cache: false
   warning: false
   message: false
 
@@ -14,7 +14,7 @@ book:
   # title: "<a href='/index.html'>R para preparación y visualización de datos</a>"
   title: "R para preparación y visualización de datos"
   subtitle: "[Doctorado en Neurociencia Social y Cognición](https://www.uai.cl/doctorado/doctorado-en-neurociencia-social-y-cognicion-2/), [UAI](https://www.uai.cl/)"
-  author: "Gorka Navarrete [![](../data/images/24px-ORCID_iD.svg.png)](http://orcid.org/0000-0001-7678-8656) [![](../data/images/twitter_small.png)](https://twitter.com/gorkang)"
+  author: "Gorka Navarrete [![](data/images/24px-ORCID_iD.svg.png)](http://orcid.org/0000-0001-7678-8656) [![](data/images/twitter_small.png)](https://twitter.com/gorkang)"
   date: today
   site-url: https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html
   repo-url: https://github.com/gorkang/R_preparacion_visualizacion_datos

@@ -261,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header><p>Combinar distintos data frames es una tarea muy común cuando preparamos datos. En ocasiones trabajaremos con distintos archivos que tendremos que combinar, y otras veces, separararemos nuestra base original en distintos data frames, para realizar procesamientos diferenciados, y más adelante volver a combinar los data frames en una base final.</p>
 <hr>
 <section id="paquetes-para-este-capítulo" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="paquetes-para-este-capítulo">Paquetes para este capítulo</h4>
-<div class="cell" data-hash="04-combinar-datos_cache/html/setup_26b096edd7ac0545e8a85bd0d18ebfe5">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org">'dplyr'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'dplyr'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org">'dplyr'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/DT">"DT"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"DT"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/DT">"DT"</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org">"ggplot2"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggplot2"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org">"ggplot2"</a></span><span class="op">)</span></span>
@@ -276,55 +276,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr></section><section id="bind-rows-or-columns" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="bind-rows-or-columns">
 <span class="header-section-number">4.1</span> Bind rows or columns</h2>
 <p>El método más sencillo. Simplemente unimos las filas o columnas de los data-frames.</p>
-<div class="cell" data-hash="04-combinar-datos_cache/html/bind_298a40c5aebedc9537b4e70780341478">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Importar CSVs</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Importar CSVs</span></span>
 <span><span class="va">DF1</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-CSVs/01.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">DF2</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-CSVs/02.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span><span class="co"># Bind DFs añadiendo las *filas* de DF2 a DF1</span></span>
 <span><span class="va">DF1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">DF2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 800 × 9
-   Sex   Priming    trialN Block Adjective  Valence  Answer Arrow    rT
-   &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
- 1 male  Collective      1 we    ofensivo   negative yes    left    623
- 2 male  Collective      2 we    resentido  negative no     right  1235
- 3 male  Collective      3 we    ego�sta    negative yes    left    335
- 4 male  Collective      4 we    indiscreto negative yes    left    355
- 5 male  Collective      5 we    sumiso     negative yes    left    618
- 6 male  Collective      6 we    agradable  positive yes    left    328
- 7 male  Collective      7 we    clasista   negative yes    left    348
- 8 male  Collective      8 we    altruista  positive yes    left   1620
- 9 male  Collective      9 we    ansioso    negative yes    left    346
-10 male  Collective     10 we    presumido  negative yes    left    778
-# ℹ 790 more rows</code></pre>
-</div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Bind DFs añadiendo las *columnas* de DF2 a DF1</span></span>
+<span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">DF2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 800 × 9</span></span>
+<span><span class="co">#&gt;   Sex   Priming    trialN Block Adjective  Valence  Answer Arrow    rT</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 male  Collective      1 we    ofensivo   negative yes    left    623</span></span>
+<span><span class="co">#&gt; 2 male  Collective      2 we    resentido  negative no     right  1235</span></span>
+<span><span class="co">#&gt; 3 male  Collective      3 we    ego�sta    negative yes    left    335</span></span>
+<span><span class="co">#&gt; 4 male  Collective      4 we    indiscreto negative yes    left    355</span></span>
+<span><span class="co">#&gt; 5 male  Collective      5 we    sumiso     negative yes    left    618</span></span>
+<span><span class="co">#&gt; 6 male  Collective      6 we    agradable  positive yes    left    328</span></span>
+<span><span class="co">#&gt; # ℹ 794 more rows</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Bind DFs añadiendo las *columnas* de DF2 a DF1</span></span>
 <span>  <span class="co">## bind_cols renombra automaticamente los nombres de las columnas para que no haya coincidencias</span></span>
 <span><span class="va">DF1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span><span class="va">DF2</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 400 × 18
-   Sex...1 Priming...2 trialN...3 Block...4 Adjective...5 Valence...6 Answer...7
-   &lt;chr&gt;   &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;     
- 1 male    Collective           1 we        ofensivo      negative    yes       
- 2 male    Collective           2 we        resentido     negative    no        
- 3 male    Collective           3 we        ego�sta       negative    yes       
- 4 male    Collective           4 we        indiscreto    negative    yes       
- 5 male    Collective           5 we        sumiso        negative    yes       
- 6 male    Collective           6 we        agradable     positive    yes       
- 7 male    Collective           7 we        clasista      negative    yes       
- 8 male    Collective           8 we        altruista     positive    yes       
- 9 male    Collective           9 we        ansioso       negative    yes       
-10 male    Collective          10 we        presumido     negative    yes       
-# ℹ 390 more rows
-# ℹ 11 more variables: Arrow...8 &lt;chr&gt;, rT...9 &lt;dbl&gt;, Sex...10 &lt;chr&gt;,
-#   Priming...11 &lt;chr&gt;, trialN...12 &lt;dbl&gt;, Block...13 &lt;chr&gt;,
-#   Adjective...14 &lt;chr&gt;, Valence...15 &lt;chr&gt;, Answer...16 &lt;chr&gt;,
-#   Arrow...17 &lt;chr&gt;, rT...18 &lt;dbl&gt;</code></pre>
-</div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span><span class="va">DF2</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; # A tibble: 400 × 18</span></span>
+<span><span class="co">#&gt;   Sex...1 Priming...2 trialN...3 Block...4 Adjective...5 Valence...6</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt; 1 male    Collective           1 we        ofensivo      negative   </span></span>
+<span><span class="co">#&gt; 2 male    Collective           2 we        resentido     negative   </span></span>
+<span><span class="co">#&gt; 3 male    Collective           3 we        ego�sta       negative   </span></span>
+<span><span class="co">#&gt; 4 male    Collective           4 we        indiscreto    negative   </span></span>
+<span><span class="co">#&gt; 5 male    Collective           5 we        sumiso        negative   </span></span>
+<span><span class="co">#&gt; 6 male    Collective           6 we        agradable     positive   </span></span>
+<span><span class="co">#&gt; # ℹ 394 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 12 more variables: Answer...7 &lt;chr&gt;, Arrow...8 &lt;chr&gt;, rT...9 &lt;dbl&gt;, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="joins" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="joins">
 <span class="header-section-number">4.2</span> Joins</h2>
@@ -376,8 +364,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>DF_BAD: Grupo de participantes “selectos”</li>
 </ul>
-<div class="cell" data-hash="04-combinar-datos_cache/html/joins-data_a7205c983198de55ad100ac618e4002d">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Importar CSVs para los joins  </span></span>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Importar CSVs para los joins  </span></span>
 <span><span class="va">DF_IDs</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-IDs.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">DF_results</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-results.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">DF_BAD</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-BAD.csv"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -389,8 +378,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figure class="figure"><p><img src="../data/images/inner-join.gif" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">SOURCE: https://github.com/gadenbuie/tidyexplain</figcaption></figure>
 </div>
-<div class="cell" data-hash="04-combinar-datos_cache/html/inner-join_e553069034d7a9bf39545cb4b8628971">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_inner_joined</span> <span class="op">=</span> </span>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF_inner_joined</span> <span class="op">=</span> </span>
 <span>  <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
@@ -410,8 +400,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figure class="figure"><p><img src="../data/images/left-join.gif" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">SOURCE: https://github.com/gadenbuie/tidyexplain</figcaption></figure>
 </div>
-<div class="cell" data-hash="04-combinar-datos_cache/html/left-join_4b8e1a98c91ebf14f4f9e464bf6e56e0">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_left_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF_left_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Vemos el número de filas de cada dataframe</span></span>
@@ -427,8 +418,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 <p>Si no tenemos columnas con el mismo nombre en ambos dataframes, tenemos que indicarle a la función a partir de que dos columnas queremos unir los dataframes. Por ejemplo, con <code>by = c("ID" = "Identificador")</code> le decimos que la columna <code>ID</code> el primer dataframe corresponde a <code>Identificador</code> del segundo dataframe.</p>
-<div class="cell" data-hash="04-combinar-datos_cache/html/left-join2_2b74328c924be55c0894b630a2399789">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Renombramos el identificador para que no coincidan</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Renombramos el identificador para que no coincidan</span></span>
 <span><span class="va">DF_results2</span> <span class="op">=</span> <span class="va">DF_results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Identificador <span class="op">=</span> <span class="va">ID</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Si no hay variables en común, nos da un error:</span></span>
@@ -458,8 +450,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figure class="figure"><p><img src="../data/images/full-join.gif" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">SOURCE: https://github.com/gadenbuie/tidyexplain</figcaption></figure>
 </div>
-<div class="cell" data-hash="04-combinar-datos_cache/html/full-join_9ea80850316c4df473ddee35307324ad">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_full_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF_full_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># CHECK</span></span>
@@ -481,8 +474,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figure class="figure"><p><img src="../data/images/anti-join.gif" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">SOURCE: https://github.com/gadenbuie/tidyexplain</figcaption></figure>
 </div>
-<div class="cell" data-hash="04-combinar-datos_cache/html/anti-join_9118563f11d68d85e044c4bee9403df3">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># AVOID the people present in DF_BAD</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># AVOID the people present in DF_BAD</span></span>
 <span><span class="va">DF_anti_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">DF_BAD</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
@@ -505,8 +499,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figure class="figure"><p><img src="../data/images/semi-join.gif" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">SOURCE: https://github.com/gadenbuie/tidyexplain</figcaption></figure>
 </div>
-<div class="cell" data-hash="04-combinar-datos_cache/html/semi-join_1ac2cc423327c06e3aa300e043b8633b">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># INCLUDE ONLY the people present in DF_BAD</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># INCLUDE ONLY the people present in DF_BAD</span></span>
 <span><span class="va">DF_semi_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">DF_BAD</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
@@ -523,8 +518,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section></section><section id="nesting-joins" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="nesting-joins">
 <span class="header-section-number">4.2.3</span> Nesting joins</h3>
-<div class="cell" data-hash="04-combinar-datos_cache/html/joins-nesting_c94b30a8a4a5f7bdce5703ebd0639ea1">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_nest_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF_nest_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nest_join.html">nest_join</a></span><span class="op">(</span><span class="va">DF_results</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">DF_nest_joined</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -536,8 +532,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section></section><section id="ejercicios-joins" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicios-joins">Ejercicios JOINS</h2>
 <p>Con los DFs de abajo, haz las siguientes operaciones:</p>
-<div class="cell" data-hash="04-combinar-datos_cache/html/ejercicios-joins-dfs_00d88e3fd644d7351a9e90d0ffd28484">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_IDs</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-IDs2.csv"</span><span class="op">)</span><span class="op">)</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF_IDs</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-IDs2.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">DF_results</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-results.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">DF_BAD</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-BAD.csv"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -568,8 +565,9 @@ Pista para promedios agrupados: <img src="../data/images/hint.png" class="img-fl
 <ol start="6" type="1">
 <li>En el ejercicio 3 de verbos avanzados creaste un DF llamado <code>DF_split</code> con la median split a partir de la variable <code>Social.Adaptation</code>.</li>
 </ol>
-<div class="cell" data-hash="04-combinar-datos_cache/html/ejercicios-joins-responses-5-setup_2d529b2b9c46a46cc5199c1f1ab6b59f">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="va">DF_wide</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span>  <span class="va">DF_wide</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">median_social_adaptation</span> <span class="op">=</span> <span class="va">DF_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -589,7 +587,7 @@ Pista para promedios agrupados: <img src="../data/images/hint.png" class="img-fl
 <span>  <span class="va">DF_long</span> <span class="op">=</span> <span class="va">DF_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">fluid_intelligence</span><span class="op">:</span><span class="va">working_memory</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Uno ese DF al <code>DF_long</code> que habías creado en el ejercicio 2 de la misma sección. El DF final se vera así:</p>
-<div class="cell" data-hash="04-combinar-datos_cache/html/ejercicios-joins-responses-5_aa0e79a868b23e31c968bb2b6571e4c9">
+<div class="cell">
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-469f2da06c6d69abe390" style="width:100%;height:auto;"></div>
@@ -599,7 +597,7 @@ Pista para promedios agrupados: <img src="../data/images/hint.png" class="img-fl
 <ol start="7" type="1">
 <li>Haz un plot donde se vea la distribución para todas las variables de resultados de los dos niveles de <code>social_adaptation_split</code>.</li>
 </ol>
-<div class="cell" data-hash="04-combinar-datos_cache/html/ejercicios-joins-responses-6_a87ce61a09ba7f73277d65951bcdb630">
+<div class="cell">
 <div class="cell-output-display">
 <p><img src="04-combinar-datos_files/figure-html/ejercicios-joins-responses-6-1.png" class="img-fluid" width="1152"></p>
 </div>

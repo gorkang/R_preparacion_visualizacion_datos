@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 </header><section id="paquetes-para-este-capítulo" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="paquetes-para-este-capítulo">Paquetes para este capítulo</h4>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/setup_ae40022009c7376e231474c8d290f5e3">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gorkang/jsPsychMaker">'jsPsychMaker'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gorkang/jsPsychMaker"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gorkang/jsPsychMaker">'jsPsychMaker'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gorkang/jsPsychMonkeys">'jsPsychMonkeys'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gorkang/jsPsychMonkeys"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gorkang/jsPsychMonkeys">'jsPsychMonkeys'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gorkang/jsPsychHelpeR">'jsPsychHelpeR'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gorkang/jsPsychHelpeR"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gorkang/jsPsychHelpeR">'jsPsychHelpeR'</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -283,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Si quieres consultar los <a href="https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks">scripts de las tareas</a> puedes hacerlo en la carpeta <code>canonical_protocol/</code> del repositorio de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a>. Si quieres crear una nueva tarea para añadir a tu protocolo, puedes seguir las <a href="09-experimentos-reproducibles.html#como-crear-una-nueva-tarea">instrucciones de más abajo</a>.</p>
 <hr>
 <p><strong>Para crear un protocolo con las tareas <code>AIM</code>, <code>EAR</code> e <code>IRI</code>, y abrirlo en un navegador:</strong></p>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-3_98c6ad2a50a1304db2c19beea6ac7e1d">
+<div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychMaker</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMaker/man/create_protocol.html">create_protocol</a></span><span class="op">(</span>canonical_tasks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AIM"</span>, <span class="st">"EAR"</span>, <span class="st">"IRI"</span><span class="op">)</span>, <span class="co"># Pruebas a incluir</span></span>
 <span>                              folder_output <span class="op">=</span> <span class="st">"~/Downloads/protocol999"</span>, <span class="co"># El directorio tiene que incluir un número (se usará como pid)</span></span>
 <span>                              launch_browser <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># Abre el navegador con el protocolo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -321,8 +321,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <!-- sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev  --><hr>
 <p><strong>Para lanzar monos localmente:</strong></p>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-4_9171fa742e19a2c3dc7fe5274f2ae5d9">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Un solo mono</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Un solo mono</span></span>
 <span><span class="fu">jsPsychMonkeys</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMonkeys/man/release_the_monkeys.html">release_the_monkeys</a></span><span class="op">(</span>uid <span class="op">=</span> <span class="st">"1"</span>, <span class="co"># Lanza un monos con el user id 1</span></span>
 <span>                                    local_folder_tasks <span class="op">=</span> <span class="st">"~/Downloads/protocol999"</span><span class="op">)</span></span>
 <span></span>
@@ -339,27 +340,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Cada tarea de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a> debería tener un script hermano en <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a> para automatizar la preparación de datos. Una vez tengamos nuestro protocolo listo para el pilotaje, con una función de jsPsychHelpeR crearemos todo lo necesario para que la preparación de datos corra automáticamente.</p>
 <hr>
 <p><strong>Para crear y abrir un nuevo proyecto de RStudio con todo listo para correr la preparación de datos de tu protocolo:</strong></p>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-5_c3b0ef24fd84956e39bc041dac2a1a10">
+<div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychHelpeR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychHelpeR/man/run_initial_setup.html">run_initial_setup</a></span><span class="op">(</span>pid <span class="op">=</span> <span class="st">'999'</span>, </span>
 <span>                                 data_location <span class="op">=</span> <span class="st">"~/Downloads/protocol999/.data"</span>, </span>
 <span>                                 folder <span class="op">=</span> <span class="st">"~/Downloads/jsPsychHelpeR999"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>En el nuevo proyecto, tendremos que correr la preparación de datos. Puedes abrir el archivo <code>run.R</code>, donde encontrarás algunas instrucciones básicas.</p>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-6_0f36d4cb8f446db4daf70872eefa6a80">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Corremos el pipeline de preparación de datos</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="co"># Corremos el pipeline de preparación de datos</span></span>
 <span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_make.html">tar_make</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <p>Para ver el data frame final listo para el análisis</p>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-7_c1feec91f4607fcfaa3fa4f27be9267e">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># List available objects</span></span>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span>  <span class="co"># List available objects</span></span>
 <span>  <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_objects.html">tar_objects</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Load DF_analysis file</span></span>
 <span>  <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_load.html">tar_load</a></span><span class="op">(</span><span class="va">DF_analysis</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># See DF_analysis dataframe</span></span>
-<span>  <span class="va">DF_analysis</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="va">DF_analysis</span></span>
+<span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <section id="como-crear-un-reporte-dentro-del-jspsychhelper" class="level3" data-number="9.4.1"><h3 data-number="9.4.1" class="anchored" data-anchor-id="como-crear-un-reporte-dentro-del-jspsychhelper">
@@ -398,7 +402,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Copia las plantillas de tareas de ejemplo:</li>
 </ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-8_41d3731bfc435182cf7a1e6c402512bc">
+<div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychMaker</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMaker/man/copy_example_tasks.html">copy_example_tasks</a></span><span class="op">(</span>destination_folder <span class="op">=</span> <span class="st">"~/Downloads/TEST"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
@@ -424,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li><p>Ejecuta <code><a href="https://rdrr.io/pkg/jsPsychMaker/man/create_protocol.html">create_protocol()</a></code> con los parámetros de abajo, se creará un nuevo protocolo con tu/tus tareas.</p></li>
 </ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-9_5f7d3639896efa987ae2a77e8f7d9d11">
+<div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">jsPsychMaker</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMaker/man/create_protocol.html">create_protocol</a></span><span class="op">(</span>canonical_tasks <span class="op">=</span> <span class="st">"EAR"</span>, <span class="co"># Incluye la tarea EAR</span></span>
 <span>                                folder_tasks <span class="op">=</span> <span class="st">"~/Downloads/TEST/"</span>, <span class="co"># Crea e incluye las tareas que estan en esta carpeta</span></span>
 <span>                                folder_output <span class="op">=</span> <span class="st">"~/Downloads/TEST/new_protocol"</span>, <span class="co"># Crea el protocolo aquí</span></span>
@@ -451,13 +455,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Instalamos jsPsychHelper:</li>
 </ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-10_a7d351fdbaeb231573c583c330dd3fb9">
+<div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gorkang/jsPsychHelpeR">'jsPsychHelpeR'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gorkang/jsPsychHelpeR"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/gorkang/jsPsychHelpeR">'jsPsychHelpeR'</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>Creamos el nuevo archivo <code>prepare_NOMBRETAREA()</code>:</li>
 </ol>
-<div class="cell" data-hash="09-experimentos-reproducibles_cache/html/unnamed-chunk-11_ff4a2daff04e546745fbe4e98e2463ba">
+<div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychHelpeR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychHelpeR/man/create_new_task.html">create_new_task</a></span><span class="op">(</span>short_name_task <span class="op">=</span> <span class="st">"NAMETASK"</span>, get_info_googledoc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Esta función:</p>

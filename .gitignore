@@ -1,4 +1,5 @@
 *_cache/
+*_files/
 index_cache
 .Rproj.user
 .Rhistory
