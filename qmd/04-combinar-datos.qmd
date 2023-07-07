@@ -111,7 +111,15 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 
 Preserva pares de observaciones de `DF_x` y de `DF_y` con claves iguales (fijaros en el mensaje que aparece en la Consola: `Joining, by = "ID"`).   
 
+::: {.content-visible when-format="html"}
 ![SOURCE: https://github.com/gadenbuie/tidyexplain](../data/images/inner-join.gif)
+:::
+
+::: {.content-visible when-format="pdf"}
+[See animation](https://github.com/gadenbuie/tidyexplain#inner-join)
+:::
+
+
 
 ```{r inner-join}
 
@@ -130,7 +138,13 @@ DT::datatable(DF_inner_joined)
 
 Preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguales (columnas con el mismo nombre).  
 
+::: {.content-visible when-format="html"}
 ![SOURCE: https://github.com/gadenbuie/tidyexplain](../data/images/left-join.gif)
+:::
+
+::: {.content-visible when-format="pdf"}
+[See animation](https://github.com/gadenbuie/tidyexplain#left-join)
+:::
 
 ```{r left-join}
 
@@ -182,7 +196,14 @@ DF_left_joined = DF_IDs %>%
 
 Preserva todas las observaciones de `DF_x` y `DF_y`, alineándolas cuando tengan claves iguales.  
 
+::: {.content-visible when-format="html"}
 ![SOURCE: https://github.com/gadenbuie/tidyexplain](../data/images/full-join.gif)
+:::
+
+::: {.content-visible when-format="pdf"}
+[See animation](https://github.com/gadenbuie/tidyexplain#full-join)
+:::
+
 
 ```{r full-join}
 
@@ -203,7 +224,13 @@ DT::datatable(DF_full_joined)
 
 Preserva solo aquellas observaciones de `DF_x` cuyas claves NO aparezcan en `DF_y`.  
 
+::: {.content-visible when-format="html"}
 ![SOURCE: https://github.com/gadenbuie/tidyexplain](../data/images/anti-join.gif)
+:::
+
+::: {.content-visible when-format="pdf"}
+[See animation](https://github.com/gadenbuie/tidyexplain#anti-join)
+:::
 
 ```{r anti-join}
 
@@ -224,7 +251,13 @@ DT::datatable(DF_anti_joined)
 
 Preserva solo aquellas observaciones de `DF_x` cuyas claves aparezcan en `DF_y`. La diferencia con `inner_join()` es que NO se preservan las observaciones de `DF_y`.     
 
+::: {.content-visible when-format="html"}
 ![SOURCE: https://github.com/gadenbuie/tidyexplain](../data/images/semi-join.gif)
+:::
+
+::: {.content-visible when-format="pdf"}
+[See animation](https://github.com/gadenbuie/tidyexplain#semi-join)
+:::
 
 ```{r semi-join}
 

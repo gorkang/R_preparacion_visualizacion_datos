@@ -38,12 +38,15 @@ knitr::include_graphics(here::here("data/images/empezando.png"))
 
 Para instalar los paquetes del workshop, ejecuta el código de más abajo (sección sombreada en gris claro) en la consola de RStudio.  
 
+::: {.content-visible when-format="html"}
+
 En este gif puedes ver como hacerlo:  
 
 ```{r image_2, echo=FALSE, message=FALSE, warning=FALSE, out.width="100%"}
-knitr::include_graphics(here::here("data/videos/rstudio_install_ALL.gif"))
+knitr::include_graphics(here::here("data/videos/rstudio-install-ALL.gif"))
 ```
 
+::: 
 
 **Copia y pega el código de abajo en la consola de RStudio y ejecútalo [tecla ENTER]**:  
 

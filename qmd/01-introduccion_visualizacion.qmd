@@ -56,9 +56,13 @@ if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'
 
 *"These 13 datasets (the Datasaurus, plus 12 others) each have the same summary statistics (x/y mean, x/y standard deviation, and Pearson's correlation) to two decimal places, while being drastically different in appearance."* (Matejka, J., & Fitzmaurice, G., 2017).    
 
+::: {.content-visible when-format="html"}
+![SOURCE: https://www.research.autodesk.com/publications/same-stats-different-graphs/](../data/images/DinoSequentialSmaller.gif)
+:::
 
-![SOURCE: https://www.autodeskresearch.com/publications/samestats](../data/images/DinoSequentialSmaller.gif)
-
+::: {.content-visible when-format="pdf"}
+[See Datasaurus](https://www.research.autodesk.com/publications/same-stats-different-graphs/)
+:::
 
 
 ### Ejemplo del mundo real: ¿cuantos temas deberia estudiar?
@@ -234,7 +238,15 @@ cowplot::plot_grid(plot_inicial, plot_final, labels = c("Antes", "Después"))
 
 #### Moraleja: es importante mostrar los datos individuales y/o la distribución de los datos {-}
 
-![SOURCE: https://www.autodeskresearch.com/publications/samestats](../data/images/BoxViolinSmaller.gif)
+
+::: {.content-visible when-format="html"}
+![SOURCE: https://www.research.autodesk.com/publications/same-stats-different-graphs/](../data/images/BoxViolinSmaller.gif)
+:::
+
+::: {.content-visible when-format="pdf"}
+[See Datasaurus](https://www.research.autodesk.com/publications/same-stats-different-graphs/)
+:::
+
 
 ---  
 
@@ -372,11 +384,17 @@ Y otros recursos que resultan muy útiles:
 
 #### Primeros pasos - con training wheels
 
-Para empezar a usar ggplot sin tener que preocuparnos de su complejidad, podemos usar la función `esquisse:::esquisser()` del paquete [esquisse](https://github.com/dreamRs/esquisse). Esta nos permite usar la potencia de ggplot para explorar una base de datos de manera muy sencilla.   
+Para empezar a usar ggplot sin tener que preocuparnos de su complejidad, podemos usar la función `esquisse:::esquisser()` del paquete [esquisse](https://www.williamrchase.com/). Esta nos permite usar la potencia de ggplot para explorar una base de datos de manera muy sencilla.   
 
-![SOURCE: https://www.williamrchase.com/slides/intro_r_anthropology_2018#93](../data/images/esquisse.gif)  
 
-<!-- (https://www.williamrchase.com/slides/slide_img/esquisse.gif)   -->  
+::: {.content-visible when-format="html"}
+![SOURCE: https://github.com/will-r-chase/blog/blob/master/static/slides/slide_img/esquisse.gif](../data/images/esquisse.gif)  
+:::
+
+::: {.content-visible when-format="pdf"}
+[See Esquisse animation](https://github.com/will-r-chase/blog/blob/master/static/slides/slide_img/esquisse.gif)
+:::
+
 
 <BR> 
 

@@ -101,9 +101,9 @@ Algo que podemos hacer con todos los repositorios de Github es clonarlos localme
 
 **Segundo**, en RStudio: `File > New Project > Version Control > Git`  
 
+::: {.content-visible when-format="html"}
 ![](../data/images/rstudio-github.gif)
-
-
+:::
 
 
 ## Crear un proyecto en RStudio asociado a Github  

@@ -441,10 +441,10 @@ Y mostramos la tabla de resultados. Como se trata de modelos mixtos, tenemos que
 
 # broomExtra::glance_performance(model2)
   
-  table_model2 %>% 
-      as_gt() %>%
-      gt::tab_source_note(
-        gt::md(paste0(deparse1(model2@call$formula), "<BR> ", "R2 conditional = ", round(R2_1$R2_conditional, 3), ", R2 marginal = ", round(R2_1$R2_marginal, 3))))
+  table_model2 
+      # as_gt() %>%
+      # gt::tab_source_note(
+      #   gt::md(paste0(deparse1(model2@call$formula), "<BR> ", "R2 conditional = ", round(R2_1$R2_conditional, 3), ", R2 marginal = ", round(R2_1$R2_marginal, 3))))
 
 ```
 

@@ -14,12 +14,27 @@ book:
   # title: "<a href='/index.html'>R para preparación y visualización de datos</a>"
   title: "R para preparación y visualización de datos"
   subtitle: "[Doctorado en Neurociencia Social y Cognición](https://www.uai.cl/doctorado/doctorado-en-neurociencia-social-y-cognicion-2/), [UAI](https://www.uai.cl/)"
-  author: "Gorka Navarrete [![](data/images/24px-ORCID_iD.svg.png)](http://orcid.org/0000-0001-7678-8656) [![](data/images/twitter_small.png)](https://twitter.com/gorkang)"
+  author:
+    - name: "Gorka Navarrete"
+      orcid: 0000-0001-7678-8656
+      email: gorkang@gmail.com
   date: today
   site-url: https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html
   repo-url: https://github.com/gorkang/R_preparacion_visualizacion_datos
   repo-branch: main
-  # downloads: [pdf]
+  downloads: [pdf]
+  navbar:
+    search: true
+    right:
+      - icon: mastodon
+        href: https://fosstodon.org/%40gorkang{_blank}
+        aria-label: Mastodon
+  page-footer:
+    border: false
+    background: light
+    left: >-
+       <a href="http://orcid.org/0000-0001-7678-8656">Gorka Navarrete</a>
+
   chapters:
     - "index.qmd"
     - "qmd/00-configuracion-sistema.qmd"
@@ -39,6 +54,10 @@ bibliography: data/bib/grateful-refs.bib
 
 format:
   html:
+    grid:
+      body-width: 1024px
+      # sidebar-width: 200px
+      # margin-width: 200px
     theme:
       - cosmo
       - base.scss
@@ -46,5 +65,12 @@ format:
     fig-width: 12
     fig-height: 8
     toc-depth: 5
-  # pdf:
-  #   documentclass: scrreprt
+  pdf:
+    documentclass: scrreprt
+    fig-width: 10
+    fig-height: 6
+    fig-dpi: 600
+    include-in-header:
+      text: \usepackage[top=20mm, left=30mm, right=25mm, bottom=25mm]{geometry}
+    template-partials:
+      - before-body.tex
