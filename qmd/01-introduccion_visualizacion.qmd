@@ -71,7 +71,7 @@ Este ejemplo viene de un experimento que realizamos junto con [Carlos Santamarí
 
 Abajo se puede ver como cambia la probabilidad de que uno de los temas estudiados aparezca dentro de los 5 seleccionados al azar. Con 30 de los 80 temas estudiados, la probabilidad de que uno de ellos salga en la prueba es del 91%. Si estudiáramos 47, subiríamos a una probabilidad del 99%.    
 
-```{r opositores-plot, echo=FALSE, fig.height=6, fig.width=8}
+```{r opositores-plot, echo=FALSE, fig.height=4, fig.width=4}
 
 hipergeometric_formula <- function(temas_totales = 80,
                  temas_estudiados = 30,
@@ -99,7 +99,6 @@ data_plot = 1:temas_totales |>
                    tibble::as_tibble()  |> 
                    dplyr::mutate(N = .x))
 
-
 plotly::ggplotly(
   ggplot2::ggplot(data_plot, ggplot2::aes(N, value)) +
     ggplot2::geom_line() +
@@ -110,7 +109,6 @@ plotly::ggplotly(
     ggplot2::labs(title = "Probabilidad de que uno de los temas estudiados aparezca",
          x = "Temas estudiados",
          y = "Probabilidad"))
-
   
 ```
 
