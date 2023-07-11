@@ -84,9 +84,22 @@ skimr::skim(gapminder)
 
 
 
-### Ejercicio variables individuales {.ejercicio -}
+### Ejercicios {.ejercicio -}
 
-Usando el DF `mpg`, visualiza la distribucion de las variables `manufacturer`, y `hwy`. Fijate que la primera es categórica, y la segunda continua.
+
+**Variables individuales**  
+
+Usando el DF `mpg`, visualiza la distribucion de las variables `manufacturer`, y `hwy`. Fijate que la primera es categórica, y la segunda continua.  
+
+::: {.callout-tip collapse="true"}
+
+### Pista
+
+Vas a tener que elegir entre `geom_bar()` y `geom_histogram()`.  
+
+Puedes ver que pasa si usas el parámetro `binwidth = 1` en `geom_histogram()`.  
+
+:::
 
 ```{r ejercicio-variables-individuales, echo=FALSE}
 
@@ -100,11 +113,10 @@ ggplot(mpg, aes(hwy)) +
 
 ```
 
-### {-}
 
 <BR>
 
-### Ejercicios {.ejercicio -}
+**Ejercicios avanzados**  
 
 Usando como base éste código:
 
@@ -116,7 +128,17 @@ ggplot(gapminder, aes(lifeExp, fill = continent)) +
 
 ¿Podrías replicar la visualización de abajo? Queremos mostrar un histograma por continente.
 
-<details><summary>Lo mejor es dividir el proceso en varios pasos![](../data/images/hint.png)</summary><span style="color: orange;">1) Empieza con el histograma de arriba. <BR>2) recuerda que puedes usar el parámetro `fill` (dentro de aes), para asignar un color de relleno por nivel de una variable categórica. <BR>3) Finalmente, usando facetas podrás crear una gráfica para cada nivel de la variable categórica [facet_wrap()!](#facet_wrap)</span></details>
+::: {.callout-tip collapse="true"}
+
+### Lo mejor es dividir el proceso en varios pasos
+
+<span style="color: orange;">
+1) Empieza con el histograma de arriba. <BR>
+2) recuerda que puedes usar el parámetro `fill` (dentro de aes), para asignar un color de relleno por nivel de una variable categórica. <BR>
+3) Finalmente, usando facetas podrás crear una gráfica para cada nivel de la variable categórica [facet_wrap()!](#facet_wrap)
+</span>
+
+:::
 
 
 ```{r ejercicio-variables-individuales-1, echo=FALSE}
@@ -127,7 +149,13 @@ ggplot(gapminder, aes(lifeExp, fill = continent)) +
 
 ¿Como podemos añadir el histograma general para poder entender donde se ubica cada continente?
 
-<details><summary>La solución está en el capítulo 1![](../data/images/hint.png)</summary><span style="color: orange;">El paquete [gghighlight](#gghighlight-y-facet_wrap) es justo lo que necesitas</span></details>
+::: {.callout-tip collapse="true"}
+
+### La solución está en el capítulo 1
+
+<span style="color: orange;">El paquete [gghighlight](#gghighlight-y-facet_wrap) es justo lo que necesitas</span>
+
+:::
 
 
 
@@ -225,8 +253,19 @@ Podemos usar geom_density_ridges() para combinar puntos con distribuciones:
 ```{r covariacion-categorica-continua-3}
 
 ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
-  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
-  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9)
+  ggridges::geom_density_ridges(
+    stat = "binline",
+    bins = 20,
+    scale = 0.95,
+    draw_baseline = FALSE,
+    alpha = .3
+  ) +
+  ggridges::geom_density_ridges(
+    jittered_points = TRUE,
+    position = "raincloud",
+    alpha = 0.5,
+    scale = 0.9
+  )
 
 ```
 
@@ -238,9 +277,21 @@ ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
 
 gapminder %>% group_by(year) %>% summarise(n())
 
-ggplot(gapminder %>% filter(year > 1995), aes(lifeExp, continent, fill = continent)) +
-  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
-  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9)
+ggplot(gapminder %>% filter(year > 1995),
+       aes(lifeExp, continent, fill = continent)) +
+  ggridges::geom_density_ridges(
+    stat = "binline",
+    bins = 20,
+    scale = 0.95,
+    draw_baseline = FALSE,
+    alpha = .3
+  ) +
+  ggridges::geom_density_ridges(
+    jittered_points = TRUE,
+    position = "raincloud",
+    alpha = 0.5,
+    scale = 0.9
+  )
 
 ```
 
@@ -255,16 +306,40 @@ Empezamos creando dos gráficos. En cada uno filtramos por el año deseado (e.g.
 
 ```{r covariacion-categorica-continua-5, echo=TRUE}
 
-A = ggplot(gapminder %>% filter(year == 1952), aes(lifeExp, continent, fill = continent)) +
-  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
-  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+A = ggplot(gapminder %>% filter(year == 1952),
+           aes(lifeExp, continent, fill = continent)) +
+  ggridges::geom_density_ridges(
+    stat = "binline",
+    bins = 20,
+    scale = 0.95,
+    draw_baseline = FALSE,
+    alpha = .3
+  ) +
+  ggridges::geom_density_ridges(
+    jittered_points = TRUE,
+    position = "raincloud",
+    alpha = 0.5,
+    scale = 0.9
+  ) +
   theme(legend.position = "none") +
   scale_x_continuous(n.breaks = 10, limits = c(20, 90)) +
   ggtitle("1952")
 
-B = ggplot(gapminder %>% filter(year == 2007), aes(lifeExp, continent, fill = continent)) +
-  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
-  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+B = ggplot(gapminder %>% filter(year == 2007),
+           aes(lifeExp, continent, fill = continent)) +
+  ggridges::geom_density_ridges(
+    stat = "binline",
+    bins = 20,
+    scale = 0.95,
+    draw_baseline = FALSE,
+    alpha = .3
+  ) +
+  ggridges::geom_density_ridges(
+    jittered_points = TRUE,
+    position = "raincloud",
+    alpha = 0.5,
+    scale = 0.9
+  ) +
   theme(legend.position = "none") +
   scale_x_continuous(n.breaks = 10, limits = c(20, 90)) +
   ggtitle("2007")
@@ -278,14 +353,26 @@ Para visualizar la diferencia entre 2007 y 1952, podemos calcular primero cuanto
 
 ```{r covariacion-categorica-continua-6}
 
-# Cálculo de la diferencia entre el máximo y mínimo de lifeExp para cada country. Incluimos continent en group_by() para poder usar esa variable en la gráfica
+# Cálculo de la diferencia entre el máximo y mínimo de lifeExp para cada country. 
+  # Incluimos continent en group_by() para poder usar esa variable en la gráfica
 DF_gapminder_max_min = gapminder %>%
   group_by(continent, country) %>%
   summarise(lifeExp = max(lifeExp) - min(lifeExp))
 
 ggplot(DF_gapminder_max_min, aes(lifeExp, continent, fill = continent)) +
-  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
-  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+  ggridges::geom_density_ridges(
+    stat = "binline",
+    bins = 20,
+    scale = 0.95,
+    draw_baseline = FALSE,
+    alpha = .3
+  ) +
+  ggridges::geom_density_ridges(
+    jittered_points = TRUE,
+    position = "raincloud",
+    alpha = 0.5,
+    scale = 0.9
+  ) +
   theme(legend.position = "none") +
   ggtitle("Diferencia entre max y min por país")
 ```
@@ -293,7 +380,14 @@ ggplot(DF_gapminder_max_min, aes(lifeExp, continent, fill = continent)) +
 ### Ejercicio {.ejercicio}
 
 Arriba estamos restando la esperanza de vida máxima y mínima de cada pais, pero querríamos ver la diferencia entre 2007 y 1952 ¿Podrías rehacer el cálculo para mostrar la diferencia entre 2007 y 1952?
-<details><summary>Pista ![](../data/images/hint.png)</summary><span style="color: orange;">1. Crear un DF para cada 2007 y otro para 1952, renombrando la variable lifeExp (e.g. max_lifeExp y min_lifeExp, respectivamente)<BR>2. Usando la funcion `full_join()`, juntamos ambas bases (tendras que usar el parametro `by = c("country", "continent")`). <BR>3. Con `mutate()` calculamos la diferencia.</span></details>
+
+::: {.callout-tip collapse="true"}
+
+### Pista
+
+<span style="color: orange;">1. Crear un DF para cada 2007 y otro para 1952, renombrando la variable lifeExp (e.g. max_lifeExp y min_lifeExp, respectivamente)<BR>2. Usando la funcion `full_join()`, juntamos ambas bases (tendras que usar el parametro `by = c("country", "continent")`). <BR>3. Con `mutate()` calculamos la diferencia.</span>
+
+:::
 
 ```{r covariacion-categorica-continua-7, echo=FALSE}
 DF_last_year = gapminder %>% filter(year == max(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_max = lifeExp)
@@ -365,9 +459,22 @@ Usando el DF `mpg`, visualiza la covariación entre:
 
 
 
-<details><summary>Visualizando una variable categórica y una continua![](../data/images/hint.png)</summary><span style="color: orange;">[geom_density_ridges()!](#variable-categórica-y-continua)</span></details>
+::: {.callout-tip collapse="true"}
 
-<details><summary>Visualizando pares de variables continuas![](../data/images/hint.png)</summary><span style="color: orange;">[geom_smooth()!](#geom_smooth)</span></details>
+### Visualizando una variable categórica y una continua
+
+<span style="color: orange;">[geom_density_ridges()!](#variable-categórica-y-continua)</span>
+
+::: 
+
+
+::: {.callout-tip collapse="true"}
+
+### Visualizando pares de variables continuas!
+
+<span style="color: orange;">[geom_smooth()!](#geom_smooth)</span>
+
+:::
 
 
 ```{r ejercicio-covariacion, echo=FALSE}
@@ -404,8 +511,13 @@ Usando la base del paper [Cancer Screening Risk Literacy of Physicians in Traini
 
 Puedes ir al enlace anterior y descargar el archivo `Cancer screening risk literacy R1.sav` en la carpeta `Data and results`, o directamente usar el codigo de abajo.
 
-<details><summary>Como visualizar todas las variables![](../data/images/hint.png)</summary><span style="color: orange;">[Ver el apartado visualizando-datasets-completos en este mismo capítulo](#visualizando-datasets-completos)</span></details>
+::: {.callout-tip collapse="true"}
 
+### Como visualizar todas las variables
+
+<span style="color: orange;">[Ver el apartado visualizando-datasets-completos en este mismo capítulo](#visualizando-datasets-completos)</span>
+
+:::
 
 
 ```{r ejercicio-final-analisis-exploratorio1, echo=TRUE, fig.height=18}

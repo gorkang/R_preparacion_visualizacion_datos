@@ -10,7 +10,9 @@ Veamos algunas funcionalidades más avanzadas con ggplot y otros paquetes.
 
 ---  
 
-#### Paquetes para este capítulo {-}
+::: {.callout-important}
+
+### Paquetes para este capítulo
 
 Como en cada capítulo, crea un nuevo script de R (CNTRL+ SHIFT + N), guardalo como `capitulo2.R`, copia y pega las líneas de abajo y ejecútalas (CNTRL + ENTER para ejecutar linea a linea).    
 
@@ -39,8 +41,7 @@ if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'
 
 ```  
 
-
----  
+:::
 
 
 
@@ -144,7 +145,13 @@ ggplot(mpg, aes(displ, hwy)) +
 - Crea un panel para cada tipo de coche (`class`) en una rejilla simétrica
 - Crea un panel para cada tipo de coche (`class`), mostrando paneles en 3 filas
 
-<details><summary>Solucion: ![](../data/images/hint.png)</summary><span style="color: orange;">`facet_grid()` permite crear rejillas simétricas de paneles, y el parámetro `nrow` de `facet_wrap()` nos ayuda con paneles con números de filas definidos.</span></details>
+::: {.callout-tip collapse="true"}
+
+### Solucion
+
+`facet_grid()` permite crear rejillas simétricas de paneles, y el parámetro `nrow` de `facet_wrap()` nos ayuda con paneles con números de filas definidos.</span>
+
+:::
 
 
 ```{r ejercicio_facetas, echo=FALSE}
@@ -177,7 +184,9 @@ En ocasiones queremos visualizar estadísticas descriptivas asociadas a los dato
 Tenemos dos opciones, la primera es preparar nuevos data-frames antes de pasar a la visualización. La segunda, realizar la computación directamente con ggplot, usando `stat_summary()` junto con alguna de las funciones tradicionales para extraer estadísticas descriptivas.
 
 
-###### Ejemplos de funciones que podemos usar en los gráficos {.parameters -}
+::: {.callout-note}
+
+### Ejemplos de funciones que podemos usar en los gráficos
 
 - **min()**: mínimo
 - **max()**: máximo
@@ -185,7 +194,7 @@ Tenemos dos opciones, la primera es preparar nuevos data-frames antes de pasar a
 - **median()**: mediana
 - **sd()**: desviación estandar
 
-###### {-}
+:::
 
 
 
@@ -291,7 +300,13 @@ Pero en realidad no quiero que las líneas pasen por todos los puntos, sino que 
 
 1) ¿Podrías reproducir el gráfico de abajo?
 
-<details><summary>Pista: ![](../data/images/hint.png)</summary><span style="color: orange;">Tendrás que reemplazar `geom_line()` por `stat_summary()`, usando el parámetro `geom = "line"` para indicarle que quieres usar lineas en lugar de puntos.</span></details>
+::: {.callout-tip collapse="true"}
+
+### Pista
+
+<span style="color: orange;">Tendrás que reemplazar `geom_line()` por `stat_summary()`, usando el parámetro `geom = "line"` para indicarle que quieres usar lineas en lugar de puntos.</span>
+
+:::
 
 
 ```{r ejercicio-7b, echo=FALSE}
@@ -313,9 +328,15 @@ ggplot(gapminder, aes(country, lifeExp, color = continent)) +
         legend.position = "none") # Elimina la leyenda
 
 ```
-Podrías crear este gráfico? Mostramos mediana ± sd para cada país, organizado por continente.
+¿Podrías crear este gráfico? Mostramos mediana ± sd para cada país, organizado por continente.
 
-<details><summary>Pista: ![](../data/images/hint.png)</summary><span style="color: orange;">Tienes que encontrar los parámetros adecuados para `stat_summary()` y `facet_grid()`. Puedes ver ejemplos en: <BR> - [computaciones con ggplot: stat_summary()](02-visualizacion-avanzada.html#computaciones-con-ggplot-stat_summary)  <BR> - [Facet_grid](02-visualizacion-avanzada.html#facet_grid).</span></details>
+::: {.callout-tip collapse="true"}
+
+### Pista
+
+<span style="color: orange;">Tienes que encontrar los parámetros adecuados para `stat_summary()` y `facet_grid()`. Puedes ver ejemplos en: <BR> - [computaciones con ggplot: stat_summary()](02-visualizacion-avanzada.html#computaciones-con-ggplot-stat_summary)  <BR> - [Facet_grid](02-visualizacion-avanzada.html#facet_grid).</span>
+
+:::
 
 
 ```{r ejercicio-8, echo=FALSE}
@@ -368,45 +389,47 @@ Usaremos las funciones que empiezan por `scale_` para multitud de cosas, por eje
 
 ```{r personalizacion-graficas-axis}
 
-  # Grafico inicial
-  plot_base = ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
-    geom_point(alpha = .1)
-  plot_base
+# Grafico inicial
+plot_base = ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
+  geom_point(alpha = .1)
+plot_base
 
-  # Definimos cuantos breaks queremos en cada eje, y rotamos las etiquetas del eje x
-  plot_base +
-    scale_x_continuous(n.breaks = 15, guide = guide_axis(angle = 90)) +
-    scale_y_continuous(n.breaks = 15)
+# Definimos cuantos breaks queremos en cada eje, y rotamos las etiquetas del eje x
+plot_base +
+  scale_x_continuous(n.breaks = 15, guide = guide_axis(angle = 90)) +
+  scale_y_continuous(n.breaks = 15)
 
-  # Separador de miles y breaks en x
-  plot_base +
-    scale_y_continuous(n.breaks = 15) +
-    scale_x_continuous(n.breaks = 6, labels = scales::comma)
+# Separador de miles y breaks en x
+plot_base +
+  scale_y_continuous(n.breaks = 15) +
+  scale_x_continuous(n.breaks = 6, labels = scales::comma)
 
-  # Con scales::dollar_format() le damos formato de $ ($M)
-  plot_base +
-    scale_y_continuous(n.breaks = 15) +
-    scale_x_continuous(n.breaks = 6, labels = scales::dollar_format(prefix = "$", suffix = "M"))
+# Con scales::dollar_format() le damos formato de $ ($M)
+plot_base +
+  scale_y_continuous(n.breaks = 15) +
+  scale_x_continuous(n.breaks = 6, labels = scales::dollar_format(prefix = "$", 
+                                                                  suffix = "M"))
 
-  # Escala log
-  plot_base +
-    scale_y_continuous(n.breaks = 15) +
-    scale_x_log10(n.breaks = 4, labels = scales::dollar_format(prefix = "$", suffix = "M"))
+# Escala log
+plot_base +
+  scale_y_continuous(n.breaks = 15) +
+  scale_x_log10(n.breaks = 4, labels = scales::dollar_format(prefix = "$", 
+                                                             suffix = "M"))
 
-  # Invertimos escala
-  plot_base +
-    scale_y_reverse()
+# Invertimos escala
+plot_base +
+  scale_y_reverse()
 
-  # No mostramos el texto ni los ticks de los breaks de x
-  plot_base +
-    scale_y_reverse() +
-    theme(axis.text.x = element_blank(),
-          axis.ticks.x = element_blank())
+# No mostramos el texto ni los ticks de los breaks de x
+plot_base +
+  scale_y_reverse() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
 
-  # Porcentaje
-  ggplot(gapminder, aes(continent, ..prop.., group = 1)) +
-    geom_bar() +
-    scale_y_continuous(labels = scales::percent)
+# Porcentaje
+ggplot(gapminder, aes(continent, ..prop.., group = 1)) +
+  geom_bar() +
+  scale_y_continuous(labels = scales::percent)
 
 ```
 
@@ -524,7 +547,13 @@ ggplot(table1, aes(as.factor(year), cases)) + # Usamos as.factor(year) para evit
 
 Trata de resolver los problemas e intenta llegar al resultado que se ve en el panel (B).
 
-<details><summary>Soluciones: ![](../data/images/hint.png)</summary><span style="color: orange;">- Recuerda la función`scales::comma()` que vimos más arriba <BR>- `theme(legend.position = "ALGO AQUI")` nos permite mover la leyenda. Si vas la ayuda de `theme()` y buscas `legend.position`, encontrarás sus opciones. <BR>- Los parámetros de `labs()` nos permiten añadir títulos, subtítulos, editar los valores de las etiquetas de `x` e `y`, añadir `caption`, etc. </span></details>
+::: {.callout-tip collapse="true"}
+
+### Soluciones
+
+<span style="color: orange;">- Recuerda la función`scales::comma()` que vimos más arriba <BR>- `theme(legend.position = "ALGO AQUI")` nos permite mover la leyenda. Si vas la ayuda de `theme()` y buscas `legend.position`, encontrarás sus opciones. <BR>- Los parámetros de `labs()` nos permiten añadir títulos, subtítulos, editar los valores de las etiquetas de `x` e `y`, añadir `caption`, etc. </span>
+
+:::
 
 ```{r geoms-ejercicios-03, echo=FALSE, fig.height=10, fig.width=8}
 
@@ -553,7 +582,13 @@ cowplot::plot_grid(plot1, plot2,
 
 Si te sobra tiempo, puedes tratar de reproducir la siguiente versión mejorada...
 
-<details><summary>Soluciones: ![](../data/images/hint.png)</summary><span style="color: orange;">Hemos visto como hacer esto en el primer ejemplo de [fancy pants legends](02-visualizacion-avanzada.html#fancy-pants-legends) </span></details>
+::: {.callout-tip collapse="true"}
+
+### Soluciones
+
+<span style="color: orange;">Hemos visto como hacer esto en el primer ejemplo de [fancy pants legends](02-visualizacion-avanzada.html#fancy-pants-legends) </span>
+
+:::
 
 ```{r geoms-ejercicios-extra,, echo=FALSE, fig.height=5, fig.width=8}
 
@@ -619,7 +654,13 @@ Las funciones `scale_color_`, `scale_fill_` nos sirven para hacer cambios global
 
 1) Usando como base este plot, podrias cambiarle la paleta de color para usar una de las cualitativas?
 
-<details><summary>Soluciones: ![](../data/images/hint.png)</summary><span style="color: orange;">Ver sección Palettes de la ayuda de `scale_fill_brewer()` </span></details>
+::: {.callout-tip collapse="true"}
+
+### Soluciones
+
+<span style="color: orange;">Ver sección Palettes de la ayuda de `scale_fill_brewer()` </span>
+
+:::
 
 
 ```{r color-01aa, echo=TRUE}
@@ -641,9 +682,15 @@ Las funciones `scale_color_`, `scale_fill_` nos sirven para hacer cambios global
 
 Podrías resolver el error y mostrar el gráfico de abajo?
 
-<details><summary>Soluciones: ![](../data/images/hint.png)</summary><span style="color: orange;">Tenemos que:
+::: {.callout-tip collapse="true"}
+
+### Soluciones
+
+<span style="color: orange;">Tenemos que:
 - indicar que el color depende de `continent`
-- usar `scale_color_manual()`, con el parámetro `values` para asignar los colores (ver ejemplos en la ayuda de la función)</span></details>
+- usar `scale_color_manual()`, con el parámetro `values` para asignar los colores (ver ejemplos en la ayuda de la función)</span>
+
+:::
 
 
 
@@ -686,7 +733,13 @@ cowplot::plot_grid(plot2, plot1, rel_widths = c(.3, 0.7))
 - Elimina las leyendas asociadas a colores y rellenos
 - Usa la paleta "Accent" para los colores y rellenos
 
-<details><summary>Soluciones: ![](../data/images/hint.png)</summary><span style="color: orange;">- guides(fill = "none") quita la leyenda asociada a `fill`...  <BR>- scale_fill_brewer(palette = "Accent") asigna la paleta "Accent" a los rellenos (`fill`)</span></details>
+::: {.callout-tip collapse="true"}
+
+### Soluciones
+
+<span style="color: orange;">- guides(fill = "none") quita la leyenda asociada a `fill`...  <BR>- scale_fill_brewer(palette = "Accent") asigna la paleta "Accent" a los rellenos (`fill`)</span>
+
+:::
 
 
 ```{r ejercicio-combinar-plots, echo=FALSE}
@@ -805,7 +858,13 @@ ggplot(diamonds, aes(price, cut, fill = cut, color = cut)) +
   ggridges::geom_density_ridges(alpha = .6)
 ```
 
-<details><summary>Soluciones: ![](../data/images/hint.png)</summary><span style="color: orange;">- scale_x_log10() nos permite transformar el eje x a una escala logarítmica  <BR>- Hay que aplicar un `ggthemes::scale_*` para cada elemento: `color`, `fill`... </span></details>
+::: {.callout-tip collapse="true"}
+
+### Soluciones
+
+<span style="color: orange;">- scale_x_log10() nos permite transformar el eje x a una escala logarítmica  <BR>- Hay que aplicar un `ggthemes::scale_*` para cada elemento: `color`, `fill`... </span>
+
+:::
 
 
 ```{r ejercicio-6a, echo=FALSE}
@@ -836,7 +895,13 @@ ggplot(gapminder, aes(gdpPercap, continent, fill = continent, color = continent)
   ggridges::geom_density_ridges(alpha = .6)
 ```
 
-<details><summary>Soluciones: ![](../data/images/hint.png)</summary><span style="color: orange;">- `scales::dollar_format()` aplicado al parámetro `labels` de las funciones `scale_x_*` nos permite darle formato de moneda a las etiquetas de la escala x</span></details>
+::: {.callout-tip collapse="true"}
+
+### Soluciones
+
+<span style="color: orange;">- `scales::dollar_format()` aplicado al parámetro `labels` de las funciones `scale_x_*` nos permite darle formato de moneda a las etiquetas de la escala x</span>
+
+:::
 
 
 ```{r ejercicio-6b, echo=FALSE}
@@ -937,12 +1002,15 @@ Scatterplot creado con ggplot donde se puede ver el valor de los puntos, selecci
 ```{r graficas-interactivas, fig.height=8, fig.width=8}
 
 plotly::ggplotly(
-  ggplot(gapminder %>% filter(year == 2007), aes(gdpPercap, lifeExp, color = continent, size = country)) +
+  ggplot(
+    gapminder %>% filter(year == 2007),
+    aes(gdpPercap, lifeExp, color = continent, size = country)
+  ) +
     geom_point(alpha = .3, point = 2) +
     scale_y_continuous(breaks = seq(0, 100, 5)) +
     scale_x_log10(labels = scales::dollar_format(prefix = "$", suffix = "M")) +
-  theme(legend.position = "none")
-  )
+    theme(legend.position = "none")
+)
 
 ```
 
@@ -968,28 +1036,72 @@ DF_RAW = structure(c(181, 163, 60, 124, 76, 62, 73, 59, 17, 21, 26, 7, 1, 2, 3,
                      100, 129, 194, 91, 53, 99, 46, 34, 60, 21, 17, 6, 14, 14, 26,
                      100, 115, 119, 88, 64, 108, 37, 24, 49, 26, 17, 6, 15, 15, 47),
                    .Dim = 15:14,
-                   .Dimnames = list(c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"),
-                                    c("2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019")))
+                   .Dimnames = list(c("1", "2", "3", "4", "5", "6", "7", "8", "9", 
+                                      "10", "11", "12", "13", "14", "15"),
+                                    c("2006", "2007", "2008", "2009", "2010", 
+                                      "2011", "2012", "2013", "2014", "2015", 
+                                      "2016", "2017", "2018", "2019")))
 
 DF = DF_RAW
 plot1 = plotly::plot_ly(x = ~ colnames(DF),
-                y = ~ rownames(DF),
-                z = ~ DF) %>%
-  plotly::add_surface(name = "3D mesh",
-                      connectgaps = TRUE, hidesurface = TRUE, showscale = FALSE,
-                      contours = list(
-                        x = list(show = TRUE, width = 1,  highlightwidth = 2, highlightcolor = "#41a7b3", highlight = TRUE),
-                        y = list(show = TRUE, width = 1,  highlightwidth = 2, highlightcolor = "#41a7b3", highlight = TRUE),
-                        z = list(show = FALSE, width = 1,  highlightwidth = 2, highlightcolor = "#41a7b3", highlight = FALSE)
-                      )) %>%
-  plotly::add_surface(name = "surface",
-                      connectgaps = FALSE,
-                      contours = list(
-                        x = list(show = F, width = 1,  highlightwidth = 2, highlightcolor = "#41a7b3", highlight = TRUE),
-                        y = list(show = F, width = 1,  highlightwidth = 2, highlightcolor = "#41a7b3", highlight = TRUE),
-                        z = list(show = FALSE, width = 1,  highlightwidth = 2, highlightcolor = "#41a7b3", highlight = FALSE)
-                      )
-   )
+                        y = ~ rownames(DF),
+                        z = ~ DF) %>%
+  plotly::add_surface(
+    name = "3D mesh",
+    connectgaps = TRUE,
+    hidesurface = TRUE,
+    showscale = FALSE,
+    contours = list(
+      x = list(
+        show = TRUE,
+        width = 1,
+        highlightwidth = 2,
+        highlightcolor = "#41a7b3",
+        highlight = TRUE
+      ),
+      y = list(
+        show = TRUE,
+        width = 1,
+        highlightwidth = 2,
+        highlightcolor = "#41a7b3",
+        highlight = TRUE
+      ),
+      z = list(
+        show = FALSE,
+        width = 1,
+        highlightwidth = 2,
+        highlightcolor = "#41a7b3",
+        highlight = FALSE
+      )
+    )
+  ) %>%
+  plotly::add_surface(
+    name = "surface",
+    connectgaps = FALSE,
+    contours = list(
+      x = list(
+        show = F,
+        width = 1,
+        highlightwidth = 2,
+        highlightcolor = "#41a7b3",
+        highlight = TRUE
+      ),
+      y = list(
+        show = F,
+        width = 1,
+        highlightwidth = 2,
+        highlightcolor = "#41a7b3",
+        highlight = TRUE
+      ),
+      z = list(
+        show = FALSE,
+        width = 1,
+        highlightwidth = 2,
+        highlightcolor = "#41a7b3",
+        highlight = FALSE
+      )
+    )
+  )
 
 if (!knitr::is_latex_output()) plot1
 ```
@@ -1017,7 +1129,8 @@ p = ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
   ease_aes('linear')
 
   # Create animated plot
-  animate(p, renderer = ffmpeg_renderer(), height = 6, width = 10, units = "in", res = 300)
+  animate(p, renderer = ffmpeg_renderer(), 
+          height = 6, width = 10, units = "in", res = 300)
 
   # Save plot
     # anim_save("name_file.mp4", animation = last_animation())

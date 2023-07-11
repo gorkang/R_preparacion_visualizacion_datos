@@ -44,7 +44,11 @@ La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las
 
 
 
-<details><summary>En ocasiones encontraras una bombilla como esta: ![](data/images/hint.png) Si haces click sobre ella aparecerá una pista sobre como resolver el ejercicio.</summary><span style="color: orange;">¡No hagas click en mi sin antes haber intentado resolver el ejercicio sin ayuda!</span></details>
+::: {.callout-tip collapse="true"}
+
+### En ocasiones encontraras un recuadro como este. En la [versión online del libro](https://gorkang.github.io/R_preparacion_visualizacion_datos/), si haces click sobre el, aparecerá una pista sobre como resolver el ejercicio.  
+
+:::
 
 ---  
 

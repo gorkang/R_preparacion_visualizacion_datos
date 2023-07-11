@@ -49,7 +49,8 @@ DF1 %>%
 
 
 # Bind DFs añadiendo las *columnas* de DF2 a DF1
-  ## bind_cols renombra automaticamente los nombres de las columnas para que no haya coincidencias
+  ## bind_cols renombra automaticamente los nombres de las columnas para que no 
+  # haya coincidencias
 DF1 %>% 
   bind_cols(DF2) 
 
@@ -66,7 +67,9 @@ En [https://github.com/gadenbuie/tidyexplain](https://github.com/gadenbuie/tidye
 ---  
 
 
-### Tipos de Join {.parameters -}  
+::: {.callout-note}
+
+### Tipos de Join
 
 Estas operaciones tendrán la forma: `DF_x %>% WHATEVER_join(DF_y)`  
 
@@ -83,6 +86,8 @@ Estas operaciones tendrán la forma: `DF_x %>% WHATEVER_join(DF_y)`
 
 * **Nesting joins**:  
     + nest_join(): preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguales  
+
+:::
 
 
 ### Mutating joins  
@@ -182,7 +187,8 @@ DF_results2 = DF_results |> rename(Identificador = ID)
 DF_left_joined = DF_IDs %>%
    left_join(DF_results2, by = c("ID" = "Identificador"))
 
-# En las últimas versiones de dplyr, han implementado la función `join_by()` que permite usar una sintaxis algo más natural:
+# En las últimas versiones de dplyr, han implementado la función `join_by()` que 
+  # permite usar una sintaxis algo más natural:
   DF_left_joined2 = DF_IDs %>% 
     left_join(DF_results2, by = join_by(ID == Identificador))
 
@@ -267,7 +273,15 @@ DF_semi_joined = DF_IDs %>%
   left_join(DF_results)
 
 # CHECK
-# map(list("DF_semi_joined" = DF_semi_joined, "DF_IDs" = DF_IDs, "DF_BAD" = DF_BAD, "DF_results" = DF_results), nrow)
+# map(
+# list(
+#   "DF_semi_joined" = DF_semi_joined,
+#   "DF_IDs" = DF_IDs,
+#   "DF_BAD" = DF_BAD,
+#   "DF_results" = DF_results
+# ),
+# nrow
+# )
 
 DT::datatable(DF_semi_joined)
 
@@ -300,13 +314,46 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 ```
 
 
-1. Une los datos demográficos con los resultados. <details><summary>Pista para unir bases: ![](../data/images/hint.png)</summary><span style="color: orange;">[Vimos en el apartado left_join() como hacer esto](#left-join)</span></details>  
+1. Une los datos demográficos con los resultados. 
 
-2. A la base resultante, quítale los sujetos descartados de `DF_BAD`. <details><summary>Pista descartar filas: ![](../data/images/hint.png)</summary><span style="color: orange;">[anti_join()!](#anti-join)</span></details>  
+::: {.callout-tip collapse="true"}
 
-3. Crea una nueva base con datos demográficos y resultados para los sujetos descartados. <details><summary>Pista para filtrar a partir de una base: ![](../data/images/hint.png)</summary><span style="color: orange;">[semi_join()!](#semi-join)</span></details>  
+### Pista para unir bases: 
 
-4. Comprueba si el promedio para `Crystallized Intelligence` de los participantes descartados difiere de la de los no descartados. <details><summary>Pista para promedios agrupados: ![](../data/images/hint.png)</summary><span style="color: orange;">`group_by() %>% summarise()`</span></details>  
+<span style="color: orange;">[Vimos en el apartado left_join() como hacer esto](#left-join)</span>
+
+:::
+
+2. A la base resultante, quítale los sujetos descartados de `DF_BAD`.
+
+::: {.callout-tip collapse="true"}
+
+### Pista descartar filas: 
+
+<span style="color: orange;">[anti_join()!](#anti-join)</span>
+
+:::
+
+
+3. Crea una nueva base con datos demográficos y resultados para los sujetos descartados. 
+
+::: {.callout-tip collapse="true"}
+
+### Pista para filtrar a partir de una base: 
+
+<span style="color: orange;">[semi_join()!](#semi-join)</span>
+
+:::
+
+4. Comprueba si el promedio para `Crystallized Intelligence` de los participantes descartados difiere de la de los no descartados. 
+
+::: {.callout-tip collapse="true"}
+
+### Pista para promedios agrupados: 
+
+<span style="color: orange;">`group_by() %>% summarise()`</span>
+
+:::
 
 5. Haz una gráfica donde se puedan ver las diferencias  
 
@@ -353,7 +400,8 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 
   
   
-# 4. Comprueba si el promedio para `Crystallized Intelligence` de los participantes descartados difiere de la de los no descartados  
+# 4. Comprueba si el promedio para `Crystallized Intelligence` de los participantes
+  # descartados difiere de la de los no descartados  
   
   # Solucion basica
   DF_joined_clean %>% 
@@ -391,24 +439,28 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 
 ```{r ejercicios-joins-responses-5-setup}
 
-  DF_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") %>% 
-    janitor::clean_names()
+DF_wide = read_csv(
+  "https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"
+) %>%
+  janitor::clean_names()
 
-  median_social_adaptation = DF_wide %>% 
-    pull(social_adaptation) %>% 
-    median(., na.rm = TRUE)
+median_social_adaptation = DF_wide %>%
+  pull(social_adaptation) %>%
+  median(., na.rm = TRUE)
 
-  DF_split = DF_wide %>% 
-    mutate(social_adaptation_split = 
-             as.factor(
-               case_when(
-                 social_adaptation >= median_social_adaptation ~ "high_social_adaptation",
-                 social_adaptation < median_social_adaptation ~ "low_social_adaptation",
-                 TRUE ~ NA_character_))) %>% 
-    select(id, social_adaptation, social_adaptation_split) %>% 
-    drop_na(social_adaptation_split)
-  
-  DF_long = DF_wide %>% pivot_longer(fluid_intelligence:working_memory)
+DF_split = DF_wide %>%
+  mutate(social_adaptation_split =
+           as.factor(
+             case_when(
+               social_adaptation >= median_social_adaptation ~ "high_social_adaptation",
+               social_adaptation < median_social_adaptation ~ "low_social_adaptation",
+               TRUE ~ NA_character_
+             )
+           )) %>%
+  select(id, social_adaptation, social_adaptation_split) %>%
+  drop_na(social_adaptation_split)
+
+DF_long = DF_wide %>% pivot_longer(fluid_intelligence:working_memory)
 
 ```
 
@@ -427,16 +479,16 @@ Uno ese DF al `DF_long` que habías creado en el ejercicio 2 de la misma secció
 
 ```{r ejercicios-joins-responses-6, echo=FALSE}
     
-  DF_final %>% 
-    ggplot(aes(value, color = social_adaptation_split, fill = social_adaptation_split)) +
-    geom_density(alpha = .2) +
-    theme(legend.position = "bottom") +
-    facet_wrap(~ name, scales = "free", nrow = 3)
+DF_final %>%
+  ggplot(aes(value, color = social_adaptation_split, fill = social_adaptation_split)) +
+  geom_density(alpha = .2) +
+  theme(legend.position = "bottom") +
+  facet_wrap(~ name, scales = "free", nrow = 3)
 
-  DF_final %>%
-    ggplot(aes(value, name, color = social_adaptation_split, fill = social_adaptation_split)) +
-    ggridges::geom_density_ridges(alpha = .2) +
-    theme(legend.position = "bottom")
+DF_final %>%
+  ggplot(aes(value, name, color = social_adaptation_split, fill = social_adaptation_split)) +
+  ggridges::geom_density_ridges(alpha = .2) +
+  theme(legend.position = "bottom")
 
 ```
 

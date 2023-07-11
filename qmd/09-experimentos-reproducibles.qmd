@@ -64,9 +64,14 @@ Si quieres consultar los [scripts de las tareas](https://github.com/gorkang/jsPs
 
 
 ```{r, eval=FALSE}
-jsPsychMaker::create_protocol(canonical_tasks = c("AIM", "EAR", "IRI"), # Pruebas a incluir
-                              folder_output = "~/Downloads/protocol999", # El directorio tiene que incluir un número (se usará como pid)
-                              launch_browser = TRUE) # Abre el navegador con el protocolo
+jsPsychMaker::create_protocol(
+  # Pruebas a incluir
+  canonical_tasks = c("AIM", "EAR", "IRI"), 
+   # El directorio tiene que incluir un número (se usará como pid)
+  folder_output = "~/Downloads/protocol999",
+  # Abre el navegador con el protocolo
+  launch_browser = TRUE
+  )
 ```
 
 - Podemos editar la configuración del protocolo en la carpeta que hemos indicado en `folder_output`, abriendo el archivo `config.js`. Puedes consultar la ayuda sobre la [configuración de experimentos](https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#experiment-configuration).  
@@ -123,16 +128,22 @@ Si no funciona, te, quedan las siguientes opciones:
 ```{r, eval=FALSE}
 
 # Un solo mono
-jsPsychMonkeys::release_the_monkeys(uid = "1", # Lanza un monos con el user id 1
-                                    local_folder_tasks = "~/Downloads/protocol999")
+jsPsychMonkeys::release_the_monkeys(
+  # Lanza un monos con el user id 1
+  uid = "1",
+  local_folder_tasks = "~/Downloads/protocol999")
 
 
 #  Monos del 1 al 5 simultaneamente
-jsPsychMonkeys::release_the_monkeys(uid = "1:5", # Lanza monos desde el uid 1 hasta el 5
-                                    local_folder_tasks = "~/Downloads/protocol999",
-                                    sequential_parallel = "parallel", # Lanza los monos en paralelo
-                                    number_of_cores = 5) # Usando este número de CPUs
-
+jsPsychMonkeys::release_the_monkeys(
+  # Lanza monos desde el uid 1 hasta el 5
+  uid = "1:5",
+  local_folder_tasks = "~/Downloads/protocol999",
+  # Lanza los monos en paralelo
+  sequential_parallel = "parallel",
+  # Usando este número de CPUs
+  number_of_cores = 5
+)
 ```
 
 
@@ -264,10 +275,16 @@ jsPsychMaker::copy_example_tasks(destination_folder = "~/Downloads/TEST")
 5) Ejecuta `create_protocol()` con los parámetros de abajo, se creará un nuevo protocolo con tu/tus tareas.  
 
 ```{r, eval=FALSE}
-  jsPsychMaker::create_protocol(canonical_tasks = "EAR", # Incluye la tarea EAR
-                                folder_tasks = "~/Downloads/TEST/", # Crea e incluye las tareas que estan en esta carpeta
-                                folder_output = "~/Downloads/TEST/new_protocol", # Crea el protocolo aquí
-                                launch_browser = TRUE) # Lanza un navegador
+  jsPsychMaker::create_protocol(
+    # Incluye la tarea EAR
+    canonical_tasks = "EAR",
+    # Crea e incluye las tareas que estan en esta carpeta
+    folder_tasks = "~/Downloads/TEST/",
+    # Crea el protocolo aquí
+    folder_output = "~/Downloads/TEST/new_protocol",
+    # Lanza un navegador
+    launch_browser = TRUE
+    )
 ```
 
 
@@ -310,7 +327,10 @@ if (!require('jsPsychHelpeR')) remotes::install_github("gorkang/jsPsychHelpeR");
 2)  Creamos el nuevo archivo `prepare_NOMBRETAREA()`:
 
 ```{r, eval=FALSE}
-jsPsychHelpeR::create_new_task(short_name_task = "NAMETASK", get_info_googledoc = TRUE)
+jsPsychHelpeR::create_new_task(
+  short_name_task = "NAMETASK", 
+  get_info_googledoc = TRUE
+  )
 ```
 
 Esta función:

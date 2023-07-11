@@ -112,11 +112,29 @@ DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening ri
 
 Intenta reproducir la siguiente tabla:  
 
-<details><summary>Donde encontrar ayuda![](../data/images/hint.png)</summary><span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html) tienes ejemplos para todo lo que necesitarás. Busca a la función `tbl_summary()`</span></details>  
+::: {.callout-tip collapse="true"}
 
-<details><summary>Demasiado detalle, solo quiero los promedios[](../data/images/hint.png)</summary><span style="color: orange;">Puedes usar `type = list(everything() ~ 'continuous'),` dentro de `tbl_summary()` para forzar el tratamiento de variables con pocos niveles como continuas.</span></details>  
+### Donde encontrar ayuda
 
-<details><summary>Error al añadir valor p ![](../data/images/hint.png) </summary><span style="color: orange;">En la ayuda de la funcion: `?add_p.tbl_summary` encontrarás que puedes usar algo como: `add_p(test = everything() ~ "t.test</span></details>  
+<span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html) tienes ejemplos para todo lo que necesitarás. Busca a la función `tbl_summary()`</span>
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+### Demasiado detalle, solo quiero los promedios
+
+<span style="color: orange;">Puedes usar `type = list(everything() ~ 'continuous'),` dentro de `tbl_summary()` para forzar el tratamiento de variables con pocos niveles como continuas.</span>
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+### Error al añadir valor p 
+
+<span style="color: orange;">En la ayuda de la funcion: `?add_p.tbl_summary` encontrarás que puedes usar algo como: `add_p(test = everything() ~ "t.test</span>
+
+:::
 
 
 ```{r ejercicios-tablas-descriptivas2, echo=FALSE}
@@ -151,20 +169,18 @@ Primero preparamos los datos:
 
 ```{r tablas-lm, echo=TRUE, fig.height=18}
 
-  # Transform variables
-  DF_gapminder = gapminder %>% 
-    # Log
-    mutate(gdpPercap_log = log(gdpPercap),
-           pop_log = log(pop)
-           ) %>% 
-    # Mean center variables so the 0 values have meaning
-    mutate(year = year - mean(year, na.rm = TRUE),
-           gdpPercap_log = gdpPercap_log - mean(gdpPercap_log, na.rm = TRUE),
-           pop_log = pop_log - mean(pop_log, na.rm = TRUE)) %>% 
-    # Will use only last year
-    filter(year == max(year))
-  
-  
+# Transform variables
+DF_gapminder = gapminder %>% 
+  # Log
+  mutate(gdpPercap_log = log(gdpPercap),
+         pop_log = log(pop)
+         ) %>% 
+  # Mean center variables so the 0 values have meaning
+  mutate(year = year - mean(year, na.rm = TRUE),
+         gdpPercap_log = gdpPercap_log - mean(gdpPercap_log, na.rm = TRUE),
+         pop_log = pop_log - mean(pop_log, na.rm = TRUE)) %>% 
+  # Will use only last year
+  filter(year == max(year))
 
 ```
 
@@ -173,16 +189,16 @@ Creamos un modelo sencillo y mostramos la tabla de resultados.
 
 ```{r tablas-lm-tabla, echo=TRUE, fig.height=18}
 
-  model1 = lm(lifeExp ~ gdpPercap_log + pop_log, DF_gapminder)
+model1 = lm(lifeExp ~ gdpPercap_log + pop_log, DF_gapminder)
 
-  table_model1 = gtsummary::tbl_regression(model1, intercept = TRUE) %>% 
-    add_global_p() %>%
-    bold_labels() %>% 
-    italicize_levels() %>% 
-    add_glance_table(include = c("nobs", "df.residual", "r.squared", "adj.r.squared"))
+table_model1 = gtsummary::tbl_regression(model1, intercept = TRUE) %>% 
+  add_global_p() %>%
+  bold_labels() %>% 
+  italicize_levels() %>% 
+  add_glance_table(include = c("nobs", "df.residual", "r.squared", "adj.r.squared"))
 
 
-  table_model1
+table_model1
 
 ```
 
@@ -194,23 +210,23 @@ De manera muy sencilla podemos unir varias tablas:
 
 ```{r tablas-estadistica-merged_tables, echo=TRUE, fig.height=18}
 
-  # Primero creamos un modelo más sencillo, basado en el anterior
-  model10 = lm(lifeExp ~ gdpPercap_log, DF_gapminder)
+# Primero creamos un modelo más sencillo, basado en el anterior
+model10 = lm(lifeExp ~ gdpPercap_log, DF_gapminder)
 
-  # Creamos la tabla
-  table_model10 = gtsummary::tbl_regression(model10, intercept = TRUE) %>% 
-    add_global_p() %>%
-    bold_labels() %>% 
-    italicize_levels() %>% 
-    add_glance_table(include = c("nobs", "df.residual", "r.squared", "adj.r.squared"))
-  
-  # Combinamos ambas tablas
-  tbl_merge(
-    tbls = list(table_model10, table_model1),
-    tab_spanner = c("**Baseline**", "**Step 1**")) %>% 
-    # Necesario para que los parámetros globales de los modelos se muestren al final
-    modify_table_body(~.x %>% arrange(row_type == "glance_statistic")
-    )
+# Creamos la tabla
+table_model10 = gtsummary::tbl_regression(model10, intercept = TRUE) %>%
+  add_global_p() %>%
+  bold_labels() %>%
+  italicize_levels() %>%
+  add_glance_table(include = c("nobs", "df.residual", "r.squared", "adj.r.squared"))
+
+# Combinamos ambas tablas
+tbl_merge(
+  tbls = list(table_model10, table_model1),
+  tab_spanner = c("**Baseline**", "**Step 1**")) %>% 
+  # Necesario para que los parámetros globales de los modelos se muestren al final
+  modify_table_body(~.x %>% arrange(row_type == "glance_statistic")
+  )
   
 ```
 
@@ -235,8 +251,10 @@ La ventaja de escribir los resultados de esta manera es que si hacemos algun peq
 
 ```{r tablas-estadistica-inline, echo=TRUE, fig.height=18}
 
-paste0("Life expectancy was significantly associated with GDP per capita (log), beta = ", 
-       gtsummary::inline_text(table_model1, variable = gdpPercap_log))  
+paste0(
+  "Life expectancy was significantly associated with GDP per capita (log), beta = ",
+  gtsummary::inline_text(table_model1, variable = gdpPercap_log)
+)  
 
 ```
 
@@ -249,8 +267,9 @@ Usando la misma base de datos del ejercicio anterior:
 
 ```{r ejercicios-tablas-inferenciales1, echo=TRUE}
 
-DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening risk literacy R1.sav")) %>% as_tibble() %>% 
-  select(IDparticipante, resident, screenbeliefs, compR1, numeracy) %>%  
+DF_dafina = haven::read_sav("../data/files/Dafina/Cancer screening risk literacy R1.sav") %>%
+  as_tibble() %>%
+  select(IDparticipante, resident, screenbeliefs, compR1, numeracy) %>%
   rename(comprehension = compR1) 
 
 ```
@@ -259,11 +278,23 @@ Haz una regresión lineal preciciendo compresion a partir de las variables de la
 
 Finalmente, crea una tabla para reportar los resultados de tu análisis, como la siguiente:  
 
-<details><summary>Donde encontrar ayuda![](../data/images/hint.png)</summary><span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) tienes ejemplos para todo lo que necesitarás. `tbl_regression()` es tu amiga.</span></details>  
+::: {.callout-tip collapse="true"}
+
+### Donde encontrar ayuda
+
+<span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) tienes ejemplos para todo lo que necesitarás. `tbl_regression()` es tu amiga.</span>
+
+:::
 
 
-<details><summary>Como añadir información en el pie de la tabla[](../data/images/hint.png)</summary><span style="color: orange;">Tendrás que usar la función `add_glance_source_note()` o `add_glance_table()`. Para saber que nombres poner en el paràmetro `include`, puedes usar la función `broom::glance(model)`
-</span></details>  
+::: {.callout-tip collapse="true"}
+
+### Como añadir información en el pie de la tabla
+
+<span style="color: orange;">Tendrás que usar la función `add_glance_source_note()` o `add_glance_table()`. Para saber que nombres poner en el paràmetro `include`, puedes usar la función `broom::glance(model)`
+</span>
+
+:::
 
 
 ```{r ejercicios-tablas-inferenciales2, echo=FALSE}
@@ -273,11 +304,18 @@ model =  lm(comprehension ~ resident + screenbeliefs + numeracy, DF_dafina)
 
 # broom::glance(model)
 
-gtsummary::tbl_regression(model, intercept = TRUE) %>% 
-    add_global_p() %>%
-    bold_labels() %>% 
-    italicize_levels() %>% 
-    add_glance_source_note(include = c("nobs", "adj.r.squared", "df.residual", "statistic", "p.value", "df"))
+gtsummary::tbl_regression(model, intercept = TRUE) %>%
+  add_global_p() %>%
+  bold_labels() %>%
+  italicize_levels() %>%
+  add_glance_source_note(include = c(
+    "nobs",
+    "adj.r.squared",
+    "df.residual",
+    "statistic",
+    "p.value",
+    "df"
+  ))
 
 ```
 
@@ -301,15 +339,14 @@ gtsummary::tbl_regression(model, intercept = TRUE) %>%
 
 ```{r correlation-test}
 
-  # Data
-  iris %>% as_tibble()
+# Data
+iris %>% as_tibble()
 
-  # Test
-  simple_corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
-  
-  # Report
-  simple_corr_test %>% report::report()
+# Test
+simple_corr_test = cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman")
 
+# Report
+simple_corr_test %>% report::report()
 
 ```
 
@@ -317,17 +354,17 @@ gtsummary::tbl_regression(model, intercept = TRUE) %>%
 
 ```{r tablas-bonitas-correlation}
 
-  # Multiple correlations
-  table_correlations = iris %>% 
-    correlation(partial = FALSE, method = "spearman")
+# Multiple correlations
+table_correlations = iris %>% 
+  correlation(partial = FALSE, method = "spearman")
 
-  # Print table
-  TABLE_CORR = table_correlations %>% 
-    summary(stars = FALSE, include_significance = TRUE, p_digits = 3) 
-  
-  # Fancy table
-  TABLE_CORR %>% 
-    parameters::print_md()
+# Print table
+TABLE_CORR = table_correlations %>% 
+  summary(stars = FALSE, include_significance = TRUE, p_digits = 3) 
+
+# Fancy table
+TABLE_CORR %>% 
+  parameters::print_md()
 
 ```
 
@@ -399,20 +436,20 @@ Primero preparamos los datos:
 
 ```{r tablas-estadistica-preparation, echo=TRUE, fig.height=18}
 
-  # Transform variables
-  DF_gapminder2 = gapminder %>% 
-    # Log
-    mutate(gdpPercap_log = log(gdpPercap),
-           pop_log = log(pop)
-           ) %>% 
-    # Mean center variables so the 0 values have meaning
-    mutate(year = year - mean(year, na.rm = TRUE),
-           gdpPercap_log = gdpPercap_log - mean(gdpPercap_log, na.rm = TRUE),
-           pop_log = pop_log - mean(pop_log, na.rm = TRUE))
-  
-  # Reference levels and contrast coding
-  DF_gapminder2 <- within(DF_gapminder2, continent <- relevel(continent, ref = "Oceania"))
-  contrasts(DF_gapminder2$continent) = car::contr.Sum(levels(DF_gapminder2$continent))
+# Transform variables
+DF_gapminder2 = gapminder %>% 
+  # Log
+  mutate(gdpPercap_log = log(gdpPercap),
+         pop_log = log(pop)
+         ) %>% 
+  # Mean center variables so the 0 values have meaning
+  mutate(year = year - mean(year, na.rm = TRUE),
+         gdpPercap_log = gdpPercap_log - mean(gdpPercap_log, na.rm = TRUE),
+         pop_log = pop_log - mean(pop_log, na.rm = TRUE))
+
+# Reference levels and contrast coding
+DF_gapminder2 <- within(DF_gapminder2, continent <- relevel(continent, ref = "Oceania"))
+contrasts(DF_gapminder2$continent) = car::contr.Sum(levels(DF_gapminder2$continent))
 
 ```
 
@@ -421,30 +458,38 @@ Creamos un modelo sencillo:
 
 ```{r tablas-estadistica-models, echo=TRUE, fig.height=18}
 
-  model2 = lme4::lmer(lifeExp ~ gdpPercap_log + pop_log + year + (1|country), DF_gapminder2)
+model2 = lme4::lmer(lifeExp ~ gdpPercap_log + pop_log + year + (1|country), DF_gapminder2)
 
-  # Extraemos los R2 del modelo para usar en la tabla
-  R2_1 = performance::r2(model2)
+# Extraemos los R2 del modelo para usar en la tabla
+R2_1 = performance::r2(model2)
   
 ```
 
 
 Y mostramos la tabla de resultados. Como se trata de modelos mixtos, tenemos que añadir manualmente los R2's.  
 
-```{r tablas-estadistica-table1, echo=TRUE, fig.height=18}
+```{r tablas-estadistica-table1, echo=TRUE, fig.height=18, results='asis'}
 
-  table_model2 = gtsummary::tbl_regression(model2, intercept = TRUE) %>% 
-    add_global_p() %>%
-    bold_labels() %>% 
-    italicize_levels() %>% 
-    add_glance_source_note(include = c("nobs", "df.residual"))
+table_model2 = gtsummary::tbl_regression(model2) |>  #, intercept = TRUE
+  add_global_p() %>%
+  bold_labels() %>%
+  italicize_levels() %>%
+  add_glance_source_note(include = c("nobs", "df.residual"))
 
 # broomExtra::glance_performance(model2)
-  
-  table_model2 
-      # as_gt() %>%
-      # gt::tab_source_note(
-      #   gt::md(paste0(deparse1(model2@call$formula), "<BR> ", "R2 conditional = ", round(R2_1$R2_conditional, 3), ", R2 marginal = ", round(R2_1$R2_marginal, 3))))
+
+table_model2 |> 
+  as_gt() |> 
+  gt::tab_source_note(gt::md(
+    paste0(
+      deparse1(model2@call$formula),
+      "<BR> ",
+      "R2 conditional = ",
+      round(R2_1$R2_conditional, 3),
+      ", R2 marginal = ",
+      round(R2_1$R2_marginal, 3)
+    )
+  ))
 
 ```
 

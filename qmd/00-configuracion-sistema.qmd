@@ -22,7 +22,7 @@ Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además
 RStudio es un entorno integrado de desarrollo (IDE) para la programación R.
 
 -   [Descargar e instalar RStudio](https://posit.co/download/rstudio-desktop/).
--   Una vez descargado e instalado, **abre** RStudio. Deberías ver algo parecido a lo siguiente:
+-   Una vez descargado e instalado, **abre RStudio**. Deberías ver algo parecido a lo siguiente:
 
 
 
@@ -52,15 +52,16 @@ knitr::include_graphics(here::here("data/videos/rstudio-install-ALL.gif"))
 
 ```{r install_workshop_packages, message=FALSE, warning=FALSE}
 
-  if (!require('rlang')) install.packages('rlang'); library('rlang')
-  rlang::check_installed(
-    pkg = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
-            "gapminder", "geomtextpath", "ggplot2", "ggraph", "ggridges", "ggthemes", 
-            "ggtext", "googlesheets4", "grateful", "gtsummary", "haven", "here", "hexbin", "inspectdf", 
-            "janitor", "knitr", "lme4", "papaja", "parameters", "performance", "plotly", 
-            "purrr", "quarto", "readODS", "readr", "readxl", "remotes", "renv", "report", 
-            "rticles", "see", "sjPlot", "stargazer", "tidyr", "usethis", "writexl"), 
-    reason = "to run the initial setup")
+if (!require('rlang')) install.packages('rlang'); library('rlang')
+rlang::check_installed(
+  pkg = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
+          "gapminder", "geomtextpath", "ggplot2", "ggraph", "ggridges", "ggthemes", 
+          "ggtext", "googlesheets4", "grateful", "gtsummary", 
+          "haven", "here", "hexbin", "inspectdf", "janitor", "knitr", "lme4", 
+          "papaja", "parameters", "performance", "plotly", "purrr", 
+          "quarto", "readODS", "readr", "readxl", "remotes", "renv", "report", 
+          "rticles", "see", "sjPlot", "stargazer", "tidyr", "usethis", "writexl"), 
+  reason = "to run the initial setup")
 
 ```
 
@@ -69,9 +70,9 @@ Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber comp
 
 ```{r install_workshop_packages2, message=FALSE, warning=FALSE}
 
-  if (!require('remotes')) install.packages('remotes'); remotes::install_github('gorkang/jsPsychAdmin')
-  if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
-  if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
+if (!require('remotes')) install.packages('remotes'); remotes::install_github('gorkang/jsPsychAdmin')
+if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
+if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
 
 ```
 
@@ -95,8 +96,8 @@ Quarto es un sistema de publicación de código abierto que funciona con diferen
 Para generar pdf’s necesitaremos tener instalado Latex. tinytex nos ayudará a simplificar el proceso:
 
 ```{r intall_latex, eval=FALSE}
-  if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
-  tinytex::install_tinytex() # Llevará un buen rato
+if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
+tinytex::install_tinytex() # Llevará un buen rato
 ```
 
 

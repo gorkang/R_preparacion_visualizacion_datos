@@ -45,7 +45,9 @@ source("../_common.R")
 ---  
 
 
-## Dependencias {.parameters -}
+::: {.callout-important}
+
+### Dependencias
 
 **Instalar Quarto**
 
@@ -65,6 +67,7 @@ Para generar pdf's necesitaremos tener instalado Latex. `tinytex` nos ayudará a
 tinytex::install_tinytex() # Llevará un rato
 ```
 
+:::
 
 
 ## Que es la reproducibilidad
@@ -131,7 +134,9 @@ En el resto del documento (con la excepción de los chunks de código), el forma
 
 IMPORTANTE. Si algo no funciona como esperas:  
 
-#### {.parameters -}
+::: {.callout-note}
+
+### Si algo no funciona
 
 * Añade saltos de linea entre párrafos.  
 * Añade dos espacios al final de las líneas.  
@@ -139,7 +144,7 @@ IMPORTANTE. Si algo no funciona como esperas:
   + MAL: `#Título grande  `  
   + BIEN: `# Título grande  `  
 
-#### {-}
+:::
   
 
 ### Chunks de código  
@@ -163,7 +168,10 @@ En la cabecera puedes añadir opciones. Hay una [cantidad apabullante de opcione
 
 `{r nombre_chunk, eval=TRUE, include=TRUE, fig.height=10, fig.width=12, message=FALSE, warning=FALSE, cache=TRUE, results='asis'}`
 
-#### {.parameters -}
+::: {.callout-note}
+
+### Parametros chunks
+
 * `eval=TRUE`: Muestra el código
 * `include=TRUE`: Corre el código
 * `fig.height=10`: altura de los plots (en inches)
@@ -173,7 +181,7 @@ En la cabecera puedes añadir opciones. Hay una [cantidad apabullante de opcione
 * `cache=TRUE`: cachea el output del plot
 * `results='asis'`: muestra el output tal cual (importante cuando el output es en latex/pdf)  
 
-#### {-}
+:::
 
 Haciendo click en la herramienta de la derecha del chunk ![](../data/images/tool.png) puedes controlar varios parámetros esenciales. 
 
@@ -328,7 +336,13 @@ Una manera muy sencilla de hacer esto es usando [{grateful}](https://pakillo.git
 
 ```{r inst_grateful, include=TRUE, eval=FALSE}
 
-grateful::cite_packages(pkgs = "All", output = "file", out.format = "Rmd", include.RStudio = TRUE, out.dir = "~/Downloads")
+grateful::cite_packages(
+  pkgs = "All",
+  output = "file",
+  out.format = "Rmd",
+  include.RStudio = TRUE,
+  out.dir = "~/Downloads"
+)
 
 ```
 
@@ -338,7 +352,9 @@ grateful::cite_packages(pkgs = "All", output = "file", out.format = "Rmd", inclu
 
 Usando un sistema de manejo de dependencias [renv](https://github.com/rstudio/renv)  creamos un snapshot de las librerías usadas actualmente. Es muy importante para garantizar que nuestros scripts correran en el futuro.  
 
-#### {.parameters -}
+::: {.callout-note}
+
+### Funcionamiento básico `renv`
 
 0. Instalamos renv: 
 `install.packages("renv")`  
@@ -354,7 +370,7 @@ Usando un sistema de manejo de dependencias [renv](https://github.com/rstudio/re
 4. Restauramos el estado de las librerías a partir del lockfile generado por renv::snapshot().
 `renv::restore()`
 
-#### {-}
+:::
 
 
 
