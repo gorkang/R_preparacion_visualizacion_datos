@@ -15,7 +15,7 @@ library(gtsummary)
 
 
 # Read and prepare DF
-DF = haven::read_sav(here::here("data/files/Dafina/Cancer screening risk literacy R1.sav")) %>%
+DF = haven::read_sav(here::here("data/files/Dafina/Cancer screening risk literacy R1.sav")) |>
   select(IDparticipante, gender, Edad, Sexo, effective, demand, screenbeliefs, numeracy, sciliteracy, statsed, benefits, harms, recommendation, resident, compR1)
 
 
@@ -46,8 +46,8 @@ cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 
 ```{r participantes, echo=FALSE, message=FALSE}
 
-DF_table2 = DF %>%
-  select(effective, demand, screenbeliefs, numeracy, sciliteracy, statsed, benefits, harms, recommendation) %>%
+DF_table2 = DF |>
+  select(effective, demand, screenbeliefs, numeracy, sciliteracy, statsed, benefits, harms, recommendation) |>
 
   mutate(effective =
            case_when(
@@ -55,7 +55,7 @@ DF_table2 = DF %>%
              effective == 1 ~ "Efective",
              demand == 0 ~ "No demand",
              demand == 1 ~ "Demand"
-           )) %>%
+           )) |>
   mutate(demand =
            case_when(
              effective == 0 ~ "Inefective",
@@ -64,7 +64,7 @@ DF_table2 = DF %>%
              demand == 1 ~ "Demand"
            ))
 
-table1 = DF_table2 %>% select(-demand) %>%
+table1 = DF_table2 |> select(-demand) |>
   gtsummary::tbl_summary(
     by = effective,
     statistic = list(
@@ -75,7 +75,7 @@ table1 = DF_table2 %>% select(-demand) %>%
     missing = "ifany"
   )
 
-table2 = DF_table2 %>% select(-effective) %>%
+table2 = DF_table2 |> select(-effective) |>
   gtsummary::tbl_summary(
     by = demand,
     statistic = list(
@@ -87,7 +87,7 @@ table2 = DF_table2 %>% select(-effective) %>%
   )
 
 
-table3 = DF_table2 %>% select(-effective, -demand) %>%
+table3 = DF_table2 |> select(-effective, -demand) |>
   gtsummary::tbl_summary(
     statistic = list(
       all_continuous() ~ "{mean} ({sd})",
@@ -124,14 +124,14 @@ cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 
 ```{r experimento1, echo=FALSE, message=FALSE}
 
-DF_table4 = DF %>% select(effective, demand, gender, resident, statsed, screenbeliefs, compR1, numeracy, sciliteracy, benefits, harms, recommendation)
+DF_table4 = DF |> select(effective, demand, gender, resident, statsed, screenbeliefs, compR1, numeracy, sciliteracy, benefits, harms, recommendation)
 
 model1 = lm(recommendation ~ effective + demand + gender + resident + statsed + screenbeliefs + numeracy + sciliteracy + benefits + harms, DF_table4)
 
-gtsummary::tbl_regression(model1, intercept = TRUE) %>%
-  add_global_p() %>%
-  bold_labels() %>%
-  italicize_levels() %>%
+gtsummary::tbl_regression(model1, intercept = TRUE) |>
+  add_global_p() |>
+  bold_labels() |>
+  italicize_levels() |>
   add_glance_table(include = c("nobs", "df.residual", "r.squared", "adj.r.squared"))
   
 ```

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>R para preparación y visualización de datos - 5&nbsp; Análisis de datos exploratorio</title>
 <style>
@@ -113,8 +113,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
 <div class="quarto-navbar-tools">
-    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="../R-para-preparación-y-visualización-de-datos.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="../R-para-preparación-y-visualización-de-datos.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -230,8 +230,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
 <li><a href="#variables-categ%C3%B3ricas" id="toc-variables-categóricas" class="nav-link" data-scroll-target="#variables-categ%C3%B3ricas"><span class="header-section-number">5.1.1</span> Variables categóricas</a></li>
   <li><a href="#variables-continuas" id="toc-variables-continuas" class="nav-link" data-scroll-target="#variables-continuas"><span class="header-section-number">5.1.2</span> Variables continuas</a></li>
-  <li><a href="#ejercicio-variables-individuales" id="toc-ejercicio-variables-individuales" class="nav-link" data-scroll-target="#ejercicio-variables-individuales">Ejercicio variables individuales</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios">Ejercicios</a></li>
   <li><a href="#visualizando-datasets-completos" id="toc-visualizando-datasets-completos" class="nav-link" data-scroll-target="#visualizando-datasets-completos"><span class="header-section-number">5.1.3</span> Visualizando datasets completos</a></li>
   </ul>
@@ -251,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <a href="#ejercicios-finales" id="toc-ejercicios-finales" class="nav-link" data-scroll-target="#ejercicios-finales"><span class="header-section-number">5.3</span> Ejercicios finales</a>
   <ul>
 <li><a href="#ejercicio-exploraci%C3%B3n-base-nueva" id="toc-ejercicio-exploración-base-nueva" class="nav-link" data-scroll-target="#ejercicio-exploraci%C3%B3n-base-nueva"><span class="header-section-number">5.3.1</span> Ejercicio exploración base nueva</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   </ul>
 </li>
   <li><a href="#bibliograf%C3%ADa" id="toc-bibliografía" class="nav-link" data-scroll-target="#bibliograf%C3%ADa">Bibliografía</a></li>
@@ -298,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">gapminder</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">continent</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 5 × 2</span></span>
 <span><span class="co">#&gt;   continent     n</span></span>
@@ -327,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> nos permite ver medias, medianas, etc.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">gapminder</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>MEAN <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">lifeExp</span><span class="op">)</span>,</span>
 <span>            MEDIAN <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">lifeExp</span><span class="op">)</span>,</span>
 <span>            SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">lifeExp</span><span class="op">)</span>,</span>
@@ -504,8 +502,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </div>
-</section><section id="ejercicio-variables-individuales" class="level3 ejercicio unnumbered"><h3 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-variables-individuales">Ejercicio variables individuales</h3>
+</section><section id="ejercicios" class="level3 ejercicio unnumbered"><h3 class="ejercicio unnumbered anchored" data-anchor-id="ejercicios">Ejercicios</h3>
+<p><strong>Variables individuales</strong></p>
 <p>Usando el DF <code>mpg</code>, visualiza la distribucion de las variables <code>manufacturer</code>, y <code>hwy</code>. Fijate que la primera es categórica, y la segunda continua.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Vas a tener que elegir entre <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code> y <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>.</p>
+<p>Puedes ver que pasa si usas el parámetro <code>binwidth = 1</code> en <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>.</p>
+</div>
+</div>
+</div>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="05-analisis-datos-exploratorio_files/figure-html/ejercicio-variables-individuales-1.png" class="img-fluid" width="576"></p>
@@ -514,24 +530,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="05-analisis-datos-exploratorio_files/figure-html/ejercicio-variables-individuales-2.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-</section><section id="section" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="section"></h3>
 <p><br></p>
-</section><section id="ejercicios" class="level3 ejercicio unnumbered"><h3 class="ejercicio unnumbered anchored" data-anchor-id="ejercicios">Ejercicios</h3>
+<p><strong>Ejercicios avanzados</strong></p>
 <p>Usando como base éste código:</p>
 <pre><code>ggplot(gapminder, aes(lifeExp, fill = continent)) +
   geom_histogram(binwidth = 1)</code></pre>
 <p>¿Podrías replicar la visualización de abajo? Queremos mostrar un histograma por continente.</p>
-<details><summary>
-Lo mejor es dividir el proceso en varios pasos<img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">1) Empieza con el histograma de arriba. <br>2) recuerda que puedes usar el parámetro <code>fill</code> (dentro de aes), para asignar un color de relleno por nivel de una variable categórica. <br>3) Finalmente, usando facetas podrás crear una gráfica para cada nivel de la variable categórica <a href="02-visualizacion-avanzada.html#facet_wrap">facet_wrap()!</a></span>
-</details><div class="cell">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lo mejor es dividir el proceso en varios pasos
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"> 1) Empieza con el histograma de arriba. <br> 2) recuerda que puedes usar el parámetro <code>fill</code> (dentro de aes), para asignar un color de relleno por nivel de una variable categórica. <br> 3) Finalmente, usando facetas podrás crear una gráfica para cada nivel de la variable categórica <a href="02-visualizacion-avanzada.html#facet_wrap">facet_wrap()!</a> </span></p>
+</div>
+</div>
+</div>
+<div class="cell">
 <div class="cell-output-display">
 <p><img src="05-analisis-datos-exploratorio_files/figure-html/ejercicio-variables-individuales-1-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
 <p>¿Como podemos añadir el histograma general para poder entender donde se ubica cada continente?</p>
-<details><summary>
-La solución está en el capítulo 1<img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">El paquete <a href="02-visualizacion-avanzada.html#gghighlight-y-facet_wrap">gghighlight</a> es justo lo que necesitas</span>
-</details><div class="cell">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+La solución está en el capítulo 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;">El paquete <a href="02-visualizacion-avanzada.html#gghighlight-y-facet_wrap">gghighlight</a> es justo lo que necesitas</span></p>
+</div>
+</div>
+</div>
+<div class="cell">
 <div class="cell-output-display">
 <p><img src="05-analisis-datos-exploratorio_files/figure-html/ejercicio-variables-individuales-2-1.png" class="img-fluid" width="576"></p>
 </div>
@@ -553,22 +596,22 @@ La solución está en el capítulo 1<img src="../data/images/hint.png" class="im
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Wide to long</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, values_transform <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>value <span class="op">=</span> <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">value</span> <span class="op">!=</span> <span class="fl">999</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># Si existiera algun codigo para missing values, filtrar</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">gapminder</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, values_transform <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>value <span class="op">=</span> <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">value</span> <span class="op">!=</span> <span class="fl">999</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># Si existiera algun codigo para missing values, filtrar</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>value_NUM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Plot numeric variables</span></span>
-<span><span class="va">d</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">value_NUM</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">d</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">value_NUM</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">value_NUM</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">name</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="co">#+ scale_x_log10()</span></span>
 <span></span>
 <span><span class="co"># Plot non-numeric variables</span></span>
-<span><span class="va">d</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">value_NUM</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">d</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">value_NUM</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">name</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -582,12 +625,12 @@ La solución está en el capítulo 1<img src="../data/images/hint.png" class="im
 </div>
 <!-- #### inspectdf -->
 <!-- ```{r inspectdf_} -->
-<!-- gapminder %>% inspectdf::inspect_na() -->
-<!-- gapminder %>% inspectdf::inspect_na() %>% show_plot + coord_flip() -->
-<!-- gapminder_cat <- gapminder %>% inspectdf::inspect_cat() -->
-<!-- gapminder_cat %>% inspectdf::show_plot() -->
-<!-- gapminder_num <- gapminder %>% inspectdf::inspect_num() -->
-<!-- gapminder_num %>% inspectdf::show_plot() -->
+<!-- gapminder |> inspectdf::inspect_na() -->
+<!-- gapminder |> inspectdf::inspect_na() |> show_plot + coord_flip() -->
+<!-- gapminder_cat <- gapminder |> inspectdf::inspect_cat() -->
+<!-- gapminder_cat |> inspectdf::show_plot() -->
+<!-- gapminder_num <- gapminder |> inspectdf::inspect_num() -->
+<!-- gapminder_num |> inspectdf::show_plot() -->
 <!-- ``` -->
 </section></section><section id="covariación" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="covariación">
 <span class="header-section-number">5.2</span> Covariación</h2>
@@ -607,8 +650,19 @@ La solución está en el capítulo 1<img src="../data/images/hint.png" class="im
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"binline"</span>, bins <span class="op">=</span> <span class="fl">20</span>, scale <span class="op">=</span> <span class="fl">0.95</span>, draw_baseline <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>jittered_points <span class="op">=</span> <span class="cn">TRUE</span>, position <span class="op">=</span> <span class="st">"raincloud"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, scale <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span></span>
+<span>    stat <span class="op">=</span> <span class="st">"binline"</span>,</span>
+<span>    bins <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>    scale <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>    draw_baseline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">.3</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span></span>
+<span>    jittered_points <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    position <span class="op">=</span> <span class="st">"raincloud"</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>    scale <span class="op">=</span> <span class="fl">0.9</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="05-analisis-datos-exploratorio_files/figure-html/covariacion-categorica-continua-3-1.png" class="img-fluid" width="576"></p>
 </div>
@@ -617,7 +671,7 @@ La solución está en el capítulo 1<img src="../data/images/hint.png" class="im
 <p>¿Qué estamos viendo exáctamente arriba? Hay un punto por cada pais, y por cada año, lo que da lugar aalgo bien dificil de interpretar. Podemos ver los datos únicamente del último año:</p>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gapminder</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 12 × 2</span></span>
 <span><span class="co">#&gt;    year `n()`</span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt;</span></span>
@@ -629,9 +683,21 @@ La solución está en el capítulo 1<img src="../data/images/hint.png" class="im
 <span><span class="co">#&gt; 6  1977   142</span></span>
 <span><span class="co">#&gt; # ℹ 6 more rows</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">&gt;</span> <span class="fl">1995</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"binline"</span>, bins <span class="op">=</span> <span class="fl">20</span>, scale <span class="op">=</span> <span class="fl">0.95</span>, draw_baseline <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>jittered_points <span class="op">=</span> <span class="cn">TRUE</span>, position <span class="op">=</span> <span class="st">"raincloud"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, scale <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">&gt;</span> <span class="fl">1995</span><span class="op">)</span>,</span>
+<span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span></span>
+<span>    stat <span class="op">=</span> <span class="st">"binline"</span>,</span>
+<span>    bins <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>    scale <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>    draw_baseline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">.3</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span></span>
+<span>    jittered_points <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    position <span class="op">=</span> <span class="st">"raincloud"</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>    scale <span class="op">=</span> <span class="fl">0.9</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="05-analisis-datos-exploratorio_files/figure-html/covariacion-categorica-continua-4-1.png" class="img-fluid" width="576"></p>
 </div>
@@ -642,16 +708,40 @@ La solución está en el capítulo 1<img src="../data/images/hint.png" class="im
 <p>Empezamos creando dos gráficos. En cada uno filtramos por el año deseado (e.g.&nbsp;<code>filter(year == 1952)</code>). Fíjate que usamos <code>scale_x_continuous(n.breaks = 10, limits = c(20, 90))</code> para que ambas gráficas compartan la misma escala en el eje x:</p>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">A</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">1952</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"binline"</span>, bins <span class="op">=</span> <span class="fl">20</span>, scale <span class="op">=</span> <span class="fl">0.95</span>, draw_baseline <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>jittered_points <span class="op">=</span> <span class="cn">TRUE</span>, position <span class="op">=</span> <span class="st">"raincloud"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, scale <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">A</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">1952</span><span class="op">)</span>,</span>
+<span>           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span></span>
+<span>    stat <span class="op">=</span> <span class="st">"binline"</span>,</span>
+<span>    bins <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>    scale <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>    draw_baseline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">.3</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span></span>
+<span>    jittered_points <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    position <span class="op">=</span> <span class="st">"raincloud"</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>    scale <span class="op">=</span> <span class="fl">0.9</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>n.breaks <span class="op">=</span> <span class="fl">10</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">90</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"1952"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">B</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"binline"</span>, bins <span class="op">=</span> <span class="fl">20</span>, scale <span class="op">=</span> <span class="fl">0.95</span>, draw_baseline <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>jittered_points <span class="op">=</span> <span class="cn">TRUE</span>, position <span class="op">=</span> <span class="st">"raincloud"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, scale <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">B</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span>,</span>
+<span>           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span></span>
+<span>    stat <span class="op">=</span> <span class="st">"binline"</span>,</span>
+<span>    bins <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>    scale <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>    draw_baseline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">.3</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span></span>
+<span>    jittered_points <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    position <span class="op">=</span> <span class="st">"raincloud"</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>    scale <span class="op">=</span> <span class="fl">0.9</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>n.breaks <span class="op">=</span> <span class="fl">10</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">90</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"2007"</span><span class="op">)</span></span>
@@ -664,14 +754,26 @@ La solución está en el capítulo 1<img src="../data/images/hint.png" class="im
 <p>Para visualizar la diferencia entre 2007 y 1952, podemos calcular primero cuanto ha cambiado la esperanza de vida en cada pais de cada continente, y crear una gráfica con esa variable:</p>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="co"># Cálculo de la diferencia entre el máximo y mínimo de lifeExp para cada country. Incluimos continent en group_by() para poder usar esa variable en la gráfica</span></span>
-<span><span class="va">DF_gapminder_max_min</span> <span class="op">=</span> <span class="va">gapminder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">continent</span>, <span class="va">country</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="co"># Cálculo de la diferencia entre el máximo y mínimo de lifeExp para cada country. </span></span>
+<span>  <span class="co"># Incluimos continent en group_by() para poder usar esa variable en la gráfica</span></span>
+<span><span class="va">DF_gapminder_max_min</span> <span class="op">=</span> <span class="va">gapminder</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">continent</span>, <span class="va">country</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>lifeExp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">lifeExp</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">DF_gapminder_max_min</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"binline"</span>, bins <span class="op">=</span> <span class="fl">20</span>, scale <span class="op">=</span> <span class="fl">0.95</span>, draw_baseline <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>jittered_points <span class="op">=</span> <span class="cn">TRUE</span>, position <span class="op">=</span> <span class="st">"raincloud"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, scale <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span></span>
+<span>    stat <span class="op">=</span> <span class="st">"binline"</span>,</span>
+<span>    bins <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>    scale <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>    draw_baseline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">.3</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span></span>
+<span>    jittered_points <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    position <span class="op">=</span> <span class="st">"raincloud"</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>    scale <span class="op">=</span> <span class="fl">0.9</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Diferencia entre max y min por país"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -680,10 +782,24 @@ La solución está en el capítulo 1<img src="../data/images/hint.png" class="im
 </div>
 </section><section id="ejercicio" class="level3 ejercicio" data-number="5.2.3"><h3 class="ejercicio anchored" data-number="5.2.3" data-anchor-id="ejercicio">
 <span class="header-section-number">5.2.3</span> Ejercicio</h3>
-Arriba estamos restando la esperanza de vida máxima y mínima de cada pais, pero querríamos ver la diferencia entre 2007 y 1952 ¿Podrías rehacer el cálculo para mostrar la diferencia entre 2007 y 1952?
-<details><summary>
-Pista <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">1. Crear un DF para cada 2007 y otro para 1952, renombrando la variable lifeExp (e.g.&nbsp;max_lifeExp y min_lifeExp, respectivamente)<br>2. Usando la funcion <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join()</a></code>, juntamos ambas bases (tendras que usar el parametro <code>by = c("country", "continent")</code>). <br>3. Con <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> calculamos la diferencia.</span>
-</details><div class="cell">
+<p>Arriba estamos restando la esperanza de vida máxima y mínima de cada pais, pero querríamos ver la diferencia entre 2007 y 1952 ¿Podrías rehacer el cálculo para mostrar la diferencia entre 2007 y 1952?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;">1. Crear un DF para cada 2007 y otro para 1952, renombrando la variable lifeExp (e.g.&nbsp;max_lifeExp y min_lifeExp, respectivamente)<br>2. Usando la funcion <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join()</a></code>, juntamos ambas bases (tendras que usar el parametro <code>by = c("country", "continent")</code>). <br>3. Con <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> calculamos la diferencia.</span></p>
+</div>
+</div>
+</div>
+<div class="cell">
 <div class="cell-output-display">
 <p><img src="05-analisis-datos-exploratorio_files/figure-html/covariacion-categorica-continua-7-1.png" class="img-fluid" width="576"></p>
 </div>
@@ -695,7 +811,7 @@ Pista <img src="../data/images/hint.png" class="img-fluid"></summary><span style
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">diamonds</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">cut</span>, <span class="va">color</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_count.html">geom_count</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">diamonds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">diamonds</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">color</span>, <span class="va">cut</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 35 × 3</span></span>
 <span><span class="co">#&gt;   color cut           n</span></span>
@@ -708,8 +824,8 @@ Pista <img src="../data/images/hint.png" class="img-fluid"></summary><span style
 <span><span class="co">#&gt; 6 E     Fair        224</span></span>
 <span><span class="co">#&gt; # ℹ 29 more rows</span></span>
 <span></span>
-<span><span class="va">diamonds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">color</span>, <span class="va">cut</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">diamonds</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">color</span>, <span class="va">cut</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">color</span>, <span class="va">cut</span>, fill <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -765,11 +881,39 @@ Pista <img src="../data/images/hint.png" class="img-fluid"></summary><span style
 <code>hwy</code> y <code>cty</code>
 </li>
 </ul>
-<details><summary>
-Visualizando una variable categórica y una continua<img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;"><a href="#variable-categ%C3%B3rica-y-continua">geom_density_ridges()!</a></span>
-</details><details><summary>
-Visualizando pares de variables continuas<img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;"><a href="01-introduccion_visualizacion.html#geom_smooth">geom_smooth()!</a></span>
-</details><div class="cell">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Visualizando una variable categórica y una continua
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"><a href="#variable-categ%C3%B3rica-y-continua">geom_density_ridges()!</a></span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Visualizando pares de variables continuas!
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"><a href="01-introduccion_visualizacion.html#geom_smooth">geom_smooth()!</a></span></p>
+</div>
+</div>
+</div>
+<div class="cell">
 <div class="cell-output-display">
 <p><img src="05-analisis-datos-exploratorio_files/figure-html/ejercicio-covariacion-1.png" class="img-fluid" width="576"></p>
 </div>
@@ -788,12 +932,26 @@ Visualizando pares de variables continuas<img src="../data/images/hint.png" clas
 <li>scatterplots de la relación entre comprensión y numeracy, y entre comprensión y screenbeliefs</li>
 </ul>
 <p>Puedes ir al enlace anterior y descargar el archivo <code>Cancer screening risk literacy R1.sav</code> en la carpeta <code>Data and results</code>, o directamente usar el codigo de abajo.</p>
-<details><summary>
-Como visualizar todas las variables<img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;"><a href="#visualizando-datasets-completos">Ver el apartado visualizando-datasets-completos en este mismo capítulo</a></span>
-</details><div class="cell">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Como visualizar todas las variables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"><a href="#visualizando-datasets-completos">Ver el apartado visualizando-datasets-completos en este mismo capítulo</a></span></p>
+</div>
+</div>
+</div>
+<div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Usamos haven::read_sav() para leer los archivos .sav</span></span>
-<span><span class="va">DF_dafina</span> <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/Dafina"</span>, <span class="st">"Cancer screening risk literacy R1.sav"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">DF_dafina</span> <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/Dafina"</span>, <span class="st">"Cancer screening risk literacy R1.sav"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -814,7 +972,7 @@ Como visualizar todas las variables<img src="../data/images/hint.png" class="img
 <p><img src="05-analisis-datos-exploratorio_files/figure-html/ejercicio-final-analisis-exploratorio3-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-</section><section id="section-1" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="section-1"></h3>
+</section><section id="section" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="section"></h3>
 </section></section><section id="bibliografía" class="level2 bibliografia unnumbered"><h2 class="bibliografia unnumbered anchored" data-anchor-id="bibliografía">Bibliografía</h2>
 <p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc.&nbsp;https://r4ds.had.co.nz/</p>
 

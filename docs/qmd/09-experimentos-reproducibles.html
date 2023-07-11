@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>R para preparación y visualización de datos - 9&nbsp; Experimentos reproducibles</title>
 <style>
@@ -113,8 +113,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
 <div class="quarto-navbar-tools">
-    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="../R-para-preparación-y-visualización-de-datos.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="../R-para-preparación-y-visualización-de-datos.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -300,9 +300,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <p><strong>Para crear un protocolo con las tareas <code>AIM</code>, <code>EAR</code> e <code>IRI</code>, y abrirlo en un navegador:</strong></p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychMaker</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMaker/man/create_protocol.html">create_protocol</a></span><span class="op">(</span>canonical_tasks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AIM"</span>, <span class="st">"EAR"</span>, <span class="st">"IRI"</span><span class="op">)</span>, <span class="co"># Pruebas a incluir</span></span>
-<span>                              folder_output <span class="op">=</span> <span class="st">"~/Downloads/protocol999"</span>, <span class="co"># El directorio tiene que incluir un número (se usará como pid)</span></span>
-<span>                              launch_browser <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># Abre el navegador con el protocolo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychMaker</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMaker/man/create_protocol.html">create_protocol</a></span><span class="op">(</span></span>
+<span>  <span class="co"># Pruebas a incluir</span></span>
+<span>  canonical_tasks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AIM"</span>, <span class="st">"EAR"</span>, <span class="st">"IRI"</span><span class="op">)</span>, </span>
+<span>   <span class="co"># El directorio tiene que incluir un número (se usará como pid)</span></span>
+<span>  folder_output <span class="op">=</span> <span class="st">"~/Downloads/protocol999"</span>,</span>
+<span>  <span class="co"># Abre el navegador con el protocolo</span></span>
+<span>  launch_browser <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p>Podemos editar la configuración del protocolo en la carpeta que hemos indicado en <code>folder_output</code>, abriendo el archivo <code>config.js</code>. Puedes consultar la ayuda sobre la <a href="https://gorkang.github.io/jsPsychR-manual/qmd/03-jsPsychMaker.html#experiment-configuration">configuración de experimentos</a>.</p></li>
@@ -340,15 +345,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Un solo mono</span></span>
-<span><span class="fu">jsPsychMonkeys</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMonkeys/man/release_the_monkeys.html">release_the_monkeys</a></span><span class="op">(</span>uid <span class="op">=</span> <span class="st">"1"</span>, <span class="co"># Lanza un monos con el user id 1</span></span>
-<span>                                    local_folder_tasks <span class="op">=</span> <span class="st">"~/Downloads/protocol999"</span><span class="op">)</span></span>
+<span><span class="fu">jsPsychMonkeys</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMonkeys/man/release_the_monkeys.html">release_the_monkeys</a></span><span class="op">(</span></span>
+<span>  <span class="co"># Lanza un monos con el user id 1</span></span>
+<span>  uid <span class="op">=</span> <span class="st">"1"</span>,</span>
+<span>  local_folder_tasks <span class="op">=</span> <span class="st">"~/Downloads/protocol999"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span><span class="co">#  Monos del 1 al 5 simultaneamente</span></span>
-<span><span class="fu">jsPsychMonkeys</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMonkeys/man/release_the_monkeys.html">release_the_monkeys</a></span><span class="op">(</span>uid <span class="op">=</span> <span class="st">"1:5"</span>, <span class="co"># Lanza monos desde el uid 1 hasta el 5</span></span>
-<span>                                    local_folder_tasks <span class="op">=</span> <span class="st">"~/Downloads/protocol999"</span>,</span>
-<span>                                    sequential_parallel <span class="op">=</span> <span class="st">"parallel"</span>, <span class="co"># Lanza los monos en paralelo</span></span>
-<span>                                    number_of_cores <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="co"># Usando este número de CPUs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">jsPsychMonkeys</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMonkeys/man/release_the_monkeys.html">release_the_monkeys</a></span><span class="op">(</span></span>
+<span>  <span class="co"># Lanza monos desde el uid 1 hasta el 5</span></span>
+<span>  uid <span class="op">=</span> <span class="st">"1:5"</span>,</span>
+<span>  local_folder_tasks <span class="op">=</span> <span class="st">"~/Downloads/protocol999"</span>,</span>
+<span>  <span class="co"># Lanza los monos en paralelo</span></span>
+<span>  sequential_parallel <span class="op">=</span> <span class="st">"parallel"</span>,</span>
+<span>  <span class="co"># Usando este número de CPUs</span></span>
+<span>  number_of_cores <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Puedes ver de los parametros disponibles en el <a href="https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#parameters-available">Manual de jsPsychMonkeys</a>.</p>
 <hr></section><section id="jspsychhelper-como-preparar-datos" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="jspsychhelper-como-preparar-datos">
@@ -445,10 +457,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Ejecuta <code><a href="https://rdrr.io/pkg/jsPsychMaker/man/create_protocol.html">create_protocol()</a></code> con los parámetros de abajo, se creará un nuevo protocolo con tu/tus tareas.</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">jsPsychMaker</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMaker/man/create_protocol.html">create_protocol</a></span><span class="op">(</span>canonical_tasks <span class="op">=</span> <span class="st">"EAR"</span>, <span class="co"># Incluye la tarea EAR</span></span>
-<span>                                folder_tasks <span class="op">=</span> <span class="st">"~/Downloads/TEST/"</span>, <span class="co"># Crea e incluye las tareas que estan en esta carpeta</span></span>
-<span>                                folder_output <span class="op">=</span> <span class="st">"~/Downloads/TEST/new_protocol"</span>, <span class="co"># Crea el protocolo aquí</span></span>
-<span>                                launch_browser <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># Lanza un navegador</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">jsPsychMaker</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMaker/man/create_protocol.html">create_protocol</a></span><span class="op">(</span></span>
+<span>    <span class="co"># Incluye la tarea EAR</span></span>
+<span>    canonical_tasks <span class="op">=</span> <span class="st">"EAR"</span>,</span>
+<span>    <span class="co"># Crea e incluye las tareas que estan en esta carpeta</span></span>
+<span>    folder_tasks <span class="op">=</span> <span class="st">"~/Downloads/TEST/"</span>,</span>
+<span>    <span class="co"># Crea el protocolo aquí</span></span>
+<span>    folder_output <span class="op">=</span> <span class="st">"~/Downloads/TEST/new_protocol"</span>,</span>
+<span>    <span class="co"># Lanza un navegador</span></span>
+<span>    launch_browser <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <section id="ejercicio-optativo-crear-nueva-tarea" class="level4 ejercicio unnumbered"><h4 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-optativo-crear-nueva-tarea">Ejercicio Optativo: Crear nueva tarea</h4>
@@ -478,7 +496,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Creamos el nuevo archivo <code>prepare_NOMBRETAREA()</code>:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychHelpeR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychHelpeR/man/create_new_task.html">create_new_task</a></span><span class="op">(</span>short_name_task <span class="op">=</span> <span class="st">"NAMETASK"</span>, get_info_googledoc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">jsPsychHelpeR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychHelpeR/man/create_new_task.html">create_new_task</a></span><span class="op">(</span></span>
+<span>  short_name_task <span class="op">=</span> <span class="st">"NAMETASK"</span>, </span>
+<span>  get_info_googledoc <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Esta función:</p>
 <ol type="1">

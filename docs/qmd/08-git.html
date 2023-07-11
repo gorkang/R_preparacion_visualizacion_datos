@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>R para preparación y visualización de datos - 8&nbsp; Control de cambios con Git y Github</title>
 <style>
@@ -113,8 +113,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
 <div class="quarto-navbar-tools">
-    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="../R-para-preparación-y-visualización-de-datos.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="../R-para-preparación-y-visualización-de-datos.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -225,34 +225,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li><a href="#paquetes-para-este-cap%C3%ADtulo" id="toc-paquetes-para-este-capítulo" class="nav-link active" data-scroll-target="#paquetes-para-este-cap%C3%ADtulo">Paquetes para este capítulo</a></li>
-  <li><a href="#dependencias" id="toc-dependencias" class="nav-link" data-scroll-target="#dependencias">Dependencias</a></li>
   <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="header-section-number">8.1</span> Git</a></li>
   <li><a href="#github" id="toc-github" class="nav-link" data-scroll-target="#github"><span class="header-section-number">8.2</span> Github</a></li>
-  <li>
-<a href="#clonar-repo" id="toc-clonar-repo" class="nav-link" data-scroll-target="#clonar-repo"><span class="header-section-number">8.3</span> Clonar un repositorio existente</a>
-  <ul>
-<li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  </ul>
-</li>
-  <li>
-<a href="#crear-un-proyecto-en-rstudio-asociado-a-github" id="toc-crear-un-proyecto-en-rstudio-asociado-a-github" class="nav-link" data-scroll-target="#crear-un-proyecto-en-rstudio-asociado-a-github"><span class="header-section-number">8.4</span> Crear un proyecto en RStudio asociado a Github</a>
-  <ul>
-<li><a href="#versi%C3%B3n-simple-recomendado" id="toc-versión-simple-recomendado" class="nav-link" data-scroll-target="#versi%C3%B3n-simple-recomendado">Versión simple [recomendado]</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
-  <li><a href="#usando-el-terminal" id="toc-usando-el-terminal" class="nav-link" data-scroll-target="#usando-el-terminal">Usando el terminal</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
-  </ul>
-</li>
+  <li><a href="#clonar-repo" id="toc-clonar-repo" class="nav-link" data-scroll-target="#clonar-repo"><span class="header-section-number">8.3</span> Clonar un repositorio existente</a></li>
+  <li><a href="#crear-un-proyecto-en-rstudio-asociado-a-github" id="toc-crear-un-proyecto-en-rstudio-asociado-a-github" class="nav-link" data-scroll-target="#crear-un-proyecto-en-rstudio-asociado-a-github"><span class="header-section-number">8.4</span> Crear un proyecto en RStudio asociado a Github</a></li>
   <li><a href="#ejercicio-git-github" id="toc-ejercicio-git-github" class="nav-link" data-scroll-target="#ejercicio-git-github">Ejercicio Git-Github</a></li>
   <li>
 <a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow"><span class="header-section-number">8.5</span> Workflow</a>
   <ul>
-<li>
-<a href="#modelo-b%C3%A1sico" id="toc-modelo-básico" class="nav-link" data-scroll-target="#modelo-b%C3%A1sico"><span class="header-section-number">8.5.1</span> Modelo básico</a>
-  <ul>
-<li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
-  </ul>
-</li>
+<li><a href="#modelo-b%C3%A1sico" id="toc-modelo-básico" class="nav-link" data-scroll-target="#modelo-b%C3%A1sico"><span class="header-section-number">8.5.1</span> Modelo básico</a></li>
   <li>
 <a href="#pull-request-en-3-1-sencillos-pasos" id="toc-pull-request-en-3-1-sencillos-pasos" class="nav-link" data-scroll-target="#pull-request-en-3-1-sencillos-pasos"><span class="header-section-number">8.5.2</span> Pull request en 3 + 1 sencillos pasos</a>
   <ul>
@@ -262,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li><a href="#ejercicio" id="toc-ejercicio" class="nav-link" data-scroll-target="#ejercicio">Ejercicio</a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   </ul>
 </li>
   <li><a href="#bibliograf%C3%ADa" id="toc-bibliografía" class="nav-link" data-scroll-target="#bibliograf%C3%ADa">Bibliografía</a></li>
@@ -310,11 +291,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://usethis.r-lib.org">'usethis'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'usethis'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://usethis.r-lib.org">'usethis'</a></span><span class="op">)</span></span>
 <span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr></section><section id="dependencias" class="level2 parameters unnumbered"><h2 class="parameters unnumbered anchored" data-anchor-id="dependencias">Dependencias</h2>
+<hr>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dependencias
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Vamos a necesitar <a href="https://git-scm.com/">Git</a> y <a href="https://www.latex-project.org/">Latex</a> para poder trabajar:</p>
 <p><strong>Instalar Git</strong></p>
 <p>Ver instrucciones para <a href="https://happygitwithr.com/install-git.html#install-git-windows">Windows</a>, <a href="https://happygitwithr.com/install-git.html#macos">Mac</a> y <a href="https://happygitwithr.com/install-git.html#linux">Linux</a>.</p>
 <p>&nbsp;&nbsp;<span style="font-size: 10px;">Importante: en el paso <em>Adjusting your PATH environment</em> en en Windows, selecciona <em>Git from the command line and also from 3rd-party software</em></span></p>
+</div>
+</div>
 </section><section id="git" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="git">
 <span class="header-section-number">8.1</span> Git</h2>
 <div style="float:right;position: relative; margin:0px 0px 0px 50px;">
@@ -350,7 +343,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="clonar-repo" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="clonar-repo">
 <span class="header-section-number">8.3</span> Clonar un repositorio existente</h2>
 <p>Algo que podemos hacer con todos los repositorios de Github es clonarlos localmente:</p>
-<section id="section" class="level4 parameters unnumbered"><h4 class="parameters unnumbered anchored" data-anchor-id="section"></h4>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Clonar repositorio Github
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><strong>Primero</strong>, copiamos la <code>repository URL</code> del repo de <a href="https://github.com/">Github</a> (ver imagen de abajo). Será algo similar a <code>https://github.com/VUESTRO_NOMBRE_DE_USUARIO/NOMBRE_REPOSITORIO.git</code></p>
 <div style="float:left;position: relative; margin:0px 30px 0px 0px;">
 <p><img src="../data/images/git-clone.png" class="img-fluid"></p>
@@ -360,7 +362,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><strong>Segundo</strong>, en RStudio: <code>File &gt; New Project &gt; Version Control &gt; Git</code></p>
 <p><img src="../data/images/rstudio-github.gif" class="img-fluid"></p>
-</section></section><section id="crear-un-proyecto-en-rstudio-asociado-a-github" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="crear-un-proyecto-en-rstudio-asociado-a-github">
+</div>
+</div>
+</section><section id="crear-un-proyecto-en-rstudio-asociado-a-github" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="crear-un-proyecto-en-rstudio-asociado-a-github">
 <span class="header-section-number">8.4</span> Crear un proyecto en RStudio asociado a Github</h2>
 <p>Podemos empezar creando un repositorio en Github, para después clonarlo localmente. Si necesitamos crear un <a href="https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">personal access token, podemos consultar la ayuda de Github</a>.</p>
 <pre><code><a href="https://usethis.r-lib.org/reference/github-token.html"># Puedes usar:  
@@ -370,15 +374,35 @@ usethis::create_github_token()
 # O manualmente, como los animales:  
 
   # En tu página de Github, haz click en tu icon (arriba a la derecha) -&gt; Settings -&gt; Developer settings -&gt; Personal access tokens -&gt; [Generate new token] -&gt; Give gist, repo and workflow permissions.</a></code></pre>
-<section id="versión-simple-recomendado" class="level3 parameters unnumbered"><h3 class="parameters unnumbered anchored" data-anchor-id="versión-simple-recomendado">Versión simple [recomendado]</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Versión simple [recomendado]
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>En <a href="https://github.com/">Github</a>:</p>
 <ol type="1">
 <li><p>Creamos repositorio nuevo</p></li>
 <li><p>Initialize this repository with a README</p></li>
 <li><p><a href="#clonar-repo">Clonar repositorio</a></p></li>
-</ol></section><section id="section-1" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="section-1"></h3>
+</ol>
+</div>
+</div>
 <p>Alternativamente, si ya tenemos un proyecto de RStudio, podemos crear un repositorio de Github asociado automágicamente.</p>
-</section><section id="usando-el-terminal" class="level3 parameters unnumbered"><h3 class="parameters unnumbered anchored" data-anchor-id="usando-el-terminal">Usando el terminal</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Usando el terminal
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li><p>Crear local git repo (solo si no lo tenemos aún): <code><a href="https://usethis.r-lib.org/reference/use_git.html">usethis::use_git()</a></code> (se crea una carpeta oculta llamada .git)</p></li>
 <li><p>Crear Github Token: <code><a href="https://usethis.r-lib.org/reference/github-token.html">usethis::create_github_token()</a></code></p></li>
@@ -388,8 +412,10 @@ usethis::create_github_token()
 <ul>
 <li>Empujar el repositorio local a Github: <code>git push --set-upstream origin master</code>
 </li>
-</ul></section><section id="section-2" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="section-2"></h3>
-</section></section><section id="ejercicio-git-github" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-git-github">Ejercicio Git-Github</h2>
+</ul>
+</div>
+</div>
+</section><section id="ejercicio-git-github" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-git-github">Ejercicio Git-Github</h2>
 <ol type="1">
 <li><p>Crea un proyecto de RStudio</p></li>
 <li><p>Abre una cuenta en <a href="https://github.com/">Github</a> y/o haz login</p></li>
@@ -413,8 +439,16 @@ usethis::create_github_token()
 <span class="header-section-number">8.5.1</span> Modelo básico</h3>
 <p>En RStudio podemos trabajar gráficamente, Usando el panel <code>Git</code>.</p>
 <p><img src="../data/images/git-rstudio.png" class="img-fluid"></p>
-<p><strong>Usando el entorno gráfico</strong></p>
-<section id="section-3" class="level5 parameters unnumbered"><h5 class="parameters unnumbered anchored" data-anchor-id="section-3"></h5>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Usando el entorno gráfico
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><strong>Empezamos en la rama master</strong>:</p>
 <ol start="0" type="1">
 <li>
@@ -442,8 +476,19 @@ usethis::create_github_token()
 <li>
 <strong>Pull</strong> <img src="../data/images/git-pull.png" class="img-fluid"> : nos aseguramos que nuestro repositorio local esta actualizado</li>
 </ol>
-<details><summary>
-Como hacerlo usando el <code>terminal</code> <img src="../data/images/hint.png" class="img-fluid"></summary><p><span style="color: orange;"></span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Como hacerlo usando el <code>terminal</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"></span></p>
 <ol start="0" type="1">
 <li>
 <strong>Pull</strong>: nos aseguramos que nuestro repositorio local esta actualizado: <code>git pull</code>
@@ -477,27 +522,29 @@ Como hacerlo usando el <code>terminal</code> <img src="../data/images/hint.png" 
 <li>
 <strong>Pull</strong>: nos aseguramos que nuestro repositorio local esta actualizado: <code>git pull</code>
 </li>
-</ol></details></section></section><section id="pull-request-en-3-1-sencillos-pasos" class="level3" data-number="8.5.2"><h3 data-number="8.5.2" class="anchored" data-anchor-id="pull-request-en-3-1-sencillos-pasos">
+</ol>
+<p></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="pull-request-en-3-1-sencillos-pasos" class="level3" data-number="8.5.2"><h3 data-number="8.5.2" class="anchored" data-anchor-id="pull-request-en-3-1-sencillos-pasos">
 <span class="header-section-number">8.5.2</span> Pull request en 3 + 1 sencillos pasos</h3>
 <p>Después de hacer el push de arriba, al entrar en nuestro repositorio deberíamos ver algo parecido a lo siguiente (si no lo vemos, ir a <strong>branches</strong>). La única dificultad es saber cual de los botones verdes apretar:</p>
 <section id="paso-1.-compare-pull-request" class="level4" data-number="8.5.2.1"><h4 data-number="8.5.2.1" class="anchored" data-anchor-id="paso-1.-compare-pull-request">
 <span class="header-section-number">8.5.2.1</span> Paso 1. Compare &amp; pull request</h4>
-<!-- ##### {.parameters -}  -->
 <p><img src="../data/images/pull-request-1.png" class="img-fluid" style="width:70.0%"></p>
-<!-- ##### {-}   -->
 </section><section id="paso-2.-create-pull-request" class="level4" data-number="8.5.2.2"><h4 data-number="8.5.2.2" class="anchored" data-anchor-id="paso-2.-create-pull-request">
 <span class="header-section-number">8.5.2.2</span> Paso 2. Create pull request</h4>
-<!-- ##### {.parameters -}  -->
 <p><img src="../data/images/pull-request-2.png" class="img-fluid" style="width:70.0%"></p>
-<!-- ##### {-}  -->
 </section><section id="paso-3.-merge-pull-request" class="level4" data-number="8.5.2.3"><h4 data-number="8.5.2.3" class="anchored" data-anchor-id="paso-3.-merge-pull-request">
 <span class="header-section-number">8.5.2.3</span> Paso 3. Merge pull request</h4>
-<!-- ##### {.parameters -}  -->
 <p><img src="../data/images/pull-request-3.png" class="img-fluid" style="width:70.0%"></p>
 <ul>
 <li>Borrar rama antigua</li>
 </ul>
-<!-- ##### {-}  --><hr></section></section><section id="ejercicio" class="level3 ejercicio unnumbered"><h3 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio">Ejercicio</h3>
+<hr></section></section><section id="ejercicio" class="level3 ejercicio unnumbered"><h3 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio">Ejercicio</h3>
 <p><strong>Nuestro primer commit</strong></p>
 <ol type="1">
 <li><p>Usando el proyecto de RStudio de antes, crea una rama nueva llamada development</p></li>
@@ -507,7 +554,7 @@ Como hacerlo usando el <code>terminal</code> <img src="../data/images/hint.png" 
 <ol start="3" type="1">
 <li><p>Haz un commit de ese archivo y subelo (push) a Github (asegurate que esta allá!). No olvides hacer un pull!</p></li>
 <li><p>Ahora haz cambios en el archivo, commitealos, súbelos, y sincroniza tu repo local</p></li>
-</ol></section><section id="section-4" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="section-4"></h3>
+</ol></section><section id="section" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="section"></h3>
 <!-- ### Feature branch  -->
 <!-- Para la versión más razonable deberiamos tener partir con las siguientes ramas: -->
 <!-- * master   -->

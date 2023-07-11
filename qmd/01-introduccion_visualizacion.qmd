@@ -126,17 +126,17 @@ Miramos el error promedio en función de la pregunta (cuanto se han alejado de l
 
 # Leemos datos
 DF = read_csv(
-  here::here("data/files/01-visualizacion-importante.csv")) %>% 
+  here::here("data/files/01-visualizacion-importante.csv")) |> 
   mutate(Question = as.factor(
     case_when(Question_p_of == 1 ~ "p (salga uno)",
               Question_p_of == 0 ~ "p (no salga ninguno)")))
 
 # Promedio por condición
-DF %>% 
-  group_by(Question) %>% 
+DF |> 
+  group_by(Question) |> 
   summarise(Error_promedio = mean(Error),
             SD = sd(Error, na.rm = TRUE),
-            N = n()) %>% 
+            N = n()) |> 
   knitr::kable()
 
 ```
@@ -201,12 +201,12 @@ Estamos listos para escribir el paper.  Preparemos la tabla con descriptivos...
 ```{r visualizacion-importante-03, echo=FALSE}
 
 # Promedio y mediana por condición
-DF %>% 
-  group_by(Question) %>% 
+DF |> 
+  group_by(Question) |> 
   summarise(Error_promedio = mean(Error),
             # Error_mediana = median(Error),
             SD = sd(Error, na.rm = TRUE),
-            N = n()) %>% 
+            N = n()) |> 
   knitr::kable()
 
 ```
@@ -343,8 +343,8 @@ La misma operación con base-R o con tidyverse:
 
 **Tidyverse**  
 ```{r tidyverse-vs-base-R-02, eval=FALSE}
-  iris %>% 
-    group_by(Species) %>% 
+  iris |> 
+    group_by(Species) |> 
     filter(Petal.Width == max(Petal.Width))
 
 ```

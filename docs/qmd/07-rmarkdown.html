@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>R para preparación y visualización de datos - 7&nbsp; Trabajo con RMarkdown para reportes reproducibles</title>
 <style>
@@ -113,8 +113,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
 <div class="quarto-navbar-tools">
-    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="../R-para-preparación-y-visualización-de-datos.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="../R-para-preparación-y-visualización-de-datos.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -225,7 +225,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li><a href="#paquetes-para-este-cap%C3%ADtulo" id="toc-paquetes-para-este-capítulo" class="nav-link active" data-scroll-target="#paquetes-para-este-cap%C3%ADtulo">Paquetes para este capítulo</a></li>
-  <li><a href="#dependencias" id="toc-dependencias" class="nav-link" data-scroll-target="#dependencias">Dependencias</a></li>
   <li><a href="#que-es-la-reproducibilidad" id="toc-que-es-la-reproducibilidad" class="nav-link" data-scroll-target="#que-es-la-reproducibilidad"><span class="header-section-number">7.1</span> Que es la reproducibilidad</a></li>
   <li><a href="#proyectos-de-r-studio" id="toc-proyectos-de-r-studio" class="nav-link" data-scroll-target="#proyectos-de-r-studio"><span class="header-section-number">7.2</span> Proyectos de R-Studio</a></li>
   <li><a href="#rmarkdownquarto-openscience-y-an%C3%A1lisis-reproducibles" id="toc-rmarkdownquarto-openscience-y-análisis-reproducibles" class="nav-link" data-scroll-target="#rmarkdownquarto-openscience-y-an%C3%A1lisis-reproducibles"><span class="header-section-number">7.3</span> RMarkdown/Quarto, openscience y análisis reproducibles</a></li>
@@ -233,39 +232,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <a href="#sintaxis-chunks-de-c%C3%B3digo-tipos-de-archivo" id="toc-sintaxis-chunks-de-código-tipos-de-archivo" class="nav-link" data-scroll-target="#sintaxis-chunks-de-c%C3%B3digo-tipos-de-archivo"><span class="header-section-number">7.4</span> Sintaxis, chunks de código, tipos de archivo</a>
   <ul>
 <li><a href="#cabecera-yaml" id="toc-cabecera-yaml" class="nav-link" data-scroll-target="#cabecera-yaml"><span class="header-section-number">7.4.1</span> Cabecera YAML</a></li>
-  <li>
-<a href="#rmarkdown" id="toc-rmarkdown" class="nav-link" data-scroll-target="#rmarkdown"><span class="header-section-number">7.4.2</span> Rmarkdown</a>
-  <ul>
-<li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
-  </ul>
-</li>
-  <li>
-<a href="#chunks-de-c%C3%B3digo" id="toc-chunks-de-código" class="nav-link" data-scroll-target="#chunks-de-c%C3%B3digo"><span class="header-section-number">7.4.3</span> Chunks de código</a>
-  <ul>
-<li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
-  </ul>
-</li>
+  <li><a href="#rmarkdown" id="toc-rmarkdown" class="nav-link" data-scroll-target="#rmarkdown"><span class="header-section-number">7.4.2</span> Rmarkdown</a></li>
+  <li><a href="#chunks-de-c%C3%B3digo" id="toc-chunks-de-código" class="nav-link" data-scroll-target="#chunks-de-c%C3%B3digo"><span class="header-section-number">7.4.3</span> Chunks de código</a></li>
   </ul>
 </li>
   <li><a href="#ejercicio-b%C3%A1sico-rmarkdown" id="toc-ejercicio-básico-rmarkdown" class="nav-link" data-scroll-target="#ejercicio-b%C3%A1sico-rmarkdown">Ejercicio básico RMarkdown</a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#ejercicio-avanzado" id="toc-ejercicio-avanzado" class="nav-link" data-scroll-target="#ejercicio-avanzado">Ejercicio avanzado</a></li>
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"></a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
   <li>
 <a href="#avanzado" id="toc-avanzado" class="nav-link" data-scroll-target="#avanzado"><span class="header-section-number">7.5</span> Avanzado</a>
   <ul>
 <li><a href="#art%C3%ADculos-apa-con-papaja" id="toc-artículos-apa-con-papaja" class="nav-link" data-scroll-target="#art%C3%ADculos-apa-con-papaja"><span class="header-section-number">7.5.1</span> Artículos APA con Papaja</a></li>
   <li><a href="#usar-bibliograf%C3%ADa" id="toc-usar-bibliografía" class="nav-link" data-scroll-target="#usar-bibliograf%C3%ADa"><span class="header-section-number">7.5.2</span> Usar bibliografía</a></li>
   <li><a href="#citar-los-paquetes-que-usamos" id="toc-citar-los-paquetes-que-usamos" class="nav-link" data-scroll-target="#citar-los-paquetes-que-usamos"><span class="header-section-number">7.5.3</span> Citar los paquetes que usamos</a></li>
-  <li>
-<a href="#manejo-de-dependencias" id="toc-manejo-de-dependencias" class="nav-link" data-scroll-target="#manejo-de-dependencias"><span class="header-section-number">7.5.4</span> Manejo de dependencias</a>
-  <ul>
-<li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"></a></li>
-  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7"></a></li>
-  </ul>
-</li>
+  <li><a href="#manejo-de-dependencias" id="toc-manejo-de-dependencias" class="nav-link" data-scroll-target="#manejo-de-dependencias"><span class="header-section-number">7.5.4</span> Manejo de dependencias</a></li>
   <li><a href="#shortcuts" id="toc-shortcuts" class="nav-link" data-scroll-target="#shortcuts"><span class="header-section-number">7.5.5</span> Shortcuts!</a></li>
   <li><a href="#estilo" id="toc-estilo" class="nav-link" data-scroll-target="#estilo"><span class="header-section-number">7.5.6</span> Estilo</a></li>
   </ul>
@@ -318,7 +299,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  </span>
 <span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr></section><section id="dependencias" class="level2 parameters unnumbered"><h2 class="parameters unnumbered anchored" data-anchor-id="dependencias">Dependencias</h2>
+<hr>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dependencias
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><strong>Instalar Quarto</strong></p>
 <p>Quarto es un sistema de publicación de código abierto que funciona con diferentes lenguajes de programación como R o python.</p>
 <p><a href="https://quarto.org/docs/get-started/">Descarga e instala Quarto</a></p>
@@ -327,6 +318,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Para generar pdf’s necesitaremos tener instalado Latex. <code>tinytex</code> nos ayudará a simplificar el proceso:</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">install_tinytex</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Llevará un rato</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </div>
 </section><section id="que-es-la-reproducibilidad" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="que-es-la-reproducibilidad">
 <span class="header-section-number">7.1</span> Que es la reproducibilidad</h2>
@@ -370,7 +363,16 @@ title: "Untitled"
 <span class="header-section-number">7.4.2</span> Rmarkdown</h3>
 <p>En el resto del documento (con la excepción de los chunks de código), el formato que usaremos será Rmarkdown. Su sintaxis es muy sencilla pero nada tolerante. Podéis ver las bases en la <a href="https://quarto.org/docs/authoring/markdown-basics.html">Markdown basics</a>.</p>
 <p>IMPORTANTE. Si algo no funciona como esperas:</p>
-<section id="section" class="level4 parameters unnumbered"><h4 class="parameters unnumbered anchored" data-anchor-id="section"></h4>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Si algo no funciona
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li>Añade saltos de linea entre párrafos.<br>
 </li>
@@ -384,8 +386,10 @@ title: "Untitled"
 </li>
 </ul>
 </li>
-</ul></section><section id="section-1" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="section-1"></h4>
-</section></section><section id="chunks-de-código" class="level3" data-number="7.4.3"><h3 data-number="7.4.3" class="anchored" data-anchor-id="chunks-de-código">
+</ul>
+</div>
+</div>
+</section><section id="chunks-de-código" class="level3" data-number="7.4.3"><h3 data-number="7.4.3" class="anchored" data-anchor-id="chunks-de-código">
 <span class="header-section-number">7.4.3</span> Chunks de código</h3>
 <p>Los chunks de código están delimitados por:</p>
 <p><img src="../data/images/chunk-options.png" class="img-fluid"></p>
@@ -398,7 +402,16 @@ title: "Untitled"
 </div>
 <p>En la cabecera puedes añadir opciones. Hay una <a href="https://bookdown.org/yihui/rmarkdown/r-code.html">cantidad apabullante de opciones</a>. Por ejemplo, en el siguiente chunk:</p>
 <p><code>{r nombre_chunk, eval=TRUE, include=TRUE, fig.height=10, fig.width=12, message=FALSE, warning=FALSE, cache=TRUE, results='asis'}</code></p>
-<section id="section-2" class="level4 parameters unnumbered"><h4 class="parameters unnumbered anchored" data-anchor-id="section-2"></h4>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Parametros chunks
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li>
 <code>eval=TRUE</code>: Muestra el código</li>
@@ -416,14 +429,16 @@ title: "Untitled"
 <code>cache=TRUE</code>: cachea el output del plot</li>
 <li>
 <code>results='asis'</code>: muestra el output tal cual (importante cuando el output es en latex/pdf)</li>
-</ul></section><section id="section-3" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="section-3"></h4>
+</ul>
+</div>
+</div>
 <p>Haciendo click en la herramienta de la derecha del chunk <img src="../data/images/tool.png" class="img-fluid"> puedes controlar varios parámetros esenciales.</p>
 <hr>
 <p><strong>TRUCO:</strong></p>
 <ul>
 <li>Si tienes un chunk llamado <code>setup</code> al principio de tu documento .Rmd/.qmd, cada vez que reinicies RStudio y ejecutes código en cualquier parte de tu documento, ese bloque se ejecutara automaticamente. Esto es ideal para poner tus librerias, lectura de datos…</li>
 </ul>
-<hr></section></section></section><section id="ejercicio-básico-rmarkdown" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-básico-rmarkdown">Ejercicio básico RMarkdown</h2>
+<hr></section></section><section id="ejercicio-básico-rmarkdown" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-básico-rmarkdown">Ejercicio básico RMarkdown</h2>
 <p>Volvamos al archivo .Rmd/.qmd que creamos antes. Hagamos lo siguiente:</p>
 <ol type="1">
 <li>Dale formato de artículo científico, creando las siguientes secciones:</li>
@@ -460,7 +475,7 @@ cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 <hr>
 <ol start="3" type="1">
 <li>Renderiza tu documento en formato PDF.</li>
-</ol></section><section id="section-4" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="section-4"></h2>
+</ol></section><section id="section" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="section"></h2>
 <hr>
 <p>El resultado del ejercicio anterior deberá ser un archivo pdf con la estructura general de un artículo científico. Puedes ver el archivo Rmd y su pdf resultante en <code>data/files/07-markdown/</code>.</p>
 <p>Si el botón <code>knit</code> no funciona, puedes renderizar el pdf usando: <code>rmarkdown::render("data/files/07-markdown/ejercicio-basico.Rmd")</code></p>
@@ -471,7 +486,7 @@ cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 <li><p>Una tabla con los resultados de un análisis sencillo (e.g.&nbsp;una regresión lineal).</p></li>
 </ol>
 <p>Podéis ver ejemplos de <a href="06-analisis-datos-inferencial.html#tablas-descriptivos">tablas de descriptivos</a> o <a href="06-analisis-datos-inferencial.html#tablas-resultados-inferenciales">tablas de resultados inferenciales</a> en el capítulo anterior.</p>
-</section><section id="section-5" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="section-5"></h2>
+</section><section id="section-1" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="section-1"></h2>
 <hr>
 <p>El resultado de este ejercicio deberá ser un archivo pdf como el que se puede ver en <code>data/files/07-markdown/</code>.</p>
 <p>De nuevo, si el botón <code>knit</code> no funciona, puedes renderizar el pdf usando: <code>rmarkdown::render("data/files/07-markdown/ejercicio-basico.Rmd")</code></p>
@@ -525,20 +540,37 @@ cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 <p>Una manera muy sencilla de hacer esto es usando <a href="https://pakillo.github.io/grateful/">{grateful}</a>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="fu">grateful</span><span class="fu">::</span><span class="fu"><a href="https://pakillo.github.io/grateful/reference/cite_packages.html">cite_packages</a></span><span class="op">(</span>pkgs <span class="op">=</span> <span class="st">"All"</span>, output <span class="op">=</span> <span class="st">"file"</span>, out.format <span class="op">=</span> <span class="st">"Rmd"</span>, include.RStudio <span class="op">=</span> <span class="cn">TRUE</span>, out.dir <span class="op">=</span> <span class="st">"~/Downloads"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">grateful</span><span class="fu">::</span><span class="fu"><a href="https://pakillo.github.io/grateful/reference/cite_packages.html">cite_packages</a></span><span class="op">(</span></span>
+<span>  pkgs <span class="op">=</span> <span class="st">"All"</span>,</span>
+<span>  output <span class="op">=</span> <span class="st">"file"</span>,</span>
+<span>  out.format <span class="op">=</span> <span class="st">"Rmd"</span>,</span>
+<span>  include.RStudio <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  out.dir <span class="op">=</span> <span class="st">"~/Downloads"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="manejo-de-dependencias" class="level3" data-number="7.5.4"><h3 data-number="7.5.4" class="anchored" data-anchor-id="manejo-de-dependencias">
 <span class="header-section-number">7.5.4</span> Manejo de dependencias</h3>
 <p>Usando un sistema de manejo de dependencias <a href="https://github.com/rstudio/renv">renv</a> creamos un snapshot de las librerías usadas actualmente. Es muy importante para garantizar que nuestros scripts correran en el futuro.</p>
-<section id="section-6" class="level4 parameters unnumbered"><h4 class="parameters unnumbered anchored" data-anchor-id="section-6"></h4>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Funcionamiento básico <code>renv</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ol start="0" type="1">
 <li><p>Instalamos renv: <code>install.packages("renv")</code></p></li>
 <li><p>Inicializamos el entorno local de un nuevo proyecto, con una librería privada de R <code><a href="https://rstudio.github.io/renv/reference/init.html">renv::init()</a></code></p></li>
 <li><p>Trabajamos en el proyecto, instalando los paquetes que necesitemos</p></li>
 <li><p>Guardamos el estado de las librerías usadas en el proyecto en un lockfile (llamado renv.lock), <code><a href="https://rstudio.github.io/renv/reference/snapshot.html">renv::snapshot()</a></code></p></li>
 <li><p>Restauramos el estado de las librerías a partir del lockfile generado por renv::snapshot(). <code><a href="https://rstudio.github.io/renv/reference/restore.html">renv::restore()</a></code></p></li>
-</ol></section><section id="section-7" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="section-7"></h4>
-</section></section><section id="shortcuts" class="level3" data-number="7.5.5"><h3 data-number="7.5.5" class="anchored" data-anchor-id="shortcuts">
+</ol>
+</div>
+</div>
+</section><section id="shortcuts" class="level3" data-number="7.5.5"><h3 data-number="7.5.5" class="anchored" data-anchor-id="shortcuts">
 <span class="header-section-number">7.5.5</span> Shortcuts!</h3>
 <ul>
 <li>Alt+SHIFT+K: Ver shortcuts!<br>

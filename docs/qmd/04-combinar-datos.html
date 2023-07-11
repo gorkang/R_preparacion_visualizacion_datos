@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>R para preparación y visualización de datos - 4&nbsp; Combinar datos</title>
 <style>
@@ -117,8 +117,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
 <div class="quarto-navbar-tools">
-    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="../R-para-preparación-y-visualización-de-datos.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="../R-para-preparación-y-visualización-de-datos.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -233,8 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#joins" id="toc-joins" class="nav-link" data-scroll-target="#joins"><span class="header-section-number">4.2</span> Joins</a>
   <ul>
-<li><a href="#tipos-de-join" id="toc-tipos-de-join" class="nav-link" data-scroll-target="#tipos-de-join">Tipos de Join</a></li>
-  <li>
+<li>
 <a href="#mutating-joins" id="toc-mutating-joins" class="nav-link" data-scroll-target="#mutating-joins"><span class="header-section-number">4.2.1</span> Mutating joins</a>
   <ul>
 <li><a href="#inner-join" id="toc-inner-join" class="nav-link" data-scroll-target="#inner-join"><span class="header-section-number">4.2.1.1</span> Inner join</a></li>
@@ -300,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span></span>
 <span></span>
 <span><span class="co"># Bind DFs añadiendo las *filas* de DF2 a DF1</span></span>
-<span><span class="va">DF1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF1</span> <span class="op">|&gt;</span> </span>
 <span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">DF2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 800 × 9</span></span>
 <span><span class="co">#&gt;   Sex   Priming    trialN Block Adjective  Valence  Answer Arrow    rT</span></span>
@@ -315,8 +314,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span></span>
 <span></span>
 <span><span class="co"># Bind DFs añadiendo las *columnas* de DF2 a DF1</span></span>
-<span>  <span class="co">## bind_cols renombra automaticamente los nombres de las columnas para que no haya coincidencias</span></span>
-<span><span class="va">DF1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co">## bind_cols renombra automaticamente los nombres de las columnas para que no </span></span>
+<span>  <span class="co"># haya coincidencias</span></span>
+<span><span class="va">DF1</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span><span class="va">DF2</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; # A tibble: 400 × 18</span></span>
 <span><span class="co">#&gt;   Sex...1 Priming...2 trialN...3 Block...4 Adjective...5 Valence...6</span></span>
@@ -339,8 +339,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>En <a href="https://github.com/gadenbuie/tidyexplain">https://github.com/gadenbuie/tidyexplain</a> se pueden ver animaciones mostrando estas operaciones.</p>
 <hr>
-<section id="tipos-de-join" class="level3 parameters unnumbered"><h3 class="parameters unnumbered anchored" data-anchor-id="tipos-de-join">Tipos de Join</h3>
-<p>Estas operaciones tendrán la forma: <code>DF_x %&gt;% WHATEVER_join(DF_y)</code></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipos de Join
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Estas operaciones tendrán la forma: <code>DF_x |&gt; WHATEVER_join(DF_y)</code></p>
 <ul>
 <li>
 <strong>Mutating joins</strong>:
@@ -369,7 +378,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>nest_join(): preserva las observaciones de <code>DF_x</code>, añadiendo las de <code>DF_y</code> con claves iguales</li>
 </ul>
 </li>
-</ul></section><section id="mutating-joins" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="mutating-joins">
+</ul>
+</div>
+</div>
+<section id="mutating-joins" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="mutating-joins">
 <span class="header-section-number">4.2.1</span> Mutating joins</h3>
 <p><strong>Importamos datos</strong></p>
 <p>Tenemos los siguientes dataframes:</p>
@@ -397,7 +409,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_inner_joined</span> <span class="op">=</span> </span>
-<span>  <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#nrow(DF_inner_joined)</span></span>
@@ -418,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">DF_left_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_left_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
 <span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Vemos el número de filas de cada dataframe</span></span>
@@ -441,7 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span></span>
 <span><span class="co"># Si no hay variables en común, nos da un error:</span></span>
 <span></span>
-<span><span class="co"># DF_left_joined = DF_IDs %&gt;% </span></span>
+<span><span class="co"># DF_left_joined = DF_IDs |&gt; </span></span>
 <span><span class="co">#    left_join(DF_results2)</span></span>
 <span>  <span class="co"># Error in `left_join()`:</span></span>
 <span>  <span class="co"># ! `by` must be supplied when `x` and `y` have no common variables.</span></span>
@@ -449,11 +461,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span></span>
 <span><span class="co"># Tenemos que indicar explicitamente que identificador del primer dataframe (DF_IDs) </span></span>
 <span>  <span class="co"># coincide con que identificador del segundo dataframe (DF_results2)</span></span>
-<span><span class="va">DF_left_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">DF_left_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span></span>
 <span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">DF_results2</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ID"</span> <span class="op">=</span> <span class="st">"Identificador"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># En las últimas versiones de dplyr, han implementado la función `join_by()` que permite usar una sintaxis algo más natural:</span></span>
-<span>  <span class="va">DF_left_joined2</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="co"># En las últimas versiones de dplyr, han implementado la función `join_by()` que </span></span>
+<span>  <span class="co"># permite usar una sintaxis algo más natural:</span></span>
+<span>  <span class="va">DF_left_joined2</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">DF_results2</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html">join_by</a></span><span class="op">(</span><span class="va">ID</span> <span class="op">==</span> <span class="va">Identificador</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Comparar si todo es =</span></span>
@@ -468,7 +481,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">DF_full_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_full_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
 <span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># CHECK</span></span>
@@ -493,8 +506,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># AVOID the people present in DF_BAD</span></span>
-<span><span class="va">DF_anti_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">DF_BAD</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_anti_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">DF_BAD</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># CHECK</span></span>
@@ -518,12 +531,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># INCLUDE ONLY the people present in DF_BAD</span></span>
-<span><span class="va">DF_semi_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">DF_BAD</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_semi_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">DF_BAD</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># CHECK</span></span>
-<span><span class="co"># map(list("DF_semi_joined" = DF_semi_joined, "DF_IDs" = DF_IDs, "DF_BAD" = DF_BAD, "DF_results" = DF_results), nrow)</span></span>
+<span><span class="co"># map(</span></span>
+<span><span class="co"># list(</span></span>
+<span><span class="co">#   "DF_semi_joined" = DF_semi_joined,</span></span>
+<span><span class="co">#   "DF_IDs" = DF_IDs,</span></span>
+<span><span class="co">#   "DF_BAD" = DF_BAD,</span></span>
+<span><span class="co">#   "DF_results" = DF_results</span></span>
+<span><span class="co"># ),</span></span>
+<span><span class="co"># nrow</span></span>
+<span><span class="co"># )</span></span>
 <span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">DF_semi_joined</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -536,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">4.2.3</span> Nesting joins</h3>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">DF_nest_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_nest_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nest_join.html">nest_join</a></span><span class="op">(</span><span class="va">DF_results</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">DF_nest_joined</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -555,26 +576,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="va">DF_BAD</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-BAD.csv"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
-<li>Une los datos demográficos con los resultados.
-<details><summary>
-Pista para unir bases: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;"><a href="#left-join">Vimos en el apartado left_join() como hacer esto</a></span>
-</details>
-</li>
-<li>A la base resultante, quítale los sujetos descartados de <code>DF_BAD</code>.
-<details><summary>
-Pista descartar filas: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;"><a href="#anti-join">anti_join()!</a></span>
-</details>
-</li>
-<li>Crea una nueva base con datos demográficos y resultados para los sujetos descartados.
-<details><summary>
-Pista para filtrar a partir de una base: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;"><a href="#semi-join">semi_join()!</a></span>
-</details>
-</li>
-<li>Comprueba si el promedio para <code>Crystallized Intelligence</code> de los participantes descartados difiere de la de los no descartados.
-<details><summary>
-Pista para promedios agrupados: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;"><code>group_by() %&gt;% summarise()</code></span>
-</details>
-</li>
+<li>Une los datos demográficos con los resultados.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista para unir bases:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"><a href="#left-join">Vimos en el apartado left_join() como hacer esto</a></span></p>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>A la base resultante, quítale los sujetos descartados de <code>DF_BAD</code>.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista descartar filas:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"><a href="#anti-join">anti_join()!</a></span></p>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Crea una nueva base con datos demográficos y resultados para los sujetos descartados.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista para filtrar a partir de una base:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"><a href="#semi-join">semi_join()!</a></span></p>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Comprueba si el promedio para <code>Crystallized Intelligence</code> de los participantes descartados difiere de la de los no descartados.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista para promedios agrupados:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"><code>group_by() |&gt; summarise()</code></span></p>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
 <li>Haz una gráfica donde se puedan ver las diferencias</li>
 </ol>
 <hr>
@@ -583,24 +660,28 @@ Pista para promedios agrupados: <img src="../data/images/hint.png" class="img-fl
 </ol>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="va">DF_wide</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">DF_wide</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">median_social_adaptation</span> <span class="op">=</span> <span class="va">DF_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">social_adaptation</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">.</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">median_social_adaptation</span> <span class="op">=</span> <span class="va">DF_wide</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">social_adaptation</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">.</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">DF_split</span> <span class="op">=</span> <span class="va">DF_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>social_adaptation_split <span class="op">=</span> </span>
-<span>             <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span></span>
-<span>               <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
-<span>                 <span class="va">social_adaptation</span> <span class="op">&gt;=</span> <span class="va">median_social_adaptation</span> <span class="op">~</span> <span class="st">"high_social_adaptation"</span>,</span>
-<span>                 <span class="va">social_adaptation</span> <span class="op">&lt;</span> <span class="va">median_social_adaptation</span> <span class="op">~</span> <span class="st">"low_social_adaptation"</span>,</span>
-<span>                 <span class="cn">TRUE</span> <span class="op">~</span> <span class="cn">NA_character_</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">social_adaptation</span>, <span class="va">social_adaptation_split</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">social_adaptation_split</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="va">DF_long</span> <span class="op">=</span> <span class="va">DF_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">fluid_intelligence</span><span class="op">:</span><span class="va">working_memory</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">DF_split</span> <span class="op">=</span> <span class="va">DF_wide</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>social_adaptation_split <span class="op">=</span></span>
+<span>           <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span></span>
+<span>             <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
+<span>               <span class="va">social_adaptation</span> <span class="op">&gt;=</span> <span class="va">median_social_adaptation</span> <span class="op">~</span> <span class="st">"high_social_adaptation"</span>,</span>
+<span>               <span class="va">social_adaptation</span> <span class="op">&lt;</span> <span class="va">median_social_adaptation</span> <span class="op">~</span> <span class="st">"low_social_adaptation"</span>,</span>
+<span>               <span class="cn">TRUE</span> <span class="op">~</span> <span class="cn">NA_character_</span></span>
+<span>             <span class="op">)</span></span>
+<span>           <span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">social_adaptation</span>, <span class="va">social_adaptation_split</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">social_adaptation_split</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">DF_long</span> <span class="op">=</span> <span class="va">DF_wide</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">fluid_intelligence</span><span class="op">:</span><span class="va">working_memory</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Uno ese DF al <code>DF_long</code> que habías creado en el ejercicio 2 de la misma sección. El DF final se vera así:</p>
 <div class="cell">
@@ -622,7 +703,7 @@ Pista para promedios agrupados: <img src="../data/images/hint.png" class="img-fl
 </div>
 </div>
 <hr>
-<!-- 8. El plot que vimos en el tema anterior tiene el problema de que los datos de tuberculosis son en números absolutos.   --><!-- ```{r ejercicios-joins-responses-7-setup, echo=TRUE, fig.height=6, fig.width=8} --><!-- library(tidyr) --><!-- # table1 --><!-- ggplot(table1, aes(as.factor(year), cases)) +  --><!--   geom_line(aes(group = country), colour = "grey50") +  --><!--   geom_point(aes(colour = country), size = 2) + --><!--   scale_y_continuous(labels = scales::comma) + --><!--   labs(title = "Casos de Tuberculosis por año", --><!--        x = "year", --><!--        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") + --><!--   theme(legend.position = "bottom",  --><!--         legend.title = element_blank()) --><!-- ``` --><!-- Serias capaz de convertir estos a % de la población, como se ve en el plot de abajo?   --><!-- ```{r ejercicios-joins-responses-7, echo=FALSE, fig.height=6, fig.width=8} --><!-- df_plot = table1 %>%  --><!--   mutate(relative = cases/population) --><!-- ggplot(df_plot, aes(as.factor(year), relative)) +  --><!--   geom_line(aes(group = country), colour = "grey50") +  --><!--   geom_point(aes(colour = country), size = 2) + --><!--   scale_y_continuous(labels = scales::percent) + --><!--   labs(title = "Casos de Tuberculosis por año", --><!--        x = "year", --><!--        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") + --><!--   theme(legend.position = "bottom",  --><!--         legend.title = element_blank()) --><!-- ``` --></section><section id="datasets-interesantes" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="datasets-interesantes">
+<!-- 8. El plot que vimos en el tema anterior tiene el problema de que los datos de tuberculosis son en números absolutos.   --><!-- ```{r ejercicios-joins-responses-7-setup, echo=TRUE, fig.height=6, fig.width=8} --><!-- library(tidyr) --><!-- # table1 --><!-- ggplot(table1, aes(as.factor(year), cases)) +  --><!--   geom_line(aes(group = country), colour = "grey50") +  --><!--   geom_point(aes(colour = country), size = 2) + --><!--   scale_y_continuous(labels = scales::comma) + --><!--   labs(title = "Casos de Tuberculosis por año", --><!--        x = "year", --><!--        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") + --><!--   theme(legend.position = "bottom",  --><!--         legend.title = element_blank()) --><!-- ``` --><!-- Serias capaz de convertir estos a % de la población, como se ve en el plot de abajo?   --><!-- ```{r ejercicios-joins-responses-7, echo=FALSE, fig.height=6, fig.width=8} --><!-- df_plot = table1 |>  --><!--   mutate(relative = cases/population) --><!-- ggplot(df_plot, aes(as.factor(year), relative)) +  --><!--   geom_line(aes(group = country), colour = "grey50") +  --><!--   geom_point(aes(colour = country), size = 2) + --><!--   scale_y_continuous(labels = scales::percent) + --><!--   labs(title = "Casos de Tuberculosis por año", --><!--        x = "year", --><!--        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") + --><!--   theme(legend.position = "bottom",  --><!--         legend.title = element_blank()) --><!-- ``` --></section><section id="datasets-interesantes" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="datasets-interesantes">
 <span class="header-section-number">4.3</span> Datasets interesantes</h2>
 <p>En los siguientes repositorios podréis encontrar datasets interesantes para jugar.</p>
 <ul>

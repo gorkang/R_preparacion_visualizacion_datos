@@ -44,14 +44,14 @@ DF2 = read_csv(here::here("data/files/02-CSVs/02.csv"))
 
 
 # Bind DFs añadiendo las *filas* de DF2 a DF1
-DF1 %>% 
+DF1 |> 
    bind_rows(DF2)
 
 
 # Bind DFs añadiendo las *columnas* de DF2 a DF1
   ## bind_cols renombra automaticamente los nombres de las columnas para que no 
   # haya coincidencias
-DF1 %>% 
+DF1 |> 
   bind_cols(DF2) 
 
 ```
@@ -71,7 +71,7 @@ En [https://github.com/gadenbuie/tidyexplain](https://github.com/gadenbuie/tidye
 
 ### Tipos de Join
 
-Estas operaciones tendrán la forma: `DF_x %>% WHATEVER_join(DF_y)`  
+Estas operaciones tendrán la forma: `DF_x |> WHATEVER_join(DF_y)`  
 
 
 * **Mutating joins**:  
@@ -129,7 +129,7 @@ Preserva pares de observaciones de `DF_x` y de `DF_y` con claves iguales (fijaro
 ```{r inner-join}
 
 DF_inner_joined = 
-  DF_IDs %>% 
+  DF_IDs |> 
   inner_join(DF_results)
 
 #nrow(DF_inner_joined)
@@ -153,7 +153,7 @@ Preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguale
 
 ```{r left-join}
 
-DF_left_joined = DF_IDs %>% 
+DF_left_joined = DF_IDs |> 
    left_join(DF_results)
 
 # Vemos el número de filas de cada dataframe
@@ -176,7 +176,7 @@ DF_results2 = DF_results |> rename(Identificador = ID)
 
 # Si no hay variables en común, nos da un error:
 
-# DF_left_joined = DF_IDs %>% 
+# DF_left_joined = DF_IDs |> 
 #    left_join(DF_results2)
   # Error in `left_join()`:
   # ! `by` must be supplied when `x` and `y` have no common variables.
@@ -184,12 +184,12 @@ DF_results2 = DF_results |> rename(Identificador = ID)
 
 # Tenemos que indicar explicitamente que identificador del primer dataframe (DF_IDs) 
   # coincide con que identificador del segundo dataframe (DF_results2)
-DF_left_joined = DF_IDs %>%
+DF_left_joined = DF_IDs |>
    left_join(DF_results2, by = c("ID" = "Identificador"))
 
 # En las últimas versiones de dplyr, han implementado la función `join_by()` que 
   # permite usar una sintaxis algo más natural:
-  DF_left_joined2 = DF_IDs %>% 
+  DF_left_joined2 = DF_IDs |> 
     left_join(DF_results2, by = join_by(ID == Identificador))
 
 # Comparar si todo es =
@@ -213,7 +213,7 @@ Preserva todas las observaciones de `DF_x` y `DF_y`, alineándolas cuando tengan
 
 ```{r full-join}
 
-DF_full_joined = DF_IDs %>% 
+DF_full_joined = DF_IDs |> 
    full_join(DF_results)
 
 # CHECK
@@ -241,8 +241,8 @@ Preserva solo aquellas observaciones de `DF_x` cuyas claves NO aparezcan en `DF_
 ```{r anti-join}
 
 # AVOID the people present in DF_BAD
-DF_anti_joined = DF_IDs %>% 
-  anti_join(DF_BAD, by = "ID") %>% 
+DF_anti_joined = DF_IDs |> 
+  anti_join(DF_BAD, by = "ID") |> 
   left_join(DF_results)
 
 # CHECK
@@ -268,8 +268,8 @@ Preserva solo aquellas observaciones de `DF_x` cuyas claves aparezcan en `DF_y`.
 ```{r semi-join}
 
 # INCLUDE ONLY the people present in DF_BAD
-DF_semi_joined = DF_IDs %>% 
-  semi_join(DF_BAD, by = "ID") %>% 
+DF_semi_joined = DF_IDs |> 
+  semi_join(DF_BAD, by = "ID") |> 
   left_join(DF_results)
 
 # CHECK
@@ -293,7 +293,7 @@ DT::datatable(DF_semi_joined)
 
 ```{r joins-nesting}
 
-DF_nest_joined = DF_IDs %>% 
+DF_nest_joined = DF_IDs |> 
   nest_join(DF_results, by = "ID")
 
 DT::datatable(DF_nest_joined)
@@ -351,7 +351,7 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 
 ### Pista para promedios agrupados: 
 
-<span style="color: orange;">`group_by() %>% summarise()`</span>
+<span style="color: orange;">`group_by() |> summarise()`</span>
 
 :::
 
@@ -363,12 +363,12 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 
   # Solucion 1  
 
-  DF_joined = DF_IDs %>% 
+  DF_joined = DF_IDs |> 
     left_join(DF_results, by = c("Identificador" = "ID"))
   
   # Solucion 2
-  DF_joined2 = DF_IDs %>% 
-    rename(ID = Identificador) %>% 
+  DF_joined2 = DF_IDs |> 
+    rename(ID = Identificador) |> 
     left_join(DF_results, by = "ID")
   
   # Comprobamos que son iguales
@@ -378,7 +378,7 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
   
 # 2. A la base resultante, quítale los sujetos descartados de `DF_BAD`  
 
-  DF_joined_clean = DF_joined2 %>% 
+  DF_joined_clean = DF_joined2 |> 
     anti_join(DF_BAD, by = "ID")
   
   
@@ -386,13 +386,13 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 # 3. Crea una nueva base con datos demográficos y resultados para los sujetos descartados  
 
   # Solucion 1
-  DF_joined_discarded = DF_IDs %>% 
-    rename(ID = Identificador) %>% 
-    left_join(DF_results, by = "ID") %>% 
+  DF_joined_discarded = DF_IDs |> 
+    rename(ID = Identificador) |> 
+    left_join(DF_results, by = "ID") |> 
     semi_join(DF_BAD, by = "ID")
 
   # Solucion 2
-  DF_joined_discarded2 = DF_BAD %>% 
+  DF_joined_discarded2 = DF_BAD |> 
     left_join(DF_results, by = "ID")
   
   # Comprobamos que son iguales
@@ -404,25 +404,25 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
   # descartados difiere de la de los no descartados  
   
   # Solucion basica
-  DF_joined_clean %>% 
+  DF_joined_clean |> 
     summarise(mean_CI = mean(`Crystallized Intelligence`, na.rm = TRUE))
 
-  DF_joined_discarded %>% 
+  DF_joined_discarded |> 
       summarise(mean_CI = mean(`Crystallized Intelligence`, na.rm = TRUE))
   
   # Solucion avanzada
-  DF_all = DF_joined_clean %>% mutate(type = "clean") %>% 
-    bind_rows(DF_joined_discarded %>% mutate(type = "discarded")) 
+  DF_all = DF_joined_clean |> mutate(type = "clean") |> 
+    bind_rows(DF_joined_discarded |> mutate(type = "discarded")) 
   
-  DF_all %>% 
-    group_by(type) %>% 
+  DF_all |> 
+    group_by(type) |> 
     summarise(mean_CI = mean(`Crystallized Intelligence`, na.rm = TRUE))
   
 
   
 # 5. Haz una gráfica donde se puedan ver las diferencias  
   
-  DF_all %>% 
+  DF_all |> 
     ggplot(aes(type, `Crystallized Intelligence`, color = type)) +
     geom_jitter(width = .2, height = 0) +
     stat_summary(fun = mean,
@@ -441,14 +441,14 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 
 DF_wide = read_csv(
   "https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"
-) %>%
+) |>
   janitor::clean_names()
 
-median_social_adaptation = DF_wide %>%
-  pull(social_adaptation) %>%
+median_social_adaptation = DF_wide |>
+  pull(social_adaptation) |>
   median(., na.rm = TRUE)
 
-DF_split = DF_wide %>%
+DF_split = DF_wide |>
   mutate(social_adaptation_split =
            as.factor(
              case_when(
@@ -456,11 +456,11 @@ DF_split = DF_wide %>%
                social_adaptation < median_social_adaptation ~ "low_social_adaptation",
                TRUE ~ NA_character_
              )
-           )) %>%
-  select(id, social_adaptation, social_adaptation_split) %>%
+           )) |>
+  select(id, social_adaptation, social_adaptation_split) |>
   drop_na(social_adaptation_split)
 
-DF_long = DF_wide %>% pivot_longer(fluid_intelligence:working_memory)
+DF_long = DF_wide |> pivot_longer(fluid_intelligence:working_memory)
 
 ```
 
@@ -468,7 +468,7 @@ Uno ese DF al `DF_long` que habías creado en el ejercicio 2 de la misma secció
 
 ```{r ejercicios-joins-responses-5, echo=FALSE}
   
-  DF_final = DF_long %>% 
+  DF_final = DF_long |> 
     right_join(DF_split, by = "id")
 
   DT::datatable(DF_final)
@@ -479,13 +479,13 @@ Uno ese DF al `DF_long` que habías creado en el ejercicio 2 de la misma secció
 
 ```{r ejercicios-joins-responses-6, echo=FALSE}
     
-DF_final %>%
+DF_final |>
   ggplot(aes(value, color = social_adaptation_split, fill = social_adaptation_split)) +
   geom_density(alpha = .2) +
   theme(legend.position = "bottom") +
   facet_wrap(~ name, scales = "free", nrow = 3)
 
-DF_final %>%
+DF_final |>
   ggplot(aes(value, name, color = social_adaptation_split, fill = social_adaptation_split)) +
   ggridges::geom_density_ridges(alpha = .2) +
   theme(legend.position = "bottom")
@@ -517,7 +517,7 @@ DF_final %>%
 
 <!-- ```{r ejercicios-joins-responses-7, echo=FALSE, fig.height=6, fig.width=8} -->
 
-<!-- df_plot = table1 %>%  -->
+<!-- df_plot = table1 |>  -->
 <!--   mutate(relative = cases/population) -->
 
 

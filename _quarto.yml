@@ -67,6 +67,9 @@ format:
     toc-depth: 5
   pdf:
     documentclass: scrreprt
+    # monofont: 'FreeMono'
+    # monofontoptions:
+    #   - Scale=0.95
     fig-width: 10
     fig-height: 6
     fig-dpi: 600

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>R para preparación y visualización de datos - 3&nbsp; Preparación y transformación de datos</title>
 <style>
@@ -117,8 +117,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
 <div class="quarto-navbar-tools">
-    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="../R-para-preparación-y-visualización-de-datos.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="../R-para-preparación-y-visualización-de-datos.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -272,24 +272,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#verbos-dplyr" id="toc-verbos-dplyr" class="nav-link" data-scroll-target="#verbos-dplyr"><span class="header-section-number">3.2.2</span> Verbos dplyr</a>
   <ul>
-<li><a href="#verbos-esenciales" id="toc-verbos-esenciales" class="nav-link" data-scroll-target="#verbos-esenciales">Verbos esenciales</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
-  <li><a href="#tabla-resumen-dplyr" id="toc-tabla-resumen-dplyr" class="nav-link" data-scroll-target="#tabla-resumen-dplyr">Tabla resumen dplyr</a></li>
+<li><a href="#tabla-resumen-dplyr" id="toc-tabla-resumen-dplyr" class="nav-link" data-scroll-target="#tabla-resumen-dplyr">Tabla resumen dplyr</a></li>
   <li><a href="#filtrar-y-ordenar-filas" id="toc-filtrar-y-ordenar-filas" class="nav-link" data-scroll-target="#filtrar-y-ordenar-filas"><span class="header-section-number">3.2.2.1</span> Filtrar y ordenar filas</a></li>
   <li><a href="#seleccionar-ordenar-y-renombrar-columnas" id="toc-seleccionar-ordenar-y-renombrar-columnas" class="nav-link" data-scroll-target="#seleccionar-ordenar-y-renombrar-columnas"><span class="header-section-number">3.2.2.2</span> Seleccionar, ordenar y renombrar columnas</a></li>
   <li><a href="#ejercicios---verbos-dplyr-simples" id="toc-ejercicios---verbos-dplyr-simples" class="nav-link" data-scroll-target="#ejercicios---verbos-dplyr-simples">Ejercicios - verbos dplyr simples</a></li>
-  <li>
-<a href="#selecci%C3%B3n-avanzada-con-select_helpers" id="toc-selección-avanzada-con-select_helpers" class="nav-link" data-scroll-target="#selecci%C3%B3n-avanzada-con-select_helpers"><span class="header-section-number">3.2.2.3</span> Selección avanzada con select_helpers()</a>
-  <ul class="collapse">
-<li><a href="#select_helpers" id="toc-select_helpers" class="nav-link" data-scroll-target="#select_helpers">select_helpers()</a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
-  </ul>
-</li>
+  <li><a href="#selecci%C3%B3n-avanzada-con-select_helpers" id="toc-selección-avanzada-con-select_helpers" class="nav-link" data-scroll-target="#selecci%C3%B3n-avanzada-con-select_helpers"><span class="header-section-number">3.2.2.3</span> Selección avanzada con select_helpers()</a></li>
   <li><a href="#modificar-y-a%C3%B1adir-variables" id="toc-modificar-y-añadir-variables" class="nav-link" data-scroll-target="#modificar-y-a%C3%B1adir-variables"><span class="header-section-number">3.2.2.4</span> Modificar y añadir variables</a></li>
   <li><a href="#res%C3%BAmenes-agrupados" id="toc-resúmenes-agrupados" class="nav-link" data-scroll-target="#res%C3%BAmenes-agrupados"><span class="header-section-number">3.2.2.5</span> Resúmenes agrupados</a></li>
   </ul>
 </li>
   <li><a href="#ejercicios---verbos-dplyr" id="toc-ejercicios---verbos-dplyr" class="nav-link" data-scroll-target="#ejercicios---verbos-dplyr">Ejercicios - verbos dplyr</a></li>
+  <li><a href="#pistas" id="toc-pistas" class="nav-link" data-scroll-target="#pistas"><span class="header-section-number">3.2.3</span> Pistas</a></li>
   </ul>
 </li>
   <li>
@@ -316,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li><a href="#ejercicios---calcular-puntajes-de-escalas-usando-regular-expressions" id="toc-ejercicios---calcular-puntajes-de-escalas-usando-regular-expressions" class="nav-link" data-scroll-target="#ejercicios---calcular-puntajes-de-escalas-usando-regular-expressions">Ejercicios - Calcular puntajes de escalas usando regular expressions</a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#bibliograf%C3%ADa" id="toc-bibliografía" class="nav-link" data-scroll-target="#bibliograf%C3%ADa">Bibliografía</a></li>
   </ul></nav>
     </div>
@@ -368,7 +361,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="archivos-csv" class="level4" data-number="3.1.1.1"><h4 data-number="3.1.1.1" class="anchored" data-anchor-id="archivos-csv">
 <span class="header-section-number">3.1.1.1</span> Archivos CSV</h4>
 <p>Usaremos las siguientes funciones del paquete <code>readr</code>:</p>
-<section id="section" class="level6 parameters unnumbered"><h6 class="parameters unnumbered anchored" data-anchor-id="section"></h6>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Funciones para leer archivos csv
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li>
 <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code>: valores separados por coma (“,”)<br>
@@ -378,7 +380,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>
 <code>readr::read_delim( , delim = "|")</code>: valores separados por un delimitador arbitrario</li>
-</ul></section><section id="section-1" class="level6 unnumbered"><h6 class="unnumbered anchored" data-anchor-id="section-1"></h6>
+</ul>
+</div>
+</div>
 <p>Leemos el archivo <code>02-read-csv.csv</code> de la carpeta <code>data/files/</code>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
@@ -409,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="va">URL</span> <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/gorkang/R_preparacion_visualizacion_datos/master/data/files/02-read-csv.csv"</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">URL</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="otros-tipos-de-archivos" class="level4" data-number="3.1.1.2"><h4 data-number="3.1.1.2" class="anchored" data-anchor-id="otros-tipos-de-archivos">
+</section><section id="otros-tipos-de-archivos" class="level4" data-number="3.1.1.2"><h4 data-number="3.1.1.2" class="anchored" data-anchor-id="otros-tipos-de-archivos">
 <span class="header-section-number">3.1.1.2</span> Otros tipos de archivos</h4>
 <section id="archivos-excel" class="level5 unnumbered"><h5 class="unnumbered anchored" data-anchor-id="archivos-excel">Archivos excel</h5>
 <div class="cell">
@@ -454,9 +458,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section></section></section><section id="ejercicios---importar-datos" class="level3 ejercicio unnumbered"><h3 class="ejercicio unnumbered anchored" data-anchor-id="ejercicios---importar-datos">Ejercicios - Importar datos</h3>
 <p>En el repositorio <a href="https://osf.io/jdn37/">R para preparación y visualización de datos - DNSC - UAI</a> de la Open Science Foundation podrás ver una carpeta llamada <code>Capitulo 3</code>. Si no tenéis conexión a internet, podéis encontrar los archivos en <code>data/files/OSF_files</code>.</p>
-Descarga e importa los archivos que ahí aparecen, asegurándote que los nombres de columna se leen adecuadamente:<br><details><summary>
-Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">La función <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code> tiene parámetros como <code>skip</code>, que permite no leer las primeras n lineas, o <code>sheet</code>, con la que puedes indicar que pestaña leer.</span>
-</details><ul>
+<p>Descarga e importa los archivos que ahí aparecen, asegurándote que los nombres de columna se leen adecuadamente:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;">La función <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code> tiene parámetros como <code>skip</code>, que permite no leer las primeras n lineas, o <code>sheet</code>, con la que puedes indicar que pestaña leer.</span></p>
+</div>
+</div>
+</div>
+<ul>
 <li>02-extralines-1.xlsx</li>
 <li>02-extralines-2.xlsx</li>
 <li>02-extralines-3.xlsx</li>
@@ -520,11 +539,13 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <p>Podemos incluir los nombres de archivo en una columna:</p>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span> <span class="co"># Para poder usar %&gt;%</span></span>
+<span></span>
 <span><span class="va">name_of_folder</span> <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-CSVs"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">name_of_folder</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">name_of_folder</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># Necesitamos esta pipe</span></span>
 <span>  <span class="co"># Asignamos nombres a los elementos del vector</span></span>
-<span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Con el parámetro .id, almacenamos los nombres en la columna "file"</span></span>
 <span><span class="va">full2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_df</a></span><span class="op">(</span><span class="va">files</span>, <span class="va">read_csv</span>, .id <span class="op">=</span> <span class="st">"file"</span><span class="op">)</span></span>
@@ -577,12 +598,24 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <li>Cuando más arriba importamos los archivos que están en la carpeta <code>data/files/02-CSVs</code>:</li>
 </ol>
 <ul>
-<li>¿Qué archivos importamos exáctamente?<br>
-</li>
-<li><details><summary>
-¿Ves algún problema en lo que hicimos?<img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">Revisa el número de filas y la variable <code>files</code>.</span>
-</details></li>
+<li>¿Qué archivos importamos exáctamente?</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+¿Ves algún problema en lo que hicimos?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;">Revisa el número de filas y la variable <code>files</code>.</span></p>
+</div>
+</div>
+</div>
 <p>El resultado final debería ser así:</p>
 <div class="cell">
 <pre><code>#&gt; # A tibble: 1,200 × 9
@@ -599,10 +632,26 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <ol start="2" type="1">
 <li>Leed los archivos .xlsx de la carpeta <code>data/files/02-XLSs</code>, combinándolos en un único DF. El resultado final debería ser como se ve a continuación:</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tendréis que <code><a href="https://rdrr.io/r/base/list.files.html">list.files()</a></code> usando el parámetro <code>pattern</code></p>
 <ul>
-<li><details><summary><ul><li>Tendréis que <code>list.files()</code> usando el parámetro <code>pattern</code> &lt;BR - Os recomiendo abrir los archivos excel para ver su estructura, las pestañas que tienen… ahí os daréis cuenta de que necesitareis otros parámetros de <code>read_xlsx()</code> como <code>sheet</code>, <code>skip</code>&gt;
-</li></ul></summary></details></li>
+<li>Te recomiendo abrir los archivos excel para ver su estructura, las pestañas que tienen… ahí te darás cuenta de que necesitas otros parámetros de <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_xlsx()</a></code> como <code>sheet</code> o <code>skip</code>
+</li>
 </ul>
+</div>
+</div>
+</div>
 <div class="cell">
 <pre><code>#&gt; # A tibble: 1,200 × 9
 #&gt;   Sex   Priming    trialN Block Adjective  Valence  Answer Arrow    rT
@@ -664,7 +713,7 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Computa ratio por 100,000</span></span>
-<span><span class="va">table1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">table1</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>rate_per_100K <span class="op">=</span> <span class="va">cases</span> <span class="op">/</span> <span class="va">population</span> <span class="op">*</span> <span class="fl">100000</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 5</span></span>
 <span><span class="co">#&gt;   country      year  cases population rate_per_100K</span></span>
@@ -680,7 +729,7 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Computa casos para cada año</span></span>
-<span><span class="va">table1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">table1</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">cases</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
 <span><span class="co">#&gt;    year  cases     n</span></span>
@@ -693,7 +742,7 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <span><span class="co">#&gt; 6  2000 213766     1</span></span>
 <span></span>
 <span><span class="co"># La suma total de casos para cada año</span></span>
-<span><span class="va">table1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">table1</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">year</span>, wt <span class="op">=</span> <span class="va">cases</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 2</span></span>
 <span><span class="co">#&gt;    year      n</span></span>
@@ -715,9 +764,19 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 </section><section id="verbos-dplyr" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="verbos-dplyr">
 <span class="header-section-number">3.2.2</span> Verbos dplyr</h3>
 <p>Usaremos <a href="https://dplyr.tidyverse.org/">{dplyr}</a>, un paquete muy potente para la manipulación de datos. Su sintaxis, además, es bastante intuitiva (¡son verbos en inglés!).</p>
-<p>Usando pipes <strong>%&gt;%</strong> (CONTROL + SHIFT + M) podemos enlazar operaciones de transformación de datos de manera muy sencilla (una vez nos aprendamos los verbos).</p>
+<p>Usando pipes <strong>|&gt;</strong> (CONTROL + SHIFT + M) podemos enlazar operaciones de transformación de datos de manera muy sencilla (una vez nos aprendamos los verbos).</p>
 <p>Podemos ver más detalle y ejemplos en la <a href="https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf">Cheatsheet de dplyr</a>.</p>
-<section id="verbos-esenciales" class="level5 parameters unnumbered"><h5 class="parameters unnumbered anchored" data-anchor-id="verbos-esenciales">Verbos esenciales</h5>
+<p>En general usaremos la pipe nativa de R (desde la versión 4.1.0) <strong>|&gt;</strong>, pero en alguna ocasión usaremos <strong>%&gt;%</strong> (requiere el paquete <code>magrittr</code>).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Verbos esenciales
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li>filter(): filtrar filas<br>
 </li>
@@ -728,13 +787,15 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <li>rename(): renombrar columnas<br>
 </li>
 <li>mutate(): crear columnas, modificar columnas, etc.</li>
-</ul></section><section id="section-2" class="level5 unnumbered"><h5 class="unnumbered anchored" data-anchor-id="section-2"></h5>
-</section><section id="tabla-resumen-dplyr" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="tabla-resumen-dplyr">Tabla resumen dplyr</h4>
+</ul>
+</div>
+</div>
+<section id="tabla-resumen-dplyr" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="tabla-resumen-dplyr">Tabla resumen dplyr</h4>
 <div class="cell">
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-74cfae68c7f2192b61f0" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-74cfae68c7f2192b61f0">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13"],["Filtrar","Ordenar","Seleccionar/eliminar variables","Renombrar variables","Separar contenidos de variable","Extraer valores únicos","Crear/modificar variables","Omitir NAs","Wide to long","Long to wide","Combinar bases de datos","Recodificar valores","Recodificar valores"],["filter()","arrange()","select()","rename()","separate()","distinct()","mutate()","drop_na()","pivot_longer()","pivot_wider()","left_join()","ifelse()","case_when()"],["datos %&gt;% filter(Sexo == 1)","datos %&gt;% arrange(Sexo)","datos %&gt;% select(-Sexo)","datos %&gt;% rename(Genero = Sexo)","datos %&gt;% separate(var_name, c('First', 'Second'), sep = '_')","datos %&gt;% distinct(Edad, .keep_all = T)","datos %&gt;% mutate(Viejo = Edad &gt; 30)","datos %&gt;% drop_na(Sexo)","datos %&gt;% pivot_longer(4:6, names_to = 'Condition', values_to = 'VD')","datos %&gt;% pivot_wider(names_from = Condition, values_from = VD)","left_join(datos1, datos2, by = 'ID')","datos %&gt;%  mutate(Edad = ifelse(Edad &gt; 30, 'Viejo', 'Joven'))","datos %&gt;%  mutate(Edad = case_when(.$Edad &gt; 30 ~ 'Viejo', 'Joven')"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>tarea<\/th>\n      <th>funcion<\/th>\n      <th>ejemplo<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":20,"dom":"t","columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,20,25,50,100]},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-74cfae68c7f2192b61f0">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13"],["Filtrar","Ordenar","Seleccionar/eliminar variables","Renombrar variables","Separar contenidos de variable","Extraer valores únicos","Crear/modificar variables","Omitir NAs","Wide to long","Long to wide","Combinar bases de datos","Recodificar valores","Recodificar valores"],["filter()","arrange()","select()","rename()","separate()","distinct()","mutate()","drop_na()","pivot_longer()","pivot_wider()","left_join()","ifelse()","case_when()"],["datos |&gt; filter(Sexo == 1)","datos |&gt; arrange(Sexo)","datos |&gt; select(-Sexo)","datos |&gt; rename(Genero = Sexo)","datos |&gt; separate(var_name, c('First', 'Second'), sep = '_')","datos |&gt; distinct(Edad, .keep_all = T)","datos |&gt; mutate(Viejo = Edad &gt; 30)","datos |&gt; drop_na(Sexo)","datos |&gt; pivot_longer(4:6, names_to = 'Condition', values_to = 'VD')","datos |&gt; pivot_wider(names_from = Condition, values_from = VD)","left_join(datos1, datos2, by = 'ID')","datos |&gt;  mutate(Edad = ifelse(Edad &gt; 30, 'Viejo', 'Joven'))","datos |&gt;  mutate(Edad = case_when(Edad &gt; 30 ~ 'Viejo', 'Joven')"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>tarea<\/th>\n      <th>funcion<\/th>\n      <th>ejemplo<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":20,"dom":"t","columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,20,25,50,100]},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section><section id="filtrar-y-ordenar-filas" class="level4" data-number="3.2.2.1"><h4 data-number="3.2.2.1" class="anchored" data-anchor-id="filtrar-y-ordenar-filas">
@@ -758,7 +819,7 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <span><span class="co">#&gt; # ℹ 1 more variable: PPV_DECLARED &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="co"># Filtrar</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Educacion</span> <span class="op">&gt;</span> <span class="fl">8</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 9</span></span>
 <span><span class="co">#&gt;    ...1    ID Genero  Edad Educacion FollowUP condition condition2</span></span>
@@ -769,7 +830,7 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <span><span class="co">#&gt; # ℹ 1 more variable: PPV_DECLARED &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="co"># Ordenar</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">Educacion</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Genero</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 9</span></span>
 <span><span class="co">#&gt;    ...1    ID Genero  Edad Educacion FollowUP condition condition2</span></span>
@@ -788,7 +849,7 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Seleccionar columnas</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Genero</span>, <span class="va">Edad</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 2</span></span>
 <span><span class="co">#&gt;   Genero  Edad</span></span>
@@ -802,7 +863,7 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <span><span class="co">#&gt; # ℹ 97 more rows</span></span>
 <span></span>
 <span><span class="co"># Eliminar columnas  </span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">...1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 8</span></span>
 <span><span class="co">#&gt;      ID Genero  Edad Educacion FollowUP condition condition2 PPV_DECLARED</span></span>
@@ -816,7 +877,7 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <span><span class="co">#&gt; # ℹ 97 more rows</span></span>
 <span></span>
 <span><span class="co"># Ordenar y eliminar columnas</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Edad</span>, <span class="va">Genero</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">-</span><span class="va">...1</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; # A tibble: 103 × 8</span></span>
 <span><span class="co">#&gt;      ID  Edad Genero Educacion FollowUP condition condition2 PPV_DECLARED</span></span>
@@ -832,7 +893,7 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Renombrar columnas</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Identificador <span class="op">=</span> <span class="va">ID</span>,</span>
 <span>         Sexo <span class="op">=</span> <span class="va">Genero</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 9</span></span>
@@ -848,7 +909,7 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <span><span class="co">#&gt; # ℹ 1 more variable: PPV_DECLARED &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="co"># Renombrar usando la posicion (DANGER!)</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Identificador <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 9</span></span>
 <span><span class="co">#&gt;    ...1 Identificador Genero  Edad Educacion FollowUP condition condition2</span></span>
@@ -865,7 +926,7 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <span><span class="co"># Renombrar usando vectores</span></span>
 <span><span class="va">oldnames</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ID"</span>,<span class="st">"Genero"</span><span class="op">)</span></span>
 <span><span class="va">newnames</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Identificador"</span>,<span class="st">"Sexo"</span><span class="op">)</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">rename_at</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">oldnames</span><span class="op">)</span>, <span class="op">~</span> <span class="va">newnames</span><span class="op">)</span></span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">rename_at</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">oldnames</span><span class="op">)</span>, <span class="op">~</span> <span class="va">newnames</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 9</span></span>
 <span><span class="co">#&gt;    ...1 Identificador  Sexo  Edad Educacion FollowUP condition condition2</span></span>
 <span><span class="co">#&gt;   &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     </span></span>
@@ -894,19 +955,41 @@ Solucion: <img src="../data/images/hint.png" class="img-fluid"></summary><span s
 <li>Crea un data-frame que no contenga la variable <code>model</code>
 </li>
 </ul>
-<details><summary>
-Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><span style="color: orange;"> - <code>mpg %&gt;% count(year)</code><br>
-- <code>mpg %&gt;% filter(year == 1999)</code><br>
-- <code>mpg %&gt;% rename(engine displacement = displ)</code> #ERROR<br>
-- <code>mpg %&gt;% rename(engine_displacement = displ)</code> #SOLUCION1<br>
-- mpg %&gt;% rename(`engine displacement` = displ) #SOLUCION2<br>
-- <code>mpg %&gt;% arrange(cty, class)</code><br>
-- <code>mpg %&gt;% select(-model)</code></span></p>
-
-</details></section><section id="selección-avanzada-con-select_helpers" class="level4" data-number="3.2.2.3"><h4 data-number="3.2.2.3" class="anchored" data-anchor-id="selección-avanzada-con-select_helpers">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Soluciones
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"> - <code>mpg |&gt; count(year)</code><br>
+- <code>mpg |&gt; filter(year == 1999)</code><br>
+- <code>mpg |&gt; rename(engine displacement = displ)</code> #ERROR<br>
+- <code>mpg |&gt; rename(engine_displacement = displ)</code> #SOLUCION1<br>
+- mpg |&gt; rename(`engine displacement` = displ) #SOLUCION2<br>
+- <code>mpg |&gt; arrange(cty, class)</code><br>
+- <code>mpg |&gt; select(-model)</code> </span></p>
+</div>
+</div>
+</div>
+</section><section id="selección-avanzada-con-select_helpers" class="level4" data-number="3.2.2.3"><h4 data-number="3.2.2.3" class="anchored" data-anchor-id="selección-avanzada-con-select_helpers">
 <span class="header-section-number">3.2.2.3</span> Selección avanzada con select_helpers()</h4>
 <p>El <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code> que usamos dentro de <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> más arriba es uno de los <code>select_helpers()</code> existentes. Estos nos ayudan a realizar operaciones de selección de variables sin necesidad de escribir a mano todas las variables.</p>
-<section id="select_helpers" class="level5 parameters unnumbered"><h5 class="parameters unnumbered anchored" data-anchor-id="select_helpers">select_helpers()</h5>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+select_helpers()
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li>starts_with(): Empieza con un prefijo (e.g.&nbsp;starts_with(“CI_”))<br>
 </li>
@@ -923,7 +1006,9 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <li>everything(): Matches all variables<br>
 </li>
 <li>last_col(): Select last variable</li>
-</ul></section><section id="section-3" class="level5 unnumbered"><h5 class="unnumbered anchored" data-anchor-id="section-3"></h5>
+</ul>
+</div>
+</div>
 <p>Trabajaremos con los datos del paper <a href="https://osf.io/egxy5/">Cognitive and Socio-affective Predictors of Social Adaptation</a>, de Neely et al.&nbsp;Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base RAW en formato wide.</p>
 <div class="cell">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
@@ -933,7 +1018,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; ID dem_genero dem_edad dem_nivedu WVOC_01_cod WVOC_02_cod WVOC_03_cod WVOC_04_cod WVOC_05_cod WVOC_06_cod WVOC_07_cod WVOC_08_cod WVOC_09_cod WVOC_10_cod WVOC_11_cod WVOC_12_cod WVOC_13_cod WVOC_14_cod WVOC_15_cod WVOC_16_cod WVOC_17_cod WVOC_18_cod WVOC_19_cod WVOC_20_cod WVOC_21_cod WVOC_22_cod WVOC_23_cod WVOC_24_cod WVOC_25_cod WVOC_26_cod WVOC_27_cod WVOC_28_cod WVOC_29_cod WVOC_30_cod WVOC_31_cod WVOC_32_cod WVOC_33_cod WVOC_TOTAL WVOC_TOTAL_STD WMAT_01_cod WMAT_01_raw WMAT_02_cod WMAT_02_raw WMAT_03_cod WMAT_03_raw WMAT_04_cod WMAT_04_raw WMAT_05_cod WMAT_05_raw WMAT_06_cod WMAT_06_raw WMAT_07_cod WMAT_07_raw WMAT_08_cod WMAT_08_raw WMAT_09_cod WMAT_09_raw WMAT_10_cod WMAT_10_raw WMAT_11_cod WMAT_11_raw WMAT_12_cod WMAT_12_raw WMAT_13_cod WMAT_13_raw WMAT_14_cod WMAT_14_raw WMAT_15_cod WMAT_15_raw WMAT_16_cod WMAT_16_raw WMAT_17_cod WMAT_17_raw WMAT_18_cod WMAT_18_raw WMAT_19_cod WMAT_19_raw WMAT_20_cod WMAT_20_raw WMAT_21_cod WMAT_21_raw WMAT_22_cod WMAT_22_raw WMAT_23_cod WMAT_23_raw WMAT_24_cod WMAT_24_raw WMAT_25_cod WMAT_25_raw WMAT_26_cod WMAT_26_raw WMAT_A WMAT_B WMAT_C wmat_total wmat_total_std bfbs_01_cod bfbs_01_conf bfbs_01_raw bfbs_03_cod bfbs_03_conf bfbs_03_raw bfbs_04_cod bfbs_04_conf bfbs_04_raw bfbs_10_cod bfbs_10_conf bfbs_10_raw bfbs_12_cod bfbs_12_conf bfbs_12_raw bfbs_14_cod bfbs_14_conf bfbs_14_raw bfbs_17_cod bfbs_17_conf bfbs_17_raw bfbs_23_cod bfbs_23_conf bfbs_23_raw bfbs_conf_total bfbs_cong_conf bfbs_cong_total bfbs_creib_conf bfbs_creib_total bfbs_incong_conf bfbs_incon_total bfbs_increib_conf bfbs_increib_total bfbs_invalid_conf bfbs_invalid_total bfbs_total bfbs_valid_conf bfbs_valid_total EA_01_raw EA_02_raw EA_03_raw EA_04_raw EA_05_raw EA_06_raw EA_07_raw EA_08_raw EA_09_raw EA_10_raw EA_11_raw EA_12_raw EA_13_raw EA_14_raw EA_15_raw EA_16_raw EA_17_raw EA_18_raw EA_19_raw EA_20_raw EA_21_raw EA_22_raw EA_23_raw EA_24_raw EA_azar_TOTAL EA_control_interno_TOTAL EA_otros_poderosos_TOTAL EAR_01_raw EAR_02_raw EAR_03_raw EAR_04_raw EAR_05_raw EAR_06_raw EAR_07_raw EAR_08_raw EAR_09_raw EAR_10_raw EAR_TOTAL ECRRS_ansiedad_TOTAL ECRRS_evitacion_TOTAL ECRRS_madre_01_raw ECRRS_madre_02_raw ECRRS_madre_03_raw ECRRS_madre_04_raw ECRRS_madre_05_raw ECRRS_madre_06_raw ECRRS_madre_07_raw ECRRS_madre_08_raw ECRRS_madre_09_raw ECRRS_madre_ansiedad_TOTAL ECRRS_madre_evitacion_TOTAL ECRRS_mejoramig_01_raw ECRRS_mejoramig_02_raw ECRRS_mejoramig_03_raw ECRRS_mejoramig_04_raw ECRRS_mejoramig_05_raw ECRRS_mejoramig_06_raw ECRRS_mejoramig_07_raw ECRRS_mejoramig_08_raw ECRRS_mejoramig_09_raw ECRRS_mejoramigo_ansiedad_TOTAL ECRRS_mejoramigo_evitacion_TOTAL ECRRS_padre_01_raw ECRRS_padre_02_raw ECRRS_padre_03_raw ECRRS_padre_04_raw ECRRS_padre_05_raw ECRRS_padre_06_raw ECRRS_padre_07_raw ECRRS_padre_08_raw ECRRS_padre_09_raw ECRRS_padre_ansiedad_TOTAL ECRRS_padre_evitacion_TOTAL ECRRS_pareja_01_raw ECRRS_pareja_02_raw ECRRS_pareja_03_raw ECRRS_pareja_04_raw ECRRS_pareja_05_raw ECRRS_pareja_06_raw ECRRS_pareja_07_raw ECRRS_pareja_08_raw ECRRS_pareja_09_raw ECRRS_pareja_ansiedad_TOTAL ECRRS_pareja_evitacion_TOTAL GHQ_01 GHQ_02 GHQ_03 GHQ_04 GHQ_05 GHQ_06 GHQ_07 GHQ_08 GHQ_09 GHQ_10 GHQ_11 GHQ_12 GHQ_autoestima_TOTAL GHQ_estres_TOTAL GHQ_exito_afrontamiento_TOTAL GHQ_TOTAL wdig_dir_total wdig_inv_total WDIGSIMB_TOTAL wdig_total wdig_total_std lkns_01_cod lkns_01_raw lkns_02_cod lkns_02_raw lkns_03_cod lkns_03_raw lkns_04_cod lkns_04_raw lkns_05_cod lkns_05_raw lkns_06_cod lkns_06_raw lkns_07_cod lkns_07_raw lkns_08_cod lkns_08_raw lkns_09_cod lkns_09_raw lkns_10_cod lkns_10_raw lkns_11_cod lkns_11_raw lkns_total SASS_01_raw SASS_02_raw SASS_03_raw SASS_04_raw SASS_05_raw SASS_06_raw SASS_07_raw SASS_08_raw SASS_09_raw SASS_10_raw SASS_11_raw SASS_12_raw SASS_13_raw SASS_14_raw SASS_15_raw SASS_16_raw SASS_17_raw SASS_18_raw SASS_19_raw SASS_20_raw SASS_21_raw SASS_TOTAL SASS_trabajo bayes_all_accuracy bayes_all_confidence bayes_pictorial_qualitative_accuracy bayes_pictorial_quantitative_accuracy bayes_text_qualitative_accuracy bayes_text_quantitative_accuracy</span></span>
 <span></span>
 <span>  <span class="co"># Seleccionamos variables que contienen la cadena de texto "dem"</span></span>
-<span>  <span class="va">df_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">df_wide</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"dem"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 232 × 3</span></span>
 <span><span class="co">#&gt;   dem_genero dem_edad dem_nivedu</span></span>
@@ -947,7 +1032,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; # ℹ 226 more rows</span></span>
 <span></span>
 <span>  <span class="co"># Seleccionamos variables que acacan con la cadena de texto "cod"</span></span>
-<span>  <span class="va">df_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">df_wide</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"cod"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 232 × 79</span></span>
 <span><span class="co">#&gt;      ID WVOC_01_cod WVOC_02_cod WVOC_03_cod WVOC_04_cod WVOC_05_cod</span></span>
@@ -962,7 +1047,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; # ℹ 73 more variables: WVOC_06_cod &lt;dbl&gt;, WVOC_07_cod &lt;dbl&gt;, …</span></span>
 <span></span>
 <span>  <span class="co"># Lo mismo, pero usando expresiones regulares</span></span>
-<span>  <span class="va">df_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">df_wide</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"cod$"</span><span class="op">)</span><span class="op">)</span> <span class="co"># $: fin de la cadena de texto</span></span>
 <span><span class="co">#&gt; # A tibble: 232 × 79</span></span>
 <span><span class="co">#&gt;      ID WVOC_01_cod WVOC_02_cod WVOC_03_cod WVOC_04_cod WVOC_05_cod</span></span>
@@ -976,7 +1061,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; # ℹ 226 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 73 more variables: WVOC_06_cod &lt;dbl&gt;, WVOC_07_cod &lt;dbl&gt;, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="modificar-y-añadir-variables" class="level4" data-number="3.2.2.4"><h4 data-number="3.2.2.4" class="anchored" data-anchor-id="modificar-y-añadir-variables">
+</section><section id="modificar-y-añadir-variables" class="level4" data-number="3.2.2.4"><h4 data-number="3.2.2.4" class="anchored" data-anchor-id="modificar-y-añadir-variables">
 <span class="header-section-number">3.2.2.4</span> Modificar y añadir variables</h4>
 <div class="cell">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
@@ -995,7 +1080,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; # ℹ 1 more variable: PPV_DECLARED &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="co"># Modificar variable reemplazando valor</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>PPV_DECLARED <span class="op">=</span> <span class="va">PPV_DECLARED</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 9</span></span>
 <span><span class="co">#&gt;    ...1    ID Genero  Edad Educacion FollowUP condition condition2</span></span>
@@ -1010,7 +1095,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; # ℹ 1 more variable: PPV_DECLARED &lt;dbl&gt;</span></span>
 <span>  </span>
 <span><span class="co"># Añadir variable</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>PPV_DECLARED_PCT <span class="op">=</span> <span class="va">PPV_DECLARED</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 10</span></span>
 <span><span class="co">#&gt;    ...1    ID Genero  Edad Educacion FollowUP condition condition2</span></span>
@@ -1025,7 +1110,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; # ℹ 2 more variables: PPV_DECLARED &lt;dbl&gt;, PPV_DECLARED_PCT &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="co"># Añadir variable destruyendo el resto del DF</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>PPV_DECLARED_PCT <span class="op">=</span> <span class="va">PPV_DECLARED</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 1</span></span>
 <span><span class="co">#&gt;   PPV_DECLARED_PCT</span></span>
@@ -1039,7 +1124,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; # ℹ 97 more rows</span></span>
 <span></span>
 <span><span class="co"># Limpiar nombres con el paquete {janitor}</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 9</span></span>
 <span><span class="co">#&gt;      x1    id genero  edad educacion follow_up condition condition2</span></span>
@@ -1059,7 +1144,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <div class="cell">
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Resumen</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>Promedio_PPV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span>, </span>
 <span>            N <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
@@ -1068,8 +1153,8 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; 1           NA   103</span></span>
 <span></span>
 <span><span class="co"># Resumen agrupado</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Genero</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Genero</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>Promedio_PPV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span>, </span>
 <span>            N <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 3</span></span>
@@ -1079,8 +1164,8 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; 2      2           NA    63</span></span>
 <span></span>
 <span><span class="co"># Resumen agrupando por multiples variables, y calculando varias cosas  </span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Genero</span>, <span class="va">condition</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Genero</span>, <span class="va">condition</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>promedio_PPV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span>,</span>
 <span>            mediana_PPV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span>,</span>
 <span>            SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span>,</span>
@@ -1114,7 +1199,28 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <ol start="2" type="1">
 <li><p>Ahora combina el resultado de todas las operaciones anteriores en un DF</p></li>
 <li><p>Calcula el promedio y desviación típica de edad para cada género</p></li>
+</ol></section><section id="pistas" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="pistas">
+<span class="header-section-number">3.2.3</span> Pistas</h3>
+<ol type="1">
+<li>
+<p>Paso a paso:</p>
+<ul>
+<li><code>filter(CONDICION1 &amp; CONDICION2)</code></li>
+<li>
+<code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> o <code>arrange(desc())</code>
+</li>
+<li>
+<code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> o <code>select(contains("ALGUN_PATRON"))</code>
+</li>
+<li>
+<code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> usando también <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code>
+</li>
+</ul>
+</li>
+<li><p><code>DF_resultado = df_wide |&gt; operacion1 |&gt; operation2 |&gt; ...</code></p></li>
+<li><p><code>group_by() |&gt; summarize()</code></p></li>
 </ol>
+<p>:::</p>
 <hr>
 <div class="cell">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
@@ -1146,7 +1252,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; 4 Participante4 frio         55    66</span></span>
 <span></span>
 <span><span class="co"># Wide to long</span></span>
-<span><span class="va">df_simple_long</span> <span class="op">=</span> <span class="va">df_simple_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">df_simple_long</span> <span class="op">=</span> <span class="va">df_simple_wide</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">Item1</span><span class="op">:</span><span class="va">Item2</span>, names_to <span class="op">=</span> <span class="st">"Item"</span>, values_to <span class="op">=</span> <span class="st">"Response"</span><span class="op">)</span></span>
 <span>  </span>
 <span></span>
@@ -1168,7 +1274,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <div class="cell">
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Long to wide simple</span></span>
-<span><span class="va">df_simple_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">df_simple_long</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Item</span>, values_from <span class="op">=</span> <span class="va">Response</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 4</span></span>
 <span><span class="co">#&gt;   ID            condition Item1 Item2</span></span>
@@ -1187,7 +1293,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span>  <span class="co"># skimr::skim(df_simple_wide)</span></span>
 <span></span>
 <span><span class="co"># Añadir para cada item 3 líneas</span></span>
-<span><span class="va">df_simple_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">df_simple_wide</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_Item1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Item1</span><span class="op">)</span>,</span>
 <span>            mean_Item2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Item2</span><span class="op">)</span>,</span>
 <span>            <span class="co"># ...</span></span>
@@ -1206,8 +1312,8 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <span><span class="co">#&gt; 1       38.5       82.5         38.5         82.5     14.2     14.2     4</span></span>
 <span></span>
 <span><span class="co"># Sirve para 1 item o para 10 millones de items</span></span>
-<span><span class="va">df_simple_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Item</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">df_simple_long</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Item</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>MEAN <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Response</span><span class="op">)</span>,</span>
 <span>            MEDIAN <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Response</span><span class="op">)</span>,</span>
 <span>            SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Response</span><span class="op">)</span>,</span>
@@ -1284,9 +1390,15 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <div class="cell">
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Leemos documento en formato WIDE</span></span>
-<span><span class="va">df_wide_complex</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">df_wide_complex</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv"</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># Seleccionamos solo algunas de las filas</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">dem_genero</span>, <span class="va">dem_edad</span>, <span class="va">dem_nivedu</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"lkns_[0-9]{2}_raw"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ID</span>,</span>
+<span>         <span class="va">dem_genero</span>,</span>
+<span>         <span class="va">dem_edad</span>,</span>
+<span>         <span class="va">dem_nivedu</span>,</span>
+<span>         <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"lkns_[0-9]{2}_raw"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">df_wide_complex</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1294,12 +1406,17 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c01c30d07c8447bee182" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-c01c30d07c8447bee182">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232],[1,0,0,0,0,0,1,1,1,1,0,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,1,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,1,0,0,0,0,0,1,0,0,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1,1,1,1,1,1,1,1,0,1,0,0,0,1,1,1,0,1,0,0,0,0,0,0,1,0,1,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,0,0,0,0],[38,67,24,30,38,45,58,47,52,49,57,33,34,31,59,38,19,65,55,76,57,39,50,24,36,58,18,19,20,18,28,33,57,45,48,36,33,19,32,65,40,34,34,48,25,20,23,34,18,19,19,38,23,19,30,67,54,19,45,51,65,56,25,56,23,55,22,23,46,26,41,38,35,52,43,61,34,45,43,56,21,22,46,68,49,62,60,54,45,59,54,58,61,39,35,46,43,18,18,18,49,31,56,26,28,50,40,60,51,51,54,23,50,44,68,56,45,51,57,65,40,59,44,40,42,70,41,55,53,50,28,33,22,26,19,18,54,54,52,73,61,53,28,53,55,54,49,27,27,33,27,33,48,45,27,51,45,70,47,36,40,24,62,47,54,51,50,40,89,48,45,30,38,36,63,33,20,31,44,32,23,20,64,21,56,52,53,47,47,67,47,18,23,34,40,41,39,41,37,50,52,22,79,62,48,59,53,29,42,27,52,28,32,58,51,63,56,24,43,51,22,50,34,24,27,53,43,25,52,61,45,24],[4,2,4,4,3,4,3,4,3,4,1,5,1,3,3,5,3,5,1,2,2,3,1,4,4,2,3,5,2,3,3,4,2,3,2,4,3,2,4,1,5,2,2,3,3,4,3,4,3,4,3,4,4,5,4,1,1,2,1,2,1,1,5,1,4,3,3,2,3,4,4,3,2,3,1,3,4,3,5,3,5,3,1,3,1,1,1,3,4,1,3,3,1,4,1,3,1,3,3,3,3,1,2,3,4,1,3,4,4,1,3,3,2,4,1,3,2,2,1,1,3,1,1,2,3,3,3,4,2,3,2,4,4,4,5,3,3,1,2,1,3,1,4,2,2,2,5,4,4,4,3,4,4,4,5,4,3,5,3,4,4,3,1,3,3,1,2,4,1,5,2,1,3,2,1,4,4,3,3,2,2,5,3,3,1,3,3,2,4,1,3,4,4,4,3,3,1,4,3,1,1,1,1,4,1,3,1,4,3,1,1,1,5,2,4,1,1,4,4,1,2,3,5,3,2,1,3,3,4,1,5,2],[500,0,700,500,6,40,0,500,600,600,500,500,500,800,6,500,500,0,800,2000,80,500,500,500,500,100,700,500,500,400,500,300,4,0,800,600,600,100,200,6,100,100,700,30,500,900,500,500,300,800,50,500,500,500,500,800,80,450,0,600,800,100,500,0,500,10,5,100,30,100,500,500,500,500,20,500,600,500,50,500,500,500,0,500,100,0,500,100,600,500,600,100,800,6000,100,500,20,2,500,500,80,650,20,500,600,500,80,500,450,2,600,100,800,300,100,300,700,50,100,800,100,0,0,6,500,500,500,800,500,500,400,500,500,500,500,300,300,200,30,800,300,500,100,300,600,100,500,350,500,600,100,500,20,300,500,600,300,800,200,200,0,0,50,100,100,0,500,500,200,6,500,0,600,400,300,30,500,500,600,50,200,300,0,600,20,100,500,0,700,600,500,600,0,600,100,500,200,500,600,800,500,600,200,500,300,500,100,500,40,100,300,500,500,200,30,500,2,500,500,30,6,500,330,10,500,500,100,500,500,0,100,100],[10,0,100,30,2,200,0,100,1,500,100,10,10,10,1,10,1,0,50,0,20,10,500,1,10,100,2,1,1,2,50,100,1,0,0,200,200,50,1,10,100,500,100,0,1,100,100,10,400,500,5,10,10,1,1,1,2,500,0,3,1,100,400,0,5,3,3,4,10,50,5,1,200,10,10,1,1,2,10,1,0.1,1,0,1,20,0,1,100,2,0,1,1,1,1,5,1,1,1,1,100,5,1,2,1,10,10,5,3000,10,500,10,100,1,100,200,1,1,3,15,500,10,0,0,10,2,100,100,100,700,10,100,80,1,1,1,50,30,20,10,100,1,1,1,10,1,100,100,100,100,1,1,1,1,0,1000,5,10,1,5,1,0,0,5000,100,1,0,20,1,1,10,10,2,10,1,2,5,1,0,10,100,50,10,0,100,10,1,10,0,1,1,1,10,0,1,10,10,1,10,100,600,2,100,3,500,300,10,10,1,10,3,2,500,0,150,0,0,5,10,1,0,1,1,1,1,100,1,5,20,10,0,10,30],[10,0,0.1,1,3,2,0,0.1,1,70,100,0.1,10,1,1,1,50,0,10,0,1,10,30,1,1,1,1,1,1,1,100,1,10,0,1,30,100,10,2,50,1,5,100,0,1,10,30,1,50,10,1,9.99,0.1,0.1,1,1,2,39,0,1,1,1,10,0,1,2,10,20,10,1,1,10,3,1,30,1,1,1,1,1,0.1,10,0,1,5,0,1,2,2,1,1,100,1,50,0,20,50,1,1,50,1,1,1,1,0.01,1,10,2000,10,1,1,1,0,1,200,1,1,2,2,80,1,0,0,5,2,10,100,900,100,1,1,10,1,1,1,15,1,100,1,1,1,1,1,1,2,1,1,50,1,1,1000,1,1,0,1,1,1,1,1,1,0,0,1,1,1,0,1,1,1,5,2,100,1,0,0,10,1,1,10,1,1,10,0,1,1,1,10,0,0.1,1,1,0.1,0,1,10,1,1,1,5,2,1,1,1,1,1,1,1,1,30,50,2,100,0,1,0,0,1,10,5,0,1,1,1,1,20,1,5,5,1,0,1,10],["b) 1 de cada 1000","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","a) 1 de cada 100","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","a) 1 de cada 100","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","b) 1 de cada 1000","a) 1 de cada 100","b) 1 de cada 1000","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","a) 1 de cada 100","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","b) 1 de cada 1000","b) 1 de cada 1000","c) 1 de cada 10","a) 1 de cada 100","b) 1 de cada 1000","b) 1 de cada 1000","c) 1 de cada 10","a) 1 de cada 100","b) 1 de cada 1000","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","a) 1 de cada 100","c) 1 de cada 10","a) 1 de cada 100","b) 1 de cada 1000","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","b) 1 de cada 1000","a) 1 de cada 100","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","b) 1 de cada 1000","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","b) 1 de cada 1000","b) 1 de cada 1000","b) 1 de cada 1000","c) 1 de cada 10","a) 1 de cada 100","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","b) 1 de cada 1000","c) 1 de cada 10","a) 1 de cada 100","a) 1 de cada 100","a) 1 de cada 100","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","a) 1 de cada 100","b) 1 de cada 1000","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","b) 1 de cada 1000","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","b) 1 de cada 1000","b) 1 de cada 1000","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","a) 1 de cada 100","c) 1 de cada 10","c) 1 de cada 10","b) 1 de cada 1000","c) 1 de cada 10"],["b)10%","c) 5%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","c) 5%","b)10%","b)10%","b)10%","b)10%","b)10%","c) 5%","b)10%","c) 5%","a) 1%","b)10%","c) 5%","c) 5%","b)10%","b)10%","c) 5%","a) 1%","b)10%","b)10%","b)10%","a) 1%","c) 5%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","c) 5%","b)10%","b)10%","b)10%","a) 1%","b)10%","b)10%","b)10%","b)10%","b)10%","c) 5%","c) 5%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","c) 5%","b)10%","b)10%","b)10%","b)10%","c) 5%","b)10%","b)10%","b)10%","b)10%","a) 1%","b)10%","c) 5%","b)10%","b)10%","b)10%","c) 5%","b)10%","b)10%","b)10%","b)10%","b)10%","c) 5%","a) 1%","c) 5%","b)10%","b)10%","c) 5%","a) 1%","a) 1%","c) 5%","b)10%","c) 5%","c) 5%","b)10%","b)10%","b)10%","a) 1%","b)10%","b)10%","b)10%","c) 5%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","c) 5%","c) 5%","c) 5%","b)10%","a) 1%","b)10%","b)10%","b)10%","c) 5%","b)10%","b)10%","a) 1%","a) 1%","a) 1%","b)10%","a) 1%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","c) 5%","b)10%","b)10%","b)10%","c) 5%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","b)10%","a) 1%","b)10%","c) 5%","b)10%","a) 1%","b)10%","b)10%","b)10%","a) 1%","b)10%","b)10%","b)10%","c) 5%","c) 5%","a) 1%","a) 1%","b)10%","a) 1%","b)10%","b)10%","a) 1%","b)10%","c) 5%","a) 1%","b)10%","c) 5%","a) 1%","a) 1%","b)10%","b)10%","c) 5%","b)10%","a) 1%","b)10%","b)10%","b)10%","a) 1%","b)10%","b)10%","b)10%","b)10%","a) 1%","b)10%","a) 1%","b)10%","b)10%","b)10%","b)10%","c) 5%","c) 5%","c) 5%","b)10%","c) 5%","b)10%","b)10%","b)10%","c) 5%","b)10%","b)10%","b)10%","b)10%","b)10%","c) 5%","b)10%","a) 1%","b)10%","b)10%","b)10%","c) 5%","a) 1%","b)10%","b)10%","b)10%","b)10%","a) 1%","c) 5%","b)10%","b)10%","b)10%","c) 5%"],[2,0,2,2,2,2,0,2,3,2,2,2,2,3,2,2,3,0,20,0,2,2,2,2,2,1,2,2,2,2,2,1,10,0,2,2,2,2,2,2,2,2,2,0,2,2,2,2,50,2,10,1.5,2,2,2,2,2,2,2,2,2,2,3,0,2,10,2,2,2,2,2,2,2,2,50,2,2,2,2,200,2,2,0,2,2,0,2,2,2,0,2,2,20,3,2,2,2,3,2,2,2,10,10,2,2,2,2,0,2,1,2,2,2,2,50,2,2,8,2,30,2,0,0,2,2,50,20,10,10,2,2,2,2,2,2,2,2,20,2,2,2,2,2,2,2,2,2,2,2,2,200,2,2,0,2,2,1,2,2,2,0,0,1,2,4,0,2,2,10,2,2,2,2,0,0,2,2,2,2,2,20,2,0,0,1,2,2,0,2,1,2,2,0,2,10,2,20,50,2,2,5,0,4,2,50,2,2,2,5,2,2,2,0,2,0,0,1,2,2,0,2,2,2,2,2,2,2,2,2,0,2,5],["0","0","2 de cada 100","2","3","2","0","2 de cada 100","2%","200","1","2 de cada 100","2","3","2 de cada 100","2 de cada 100","200","0","200","0","2 de cada 100","2 de 100","200","2","2","200","2","2 de cada 100","20","2","2 de 100","100","2","0","200","2 de cada 100","200","200","2 de 100","2","2 de cada 100","2","2","0","2","2 de cada 100","2 de cada 100","2 de cada 200","50","50","20","2 de cada 100","2 de cada 100","2 de cada 100","2 de cada 100","50","200","50","2","200","1000","200","2 de cada 100","0","2 de cada 100","100","200","2","2","2 de cada 100","2 de cada 100","2 de cada 100","2 de cada 100","2 de cada 100","el doble","2 de cada 100","2 de cada 100","20","2","200","2de100","2 de cada 100","0","2 de cada 100","4","0","2 de cada 100","2 de cada 100","2%","50%","200","200","20","300","2 de 100","200","el doble %","1 cada 1000","2 de cada 100","200","2 de cada 100","10","10 de cada 100","2","2 de cada 100","2 de cada 100","1 de cada 200","3%","2 de cada 100","100%","20 de cada 100","2 de cada 100","2 de cada 100","2 de cada 100","20%","2","2 de cada 100","1 de cada 100","2","20%","2","0","0","90","200","2","20","200","1 de cada 100","2 de cada 100","30%","2 de cada 200","2 de cada 100","200","2 de cada 200","2 de cada 100","2 de 100","200","2","200","2","2","2","2 de cada 100","2 de cada 100","2 de cada 100","2","1 de cada 200","2 de cada 100","2 de cada 100","200","2 de 100","200","0","1 cada 200","20 de cada 200","1 de cada 10","2","2","2 de 100","0","0","200","2","1000","0","2 de cada 100","200","1","200","2","200","2 de cada 100","0","0","2","2 de cada 100","200","2","2 de cada 100","40","2 de cada 100","0","200","el doble","2","2","0","2 de cada 100","2%","200","2 de cada 100","0","2 de cada 100","0","2","20","2 de cada 100","2 de cada 100","2 de 200","10%","0","200","2","0","2","2","2 de cada 100","50%","2 de 50","el doble","100","0","10","0","0","3","2","2","0","2 DE 100","2","1 de cada 200","2 de cada 100","0","2 DE 100","200","200","2 de cada 100","0","50","15"],[0,0,10,10,50,50,0,10,10,50,50,10,10,10,10,10,50,0,10,0,10,10,40,90,10,100,20,10,20,10,10,10,10,0,10,30,10,10,5,30,10,10,10,0,10,10,20,10,100,30,20,10,10,10,10,10,20,80,10,10,90,0,10,0,10,100,50,5,20,35,10,10,10,10,10,10,10,10,10,10,10,10,0,10,5,0,90,20,5,5,10,15,10,1,20,1000,10,20,10,10,10,50,5,10,10,10,20,1000,10,100,10,10,10,10,30,10,10,8,4,5,5,0,0,50,10,10,50,30,100,2,20,20,10,10,10,10,60,3,1,30,10,10,50,10,10,10,10,10,10,10,10,10,10,0,10,10,10,10,10,10,0,0,1,10,1,0,20,10,50,10,5,10,10,10,5,10,10,10,8,10,10,10,0,10,10,50,10,0,10,10,10,10,0,10,1,10,10,10,50,80,60,60,50,10,0,10,10,10,15,30,5,50,0,50,0,0,50,10,100,10,20,2,10,10,10,100,10,10,10,0,10,20],[0,0,100,1,500,20,0,100,1,500,500,1,10,100,100,100,400,0,10,0,100,100,60,10,100,1000,5,100,100,100,100,100,10,0,100,300,100,10,100,20,100,10,100,0,10,100,100,1,200,100,200,100,100,100,100,100,200,90,10,100,900,0,100,0,100,100,500,30,10,350,100,100,10,100,20,100,100,100,100,100,100,100,0,100,100,0,9000,30,1,1,100,150,10,6,100,10000,30,100,100,30,100,600,10,10,100,100,200,15,100,100,100,100,100,100,300,100,100,500,800,30,10,0,0,100,100,100,500,300,100,20,100,100,100,100,100,100,500,300,1,400,100,10,500,100,100,100,10,30,100,100,100,100,100,0,100,100,100,10,1,100,0,0,100,100,100,0,500,10,400,10,800,100,100,0,10,1,100,100,10,100,100,100,0,100,100,500,100,0,100,100,100,5,0,100,100,10,10,100,100,700,90,500,500,100,0,100,100,100,30,200,4,100,0,400,0,0,50,100,10,100,50,10,100,100,100,10,5,100,100,0,100,5],[0,0,20,20,10,10,0,20,1,20,10,20,20,20,20,80,30,0,20,0,20,20,30,80,2,80,25,25,30,20,20,5,0,0,20,40,20,40,10,10,20,20,20,0,20,20,10,50,25,20,10,20,20,20,2,20,20,10,20,20,10,0,20,0,20,100,10,10,20,25,2,20,0,2,30,20,20,20,20,5,20,2,0,20,10,0,90,20,2,20,20,2,20,8,2,20,50,10,20,30,20,10,10,20,20,20,20,22,20,40,20,2,20,20,40,20,2,8,15,20,80,0,0,10,2,20,50,200,100,2,30,80,5,25,20,20,3,20,2,5,20,20,5,0,20,20,20,50,20,20,20,20,2,0,20,20,2,20,20,2,0,0,2,2,2,0,30,20,60,10,50,20,20,0,6,2,20,10,20,2,20,20,0,20,10,20,20,0,20,20,20,40,0,80,2,20,25,2,20,20,10,400,20,2,0,20,80,20,20,10,15,20,0,100,0,0,30,20,2,0,10,20,2,20,20,20,10,20,20,0,20,30],[0,0,5,1,5000,500,0,20,1,5,500,5,0,5,5,1,3,0,500,0,100,5,60,1,5,100,50,5,1,5,50,5,0,0,5,1000,2,1000,10,500,4,10,50,0,5,1,2,5,300,100,5000,5,1,5,1,50,5,99,0,5,900,0,10,0,0,100,2,100,5,2000,1,5,10,0,20,5,5,5,5,5,1,1,0,5,10,0,1,0.0005,1,1,5,5000,500,1,5,5,50,10,1,5,10,8000,10,0,5,5,2,12000,5,80,5,5,1,500,400,1,5,900,5,30,50,0,0,20,5,5,5000,50,5000,1,10,5,1,3,5,5,500,100,5,6000,100,0,10,10,5,500,50,100,5,1,1,5,0,0,5,1,10,500,5,1,0,0,0,0,1,0,1,3000,10,10,600,5,1,1,10,5,1,1,100,5,10,0,0,5,1000,1,5,0,5,1,5,1,0,10,5,5,2,1,1000,700,90,10000,300,5,0,5,5,1,2,0,0,5,0,5000,0,0,100,50,5,1,100,1,5,5,1,50,1,100,1,0,0,11]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>dem_genero<\/th>\n      <th>dem_edad<\/th>\n      <th>dem_nivedu<\/th>\n      <th>lkns_01_raw<\/th>\n      <th>lkns_02_raw<\/th>\n      <th>lkns_03_raw<\/th>\n      <th>lkns_04_raw<\/th>\n      <th>lkns_05_raw<\/th>\n      <th>lkns_06_raw<\/th>\n      <th>lkns_07_raw<\/th>\n      <th>lkns_08_raw<\/th>\n      <th>lkns_09_raw<\/th>\n      <th>lkns_10_raw<\/th>\n      <th>lkns_11_raw<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,10,12,13,14,15]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  </span>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="co"># Wide to long</span></span>
-<span><span class="va">df_long_complex</span> <span class="op">=</span> </span>
-<span>  <span class="va">df_wide_complex</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">lkns_01_raw</span><span class="op">:</span><span class="va">lkns_11_raw</span>, names_to <span class="op">=</span> <span class="st">"Item"</span>, values_to <span class="op">=</span> <span class="st">"Response"</span>, values_transform <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Response <span class="op">=</span> <span class="va">as.character</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df_long_complex</span> <span class="op">=</span></span>
+<span>  <span class="va">df_wide_complex</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
+<span>    cols <span class="op">=</span> <span class="va">lkns_01_raw</span><span class="op">:</span><span class="va">lkns_11_raw</span>,</span>
+<span>    names_to <span class="op">=</span> <span class="st">"Item"</span>,</span>
+<span>    values_to <span class="op">=</span> <span class="st">"Response"</span>,</span>
+<span>    values_transform <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Response <span class="op">=</span> <span class="va">as.character</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Podemos usar select_helpers!</span></span>
 <span>  <span class="co"># Reemplaza lkns_01_raw:lkns_11_raw por matches("lkns")</span></span>
@@ -1318,7 +1435,7 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <div class="cell">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Long to wide</span></span>
-<span><span class="va">df_long_complex</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
+<span><span class="va">df_long_complex</span> <span class="op">|&gt;</span>  </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Item</span>, values_from <span class="op">=</span> <span class="va">Response</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 232 × 15</span></span>
 <span><span class="co">#&gt;      ID dem_genero dem_edad dem_nivedu lkns_01_raw lkns_02_raw lkns_03_raw</span></span>
@@ -1339,13 +1456,33 @@ Soluciones: <img src="../data/images/hint.png" class="img-fluid"></summary><p><s
 <li><p>Transforma la base a formato long (eso sí, mantén las variables demográficas en formato wide).</p></li>
 <li><p>Aprovechando que tenemos la base en formato long, sabrías hacer una gráfica con un histograma o densidad para cada una de las variables no deográficas?</p></li>
 </ol>
-<details><summary>
-Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">Tendras que usar la función <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> y el select helper <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code> para el primer paso. Para el segundo paso, <code>pivot_longer(primera_variable:ultima_variable)</code> Para el tercer paso, <code>facet_wrap(~name, scales = "free") te ayudara a crear paneles para cada nombre, donde las escalas x/y pueden variar libremente.</code></span>
-</details><hr>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pistas
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Tendras que usar la función <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> y el select helper <code><a href="https://tidyselect.r-lib.org/reference/everything.html">everything()</a></code></p></li>
+<li><p><code>pivot_longer(primera_variable:ultima_variable)</code></p></li>
+<li><p><code>facet_wrap(~name, scales = "free") te ayudara a crear paneles para cada nombre, donde las escalas x/y pueden variar libremente.</code></p></li>
+</ol>
+</div>
+</div>
+</div>
+<hr>
 <p>Importamos datos, y limpiamos nombres de variables:</p>
 <div class="cell">
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">DF_wide</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_wide</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="separate-omit-ifelse-case_when-tipos-de-variables" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="separate-omit-ifelse-case_when-tipos-de-variables">
@@ -1353,7 +1490,9 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <p>Para transformaciones algo más complejas, pero muy habituales, usaremos algunos verbos del paquete {tidyr}, y variaciones con {dplyr}</p>
 <div class="cell">
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Base original</span></span>
-<span><span class="va">DF_name</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-read-csv.csv"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">...1</span>, <span class="op">-</span><span class="va">Educacion</span>, <span class="op">-</span><span class="va">Edad</span>, <span class="op">-</span><span class="va">condition2</span><span class="op">)</span></span>
+<span><span class="va">DF_name</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../data/files/02-read-csv.csv"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">...1</span>, <span class="op">-</span><span class="va">Educacion</span>, <span class="op">-</span><span class="va">Edad</span>, <span class="op">-</span><span class="va">condition2</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">DF_name</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -1365,7 +1504,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <p>Podemos separar la columna de condicion usando un separador. La separación puede ser en columnas o en filas:</p>
 <div class="cell">
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Separate</span></span>
-<span><span class="va">DF_separated</span> <span class="op">=</span> <span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_separated</span> <span class="op">=</span> <span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">condition</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"primer_chunk"</span>, <span class="st">"segundo_chunk"</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">DF_separated</span></span>
@@ -1381,7 +1520,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <span><span class="co">#&gt; # ℹ 97 more rows</span></span>
 <span></span>
 <span><span class="co"># Separate in rows</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate_rows.html">separate_rows</a></span><span class="op">(</span><span class="va">condition</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 206 × 5</span></span>
 <span><span class="co">#&gt;      ID Genero FollowUP condition PPV_DECLARED</span></span>
@@ -1398,7 +1537,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <div class="cell">
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Unite: inversa de separate</span></span>
-<span><span class="va">DF_separated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_separated</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span><span class="va">condition</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">primer_chunk</span>, <span class="va">segundo_chunk</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 5</span></span>
 <span><span class="co">#&gt;      ID Genero FollowUP condition PPV_DECLARED</span></span>
@@ -1414,7 +1553,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <p>Si necesitamos recodificar variables, cambiar valores condicionalmente,… podemos usar <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> o <code><a href="https://dplyr.tidyverse.org/reference/recode.html">recode()</a></code>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># If else</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Genero <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Genero</span> <span class="op">==</span> <span class="fl">1</span>, <span class="st">"Hombre"</span>, <span class="st">"Mujer"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 5</span></span>
 <span><span class="co">#&gt;      ID Genero FollowUP condition PPV_DECLARED</span></span>
@@ -1429,7 +1568,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <span></span>
 <span><span class="co"># Case when</span></span>
 <span><span class="co">## las condiciones lógicas pueden ser arbitrariamente complejas</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Genero <span class="op">=</span> </span>
 <span>           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
 <span>             <span class="va">Genero</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">~</span> <span class="st">"Hombre"</span>,</span>
@@ -1449,7 +1588,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <span><span class="co">#&gt; # ℹ 97 more rows</span></span>
 <span></span>
 <span>  <span class="co"># Función recode</span></span>
-<span>  <span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">DF_name</span> <span class="op">|&gt;</span></span>
 <span>    </span>
 <span>    <span class="co"># De número a texto</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Genero <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span></span>
@@ -1457,7 +1596,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <span>      `1` <span class="op">=</span> <span class="st">"Hombre"</span>,</span>
 <span>      `2` <span class="op">=</span> <span class="st">"Mujer"</span>,</span>
 <span>      .default <span class="op">=</span> <span class="st">"No definido"</span></span>
-<span>    <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    </span>
 <span>    <span class="co"># De texto a número</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Genero2 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span></span>
@@ -1481,7 +1620,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <div class="cell">
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Pull</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span></span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   [1] 99 99 99  1 24 NA 99 99 99  1 94 99 88  0  1 99 99 99 70 99  1 99 99  7</span></span>
 <span><span class="co">#&gt;  [25] 10 99 99 99 46 45 46 40 NA 46 46 73 46 50 46 45 46 87 46 49 30 46 50 70</span></span>
 <span><span class="co">#&gt;  [49] 44 80 99 99 99 99 80 51 99 20 30  1 20  5 30 99 99 99 99 80 98 99 80 59</span></span>
@@ -1489,11 +1628,11 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <span><span class="co">#&gt;  [97] 92 92 90 92 NA 92 80</span></span>
 <span></span>
 <span><span class="co"># Promedio de una columna (con pipes)</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span></span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] NA</span></span>
 <span></span>
 <span><span class="co"># Eliminando los NA's!</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 68.06</span></span>
 <span></span>
 <span><span class="co"># Más sencillo, en base R (no siempre son necesarias las pipes)</span></span>
@@ -1501,7 +1640,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <span><span class="co">#&gt; [1] 68.06</span></span>
 <span></span>
 <span><span class="co"># Drop NAs</span></span>
-<span><span class="va">DF_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 100 × 5</span></span>
 <span><span class="co">#&gt;      ID Genero FollowUP condition PPV_DECLARED</span></span>
@@ -1516,12 +1655,24 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 </div>
 </section><section id="ejercicios---verbos-avanzados-dplyr" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicios---verbos-avanzados-dplyr">Ejercicios - verbos avanzados dplyr</h2>
 <ol type="1">
-<li>Importa los datos y limpia los nombres de columna:
-<details><summary>
-Para limpiar nombres de columnas automáticamente: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;"><a href="#modificar-y-a%C3%B1adir-variables"><code>clean_names()</code></a></span>
-</details>
-</li>
+<li>Importa los datos y limpia los nombres de columna:</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Para limpiar nombres de columnas automáticamente:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"><a href="#modificar-y-a%C3%B1adir-variables"><code>clean_names()</code></a></span></p>
+</div>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Leemos los datos y usamos janitor::clean_names() para limpiar los nombres de las columnas</span></span>
@@ -1529,17 +1680,43 @@ Para limpiar nombres de columnas automáticamente: <img src="../data/images/hint
 <span>  <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
-<li>En un nuevo DF (<code>DF_split</code>), crea una variable llamada <code>social_adaptation_split</code> con la median split para la variable social_adaptation. La mitad superior se llamará <code>high_social_adaptation</code> y la mitad inferior <code>low_social_adaptation</code>.
-<details><summary>
-Suele ser más facil si dividimos la tarea en varios pasos <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">1. Calculamos mediana<br><br>2. Usamos <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code></span>
-</details>
-</li>
-<li>Asegúrate que no hay valores NA.
-<details><summary>
-Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">La función <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code> .</span>
-</details>
-</li>
+<li>En un nuevo DF (<code>DF_split</code>), crea una variable llamada <code>social_adaptation_split</code> con la median split para la variable social_adaptation. La mitad superior se llamará <code>high_social_adaptation</code> y la mitad inferior <code>low_social_adaptation</code>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suele ser más facil si dividimos la tarea en varios pasos
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;">1. Calculamos mediana <br><br>2. Usamos <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code></span></p>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Asegúrate que no hay valores NA.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;">La función <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code> .</span></p>
+</div>
+</div>
+</div>
 <hr>
 <p>El resultado final debería ser:</p>
 <div class="cell">
@@ -1558,10 +1735,12 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <figcaption class="figure-caption">SOURCE: https://xkcd.com/208/</figcaption></figure>
 </div>
 <hr>
-<p>Imaginad que tenemos que trabajar con la columna <code>condition2</code>, donde están codificadas 3 variables importantes:</p>
+<p>Imagina que tenemos que trabajar con la columna <code>condition2</code>, donde están codificadas 3 variables importantes:</p>
 <div class="cell">
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">DF_regexp</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-read-csv.csv"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">...1</span>, <span class="op">-</span><span class="va">Educacion</span>, <span class="op">-</span><span class="va">Edad</span>, <span class="op">-</span><span class="va">condition</span><span class="op">)</span></span>
+<span><span class="va">DF_regexp</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-read-csv.csv"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">...1</span>, <span class="op">-</span><span class="va">Educacion</span>, <span class="op">-</span><span class="va">Edad</span>, <span class="op">-</span><span class="va">condition</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">DF_regexp</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 5</span></span>
 <span><span class="co">#&gt;      ID Genero FollowUP condition2 PPV_DECLARED</span></span>
@@ -1578,7 +1757,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <p>La función <code><a href="https://rdrr.io/r/base/grep.html">gsub()</a></code> nos sirve para eliminar partes de una cadena de texto, para extraer un número, etc.:</p>
 <div class="cell">
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">DF_regexp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_regexp</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cond_NM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"([0-9]{2,3}).*"</span>, <span class="st">"\\1"</span>, <span class="va">condition2</span><span class="op">)</span>,</span>
 <span>         cond_LR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"[0-9]{2,3}([LR]).*"</span>, <span class="st">"\\1"</span>, <span class="va">condition2</span><span class="op">)</span>,</span>
 <span>         cond_IA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"[0-9]{2,3}[LR](.*)"</span>, <span class="st">"\\1"</span>, <span class="va">condition2</span><span class="op">)</span><span class="op">)</span></span>
@@ -1596,7 +1775,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <p>Extraemos la misma información, de una manera ligeramente distinta, siendo mucho más explícitos sobre la estructura esperada de la columna condition2:</p>
 <div class="cell">
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">DF_regexp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">DF_regexp</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cond_NM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"^([0-9]{2,3})([LR])(.*)$"</span>, <span class="st">"\\1"</span>, <span class="va">condition2</span><span class="op">)</span>,</span>
 <span>         cond_LR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"^([0-9]{2,3})([LR])(.*)$"</span>, <span class="st">"\\2"</span>, <span class="va">condition2</span><span class="op">)</span>,</span>
 <span>         cond_IA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"^([0-9]{2,3})([LR])(.*)$"</span>, <span class="st">"\\3"</span>, <span class="va">condition2</span><span class="op">)</span><span class="op">)</span></span>
@@ -1623,7 +1802,7 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="co"># Seleccionamos solo algunas de las filas</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">dem_genero</span>, <span class="va">dem_edad</span>, <span class="va">dem_nivedu</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"lkns_[0-9]{2}_raw"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 232 × 15</span></span>
@@ -1667,21 +1846,77 @@ Pista: <img src="../data/images/hint.png" class="img-fluid"></summary><span styl
 <li><p>Selecciona las columnas relevantes y haz la suma de columnas</p></li>
 <li><p>Convierte a long, filtra para quedarte con las filas correspondientes a la prueba relevante, y haz una suma agrupada</p></li>
 </ol>
-<details><summary>
-Pista para seleccionar o filtrar columnas: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">Recuerda que usamos <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> para seleccionar columnas, o <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> para filtrar.</span>
-</details><details><summary>
-Pista para seleccionar columnas: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">Podemos usar <code>matches("WMAT_[0-9]{2}_cod")</code> para seleccionar o filtrar todas las columnas o ítems que contienen: <code>WMAT_</code>, 2 numeros del 0 al 9, y acaban en <code>_cod</code>.</span>
-</details><details><summary>
-Pista para suma de columnas: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;"><code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code> es la función que podemos usar, pero su sintaxis es algo complicada.</span>
-</details><details><summary>
-Pista para suma agrupada: <img src="../data/images/hint.png" class="img-fluid"></summary><span style="color: orange;">Usamos <code>group_by() %&gt;% summarise()</code> poniendo parámetros dentro de cada función.</span>
-</details><hr>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista para seleccionar o filtrar columnas:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;">Recuerda que usamos <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> para seleccionar columnas, o <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> para filtrar.</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista para seleccionar columnas:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;">Podemos usar <code>matches("WMAT_[0-9]{2}_cod")</code> para seleccionar o filtrar todas las columnas o ítems que contienen: <code>WMAT_</code>, 2 numeros del 0 al 9, y acaban en <code>_cod</code>.</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista para suma de columnas:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"><code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code> es la función que podemos usar, pero su sintaxis es algo complicada.</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pista para suma agrupada:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;">Usamos <code>group_by() |&gt; summarise()</code> poniendo parámetros dentro de cada función.</span></p>
+</div>
+</div>
+</div>
+<hr>
 <p>Importar datos:</p>
 <div class="cell">
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">df_wide_raw</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="section-4" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="section-4"></h2>
+</section><section id="section" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="section"></h2>
 </section><section id="bibliografía" class="level2 bibliografia unnumbered"><h2 class="bibliografia unnumbered anchored" data-anchor-id="bibliografía">Bibliografía</h2>
 <p><a href="https://github.com/rstudio/cheatsheets">Cheatsheets RStudio</a></p>
 <p><a href="https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf">Cheatsheet dplyr</a></p>

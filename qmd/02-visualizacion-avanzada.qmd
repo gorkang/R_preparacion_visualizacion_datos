@@ -124,11 +124,12 @@ Facetas por continente.
 Con la función `gghighlight()` del paquete `[{gghighlight}](https://cran.r-project.org/web/packages/gghighlight/index.html)` podemos añadir una capa para facilitar la comparación de cada faceta con los datos completos.
 
 ```{r facet_wrap-gghighlight}
-  ggplot(gapminder, aes(lifeExp, fill = continent)) +
-    geom_histogram(alpha = .5) +
-    facet_wrap( ~ continent, nrow = 1) +
-    guides(color = "none") +
-    gghighlight::gghighlight()
+
+ggplot(gapminder, aes(lifeExp, fill = continent)) +
+  geom_histogram(alpha = .5) +
+  facet_wrap( ~ continent, nrow = 1) +
+  guides(color = "none") +
+  gghighlight::gghighlight()
 
 ```
 
@@ -202,9 +203,9 @@ Con `stat_summary()` podemos usar funciones simples de manera directa. Por ejemp
 
 ```{r transformaciones-estadisticas-stat_summary-1}
 
-  ggplot(gapminder, aes(continent, lifeExp)) +
-    stat_summary(fun = median) +
-  labs(caption = "Mediana")
+ggplot(gapminder, aes(continent, lifeExp)) +
+  stat_summary(fun = median) +
+labs(caption = "Mediana")
 
 ```
 
@@ -212,13 +213,13 @@ Con `stat_summary()` podemos usar funciones simples de manera directa. Por ejemp
 
 ```{r transformaciones-estadisticas-stat_summary-2}
 
-  ggplot(gapminder, aes(continent, lifeExp)) +
-    stat_summary(
-      fun = median,
-      fun.min = min,
-      fun.max = max
-      ) +
-    labs(caption = "Mediana y rango (mínimo/máximo) de los datos")
+ggplot(gapminder, aes(continent, lifeExp)) +
+  stat_summary(
+    fun = median,
+    fun.min = min,
+    fun.max = max
+    ) +
+  labs(caption = "Mediana y rango (mínimo/máximo) de los datos")
 
 ```
 
@@ -230,13 +231,13 @@ Si queremos usar funciones algo más complejas, la sintaxis es diferente. En est
 
 ```{r transformaciones-estadisticas-stat_summary-3}
 
-  ggplot(gapminder, aes(continent, lifeExp)) +
-    stat_summary(
-      fun = median,
-      fun.min = function(x) median(x) - sd(x),
-      fun.max = function(x) median(x) + sd(x)
-      ) +
-  labs(caption = "Mediana más/menos desviación estandard")
+ggplot(gapminder, aes(continent, lifeExp)) +
+  stat_summary(
+    fun = median,
+    fun.min = function(x) median(x) - sd(x),
+    fun.max = function(x) median(x) + sd(x)
+    ) +
+labs(caption = "Mediana más/menos desviación estandard")
 
 ```
 
@@ -247,8 +248,8 @@ Lo interesante es que podemos añadir estas transformaciones estadísticas como 
 
 ```{r transformaciones-estadisticas-promedios-grupo-1}
 
- ggplot(gapminder, aes(continent, lifeExp)) +
-  geom_jitter()
+ggplot(gapminder, aes(continent, lifeExp)) +
+geom_jitter()
 
 ```
 
@@ -256,10 +257,10 @@ Le podemos añadir un punto mostrando la mediana por grupo:
 
 ```{r transformaciones-estadisticas-promedios-grupo-2}
 
- ggplot(gapminder, aes(continent, lifeExp)) +
-  geom_jitter() +
-  stat_summary(fun = median,
-               color = "red", size = 1, alpha = .7)
+ggplot(gapminder, aes(continent, lifeExp)) +
+geom_jitter() +
+stat_summary(fun = median,
+             color = "red", size = 1, alpha = .7)
 
 ```
 
@@ -268,12 +269,12 @@ O la mediana más la desviación estandard:
 
 ```{r transformaciones-estadisticas-promedios-grupo-3}
 
- ggplot(gapminder, aes(continent, lifeExp)) +
-  geom_jitter() +
-  stat_summary(fun = median,
-               color = "red", size = 1, alpha = .7,
-               fun.min = function(x) median(x) - sd(x),
-               fun.max = function(x) median(x) + sd(x))
+ggplot(gapminder, aes(continent, lifeExp)) +
+geom_jitter() +
+stat_summary(fun = median,
+             color = "red", size = 1, alpha = .7,
+             fun.min = function(x) median(x) - sd(x),
+             fun.max = function(x) median(x) + sd(x))
 
 ```
 
@@ -310,10 +311,10 @@ Pero en realidad no quiero que las líneas pasen por todos los puntos, sino que 
 
 
 ```{r ejercicio-7b, echo=FALSE}
-  ggplot(mpg, aes(displ, hwy, color = class)) +
-    geom_point() +
-    stat_summary(fun = mean, geom = "line") +
-    theme(legend.position = "bottom")
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() +
+  stat_summary(fun = mean, geom = "line") +
+  theme(legend.position = "bottom")
 ```
 
 
@@ -341,14 +342,14 @@ ggplot(gapminder, aes(country, lifeExp, color = continent)) +
 
 ```{r ejercicio-8, echo=FALSE}
 
-  ggplot(gapminder, aes(country, lifeExp, color = continent)) +
-    stat_summary(
-      fun.min = function(x) median(x) - sd(x),
-      fun.max = function(x) median(x) + sd(x),
-      fun = mean) +
-  facet_grid(~ continent) +
-  theme(axis.text.x = element_blank(),
-        legend.position = "none")
+ggplot(gapminder, aes(country, lifeExp, color = continent)) +
+  stat_summary(
+    fun.min = function(x) median(x) - sd(x),
+    fun.max = function(x) median(x) + sd(x),
+    fun = mean) +
+facet_grid(~ continent) +
+theme(axis.text.x = element_blank(),
+      legend.position = "none")
 
 ```
 ### {-}
@@ -364,19 +365,19 @@ Habitualmente, un vez hemos creado la gráfica, querremos personalizar varias co
 
 ```{r personalizacion-graficas-coord}
 
-  # Gráfico inicial
-  ggplot(gapminder, aes(continent)) +
-      geom_bar()
+# Gráfico inicial
+ggplot(gapminder, aes(continent)) +
+    geom_bar()
 
-  # coord_flip()
-  ggplot(gapminder, aes(continent)) +
-    geom_bar() +
-    coord_flip()
+# coord_flip()
+ggplot(gapminder, aes(continent)) +
+  geom_bar() +
+  coord_flip()
 
-  # coord_polar()
-  ggplot(gapminder, aes(continent)) +
-    geom_bar() +
-    coord_polar()
+# coord_polar()
+ggplot(gapminder, aes(continent)) +
+  geom_bar() +
+  coord_polar()
 
 ```
 
@@ -482,9 +483,9 @@ Usando un poco de vodoo, podemos convertirlo en esto:
 
 ```{r advanced-scales}
 
-gapminder_last = gapminder %>%
-  group_by(continent) %>%
-  filter(year == max(year)) %>%
+gapminder_last = gapminder |>
+  group_by(continent) |>
+  filter(year == max(year)) |>
   summarize(lifeExp = mean(lifeExp))
 
 ggplot(gapminder, aes(year, lifeExp, linetype = continent, color = continent)) +
@@ -590,9 +591,9 @@ Si te sobra tiempo, puedes tratar de reproducir la siguiente versión mejorada..
 
 :::
 
-```{r geoms-ejercicios-extra,, echo=FALSE, fig.height=5, fig.width=8}
+```{r geoms-ejercicios-extra, echo=FALSE, fig.height=5, fig.width=8}
 
-table1_end = table1 %>% filter(year == max(.$year))
+table1_end = table1 |> filter(year == max(year))
 
   ggplot(table1, aes(as.factor(year), cases)) +
   geom_line(aes(group = country), colour = "grey50") +
@@ -926,10 +927,10 @@ Con {ggtext} podemos incluir estilos en los textos, por ejemplo, en el título d
 ```{r estilos-texto}
 
 # Ejemplo adaptado de https://wilkelab.org/ggtext/articles/theme_elements.html
-mtcars %>%
+mtcars |>
   mutate(
     transmission = ifelse(am == 1, "automatic", "manual")
-  ) %>%
+  ) |>
   ggplot(aes(hp, mpg, color = transmission)) +
   geom_point(size = 2) +
   geom_smooth(se = FALSE, method = "lm") +
@@ -1003,7 +1004,7 @@ Scatterplot creado con ggplot donde se puede ver el valor de los puntos, selecci
 
 plotly::ggplotly(
   ggplot(
-    gapminder %>% filter(year == 2007),
+    gapminder |> filter(year == 2007),
     aes(gdpPercap, lifeExp, color = continent, size = country)
   ) +
     geom_point(alpha = .3, point = 2) +
@@ -1045,7 +1046,7 @@ DF_RAW = structure(c(181, 163, 60, 124, 76, 62, 73, 59, 17, 21, 26, 7, 1, 2, 3,
 DF = DF_RAW
 plot1 = plotly::plot_ly(x = ~ colnames(DF),
                         y = ~ rownames(DF),
-                        z = ~ DF) %>%
+                        z = ~ DF) |>
   plotly::add_surface(
     name = "3D mesh",
     connectgaps = TRUE,
@@ -1074,7 +1075,7 @@ plot1 = plotly::plot_ly(x = ~ colnames(DF),
         highlight = FALSE
       )
     )
-  ) %>%
+  ) |>
   plotly::add_surface(
     name = "surface",
     connectgaps = FALSE,

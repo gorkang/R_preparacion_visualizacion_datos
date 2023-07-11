@@ -40,7 +40,7 @@ Para visualizar la distribución de nuestras variables, tendremos que seguir est
 ggplot(gapminder, aes(continent)) +
   geom_bar()
 
-gapminder %>% 
+gapminder |> 
   count(continent)
 
 ```
@@ -65,7 +65,7 @@ ggplot(gapminder, aes(lifeExp)) +
 
 ```{r visualizando-distribuciones-continuas2}
 
-gapminder %>%
+gapminder |>
   summarise(MEAN = mean(lifeExp),
             MEDIAN = median(lifeExp),
             SD = sd(lifeExp),
@@ -170,13 +170,13 @@ ggplot(gapminder, aes(lifeExp, fill = continent)) +
 También queremos ver los descriptivos por continente, ordenados por el promedio:
 
 ```{r ejercicio-variables-individuales-3, echo=FALSE}
-gapminder %>%
-  group_by(continent) %>%
+gapminder |>
+  group_by(continent) |>
   summarise(MEAN = mean(lifeExp),
             MEDIAN = median(lifeExp),
             SD = sd(lifeExp),
             MAX = max(lifeExp),
-            MIN = min(lifeExp)) %>%
+            MIN = min(lifeExp)) |>
   arrange(MEAN)
 ```
 
@@ -192,22 +192,22 @@ Cuando nos llega una nueva base de datos, una de las primeras cosas que haremos 
 ```{r initial exploration, fig.height=12}
 
 # Wide to long
-d <- gapminder %>%
-  pivot_longer(everything(), values_transform = list(value = as.character)) %>%
-  filter(value != 999) %>% # Si existiera algun codigo para missing values, filtrar
+d <- gapminder |>
+  pivot_longer(everything(), values_transform = list(value = as.character)) |>
+  filter(value != 999) |> # Si existiera algun codigo para missing values, filtrar
   mutate(value_NUM = as.numeric(value))
 
 # Plot numeric variables
-d %>%
-  drop_na(value_NUM) %>%
+d |>
+  drop_na(value_NUM) |>
   ggplot(aes(value_NUM)) +
     facet_wrap(~ name, scales = "free") +
     geom_histogram(bins = 15) #+ scale_x_log10()
 
 # Plot non-numeric variables
-d %>%
-  drop_na(value) %>%
-  filter(is.na(value_NUM)) %>%
+d |>
+  drop_na(value) |>
+  filter(is.na(value_NUM)) |>
   ggplot(aes(value)) +
     facet_wrap(~ name, scales = "free") +
     geom_bar() +
@@ -220,15 +220,15 @@ d %>%
 
 <!-- ```{r inspectdf_} -->
 
-<!-- gapminder %>% inspectdf::inspect_na() -->
-<!-- gapminder %>% inspectdf::inspect_na() %>% show_plot + coord_flip() -->
+<!-- gapminder |> inspectdf::inspect_na() -->
+<!-- gapminder |> inspectdf::inspect_na() |> show_plot + coord_flip() -->
 
-<!-- gapminder_cat <- gapminder %>% inspectdf::inspect_cat() -->
-<!-- gapminder_cat %>% inspectdf::show_plot() -->
+<!-- gapminder_cat <- gapminder |> inspectdf::inspect_cat() -->
+<!-- gapminder_cat |> inspectdf::show_plot() -->
 
 
-<!-- gapminder_num <- gapminder %>% inspectdf::inspect_num() -->
-<!-- gapminder_num %>% inspectdf::show_plot() -->
+<!-- gapminder_num <- gapminder |> inspectdf::inspect_num() -->
+<!-- gapminder_num |> inspectdf::show_plot() -->
 
 <!-- ``` -->
 
@@ -275,9 +275,9 @@ ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
 
 ```{r covariacion-categorica-continua-4}
 
-gapminder %>% group_by(year) %>% summarise(n())
+gapminder |> group_by(year) |> summarise(n())
 
-ggplot(gapminder %>% filter(year > 1995),
+ggplot(gapminder |> filter(year > 1995),
        aes(lifeExp, continent, fill = continent)) +
   ggridges::geom_density_ridges(
     stat = "binline",
@@ -306,7 +306,7 @@ Empezamos creando dos gráficos. En cada uno filtramos por el año deseado (e.g.
 
 ```{r covariacion-categorica-continua-5, echo=TRUE}
 
-A = ggplot(gapminder %>% filter(year == 1952),
+A = ggplot(gapminder |> filter(year == 1952),
            aes(lifeExp, continent, fill = continent)) +
   ggridges::geom_density_ridges(
     stat = "binline",
@@ -325,7 +325,7 @@ A = ggplot(gapminder %>% filter(year == 1952),
   scale_x_continuous(n.breaks = 10, limits = c(20, 90)) +
   ggtitle("1952")
 
-B = ggplot(gapminder %>% filter(year == 2007),
+B = ggplot(gapminder |> filter(year == 2007),
            aes(lifeExp, continent, fill = continent)) +
   ggridges::geom_density_ridges(
     stat = "binline",
@@ -355,8 +355,8 @@ Para visualizar la diferencia entre 2007 y 1952, podemos calcular primero cuanto
 
 # Cálculo de la diferencia entre el máximo y mínimo de lifeExp para cada country. 
   # Incluimos continent en group_by() para poder usar esa variable en la gráfica
-DF_gapminder_max_min = gapminder %>%
-  group_by(continent, country) %>%
+DF_gapminder_max_min = gapminder |>
+  group_by(continent, country) |>
   summarise(lifeExp = max(lifeExp) - min(lifeExp))
 
 ggplot(DF_gapminder_max_min, aes(lifeExp, continent, fill = continent)) +
@@ -390,11 +390,11 @@ Arriba estamos restando la esperanza de vida máxima y mínima de cada pais, per
 :::
 
 ```{r covariacion-categorica-continua-7, echo=FALSE}
-DF_last_year = gapminder %>% filter(year == max(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_max = lifeExp)
-DF_first_year = gapminder %>% filter(year == min(year)) %>% select(country, continent, lifeExp) %>% rename(lifeExp_min = lifeExp)
+DF_last_year = gapminder |> filter(year == max(year)) |> select(country, continent, lifeExp) |> rename(lifeExp_max = lifeExp)
+DF_first_year = gapminder |> filter(year == min(year)) |> select(country, continent, lifeExp) |> rename(lifeExp_min = lifeExp)
 
-DF_last_first = DF_last_year %>%
-  full_join(DF_first_year, by = c("country", "continent")) %>%
+DF_last_first = DF_last_year |>
+  full_join(DF_first_year, by = c("country", "continent")) |>
   mutate(DIFF = lifeExp_max - lifeExp_min)
 
 ggplot(DF_last_first, aes(DIFF, continent, fill = continent)) +
@@ -415,11 +415,11 @@ ggplot(DF_last_first, aes(DIFF, continent, fill = continent)) +
 ggplot(diamonds, aes(cut, color)) +
   geom_count()
 
-diamonds %>%
+diamonds |>
   count(color, cut)
 
-diamonds %>%
-  count(color, cut) %>%
+diamonds |>
+  count(color, cut) |>
   ggplot(aes(color, cut, fill = n)) +
     geom_tile()
 
@@ -523,7 +523,7 @@ Puedes ir al enlace anterior y descargar el archivo `Cancer screening risk liter
 ```{r ejercicio-final-analisis-exploratorio1, echo=TRUE, fig.height=18}
 
 # Usamos haven::read_sav() para leer los archivos .sav
-DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening risk literacy R1.sav")) %>% as_tibble()
+DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening risk literacy R1.sav")) |> as_tibble()
 
 ```
 
@@ -535,21 +535,21 @@ if (!knitr::is_latex_output()) knitr::opts_chunk$set(column = "page")
 
 # * histogramas de todas las variables numéricas y no-numéricas
 
-d <- DF_dafina %>%
-  pivot_longer(everything(), values_transform = list(value = as.character)) %>%
-  filter(value != -66) %>%
+d <- DF_dafina |>
+  pivot_longer(everything(), values_transform = list(value = as.character)) |>
+  filter(value != -66) |>
   mutate(value_NUM = as.numeric(value))
 
 # Plot numeric variables
-d %>% drop_na(value_NUM) %>%
+d |> drop_na(value_NUM) |>
   ggplot(aes(value_NUM)) +
   facet_wrap(~ name, scales = "free") +
   geom_histogram(bins = 15) #+ scale_x_log10()
 
 # Plot non-numeric variables
-d %>%
-  drop_na(value) %>%
-  filter(is.na(value_NUM)) %>%
+d |>
+  drop_na(value) |>
+  filter(is.na(value_NUM)) |>
   ggplot(aes(value)) +
   facet_wrap(~ name, scales = "free") +
   geom_bar() +
@@ -563,20 +563,20 @@ d %>%
 
 
 # * scatterplots de la relación entre comprensión y numeracy, y entre comprensión y screenbeliefs
-  DF = DF_dafina %>%
-    select(IDparticipante, screenbeliefs, compR1, numeracy) %>%
-    rename(comprehension = compR1) %>%
+  DF = DF_dafina |>
+    select(IDparticipante, screenbeliefs, compR1, numeracy) |>
+    rename(comprehension = compR1) |>
     drop_na()
 
 
-  A = DF %>% ggplot(aes(screenbeliefs, comprehension)) +
+  A = DF |> ggplot(aes(screenbeliefs, comprehension)) +
     geom_jitter(height = .1, width = .1, alpha = .6, size  = 3) +
     geom_smooth(method = "lm") +
     theme_minimal() +
     theme(text = element_text(size = 20)) +
     scale_y_discrete(limits = 0:6)
 
-  B = DF %>% ggplot(aes(numeracy, comprehension)) +
+  B = DF |> ggplot(aes(numeracy, comprehension)) +
     geom_jitter(height = .1, width = .1, alpha = .6, size  = 3) +
     geom_smooth(method = "lm") +
     theme_minimal() +
