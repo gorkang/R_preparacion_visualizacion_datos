@@ -48,6 +48,8 @@ La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las
 
 ### En ocasiones encontraras un recuadro como este. En la [versión online del libro](https://gorkang.github.io/R_preparacion_visualizacion_datos/), si haces click sobre el, aparecerá una pista sobre como resolver el ejercicio.  
 
+¡No hagas click sin antes haber intentado resolver el ejercicio sin ayuda!
+
 :::
 
 ---  
