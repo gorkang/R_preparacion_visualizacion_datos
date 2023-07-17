@@ -340,6 +340,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Crear una máquina virtual linux desde la que simular participantes. Puedes usar <a href="https://www.virtualbox.org/wiki/Downloads">Virtualbox</a> para instalar <a href="https://releases.ubuntu.com/20.04/">Ubuntu</a>. Una vez dentro, tendrás que seguir los pasos del <a href="https://gorkang.github.io/R_preparacion_visualizacion_datos/preparando-sistema.html#empezando-en-a-b-c">manual para prepara el sistema para correr R y RStudio</a>
 </li>
 </ul>
+<p>Errores comunes:</p>
+<ul>
+<li>Error sobre <code>elevated privileges</code>: abre Docker desktop antes de empezar</li>
+</ul>
 <!-- sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev  --><hr>
 <p><strong>Para lanzar monos localmente:</strong></p>
 <div class="cell">
@@ -362,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  number_of_cores <span class="op">=</span> <span class="fl">5</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Puedes ver de los parametros disponibles en el <a href="https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#parameters-available">Manual de jsPsychMonkeys</a>.</p>
+<p>Puedes ver de los parametros disponibles en el <a href="https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#parameters-available">Manual de jsPsychMonkeys</a>. Por ejemplo, con <code>open_VNC = TRUE</code> puedes ver a los monos hacer su trabajo (siempre y cuando hayas <a href="https://www.realvnc.com/en/connect/download/viewer/">instalado realvnc</a>).</p>
 <hr></section><section id="jspsychhelper-como-preparar-datos" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="jspsychhelper-como-preparar-datos">
 <span class="header-section-number">9.4</span> jsPsychHelpeR: Como preparar datos</h2>
 <p>Cada tarea de <a href="https://github.com/gorkang/jsPsychMaker">jsPsychMaker</a> debería tener un script hermano en <a href="https://github.com/gorkang/jsPsychHelpeR">jsPsychHelpeR</a> para automatizar la preparación de datos. Una vez tengamos nuestro protocolo listo para el pilotaje, con una función de jsPsychHelpeR crearemos todo lo necesario para que la preparación de datos corra automáticamente.</p>

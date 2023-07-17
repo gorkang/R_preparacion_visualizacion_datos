@@ -50,7 +50,7 @@ knitr::include_graphics(here::here("data/videos/rstudio-install-ALL.gif"))
 
 **Copia y pega el código de abajo en la consola de RStudio y ejecútalo [tecla ENTER]**:  
 
-```{r install_workshop_packages, message=FALSE, warning=FALSE}
+```{r install_workshop_packages, message=FALSE, warning=FALSE, include=FALSE}
 
 if (!require('rlang')) install.packages('rlang'); library('rlang')
 rlang::check_installed(
@@ -68,7 +68,7 @@ rlang::check_installed(
 
 Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber completado el paso previo.  
 
-```{r install_workshop_packages2, message=FALSE, warning=FALSE}
+```{r install_workshop_packages2, message=FALSE, warning=FALSE, include=FALSE}
 
 if (!require('remotes')) install.packages('remotes'); remotes::install_github('gorkang/jsPsychAdmin')
 if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')

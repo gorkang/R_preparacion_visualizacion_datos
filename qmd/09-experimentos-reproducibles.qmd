@@ -118,6 +118,11 @@ Si no funciona, te, quedan las siguientes opciones:
 -   Usar un ordenador con Linux o crear una partición Linux\
 -   Crear una máquina virtual linux desde la que simular participantes. Puedes usar [Virtualbox](https://www.virtualbox.org/wiki/Downloads) para instalar [Ubuntu](https://releases.ubuntu.com/20.04/). Una vez dentro, tendrás que seguir los pasos del [manual para prepara el sistema para correr R y RStudio](https://gorkang.github.io/R_preparacion_visualizacion_datos/preparando-sistema.html#empezando-en-a-b-c)
 
+Errores comunes:  
+
+- Error sobre `elevated privileges`: abre Docker desktop antes de empezar  
+
+
 <!-- sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev  -->
 
 ------------------------------------------------------------------------
@@ -147,7 +152,7 @@ jsPsychMonkeys::release_the_monkeys(
 ```
 
 
-Puedes ver de los parametros disponibles en el [Manual de jsPsychMonkeys](https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#parameters-available).  
+Puedes ver de los parametros disponibles en el [Manual de jsPsychMonkeys](https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#parameters-available). Por ejemplo, con `open_VNC = TRUE` puedes ver a los monos hacer su trabajo (siempre y cuando hayas [instalado realvnc](https://www.realvnc.com/en/connect/download/viewer/)).    
 
 
 ------------------------------------------------------------------------
