@@ -332,6 +332,23 @@ map_df(files, read_xlsx, sheet = 2, skip = 5)
 
 
 
+### Limpiar nombres de columnas
+
+El paquete {janitor} tiene una función muy útil llamada `clean_names()` que aplica algunas reglas sencillas para estandarizar los nombres de columnas:  
+
+```{r janitor_clean_names}
+
+DF_name = read_csv(here::here("data/files/02-read-csv.csv"))
+cat(names(DF_name))
+
+DF_names_clean = DF_name |> janitor::clean_names()
+cat(names(DF_names_clean))
+
+```
+
+
+
+
 ### Exportar datos
 
 Muchas veces guardaremos los datos una vez procesados. Esto se puede hacer con la familia de funciones `write_*`.  
@@ -468,18 +485,30 @@ DT::datatable(DF, options = list(pageLength = 20, dom = 't'))
 
 #### Filtrar y ordenar filas
 
+A partir de los siguientes datos:  
+
 ```{r filtrando-ordenando}
 
-# DF original
 name_of_file = here::here("data/files/02-read-csv.csv")
 DF_name = read_csv(name_of_file)
 DF_name
+
+```
+
+Podemos usar el verbo `filter()` para mostrar las filas que cumplan cualquier regla lógica o combinación de reglas (e.g. Genero == 1 & Edad >= 30). En el ejemplo siguiente, nos quedamos con las filas donde el valor de Educación sea mayor de 8:  
+
+```{r filtrando-ordenando2}
 
 # Filtrar
 DF_name |> 
   filter(Educacion > 8)
 
-# Ordenar
+```
+
+También podemos ordenar las filas usando `arrange()` y `desc()`. Por ejemplo, ordenamos Educación de manera ascendente, y de Género descendente):  
+
+```{r filtrando-ordenando3}
+
 DF_name |> 
   arrange(Educacion, desc(Genero))
 
@@ -487,38 +516,41 @@ DF_name |>
 
 #### Seleccionar, ordenar y renombrar columnas
 
+Seleccionamos las columnas que queremos listando las variables en el orden deseado dentro del verbo `select()`:  
+
 ```{r seleccionando-ordenando-columnas}
 
-# Seleccionar columnas
 DF_name |> 
   select(Genero, Edad)
 
-# Eliminar columnas  
+```
+
+Eliminamos columnas precediendo las variables a eliminar con `-` dentro de `select()`:  
+
+```{r seleccionando-ordenando-columnas2}
+
 DF_name |> 
   select(-...1)
 
-# Ordenar y eliminar columnas
+```
+
+Ordenamos y eliminamos columnas listando las variables en el orden deseado dentro del verbo `select()` y precediendo las variables a eliminar con `-`:  
+
+```{r seleccionando-ordenando-columnas3}
+
 DF_name |> 
   select(ID, Edad, Genero, everything(), -...1) 
 
 ```
 
 
+Para renombrar variables usamos el verbo `rename()`. Es importante recordar que en hay que indicar `rename(NOMBRE_NUEVO = NOMBRE_ANTIGUO)`:  
+
 ```{r renombrando}
 
-# Renombrar columnas
 DF_name |> 
   rename(Identificador = ID,
          Sexo = Genero)
-
-# Renombrar usando la posicion (DANGER!)
-DF_name |> 
-  rename(Identificador = 2)
-
-# Renombrar usando vectores
-oldnames = c("ID","Genero")
-newnames = c("Identificador","Sexo")
-DF_name |> rename_at(all_of(oldnames), ~ newnames)
 
 ```
 
@@ -587,23 +619,37 @@ El `everything()` que usamos dentro de `select()` más arriba es uno de los `sel
 :::
 
 
-Trabajaremos con los datos del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al. Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base RAW en formato wide.    
+Trabajaremos con los datos del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al. Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base RAW en formato wide. Leemos la base y mostramos los títulos de las 291 columnas:     
 
 ```{r seleccion-avanzada}
 
-  # DF original  
   df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")  
   cat(names(df_wide))
 
-  # Seleccionamos variables que contienen la cadena de texto "dem"
+```
+
+Con `contains()` seleccionamos variables que contienen la cadena de texto `dem`:  
+  
+```{r seleccion-avanzada2}
+
   df_wide |> 
     select(contains("dem"))
 
-  # Seleccionamos variables que acacan con la cadena de texto "cod"
+```
+
+Usando `ends_with()` seleccionamos variables que acaban con la cadena de texto `cod`:  
+
+```{r seleccion-avanzada3}
+
   df_wide |> 
     select(ID, ends_with("cod"))
 
-  # Lo mismo, pero usando expresiones regulares
+```
+
+Finalmente, `matches()` nos permite usar todo la potencia de las [expresiones regulares](03-preparacion_transformacion.html#regular-expressions). En este caso, también le pedimos variables que acaban con la cadena de texto `cod`:  
+
+```{r seleccion-avanzada4}
+
   df_wide |> 
     select(ID, matches("cod$")) # $: fin de la cadena de texto
   
@@ -612,27 +658,42 @@ Trabajaremos con los datos del paper [Cognitive and Socio-affective Predictors o
 
 #### Modificar y añadir variables
 
+Seguimos usando verbos de {dplyr}. Para crear nuevas variables o modificarlas reemplazando los valores usaremos `mutate()`. Dentro de mutate podemos hacer cualquier operación con una o más variables.      
 
-```{r modificar-anadir-variables}
+Primero leemos nuestra base:  
 
-# DF original
+```{r modificar-anadir-variables1}
+
+name_of_file = here::here("data/files/02-read-csv.csv")
+DF_name = read_csv(name_of_file)
 DF_name
 
-# Modificar variable reemplazando valor
+```
+
+Si usamos una variable ya existente, en este caso `PPV_DECLARED`, sus valores se sobreescriben:  
+
+```{r modificar-anadir-variables2}
+
 DF_name |> 
   mutate(PPV_DECLARED = PPV_DECLARED/100)
   
-# Añadir variable
+```
+
+Si usamos una variable no existente (`PPV_DECLARED_PCT`), la creamos:  
+
+```{r modificar-anadir-variables3}
+
 DF_name |> 
   mutate(PPV_DECLARED_PCT = PPV_DECLARED/100)
 
-# Añadir variable destruyendo el resto del DF
+```
+
+Con `transmute()` añadimos una nueva variable destruyendo el resto del DF:  
+
+```{r modificar-anadir-variables4}
+
 DF_name |> 
   transmute(PPV_DECLARED_PCT = PPV_DECLARED/100)
-
-# Limpiar nombres con el paquete {janitor}
-DF_name |> 
-  janitor::clean_names()
 
 ```
 
@@ -641,25 +702,39 @@ DF_name |>
 
 La combinación de verbos `group_by()` y `summarise()` es una de las más usadas. Con esta podemos calcular promedios, medianas, etc. por condición de manera sencilla.  
 
+
+`summarise()` nos permite 'resumir' datos, calculando promedios, medianas, o cualquier otro estadístico de interes. En este caso, vemos el promedio de la variable `PPV_DECLARED` usando `mean(PPV_DECLARED, na.rm = TRUE)`. El parámetro `na.rm = TRUE` ignora los valores `NA` que pueda haber en la base:  
+
 ```{r resumenes-agrupados}
 
-# Resumen
 DF_name |> 
-  summarise(Promedio_PPV = mean(PPV_DECLARED), 
+  summarise(Promedio_PPV = mean(PPV_DECLARED, na.rm = TRUE), 
             N = n())
 
-# Resumen agrupado
+```
+
+
+Si incluimos `group_by()` en la pipeline, esos 'resumenes' se mostraran para cada valor de la variable por la que agrupamos:  
+
+```{r resumenes-agrupados2}
+
 DF_name |> 
   group_by(Genero) |> 
-  summarise(Promedio_PPV = mean(PPV_DECLARED), 
+  summarise(Promedio_PPV = mean(PPV_DECLARED, na.rm = TRUE), 
             N = n())
 
-# Resumen agrupando por multiples variables, y calculando varias cosas  
+
+```
+
+Podemos agrupar por multiples variables, y calcular tantas cosas como queramos. En ese caso la media, mediana, desviación estandard y el numero de observaciones:   
+
+```{r resumenes-agrupados3}
+
 DF_name |> 
   group_by(Genero, condition) |> 
-  summarise(promedio_PPV = mean(PPV_DECLARED),
-            mediana_PPV = median(PPV_DECLARED),
-            SD = sd(PPV_DECLARED),
+  summarise(promedio_PPV = mean(PPV_DECLARED, na.rm = TRUE),
+            mediana_PPV = median(PPV_DECLARED, na.rm = TRUE),
+            SD = sd(PPV_DECLARED, na.rm = TRUE),
             N = n())
 
 ```
@@ -759,25 +834,31 @@ DF_name |>
 
 ### Wide to long simple
 
-Empecemos con un ejemplo muy sencillo. 3 participantes, 2 items.  
+Empecemos con un ejemplo muy sencillo. 2 participantes, cada uno en una condición, y 2 items.  
 
 ```{r wide-to-long}
 
-# Creamos un DF
 df_simple_wide = 
   tibble(
-    ID = c("Participante1", "Participante2", "Participante3", "Participante4"),
-    condition = c("calor", "calor", "frio", "frio"),
-    Item1 = c(22, 33, 44, 55),
-    Item2 = c(88, 99, 77, 66)
+    ID = c("Participante1", "Participante2"),
+    condition = c("calor", "frio"),
+    Item1 = c(22, 33),
+    Item2 = c(88, 99)
     )
 
 df_simple_wide
 
-# Wide to long
-df_simple_long = df_simple_wide |> 
-  pivot_longer(Item1:Item2, names_to = "Item", values_to = "Response")
-  
+```
+
+Pasamos esta base de datos 'ancha' (una fila por participante), a una base en formato 'largo' (una fila por observación) usando la función `pivot_longer()`. Solo tenemos que indicar el rango de columnas, asignar nombre a la columna donde enviaremos los nombres de las columnas, y asignar nombre a la columna donde estarán los valores:  
+
+```{r wide-to-long2}
+
+df_simple_long = df_simple_wide |>
+  pivot_longer(cols = Item1:Item2,
+               names_to = "Item",
+               values_to = "Response")
+
 
 df_simple_long
 
@@ -787,11 +868,10 @@ df_simple_long
 
 ### Long to wide simple
 
-Retomamos el ejemplo simple de antes:  
+Siguiendo con el ejemplo anterior, podemos devolver la base en formato 'largo' a 'ancho' de nuevo usando `pivot_wider()`:  
 
 ```{r long-to-wide}
 
-# Long to wide simple
 df_simple_long |> 
   pivot_wider(names_from = Item, values_from = Response)
 
@@ -801,7 +881,7 @@ df_simple_long |>
 
 #### ¿Para que sirve tener los datos en formato long?  
 
-Hay algunos análisis para los que necesitamos formato long (anovas, modelos mixtos...), y varias cosas que se simplifican cuando los datos estan en formato largo.  
+Hay algunos análisis para los que necesitamos formato long (e.g. anovas, modelos mixtos...), muchas gráficas con `ggplot` asumen formato long, y varias cosas se simplifican cuando los datos estan en formato largo.  
 
 Por ejemplo, si queremos usar resúmenes agrupados para obtener la media, mediana, desviación estandard... por ítem, con el formato WIDE necesitaremos 3 lineas de código para cada ítem que tenga nuestra base (imagina con 100 items...). Con el formato long, el código de abajo es suficiente.  
 
@@ -832,12 +912,6 @@ df_simple_long |>
             SD = sd(Response),
             N = n())
 
-
-# Análisis modelos mixtos
-model = lme4::lmer(Response ~ condition + (1|ID), df_simple_long)
-sjPlot::tab_model(model)
-
-
 ```
 
 
@@ -845,10 +919,9 @@ sjPlot::tab_model(model)
 
 ### Wide to long complex
 
-Ahora pasemos a un ejemplo mas complejo. Tenemos las puntuaciones a los 11 items de la lipkus numeracy scale de 232 participantes, ademas de datos demográficos.  
+Ahora pasemos a un ejemplo mas complejo. Leemos la base de datos y seleccionamos las puntuaciones a los 11 items de la lipkus numeracy scale de 232 participantes, ademas de datos demográficos. Usamos `DT::datatable()` para visualizar la base de manera interactiva.  
 
-
-```{r wide-to-long2}
+```{r wide-to-long2a}
 
 # Leemos documento en formato WIDE
 df_wide_complex = read_csv(
@@ -863,8 +936,12 @@ df_wide_complex = read_csv(
 
 DT::datatable(df_wide_complex)
 
+```
 
-# Wide to long
+De nuevo, para pasar de formato 'ancho' a 'largo' completamos los mismos parámetros que antes. Lo unico que añadimos es `values_transform = list(Response = as.character)` para poder incluir en la columna `Response` tanto valores numéricos como caracteres.  
+
+```{r wide-to-long2b}
+
 df_long_complex =
   df_wide_complex |>
   pivot_longer(
@@ -889,7 +966,6 @@ Nos sirve el mismo código que con el ejemplo más simple:
 
 ```{r long-to-wide-2}
 
-# Long to wide
 df_long_complex |>  
   pivot_wider(names_from = Item, values_from = Response)
 
@@ -970,16 +1046,22 @@ DT::datatable(DF_name)
 
 ---  
 
-Podemos separar la columna de condicion usando un separador. La separación puede ser en columnas o en filas:  
+Podemos separar la columna de condicion usando la función `separate()` y un separador (`sep = "_"`). La separación puede ser en columnas o en filas. En este primer caso, separamos enviando cada parte de `condition` a una columna distinta:  
 
-```{r separates}
+```{r separates1}
 # Separate
 DF_separated = DF_name |> 
   separate(condition, c("primer_chunk", "segundo_chunk"), sep = "_")
 
 DF_separated
 
-# Separate in rows
+
+```
+
+Tambien podemos enviar cada parte de `condition` a una fila distinta:  
+
+```{r separates2}
+
 DF_name |> 
   separate_rows(condition, sep = "_")
 
@@ -998,14 +1080,19 @@ DF_separated |>
 
 Si necesitamos recodificar variables, cambiar valores condicionalmente,... podemos usar `ifelse()`, `case_when()` o `recode()`:    
 
+`ifelse()`, si se cumple la condición `Genero == 1`, asigna el valor "Hombre", de lo contrario, "Mujer":  
 
 ```{r ifelse-casewhen}
-# If else
+
 DF_name |>
   mutate(Genero = ifelse(Genero == 1, "Hombre", "Mujer"))
 
-# Case when
-## las condiciones lógicas pueden ser arbitrariamente complejas
+```
+
+Con `case_when()` podemos establecer varias condiciones lógicas simultáneamente, ademas de un valor por defecto si no se cumple ninguna de ellas. Las condiciones lógicas pueden ser arbitrariamente complejas:  
+
+```{r ifelse-casewhen2}
+
 DF_name |>
   mutate(Genero = 
            case_when(
@@ -1015,11 +1102,17 @@ DF_name |>
              TRUE ~ NA_character_)
          )
 
-  # Función recode
-  DF_name |>
+```
+
+Finalmente podemos usar `recode()`, con una sintaxis tal vez algo más sencilla:  
+
+```{r ifelse-casewhen3}
+
+  DF_name |> 
+  select(Genero) |> 
     
     # De número a texto
-    mutate(Genero = recode(
+    mutate(Genero2 = recode(
       Genero,
       `1` = "Hombre",
       `2` = "Mujer",
@@ -1027,34 +1120,51 @@ DF_name |>
     )) |>
     
     # De texto a número
-    mutate(Genero2 = recode(
-      Genero,
+    mutate(Genero3 = recode(
+      Genero2,
       "Hombre" = 1,
-      "Mujer" = 2,
+      "Mujer" = 0,
       .default = 999
     ))
 
 ```
 
-Otras funciones útiles, extraer los valores de una columna con `pull()` o descartar los `NA` de una columna con `drop_na()`:  
+Otras funciones útiles, extraer los valores de una columna con `pull()` o descartar los `NA` de una columna con `drop_na()`.  
+
+Usamos `pull()` para extraer los valores de una columna.  
 
 ```{r omit-ifelse-casewhen}
-
-# Pull
 DF_name |> pull(PPV_DECLARED)
+```
 
-# Promedio de una columna (con pipes)
+
+Calculamos el promedio de una columna (con pipes).  
+
+```{r pull_mean}
+ 
 DF_name |> pull(PPV_DECLARED) |> mean()
 
-# Eliminando los NA's!
+```
+
+
+Calculamos el promedio usando `na.rm = TRUE` para que la función `mean()` ignore los NA's:  
+
+```{r pull_mean_na}
+
 DF_name |> pull(PPV_DECLARED) |> mean(na.rm = TRUE)
 
-# Más sencillo, en base R (no siempre son necesarias las pipes)
- mean(DF_name$PPV_DECLARED, na.rm = TRUE)
+```
 
-# Drop NAs
-DF_name |>
-  drop_na(PPV_DECLARED)
+Calculamos la media de manera más sencilla, en este caso usando base R. No siempre son necesarias las pipes. Si escribes `DF_name$` y presionas el tabulador, aparecerán todas las columnas de esa base:  
+
+```{r mean_simple}
+mean(DF_name$PPV_DECLARED, na.rm = TRUE)
+```
+
+Eliminamos las filas que tienen valores perdidos en la variable indicada. En este caso pasamos de 103 a 100 observaciones:  
+
+```{r drop_na}
+DF_name |>  drop_na(PPV_DECLARED)
 ```
 
 

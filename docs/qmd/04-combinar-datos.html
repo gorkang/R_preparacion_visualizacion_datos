@@ -291,16 +291,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr></section><section id="bind-rows-or-columns" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="bind-rows-or-columns">
 <span class="header-section-number">4.1</span> Bind rows or columns</h2>
 <p>El método más sencillo. Simplemente unimos las filas o columnas de los data-frames.</p>
+<p>Primero importamos dos DFs:</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="co"># Importar CSVs</span></span>
 <span><span class="va">DF1</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-CSVs/01.csv"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">DF2</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-CSVs/02.csv"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># Bind DFs añadiendo las *filas* de DF2 a DF1</span></span>
-<span><span class="va">DF1</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">DF2</span><span class="op">)</span></span>
+<span><span class="va">DF2</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-CSVs/02.csv"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> podemos añadir las <em>filas</em> de DF2 a DF1:</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">DF2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 800 × 9</span></span>
 <span><span class="co">#&gt;   Sex   Priming    trialN Block Adjective  Valence  Answer Arrow    rT</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;</span></span>
@@ -310,14 +310,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">#&gt; 4 male  Collective      4 we    indiscreto negative yes    left    355</span></span>
 <span><span class="co">#&gt; 5 male  Collective      5 we    sumiso     negative yes    left    618</span></span>
 <span><span class="co">#&gt; 6 male  Collective      6 we    agradable  positive yes    left    328</span></span>
-<span><span class="co">#&gt; # ℹ 794 more rows</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># Bind DFs añadiendo las *columnas* de DF2 a DF1</span></span>
-<span>  <span class="co">## bind_cols renombra automaticamente los nombres de las columnas para que no </span></span>
-<span>  <span class="co"># haya coincidencias</span></span>
-<span><span class="va">DF1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span><span class="va">DF2</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; # ℹ 794 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con <code><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols()</a></code> añadimos las <em>columnas</em> de DF2 a DF1. <code><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols()</a></code> renombra automaticamente los nombres de las columnas para que no haya coincidencias:</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span><span class="va">DF2</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; # A tibble: 400 × 18</span></span>
 <span><span class="co">#&gt;   Sex...1 Priming...2 trialN...3 Block...4 Adjective...5 Valence...6</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;      </span></span>
@@ -393,7 +391,7 @@ Tipos de Join
 <li>DF_BAD: Grupo de participantes “selectos”</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Importar CSVs para los joins  </span></span>
 <span><span class="va">DF_IDs</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-IDs.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">DF_results</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-results.csv"</span><span class="op">)</span><span class="op">)</span></span>
@@ -407,7 +405,7 @@ Tipos de Join
 <figcaption class="figure-caption">SOURCE: https://github.com/gadenbuie/tidyexplain</figcaption></figure>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_inner_joined</span> <span class="op">=</span> </span>
 <span>  <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
@@ -429,7 +427,7 @@ Tipos de Join
 <figcaption class="figure-caption">SOURCE: https://github.com/gadenbuie/tidyexplain</figcaption></figure>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_left_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
 <span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
@@ -447,7 +445,7 @@ Tipos de Join
 <hr>
 <p>Si no tenemos columnas con el mismo nombre en ambos dataframes, tenemos que indicarle a la función a partir de que dos columnas queremos unir los dataframes. Por ejemplo, con <code>by = c("ID" = "Identificador")</code> le decimos que la columna <code>ID</code> el primer dataframe corresponde a <code>Identificador</code> del segundo dataframe.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Renombramos el identificador para que no coincidan</span></span>
 <span><span class="va">DF_results2</span> <span class="op">=</span> <span class="va">DF_results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Identificador <span class="op">=</span> <span class="va">ID</span><span class="op">)</span></span>
 <span></span>
@@ -480,12 +478,20 @@ Tipos de Join
 <figcaption class="figure-caption">SOURCE: https://github.com/gadenbuie/tidyexplain</figcaption></figure>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_full_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
 <span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># CHECK</span></span>
-<span><span class="co"># map(list("DF_full_joined" = DF_full_joined, "DF_IDs" = DF_IDs, "DF_results" = DF_results), nrow)</span></span>
+<span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"DF_full_joined"</span> <span class="op">=</span> <span class="va">DF_full_joined</span>, <span class="st">"DF_IDs"</span> <span class="op">=</span> <span class="va">DF_IDs</span>, <span class="st">"DF_results"</span> <span class="op">=</span> <span class="va">DF_results</span><span class="op">)</span>, <span class="va">nrow</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $DF_full_joined</span></span>
+<span><span class="co">#&gt; [1] 237</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $DF_IDs</span></span>
+<span><span class="co">#&gt; [1] 235</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $DF_results</span></span>
+<span><span class="co">#&gt; [1] 234</span></span>
 <span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">DF_full_joined</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -504,14 +510,25 @@ Tipos de Join
 <figcaption class="figure-caption">SOURCE: https://github.com/gadenbuie/tidyexplain</figcaption></figure>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># AVOID the people present in DF_BAD</span></span>
 <span><span class="va">DF_anti_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">DF_BAD</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># CHECK</span></span>
-<span><span class="co"># map(list("DF_anti_joined" = DF_anti_joined, "DF_IDs" = DF_IDs, "DF_BAD" = DF_BAD, "DF_results" = DF_results), nrow)</span></span>
+<span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"DF_anti_joined"</span> <span class="op">=</span> <span class="va">DF_anti_joined</span>, <span class="st">"DF_IDs"</span> <span class="op">=</span> <span class="va">DF_IDs</span>, <span class="st">"DF_BAD"</span> <span class="op">=</span> <span class="va">DF_BAD</span>, <span class="st">"DF_results"</span> <span class="op">=</span> <span class="va">DF_results</span><span class="op">)</span>, <span class="va">nrow</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $DF_anti_joined</span></span>
+<span><span class="co">#&gt; [1] 226</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $DF_IDs</span></span>
+<span><span class="co">#&gt; [1] 235</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $DF_BAD</span></span>
+<span><span class="co">#&gt; [1] 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $DF_results</span></span>
+<span><span class="co">#&gt; [1] 234</span></span>
 <span></span>
 <span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">DF_anti_joined</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -529,22 +546,29 @@ Tipos de Join
 <figcaption class="figure-caption">SOURCE: https://github.com/gadenbuie/tidyexplain</figcaption></figure>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># INCLUDE ONLY the people present in DF_BAD</span></span>
 <span><span class="va">DF_semi_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">DF_BAD</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">DF_results</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># CHECK</span></span>
-<span><span class="co"># map(</span></span>
-<span><span class="co"># list(</span></span>
-<span><span class="co">#   "DF_semi_joined" = DF_semi_joined,</span></span>
-<span><span class="co">#   "DF_IDs" = DF_IDs,</span></span>
-<span><span class="co">#   "DF_BAD" = DF_BAD,</span></span>
-<span><span class="co">#   "DF_results" = DF_results</span></span>
-<span><span class="co"># ),</span></span>
-<span><span class="co"># nrow</span></span>
-<span><span class="co"># )</span></span>
+<span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"DF_semi_joined"</span> <span class="op">=</span> <span class="va">DF_semi_joined</span>,</span>
+<span>         <span class="st">"DF_IDs"</span> <span class="op">=</span> <span class="va">DF_IDs</span>,</span>
+<span>         <span class="st">"DF_BAD"</span> <span class="op">=</span> <span class="va">DF_BAD</span>,</span>
+<span>         <span class="st">"DF_results"</span> <span class="op">=</span> <span class="va">DF_results</span><span class="op">)</span>,</span>
+<span>    <span class="va">nrow</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $DF_semi_joined</span></span>
+<span><span class="co">#&gt; [1] 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $DF_IDs</span></span>
+<span><span class="co">#&gt; [1] 235</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $DF_BAD</span></span>
+<span><span class="co">#&gt; [1] 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $DF_results</span></span>
+<span><span class="co">#&gt; [1] 234</span></span>
 <span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">DF_semi_joined</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -556,7 +580,7 @@ Tipos de Join
 </section></section><section id="nesting-joins" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="nesting-joins">
 <span class="header-section-number">4.2.3</span> Nesting joins</h3>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_nest_joined</span> <span class="op">=</span> <span class="va">DF_IDs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nest_join.html">nest_join</a></span><span class="op">(</span><span class="va">DF_results</span>, by <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span></span>
 <span></span>
@@ -570,7 +594,7 @@ Tipos de Join
 </section></section><section id="ejercicios-joins" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicios-joins">Ejercicios JOINS</h2>
 <p>Con los DFs de abajo, haz las siguientes operaciones:</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_IDs</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-IDs2.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">DF_results</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-results.csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">DF_BAD</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-join-BAD.csv"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -659,7 +683,7 @@ Pista para promedios agrupados:
 <li>En el ejercicio 3 de verbos avanzados creaste un DF llamado <code>DF_split</code> con la median split a partir de la variable <code>Social.Adaptation</code>.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_wide</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -702,8 +726,7 @@ Pista para promedios agrupados:
 <p><img src="04-combinar-datos_files/figure-html/ejercicios-joins-responses-6-2.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-<hr>
-<!-- 8. El plot que vimos en el tema anterior tiene el problema de que los datos de tuberculosis son en números absolutos.   --><!-- ```{r ejercicios-joins-responses-7-setup, echo=TRUE, fig.height=6, fig.width=8} --><!-- library(tidyr) --><!-- # table1 --><!-- ggplot(table1, aes(as.factor(year), cases)) +  --><!--   geom_line(aes(group = country), colour = "grey50") +  --><!--   geom_point(aes(colour = country), size = 2) + --><!--   scale_y_continuous(labels = scales::comma) + --><!--   labs(title = "Casos de Tuberculosis por año", --><!--        x = "year", --><!--        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") + --><!--   theme(legend.position = "bottom",  --><!--         legend.title = element_blank()) --><!-- ``` --><!-- Serias capaz de convertir estos a % de la población, como se ve en el plot de abajo?   --><!-- ```{r ejercicios-joins-responses-7, echo=FALSE, fig.height=6, fig.width=8} --><!-- df_plot = table1 |>  --><!--   mutate(relative = cases/population) --><!-- ggplot(df_plot, aes(as.factor(year), relative)) +  --><!--   geom_line(aes(group = country), colour = "grey50") +  --><!--   geom_point(aes(colour = country), size = 2) + --><!--   scale_y_continuous(labels = scales::percent) + --><!--   labs(title = "Casos de Tuberculosis por año", --><!--        x = "year", --><!--        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") + --><!--   theme(legend.position = "bottom",  --><!--         legend.title = element_blank()) --><!-- ``` --></section><section id="datasets-interesantes" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="datasets-interesantes">
+<hr></section><section id="datasets-interesantes" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="datasets-interesantes">
 <span class="header-section-number">4.3</span> Datasets interesantes</h2>
 <p>En los siguientes repositorios podréis encontrar datasets interesantes para jugar.</p>
 <ul>

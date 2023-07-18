@@ -101,13 +101,19 @@ Puedes ver que pasa si usas el parámetro `binwidth = 1` en `geom_histogram()`.
 
 :::
 
+Usamos `geom_bar()` para visualizar variables discretas:  
+
 ```{r ejercicio-variables-individuales, echo=FALSE}
 
-# Var discreta
 ggplot(mpg, aes(manufacturer)) +
   geom_bar()
 
-# Var continua
+```
+
+Para variables continuas, `geom_histogram()`:  
+
+```{r ejercicio-variables-individuales2, echo=FALSE}
+
 ggplot(mpg, aes(hwy)) +
   geom_histogram(binwidth = 1)
 
@@ -188,23 +194,29 @@ gapminder |>
 
 Cuando nos llega una nueva base de datos, una de las primeras cosas que haremos será familiarizarnos con los datos. Cómo se distribuyen, cual es la relación entre distintas variables, etc.
 
+Convertimos la base a formato largo para poder filtrar los valores perdidos (i.e. 999), y crear una columna donde introducir únicamente valores numéricos:  
 
 ```{r initial exploration, fig.height=12}
-
-# Wide to long
 d <- gapminder |>
   pivot_longer(everything(), values_transform = list(value = as.character)) |>
   filter(value != 999) |> # Si existiera algun codigo para missing values, filtrar
   mutate(value_NUM = as.numeric(value))
+```
 
-# Plot numeric variables
+Visualiza las variables numéricas usando la variables `value_NUM` que hemos creado:  
+
+```{r initial exploration2, fig.height=12}
 d |>
   drop_na(value_NUM) |>
   ggplot(aes(value_NUM)) +
     facet_wrap(~ name, scales = "free") +
     geom_histogram(bins = 15) #+ scale_x_log10()
 
-# Plot non-numeric variables
+```
+
+Visualiza variables no numéricas. Para ello, nos quedamos solo con aquellas filas donde `value_NUM` es una valor perdido. Esto es porque cuando antes hicimos `mutate(value_NUM = as.numeric(value))`, aquellos valores de `value` que no se pudieron convertir a numérico, quedaron como `NA` en `value_NUM`:  
+```{r initial exploration3, fig.height=12}
+
 d |>
   drop_na(value) |>
   filter(is.na(value_NUM)) |>
@@ -215,22 +227,7 @@ d |>
 
 ```
 
-
-<!-- #### inspectdf -->
-
-<!-- ```{r inspectdf_} -->
-
-<!-- gapminder |> inspectdf::inspect_na() -->
-<!-- gapminder |> inspectdf::inspect_na() |> show_plot + coord_flip() -->
-
-<!-- gapminder_cat <- gapminder |> inspectdf::inspect_cat() -->
-<!-- gapminder_cat |> inspectdf::show_plot() -->
-
-
-<!-- gapminder_num <- gapminder |> inspectdf::inspect_num() -->
-<!-- gapminder_num |> inspectdf::show_plot() -->
-
-<!-- ``` -->
+Hay algunos paquetes que ayudan a la exploración inicial de bases de datos, localización de datos perdidos, etc. Por ejemplo {[inspectdf](https://alastairrushworth.github.io/inspectdf/)}.  
 
 
 ## Covariación
@@ -409,14 +406,18 @@ ggplot(DF_last_first, aes(DIFF, continent, fill = continent)) +
 
 ### Dos variables categóricas
 
+Podemos contar el número de valores para los niveles de dos variables categóricas con `count()`:  
 
 ```{r covariacion-2categoricas}
 
-ggplot(diamonds, aes(cut, color)) +
-  geom_count()
-
 diamonds |>
   count(color, cut)
+
+```
+
+Una manera de visualizar esto es con `geom_tile()`:  
+
+```{r covariacion-2categoricas2}
 
 diamonds |>
   count(color, cut) |>
@@ -427,19 +428,27 @@ diamonds |>
 
 ### Dos variables continuas
 
-```{r covariacion-2continuas}
+Una herramienta esencial para ver como covarian dos variables continuas es un scatterplot. Usaremos `geom_point()`:  
+
+```{r covariacion-2continuas2}
 
 ggplot(gapminder, aes(lifeExp, gdpPercap)) +
   geom_point()
 
+```
+
+Si añadimos color y cambiamos a escala logarítmica, podemos hacernos una mejor idea:  
+
+```{r covariacion-2continuas3}
 ggplot(gapminder, aes(lifeExp, gdpPercap, color = continent)) +
   geom_point(alpha = 1 / 2) +
   scale_y_log10()
 
+```
 
-ggplot(gapminder, aes(lifeExp, gdpPercap)) +
-  geom_hex()
+Con `geom_boxplot()` podemos hacernos una idea rápida de las distribuciones:  
 
+```{r covariacion-2continuas4}
 
 ggplot(gapminder, aes(lifeExp, gdpPercap)) +
   geom_boxplot(mapping = aes(group = cut_width(lifeExp, 10))) +

@@ -362,19 +362,28 @@ Habitualmente, un vez hemos creado la gráfica, querremos personalizar varias co
 
 ### Coordenadas
 
+Gráfico inicial:  
 
 ```{r personalizacion-graficas-coord}
 
-# Gráfico inicial
 ggplot(gapminder, aes(continent)) +
     geom_bar()
 
-# coord_flip()
+```
+
+Usamos `coord_flip()` para rotar las coordenadas:  
+
+```{r personalizacion-graficas-coord2}
+
 ggplot(gapminder, aes(continent)) +
   geom_bar() +
   coord_flip()
 
-# coord_polar()
+```
+
+O `coord_polar()` para usar el sistema de coordenadas polar (360º):  
+```{r personalizacion-graficas-coord3}
+
 ggplot(gapminder, aes(continent)) +
   geom_bar() +
   coord_polar()
@@ -395,44 +404,80 @@ plot_base = ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
   geom_point(alpha = .1)
 plot_base
 
-# Definimos cuantos breaks queremos en cada eje, y rotamos las etiquetas del eje x
+```
+
+Definimos cuantos breaks queremos en cada eje, y rotamos las etiquetas del eje x:  
+
+```{r personalizacion-graficas-axis2}
+
 plot_base +
   scale_x_continuous(n.breaks = 15, guide = guide_axis(angle = 90)) +
   scale_y_continuous(n.breaks = 15)
 
-# Separador de miles y breaks en x
+```
+
+Separador de miles y breaks en x:  
+
+```{r personalizacion-graficas-axis3}
+
 plot_base +
   scale_y_continuous(n.breaks = 15) +
   scale_x_continuous(n.breaks = 6, labels = scales::comma)
 
-# Con scales::dollar_format() le damos formato de $ ($M)
+```
+
+Con `scales::dollar_format()` le damos formato de $ ($M)
+
+```{r personalizacion-graficas-axis4}
+
 plot_base +
   scale_y_continuous(n.breaks = 15) +
   scale_x_continuous(n.breaks = 6, labels = scales::dollar_format(prefix = "$", 
                                                                   suffix = "M"))
+```
 
-# Escala log
+Escala logarítmica. Muy útil para mostrar crecimiento exponencial:  
+
+```{r personalizacion-graficas-axis5}
+
 plot_base +
   scale_y_continuous(n.breaks = 15) +
   scale_x_log10(n.breaks = 4, labels = scales::dollar_format(prefix = "$", 
                                                              suffix = "M"))
 
-# Invertimos escala
+```
+
+Invertimos escala:  
+
+```{r personalizacion-graficas-axis6}
+
 plot_base +
   scale_y_reverse()
 
-# No mostramos el texto ni los ticks de los breaks de x
+```
+
+No mostramos el texto ni los ticks de los breaks de x:  
+
+```{r personalizacion-graficas-axis7}
+
 plot_base +
   scale_y_reverse() +
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank())
 
-# Porcentaje
+```
+
+Porcentaje:  
+
+```{r personalizacion-graficas-axis8}
+
 ggplot(gapminder, aes(continent, ..prop.., group = 1)) +
   geom_bar() +
   scale_y_continuous(labels = scales::percent)
 
 ```
+
+
 
 ### Legends
 
@@ -445,17 +490,23 @@ ggplot(gapminder, aes(year, lifeExp, color = continent)) +
 
 ```
 
-Podemos hacer algunas cosas básicas como cambiar el nombre de la leyenda, o no mostrarla:
+Podemos hacer algunas cosas básicas como cambiar el nombre de la leyenda, o no mostrarla. 
+
+Por ejemplo, usamos `labs(color = "")` o `labs(fill = "")` para cambiar el título de las leyendas asociadas a colores o rellenos:  
 
 
 ```{r leyendas2}
 
-# Usamos labs(color = "") o labs(fill = "") para cambiar el título de las leyendas
 ggplot(gapminder, aes(year, lifeExp, color = continent)) +
   geom_jitter() +
   labs(color = "My new legend")
 
-# Con guides(color = "none") hacemos desaparecer la leyenda asociada al color
+```
+
+Por otro lado, con `guides(color = "none")` hacemos desaparecer la leyenda asociada al color:  
+
+```{r leyendas3}
+
 ggplot(gapminder, aes(year, lifeExp, color = continent)) +
   geom_jitter() +
   guides(color = "none")
@@ -621,26 +672,60 @@ table1_end = table1 |> filter(year == max(year))
 
 Las funciones `scale_color_`, `scale_fill_` nos sirven para hacer cambios globales en los colores o rellenos de las gráficas. Algunos ejemplos:
 
-```{r personalizacion-graficas-color-fill}
+Plot inicial:  
+
+```{r personalizacion-graficas-color-fill1}
 
   # Plot inicial
   ggplot(gapminder, aes(continent, lifeExp, fill = continent)) +
     geom_violin(alpha = .2)
 
-  # Relleno usando paleta blues
+```
+
+Podemos usar diferentes paletas de colores preexistentes. Una manera de consultar las paletas disponibles es con `RColorBrewer::display.brewer.all()`:  
+
+```{r personalizacion-graficas-color-fill2}
+
+  RColorBrewer::display.brewer.all(n=3, type = "seq", exact.n = FALSE, colorblindFriendly = TRUE)
+
+```
+
+
+Una vez elegia nuestra paleta, la podemos aplicar con `scale_fill_brewer()` para `fill` o con `scale_color_brewer_brewer()` para `color`. En este caso usamos la `palette = "Blues"`:   
+
+```{r personalizacion-graficas-color-fill3}
+
   ggplot(gapminder, aes(continent, lifeExp, fill = continent)) +
     geom_violin(alpha = .2) +
     scale_fill_brewer(palette = "Blues")
 
-  # Color grey
+```
+
+Usamos `scale_color_grey()` para estala de grises:  
+
+```{r personalizacion-graficas-color-fill4}
+
+  
   ggplot(iris, aes(Petal.Width, Petal.Length, color = Species)) +
     geom_point() +
     scale_color_grey(start = 0.2, end = 0.8, na.value = "red")
 
-  # Gradient
+```
+
+
+`scale_color_gradient()` para gradientes:  
+
+```{r personalizacion-graficas-color-fill5}
+
   ggplot(iris, aes(Petal.Width, Petal.Length, color = Petal.Width)) +
     geom_point() +
     scale_color_gradient(low = "red", high = "blue")
+
+```
+
+O `scale_colour_gradientn()` con un número predeterminado de colores definido por la paleta `terrain.colors()`:  
+
+```{r personalizacion-graficas-color-fill6}
 
   # Gradient con un numero predefinidos de una paleta
   ggplot(iris, aes(Petal.Width, Petal.Length, color = Petal.Width)) +
@@ -648,8 +733,6 @@ Las funciones `scale_color_`, `scale_fill_` nos sirven para hacer cambios global
     scale_colour_gradientn(colours = terrain.colors(3))
 
 ```
-
-
 
 ### Ejercicio {.ejercicio -}
 

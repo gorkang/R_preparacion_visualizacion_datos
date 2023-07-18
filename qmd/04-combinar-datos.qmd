@@ -36,23 +36,28 @@ if (!require("waldo")) install.packages("waldo"); library("waldo")
 
 El método más sencillo. Simplemente unimos las filas o columnas de los data-frames.  
 
+
+Primero importamos dos DFs:  
 ```{r bind}
 
-# Importar CSVs
 DF1 = read_csv(here::here("data/files/02-CSVs/01.csv"))
 DF2 = read_csv(here::here("data/files/02-CSVs/02.csv"))
 
+```
 
-# Bind DFs añadiendo las *filas* de DF2 a DF1
-DF1 |> 
-   bind_rows(DF2)
+Con `bind_rows()` podemos añadir las *filas* de DF2 a DF1:  
 
+```{r bind2}
 
-# Bind DFs añadiendo las *columnas* de DF2 a DF1
-  ## bind_cols renombra automaticamente los nombres de las columnas para que no 
-  # haya coincidencias
-DF1 |> 
-  bind_cols(DF2) 
+DF1 |> bind_rows(DF2)
+
+```
+
+Con `bind_cols()` añadimos las *columnas* de DF2 a DF1. `bind_cols()` renombra automaticamente los nombres de las columnas para que no haya coincidencias:  
+
+```{r bind3}
+
+DF1 |> bind_cols(DF2) 
 
 ```
 
@@ -217,7 +222,7 @@ DF_full_joined = DF_IDs |>
    full_join(DF_results)
 
 # CHECK
-# map(list("DF_full_joined" = DF_full_joined, "DF_IDs" = DF_IDs, "DF_results" = DF_results), nrow)
+map(list("DF_full_joined" = DF_full_joined, "DF_IDs" = DF_IDs, "DF_results" = DF_results), nrow)
 
 DT::datatable(DF_full_joined)
 
@@ -246,7 +251,7 @@ DF_anti_joined = DF_IDs |>
   left_join(DF_results)
 
 # CHECK
-# map(list("DF_anti_joined" = DF_anti_joined, "DF_IDs" = DF_IDs, "DF_BAD" = DF_BAD, "DF_results" = DF_results), nrow)
+map(list("DF_anti_joined" = DF_anti_joined, "DF_IDs" = DF_IDs, "DF_BAD" = DF_BAD, "DF_results" = DF_results), nrow)
 
 
 DT::datatable(DF_anti_joined)
@@ -273,15 +278,11 @@ DF_semi_joined = DF_IDs |>
   left_join(DF_results)
 
 # CHECK
-# map(
-# list(
-#   "DF_semi_joined" = DF_semi_joined,
-#   "DF_IDs" = DF_IDs,
-#   "DF_BAD" = DF_BAD,
-#   "DF_results" = DF_results
-# ),
-# nrow
-# )
+map(list("DF_semi_joined" = DF_semi_joined,
+         "DF_IDs" = DF_IDs,
+         "DF_BAD" = DF_BAD,
+         "DF_results" = DF_results),
+    nrow)
 
 DT::datatable(DF_semi_joined)
 
@@ -494,44 +495,6 @@ DF_final |>
 
 ---  
 
-<!-- 8. El plot que vimos en el tema anterior tiene el problema de que los datos de tuberculosis son en números absolutos.   -->
-
-<!-- ```{r ejercicios-joins-responses-7-setup, echo=TRUE, fig.height=6, fig.width=8} -->
-
-<!-- library(tidyr) -->
-<!-- # table1 -->
-
-<!-- ggplot(table1, aes(as.factor(year), cases)) +  -->
-<!--   geom_line(aes(group = country), colour = "grey50") +  -->
-<!--   geom_point(aes(colour = country), size = 2) + -->
-<!--   scale_y_continuous(labels = scales::comma) + -->
-<!--   labs(title = "Casos de Tuberculosis por año", -->
-<!--        x = "year", -->
-<!--        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") + -->
-<!--   theme(legend.position = "bottom",  -->
-<!--         legend.title = element_blank()) -->
-
-<!-- ``` -->
-
-<!-- Serias capaz de convertir estos a % de la población, como se ve en el plot de abajo?   -->
-
-<!-- ```{r ejercicios-joins-responses-7, echo=FALSE, fig.height=6, fig.width=8} -->
-
-<!-- df_plot = table1 |>  -->
-<!--   mutate(relative = cases/population) -->
-
-
-<!-- ggplot(df_plot, aes(as.factor(year), relative)) +  -->
-<!--   geom_line(aes(group = country), colour = "grey50") +  -->
-<!--   geom_point(aes(colour = country), size = 2) + -->
-<!--   scale_y_continuous(labels = scales::percent) + -->
-<!--   labs(title = "Casos de Tuberculosis por año", -->
-<!--        x = "year", -->
-<!--        caption = "SOURCE: http://www.who.int/tb/country/data/download/en/") + -->
-<!--   theme(legend.position = "bottom",  -->
-<!--         legend.title = element_blank()) -->
-
-<!-- ``` -->
 
 
 ## Datasets interesantes  
