@@ -11,7 +11,6 @@ editor_options:
   chunk_output_type: console
 
 book:
-  # title: "<a href='/index.html'>R para preparación y visualización de datos</a>"
   title: "R para preparación y visualización de datos"
   subtitle: "[Doctorado en Neurociencia Social y Cognición](https://www.uai.cl/doctorado/doctorado-en-neurociencia-social-y-cognicion-2/), [UAI](https://www.uai.cl/)"
   author:
@@ -56,8 +55,6 @@ format:
   html:
     grid:
       body-width: 1024px
-      # sidebar-width: 200px
-      # margin-width: 200px
     theme:
       - cosmo
       - base.scss
@@ -67,9 +64,6 @@ format:
     toc-depth: 5
   pdf:
     documentclass: scrreprt
-    # monofont: 'FreeMono'
-    # monofontoptions:
-    #   - Scale=0.95
     fig-width: 10
     fig-height: 6
     fig-dpi: 600

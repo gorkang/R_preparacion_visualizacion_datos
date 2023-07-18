@@ -1,5 +1,4 @@
 *_cache/
-*_files/
 index_cache
 .Rproj.user
 .Rhistory
@@ -8,5 +7,4 @@ index_cache
 dev/
 _bookdown_files
 .Renviron
-
 /.quarto/

@@ -55,7 +55,7 @@ Quarto es un sistema de publicación de código abierto que funciona con diferen
 
 [Descarga e instala Quarto](https://quarto.org/docs/get-started/)  
 
---- 
+---  
 
 
 
@@ -86,12 +86,17 @@ Además de los motivos científicos para trabajar de manera más transparente y 
 
 ## Proyectos de R-Studio 
 
-El primer paso empieza por crear un proyecto de RStudio. Al usar proyectos, simplificamos varias cosas, haciendo automáticamente más fácil compartir nuestro trabajo con otras personas. Podéis leer algo más sobre esto [aquí](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/).   
+El primer paso empieza por crear un proyecto de RStudio. Al usar proyectos, simplificamos varias cosas, haciendo más fácil compartir nuestro trabajo con otras personas, retomar nuestro trabajo, detectar cambios, etc. Podéis leer algo más sobre esto [aquí](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/).   
+
+![](../data/images/new_rstudio_project.png) Para crear un nuevo proyecto de RStudio, haz click en este icono (o File -> New Project), y sigue las instrucciones paso a paso del `New Project Wizard`:    
+
+![](../data/images/new_project_wizard.png)
+
 
 
 ## RMarkdown/Quarto, openscience y  análisis reproducibles  
 
-RMarkdown/Quarto son herramientas que nos permiten combinar texto formateado con código y resultados en un mismo documento (html, pdf, docx, ...). Existe una evolución de Rmarkdown que reemplazará a Rmarkdown en el futuro, y que facilita la interoperabilidad entre R, Python, Julia, etc. llamada [quarto](https://quarto.org/). La diferencia esencial es que usaremos archivos `.qmd` en lugar de `.Rmd`, y que tendremos que instalar [quarto](https://quarto.org/docs/get-started/) en nuestro ordenador. Pero en general, resulta trivial convertir nuestros archivos Rmd a qmd (solo hay que renombrarlos).  
+RMarkdown/Quarto son herramientas que nos permiten combinar texto formateado con código y resultados en un mismo documento (html, pdf, docx, ...). Existe una evolución de Rmarkdown que ha reemplazado a Rmarkdown, y que facilita la interoperabilidad entre R, Python, Julia, etc. llamada [quarto](https://quarto.org/). La diferencia esencial es que usaremos archivos `.qmd` en lugar de `.Rmd`, y que tendremos que instalar [quarto](https://quarto.org/docs/get-started/) en nuestro ordenador. Pero en general, resulta trivial convertir nuestros archivos Rmd a qmd (solo hay que renombrarlos).  
 
 Aprovechando la potencia de estas herramientas, algunas personas han creado paquetes para [preparar artículos en formato APA](http://frederikaust.com/papaja_man), o con las [plantillas de decenas de editoriales](https://github.com/rstudio/rticles).  
 
