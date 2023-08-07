@@ -50,7 +50,7 @@ knitr::include_graphics(here::here("data/videos/rstudio-install-ALL.gif"))
 
 **Copia y pega el código de abajo en la consola de RStudio y ejecútalo [tecla ENTER]**:  
 
-```{r install_workshop_packages, message=FALSE, warning=FALSE, include=FALSE}
+```{r install_workshop_packages, message=FALSE, warning=FALSE, include=TRUE}
 
 if (!require('rlang')) install.packages('rlang'); library('rlang')
 rlang::check_installed(
