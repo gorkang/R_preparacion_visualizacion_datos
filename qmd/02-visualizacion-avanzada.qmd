@@ -346,7 +346,7 @@ ggplot(gapminder, aes(country, lifeExp, color = continent)) +
   stat_summary(
     fun.min = function(x) median(x) - sd(x),
     fun.max = function(x) median(x) + sd(x),
-    fun = mean) +
+    fun = median) +
 facet_grid(~ continent) +
 theme(axis.text.x = element_blank(),
       legend.position = "none")
@@ -513,7 +513,25 @@ ggplot(gapminder, aes(year, lifeExp, color = continent)) +
 
 ```
 
+Con `theme(legend.position = "none")` hacemos desaparecer la leyenda completa:  
 
+```{r leyendas4}
+
+ggplot(gapminder, aes(year, lifeExp, color = continent)) +
+  geom_jitter() +
+  theme(legend.position = "none")
+
+```
+
+O tambíen podemos definir una nueva ubicación para nuestra leyenda. Con `theme(legend.position = "bottom")` movemos la leenda abajo:  
+
+```{r leyendas5}
+
+ggplot(gapminder, aes(year, lifeExp, color = continent)) +
+  geom_jitter() +
+  theme(legend.position = "bottom")
+
+```
 
 #### Fancy pants legends
 
@@ -686,9 +704,15 @@ Podemos usar diferentes paletas de colores preexistentes. Una manera de consulta
 
 ```{r personalizacion-graficas-color-fill2}
 
-  RColorBrewer::display.brewer.all(n=3, type = "seq", exact.n = FALSE, colorblindFriendly = TRUE)
+  RColorBrewer::display.brewer.all(n = 3, 
+                                   type = "seq", # Colores secuenciales
+                                   exact.n = FALSE, 
+                                   colorblindFriendly = TRUE)
 
 ```
+
+Podemos ver que el parámetro `type` nos permite seleccionar paletas secuenciales, divergentes y cualitativas. Por ejemplo, `type = "qual"` nos mostrará colores de paletas cualitativas.  
+
 
 
 Una vez elegia nuestra paleta, la podemos aplicar con `scale_fill_brewer()` para `fill` o con `scale_color_brewer_brewer()` para `color`. En este caso usamos la `palette = "Blues"`:   
@@ -736,13 +760,13 @@ O `scale_colour_gradientn()` con un número predeterminado de colores definido p
 
 ### Ejercicio {.ejercicio -}
 
-1) Usando como base este plot, podrias cambiarle la paleta de color para usar una de las cualitativas?
+1) Usando como base este plot, podrias cambiarle la paleta de color para usar una de las paletas cualitativas?
 
 ::: {.callout-tip collapse="true"}
 
 ### Soluciones
 
-<span style="color: orange;">Ver sección Palettes de la ayuda de `scale_fill_brewer()` </span>
+<span style="color: orange;">Ver parámetro `type` de la ayuda de `scale_fill_brewer()` </span>
 
 :::
 
@@ -755,16 +779,38 @@ O `scale_colour_gradientn()` con un número predeterminado de colores definido p
 
 ```
 
+El grafico final debería verse así:  
 
-2) Si intentamos asignar colores manualmente a los continentes de este modo, recibimos un error:
+```{r color-01aaa, echo=FALSE}
+
+  ggplot(gapminder, aes(continent, lifeExp, fill = continent)) +
+    geom_violin(alpha = .2) +
+    scale_fill_brewer(type = "qual")
+
+```
+
+
+2) Ahora, usando el gráfico de abajo como base, puedes asignar manualmente colores a los continentes? 
+
+
+```{r color-01b, echo=FALSE}
+  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
+    geom_point() +
+    scale_color_manual(values = c("red", "grey", "green", "purple", "black"))
+```
+
+
+
+Nuestra primera idea podría ser asignar colores directamente dentro de `geom_point()` tal y como se ve abajo. Pero si intentamos asignar colores manualmente a los continentes de este modo, recibimos un error:
 
 ```
   ggplot(gapminder, aes(gdpPercap, lifeExp)) +
     geom_point(color = c("red", "grey", "green", "purple", "black"))
-  # Error: Aesthetics must be either length 1 or the same as the data (1704): colour
+  #  Aesthetics must be either length 1 or the same as the data   (1704)
+  # ✖ Fix the following mappings: `colour`
 ```
 
-Podrías resolver el error y mostrar el gráfico de abajo?
+
 
 ::: {.callout-tip collapse="true"}
 
@@ -776,13 +822,6 @@ Podrías resolver el error y mostrar el gráfico de abajo?
 
 :::
 
-
-
-```{r color-01b, echo=FALSE}
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
-    geom_point() +
-    scale_color_manual(values = c("red", "grey", "green", "purple", "black"))
-```
 
 
 
@@ -933,9 +972,9 @@ p +
 
 ### Ejercicios {.ejercicio -}
 
-1) Serías capaz de reproducir este gráfico, usando el dataframe `diamonds` y el `theme_economist`?
+1) Serías capaz de reproducir este gráfico, usando el dataframe `diamonds` y el `theme_economist`?  
 
-Gráfica inicial:
+Gráfica inicial (verás que parecen datos distintos! Si te fijas bien en la gráfica que queremos conseguir, entenderás porque):
 
 ```
 ggplot(diamonds, aes(price, cut, fill = cut, color = cut)) +

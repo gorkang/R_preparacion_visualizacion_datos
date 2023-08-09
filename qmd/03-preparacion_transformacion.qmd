@@ -46,7 +46,7 @@ Podemos ver algunas de las funciones de esta sección y cómo usarlas en la [Che
 
 ### Importar un solo archivo
 
-Empezaremos por la situación básica más común, cómo importar un solo archivo. Vamos a ver con más detalle los archivos CSV (*comma separated values*). Las funciones para importar archivos excel, Libreoffice, SPSS, etc. tienen parámetros muy similares.    
+Empezaremos por la situación básica más común, cómo importar un solo archivo. Vamos a ver con más detalle los archivos CSV (*comma separated values*). Las funciones para importar archivos Excel, Libreoffice, SPSS, etc. tienen parámetros similares.    
 
 
 #### Archivos CSV
@@ -58,7 +58,7 @@ Usaremos las siguientes funciones del paquete `readr`:
 ### Funciones para leer archivos csv
 
 * `readr::read_csv()`: valores separados por coma (",")  
-* `readr::read_csv2()`: valores separados por punto y coma (";")  
+* `readr::read_csv2()`: valores separados por punto y coma (";"), típicamente usado en paises de habla Hispana  
 * `readr::read_delim( , delim = "|")`: valores separados por un delimitador arbitrario  
 
 :::
@@ -75,14 +75,17 @@ Si estamos usando rmarkdown, o similar, es recomendable usar `here::here()` para
 
 ```{r read-csv-02}
   
+# En name_of_file almacenamos la ruta completa al archivo
 name_of_file = here::here("data/files/02-read-csv.csv")
+
+# Leemos el archivo que esta en name_of_file
 DF_name = read_csv(name_of_file)
 
 DF_name
 
 ```
 
-Si usamos un repositorio online para almacenar los archivos, podemos leer directamente de una URL.  
+Si usamos un [repositorio online para almacenar los archivos](https://github.com/gorkang/R_preparacion_visualizacion_datos), podemos leer directamente de una URL.  
 
 ```{r read-csv-URL, eval=FALSE}
 
@@ -91,8 +94,29 @@ read_csv(URL)
 
 ```
 
+La función `read_csv()` tiene varios parámetros muy utiles como `skip` o `col_types`. Con `skip` podemos saltarnos líneas del inicio del archivo. Con `col_types` podemos especificar el tipo de datos que contiene cada columna (texo, numeros, factores...). Al ser explicitos con el tipo de datos evitamos sorpresas, y de paso reducimos el output de la Consola.    
+
+```{r read-csv-params}
+  
+# En name_of_file almacenamos la ruta completa al archivo
+name_of_file = here::here("data/files/02-read-csv.csv")
+
+# Leemos el archivo que esta en name_of_file
+read_csv(name_of_file,
+         col_types = cols(
+           .default = col_double(),
+           condition = col_character(),
+           condition2 = col_character()
+           )
+         )
+
+```
+
 
 #### Otros tipos de archivos
+
+Para otros tipos de archivos simplemente usaremos otras funciones. Por ejemplo, para leer archivos Excel podemos usar `read_excel` del paquete `{readxl}`.  
+
 
 ##### Archivos excel {-}
 
@@ -217,6 +241,7 @@ files <- list.files(name_of_folder, full.names = TRUE)
 # Leemos todos los archivos de uno en uno, combinandolos en un dataframe
 full <- purrr::map_df(files, read_csv)
 
+# Mostramos lo que contiene full
 full
 
 ```
@@ -231,18 +256,18 @@ Podemos incluir los nombres de archivo en una columna:
 
 ```{r importar-multiples-archivos-nombres}
 
-library(magrittr) # Para poder usar %>%
-
+# Nombre de la carpeta
 name_of_folder = here::here("data/files/02-CSVs")
 
-files <- list.files(name_of_folder, full.names = TRUE) %>% # Necesitamos esta pipe
-  # Asignamos nombres a los elementos del vector
-  set_names(basename(.))
+# Listamos los archivos dentro de esa carpeta
+files_simple <- list.files(name_of_folder, full.names = TRUE)
+
+# Asignamos nombres a los elementos del vector
+files = files_simple |> set_names(basename(files_simple))
 
 # Con el parámetro .id, almacenamos los nombres en la columna "file"
 full2 <- map_df(files, read_csv, .id = "file")
 
-full2
 
 ```
 
@@ -255,19 +280,43 @@ Añadimos parámetros a la función de lectura. En este caso, definimos el tipo 
 
 name_of_folder = here::here("data/files/02-CSVs")
 files <- list.files(name_of_folder, full.names = TRUE)
-full <- map_df(files, read_csv, 
+full <- map_df(files, read_csv,
+               # Ponemos los parámetros separados por comas, después de la función
                col_types = cols(
+                 .default = col_character(), 
                  Sex = col_factor(),
-                 Priming = col_character(),
                  trialN = col_integer(),
-                 Block = col_character(),
-                 Adjective = col_character(),
                  Valence = col_factor(),
-                 Answer = col_character(),
-                 Arrow = col_character(),
-                 rT = col_double()))
+                 rT = col_double()
+                 )
+               )
 
 full
+
+```
+
+Otra manera de hacer exactamente lo mismo con `map_df()`. El codigo es algo más complejo, pero nos da más flexibilidad, y podemos usar las funciones del mismo modo que habitualmente.  
+
+```{r importar-multiples-archivos-parametros2}
+
+name_of_folder = here::here("data/files/02-CSVs")
+files <- list.files(name_of_folder, full.names = TRUE)
+full2 <- 1:length(files) |> 
+  purrr::map_df(~ {
+    
+    cli::cli_alert_info("Reading file {basename(files[.x])}")
+    read_csv(files[.x], col_types =  cols(.default = col_character(), 
+                                          Sex = col_factor(),
+                                          trialN = col_integer(),
+                                          Valence = col_factor(),
+                                          rT = col_double()
+                                          )
+             )
+  })
+
+
+# Comprobamos que no hay diferencias
+waldo::compare(full, full2)
 
 ```
 
@@ -283,7 +332,7 @@ full
 
 ### ¿Ves algún problema en lo que hicimos?
 
-<span style="color: orange;">Revisa el número de filas y la variable `files`.</span>
+<span style="color: orange;">Revisa el número de filas y el contenido de la variable `files`.</span>
 
 ::: 
 
@@ -313,7 +362,7 @@ full
 
 ### Pista
 
-Tendréis que `list.files()` usando el parámetro `pattern` 
+Tendréis que usar `list.files()` usando el parámetro `pattern` 
 
 - Te recomiendo abrir los archivos excel para ver su estructura, las pestañas que tienen... ahí te darás cuenta de que necesitas otros parámetros de `read_xlsx()` como `sheet` o `skip`
 

@@ -834,7 +834,7 @@ Coloreamos puntos pero mantenemos un solo smooth introduciendo el parámetro `ae
 
 #### Ejercicios {.ejercicio -}
 
-Usando como base el plot de la sección [Shape](#shape):  
+Usando como base el siguiente plot:  
 
 ```
   ggplot(gapminder, aes(gdpPercap, lifeExp, shape = continent)) + 
@@ -855,7 +855,6 @@ Usando como base el plot de la sección [Shape](#shape):
                         linetype = continent)) + 
     geom_point(alpha = .3) +
     geom_smooth(se = FALSE) 
-
 
 ```
 
