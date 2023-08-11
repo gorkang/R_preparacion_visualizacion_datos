@@ -406,7 +406,7 @@ Siguiendo el ejercicio anterior, después de leer los archivos excel de una carp
 
 #### Archivos CSV
 
-Si queremos que el archivo guardado sea un `csv`, usaremos `write_csv()`. 
+Si queremos que el archivo guardado sea un `csv`, usaremos `write_csv()` del paquete {`readr`}.  
 
 ```{r write-csv, eval = FALSE}
 
@@ -415,7 +415,7 @@ name_of_folder = here::here("data/files/02-XLSs")
 files <- list.files(name_of_folder, pattern = "xls", full.names = TRUE)
 DF_all = map_df(files, read_xlsx, sheet = 2, skip = 5) |> janitor::clean_names()
 
-write_csv(DF_all, "data_clean/DF_all.csv")
+readr::write_csv(DF_all, "data_clean/DF_all.csv")
 
 ```
 
@@ -423,9 +423,10 @@ write_csv(DF_all, "data_clean/DF_all.csv")
 
 La función a usar cambiará en función del formato que queramos:
 
-- `xlsx`: `writexl::write_csv()`  
-- `xlsx`: `haven::write_sav()`  
-- `xlsx`: `readODS::write_ods()`  
+- `xlsx`: `writexl::write_xlsx()`  
+- `sav`: `haven::write_sav()`  
+- `ods`: `readODS::write_ods()`
+- `rds`: `readr::write_rds()`  
 
 ```{r write-otros, eval = FALSE}
 
@@ -434,6 +435,8 @@ writexl::write_xlsx(DF_all, "data_clean/DF_all.xlsx")
 haven::write_sav(DF_all, "data_clean/DF_all.sav")
 
 readODS::write_ods(DF_all, "data_clean/DF_all.ods")
+
+readr::write_rds(DF_all, "data_clean/DF_all.rds")
 
 ```
 
@@ -474,29 +477,20 @@ O contar el número de casos por valor de una variable.
 
 ```{r tidy_vector-2}
 
-# Computa casos para cada año
+# Cuenta cuantos registros tenemos por año
 table1 |> 
-  count(year, cases)
+  count(year)
 
-# La suma total de casos para cada año
+# Cuenta cuantos registros tenemos por año y país
 table1 |> 
-  count(year, wt = cases)
+  count(year, country)
 
 
 ```
 
-Y, como no, `ggplot` funciona con datos `tidy`, en formato long.  
+Y, como no, `ggplot` funciona con datos `tidy`, en formato long.   
 
-```{r tidy_vector-3}
 
-# Visualizar cambios a lo largo del tiempo
-ggplot(table1, aes(as.factor(year), cases)) + 
-  geom_line(aes(group = country), colour = "grey50") + 
-  geom_point(aes(colour = country))
-
-```
-
-    
 ### Verbos dplyr
 
 Usaremos [{dplyr}](https://dplyr.tidyverse.org/), un paquete muy potente para la manipulación de datos. Su sintaxis, además, es bastante intuitiva (¡son verbos en inglés!).   
@@ -550,17 +544,29 @@ DF_name
 
 ```
 
-Podemos usar el verbo `filter()` para mostrar las filas que cumplan cualquier regla lógica o combinación de reglas (e.g. Genero == 1 & Edad >= 30). En el ejemplo siguiente, nos quedamos con las filas donde el valor de Educación sea mayor de 8:  
+Podemos usar el verbo `filter()` para mostrar las filas que cumplan cualquier regla lógica o combinación de reglas (e.g. Genero == 1 & Edad >= 30). 
+
+En el ejemplo siguiente, nos quedamos con las filas donde el valor de Educación sea mayor de 8:  
 
 ```{r filtrando-ordenando2}
-
-# Filtrar
 DF_name |> 
   filter(Educacion > 8)
+```
+
+Si queremos usar varias condiciones lógicas, las reparamos de `&` (AND).
+
+Aquí nos quedamos con las filas donde el valor de Educación sea mayor de 8 **Y** el Genero sea igual a 1 (fijate que usamos `==` para indicar la condición lógica de igualdad):  
+
+```{r filtrando-ordenando2b}
+
+DF_name |> 
+  filter(Educacion > 8 & Genero == 1)
 
 ```
 
-También podemos ordenar las filas usando `arrange()` y `desc()`. Por ejemplo, ordenamos Educación de manera ascendente, y de Género descendente):  
+También podemos ordenar las filas usando `arrange()` solo o en combinación con `desc()`. 
+
+Por ejemplo, ordenamos a partir de Educación, de menor a mayor:
 
 ```{r filtrando-ordenando3}
 
@@ -568,6 +574,18 @@ DF_name |>
   arrange(Educacion, desc(Genero))
 
 ```
+
+Si queremos ordenar a partir de dos o más criterios, simplemente los separamos por coma. Además, si queremos que alguno de ellos sea de manera descentente (por defecto es ascendente), envolvemos el nombre de columna en `desc()`. 
+
+Abajo, ordenamos educación de manera ascendente, y de Género descendente:  
+
+```{r filtrando-ordenando3a}
+
+DF_name |> 
+  arrange(Educacion, desc(Genero))
+
+```
+
 
 #### Seleccionar, ordenar y renombrar columnas
 

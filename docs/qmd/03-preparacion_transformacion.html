@@ -730,7 +730,7 @@ Pista
 <p>Siguiendo el ejercicio anterior, después de leer los archivos excel de una carpeta y limpiar los nombres de columna, queremos guardar el dataframe resultante en la carpeta <code>data_clean</code> (¡es importante asegurarnos que esa carpeta existe!).</p>
 <section id="archivos-csv-1" class="level4" data-number="3.1.4.1"><h4 data-number="3.1.4.1" class="anchored" data-anchor-id="archivos-csv-1">
 <span class="header-section-number">3.1.4.1</span> Archivos CSV</h4>
-<p>Si queremos que el archivo guardado sea un <code>csv</code>, usaremos <code><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv()</a></code>.</p>
+<p>Si queremos que el archivo guardado sea un <code>csv</code>, usaremos <code><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv()</a></code> del paquete {<code>readr</code>}.</p>
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Lo que hicimos antes, leemos todos los archivos excel de un directorio</span></span>
@@ -738,20 +738,23 @@ Pista
 <span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">name_of_folder</span>, pattern <span class="op">=</span> <span class="st">"xls"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">DF_all</span> <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_df</a></span><span class="op">(</span><span class="va">files</span>, <span class="va">read_xlsx</span>, sheet <span class="op">=</span> <span class="fl">2</span>, skip <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">DF_all</span>, <span class="st">"data_clean/DF_all.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">DF_all</span>, <span class="st">"data_clean/DF_all.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="otros-archivos" class="level4" data-number="3.1.4.2"><h4 data-number="3.1.4.2" class="anchored" data-anchor-id="otros-archivos">
 <span class="header-section-number">3.1.4.2</span> Otros Archivos</h4>
 <p>La función a usar cambiará en función del formato que queramos:</p>
 <ul>
 <li>
-<code>xlsx</code>: <code>writexl::write_csv()</code><br>
+<code>xlsx</code>: <code><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">writexl::write_xlsx()</a></code><br>
 </li>
 <li>
-<code>xlsx</code>: <code><a href="https://haven.tidyverse.org/reference/read_spss.html">haven::write_sav()</a></code><br>
+<code>sav</code>: <code><a href="https://haven.tidyverse.org/reference/read_spss.html">haven::write_sav()</a></code><br>
 </li>
 <li>
-<code>xlsx</code>: <code><a href="https://docs.ropensci.org/readODS/reference/write_ods.html">readODS::write_ods()</a></code>
+<code>ods</code>: <code><a href="https://docs.ropensci.org/readODS/reference/write_ods.html">readODS::write_ods()</a></code>
+</li>
+<li>
+<code>rds</code>: <code><a href="https://readr.tidyverse.org/reference/read_rds.html">readr::write_rds()</a></code>
 </li>
 </ul>
 <div class="cell">
@@ -760,7 +763,9 @@ Pista
 <span></span>
 <span><span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">write_sav</a></span><span class="op">(</span><span class="va">DF_all</span>, <span class="st">"data_clean/DF_all.sav"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">readODS</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/readODS/reference/write_ods.html">write_ods</a></span><span class="op">(</span><span class="va">DF_all</span>, <span class="st">"data_clean/DF_all.ods"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">readODS</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/readODS/reference/write_ods.html">write_ods</a></span><span class="op">(</span><span class="va">DF_all</span>, <span class="st">"data_clean/DF_all.ods"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html">write_rds</a></span><span class="op">(</span><span class="va">DF_all</span>, <span class="st">"data_clean/DF_all.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section></section><section id="preparación-y-transformación-de-datos" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="preparación-y-transformación-de-datos">
 <span class="header-section-number">3.2</span> Preparación y transformación de datos</h2>
@@ -799,39 +804,29 @@ Pista
 <p>O contar el número de casos por valor de una variable.</p>
 <div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="co"># Computa casos para cada año</span></span>
+<span><span class="co"># Cuenta cuantos registros tenemos por año</span></span>
 <span><span class="va">table1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">cases</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
-<span><span class="co">#&gt;    year  cases     n</span></span>
-<span><span class="co">#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1  1999    745     1</span></span>
-<span><span class="co">#&gt; 2  1999  37737     1</span></span>
-<span><span class="co">#&gt; 3  1999 212258     1</span></span>
-<span><span class="co">#&gt; 4  2000   2666     1</span></span>
-<span><span class="co">#&gt; 5  2000  80488     1</span></span>
-<span><span class="co">#&gt; 6  2000 213766     1</span></span>
-<span></span>
-<span><span class="co"># La suma total de casos para cada año</span></span>
-<span><span class="va">table1</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">year</span>, wt <span class="op">=</span> <span class="va">cases</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 2</span></span>
-<span><span class="co">#&gt;    year      n</span></span>
-<span><span class="co">#&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1  1999 250740</span></span>
-<span><span class="co">#&gt; 2  2000 296920</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#&gt;    year     n</span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1  1999     3</span></span>
+<span><span class="co">#&gt; 2  2000     3</span></span>
+<span></span>
+<span><span class="co"># Cuenta cuantos registros tenemos por año y país</span></span>
+<span><span class="va">table1</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">country</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
+<span><span class="co">#&gt;    year country         n</span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;       &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1  1999 Afghanistan     1</span></span>
+<span><span class="co">#&gt; 2  1999 Brazil          1</span></span>
+<span><span class="co">#&gt; 3  1999 China           1</span></span>
+<span><span class="co">#&gt; 4  2000 Afghanistan     1</span></span>
+<span><span class="co">#&gt; 5  2000 Brazil          1</span></span>
+<span><span class="co">#&gt; 6  2000 China           1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Y, como no, <code>ggplot</code> funciona con datos <code>tidy</code>, en formato long.</p>
-<div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="co"># Visualizar cambios a lo largo del tiempo</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">table1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, <span class="va">cases</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">country</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"grey50"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="va">country</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="03-preparacion_transformacion_files/figure-html/tidy_vector-3-1.png" class="img-fluid" width="576"></p>
-</div>
-</div>
 </section><section id="verbos-dplyr" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="verbos-dplyr">
 <span class="header-section-number">3.2.2</span> Verbos dplyr</h3>
 <p>Usaremos <a href="https://dplyr.tidyverse.org/">{dplyr}</a>, un paquete muy potente para la manipulación de datos. Su sintaxis, además, es bastante intuitiva (¡son verbos en inglés!).</p>
@@ -873,7 +868,7 @@ Verbos esenciales
 <span class="header-section-number">3.2.2.1</span> Filtrar y ordenar filas</h4>
 <p>A partir de los siguientes datos:</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">name_of_file</span> <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-read-csv.csv"</span><span class="op">)</span></span>
 <span><span class="va">DF_name</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">name_of_file</span><span class="op">)</span></span>
 <span><span class="va">DF_name</span></span>
@@ -889,11 +884,10 @@ Verbos esenciales
 <span><span class="co">#&gt; # ℹ 97 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 1 more variable: PPV_DECLARED &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Podemos usar el verbo <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> para mostrar las filas que cumplan cualquier regla lógica o combinación de reglas (e.g.&nbsp;Genero == 1 &amp; Edad &gt;= 30). En el ejemplo siguiente, nos quedamos con las filas donde el valor de Educación sea mayor de 8:</p>
+<p>Podemos usar el verbo <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> para mostrar las filas que cumplan cualquier regla lógica o combinación de reglas (e.g.&nbsp;Genero == 1 &amp; Edad &gt;= 30).</p>
+<p>En el ejemplo siguiente, nos quedamos con las filas donde el valor de Educación sea mayor de 8:</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="co"># Filtrar</span></span>
-<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Educacion</span> <span class="op">&gt;</span> <span class="fl">8</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 9</span></span>
 <span><span class="co">#&gt;    ...1    ID Genero  Edad Educacion FollowUP condition condition2</span></span>
@@ -903,9 +897,41 @@ Verbos esenciales
 <span><span class="co">#&gt; 3   381 64486      2    19         9       80 PPV_Cond4 100RAmp   </span></span>
 <span><span class="co">#&gt; # ℹ 1 more variable: PPV_DECLARED &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>También podemos ordenar las filas usando <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> y <code><a href="https://dplyr.tidyverse.org/reference/desc.html">desc()</a></code>. Por ejemplo, ordenamos Educación de manera ascendente, y de Género descendente):</p>
+<p>Si queremos usar varias condiciones lógicas, las reparamos de <code>&amp;</code> (AND).</p>
+<p>Aquí nos quedamos con las filas donde el valor de Educación sea mayor de 8 <strong>Y</strong> el Genero sea igual a 1 (fijate que usamos <code>==</code> para indicar la condición lógica de igualdad):</p>
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Educacion</span> <span class="op">&gt;</span> <span class="fl">8</span> <span class="op">&amp;</span> <span class="va">Genero</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 9</span></span>
+<span><span class="co">#&gt;    ...1    ID Genero  Edad Educacion FollowUP condition condition2</span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     </span></span>
+<span><span class="co">#&gt; 1   157 12207      1    26         9       57 PPV_Cond2 100RInt   </span></span>
+<span><span class="co">#&gt; 2   287 60873      1    72        10       51 PPV_Cond3 100RAmp   </span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: PPV_DECLARED &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>También podemos ordenar las filas usando <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> solo o en combinación con <code><a href="https://dplyr.tidyverse.org/reference/desc.html">desc()</a></code>.</p>
+<p>Por ejemplo, ordenamos a partir de Educación, de menor a mayor:</p>
 <div class="cell">
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">Educacion</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Genero</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 103 × 9</span></span>
+<span><span class="co">#&gt;    ...1    ID Genero  Edad Educacion FollowUP condition condition2</span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     </span></span>
+<span><span class="co">#&gt; 1   350 20439      2    41         1       81 PPV_Cond4 90LAmp    </span></span>
+<span><span class="co">#&gt; 2   399 81379      1    36         1       90 PPV_Cond4 90RAmp    </span></span>
+<span><span class="co">#&gt; 3    42 20361      2    37         2       60 PPV_Cond1 100LInt   </span></span>
+<span><span class="co">#&gt; 4   364 19201      2    21         2       67 PPV_Cond4 90LAmp    </span></span>
+<span><span class="co">#&gt; 5   412 60292      1    28         2       90 PPV_Cond4 100LAmp   </span></span>
+<span><span class="co">#&gt; 6    44 92735      2    30         3       95 PPV_Cond1 100RInt   </span></span>
+<span><span class="co">#&gt; # ℹ 97 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: PPV_DECLARED &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si queremos ordenar a partir de dos o más criterios, simplemente los separamos por coma. Además, si queremos que alguno de ellos sea de manera descentente (por defecto es ascendente), envolvemos el nombre de columna en <code><a href="https://dplyr.tidyverse.org/reference/desc.html">desc()</a></code>.</p>
+<p>Abajo, ordenamos educación de manera ascendente, y de Género descendente:</p>
+<div class="cell">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">Educacion</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Genero</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 9</span></span>
@@ -924,7 +950,7 @@ Verbos esenciales
 <span class="header-section-number">3.2.2.2</span> Seleccionar, ordenar y renombrar columnas</h4>
 <p>Seleccionamos las columnas que queremos listando las variables en el orden deseado dentro del verbo <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Genero</span>, <span class="va">Edad</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 2</span></span>
@@ -940,7 +966,7 @@ Verbos esenciales
 </div>
 <p>Eliminamos columnas precediendo las variables a eliminar con <code>-</code> dentro de <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">...1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 8</span></span>
@@ -956,7 +982,7 @@ Verbos esenciales
 </div>
 <p>Ordenamos y eliminamos columnas listando las variables en el orden deseado dentro del verbo <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> y precediendo las variables a eliminar con <code>-</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">Edad</span>, <span class="va">Genero</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">-</span><span class="va">...1</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; # A tibble: 103 × 8</span></span>
@@ -972,7 +998,7 @@ Verbos esenciales
 </div>
 <p>Para renombrar variables usamos el verbo <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code>. Es importante recordar que en hay que indicar <code>rename(NOMBRE_NUEVO = NOMBRE_ANTIGUO)</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Identificador <span class="op">=</span> <span class="va">ID</span>,</span>
 <span>         Sexo <span class="op">=</span> <span class="va">Genero</span><span class="op">)</span></span>
@@ -1060,14 +1086,14 @@ select_helpers()
 </div>
 <p>Trabajaremos con los datos del paper <a href="https://osf.io/egxy5/">Cognitive and Socio-affective Predictors of Social Adaptation</a>, de Neely et al.&nbsp;Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base RAW en formato wide. Leemos la base y mostramos los títulos de las 291 columnas:</p>
 <div class="cell">
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span>  <span class="va">df_wide</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv"</span><span class="op">)</span>  </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df_wide</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ID dem_genero dem_edad dem_nivedu WVOC_01_cod WVOC_02_cod WVOC_03_cod WVOC_04_cod WVOC_05_cod WVOC_06_cod WVOC_07_cod WVOC_08_cod WVOC_09_cod WVOC_10_cod WVOC_11_cod WVOC_12_cod WVOC_13_cod WVOC_14_cod WVOC_15_cod WVOC_16_cod WVOC_17_cod WVOC_18_cod WVOC_19_cod WVOC_20_cod WVOC_21_cod WVOC_22_cod WVOC_23_cod WVOC_24_cod WVOC_25_cod WVOC_26_cod WVOC_27_cod WVOC_28_cod WVOC_29_cod WVOC_30_cod WVOC_31_cod WVOC_32_cod WVOC_33_cod WVOC_TOTAL WVOC_TOTAL_STD WMAT_01_cod WMAT_01_raw WMAT_02_cod WMAT_02_raw WMAT_03_cod WMAT_03_raw WMAT_04_cod WMAT_04_raw WMAT_05_cod WMAT_05_raw WMAT_06_cod WMAT_06_raw WMAT_07_cod WMAT_07_raw WMAT_08_cod WMAT_08_raw WMAT_09_cod WMAT_09_raw WMAT_10_cod WMAT_10_raw WMAT_11_cod WMAT_11_raw WMAT_12_cod WMAT_12_raw WMAT_13_cod WMAT_13_raw WMAT_14_cod WMAT_14_raw WMAT_15_cod WMAT_15_raw WMAT_16_cod WMAT_16_raw WMAT_17_cod WMAT_17_raw WMAT_18_cod WMAT_18_raw WMAT_19_cod WMAT_19_raw WMAT_20_cod WMAT_20_raw WMAT_21_cod WMAT_21_raw WMAT_22_cod WMAT_22_raw WMAT_23_cod WMAT_23_raw WMAT_24_cod WMAT_24_raw WMAT_25_cod WMAT_25_raw WMAT_26_cod WMAT_26_raw WMAT_A WMAT_B WMAT_C wmat_total wmat_total_std bfbs_01_cod bfbs_01_conf bfbs_01_raw bfbs_03_cod bfbs_03_conf bfbs_03_raw bfbs_04_cod bfbs_04_conf bfbs_04_raw bfbs_10_cod bfbs_10_conf bfbs_10_raw bfbs_12_cod bfbs_12_conf bfbs_12_raw bfbs_14_cod bfbs_14_conf bfbs_14_raw bfbs_17_cod bfbs_17_conf bfbs_17_raw bfbs_23_cod bfbs_23_conf bfbs_23_raw bfbs_conf_total bfbs_cong_conf bfbs_cong_total bfbs_creib_conf bfbs_creib_total bfbs_incong_conf bfbs_incon_total bfbs_increib_conf bfbs_increib_total bfbs_invalid_conf bfbs_invalid_total bfbs_total bfbs_valid_conf bfbs_valid_total EA_01_raw EA_02_raw EA_03_raw EA_04_raw EA_05_raw EA_06_raw EA_07_raw EA_08_raw EA_09_raw EA_10_raw EA_11_raw EA_12_raw EA_13_raw EA_14_raw EA_15_raw EA_16_raw EA_17_raw EA_18_raw EA_19_raw EA_20_raw EA_21_raw EA_22_raw EA_23_raw EA_24_raw EA_azar_TOTAL EA_control_interno_TOTAL EA_otros_poderosos_TOTAL EAR_01_raw EAR_02_raw EAR_03_raw EAR_04_raw EAR_05_raw EAR_06_raw EAR_07_raw EAR_08_raw EAR_09_raw EAR_10_raw EAR_TOTAL ECRRS_ansiedad_TOTAL ECRRS_evitacion_TOTAL ECRRS_madre_01_raw ECRRS_madre_02_raw ECRRS_madre_03_raw ECRRS_madre_04_raw ECRRS_madre_05_raw ECRRS_madre_06_raw ECRRS_madre_07_raw ECRRS_madre_08_raw ECRRS_madre_09_raw ECRRS_madre_ansiedad_TOTAL ECRRS_madre_evitacion_TOTAL ECRRS_mejoramig_01_raw ECRRS_mejoramig_02_raw ECRRS_mejoramig_03_raw ECRRS_mejoramig_04_raw ECRRS_mejoramig_05_raw ECRRS_mejoramig_06_raw ECRRS_mejoramig_07_raw ECRRS_mejoramig_08_raw ECRRS_mejoramig_09_raw ECRRS_mejoramigo_ansiedad_TOTAL ECRRS_mejoramigo_evitacion_TOTAL ECRRS_padre_01_raw ECRRS_padre_02_raw ECRRS_padre_03_raw ECRRS_padre_04_raw ECRRS_padre_05_raw ECRRS_padre_06_raw ECRRS_padre_07_raw ECRRS_padre_08_raw ECRRS_padre_09_raw ECRRS_padre_ansiedad_TOTAL ECRRS_padre_evitacion_TOTAL ECRRS_pareja_01_raw ECRRS_pareja_02_raw ECRRS_pareja_03_raw ECRRS_pareja_04_raw ECRRS_pareja_05_raw ECRRS_pareja_06_raw ECRRS_pareja_07_raw ECRRS_pareja_08_raw ECRRS_pareja_09_raw ECRRS_pareja_ansiedad_TOTAL ECRRS_pareja_evitacion_TOTAL GHQ_01 GHQ_02 GHQ_03 GHQ_04 GHQ_05 GHQ_06 GHQ_07 GHQ_08 GHQ_09 GHQ_10 GHQ_11 GHQ_12 GHQ_autoestima_TOTAL GHQ_estres_TOTAL GHQ_exito_afrontamiento_TOTAL GHQ_TOTAL wdig_dir_total wdig_inv_total WDIGSIMB_TOTAL wdig_total wdig_total_std lkns_01_cod lkns_01_raw lkns_02_cod lkns_02_raw lkns_03_cod lkns_03_raw lkns_04_cod lkns_04_raw lkns_05_cod lkns_05_raw lkns_06_cod lkns_06_raw lkns_07_cod lkns_07_raw lkns_08_cod lkns_08_raw lkns_09_cod lkns_09_raw lkns_10_cod lkns_10_raw lkns_11_cod lkns_11_raw lkns_total SASS_01_raw SASS_02_raw SASS_03_raw SASS_04_raw SASS_05_raw SASS_06_raw SASS_07_raw SASS_08_raw SASS_09_raw SASS_10_raw SASS_11_raw SASS_12_raw SASS_13_raw SASS_14_raw SASS_15_raw SASS_16_raw SASS_17_raw SASS_18_raw SASS_19_raw SASS_20_raw SASS_21_raw SASS_TOTAL SASS_trabajo bayes_all_accuracy bayes_all_confidence bayes_pictorial_qualitative_accuracy bayes_pictorial_quantitative_accuracy bayes_text_qualitative_accuracy bayes_text_quantitative_accuracy</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Con <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains()</a></code> seleccionamos variables que contienen la cadena de texto <code>dem</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span>  <span class="va">df_wide</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"dem"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 232 × 3</span></span>
@@ -1083,7 +1109,7 @@ select_helpers()
 </div>
 <p>Usando <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with()</a></code> seleccionamos variables que acaban con la cadena de texto <code>cod</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span>  <span class="va">df_wide</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"cod"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 232 × 79</span></span>
@@ -1100,7 +1126,7 @@ select_helpers()
 </div>
 <p>Finalmente, <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches()</a></code> nos permite usar todo la potencia de las <a href="03-preparacion_transformacion.html#regular-expressions">expresiones regulares</a>. En este caso, también le pedimos variables que acaban con la cadena de texto <code>cod</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span>  <span class="va">df_wide</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"cod$"</span><span class="op">)</span><span class="op">)</span> <span class="co"># $: fin de la cadena de texto</span></span>
 <span><span class="co">#&gt; # A tibble: 232 × 79</span></span>
@@ -1120,7 +1146,7 @@ select_helpers()
 <p>Seguimos usando verbos de {dplyr}. Para crear nuevas variables o modificarlas reemplazando los valores usaremos <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>. Dentro de mutate podemos hacer cualquier operación con una o más variables.</p>
 <p>Primero leemos nuestra base:</p>
 <div class="cell">
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">name_of_file</span> <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-read-csv.csv"</span><span class="op">)</span></span>
 <span><span class="va">DF_name</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">name_of_file</span><span class="op">)</span></span>
 <span><span class="va">DF_name</span></span>
@@ -1138,7 +1164,7 @@ select_helpers()
 </div>
 <p>Si usamos una variable ya existente, en este caso <code>PPV_DECLARED</code>, sus valores se sobreescriben:</p>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>PPV_DECLARED <span class="op">=</span> <span class="va">PPV_DECLARED</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 9</span></span>
@@ -1155,7 +1181,7 @@ select_helpers()
 </div>
 <p>Si usamos una variable no existente (<code>PPV_DECLARED_PCT</code>), la creamos:</p>
 <div class="cell">
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>PPV_DECLARED_PCT <span class="op">=</span> <span class="va">PPV_DECLARED</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 10</span></span>
@@ -1172,7 +1198,7 @@ select_helpers()
 </div>
 <p>Con <code><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute()</a></code> añadimos una nueva variable destruyendo el resto del DF:</p>
 <div class="cell">
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>PPV_DECLARED_PCT <span class="op">=</span> <span class="va">PPV_DECLARED</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 1</span></span>
@@ -1191,7 +1217,7 @@ select_helpers()
 <p>La combinación de verbos <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> y <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> es una de las más usadas. Con esta podemos calcular promedios, medianas, etc. por condición de manera sencilla.</p>
 <p><code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> nos permite ‘resumir’ datos, calculando promedios, medianas, o cualquier otro estadístico de interes. En este caso, vemos el promedio de la variable <code>PPV_DECLARED</code> usando <code>mean(PPV_DECLARED, na.rm = TRUE)</code>. El parámetro <code>na.rm = TRUE</code> ignora los valores <code>NA</code> que pueda haber en la base:</p>
 <div class="cell">
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>Promedio_PPV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
 <span>            N <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -1202,7 +1228,7 @@ select_helpers()
 </div>
 <p>Si incluimos <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> en la pipeline, esos ‘resumenes’ se mostraran para cada valor de la variable por la que agrupamos:</p>
 <div class="cell">
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Genero</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>Promedio_PPV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
@@ -1215,7 +1241,7 @@ select_helpers()
 </div>
 <p>Podemos agrupar por multiples variables, y calcular tantas cosas como queramos. En ese caso la media, mediana, desviación estandard y el numero de observaciones:</p>
 <div class="cell">
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Genero</span>, <span class="va">condition</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>promedio_PPV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
@@ -1275,7 +1301,7 @@ select_helpers()
 <p>:::</p>
 <hr>
 <div class="cell">
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span>  <span class="va">df_wide</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv"</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section><section id="verbos-avanzados-y-otras-criaturas-indómitas" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="verbos-avanzados-y-otras-criaturas-indómitas">
@@ -1284,7 +1310,7 @@ select_helpers()
 <span class="header-section-number">3.3.1</span> Wide to long simple</h3>
 <p>Empecemos con un ejemplo muy sencillo. 2 participantes, cada uno en una condición, y 2 items.</p>
 <div class="cell">
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">df_simple_wide</span> <span class="op">=</span> </span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>    ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Participante1"</span>, <span class="st">"Participante2"</span><span class="op">)</span>,</span>
@@ -1302,7 +1328,7 @@ select_helpers()
 </div>
 <p>Pasamos esta base de datos ‘ancha’ (una fila por participante), a una base en formato ‘largo’ (una fila por observación) usando la función <code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code>. Solo tenemos que indicar el rango de columnas, asignar nombre a la columna donde enviaremos los nombres de las columnas, y asignar nombre a la columna donde estarán los valores:</p>
 <div class="cell">
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">df_simple_long</span> <span class="op">=</span> <span class="va">df_simple_wide</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">Item1</span><span class="op">:</span><span class="va">Item2</span>,</span>
 <span>               names_to <span class="op">=</span> <span class="st">"Item"</span>,</span>
@@ -1322,7 +1348,7 @@ select_helpers()
 <span class="header-section-number">3.3.2</span> Long to wide simple</h3>
 <p>Siguiendo con el ejemplo anterior, podemos devolver la base en formato ‘largo’ a ‘ancho’ de nuevo usando <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">df_simple_long</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Item</span>, values_from <span class="op">=</span> <span class="va">Response</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 4</span></span>
@@ -1336,7 +1362,7 @@ select_helpers()
 <p>Hay algunos análisis para los que necesitamos formato long (e.g.&nbsp;anovas, modelos mixtos…), muchas gráficas con <code>ggplot</code> asumen formato long, y varias cosas se simplifican cuando los datos estan en formato largo.</p>
 <p>Por ejemplo, si queremos usar resúmenes agrupados para obtener la media, mediana, desviación estandard… por ítem, con el formato WIDE necesitaremos 3 lineas de código para cada ítem que tenga nuestra base (imagina con 100 items…). Con el formato long, el código de abajo es suficiente.</p>
 <div class="cell">
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># En formato wide podriamos usar cosas como:  </span></span>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># En formato wide podriamos usar cosas como:  </span></span>
 <span>  <span class="co"># skimr::skim(df_simple_wide)</span></span>
 <span></span>
 <span><span class="co"># Añadir para cada item 3 líneas</span></span>
@@ -1375,7 +1401,7 @@ select_helpers()
 <span class="header-section-number">3.3.3</span> Wide to long complex</h3>
 <p>Ahora pasemos a un ejemplo mas complejo. Leemos la base de datos y seleccionamos las puntuaciones a los 11 items de la lipkus numeracy scale de 232 participantes, ademas de datos demográficos. Usamos <code><a href="https://rdrr.io/pkg/DT/man/datatable.html">DT::datatable()</a></code> para visualizar la base de manera interactiva.</p>
 <div class="cell">
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Leemos documento en formato WIDE</span></span>
 <span><span class="va">df_wide_complex</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv"</span></span>
@@ -1396,7 +1422,7 @@ select_helpers()
 </div>
 <p>De nuevo, para pasar de formato ‘ancho’ a ‘largo’ completamos los mismos parámetros que antes. Lo unico que añadimos es <code>values_transform = list(Response = as.character)</code> para poder incluir en la columna <code>Response</code> tanto valores numéricos como caracteres.</p>
 <div class="cell">
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">df_long_complex</span> <span class="op">=</span></span>
 <span>  <span class="va">df_wide_complex</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
@@ -1421,7 +1447,7 @@ select_helpers()
 <span class="header-section-number">3.3.4</span> Long to wide complex</h3>
 <p>Nos sirve el mismo código que con el ejemplo más simple:</p>
 <div class="cell">
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">df_long_complex</span> <span class="op">|&gt;</span>  </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Item</span>, values_from <span class="op">=</span> <span class="va">Response</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 232 × 15</span></span>
@@ -1466,7 +1492,7 @@ Pistas
 <hr>
 <p>Importamos datos, y limpiamos nombres de variables:</p>
 <div class="cell">
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_wide</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1476,7 +1502,7 @@ Pistas
 <span class="header-section-number">3.4</span> Separate, omit, ifelse, case_when, tipos de variables…</h2>
 <p>Para transformaciones algo más complejas, pero muy habituales, usaremos algunos verbos del paquete {tidyr}, y variaciones con {dplyr}</p>
 <div class="cell">
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Base original</span></span>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Base original</span></span>
 <span><span class="va">DF_name</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../data/files/02-read-csv.csv"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">...1</span>, <span class="op">-</span><span class="va">Educacion</span>, <span class="op">-</span><span class="va">Edad</span>, <span class="op">-</span><span class="va">condition2</span><span class="op">)</span></span>
 <span></span>
@@ -1490,7 +1516,7 @@ Pistas
 <hr>
 <p>Podemos separar la columna de condicion usando la función <code><a href="https://tidyr.tidyverse.org/reference/separate.html">separate()</a></code> y un separador (<code>sep = "_"</code>). La separación puede ser en columnas o en filas. En este primer caso, separamos enviando cada parte de <code>condition</code> a una columna distinta:</p>
 <div class="cell">
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Separate</span></span>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Separate</span></span>
 <span><span class="va">DF_separated</span> <span class="op">=</span> <span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">condition</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"primer_chunk"</span>, <span class="st">"segundo_chunk"</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span>
 <span></span>
@@ -1508,7 +1534,7 @@ Pistas
 </div>
 <p>Tambien podemos enviar cada parte de <code>condition</code> a una fila distinta:</p>
 <div class="cell">
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate_rows.html">separate_rows</a></span><span class="op">(</span><span class="va">condition</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 206 × 5</span></span>
@@ -1524,7 +1550,7 @@ Pistas
 </div>
 <p>Con <code><a href="https://tidyr.tidyverse.org/reference/unite.html">unite()</a></code> podemos hacer lo contrario, unir columnas con un separador definido:</p>
 <div class="cell">
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Unite: inversa de separate</span></span>
 <span><span class="va">DF_separated</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span><span class="va">condition</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">primer_chunk</span>, <span class="va">segundo_chunk</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span>
@@ -1542,7 +1568,7 @@ Pistas
 <p>Si necesitamos recodificar variables, cambiar valores condicionalmente,… podemos usar <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> o <code><a href="https://dplyr.tidyverse.org/reference/recode.html">recode()</a></code>:</p>
 <p><code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code>, si se cumple la condición <code>Genero == 1</code>, asigna el valor “Hombre”, de lo contrario, “Mujer”:</p>
 <div class="cell">
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Genero <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Genero</span> <span class="op">==</span> <span class="fl">1</span>, <span class="st">"Hombre"</span>, <span class="st">"Mujer"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 103 × 5</span></span>
@@ -1558,7 +1584,7 @@ Pistas
 </div>
 <p>Con <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> podemos establecer varias condiciones lógicas simultáneamente, ademas de un valor por defecto si no se cumple ninguna de ellas. Las condiciones lógicas pueden ser arbitrariamente complejas:</p>
 <div class="cell">
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Genero <span class="op">=</span> </span>
 <span>           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
@@ -1580,7 +1606,7 @@ Pistas
 </div>
 <p>Finalmente podemos usar <code><a href="https://dplyr.tidyverse.org/reference/recode.html">recode()</a></code>, con una sintaxis tal vez algo más sencilla:</p>
 <div class="cell">
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span>  <span class="va">DF_name</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Genero</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    </span>
@@ -1613,7 +1639,7 @@ Pistas
 <p>Otras funciones útiles, extraer los valores de una columna con <code><a href="https://dplyr.tidyverse.org/reference/pull.html">pull()</a></code> o descartar los <code>NA</code> de una columna con <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code>.</p>
 <p>Usamos <code><a href="https://dplyr.tidyverse.org/reference/pull.html">pull()</a></code> para extraer los valores de una columna.</p>
 <div class="cell">
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_name</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_name</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   [1] 99 99 99  1 24 NA 99 99 99  1 94 99 88  0  1 99 99 99 70 99  1 99 99  7</span></span>
 <span><span class="co">#&gt;  [25] 10 99 99 99 46 45 46 40 NA 46 46 73 46 50 46 45 46 87 46 49 30 46 50 70</span></span>
 <span><span class="co">#&gt;  [49] 44 80 99 99 99 99 80 51 99 20 30  1 20  5 30 99 99 99 99 80 98 99 80 59</span></span>
@@ -1622,24 +1648,24 @@ Pistas
 </div>
 <p>Calculamos el promedio de una columna (con pipes).</p>
 <div class="cell">
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> </span>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> </span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Calculamos el promedio usando <code>na.rm = TRUE</code> para que la función <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> ignore los NA’s:</p>
 <div class="cell">
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 68.06</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Calculamos la media de manera más sencilla, en este caso usando base R. No siempre son necesarias las pipes. Si escribes <code>DF_name$</code> y presionas el tabulador, aparecerán todas las columnas de esa base:</p>
 <div class="cell">
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">DF_name</span><span class="op">$</span><span class="va">PPV_DECLARED</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">DF_name</span><span class="op">$</span><span class="va">PPV_DECLARED</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 68.06</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Eliminamos las filas que tienen valores perdidos en la variable indicada. En este caso pasamos de 103 a 100 observaciones:</p>
 <div class="cell">
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_name</span> <span class="op">|&gt;</span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">DF_name</span> <span class="op">|&gt;</span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">PPV_DECLARED</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 100 × 5</span></span>
 <span><span class="co">#&gt;      ID Genero FollowUP condition PPV_DECLARED</span></span>
 <span><span class="co">#&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;</span></span>
@@ -1672,7 +1698,7 @@ Para limpiar nombres de columnas automáticamente:
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="co"># Leemos los datos y usamos janitor::clean_names() para limpiar los nombres de las columnas</span></span>
 <span> <span class="va">DF_wide</span> <span class="op">=</span> </span>
 <span>  <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1735,7 +1761,7 @@ Pista
 <hr>
 <p>Imagina que tenemos que trabajar con la columna <code>condition2</code>, donde están codificadas 3 variables importantes:</p>
 <div class="cell">
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_regexp</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-read-csv.csv"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">...1</span>, <span class="op">-</span><span class="va">Educacion</span>, <span class="op">-</span><span class="va">Edad</span>, <span class="op">-</span><span class="va">condition</span><span class="op">)</span></span>
 <span></span>
@@ -1754,7 +1780,7 @@ Pista
 <p>Cuando no tenemos separadores explícitos como vimos antes con <code><a href="https://tidyr.tidyverse.org/reference/separate.html">separate()</a></code>, podemos usar <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> junto a <code><a href="https://rdrr.io/r/base/grep.html">gsub()</a></code> y expresiones regulares para extraer, una a una, las condiciones.</p>
 <p>La función <code><a href="https://rdrr.io/r/base/grep.html">gsub()</a></code> nos sirve para eliminar partes de una cadena de texto, para extraer un número, etc.:</p>
 <div class="cell">
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_regexp</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cond_NM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"([0-9]{2,3}).*"</span>, <span class="st">"\\1"</span>, <span class="va">condition2</span><span class="op">)</span>,</span>
 <span>         cond_LR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"[0-9]{2,3}([LR]).*"</span>, <span class="st">"\\1"</span>, <span class="va">condition2</span><span class="op">)</span>,</span>
@@ -1772,7 +1798,7 @@ Pista
 </div>
 <p>Extraemos la misma información, de una manera ligeramente distinta, siendo mucho más explícitos sobre la estructura esperada de la columna condition2:</p>
 <div class="cell">
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_regexp</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cond_NM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"^([0-9]{2,3})([LR])(.*)$"</span>, <span class="st">"\\1"</span>, <span class="va">condition2</span><span class="op">)</span>,</span>
 <span>         cond_LR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"^([0-9]{2,3})([LR])(.*)$"</span>, <span class="st">"\\2"</span>, <span class="va">condition2</span><span class="op">)</span>,</span>
@@ -1799,7 +1825,7 @@ Pista
 <code>_raw</code>a continuación, contiene esta cadena de texto</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="co"># Seleccionamos solo algunas de las filas</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">dem_genero</span>, <span class="va">dem_edad</span>, <span class="va">dem_nivedu</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"lkns_[0-9]{2}_raw"</span><span class="op">)</span><span class="op">)</span></span>
@@ -1830,7 +1856,7 @@ Pista
 </div>
 <p>Hay una aplicación Shiny muy útil que nos ayudará a construir Regular Expressions:</p>
 <div class="cell">
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="fu">regexplain</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/regexplain/man/regexplain_gadget.html">regexplain_gadget</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr></section></section><section id="ejercicios---calcular-puntajes-de-escalas-usando-regular-expressions" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicios---calcular-puntajes-de-escalas-usando-regular-expressions">Ejercicios - Calcular puntajes de escalas usando regular expressions</h2>
@@ -1911,7 +1937,7 @@ Pista para suma agrupada:
 <hr>
 <p>Importar datos:</p>
 <div class="cell">
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">df_wide_raw</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="section" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="section"></h2>
