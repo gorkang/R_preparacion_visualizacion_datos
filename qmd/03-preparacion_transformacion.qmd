@@ -816,7 +816,7 @@ DF_name |>
 ### Ejercicios - verbos dplyr {.ejercicio -} 
 
 
-1. Usando la base df_wide (ver código abajo), haz las siguientes cosas, una a una:  
+1. Usando la base df_wide (puedes usar el código de abajo), haz las siguientes cosas, una a una:  
 
 ```
 df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")  
@@ -841,7 +841,7 @@ df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-soci
 
     + `filter(CONDICION1 & CONDICION2)` o `filter(CONDICION1, CONDICION2)`
     + `arrange()` o `arrange(desc())`
-    + `select()` o `select(contains("ALGUN_PATRON"))`
+    + `select(starts_with("ALGUN_PATRON"))` o `select(ends_with("ALGUN_PATRON"))`
     + `mutate()` usando también `max()`
 
 2. `DF_resultado = df_wide |> operacion1 |> operation2 |> ...`
@@ -850,20 +850,13 @@ df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-soci
 
 :::
 
----  
 
-
-```{r ejercicios-dplyr-1}
-
-  df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")  
-
-
-```
 
 ```{r ejercicios-dplyr-soluciones, eval=FALSE, include=FALSE}
 
 # 1. Usando la base df_wide, haz las siguientes cosas, una a una:  
- 
+ df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")  
+
 # * Filtra el DF para quedarnos solo con edades entre 18 y 50 años  
   
   # Metodo paso a paso
@@ -894,7 +887,7 @@ df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-soci
   df_final = df_wide |> 
     filter(dem_edad >= 18 & dem_edad <= 50) |>
     arrange(dem_genero, desc(dem_edad)) |>
-    select(ID, contains("dem_"), contains("raw")) |>
+    select(ID, starts_with("dem_"), ends_with("raw")) |>
     mutate(niv_edu_porc = dem_nivedu / max(dem_nivedu) * 100)
 
 
@@ -1054,7 +1047,19 @@ df_long_complex |>
 
 ## Ejercicios - wide to long {.ejercicio -} 
 
-Trabajaremos con los datos *procesados* del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al. Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base final en formato wide (Dentro de https://osf.io/egxy5/, ver archivo: `/outputs/data/sa-prepared.csv`).  
+De nuevo trabajaremos con datos del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al., pero esta vez van a ser los datos *procesados*. Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base final en formato wide (Dentro de https://osf.io/egxy5/, ver archivo: `/outputs/data/sa-prepared.csv`).  
+
+Para simplificar el proceso, puedes importar los datos y limpiar los nombres de variables así:  
+
+```{r ejercicios-dplyr-avanzado-1-2-import, echo=TRUE}
+
+DF_wide = read_csv(
+  "https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"
+) |>
+  janitor::clean_names()
+
+```
+
 
 1. Cambia el orden de las variables para que ID sea la primera columna.  
 
@@ -1074,17 +1079,6 @@ Trabajaremos con los datos *procesados* del paper [Cognitive and Socio-affective
 
 :::
 
----  
-
-Importamos datos, y limpiamos nombres de variables:  
-```{r ejercicios-dplyr-avanzado-1-2-import, echo=TRUE}
-
-DF_wide = read_csv(
-  "https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"
-) |>
-  janitor::clean_names()
-
-```
 
 ```{r ejercicios-dplyr-avanzado-1-2, include=FALSE}
 
