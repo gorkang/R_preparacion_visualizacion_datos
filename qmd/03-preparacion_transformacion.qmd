@@ -816,24 +816,30 @@ DF_name |>
 ### Ejercicios - verbos dplyr {.ejercicio -} 
 
 
-1. Usando la base df_wide, haz las siguientes cosas, una a una:  
+1. Usando la base df_wide (ver código abajo), haz las siguientes cosas, una a una:  
 
-* Importa los datos (ver código abajo)
+```
+df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")  
+
+```
+
 * Filtra el DF para quedarnos solo con edades entre 18 y 50 años  
 * Ordena los datos por genero y edad, esta última decreciente  
 * Selecciona las columnas para quedarnos solo con ID, variables demograficas, y respuestas crudas (raw)  
-* Crea una nueva variable que sea niv_edu_porc, en la que calcules cual es el porcentaje de nivel educativo al que han llegado relativo al máximo de la base de datos (nivel educativo persona / nivel educativo maximo; en porcentaje)  
+* Crea una nueva variable llamada `niv_edu_porc`, en la que calcules el nivel educativo al que han llegado dividido por el máximo de la base de datos, pero en porcentaje (nivel educativo persona / nivel educativo maximo; en porcentaje)  
 
 2. Ahora combina el resultado de todas las operaciones anteriores en un DF  
 
 3. Calcula el promedio y desviación típica de edad para cada género  
 
 
+::: {.callout-tip collapse="true"}
+
 ### Pistas
 
 1. Paso a paso:  
 
-    + `filter(CONDICION1 & CONDICION2)`
+    + `filter(CONDICION1 & CONDICION2)` o `filter(CONDICION1, CONDICION2)`
     + `arrange()` o `arrange(desc())`
     + `select()` o `select(contains("ALGUN_PATRON"))`
     + `mutate()` usando también `max()`
