@@ -375,8 +375,8 @@ name_of_folder = here::here("data/files/02-XLSs")
 
 # Listamos los archivos a leer
 files <- list.files(name_of_folder, pattern = "xls", full.names = TRUE)
-map_df(files, read_xlsx, sheet = 2, skip = 5)
-
+DF_all = map_df(files, read_xlsx, sheet = 2, skip = 5)
+DF_all
 ```
 
 
@@ -388,10 +388,10 @@ El paquete {janitor} tiene una función muy útil llamada `clean_names()` que ap
 ```{r janitor_clean_names}
 
 DF_name = read_csv(here::here("data/files/02-read-csv.csv"))
-cat(names(DF_name))
+names(DF_name)
 
 DF_names_clean = DF_name |> janitor::clean_names()
-cat(names(DF_names_clean))
+names(DF_names_clean)
 
 ```
 
@@ -402,32 +402,38 @@ cat(names(DF_names_clean))
 
 Muchas veces guardaremos los datos una vez procesados. Esto se puede hacer con la familia de funciones `write_*`.  
 
+Siguiendo el ejercicio anterior, después de leer los archivos excel de una carpeta y limpiar los nombres de columna, queremos guardar el dataframe resultante en la carpeta `data_clean` (¡es importante asegurarnos que esa carpeta existe!).   
+
 #### Archivos CSV
+
+Si queremos que el archivo guardado sea un `csv`, usaremos `write_csv()`. 
 
 ```{r write-csv, eval = FALSE}
 
-# Versión simple
-write_csv(DF_name, "data/files/02-write-csv.csv")
+# Lo que hicimos antes, leemos todos los archivos excel de un directorio
+name_of_folder = here::here("data/files/02-XLSs")
+files <- list.files(name_of_folder, pattern = "xls", full.names = TRUE)
+DF_all = map_df(files, read_xlsx, sheet = 2, skip = 5) |> janitor::clean_names()
 
-# Versión para Rmarkdown
-name_of_file = here::here("data/files/02-write-csv.csv")
-write_csv(DF_name, name_of_file)
-
+write_csv(DF_all, "data_clean/DF_all.csv")
 
 ```
 
 #### Otros Archivos
 
+La función a usar cambiará en función del formato que queramos:
+
+- `xlsx`: `writexl::write_csv()`  
+- `xlsx`: `haven::write_sav()`  
+- `xlsx`: `readODS::write_ods()`  
+
 ```{r write-otros, eval = FALSE}
 
-name_of_file = here::here("data/files/02-write-xlsx.xlsx")
-writexl::write_xlsx(DF_name, name_of_file)
+writexl::write_xlsx(DF_all, "data_clean/DF_all.xlsx")
 
-name_of_file = here::here("data/files/02-write-sav.sav")
-haven::write_sav(DF_name, name_of_file)
+haven::write_sav(DF_all, "data_clean/DF_all.sav")
 
-name_of_file = here::here("data/files/02-write-ods.ods")
-readODS::write_ods(DF_name, name_of_file)
+readODS::write_ods(DF_all, "data_clean/DF_all.ods")
 
 ```
 

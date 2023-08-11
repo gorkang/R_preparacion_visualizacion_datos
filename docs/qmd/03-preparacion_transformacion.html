@@ -713,39 +713,54 @@ Pista
 <div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">DF_name</span> <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-read-csv.csv"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">DF_name</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ...1 ID Genero Edad Educacion FollowUP condition condition2 PPV_DECLARED</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">DF_name</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "...1"         "ID"           "Genero"       "Edad"        </span></span>
+<span><span class="co">#&gt; [5] "Educacion"    "FollowUP"     "condition"    "condition2"  </span></span>
+<span><span class="co">#&gt; [9] "PPV_DECLARED"</span></span>
 <span></span>
 <span><span class="va">DF_names_clean</span> <span class="op">=</span> <span class="va">DF_name</span> <span class="op">|&gt;</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">DF_names_clean</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; x1 id genero edad educacion follow_up condition condition2 ppv_declared</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">DF_names_clean</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "x1"           "id"           "genero"       "edad"        </span></span>
+<span><span class="co">#&gt; [5] "educacion"    "follow_up"    "condition"    "condition2"  </span></span>
+<span><span class="co">#&gt; [9] "ppv_declared"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="exportar-datos" class="level3" data-number="3.1.4"><h3 data-number="3.1.4" class="anchored" data-anchor-id="exportar-datos">
 <span class="header-section-number">3.1.4</span> Exportar datos</h3>
 <p>Muchas veces guardaremos los datos una vez procesados. Esto se puede hacer con la familia de funciones <code>write_*</code>.</p>
+<p>Siguiendo el ejercicio anterior, después de leer los archivos excel de una carpeta y limpiar los nombres de columna, queremos guardar el dataframe resultante en la carpeta <code>data_clean</code> (¡es importante asegurarnos que esa carpeta existe!).</p>
 <section id="archivos-csv-1" class="level4" data-number="3.1.4.1"><h4 data-number="3.1.4.1" class="anchored" data-anchor-id="archivos-csv-1">
 <span class="header-section-number">3.1.4.1</span> Archivos CSV</h4>
+<p>Si queremos que el archivo guardado sea un <code>csv</code>, usaremos <code><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv()</a></code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="co"># Versión simple</span></span>
-<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">DF_name</span>, <span class="st">"data/files/02-write-csv.csv"</span><span class="op">)</span></span>
+<span><span class="co"># Lo que hicimos antes, leemos todos los archivos excel de un directorio</span></span>
+<span><span class="va">name_of_folder</span> <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-XLSs"</span><span class="op">)</span></span>
+<span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">name_of_folder</span>, pattern <span class="op">=</span> <span class="st">"xls"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">DF_all</span> <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_df</a></span><span class="op">(</span><span class="va">files</span>, <span class="va">read_xlsx</span>, sheet <span class="op">=</span> <span class="fl">2</span>, skip <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Versión para Rmarkdown</span></span>
-<span><span class="va">name_of_file</span> <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-write-csv.csv"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">DF_name</span>, <span class="va">name_of_file</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">DF_all</span>, <span class="st">"data_clean/DF_all.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="otros-archivos" class="level4" data-number="3.1.4.2"><h4 data-number="3.1.4.2" class="anchored" data-anchor-id="otros-archivos">
 <span class="header-section-number">3.1.4.2</span> Otros Archivos</h4>
+<p>La función a usar cambiará en función del formato que queramos:</p>
+<ul>
+<li>
+<code>xlsx</code>: <code>writexl::write_csv()</code><br>
+</li>
+<li>
+<code>xlsx</code>: <code><a href="https://haven.tidyverse.org/reference/read_spss.html">haven::write_sav()</a></code><br>
+</li>
+<li>
+<code>xlsx</code>: <code><a href="https://docs.ropensci.org/readODS/reference/write_ods.html">readODS::write_ods()</a></code>
+</li>
+</ul>
 <div class="cell">
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">name_of_file</span> <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-write-xlsx.xlsx"</span><span class="op">)</span></span>
-<span><span class="fu">writexl</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">DF_name</span>, <span class="va">name_of_file</span><span class="op">)</span></span>
+<span><span class="fu">writexl</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="va">DF_all</span>, <span class="st">"data_clean/DF_all.xlsx"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">name_of_file</span> <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-write-sav.sav"</span><span class="op">)</span></span>
-<span><span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">write_sav</a></span><span class="op">(</span><span class="va">DF_name</span>, <span class="va">name_of_file</span><span class="op">)</span></span>
+<span><span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">write_sav</a></span><span class="op">(</span><span class="va">DF_all</span>, <span class="st">"data_clean/DF_all.sav"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">name_of_file</span> <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data/files/02-write-ods.ods"</span><span class="op">)</span></span>
-<span><span class="fu">readODS</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/readODS/reference/write_ods.html">write_ods</a></span><span class="op">(</span><span class="va">DF_name</span>, <span class="va">name_of_file</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">readODS</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/readODS/reference/write_ods.html">write_ods</a></span><span class="op">(</span><span class="va">DF_all</span>, <span class="st">"data_clean/DF_all.ods"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section></section><section id="preparación-y-transformación-de-datos" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="preparación-y-transformación-de-datos">
 <span class="header-section-number">3.2</span> Preparación y transformación de datos</h2>
