@@ -1065,7 +1065,7 @@ DF_wide = read_csv(
 
 2. Transforma la base a formato long (eso sí, mantén las variables demográficas en formato wide).  
 
-3. Aprovechando que tenemos la base en formato long, sabrías hacer una gráfica con un histograma o densidad para cada una de las variables no deográficas?    
+3. Aprovechando que tenemos la base en formato long, sabrías hacer una gráfica con un histograma o densidad para cada una de las variables no demográficas?    
 
 ::: {.callout-tip collapse="true"}
 
@@ -1080,7 +1080,9 @@ DF_wide = read_csv(
 :::
 
 
-```{r ejercicios-dplyr-avanzado-1-2, include=FALSE}
+El gráfico final se debería ver así:  
+
+```{r ejercicios-dplyr-avanzado-1-2, echo=FALSE}
 
 DF_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") |> 
   janitor::clean_names()
