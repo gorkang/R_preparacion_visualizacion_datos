@@ -43,7 +43,7 @@ book:
     - "qmd/04-combinar-datos.qmd"
     - "qmd/05-analisis-datos-exploratorio.qmd"
     - "qmd/06-analisis-datos-inferencial.qmd"
-    - "qmd/07-rmarkdown.qmd"
+    - "qmd/07-quarto.qmd"
     - "qmd/08-git.qmd"
     - "qmd/09-experimentos-reproducibles.qmd"
     - "qmd/10-ejercicios.qmd"

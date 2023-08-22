@@ -494,7 +494,8 @@ Usando el DF `mpg`, visualiza la covariación entre:
 
 ggplot(mpg, aes(hwy, manufacturer, fill = manufacturer)) +
   ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.95, draw_baseline = FALSE, alpha = .3) +
-  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9)
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
+  guides(fill = "none")
 
 # * `hwy` y `cty`
 ggplot(mpg, aes(hwy, cty)) +

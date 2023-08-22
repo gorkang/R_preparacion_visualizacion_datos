@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../qmd/07-rmarkdown.html" rel="next">
+<link href="../qmd/07-quarto.html" rel="next">
 <link href="../qmd/05-analisis-datos-exploratorio.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -188,8 +188,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../qmd/07-rmarkdown.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Trabajo con RMarkdown para reportes reproducibles</span></span></a>
+  <a href="../qmd/07-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Trabajo con Quarto para reportes reproducibles</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -238,10 +238,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li><a href="#tablas-resultados-inferenciales" id="toc-tablas-resultados-inferenciales" class="nav-link" data-scroll-target="#tablas-resultados-inferenciales"><span class="header-section-number">6.3</span> Tablas resultados inferenciales</a></li>
-  <li><a href="#unir-tablas" id="toc-unir-tablas" class="nav-link" data-scroll-target="#unir-tablas"><span class="header-section-number">6.4</span> Unir tablas</a></li>
-  <li><a href="#reporte-de-resultados" id="toc-reporte-de-resultados" class="nav-link" data-scroll-target="#reporte-de-resultados"><span class="header-section-number">6.5</span> Reporte de resultados</a></li>
-  <li><a href="#texto-inline" id="toc-texto-inline" class="nav-link" data-scroll-target="#texto-inline"><span class="header-section-number">6.6</span> Texto inline</a></li>
+  <li><a href="#reporte-de-resultados" id="toc-reporte-de-resultados" class="nav-link" data-scroll-target="#reporte-de-resultados"><span class="header-section-number">6.4</span> Reporte de resultados</a></li>
+  <li><a href="#texto-inline" id="toc-texto-inline" class="nav-link" data-scroll-target="#texto-inline"><span class="header-section-number">6.5</span> Texto inline</a></li>
   <li><a href="#ejercicio---resultados-inferenciales" id="toc-ejercicio---resultados-inferenciales" class="nav-link" data-scroll-target="#ejercicio---resultados-inferenciales">Ejercicio - Resultados inferenciales</a></li>
+  <li><a href="#unir-tablas" id="toc-unir-tablas" class="nav-link" data-scroll-target="#unir-tablas"><span class="header-section-number">6.6</span> Unir tablas</a></li>
   <li>
 <a href="#otros-an%C3%A1lisis-y-sus-tablas" id="toc-otros-análisis-y-sus-tablas" class="nav-link" data-scroll-target="#otros-an%C3%A1lisis-y-sus-tablas"><span class="header-section-number">6.7</span> Otros análisis y sus tablas</a>
   <ul>
@@ -1329,17 +1329,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>El parámetro <code>statistic</code> nos permite controlar que estadísticos mostrar en función del tipo de variable:</p>
+<p>El parámetro <code>statistic</code> nos permite controlar que estadísticos mostrar en función del tipo de variable. En el caso de abajo, usaremos “promedio (desviación estandard)” para las variables continuas y “número de observaciones (% del total)” para las variables categóricas.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Usando promedio (desviación estandard)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
 <span><span class="va">gapminder</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">country</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">continent</span>,</span>
 <span>                         statistic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/select_helpers.html">all_continuous</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"{mean} ({sd})"</span>,</span>
-<span>                                          <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/select_helpers.html">all_categorical</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"{n} / {N} ({p}%)"</span><span class="op">)</span>,</span>
-<span>                         </span>
+<span>                                          <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/select_helpers.html">all_categorical</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"{n} ({p}%)"</span><span class="op">)</span>,</span>
 <span>                       missing <span class="op">=</span> <span class="st">"ifany"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_n.html">add_n</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_n.html">add_n</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_spanning_header</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat_1"</span>, <span class="st">"stat_2"</span>, <span class="st">"stat_3"</span>, <span class="st">"stat_4"</span>, <span class="st">"stat_5"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**Continent**"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="ynbpfuirgg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -1783,10 +1783,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>N</strong>"><strong>N</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Africa</strong>, N = 624<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>">
+<thead>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="<strong>N</strong>"><strong>N</strong></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="5" scope="colgroup" id="<strong>Continent</strong>">
+        <span class="gt_column_spanner"><strong>Continent</strong></span>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Africa</strong>, N = 624<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>">
 <strong>Africa</strong>, N = 624<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
 </th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Americas</strong>, N = 300<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>">
@@ -1801,7 +1807,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Oceania</strong>, N = 24<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>">
 <strong>Oceania</strong>, N = 24<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
 </th>
-    </tr></thead>
+    </tr>
+</thead>
 <tbody class="gt_table_body">
 <tr>
 <td headers="label" class="gt_row gt_left">year</td>
@@ -1856,20 +1863,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">IDparticipante</span>, <span class="va">resident</span>, <span class="va">screenbeliefs</span>, <span class="va">compR1</span>, <span class="va">numeracy</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>comprehension <span class="op">=</span> <span class="va">compR1</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Intenta reproducir la siguiente tabla:</p>
+<p>Intenta reproducir la tabla de abajo. En el <a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html">manual de gtsummary</a> tienes ejemplos para todo lo que necesitarás. Busca a la función <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary()</a></code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Donde encontrar ayuda
+La tabla me muestra demasiado detalle, pero sólo quiero los promedios
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><span style="color: orange;">En el <a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html">manual de gtsummary</a> tienes ejemplos para todo lo que necesitarás. Busca a la función <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary()</a></code></span></p>
+<p><span style="color: orange;">Si todas tus variables son continuas, puedes usar <code>type = list(everything() ~ 'continuous'),</code> dentro de <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary()</a></code> para forzar el tratamiento de variables con pocos niveles como continuas.</span></p>
 </div>
 </div>
 </div>
@@ -1879,13 +1886,13 @@ Donde encontrar ayuda
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Demasiado detalle, solo quiero los promedios
+Error al añadir valor p
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><span style="color: orange;">Puedes usar <code>type = list(everything() ~ 'continuous'),</code> dentro de <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary()</a></code> para forzar el tratamiento de variables con pocos niveles como continuas.</span></p>
+<p><span style="color: orange;">En la ayuda de la funcion: <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.tbl_summary.html">?add_p.tbl_summary</a></code> encontrarás que puedes usar algo como: <code>add_p(test = everything() ~ "t.test")</code></span></p>
 </div>
 </div>
 </div>
@@ -1895,13 +1902,13 @@ Demasiado detalle, solo quiero los promedios
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Error al añadir valor p
+¿Cómo consigo poner el titulo <code>Resident</code>?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><span style="color: orange;">En la ayuda de la funcion: <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.tbl_summary.html">?add_p.tbl_summary</a></code> encontrarás que puedes usar algo como: `add_p(test = everything() ~ “t.test</span></p>
+<p><span style="color: orange;">Fijate cómo usamos <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_spanning_header()</a></code> en el ejemplo anterior. Solo tienes que adaptarlo a los datos actuales, donde tenemos únicamente dos grupos.</span></p>
 </div>
 </div>
 </div>
@@ -2948,28 +2955,86 @@ Error al añadir valor p
 </div>
 </div>
 </div>
-</section><section id="unir-tablas" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="unir-tablas">
-<span class="header-section-number">6.4</span> Unir tablas</h2>
-<p>De manera muy sencilla podemos unir varias tablas:</p>
+</section><section id="reporte-de-resultados" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="reporte-de-resultados">
+<span class="header-section-number">6.4</span> Reporte de resultados</h2>
+<p>Con la función <code><a href="https://easystats.github.io/report/reference/report.html">report()</a></code> podemos ver una descripción completa de los resultados de nuestro modelo:</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="co"># Primero creamos un modelo más sencillo, basado en el anterior</span></span>
-<span><span class="va">model10</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">lifeExp</span> <span class="op">~</span> <span class="va">gdpPercap_log</span>, <span class="va">DF_gapminder</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Creamos la tabla</span></span>
-<span><span class="va">table_model10</span> <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">model10</span>, intercept <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_global_p.html">add_global_p</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">bold_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">italicize_levels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html">add_glance_table</a></span><span class="op">(</span>include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nobs"</span>, <span class="st">"df.residual"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Combinamos ambas tablas</span></span>
-<span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_merge.html">tbl_merge</a></span><span class="op">(</span></span>
-<span>  tbls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">table_model10</span>, <span class="va">table_model1</span><span class="op">)</span>,</span>
-<span>  tab_spanner <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"**Baseline**"</span>, <span class="st">"**Step 1**"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="co"># Necesario para que los parámetros globales de los modelos se muestren al final</span></span>
-<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_table_body.html">modify_table_body</a></span><span class="op">(</span><span class="op">~</span><span class="va">.x</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">row_type</span> <span class="op">==</span> <span class="st">"glance_statistic"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">model1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; We fitted a linear model (estimated using OLS) to predict lifeExp with</span></span>
+<span><span class="co">#&gt; gdpPercap_log and pop_log (formula: lifeExp ~ gdpPercap_log + pop_log). The</span></span>
+<span><span class="co">#&gt; model explains a statistically significant and substantial proportion of</span></span>
+<span><span class="co">#&gt; variance (R2 = 0.66, F(2, 139) = 137.93, p &lt; .001, adj. R2 = 0.66). The</span></span>
+<span><span class="co">#&gt; model's intercept, corresponding to gdpPercap_log = 0 and pop_log = 0, is at</span></span>
+<span><span class="co">#&gt; 63.28 (95% CI [61.98, 64.58], t(139) = 96.30, p &lt; .001). Within this model:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   - The effect of gdpPercap log is statistically significant and positive</span></span>
+<span><span class="co">#&gt; (beta = 7.24, 95% CI [6.38, 8.11], t(139) = 16.56, p &lt; .001; Std. beta =</span></span>
+<span><span class="co">#&gt; 0.81, 95% CI [0.72, 0.91])</span></span>
+<span><span class="co">#&gt;   - The effect of pop log is statistically significant and positive (beta =</span></span>
+<span><span class="co">#&gt; 0.81, 95% CI [0.04, 1.58], t(139) = 2.09, p = 0.039; Std. beta = 0.10, 95%</span></span>
+<span><span class="co">#&gt; CI [5.35e-03, 0.20])</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Standardized parameters were obtained by fitting the model on a standardized</span></span>
+<span><span class="co">#&gt; version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span></span>
+<span><span class="co">#&gt; computed using a Wald t-distribution approximation.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="texto-inline" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="texto-inline">
+<span class="header-section-number">6.5</span> Texto inline</h2>
+<p>Algo genial de gtsummary, es que podemos usar las propias tablas para <a href="https://www.danieldsjoberg.com/gtsummary/articles/inline_text.html">extraer detalles de los resultados</a> y usarlos directamente en el texto.</p>
+<p>El paquete <a href="https://github.com/easystats/report">report</a> tiene también funcionalidades muy potentes que merece la pena explorar.</p>
+<p>La ventaja de escribir los resultados de esta manera es que si hacemos algun pequeño cambio en la preparación de datos, podemos volver a correr el script de generación del reporte de resultados, y los valores p, etc. se ajustarán automáticamente. Únicamente tenemos que asegurarnos que la interpretación cualitativa no cambia :)</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Life expectancy was significantly associated with GDP per capita (log), beta = "</span>,</span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/inline_text.html">inline_text</a></span><span class="op">(</span><span class="va">table_model1</span>, variable <span class="op">=</span> <span class="va">gdpPercap_log</span><span class="op">)</span></span>
+<span><span class="op">)</span>  </span>
+<span><span class="co">#&gt; [1] "Life expectancy was significantly associated with GDP per capita (log), beta = 7.2 (95% CI 6.4, 8.1; p&lt;0.001)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="ejercicio---resultados-inferenciales" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio---resultados-inferenciales">Ejercicio - Resultados inferenciales</h2>
+<p>Usando la misma base de datos del ejercicio anterior:</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="va">DF_dafina</span> <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="st">"../data/files/Dafina/Cancer screening risk literacy R1.sav"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">IDparticipante</span>, <span class="va">resident</span>, <span class="va">screenbeliefs</span>, <span class="va">compR1</span>, <span class="va">numeracy</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>comprehension <span class="op">=</span> <span class="va">compR1</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Haz una regresión lineal prediciendo compresión a partir de las otras variables de la base.</p>
+<p>Finalmente, crea una tabla similar a la siguiente para reportar los resultados de tu análisis. Recuerda que en el <a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html">manual de gtsummary</a> tienes ejemplos para todo lo que necesitarás. En concreto, <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression()</a></code> es tu amiga:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Funciones necesarias
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;"><code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_global_p.html">add_global_p()</a></code> para los valores p.&nbsp;<code><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">bold_labels()</a></code> para poner en negrita los nombres de variables</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Como añadir información en el pie de la tabla
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span style="color: orange;">Tendrás que usar la función <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html">add_glance_source_note()</a></code> o <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html">add_glance_table()</a></code>. Para saber que nombres poner en el paràmetro <code>include</code>, puedes usar la función <code>broom::glance(model)</code>, donde model es el nombre que has usado para tu modelo estadístico. </span></p>
+</div>
+</div>
+</div>
+<div class="cell">
 <div class="cell-output-display">
 
 <div id="jldqejsqzo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -3413,184 +3478,73 @@ Error al añadir valor p
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings gt_spanner_row">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
-      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="<strong>Baseline</strong>">
-        <span class="gt_column_spanner"><strong>Baseline</strong></span>
-      </th>
-      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="<strong>Step 1</strong>">
-        <span class="gt_column_spanner"><strong>Step 1</strong></span>
-      </th>
-    </tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Beta</strong>"><strong>Beta</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>95% CI</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>">
-<strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
-</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>p-value</strong>"><strong>p-value</strong></th>
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Beta</strong>"><strong>Beta</strong></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>95% CI</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>">
 <strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
 </th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>p-value</strong>"><strong>p-value</strong></th>
-    </tr>
-</thead>
+    </tr></thead>
 <tbody class="gt_table_body">
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">(Intercept)</td>
-<td headers="estimate_1" class="gt_row gt_center">64</td>
-<td headers="ci_1" class="gt_row gt_center">62, 65</td>
-<td headers="p.value_1" class="gt_row gt_center">
-</td>
-<td headers="estimate_2" class="gt_row gt_center">63</td>
-<td headers="ci_2" class="gt_row gt_center">62, 65</td>
-<td headers="p.value_2" class="gt_row gt_center"></td>
+<td headers="estimate" class="gt_row gt_center">2.8</td>
+<td headers="ci" class="gt_row gt_center">1.9, 3.8</td>
+<td headers="p.value" class="gt_row gt_center"></td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">gdpPercap_log</td>
-<td headers="estimate_1" class="gt_row gt_center">7.2</td>
-<td headers="ci_1" class="gt_row gt_center">6.3, 8.1</td>
-<td headers="p.value_1" class="gt_row gt_center">
-</td>
-<td headers="estimate_2" class="gt_row gt_center">7.2</td>
-<td headers="ci_2" class="gt_row gt_center">6.4, 8.1</td>
-<td headers="p.value_2" class="gt_row gt_center"></td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Resident</td>
+<td headers="estimate" class="gt_row gt_center">-0.23</td>
+<td headers="ci" class="gt_row gt_center">-0.62, 0.17</td>
+<td headers="p.value" class="gt_row gt_center">0.3</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">pop_log</td>
-<td headers="estimate_1" class="gt_row gt_center"></td>
-<td headers="ci_1" class="gt_row gt_center"></td>
-<td headers="p.value_1" class="gt_row gt_center"></td>
-<td headers="estimate_2" class="gt_row gt_center">0.81</td>
-<td headers="ci_2" class="gt_row gt_center">0.04, 1.6</td>
-<td headers="p.value_2" class="gt_row gt_center">0.039</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Screening beliefs</td>
+<td headers="estimate" class="gt_row gt_center">-0.02</td>
+<td headers="ci" class="gt_row gt_center">-0.05, 0.01</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-style: italic; border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;">No. Obs.</td>
-<td headers="estimate_1" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;">142</td>
-<td headers="ci_1" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;"></td>
-<td headers="p.value_1" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;"></td>
-<td headers="estimate_2" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;">142</td>
-<td headers="ci_2" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;"></td>
-<td headers="p.value_2" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;"></td>
-</tr>
-<tr>
-<td headers="label" class="gt_row gt_left" style="font-style: italic;">Residual df</td>
-<td headers="estimate_1" class="gt_row gt_center">140</td>
-<td headers="ci_1" class="gt_row gt_center"></td>
-<td headers="p.value_1" class="gt_row gt_center"></td>
-<td headers="estimate_2" class="gt_row gt_center">139</td>
-<td headers="ci_2" class="gt_row gt_center"></td>
-<td headers="p.value_2" class="gt_row gt_center"></td>
-</tr>
-<tr>
-<td headers="label" class="gt_row gt_left" style="font-style: italic;">R²</td>
-<td headers="estimate_1" class="gt_row gt_center">0.654</td>
-<td headers="ci_1" class="gt_row gt_center"></td>
-<td headers="p.value_1" class="gt_row gt_center"></td>
-<td headers="estimate_2" class="gt_row gt_center">0.665</td>
-<td headers="ci_2" class="gt_row gt_center"></td>
-<td headers="p.value_2" class="gt_row gt_center"></td>
-</tr>
-<tr>
-<td headers="label" class="gt_row gt_left" style="font-style: italic;">Adjusted R²</td>
-<td headers="estimate_1" class="gt_row gt_center">0.652</td>
-<td headers="ci_1" class="gt_row gt_center"></td>
-<td headers="p.value_1" class="gt_row gt_center"></td>
-<td headers="estimate_2" class="gt_row gt_center">0.660</td>
-<td headers="ci_2" class="gt_row gt_center"></td>
-<td headers="p.value_2" class="gt_row gt_center"></td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Numeracy BNT-S</td>
+<td headers="estimate" class="gt_row gt_center">0.14</td>
+<td headers="ci" class="gt_row gt_center">0.03, 0.26</td>
+<td headers="p.value" class="gt_row gt_center">0.016</td>
 </tr>
 </tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4">No. Obs. = 172; Adjusted R² = 0.047; Residual df = 168; Statistic = 3.83; p-value = 0.011; df = 3</td>
+    </tr></tfoot>
 <tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="7">
+<td class="gt_footnote" colspan="4">
 <span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> CI = Confidence Interval</td>
     </tr></tfoot>
 </table>
 </div>
 </div>
 </div>
-</section><section id="reporte-de-resultados" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="reporte-de-resultados">
-<span class="header-section-number">6.5</span> Reporte de resultados</h2>
-<p>Con la función <code><a href="https://easystats.github.io/report/reference/report.html">report()</a></code> podemos ver una descripción completa de los resultados de nuestro modelo:</p>
-<div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">model1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; We fitted a linear model (estimated using OLS) to predict lifeExp with</span></span>
-<span><span class="co">#&gt; gdpPercap_log and pop_log (formula: lifeExp ~ gdpPercap_log + pop_log). The</span></span>
-<span><span class="co">#&gt; model explains a statistically significant and substantial proportion of</span></span>
-<span><span class="co">#&gt; variance (R2 = 0.66, F(2, 139) = 137.93, p &lt; .001, adj. R2 = 0.66). The</span></span>
-<span><span class="co">#&gt; model's intercept, corresponding to gdpPercap_log = 0 and pop_log = 0, is at</span></span>
-<span><span class="co">#&gt; 63.28 (95% CI [61.98, 64.58], t(139) = 96.30, p &lt; .001). Within this model:</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   - The effect of gdpPercap log is statistically significant and positive</span></span>
-<span><span class="co">#&gt; (beta = 7.24, 95% CI [6.38, 8.11], t(139) = 16.56, p &lt; .001; Std. beta =</span></span>
-<span><span class="co">#&gt; 0.81, 95% CI [0.72, 0.91])</span></span>
-<span><span class="co">#&gt;   - The effect of pop log is statistically significant and positive (beta =</span></span>
-<span><span class="co">#&gt; 0.81, 95% CI [0.04, 1.58], t(139) = 2.09, p = 0.039; Std. beta = 0.10, 95%</span></span>
-<span><span class="co">#&gt; CI [5.35e-03, 0.20])</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Standardized parameters were obtained by fitting the model on a standardized</span></span>
-<span><span class="co">#&gt; version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span></span>
-<span><span class="co">#&gt; computed using a Wald t-distribution approximation.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="texto-inline" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="texto-inline">
-<span class="header-section-number">6.6</span> Texto inline</h2>
-<p>Algo genial de gtsummary, es que podemos usar las propias tablas para <a href="https://www.danieldsjoberg.com/gtsummary/articles/inline_text.html">extraer detalles de los resultados</a> y usarlos directamente en el texto.</p>
-<p>El paquete <a href="https://github.com/easystats/report">report</a> tiene también funcionalidades muy potentes que merece la pena explorar.</p>
-<p>La ventaja de escribir los resultados de esta manera es que si hacemos algun pequeño cambio en la preparación de datos, podemos volver a correr el script de generación del reporte de resultados, y los valores p, etc. se ajustarán automáticamente. Únicamente tenemos que asegurarnos que la interpretación cualitativa no cambia :)</p>
-<div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span></span>
-<span>  <span class="st">"Life expectancy was significantly associated with GDP per capita (log), beta = "</span>,</span>
-<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/inline_text.html">inline_text</a></span><span class="op">(</span><span class="va">table_model1</span>, variable <span class="op">=</span> <span class="va">gdpPercap_log</span><span class="op">)</span></span>
-<span><span class="op">)</span>  </span>
-<span><span class="co">#&gt; [1] "Life expectancy was significantly associated with GDP per capita (log), beta = 7.2 (95% CI 6.4, 8.1; p&lt;0.001)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="ejercicio---resultados-inferenciales" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio---resultados-inferenciales">Ejercicio - Resultados inferenciales</h2>
-<p>Usando la misma base de datos del ejercicio anterior:</p>
+<hr></section><section id="unir-tablas" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="unir-tablas">
+<span class="header-section-number">6.6</span> Unir tablas</h2>
+<p>De manera muy sencilla podemos unir varias tablas. Esto es útil, por ejemplo, para mostrar los resultados de regresiones jerárquicas:</p>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">DF_dafina</span> <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="st">"../data/files/Dafina/Cancer screening risk literacy R1.sav"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">IDparticipante</span>, <span class="va">resident</span>, <span class="va">screenbeliefs</span>, <span class="va">compR1</span>, <span class="va">numeracy</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>comprehension <span class="op">=</span> <span class="va">compR1</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Haz una regresión lineal preciciendo compresion a partir de las variables de la base.</p>
-<p>Finalmente, crea una tabla para reportar los resultados de tu análisis, como la siguiente:</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Donde encontrar ayuda
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><span style="color: orange;">En el <a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html">manual de gtsummary</a> tienes ejemplos para todo lo que necesitarás. <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression()</a></code> es tu amiga.</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Como añadir información en el pie de la tabla
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><span style="color: orange;">Tendrás que usar la función <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html">add_glance_source_note()</a></code> o <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html">add_glance_table()</a></code>. Para saber que nombres poner en el paràmetro <code>include</code>, puedes usar la función <code>broom::glance(model)</code> </span></p>
-</div>
-</div>
-</div>
-<div class="cell">
+<span><span class="co"># Primero creamos un modelo más sencillo, basado en el anterior</span></span>
+<span><span class="va">model10</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">lifeExp</span> <span class="op">~</span> <span class="va">gdpPercap_log</span>, <span class="va">DF_gapminder</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Creamos la tabla</span></span>
+<span><span class="va">table_model10</span> <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">model10</span>, intercept <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_global_p.html">add_global_p</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">bold_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">italicize_levels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html">add_glance_table</a></span><span class="op">(</span>include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nobs"</span>, <span class="st">"df.residual"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Combinamos ambas tablas</span></span>
+<span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_merge.html">tbl_merge</a></span><span class="op">(</span></span>
+<span>  tbls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">table_model10</span>, <span class="va">table_model1</span><span class="op">)</span>,</span>
+<span>  tab_spanner <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"**Baseline**"</span>, <span class="st">"**Step 1**"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="co"># Necesario para que los parámetros globales de los modelos se muestren al final</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify_table_body.html">modify_table_body</a></span><span class="op">(</span><span class="op">~</span><span class="va">.x</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">row_type</span> <span class="op">==</span> <span class="st">"glance_statistic"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="urllkiykvp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -4034,52 +3988,105 @@ Como añadir información en el pie de la tabla
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+<thead>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="<strong>Baseline</strong>">
+        <span class="gt_column_spanner"><strong>Baseline</strong></span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="<strong>Step 1</strong>">
+        <span class="gt_column_spanner"><strong>Step 1</strong></span>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Beta</strong>"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>95% CI</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>">
+<strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>p-value</strong>"><strong>p-value</strong></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Beta</strong>"><strong>Beta</strong></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>95% CI</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>">
 <strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
 </th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>p-value</strong>"><strong>p-value</strong></th>
-    </tr></thead>
+    </tr>
+</thead>
 <tbody class="gt_table_body">
 <tr>
 <td headers="label" class="gt_row gt_left" style="font-weight: bold;">(Intercept)</td>
-<td headers="estimate" class="gt_row gt_center">2.8</td>
-<td headers="ci" class="gt_row gt_center">1.9, 3.8</td>
-<td headers="p.value" class="gt_row gt_center"></td>
+<td headers="estimate_1" class="gt_row gt_center">64</td>
+<td headers="ci_1" class="gt_row gt_center">62, 65</td>
+<td headers="p.value_1" class="gt_row gt_center">
+</td>
+<td headers="estimate_2" class="gt_row gt_center">63</td>
+<td headers="ci_2" class="gt_row gt_center">62, 65</td>
+<td headers="p.value_2" class="gt_row gt_center"></td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Resident</td>
-<td headers="estimate" class="gt_row gt_center">-0.23</td>
-<td headers="ci" class="gt_row gt_center">-0.62, 0.17</td>
-<td headers="p.value" class="gt_row gt_center">0.3</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">gdpPercap_log</td>
+<td headers="estimate_1" class="gt_row gt_center">7.2</td>
+<td headers="ci_1" class="gt_row gt_center">6.3, 8.1</td>
+<td headers="p.value_1" class="gt_row gt_center">
+</td>
+<td headers="estimate_2" class="gt_row gt_center">7.2</td>
+<td headers="ci_2" class="gt_row gt_center">6.4, 8.1</td>
+<td headers="p.value_2" class="gt_row gt_center"></td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Screening beliefs</td>
-<td headers="estimate" class="gt_row gt_center">-0.02</td>
-<td headers="ci" class="gt_row gt_center">-0.05, 0.01</td>
-<td headers="p.value" class="gt_row gt_center">0.2</td>
+<td headers="label" class="gt_row gt_left" style="font-weight: bold;">pop_log</td>
+<td headers="estimate_1" class="gt_row gt_center"></td>
+<td headers="ci_1" class="gt_row gt_center"></td>
+<td headers="p.value_1" class="gt_row gt_center"></td>
+<td headers="estimate_2" class="gt_row gt_center">0.81</td>
+<td headers="ci_2" class="gt_row gt_center">0.04, 1.6</td>
+<td headers="p.value_2" class="gt_row gt_center">0.039</td>
 </tr>
 <tr>
-<td headers="label" class="gt_row gt_left" style="font-weight: bold;">Numeracy BNT-S</td>
-<td headers="estimate" class="gt_row gt_center">0.14</td>
-<td headers="ci" class="gt_row gt_center">0.03, 0.26</td>
-<td headers="p.value" class="gt_row gt_center">0.016</td>
+<td headers="label" class="gt_row gt_left" style="font-style: italic; border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;">No. Obs.</td>
+<td headers="estimate_1" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;">142</td>
+<td headers="ci_1" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;"></td>
+<td headers="p.value_1" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;"></td>
+<td headers="estimate_2" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;">142</td>
+<td headers="ci_2" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;"></td>
+<td headers="p.value_2" class="gt_row gt_center" style="border-top-width: 2px; border-top-style: solid; border-top-color: #D3D3D3;"></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left" style="font-style: italic;">Residual df</td>
+<td headers="estimate_1" class="gt_row gt_center">140</td>
+<td headers="ci_1" class="gt_row gt_center"></td>
+<td headers="p.value_1" class="gt_row gt_center"></td>
+<td headers="estimate_2" class="gt_row gt_center">139</td>
+<td headers="ci_2" class="gt_row gt_center"></td>
+<td headers="p.value_2" class="gt_row gt_center"></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left" style="font-style: italic;">R²</td>
+<td headers="estimate_1" class="gt_row gt_center">0.654</td>
+<td headers="ci_1" class="gt_row gt_center"></td>
+<td headers="p.value_1" class="gt_row gt_center"></td>
+<td headers="estimate_2" class="gt_row gt_center">0.665</td>
+<td headers="ci_2" class="gt_row gt_center"></td>
+<td headers="p.value_2" class="gt_row gt_center"></td>
+</tr>
+<tr>
+<td headers="label" class="gt_row gt_left" style="font-style: italic;">Adjusted R²</td>
+<td headers="estimate_1" class="gt_row gt_center">0.652</td>
+<td headers="ci_1" class="gt_row gt_center"></td>
+<td headers="p.value_1" class="gt_row gt_center"></td>
+<td headers="estimate_2" class="gt_row gt_center">0.660</td>
+<td headers="ci_2" class="gt_row gt_center"></td>
+<td headers="p.value_2" class="gt_row gt_center"></td>
 </tr>
 </tbody>
-<tfoot class="gt_sourcenotes"><tr>
-<td class="gt_sourcenote" colspan="4">No. Obs. = 172; Adjusted R² = 0.047; Residual df = 168; Statistic = 3.83; p-value = 0.011; df = 3</td>
-    </tr></tfoot>
 <tfoot class="gt_footnotes"><tr>
-<td class="gt_footnote" colspan="4">
+<td class="gt_footnote" colspan="7">
 <span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> CI = Confidence Interval</td>
     </tr></tfoot>
 </table>
 </div>
 </div>
 </div>
-<hr></section><section id="otros-análisis-y-sus-tablas" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="otros-análisis-y-sus-tablas">
+</section><section id="otros-análisis-y-sus-tablas" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="otros-análisis-y-sus-tablas">
 <span class="header-section-number">6.7</span> Otros análisis y sus tablas</h2>
 <p><a href="https://stats.idre.ucla.edu/other/mult-pkg/whatstat/">Que test estadístico debería usar, con código en R</a></p>
 <p><img src="../data/images/statistical-tests.png" class="img-fluid"></p>
@@ -4166,31 +4173,6 @@ Como añadir información en el pie de la tabla
 <p>p-value adjustment method: Holm (1979)</p>
 </div>
 </div>
-<!-- ### LM   -->
-<!-- Usaremos un análisis de regresión sencillo tratando de predecir la longitud de los sépalos a partir de los efectos principales y la interacción entre la longitud y ancho de los pétalos.   -->
-<!-- ```{r tablas-bonitas-lm} -->
-<!--   model_lm <- lm(Sepal.Length ~ Petal.Length * Petal.Width, data = iris) -->
-<!--   #summary(model_lm) -->
-<!--   report::report(model_lm) -->
-<!--   parameters::model_parameters(model_lm) |> parameters::print_md() -->
-<!-- ``` -->
-<!-- <BR>   -->
-<!-- Hay varias maneras de mostrar tablas en Rmarkdown. Arriba usamos el paquete {[parameters](https://github.com/easystats/parameters)}, pero también se puede hacer con {stargazer}, papaja, kable, etc.    -->
-<!-- ```{r eval=FALSE, include=FALSE} -->
-
-<!--   # table_lm = papaja::apa_print(model_lm)$table -->
-<!--   # knitr::kable(table_lm) -->
-<!--   #  -->
-
-<!--   # table_easystats = report::report(model_lm) -->
-<!--   # knitr::kable(table_easystats) -->
-<!-- ``` -->
-<!-- <BR> -->
-<!-- sjPlot es especialmente potente. El único detalle es que no genera outputs en pdf. Para usar las tablas generadas por sjPlot en pdf's ver el paquete {[html2latex](https://github.com/gorkang/html2latex/)}    -->
-<!-- ```{r sjplot, results='asis'} -->
-<!--   sjPlot::tab_model(model_lm) -->
-<!-- ``` -->
-<!-- <BR> -->
 </section><section id="anova" class="level3" data-number="6.7.3"><h3 data-number="6.7.3" class="anchored" data-anchor-id="anova">
 <span class="header-section-number">6.7.3</span> Anova</h3>
 <ul>
@@ -5085,8 +5067,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../qmd/07-rmarkdown.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Trabajo con RMarkdown para reportes reproducibles</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../qmd/07-quarto.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Trabajo con Quarto para reportes reproducibles</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

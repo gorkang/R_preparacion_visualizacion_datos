@@ -82,18 +82,20 @@ gapminder |>
 
 ```
 
-El parámetro `statistic` nos permite controlar que estadísticos mostrar en función del tipo de variable:  
+El parámetro `statistic` nos permite controlar que estadísticos mostrar en función del tipo de variable. En el caso de abajo, usaremos "promedio (desviación estandard)" para las variables continuas y "número de observaciones (% del total)" para las variables categóricas.  
+
 
 ```{r tablas3, echo=TRUE, fig.height=18}
-# Usando promedio (desviación estandard)
+
 gapminder |> 
   select(-country) |> 
   gtsummary::tbl_summary(by = continent,
                          statistic = list(all_continuous() ~ "{mean} ({sd})",
-                                          all_categorical() ~ "{n} / {N} ({p}%)"),
-                         
+                                          all_categorical() ~ "{n} ({p}%)"),
                        missing = "ifany") |> 
-  gtsummary::add_n()
+  gtsummary::add_n() |> 
+  gtsummary::modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Continent**")
+
 ```
 
 
@@ -110,21 +112,14 @@ DF_dafina = haven::read_sav(here::here("data/files/Dafina", "Cancer screening ri
 
 ```
 
-Intenta reproducir la siguiente tabla:  
+Intenta reproducir la tabla de abajo. En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html) tienes ejemplos para todo lo que necesitarás. Busca a la función `tbl_summary()`.  
+
 
 ::: {.callout-tip collapse="true"}
 
-### Donde encontrar ayuda
+### La tabla me muestra demasiado detalle, pero sólo quiero los promedios
 
-<span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html) tienes ejemplos para todo lo que necesitarás. Busca a la función `tbl_summary()`</span>
-
-:::
-
-::: {.callout-tip collapse="true"}
-
-### Demasiado detalle, solo quiero los promedios
-
-<span style="color: orange;">Puedes usar `type = list(everything() ~ 'continuous'),` dentro de `tbl_summary()` para forzar el tratamiento de variables con pocos niveles como continuas.</span>
+<span style="color: orange;">Si todas tus variables son continuas, puedes usar `type = list(everything() ~ 'continuous'),` dentro de `tbl_summary()` para forzar el tratamiento de variables con pocos niveles como continuas.</span>
 
 :::
 
@@ -132,7 +127,15 @@ Intenta reproducir la siguiente tabla:
 
 ### Error al añadir valor p 
 
-<span style="color: orange;">En la ayuda de la funcion: `?add_p.tbl_summary` encontrarás que puedes usar algo como: `add_p(test = everything() ~ "t.test</span>
+<span style="color: orange;">En la ayuda de la funcion: `?add_p.tbl_summary` encontrarás que puedes usar algo como: `add_p(test = everything() ~ "t.test")`</span>
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+### ¿Cómo consigo poner el titulo `Resident`?
+
+<span style="color: orange;">Fijate cómo usamos `modify_spanning_header()` en el ejemplo anterior. Solo tienes que adaptarlo a los datos actuales, donde tenemos únicamente dos grupos.</span>
 
 :::
 
@@ -145,8 +148,8 @@ DF_dafina |>
     by = resident,
     statistic = list(all_continuous() ~ "{mean} ({sd})",
                      all_categorical() ~ "{n} / {N} ({p}%)"),
-    type = list(c("comprehension", "numeracy") ~ 'continuous'),
-    # type = list(everything() ~ 'continuous'),
+    # type = list(c("comprehension", "numeracy") ~ 'continuous'),
+    type = list(everything() ~ 'continuous'),
     missing = "ifany") |> 
   gtsummary::modify_spanning_header(c("stat_1", "stat_2") ~ "**Resident**") |> 
   gtsummary::add_n() |> 
@@ -203,33 +206,6 @@ table_model1
 ```
 
 
-
-## Unir tablas
-
-De manera muy sencilla podemos unir varias tablas:  
-
-```{r tablas-estadistica-merged_tables, echo=TRUE, fig.height=18}
-
-# Primero creamos un modelo más sencillo, basado en el anterior
-model10 = lm(lifeExp ~ gdpPercap_log, DF_gapminder)
-
-# Creamos la tabla
-table_model10 = gtsummary::tbl_regression(model10, intercept = TRUE) |>
-  add_global_p() |>
-  bold_labels() |>
-  italicize_levels() |>
-  add_glance_table(include = c("nobs", "df.residual", "r.squared", "adj.r.squared"))
-
-# Combinamos ambas tablas
-tbl_merge(
-  tbls = list(table_model10, table_model1),
-  tab_spanner = c("**Baseline**", "**Step 1**")) |> 
-  # Necesario para que los parámetros globales de los modelos se muestren al final
-  modify_table_body(~.x |> arrange(row_type == "glance_statistic")
-  )
-  
-```
-
 ## Reporte de resultados
 
 Con la función `report()` podemos ver una descripción completa de los resultados de nuestro modelo:  
@@ -274,15 +250,15 @@ DF_dafina = haven::read_sav("../data/files/Dafina/Cancer screening risk literacy
 
 ```
 
-Haz una regresión lineal preciciendo compresion a partir de las variables de la base.  
+Haz una regresión lineal prediciendo compresión a partir de las otras variables de la base.  
 
-Finalmente, crea una tabla para reportar los resultados de tu análisis, como la siguiente:  
+Finalmente, crea una tabla similar a la siguiente para reportar los resultados de tu análisis. Recuerda que en el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) tienes ejemplos para todo lo que necesitarás. En concreto, `tbl_regression()` es tu amiga:  
 
 ::: {.callout-tip collapse="true"}
 
-### Donde encontrar ayuda
+### Funciones necesarias
 
-<span style="color: orange;">En el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) tienes ejemplos para todo lo que necesitarás. `tbl_regression()` es tu amiga.</span>
+<span style="color: orange;">`add_global_p()` para los valores p. `bold_labels()` para poner en negrita los nombres de variables</span>
 
 :::
 
@@ -291,8 +267,7 @@ Finalmente, crea una tabla para reportar los resultados de tu análisis, como la
 
 ### Como añadir información en el pie de la tabla
 
-<span style="color: orange;">Tendrás que usar la función `add_glance_source_note()` o `add_glance_table()`. Para saber que nombres poner en el paràmetro `include`, puedes usar la función `broom::glance(model)`
-</span>
+<span style="color: orange;">Tendrás que usar la función `add_glance_source_note()` o `add_glance_table()`. Para saber que nombres poner en el paràmetro `include`, puedes usar la función `broom::glance(model)`, donde model es el nombre que has usado para tu modelo estadístico.  </span>
 
 :::
 
@@ -307,7 +282,7 @@ model =  lm(comprehension ~ resident + screenbeliefs + numeracy, DF_dafina)
 gtsummary::tbl_regression(model, intercept = TRUE) |>
   add_global_p() |>
   bold_labels() |>
-  italicize_levels() |>
+  # italicize_levels() |>
   add_glance_source_note(include = c(
     "nobs",
     "adj.r.squared",
@@ -322,6 +297,33 @@ gtsummary::tbl_regression(model, intercept = TRUE) |>
 
 
 ---  
+
+
+## Unir tablas
+
+De manera muy sencilla podemos unir varias tablas. Esto es útil, por ejemplo, para mostrar los resultados de regresiones jerárquicas:  
+
+```{r tablas-estadistica-merged_tables, echo=TRUE, fig.height=18}
+
+# Primero creamos un modelo más sencillo, basado en el anterior
+model10 = lm(lifeExp ~ gdpPercap_log, DF_gapminder)
+
+# Creamos la tabla
+table_model10 = gtsummary::tbl_regression(model10, intercept = TRUE) |>
+  add_global_p() |>
+  bold_labels() |>
+  italicize_levels() |>
+  add_glance_table(include = c("nobs", "df.residual", "r.squared", "adj.r.squared"))
+
+# Combinamos ambas tablas
+tbl_merge(
+  tbls = list(table_model10, table_model1),
+  tab_spanner = c("**Baseline**", "**Step 1**")) |> 
+  # Necesario para que los parámetros globales de los modelos se muestren al final
+  modify_table_body(~.x |> arrange(row_type == "glance_statistic")
+  )
+  
+```
 
 
 
@@ -367,45 +369,6 @@ TABLE_CORR |>
   parameters::print_md()
 
 ```
-
-<!-- ### LM   -->
-
-<!-- Usaremos un análisis de regresión sencillo tratando de predecir la longitud de los sépalos a partir de los efectos principales y la interacción entre la longitud y ancho de los pétalos.   -->
-
-<!-- ```{r tablas-bonitas-lm} -->
-
-<!--   model_lm <- lm(Sepal.Length ~ Petal.Length * Petal.Width, data = iris) -->
-<!--   #summary(model_lm) -->
-
-<!--   report::report(model_lm) -->
-
-<!--   parameters::model_parameters(model_lm) |> parameters::print_md() -->
-
-<!-- ``` -->
-
-<!-- <BR>   -->
-
-<!-- Hay varias maneras de mostrar tablas en Rmarkdown. Arriba usamos el paquete {[parameters](https://github.com/easystats/parameters)}, pero también se puede hacer con {stargazer}, papaja, kable, etc.    -->
-
-<!-- ```{r eval=FALSE, include=FALSE} -->
-<!--   # table_lm = papaja::apa_print(model_lm)$table -->
-<!--   # knitr::kable(table_lm) -->
-<!--   #  -->
-<!--   # table_easystats = report::report(model_lm) -->
-<!--   # knitr::kable(table_easystats) -->
-
-<!-- ``` -->
-
-<!-- <BR> -->
-
-<!-- sjPlot es especialmente potente. El único detalle es que no genera outputs en pdf. Para usar las tablas generadas por sjPlot en pdf's ver el paquete {[html2latex](https://github.com/gorkang/html2latex/)}    -->
-
-<!-- ```{r sjplot, results='asis'} -->
-
-<!--   sjPlot::tab_model(model_lm) -->
-
-<!-- ``` -->
-<!-- <BR> -->
 
 
 ### Anova
