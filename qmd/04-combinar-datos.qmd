@@ -362,7 +362,9 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 ```{r ejercicios-joins-responses, eval=FALSE, include=FALSE}
 # 1. Une los datos demográficos con los resultados  
 
-  # Solucion 1  
+  # Solucion 1 - IDEAL
+  DF_IDs = read_csv(here::here("data/files/02-join-IDs2.csv")) |> rename(ID = Identificador)
+
 
   DF_joined = DF_IDs |> 
     left_join(DF_results, by = c("Identificador" = "ID"))

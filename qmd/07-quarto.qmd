@@ -179,8 +179,9 @@ En su cabecera puedes añadir opciones. Hay una [cantidad apabullante de opcione
 
 ### Parametros chunks
 
-* `eval=TRUE`: Muestra el código
-* `include=TRUE`: Corre el código
+* `echo=FALSE`: Esconde el código pero este sigue corriendo
+* `eval=TRUE`: Evalúa el código
+* `include=TRUE`: Incluye el codigo
 * `fig.height=10`: altura de los plots (en inches)
 * `fig.width=12`: ancho de los plots (en inches)
 * `message=FALSE`: NO muestres mensajes
