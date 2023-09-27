@@ -473,15 +473,14 @@ Parametros chunks
 <li>Bibliography</li>
 </ul>
 <ol start="2" type="1">
-<li>Pon texto de relleno dentro de cada sección. Para ello puedes usar la función <code>stringi::stri_rand_lipsum(n_paragraphs = 1)</code> del paquete {stringi}.</li>
+<li>Pon texto de relleno dentro de cada sección. Para ello puedes usar la función <code>stringi::stri_rand_lipsum(n_paragraphs = 1)</code> del paquete {stringi}. Los chunks de código deberán ser similares a este:</li>
 </ol>
-<p>Los chunks de código deberán ser similares a este:</p>
 <hr>
-<pre><code>``{r abstract, echo=FALSE, results='asis'}  
+<pre><code>\`\`\`{r, echo=FALSE, results='asis'}  
 
 cat(stringi::stri_rand_lipsum(n_paragraphs = 1))  
 
-``  </code></pre>
+\`\`\`  </code></pre>
 <hr>
 <ol start="3" type="1">
 <li>Renderiza tu documento en formato PDF.</li>

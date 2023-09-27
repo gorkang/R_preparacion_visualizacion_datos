@@ -226,17 +226,15 @@ Ahora hagamos lo siguiente:
 * Discussion
 * Bibliography
 
-2. Pon texto de relleno dentro de cada sección. Para ello puedes usar la función `stringi::stri_rand_lipsum(n_paragraphs = 1)` del paquete {stringi}.  
-
-Los chunks de código deberán ser similares a este:  
+2. Pon texto de relleno dentro de cada sección. Para ello puedes usar la función `stringi::stri_rand_lipsum(n_paragraphs = 1)` del paquete {stringi}.  Los chunks de código deberán ser similares a este:  
 
 ---  
 
-    ``{r abstract, echo=FALSE, results='asis'}  
+    \`\`\`{r, echo=FALSE, results='asis'}  
     
     cat(stringi::stri_rand_lipsum(n_paragraphs = 1))  
     
-    ``  
+    \`\`\`  
 
 ---  
 
