@@ -55,7 +55,7 @@ knitr::include_graphics(here::here("data/videos/rstudio-install-ALL.gif"))
 if (!require('rlang')) install.packages('rlang'); library('rlang')
 rlang::check_installed(
   pkg = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
-          "gapminder", "geomtextpath", "ggplot2", "ggraph", "ggridges", "ggthemes", 
+          "gapminder", "geomtextpath", "ggplot2", "ggrain", "ggraph", "ggridges", "ggthemes", 
           "ggtext", "googlesheets4", "grateful", "gtsummary", 
           "haven", "here", "hexbin", "inspectdf", "janitor", "knitr", "lme4", 
           "papaja", "parameters", "performance", "plotly", "purrr", 
@@ -72,7 +72,7 @@ Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber comp
 
 if (!require('remotes')) install.packages('remotes'); remotes::install_github('gorkang/jsPsychAdmin')
 if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
-if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
+# if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
 
 ```
 

@@ -27,6 +27,7 @@ if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
 if (!require('geomtextpath')) install.packages('geomtextpath'); library('geomtextpath')
 if (!require('gghighlight')) install.packages('gghighlight'); library('gghighlight')
 if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('ggrain')) install.packages('ggrain'); library('ggrain')
 if (!require('ggthemes')) install.packages('ggthemes'); library('ggthemes')
 if (!require('ggridges')) install.packages('ggridges'); library('ggridges')
 if (!require('ggtext')) install.packages('ggtext'); library('ggtext')
@@ -37,7 +38,7 @@ if (!require('readr')) install.packages('readr'); library('readr')
 if (!require('sjPlot')) install.packages('sjPlot'); library('sjPlot')
 if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
 
-if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
+# if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
 
 ```  
 
@@ -1081,33 +1082,35 @@ mtcars |>
 
 ## Otras gráficas
 
-Un tipo de gráfica genial para mostrar simultáneamente observaciones individuales, distribuciones, y cambios, es el [raincloudplot](https://github.com/jorvlan/raincloudplots).
+Un tipo de gráfica genial para mostrar simultáneamente observaciones individuales, distribuciones, y cambios, es el [raincloudplot](https://github.com/njudd/ggrain).
+
+Se pueden mostrar las distribuciones para todas las variables numéricas de una base de datos.
+
+```{r}
+gapminder |> 
+  select(where(is.numeric)) |> 
+  pivot_longer(everything()) |> 
+  ggplot(aes(name, value, fill = name)) +
+  ggrain::geom_rain(alpha = .5) +
+  theme_minimal(base_size = 16) +
+  guides(fill = 'none', color = 'none') +
+  facet_wrap(~ name, scales = "free")
+```
+
+O la relación entre dos condiciones, momentos, etc.  
 
 ```{r otras-graficas-raincloudplots, fig.height=8, fig.width=8}
 
-# Transforma datos para adaptarlos a la estructura necesaria para raincloudplot
-df_1x1 <- data_1x1(
-  array_1 = iris$Sepal.Length[1:50],
-  array_2 = iris$Sepal.Length[51:100],
-  jit_distance = .09,
-  jit_seed = 321)
+gapminder_min_max = gapminder |> filter(year == max(year) | year == min(year)) |> mutate(year = as.factor(year))
 
-# Crea raincloudplot
-raincloud_1x1_repmes(
-  data = df_1x1,
-  colors = (c('dodgerblue', 'darkorange')),
-  fills = (c('dodgerblue', 'darkorange')),
-  line_color = 'gray',
-  line_alpha = .3,
-  size = 1,
-  alpha = .6,
-  align_clouds = FALSE) +
+gapminder_min_max |> 
+  ggplot(aes(year, lifeExp, fill = year, color = year)) +
+  geom_rain(alpha = .6, rain.side = 'f1x1', id.long.var = "country", line.args = list(color = "lightgrey")) +
+  theme_classic() +
+  scale_fill_manual(values=c("dodgerblue", "darkorange")) +
+  scale_color_manual(values=c("dodgerblue", "darkorange")) +
+  guides(fill = 'none', color = 'none')
 
-  scale_x_continuous(breaks = c(1, 2),
-                     labels = c("Pre", "Post"),
-                     limits = c(0, 3)) +
-  xlab("Time") +
-  ylab("Score")
 
 ```
 
