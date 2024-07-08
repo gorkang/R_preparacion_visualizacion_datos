@@ -14,6 +14,7 @@ source("../_common.R")
 #| label: setup
 #| echo: true
 
+if (!require('corrplot')) install.packages('corrplot'); library('corrplot')
 if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
 if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
@@ -74,7 +75,7 @@ gapminder |>
 
 ```
 
-Alternativamente, hay funciones como `skimr::skim()` que nos muestran una panorámica muy util de las variables de nuestro dataframe. Corre la función en tu Consola para ver el output completo.
+Alternativamente, hay funciones como `skimr::skim()` que nos muestran una panorámica muy útil de las variables de nuestro data frame. Corre la función en tu Consola para ver el output completo.
 
 ```{r skimr, results='asis'}
 
@@ -89,7 +90,7 @@ skimr::skim(gapminder)
 
 **Variables individuales**  
 
-Usando el DF `mpg`, visualiza la distribucion de las variables `manufacturer`, y `hwy`. Fijate que la primera es categórica, y la segunda continua.  
+Usando el DF `mpg`, visualiza la distribución de las variables `manufacturer`, y `hwy`. Fíjate que la primera es categórica, y la segunda continua.  
 
 ::: {.callout-tip collapse="true"}
 
@@ -199,7 +200,7 @@ Convertimos la base a formato largo para poder filtrar los valores perdidos (i.e
 ```{r initial exploration, fig.height=12}
 d <- gapminder |>
   pivot_longer(everything(), values_transform = list(value = as.character)) |>
-  filter(value != 999) |> # Si existiera algun codigo para missing values, filtrar
+  filter(value != 999) |> # Si existiera algún código para missing values, filtrar
   mutate(value_NUM = as.numeric(value))
 ```
 
@@ -268,14 +269,15 @@ ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
 
 ---
 
-¿Qué estamos viendo exáctamente arriba? Hay un punto por cada pais, y por cada año, lo que da lugar aalgo bien dificil de interpretar. Podemos ver los datos únicamente del último año:
+¿Qué estamos viendo exactamente arriba? Hay un punto por cada país, y por cada año, lo que da lugar a algo difícil de interpretar.  
+
+Podemos ver los datos únicamente del último año:
 
 ```{r covariacion-categorica-continua-4}
 
-gapminder |> group_by(year) |> summarise(n())
-
-ggplot(gapminder |> filter(year > 1995),
-       aes(lifeExp, continent, fill = continent)) +
+gapminder |> filter(year == max(year)) |> 
+  
+  ggplot(aes(lifeExp, continent, fill = continent)) +
   ggridges::geom_density_ridges(
     stat = "binline",
     bins = 20,
@@ -297,13 +299,13 @@ ggplot(gapminder |> filter(year > 1995),
 
 ### Ejercicio avanzado - Introducción
 
-En este ejercicio vamos a intentar mostrar la como la distribución de esperanza de vida ha cambiado a lo largo del tiempo. Para ello, usando la base `gapminder`, compararemos las distribuciones por continente del año 1952 con el año 2007.
+En este ejercicio vamos a intentar mostrar la como la distribución de esperanza de vida ha cambiado a lo largo del tiempo. Para ello, usando la base `gapminder`, compararemos los valores máximos y mínimos.
 
-Empezamos creando dos gráficos. En cada uno filtramos por el año deseado (e.g. `filter(year == 1952)`). Fíjate que usamos `scale_x_continuous(n.breaks = 10, limits = c(20, 90))` para que ambas gráficas compartan la misma escala en el eje x:
+Empezamos creando dos gráficos. En cada uno filtramos por el año deseado (e.g. `filter(year == min(year))`). Fíjate que usamos `scale_x_continuous(n.breaks = 10, limits = c(20, 90))` para que ambas gráficas compartan la misma escala en el eje x:
 
 ```{r covariacion-categorica-continua-5, echo=TRUE}
 
-A = ggplot(gapminder |> filter(year == 1952),
+A = ggplot(gapminder |> filter(year == min(year)),
            aes(lifeExp, continent, fill = continent)) +
   ggridges::geom_density_ridges(
     stat = "binline",
@@ -320,9 +322,9 @@ A = ggplot(gapminder |> filter(year == 1952),
   ) +
   theme(legend.position = "none") +
   scale_x_continuous(n.breaks = 10, limits = c(20, 90)) +
-  ggtitle("1952")
+  ggtitle("min")
 
-B = ggplot(gapminder |> filter(year == 2007),
+B = ggplot(gapminder |> filter(year == max(year)),
            aes(lifeExp, continent, fill = continent)) +
   ggridges::geom_density_ridges(
     stat = "binline",
@@ -339,14 +341,14 @@ B = ggplot(gapminder |> filter(year == 2007),
   ) +
   theme(legend.position = "none") +
   scale_x_continuous(n.breaks = 10, limits = c(20, 90)) +
-  ggtitle("2007")
+  ggtitle("max")
 
 cowplot::plot_grid(A, B)
 
 ```
 
 
-Para visualizar la diferencia entre 2007 y 1952, podemos calcular primero cuanto ha cambiado la esperanza de vida en cada pais de cada continente, y crear una gráfica con esa variable:
+Para visualizar la diferencia entre los valores máximos y mínimos, podemos calcular primero cuanto ha cambiado la esperanza de vida en cada país de cada continente, y crear una gráfica con esa variable:
 
 ```{r covariacion-categorica-continua-6}
 
@@ -376,13 +378,15 @@ ggplot(DF_gapminder_max_min, aes(lifeExp, continent, fill = continent)) +
 
 ### Ejercicio {.ejercicio}
 
-Arriba estamos restando la esperanza de vida máxima y mínima de cada pais, pero querríamos ver la diferencia entre 2007 y 1952 ¿Podrías rehacer el cálculo para mostrar la diferencia entre 2007 y 1952?
+Arriba estamos restando la esperanza de vida máxima y mínima de cada país. Sabemos que la esperanza de vida ha mejorado con el tiempo, por lo que asumíamos que era equivalente a comparar los datos más antiguos y los más nuevos.
+
+Pero lo que realmente queremos ver es la diferencia entre 2007 y 1952 ¿Podrías rehacer el cálculo para mostrar la diferencia entre 2007 y 1952?
 
 ::: {.callout-tip collapse="true"}
 
 ### Pista
 
-<span style="color: orange;">1. Crear un DF para cada 2007 y otro para 1952, renombrando la variable lifeExp (e.g. max_lifeExp y min_lifeExp, respectivamente)<BR>2. Usando la funcion `full_join()`, juntamos ambas bases (tendras que usar el parametro `by = c("country", "continent")`). <BR>3. Con `mutate()` calculamos la diferencia.</span>
+<span style="color: orange;">1. Crear un DF para cada 2007 y otro para 1952, renombrando la variable lifeExp (e.g. max_lifeExp y min_lifeExp, respectivamente)<BR>2. Usando la función `full_join()`, juntamos ambas bases (tendrás que usar el parámetro `by = c("country", "continent")`). <BR>3. Con `mutate()` calculamos la diferencia.</span>
 
 :::
 
@@ -399,6 +403,7 @@ ggplot(DF_last_first, aes(DIFF, continent, fill = continent)) +
   ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.5, scale = 0.9) +
   theme(legend.position = "none") +
   ggtitle("Diferencia entre 2007 y 1952 por pais")
+
 ```
 
 
@@ -428,7 +433,7 @@ diamonds |>
 
 ### Dos variables continuas
 
-Una herramienta esencial para ver como covarian dos variables continuas es un scatterplot. Usaremos `geom_point()`:  
+Una herramienta esencial para ver como covarían dos variables continuas es un scatterplot. Usaremos `geom_point()`:  
 
 ```{r covariacion-2continuas2}
 
@@ -454,6 +459,14 @@ ggplot(gapminder, aes(lifeExp, gdpPercap)) +
   geom_boxplot(mapping = aes(group = cut_width(lifeExp, 10))) +
   scale_y_log10()
 
+```
+
+
+Con `corrplot` podemos visualizar las correlaciones entre variables numéricas de nuestra base de datos.  
+
+```{r}
+corrplot(cor(gapminder |> select(where(is.numeric))), method = "circle")
+corrplot(cor(gapminder |> select(where(is.numeric))), method = "number", type = "upper")
 ```
 
 
@@ -505,10 +518,6 @@ ggplot(mpg, aes(hwy, cty)) +
 
 ```
 
-<!-- 7.6 Patterns and models -->
-
-
-
 
 ## Ejercicios finales
 
@@ -519,7 +528,7 @@ Usando la base del paper [Cancer Screening Risk Literacy of Physicians in Traini
 * histogramas de todas las variables numéricas y no-numéricas
 * scatterplots de la relación entre comprensión y numeracy, y entre comprensión y screenbeliefs
 
-Puedes ir al enlace anterior y descargar el archivo `Cancer screening risk literacy R1.sav` en la carpeta `Data and results`, o directamente usar el codigo de abajo.
+Puedes ir al enlace anterior y descargar el archivo `Cancer screening risk literacy R1.sav` en la carpeta `Data and results`, o directamente usar el código de abajo.
 
 ::: {.callout-tip collapse="true"}
 

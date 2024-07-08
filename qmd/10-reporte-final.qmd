@@ -115,7 +115,7 @@ Es muy recomendable ubicar las variables de interés, y renombrarlas para que se
 <!-- set.seed(20190705) -->
 
 <!-- tareas = c("Experimento 1", "Experimento 2", "Experimento 3") -->
-<!-- personas = c("Seyhun", "Daniel", "Nicolas") -->
+<!-- personas = c("Alumna1", "Alumna2", "Alumno3") -->
 <!-- x = sample(personas, 3) -->
 <!-- print(paste(tareas, x)) -->
 

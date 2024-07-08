@@ -115,7 +115,7 @@ Algo que podemos hacer con todos los repositorios de Github es clonarlos localme
 
 ## Crear un proyecto en RStudio asociado a Github  
 
-Tener nuestros proyectos de RStudio asociados a repositorios en Github es muy útil para poder compartir el código y datos asociados a nuestras investigaciones, disponer de una copia de seguridad online, y, si lo usamos adecuadamente, detectar de manera más rápida cúal de los últimos cambios es responsable de los errores que nos aparezcan.  
+Tener nuestros proyectos de RStudio asociados a repositorios en Github es muy útil para poder compartir el código y datos asociados a nuestras investigaciones, disponer de una copia de seguridad online, y, si lo usamos adecuadamente, detectar de manera más rápida cual de los últimos cambios es responsable de los errores que nos aparezcan.  
 
 ::: {.callout-important}
 
@@ -209,7 +209,7 @@ Ahora podemos usar el método inverso. Si tenemos un proyecto de RStudio, vamos 
 
 Git es extraordinariamente potente, pero vamos a empezar por la funcionalidad básica, `commit`(enviar/encomendar) archivos.  
 
-Si partimos de un nuevo proyecto de RStudio llamado `mi_primer_proyecto` en el que hemos añadido un reporitorio de Git (`usethis::use_git()`), y creado un nuevo archivo llamado `mi_primer_archivo.R`, en el panel `Git` veremos algo similar a esto:  
+Si partimos de un nuevo proyecto de RStudio llamado `mi_primer_proyecto` en el que hemos añadido un repositorio de Git (`usethis::use_git()`), y creado un nuevo archivo llamado `mi_primer_archivo.R`, en el panel `Git` veremos algo similar a esto:  
 
 ![](../data/images/git_my_first_file.png)
 
@@ -218,7 +218,7 @@ Si hacemos cambios en `mi_primer_archivo.R` y hacemos click en Commit ![Commit](
 
 A partir de este momento, cualquier cambio en `mi_primer_archivo.R` será detectado por Git.
 
-Por ejemplo, si añadimos una línea, veremos que el ícono junto al archivo se convierte en una M en un recuadro azul. 
+Por ejemplo, si añadimos una línea, veremos que el icono junto al archivo se convierte en una M en un recuadro azul. 
 
 ![](../data/images/git_modified_files.png)  
 
@@ -246,7 +246,7 @@ Con los comandos pull y push:
 
 ![](../data/images/new-qmd-file.png)  
 
-2. Haz un commit de ese archivo y subelo (push) a Github (asegurate que esta allá!). No olvides hacer un pull!  
+2. Haz un commit de ese archivo y súbelo (push) a Github (asegúrate que esta allá!). No olvides hacer un pull!  
 
 3. Ahora haz cambios en el archivo localmente. Una vez hechos:
 
@@ -265,13 +265,13 @@ Con los comandos pull y push:
 ![SOURCE: [nvie.com](https://nvie.com/posts/a-successful-git-branching-model/)](../data/images/git-basic.png)  
 </div>
 
-Hay diferentes filosofias sobre cual es la mejor manera de trabajar con Git.
+Hay diferentes filosofías sobre cual es la mejor manera de trabajar con Git.
 
-En [este post](https://nvie.com/posts/a-successful-git-branching-model/) por Vincent Driessen podeis ver una explicación bien detallada, complementada con imagenes como la que se ve a continuación.  
+En [este post](https://nvie.com/posts/a-successful-git-branching-model/) por Vincent Driessen podéis ver una explicación bien detallada, complementada con imágenes como la que se ve a continuación.  
 
 El modelo básico implica la existencia de dos ramas. Una `main` o master ("producción"), donde tenemos código que siempre debe funcionar, y una `development` (para desarrollo), donde experimentamos, rompemos cosas, etc.  
 
-Podeis ver un manual super completo llamado [Happy Git and GitHub for the useR](http://happygitwithr.com/) elaborado por Jenny Bryan, Jim Hester, entre otros.  
+Podéis ver un manual super completo llamado [Happy Git and GitHub for the useR](http://happygitwithr.com/) elaborado por Jenny Bryan, Jim Hester, entre otros.  
 
 <div style="clear: both;"></div>
 

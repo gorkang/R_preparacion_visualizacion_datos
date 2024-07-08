@@ -54,7 +54,7 @@ knitr::include_graphics(here::here("data/videos/rstudio-install-ALL.gif"))
 
 if (!require('rlang')) install.packages('rlang'); library('rlang')
 rlang::check_installed(
-  pkg = c("afex", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
+  pkg = c("afex", "broom.mixed", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
           "gapminder", "geomtextpath", "ggplot2", "ggrain", "ggraph", "ggridges", "ggthemes", 
           "ggtext", "googlesheets4", "grateful", "gtsummary", 
           "haven", "here", "hexbin", "inspectdf", "janitor", "knitr", "lme4", 
@@ -66,9 +66,35 @@ rlang::check_installed(
 ```
 
 
-Otros paquetes que usaremos. Para que corran estas lineas tenemos que haber completado el paso previo.  
 
-```{r install_workshop_packages2, message=FALSE, warning=FALSE, include=FALSE}
+::: {.callout-tip collapse="true"}
+
+### Si falla el codigo de arriba, puedes intentar esto
+
+```{r install_workshop_packages_alt, message=FALSE, warning=FALSE, include=TRUE}
+if (!require('pak')) install.packages('pak'); library('pak')
+
+pak::pak(
+  pkg = c("afex", "broom.mixed", "correlation", "corrr", "cowplot", "dplyr", "DT", "esquisse",
+          "gapminder", "geomtextpath", "ggplot2", "ggrain", "ggraph", "ggridges", "ggthemes", 
+          "ggtext", "googlesheets4", "grateful", "gtsummary", 
+          "haven", "here", "hexbin", "inspectdf", "janitor", "knitr", "lme4", 
+          "papaja", "parameters", "performance", "plotly", "purrr", 
+          "quarto", "readODS", "readr", "readxl", "remotes", "renv", "report", 
+          "rticles", "see", "sjPlot", "stargazer", "tidyr", "usethis", "writexl"))
+
+```
+
+
+:::
+
+
+
+
+
+Otros paquetes que necesitaremos Para que corran estas lineas tenemos que haber completado el paso previo.  
+
+```{r install_workshop_packages2, message=FALSE, warning=FALSE, include=TRUE}
 
 if (!require('remotes')) install.packages('remotes'); remotes::install_github('gorkang/jsPsychAdmin')
 if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
@@ -76,7 +102,7 @@ if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); lib
 
 ```
 
-Usaremos un buen numero de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (_en algunos sistemas puede llegar a 1 hora_). Si tienes alguna dificultad en este punto, te recomiendo que veas algun [tutorial básico de R o RStudio](https://www.youtube.com/watch?v=BvKETZ6kr9Q).  
+Usaremos un buen número de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (_en algunos sistemas puede llegar a 1 hora_). Si tienes alguna dificultad en este punto, te recomiendo que veas algún [tutorial básico de R o RStudio](https://www.youtube.com/watch?v=BvKETZ6kr9Q).  
 
 Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, renv, ...), pero dejaremos eso para más adelante.   
 
@@ -119,7 +145,7 @@ Adicionalmente:
     + En un terminal: `sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev docker`
     + Si los monos hacen su trabajo pero no aparecen los csv's, asegúrate que el usuario `docker` tiene acceso al directorio ~/Downloads
 
-Para más detalles, puedes consultar [jsPsychMonkeys setup](https://gorkang.github.io/jsPsychR-manual/qmd/04-jsPsychMonkeys.html#setup)
+Para más detalles, puedes consultar [jsPsychMonkeys setup](https://gorkang.github.io/jsPsychRmanual/qmd/04-jsPsychMonkeys.html#setup)
 
 
 

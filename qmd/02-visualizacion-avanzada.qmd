@@ -14,7 +14,7 @@ Veamos algunas funcionalidades más avanzadas con ggplot y otros paquetes.
 
 ### Paquetes para este capítulo
 
-Como en cada capítulo, crea un nuevo script de R (CNTRL+ SHIFT + N), guardalo como `capitulo2.R`, copia y pega las líneas de abajo y ejecútalas (CNTRL + ENTER para ejecutar linea a linea).    
+Como en cada capítulo, crea un nuevo script de R (CNTRL+ SHIFT + N), guárdalo como `capitulo2.R`, copia y pega las líneas de abajo y ejecútalas (CNTRL + ENTER para ejecutar linea a linea).    
 
 ```{r}
 #| label: setup
@@ -37,8 +37,6 @@ if (!require('purrr')) install.packages('purrr'); library('purrr')
 if (!require('readr')) install.packages('readr'); library('readr')
 if (!require('sjPlot')) install.packages('sjPlot'); library('sjPlot')
 if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
-
-# if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
 
 ```  
 
@@ -181,9 +179,9 @@ ggplot2 nos permite hacer algunas transformaciones estadísticas al crear los gr
 
 ### Computaciones con ggplot: stat_summary()
 
-En ocasiones queremos visualizar estadísticas descriptivas asociadas a los datos (e.g. promedio, mínimo y máximo por condición), pero como generalmente trabajaremos con data-frames en formato long (una observación por fila), no podremos usar los geoms que hemos visto hasta ahora.
+En ocasiones queremos visualizar estadísticas descriptivas asociadas a los datos (e.g. promedio, mínimo y máximo por condición), pero como generalmente trabajaremos con data frames en formato long (una observación por fila), no podremos usar los geoms que hemos visto hasta ahora.
 
-Tenemos dos opciones, la primera es preparar nuevos data-frames antes de pasar a la visualización. La segunda, realizar la computación directamente con ggplot, usando `stat_summary()` junto con alguna de las funciones tradicionales para extraer estadísticas descriptivas.
+Tenemos dos opciones, la primera es preparar nuevos data frames antes de pasar a la visualización. La segunda, realizar la computación directamente con ggplot, usando `stat_summary()` junto con alguna de las funciones tradicionales para extraer estadísticas descriptivas.
 
 
 ::: {.callout-note}
@@ -194,7 +192,7 @@ Tenemos dos opciones, la primera es preparar nuevos data-frames antes de pasar a
 - **max()**: máximo
 - **mean()**: media
 - **median()**: mediana
-- **sd()**: desviación estandar
+- **sd()**: desviación estándar
 
 :::
 
@@ -210,7 +208,7 @@ labs(caption = "Mediana")
 
 ```
 
-`stat_summary()` tiene un buen número de parámetros (F1 sobre la función para ver la ayuda). Por ejemplo, `fun.min` y `fun.max` nos permitiran añadir a la gráfica anterior el rango completo de los datos:
+`stat_summary()` tiene un buen número de parámetros (F1 sobre la función para ver la ayuda). Por ejemplo, `fun.min` y `fun.max` nos permitirán añadir a la gráfica anterior el rango completo de los datos:
 
 ```{r transformaciones-estadisticas-stat_summary-2}
 
@@ -228,7 +226,7 @@ ggplot(gapminder, aes(continent, lifeExp)) +
 
 
 
-Si queremos usar funciones algo más complejas, la sintaxis es diferente. En este caso mostramos media ± desviación estandar:
+Si queremos usar funciones algo más complejas, la sintaxis es diferente. En este caso mostramos media ± desviación estándar:
 
 ```{r transformaciones-estadisticas-stat_summary-3}
 
@@ -238,7 +236,7 @@ ggplot(gapminder, aes(continent, lifeExp)) +
     fun.min = function(x) median(x) - sd(x),
     fun.max = function(x) median(x) + sd(x)
     ) +
-labs(caption = "Mediana más/menos desviación estandard")
+labs(caption = "Mediana más/menos desviación estándar")
 
 ```
 
@@ -266,7 +264,7 @@ stat_summary(fun = median,
 ```
 
 
-O la mediana más la desviación estandard:
+O la mediana más la desviación estandardice:
 
 ```{r transformaciones-estadisticas-promedios-grupo-3}
 
@@ -400,7 +398,7 @@ Usaremos las funciones que empiezan por `scale_` para multitud de cosas, por eje
 
 ```{r personalizacion-graficas-axis}
 
-# Grafico inicial
+# Gráfico inicial
 plot_base = ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
   geom_point(alpha = .1)
 plot_base
@@ -524,7 +522,7 @@ ggplot(gapminder, aes(year, lifeExp, color = continent)) +
 
 ```
 
-O tambíen podemos definir una nueva ubicación para nuestra leyenda. Con `theme(legend.position = "bottom")` movemos la leenda abajo:  
+O también podemos definir una nueva ubicación para nuestra leyenda. Con `theme(legend.position = "bottom")` movemos la leyenda abajo:  
 
 ```{r leyendas5}
 
@@ -716,7 +714,7 @@ Podemos ver que el parámetro `type` nos permite seleccionar paletas secuenciale
 
 
 
-Una vez elegia nuestra paleta, la podemos aplicar con `scale_fill_brewer()` para `fill` o con `scale_color_brewer_brewer()` para `color`. En este caso usamos la `palette = "Blues"`:   
+Una vez elegía nuestra paleta, la podemos aplicar con `scale_fill_brewer()` para `fill` o con `scale_color_brewer_brewer()` para `color`. En este caso usamos la `palette = "Blues"`:   
 
 ```{r personalizacion-graficas-color-fill3}
 
@@ -761,7 +759,7 @@ O `scale_colour_gradientn()` con un número predeterminado de colores definido p
 
 ### Ejercicio {.ejercicio -}
 
-1) Usando como base este plot, podrias cambiarle la paleta de color para usar una de las paletas cualitativas?
+1) Usando como base este plot, podrías cambiarle la paleta de color para usar una de las paletas cualitativas?
 
 ::: {.callout-tip collapse="true"}
 
@@ -780,7 +778,7 @@ O `scale_colour_gradientn()` con un número predeterminado de colores definido p
 
 ```
 
-El grafico final debería verse así:  
+El gráfico final debería verse así:  
 
 ```{r color-01aaa, echo=FALSE}
 
@@ -973,7 +971,7 @@ p +
 
 ### Ejercicios {.ejercicio -}
 
-1) Serías capaz de reproducir este gráfico, usando el dataframe `diamonds` y el `theme_economist`?  
+1) Serías capaz de reproducir este gráfico, usando el data frame `diamonds` y el `theme_economist`?  
 
 Gráfica inicial (verás que parecen datos distintos! Si te fijas bien en la gráfica que queremos conseguir, entenderás porque):
 
@@ -1009,7 +1007,7 @@ ggplot(diamonds, aes(price, cut, fill = cut, color = cut)) +
 
 ---
 
-2) Serías capaz de reproducir este gráfico, usando el dataframe `gapminder` y la paleta `Accent`?
+2) Serías capaz de reproducir este gráfico, usando el data frame `gapminder` y la paleta `Accent`?
 
 
 Gráfica inicial:

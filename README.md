@@ -17,7 +17,7 @@ Al finalizar el curso deberíamos ser capaces de:
 * Importar archivos de datos, transformar los datos, crear nuevas variables  
 * Realizar análisis de datos exploratorios, visualizar distribuciones y comparar grupos  
 * Generar reportes reproducibles con RMarkdown  
-* Crear paradigmas experimentales y un pipeline completo para la preparación de datos con [jsPsychR](https://gorkang.github.io/jsPsychR-manual/index.html)  
+* Crear paradigmas experimentales y un pipeline completo para la preparación de datos con [jsPsychR](https://gorkang.github.io/jsPsychRmanual/index.html)  
 
 
 

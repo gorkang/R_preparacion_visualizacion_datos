@@ -49,4 +49,4 @@ Tendréis que compartir el proyecto completo con el profesor, y él deberá pode
 
 (preparando datos): Ver [como preparar datos](09-experimentos-reproducibles.html#jspsychhelper-como-preparar-datos)\
 
-Para más información, ver [el manual de jsPsychR](https://gorkang.github.io/jsPsychR-manual/qmd/02-QuickGuide.html#QuickGuidejsPsychHelpeR)\
+Para más información, ver [el manual de jsPsychR](https://gorkang.github.io/jsPsychRmanual/qmd/02-QuickGuide.html#QuickGuidejsPsychHelpeR)\

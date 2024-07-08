@@ -26,7 +26,7 @@ book:
     search: true
     right:
       - icon: mastodon
-        href: https://fosstodon.org/%40gorkang{_blank}
+        href: https://fosstodon.org/@gorkang
         aria-label: Mastodon
   page-footer:
     border: false
@@ -59,13 +59,16 @@ format:
       - cosmo
       - base.scss
     code-link: true
-    fig-width: 12
+    fig-width: 16
     fig-height: 8
+    fig-align: center
+    fig-dpi: 600
     toc-depth: 5
   pdf:
     documentclass: scrreprt
     fig-width: 10
     fig-height: 6
+    fig-align: center
     fig-dpi: 600
     include-in-header:
       text: \usepackage[top=20mm, left=30mm, right=25mm, bottom=25mm]{geometry}

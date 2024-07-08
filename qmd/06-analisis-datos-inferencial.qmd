@@ -82,7 +82,7 @@ gapminder |>
 
 ```
 
-El parámetro `statistic` nos permite controlar que estadísticos mostrar en función del tipo de variable. En el caso de abajo, usaremos "promedio (desviación estandard)" para las variables continuas y "número de observaciones (% del total)" para las variables categóricas.  
+El parámetro `statistic` nos permite controlar que estadísticos mostrar en función del tipo de variable. En el caso de abajo, usaremos "promedio (desviación estándar)" para las variables continuas y "número de observaciones (% del total)" para las variables categóricas.  
 
 
 ```{r tablas3, echo=TRUE, fig.height=18}
@@ -127,7 +127,7 @@ Intenta reproducir la tabla de abajo. En el [manual de gtsummary](https://www.da
 
 ### Error al añadir valor p 
 
-<span style="color: orange;">En la ayuda de la funcion: `?add_p.tbl_summary` encontrarás que puedes usar algo como: `add_p(test = everything() ~ "t.test")`</span>
+<span style="color: orange;">En la ayuda de la función: `?add_p.tbl_summary` encontrarás que puedes usar algo como: `add_p(test = everything() ~ "t.test")`</span>
 
 :::
 
@@ -135,7 +135,7 @@ Intenta reproducir la tabla de abajo. En el [manual de gtsummary](https://www.da
 
 ### ¿Cómo consigo poner el titulo `Resident`?
 
-<span style="color: orange;">Fijate cómo usamos `modify_spanning_header()` en el ejemplo anterior. Solo tienes que adaptarlo a los datos actuales, donde tenemos únicamente dos grupos.</span>
+<span style="color: orange;">Fíjate cómo usamos `modify_spanning_header()` en el ejemplo anterior. Solo tienes que adaptarlo a los datos actuales, donde tenemos únicamente dos grupos.</span>
 
 :::
 
@@ -222,7 +222,7 @@ Algo genial de gtsummary, es que podemos usar las propias tablas para [extraer d
 
 El paquete [report](https://github.com/easystats/report) tiene también funcionalidades muy potentes que merece la pena explorar.  
 
-La ventaja de escribir los resultados de esta manera es que si hacemos algun pequeño cambio en la preparación de datos, podemos volver a correr el script de generación del reporte de resultados, y los valores p, etc. se ajustarán automáticamente. Únicamente tenemos que asegurarnos que la interpretación cualitativa no cambia :)  
+La ventaja de escribir los resultados de esta manera es que si hacemos algún pequeño cambio en la preparación de datos, podemos volver a correr el script de generación del reporte de resultados, y los valores p, etc. se ajustarán automáticamente. Únicamente tenemos que asegurarnos que la interpretación cualitativa no cambia :)  
 
 
 ```{r tablas-estadistica-inline, echo=TRUE, fig.height=18}
@@ -267,7 +267,7 @@ Finalmente, crea una tabla similar a la siguiente para reportar los resultados d
 
 ### Como añadir información en el pie de la tabla
 
-<span style="color: orange;">Tendrás que usar la función `add_glance_source_note()` o `add_glance_table()`. Para saber que nombres poner en el paràmetro `include`, puedes usar la función `broom::glance(model)`, donde model es el nombre que has usado para tu modelo estadístico.  </span>
+<span style="color: orange;">Tendrás que usar la función `add_glance_source_note()` o `add_glance_table()`. Para saber que nombres poner en el parámetro `include`, puedes usar la función `broom::glance(model)`, donde model es el nombre que has usado para tu modelo estadístico.  </span>
 
 :::
 

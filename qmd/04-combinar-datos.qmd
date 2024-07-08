@@ -6,7 +6,7 @@
 source("../_common.R")
 ```
 
-Combinar distintos data frames es una tarea muy común cuando preparamos datos. En ocasiones trabajaremos con distintos archivos que tendremos que combinar, y otras veces, separararemos nuestra base original en distintos data frames, para realizar procesamientos diferenciados, y más adelante volver a combinar los data frames en una base final.  
+Combinar distintos data frames es una tarea muy común cuando preparamos datos. En ocasiones trabajaremos con distintos archivos que tendremos que combinar, y otras veces, separaremos nuestra base original en distintos data frames, para realizar procesamientos diferenciados, y más adelante volver a combinar los data frames en una base final.  
 
 ---  
 
@@ -34,7 +34,7 @@ if (!require("waldo")) install.packages("waldo"); library("waldo")
 
 ## Bind rows or columns
 
-El método más sencillo. Simplemente unimos las filas o columnas de los data-frames.  
+El método más sencillo. Simplemente unimos las filas o columnas de los data frames.  
 
 
 Primero importamos dos DFs:  
@@ -53,7 +53,7 @@ DF1 |> bind_rows(DF2)
 
 ```
 
-Con `bind_cols()` añadimos las *columnas* de DF2 a DF1. `bind_cols()` renombra automaticamente los nombres de las columnas para que no haya coincidencias:  
+Con `bind_cols()` añadimos las *columnas* de DF2 a DF1. `bind_cols()` renombra automáticamente los nombres de las columnas para que no haya coincidencias:  
 
 ```{r bind3}
 
@@ -63,7 +63,7 @@ DF1 |> bind_cols(DF2)
 
 ## Joins
 
-El paquete {dplyr} tiene funciones que permiten trabajar combinando, filtrando, etc. distintos dataframes. Podéis ver más detalle y algunas ilustraciones fantásticas (como la de abajo; **inner_join()**) en el capítulo [relational data de r4ds](https://r4ds.had.co.nz/relational-data.html).
+El paquete {dplyr} tiene funciones que permiten trabajar combinando, filtrando, etc. distintos data frames. Podéis ver más detalle y algunas ilustraciones fantásticas (como la de abajo; **inner_join()**) en el capítulo [relational data de r4ds](https://r4ds.had.co.nz/relational-data.html).
 
 ![SOURCE: https://r4ds.had.co.nz/relational-data.html#mutating-joins](../data/images/join-inner.png)  
 
@@ -100,7 +100,7 @@ Estas operaciones tendrán la forma: `DF_x |> WHATEVER_join(DF_y)`
 
 **Importamos datos**
 
-Tenemos los siguientes dataframes:  
+Tenemos los siguientes data frames:  
 
 * DF_IDs: Variables demográficas de participantes  
 * DF_results: Resultados en variables de interés de participantes    
@@ -161,7 +161,7 @@ Preserva las observaciones de `DF_x`, añadiendo las de `DF_y` con claves iguale
 DF_left_joined = DF_IDs |> 
    left_join(DF_results)
 
-# Vemos el número de filas de cada dataframe
+# Vemos el número de filas de cada data frame
 # nrow(DF_left_joined)
 # map(list("DF_left_joined" = DF_left_joined, "DF_IDs" = DF_IDs, "DF_results" = DF_results), nrow)
 
@@ -172,7 +172,7 @@ DT::datatable(DF_left_joined)
 ---  
 
 
-Si no tenemos columnas con el mismo nombre en ambos dataframes, tenemos que indicarle a la función a partir de que dos columnas queremos unir los dataframes. Por ejemplo, con `by = c("ID" = "Identificador")` le decimos que la columna `ID` el primer dataframe corresponde a `Identificador` del segundo dataframe.  
+Si no tenemos columnas con el mismo nombre en ambos data frames, tenemos que indicarle a la función a partir de que dos columnas queremos unir los data frames. Por ejemplo, con `by = c("ID" = "Identificador")` le decimos que la columna `ID` el primer data frame corresponde a `Identificador` del segundo data frame.  
 
 ```{r left-join2}
 
@@ -187,8 +187,8 @@ DF_results2 = DF_results |> rename(Identificador = ID)
   # ! `by` must be supplied when `x` and `y` have no common variables.
 # ℹ use by = character()` to perform a cross-join.
 
-# Tenemos que indicar explicitamente que identificador del primer dataframe (DF_IDs) 
-  # coincide con que identificador del segundo dataframe (DF_results2)
+# Tenemos que indicar explicitamente que identificador del primer data frame (DF_IDs) 
+  # coincide con que identificador del segundo data frame (DF_results2)
 DF_left_joined = DF_IDs |>
    left_join(DF_results2, by = c("ID" = "Identificador"))
 
@@ -362,14 +362,14 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 ```{r ejercicios-joins-responses, eval=FALSE, include=FALSE}
 # 1. Une los datos demográficos con los resultados  
 
-  # Solucion 1 - IDEAL
+  # Solución 1 - IDEAL
   DF_IDs = read_csv(here::here("data/files/02-join-IDs2.csv")) |> rename(ID = Identificador)
 
 
   DF_joined = DF_IDs |> 
     left_join(DF_results, by = c("Identificador" = "ID"))
   
-  # Solucion 2
+  # Solución 2
   DF_joined2 = DF_IDs |> 
     rename(ID = Identificador) |> 
     left_join(DF_results, by = "ID")
@@ -388,13 +388,13 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 
 # 3. Crea una nueva base con datos demográficos y resultados para los sujetos descartados  
 
-  # Solucion 1
+  # Solución 1
   DF_joined_discarded = DF_IDs |> 
     rename(ID = Identificador) |> 
     left_join(DF_results, by = "ID") |> 
     semi_join(DF_BAD, by = "ID")
 
-  # Solucion 2
+  # Solución 2
   DF_joined_discarded2 = DF_BAD |> 
     left_join(DF_results, by = "ID")
   
@@ -406,14 +406,14 @@ DF_BAD = read_csv(here::here("data/files/02-join-BAD.csv"))
 # 4. Comprueba si el promedio para `Crystallized Intelligence` de los participantes
   # descartados difiere de la de los no descartados  
   
-  # Solucion basica
+  # Solución básica
   DF_joined_clean |> 
     summarise(mean_CI = mean(`Crystallized Intelligence`, na.rm = TRUE))
 
   DF_joined_discarded |> 
       summarise(mean_CI = mean(`Crystallized Intelligence`, na.rm = TRUE))
   
-  # Solucion avanzada
+  # Solución avanzada
   DF_all = DF_joined_clean |> mutate(type = "clean") |> 
     bind_rows(DF_joined_discarded |> mutate(type = "discarded")) 
   

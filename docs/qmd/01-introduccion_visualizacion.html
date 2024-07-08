@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.5.53">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>R para preparación y visualización de datos - 1&nbsp; Introducción a R y visualización de datos</title>
+<title>1&nbsp; Introducción a R y visualización de datos – R para preparación y visualización de datos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -76,7 +76,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -85,60 +91,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="../site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="../site_libs/plotly-binding-4.10.2/plotly.js"></script><script src="../site_libs/typedarray-0.1/typedarray.min.js"></script><script src="../site_libs/jquery-3.5.1/jquery.min.js"></script><link href="../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+}</script><link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="../site_libs/plotly-binding-4.10.4/plotly.js"></script><script src="../site_libs/typedarray-0.1/typedarray.min.js"></script><script src="../site_libs/jquery-3.5.1/jquery.min.js"></script><link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 </head>
 <body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">R para preparación y visualización de datos</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://fosstodon.org/%40gorkang%7B_blank%7D" rel="" target=""><i class="bi bi-mastodon" role="img" aria-label="Mastodon">
+    <a class="nav-link" href="https://fosstodon.org/@gorkang"> <i class="bi bi-mastodon" role="img" aria-label="Mastodon">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-<div class="quarto-navbar-tools">
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
     <a href="https://github.com/gorkang/R_preparacion_visualizacion_datos" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="../R-para-preparación-y-visualización-de-datos.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/01-introduccion_visualizacion.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a R y visualización de datos</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/01-introduccion_visualizacion.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a R y visualización de datos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -220,14 +220,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li>
-<a href="#introducci%C3%B3n-porque-la-visualizaci%C3%B3n-de-datos-es-importante" id="toc-introducción-porque-la-visualización-de-datos-es-importante" class="nav-link active" data-scroll-target="#introducci%C3%B3n-porque-la-visualizaci%C3%B3n-de-datos-es-importante"><span class="header-section-number">1.1</span> Introducción: porque la visualización de datos es importante</a>
+<a href="#introducci%C3%B3n-por-qu%C3%A9-la-visualizaci%C3%B3n-de-datos-es-importante" id="toc-introducción-por-qué-la-visualización-de-datos-es-importante" class="nav-link active" data-scroll-target="#introducci%C3%B3n-por-qu%C3%A9-la-visualizaci%C3%B3n-de-datos-es-importante"><span class="header-section-number">1.1</span> Introducción: ¿por qué la visualización de datos es importante?</a>
   <ul>
 <li>
 <a href="#ejemplo-del-mundo-real-cuantos-temas-deberia-estudiar" id="toc-ejemplo-del-mundo-real-cuantos-temas-deberia-estudiar" class="nav-link" data-scroll-target="#ejemplo-del-mundo-real-cuantos-temas-deberia-estudiar"><span class="header-section-number">1.1.1</span> Ejemplo del mundo real: ¿cuantos temas deberia estudiar?</a>
@@ -238,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#por-qu%C3%A9-r" id="toc-por-qué-r" class="nav-link" data-scroll-target="#por-qu%C3%A9-r"><span class="header-section-number">1.2</span> Por qué R?</a>
+<a href="#por-qu%C3%A9-r" id="toc-por-qué-r" class="nav-link" data-scroll-target="#por-qu%C3%A9-r"><span class="header-section-number">1.2</span> ¿Por qué R?</a>
   <ul>
 <li>
 <a href="#bienvenida-al-tidyverse" id="toc-bienvenida-al-tidyverse" class="nav-link" data-scroll-target="#bienvenida-al-tidyverse"><span class="header-section-number">1.2.1</span> Bienvenida al tidyverse</a>
@@ -321,6 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header><hr>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -349,24 +350,23 @@ Cuando empecemos <strong>cada capítulo</strong>:</p>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://allancameron.github.io/geomtextpath/">'geomtextpath'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'geomtextpath'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://allancameron.github.io/geomtextpath/">'geomtextpath'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://yutannihilation.github.io/gghighlight/">'gghighlight'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'gghighlight'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://yutannihilation.github.io/gghighlight/">'gghighlight'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org">'ggplot2'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'ggplot2'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org">'ggplot2'</a></span><span class="op">)</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jrnold/ggthemes">'ggthemes'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'ggthemes'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jrnold/ggthemes">'ggthemes'</a></span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/njudd/ggrain">'ggrain'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'ggrain'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/njudd/ggrain">'ggrain'</a></span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://jrnold.github.io/ggthemes/">'ggthemes'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'ggthemes'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://jrnold.github.io/ggthemes/">'ggthemes'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://wilkelab.org/ggridges/">'ggridges'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'ggridges'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://wilkelab.org/ggridges/">'ggridges'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/">'knitr'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'knitr'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/">'knitr'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://plotly-r.com">'plotly'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'plotly'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://plotly-r.com">'plotly'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://purrr.tidyverse.org/">'purrr'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'purrr'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://purrr.tidyverse.org/">'purrr'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://readr.tidyverse.org">'readr'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'readr'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://readr.tidyverse.org">'readr'</a></span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://strengejacke.github.io/sjPlot/">'sjPlot'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'sjPlot'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://strengejacke.github.io/sjPlot/">'sjPlot'</a></span><span class="op">)</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://tidyr.tidyverse.org">'tidyr'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tidyr'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyr.tidyverse.org">'tidyr'</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jorvlan/raincloudplots">'raincloudplots'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'jorvlan/raincloudplots'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jorvlan/raincloudplots">'raincloudplots'</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://tidyr.tidyverse.org">'tidyr'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tidyr'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyr.tidyverse.org">'tidyr'</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
-<section id="introducción-porque-la-visualización-de-datos-es-importante" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="introducción-porque-la-visualización-de-datos-es-importante">
-<span class="header-section-number">1.1</span> Introducción: porque la visualización de datos es importante</h2>
+<section id="introducción-por-qué-la-visualización-de-datos-es-importante" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="introducción-por-qué-la-visualización-de-datos-es-importante">
+<span class="header-section-number">1.1</span> Introducción: ¿por qué la visualización de datos es importante?</h2>
 <p><em>“These 13 datasets (the Datasaurus, plus 12 others) each have the same summary statistics (x/y mean, x/y standard deviation, and Pearson’s correlation) to two decimal places, while being drastically different in appearance.”</em> (Matejka, J., &amp; Fitzmaurice, G., 2017).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="../data/images/DinoSequentialSmaller.gif" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">SOURCE: https://www.research.autodesk.com/publications/same-stats-different-graphs/</figcaption></figure>
+<figcaption>SOURCE: https://www.research.autodesk.com/publications/same-stats-different-graphs/</figcaption></figure>
 </div>
 <section id="ejemplo-del-mundo-real-cuantos-temas-deberia-estudiar" class="level3" data-number="1.1.1"><h3 data-number="1.1.1" class="anchored" data-anchor-id="ejemplo-del-mundo-real-cuantos-temas-deberia-estudiar">
 <span class="header-section-number">1.1.1</span> Ejemplo del mundo real: ¿cuantos temas deberia estudiar?</h3>
@@ -374,8 +374,8 @@ Cuando empecemos <strong>cada capítulo</strong>:</p>
 <p>Abajo se puede ver como cambia la probabilidad de que uno de los temas estudiados aparezca dentro de los 5 seleccionados al azar. Con 30 de los 80 temas estudiados, la probabilidad de que uno de ellos salga en la prueba es del 91%. Si estudiáramos 47, subiríamos a una probabilidad del 99%.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-68c7f2192b61f0c01c30" style="width:100%;height:433px;"></div>
-<script type="application/json" data-for="htmlwidget-68c7f2192b61f0c01c30">{"x":{"data":[{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80],"y":[0.06249999999999313,0.1218354430379706,0.17812804284322428,0.2314963517495027,0.28205580229229843,0.32991874880613853,0.37519450902193913,0.41798940566426934,0.45840680804868078,0.49654717367904699,0.5325080898448652,0.56638431521841837,0.59826782145235591,0.62824783477679846,0.65641087759670602,0.68284081008926245,0.70761887180104099,0.73082372324539513,0.75253148749982679,0.77281579180312099,0.79174780915281218,0.80939629990258433,0.82582765335923913,0.84110592938037376,0.85529289997142044,0.86844809088310626,0.88062882320875147,0.89189025498150099,0.90228542277174106,0.91186528328428618,0.92067875495586282,0.92877275955219873,0.93619226376550679,0.94298032081172467,0.94917811202783686,0.95482498846918329,0.95995851250677111,0.96461449942458322,0.96882705901688948,0.97262863718555626,0.97605005753735607,0.97912056298127903,0.98186785732584181,0.98431814687639763,0.9864961820324476,0.98842529888494857,0.99012746081362613,0.99162330008428212,0.99293215944610624,0.9940721337289733,0.99506011144083106,0.99591181636481796,0.9966418491568183,0.99726372894257831,0.99778993491515722,0.99823194793210124,0.99860029211287948,0.99890457643616659,0.9991535363370051,0.99935507530442103,0.99951630647830769,0.99964359424713078,0.99974259584513248,0.99981830294949026,0.99987508327773356,0.99991672218516947,0.99994646426190803,0.9999670549304025,0.99998078204273466,0.99998951747779408,0.99999475873886778,0.99999767055059174,0.99999912645643707,0.9999997504160465,0.9999999584026612,0.99999999999996314,0.99999999999994582,0.99999999999991995,0.99999999999991984,1],"text":["N:  1<br />value: 0.0625000","N:  2<br />value: 0.1218354","N:  3<br />value: 0.1781280","N:  4<br />value: 0.2314964","N:  5<br />value: 0.2820558","N:  6<br />value: 0.3299187","N:  7<br />value: 0.3751945","N:  8<br />value: 0.4179894","N:  9<br />value: 0.4584068","N: 10<br />value: 0.4965472","N: 11<br />value: 0.5325081","N: 12<br />value: 0.5663843","N: 13<br />value: 0.5982678","N: 14<br />value: 0.6282478","N: 15<br />value: 0.6564109","N: 16<br />value: 0.6828408","N: 17<br />value: 0.7076189","N: 18<br />value: 0.7308237","N: 19<br />value: 0.7525315","N: 20<br />value: 0.7728158","N: 21<br />value: 0.7917478","N: 22<br />value: 0.8093963","N: 23<br />value: 0.8258277","N: 24<br />value: 0.8411059","N: 25<br />value: 0.8552929","N: 26<br />value: 0.8684481","N: 27<br />value: 0.8806288","N: 28<br />value: 0.8918903","N: 29<br />value: 0.9022854","N: 30<br />value: 0.9118653","N: 31<br />value: 0.9206788","N: 32<br />value: 0.9287728","N: 33<br />value: 0.9361923","N: 34<br />value: 0.9429803","N: 35<br />value: 0.9491781","N: 36<br />value: 0.9548250","N: 37<br />value: 0.9599585","N: 38<br />value: 0.9646145","N: 39<br />value: 0.9688271","N: 40<br />value: 0.9726286","N: 41<br />value: 0.9760501","N: 42<br />value: 0.9791206","N: 43<br />value: 0.9818679","N: 44<br />value: 0.9843181","N: 45<br />value: 0.9864962","N: 46<br />value: 0.9884253","N: 47<br />value: 0.9901275","N: 48<br />value: 0.9916233","N: 49<br />value: 0.9929322","N: 50<br />value: 0.9940721","N: 51<br />value: 0.9950601","N: 52<br />value: 0.9959118","N: 53<br />value: 0.9966418","N: 54<br />value: 0.9972637","N: 55<br />value: 0.9977899","N: 56<br />value: 0.9982319","N: 57<br />value: 0.9986003","N: 58<br />value: 0.9989046","N: 59<br />value: 0.9991535","N: 60<br />value: 0.9993551","N: 61<br />value: 0.9995163","N: 62<br />value: 0.9996436","N: 63<br />value: 0.9997426","N: 64<br />value: 0.9998183","N: 65<br />value: 0.9998751","N: 66<br />value: 0.9999167","N: 67<br />value: 0.9999465","N: 68<br />value: 0.9999671","N: 69<br />value: 0.9999808","N: 70<br />value: 0.9999895","N: 71<br />value: 0.9999948","N: 72<br />value: 0.9999977","N: 73<br />value: 0.9999991","N: 74<br />value: 0.9999998","N: 75<br />value: 1.0000000","N: 76<br />value: 1.0000000","N: 77<br />value: 1.0000000","N: 78<br />value: 1.0000000","N: 79<br />value: 1.0000000","N: 80<br />value: 1.0000000"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[30,30],"y":[0.015624999999992784,1.0468750000000004],"text":"xintercept: 30","type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)","dash":"dash"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-2.9500000000000002,83.950000000000003],"y":[1,1],"text":"yintercept: 1","type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)","dash":"dash"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":41.902864259028647,"r":6.6417600664176026,"b":37.193856371938573,"l":44.499792444997929},"font":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835205},"title":{"text":"Probabilidad de que uno de los temas estudiados aparezca","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402243},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-2.9500000000000002,83.950000000000003],"tickmode":"array","ticktext":["0","10","20","30","40","50","60","70","80"],"tickvals":[0,10,20.000000000000004,30.000000000000004,40,50.000000000000007,59.999999999999993,70,80],"categoryorder":"array","categoryarray":["0","10","20","30","40","50","60","70","80"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.3208800332088013,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":10.62681610626816},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.60379636967432737,"zeroline":false,"anchor":"y","title":{"text":"Temas estudiados","font":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.015624999999992784,1.0468750000000004],"tickmode":"array","ticktext":["5%","10%","15%","20%","25%","30%","35%","40%","45%","50%","55%","60%","65%","70%","75%","80%","85%","90%","95%","100%"],"tickvals":[0.050000000000000003,0.10000000000000002,0.15000000000000002,0.20000000000000001,0.25,0.30000000000000004,0.35000000000000003,0.40000000000000002,0.45000000000000001,0.5,0.55000000000000004,0.60000000000000009,0.65000000000000002,0.70000000000000007,0.75,0.80000000000000004,0.85000000000000009,0.90000000000000002,0.95000000000000007,1],"categoryorder":"array","categoryarray":["5%","10%","15%","20%","25%","30%","35%","40%","45%","50%","55%","60%","65%","70%","75%","80%","85%","90%","95%","100%"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.3208800332088013,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":10.62681610626816},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.60379636967432737,"zeroline":false,"anchor":"x","title":{"text":"Probabilidad","font":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":10.62681610626816}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"15e91147d6c50":{"x":{},"y":{},"type":"scatter"},"15e916a8bbf71":{"xintercept":{}},"15e912de72e1a":{"yintercept":{}}},"cur_data":"15e91147d6c50","visdat":{"15e91147d6c50":["function (y) ","x"],"15e916a8bbf71":["function (y) ","x"],"15e912de72e1a":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-68c7f2192b61f0c01c30" style="width:100%;height:650px;"></div>
+<script type="application/json" data-for="htmlwidget-68c7f2192b61f0c01c30">{"x":{"data":[{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80],"y":[0.06249999999999313,0.1218354430379706,0.17812804284322428,0.2314963517495027,0.28205580229229843,0.32991874880613853,0.37519450902193913,0.41798940566426934,0.45840680804868078,0.49654717367904699,0.5325080898448652,0.56638431521841837,0.59826782145235591,0.62824783477679846,0.65641087759670602,0.68284081008926245,0.70761887180104099,0.73082372324539513,0.75253148749982679,0.77281579180312099,0.79174780915281218,0.80939629990258433,0.82582765335923913,0.84110592938037376,0.85529289997142044,0.86844809088310626,0.88062882320875147,0.89189025498150099,0.90228542277174106,0.91186528328428618,0.92067875495586282,0.92877275955219873,0.93619226376550679,0.94298032081172467,0.94917811202783686,0.95482498846918329,0.95995851250677111,0.96461449942458322,0.96882705901688948,0.97262863718555626,0.97605005753735607,0.97912056298127903,0.98186785732584181,0.98431814687639763,0.9864961820324476,0.98842529888494857,0.99012746081362613,0.99162330008428212,0.99293215944610624,0.9940721337289733,0.99506011144083106,0.99591181636481796,0.9966418491568183,0.99726372894257831,0.99778993491515722,0.99823194793210124,0.99860029211287948,0.99890457643616659,0.9991535363370051,0.99935507530442103,0.99951630647830769,0.99964359424713078,0.99974259584513248,0.99981830294949026,0.99987508327773356,0.99991672218516947,0.99994646426190803,0.9999670549304025,0.99998078204273466,0.99998951747779408,0.99999475873886778,0.99999767055059174,0.99999912645643707,0.9999997504160465,0.9999999584026612,0.99999999999996314,0.99999999999994582,0.99999999999991995,0.99999999999991984,1],"text":["N:  1<br />value: 0.0625000","N:  2<br />value: 0.1218354","N:  3<br />value: 0.1781280","N:  4<br />value: 0.2314964","N:  5<br />value: 0.2820558","N:  6<br />value: 0.3299187","N:  7<br />value: 0.3751945","N:  8<br />value: 0.4179894","N:  9<br />value: 0.4584068","N: 10<br />value: 0.4965472","N: 11<br />value: 0.5325081","N: 12<br />value: 0.5663843","N: 13<br />value: 0.5982678","N: 14<br />value: 0.6282478","N: 15<br />value: 0.6564109","N: 16<br />value: 0.6828408","N: 17<br />value: 0.7076189","N: 18<br />value: 0.7308237","N: 19<br />value: 0.7525315","N: 20<br />value: 0.7728158","N: 21<br />value: 0.7917478","N: 22<br />value: 0.8093963","N: 23<br />value: 0.8258277","N: 24<br />value: 0.8411059","N: 25<br />value: 0.8552929","N: 26<br />value: 0.8684481","N: 27<br />value: 0.8806288","N: 28<br />value: 0.8918903","N: 29<br />value: 0.9022854","N: 30<br />value: 0.9118653","N: 31<br />value: 0.9206788","N: 32<br />value: 0.9287728","N: 33<br />value: 0.9361923","N: 34<br />value: 0.9429803","N: 35<br />value: 0.9491781","N: 36<br />value: 0.9548250","N: 37<br />value: 0.9599585","N: 38<br />value: 0.9646145","N: 39<br />value: 0.9688271","N: 40<br />value: 0.9726286","N: 41<br />value: 0.9760501","N: 42<br />value: 0.9791206","N: 43<br />value: 0.9818679","N: 44<br />value: 0.9843181","N: 45<br />value: 0.9864962","N: 46<br />value: 0.9884253","N: 47<br />value: 0.9901275","N: 48<br />value: 0.9916233","N: 49<br />value: 0.9929322","N: 50<br />value: 0.9940721","N: 51<br />value: 0.9950601","N: 52<br />value: 0.9959118","N: 53<br />value: 0.9966418","N: 54<br />value: 0.9972637","N: 55<br />value: 0.9977899","N: 56<br />value: 0.9982319","N: 57<br />value: 0.9986003","N: 58<br />value: 0.9989046","N: 59<br />value: 0.9991535","N: 60<br />value: 0.9993551","N: 61<br />value: 0.9995163","N: 62<br />value: 0.9996436","N: 63<br />value: 0.9997426","N: 64<br />value: 0.9998183","N: 65<br />value: 0.9998751","N: 66<br />value: 0.9999167","N: 67<br />value: 0.9999465","N: 68<br />value: 0.9999671","N: 69<br />value: 0.9999808","N: 70<br />value: 0.9999895","N: 71<br />value: 0.9999948","N: 72<br />value: 0.9999977","N: 73<br />value: 0.9999991","N: 74<br />value: 0.9999998","N: 75<br />value: 1.0000000","N: 76<br />value: 1.0000000","N: 77<br />value: 1.0000000","N: 78<br />value: 1.0000000","N: 79<br />value: 1.0000000","N: 80<br />value: 1.0000000"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[30,30],"y":[0.015624999999992784,1.0468750000000004],"text":"xintercept: 30","type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)","dash":"dash"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-2.9500000000000002,83.950000000000003],"y":[1,1],"text":"yintercept: 1","type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)","dash":"dash"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":40.840182648401829,"r":7.3059360730593621,"b":37.260273972602747,"l":48.949771689497723},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Probabilidad de que uno de los temas estudiados aparezca","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-2.9500000000000002,83.950000000000003],"tickmode":"array","ticktext":["0","10","20","30","40","50","60","70","80"],"tickvals":[0,10,20.000000000000004,30.000000000000004,40,50.000000000000007,59.999999999999993,70,80],"categoryorder":"array","categoryarray":["0","10","20","30","40","50","60","70","80"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Temas estudiados","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.015624999999992784,1.0468750000000004],"tickmode":"array","ticktext":["5%","10%","15%","20%","25%","30%","35%","40%","45%","50%","55%","60%","65%","70%","75%","80%","85%","90%","95%","100%"],"tickvals":[0.050000000000000003,0.10000000000000002,0.15000000000000002,0.20000000000000001,0.25,0.30000000000000004,0.35000000000000003,0.40000000000000002,0.45000000000000001,0.5,0.55000000000000004,0.60000000000000009,0.65000000000000002,0.70000000000000007,0.75,0.80000000000000004,0.85000000000000009,0.90000000000000002,0.95000000000000007,1],"categoryorder":"array","categoryarray":["5%","10%","15%","20%","25%","30%","35%","40%","45%","50%","55%","60%","65%","70%","75%","80%","85%","90%","95%","100%"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Probabilidad","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"a3b42a482265":{"x":{},"y":{},"type":"scatter"},"a3b4d8f538b":{"xintercept":{}},"a3b45a2c1e8f":{"yintercept":{}}},"cur_data":"a3b42a482265","visdat":{"a3b42a482265":["function (y) ","x"],"a3b4d8f538b":["function (y) ","x"],"a3b45a2c1e8f":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br> En el experimento le preguntamos a las personas por la probabilidad de que les apareciera alguno de los temas estudiados en la prueba. Comparamos las siguientes dos preguntas:</p>
@@ -387,7 +387,7 @@ Cuando empecemos <strong>cada capítulo</strong>:</p>
 <p>Miramos el error promedio en función de la pregunta (cuanto se han alejado de la probabilidad correcta), y vimos que nuestra manipulación había tenido un efecto considerable:</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">Question</th>
 <th style="text-align: right;">Error_promedio</th>
@@ -415,7 +415,7 @@ Cuando empecemos <strong>cada capítulo</strong>:</p>
 <p>Hay una diferencia notable entre condiciones. Pasamos de un error promedio del -30.7% a tan solo 4%, simplemente cambiando la pregunta. Hagamos un sencillo análisis de regresión para ver si la diferencia es significativa, y cuanta varianza explica nuestro modelo.</p>
 <div class="cell">
 <div class="cell-output-display">
-<table data-quarto-postprocess="true" class="table table-sm table-striped small"><tbody>
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true"><tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
 <td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Error</td>
@@ -450,13 +450,18 @@ Cuando empecemos <strong>cada capítulo</strong>:</p>
 </div>
 </div>
 <div class="cell">
-<pre><code>#&gt; 
-#&gt;  Shapiro-Wilk normality test
-#&gt; 
-#&gt; data:  modelo_regresion$residuals
-#&gt; W = 0.96215, p-value = 0.0532</code></pre>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/visualizacion-importante-01c-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/visualizacion-importante-01c-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  modelo_regresion$residuals
+W = 0.96215, p-value = 0.0532</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -480,13 +485,16 @@ Nota importante sobre las pruebas de normalidad. <em>Hack click para leerme</em>
 <p>Preparamos un plot con promedios y barras con error standard para nuestro paper.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/visualizacion-importante-01d-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/visualizacion-importante-01d-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Estamos listos para escribir el paper. Preparemos la tabla con descriptivos…</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">Question</th>
 <th style="text-align: right;">Error_promedio</th>
@@ -511,10 +519,13 @@ Nota importante sobre las pruebas de normalidad. <em>Hack click para leerme</em>
 </div>
 </div>
 <hr>
-<p>Es curioso que la desviación estandard sea mayor en el grupo con menos error promedio… Visualicemos las respuestas de todos los participantes, junto con la distribución de los datos.</p>
+<p>Es curioso que la desviación estándar sea mayor en el grupo con menos error promedio… Visualicemos las respuestas de todos los participantes, junto con la distribución de los datos.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/visualizacion-importante-04-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/visualizacion-importante-04-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Como se puede apreciar en la gráfica, cuando usamos la pregunta <code>¿Cuál es la probabilidad de que no salga ninguno de los temas que has estudiado?</code> no estamos reduciendo el error, sino convirtiendo una distribución de respuestas unimodal en bimodal.</p>
@@ -522,37 +533,39 @@ Nota importante sobre las pruebas de normalidad. <em>Hack click para leerme</em>
 <p><strong>TLDR</strong>: La manera en la visualizamos la información determina las conclusiones a las que llegamos. En una sola gráfica:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/visualizacion-importante-05-1.png" class="img-fluid" width="1152"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/visualizacion-importante-05-1.png" class="img-fluid figure-img" width="7200"></p>
+</figure>
+</div>
 </div>
 </div>
 <section id="moraleja-es-importante-mostrar-los-datos-individuales-yo-la-distribución-de-los-datos" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="moraleja-es-importante-mostrar-los-datos-individuales-yo-la-distribución-de-los-datos">Moraleja: es importante mostrar los datos individuales y/o la distribución de los datos</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="../data/images/BoxViolinSmaller.gif" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">SOURCE: https://www.research.autodesk.com/publications/same-stats-different-graphs/</figcaption></figure>
+<figcaption>SOURCE: https://www.research.autodesk.com/publications/same-stats-different-graphs/</figcaption></figure>
 </div>
 <hr>
 <!-- [@riedel2022cs]: https://doi.org/10.1042/CS20220287 --><hr></section></section></section><section id="por-qué-r" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="por-qué-r">
-<span class="header-section-number">1.2</span> Por qué R?</h2>
+<span class="header-section-number">1.2</span> ¿Por qué R?</h2>
 <div style="float:left;position: relative; margin:0px 30px 0px 0px;">
 <img src="../data/images/R_logo.png" class="img-fluid">
 </div>
-<p>R es <a href="http://r4stats.com/articles/popularity/">uno de los programas para data science mas populares</a>, especialmente usado en la academia. El numero de paquetes que ofrecen funcionalidades de todo tipo no ha dejado de crecer. En 2023 el numero de paquetes en <a href="https://cran.r-project.org/web/packages/index.html">R-cran</a> ha superado los 25,000, y el ritmo de crecimiento nos acerca a la singularidad… ;)</p>
+<p>R es <a href="http://r4stats.com/articles/popularity/">uno de los programas para data science mas populares</a>, especialmente usado en la academia. El numero de paquetes que ofrecen funcionalidades de todo tipo no ha dejado de crecer. En 2024 el numero de paquetes en <a href="https://cran.r-project.org/web/packages/index.html">R-cran</a> ha superado los 25,000, y el ritmo de crecimiento nos acerca a la singularidad… ;)</p>
 <p><br></p>
 <div style="clear: both;">
 
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="../data/images/number-of-submitted-packages-to-CRAN.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">SOURCE: https://gist.github.com/daroczig/3cf06d6db4be2bbe3368</figcaption></figure>
+<figcaption>SOURCE: https://gist.github.com/daroczig/3cf06d6db4be2bbe3368</figcaption></figure>
 </div>
-<!-- (https://gist.githubusercontent.com/daroczig/3cf06d6db4be2bbe3368/raw/b66b0531fb1b86d3e04a003b2e105ad4f147900e/number-of-submitted-packages-to-CRAN.png)   -->
 <p><br></p>
 <p>Además de lo anterior, R es un programa de <a href="https://en.wikipedia.org/wiki/Open_source">código abierto</a> (algo esencial para poder hacer ciencia reproducible), con una <a href="https://community.rstudio.com/">comunidad de usuarios</a> muy acogedora, y con un importante foco en la <a href="https://qz.com/work/1661486/r-ladies-made-data-science-inclusive/">inclusividad</a>.</p>
 <p>La importancia de la comunidad es difícil de apreciar. Por ejemplo, es relativamente habitual que uno abra un issue en Github pidiendo una nueva característica en un paquete, y que los creadores la implementen (e.g.&nbsp;<a href="https://github.com/easystats/correlation/issues/145">correlation</a>, <a href="https://github.com/ddsjoberg/gtsummary/issues/677">gtsummary</a>, <a href="https://github.com/ropensci/rorcid/issues/44">rorcid</a>), que uno reporte un error y lo corrijan (e.g.&nbsp;<a href="https://github.com/strengejacke/sjPlot/issues/725">sjPlot</a>, <a href="https://github.com/ddsjoberg/gtsummary/issues/686">gtsummary</a>), recibir correcciones y mejoras en tus repositorios (e.g.&nbsp;<a href="https://github.com/gorkang/html2latex/pull/1">html2latex</a>, <a href="https://github.com/gorkang/2019-Chile/pull/1">2019-Chile</a>), o poder contribuir a repositorios de otros (e.g.&nbsp;<a href="https://github.com/jspsych/jsPsych/pull/1212">jsPsych</a>, <a href="https://github.com/ddsjoberg/gtsummary/pull/683">gtsummary</a>).</p>
 <p>Sus funciones de visualización son muy potentes (ver la <a href="https://www.r-graph-gallery.com/">r-graph-gallery</a> para algunos ejemplos), siendo usadas como herramienta principal en medios como la <a href="https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535">BBC</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="../data/images/BBC.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">SOURCE: <a href="https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535">BBC</a></figcaption></figure>
+<figcaption>SOURCE: <a href="https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535">BBC</a></figcaption></figure>
 </div>
 <p><br></p>
 <p>No menos importante, hay una gran cantidad de cursos, tutoriales, presentaciones y libros de una calidad excelente, con los que podemos aprender de manera autónoma. Por ejemplo:</p>
@@ -597,20 +610,22 @@ Nota importante sobre las pruebas de normalidad. <em>Hack click para leerme</em>
 <span>                      <span class="op">}</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Then combine the results into a data.frame</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">widest_petals</span><span class="op">)</span></span>
-<span><span class="co">#&gt;               Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</span></span>
-<span><span class="co">#&gt; setosa                 5.0         3.5          1.6         0.6     setosa</span></span>
-<span><span class="co">#&gt; versicolor             5.9         3.2          4.8         1.8 versicolor</span></span>
-<span><span class="co">#&gt; virginica.101          6.3         3.3          6.0         2.5  virginica</span></span>
-<span><span class="co">#&gt; virginica.110          7.2         3.6          6.1         2.5  virginica</span></span>
-<span><span class="co">#&gt; virginica.145          6.7         3.3          5.7         2.5  virginica</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">widest_petals</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+setosa                 5.0         3.5          1.6         0.6     setosa
+versicolor             5.9         3.2          4.8         1.8 versicolor
+virginica.101          6.3         3.3          6.0         2.5  virginica
+virginica.110          7.2         3.6          6.1         2.5  virginica
+virginica.145          6.7         3.3          5.7         2.5  virginica</code></pre>
+</div>
 </div>
 </section></section><section id="antes-de-empezar" class="level3" data-number="1.2.2"><h3 data-number="1.2.2" class="anchored" data-anchor-id="antes-de-empezar">
 <span class="header-section-number">1.2.2</span> Antes de empezar</h3>
 <p>Programar es muy difícil. Todos necesitamos ayuda. Contar con una comunidad robusta con la que compartir, preguntar, contribuir, ayuda muchísimo.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="../data/images/dunning-kruger.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">SOURCE: http://www.keywordbasket.com/ZWZlY3RvIGR1bm5pbmcta3J1Z2Vy/</figcaption></figure>
+<figcaption>SOURCE: http://www.keywordbasket.com/ZWZlY3RvIGR1bm5pbmcta3J1Z2Vy/</figcaption></figure>
 </div>
 <p><br></p>
 <p>Hay algunos recursos que son <strong>imprescindibles</strong>. Nadie sabe como <em>los antiguos</em> podían programar antes de la llegada de Stackoverflow:</p>
@@ -622,18 +637,18 @@ Nota importante sobre las pruebas de normalidad. <em>Hack click para leerme</em>
 <ul>
 <li><p><a href="https://community.rstudio.com/">Comunidad de usuarios de Rstudio</a></p></li>
 <li>
-<p><a href="https://twitter.com/home">Twitter!</a> Por ejemplo:</p>
+<p><a href="https://joinmastodon.org/">Mastodon!</a> Por ejemplo:</p>
 <ul>
 <li>
-<a href="https://twitter.com/thomas_mock"><img src="../data/images/twitter_small.png" class="img-fluid"> @thomas_mock</a> (#TidyTuesday)<br>
+<a href="https://fosstodon.org/@thomas_mock"><img src="../data/images/logo-mastodon.png" class="img-fluid"> @thomas_mock</a> (#TidyTuesday)<br>
 </li>
 <li>
-<a href="https://twitter.com/dataandme"><img src="../data/images/twitter_small.png" class="img-fluid"> @dataandme</a><br>
+<a href="https://fosstodon.org/@rivaquiroga@mastodon.social"><img src="../data/images/logo-mastodon.png" class="img-fluid"> @rivaquiroga</a><br>
 </li>
 <li>
-<a href="https://twitter.com/rivaquiroga"><img src="../data/images/twitter_small.png" class="img-fluid"> @rivaquiroga</a><br>
+<a href="https://fosstodon.org/@RLadiesGlobal@hachyderm.io"><img src="../data/images/logo-mastodon.png" class="img-fluid"> @RLadiesGlobal</a><br>
 </li>
-<li><a href="https://twitter.com/RLadiesSantiago"><img src="../data/images/twitter_small.png" class="img-fluid"> @RLadiesSantiago</a></li>
+<li><a href="https://fosstodon.org/@coolbutuseless"><img src="../data/images/logo-mastodon.png" class="img-fluid"> @coolbutuseless</a></li>
 </ul>
 </li>
 <li><p>Webs como <a href="https://www.r-bloggers.com/">R bloggers</a></p></li>
@@ -645,13 +660,12 @@ Nota importante sobre las pruebas de normalidad. <em>Hack click para leerme</em>
 <p>Para empezar a usar ggplot sin tener que preocuparnos de su complejidad, podemos usar la función <code>esquisse:::esquisser()</code> del paquete <a href="https://www.williamrchase.com/">esquisse</a>. Esta nos permite usar la potencia de ggplot para explorar una base de datos de manera muy sencilla.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="../data/images/esquisse.gif" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">SOURCE: https://github.com/will-r-chase/blog/blob/master/static/slides/slide_img/esquisse.gif</figcaption></figure>
+<figcaption>SOURCE: https://github.com/will-r-chase/blog/blob/master/static/slides/slide_img/esquisse.gif</figcaption></figure>
 </div>
 <p><br></p>
 <p>La manera fácil (1, 2, 3), usando <a href="https://github.com/dreamRs/esquisse">esquisse</a>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="co"># 1) Asegúrate que hemos instalado el paquete esquisse</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 1) Asegúrate que hemos instalado el paquete esquisse</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://dreamrs.github.io/esquisse/">'esquisse'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'esquisse'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://dreamrs.github.io/esquisse/">'esquisse'</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 2) Lanza el wizard esquisser  </span></span>
@@ -661,7 +675,7 @@ Nota importante sobre las pruebas de normalidad. <em>Hack click para leerme</em>
 </div>
 </section><section id="aprendamos-con-garrick" class="level4" data-number="1.2.3.2"><h4 data-number="1.2.3.2" class="anchored" data-anchor-id="aprendamos-con-garrick">
 <span class="header-section-number">1.2.3.2</span> Aprendamos con Garrick</h4>
-<p><a href="https://www.garrickadenbuie.com/">Garrick Aden-Buie</a> (<a href="https://twitter.com/grrrck"><img src="../data/images/twitter_small.png" class="img-fluid"> @grrrck</a>) ha creado una excelente <a href="https://pkg.garrickadenbuie.com/gentle-ggplot2/#28">introducción a ggplot2 y la gramática de gráficos</a>. Os recomiendo revisarla para familiarizaros con las funcionalidades de ggplot.<br><!-- https://github.com/gadenbuie/gentle-ggplot2  --></p>
+<p><a href="https://www.garrickadenbuie.com/">Garrick Aden-Buie</a> (<a href="https://fosstodon.org/@grrrck"><img src="../data/images/logo-mastodon.png" class="img-fluid"> @grrrck</a>) ha creado una excelente <a href="https://pkg.garrickadenbuie.com/gentle-ggplot2/#28">introducción a ggplot2 y la gramática de gráficos</a>. Os recomiendo revisarla para familiarizaros con las funcionalidades de ggplot.<br><!-- https://github.com/gadenbuie/gentle-ggplot2  --></p>
 </section></section></section><section id="visualización-de-datos-con-ggplot2" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="visualización-de-datos-con-ggplot2">
 <span class="header-section-number">1.3</span> Visualización de datos con ggplot2</h2>
 <section id="componentes-de-una-gráfica" class="level3" data-number="1.3.1"><h3 data-number="1.3.1" class="anchored" data-anchor-id="componentes-de-una-gráfica">
@@ -689,7 +703,7 @@ Ingredientes esenciales de una gráfica
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="../data/images/visualization-layers-of-ggplot.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">SOURCE: https://skillgaze.com/2017/10/31/understanding-different-visualization-layers-of-ggplot/</figcaption></figure>
+<figcaption>SOURCE: https://skillgaze.com/2017/10/31/understanding-different-visualization-layers-of-ggplot/</figcaption></figure>
 </div>
 </div>
 </div>
@@ -700,7 +714,7 @@ Ingredientes esenciales de una gráfica
 <ul>
 <li>indicar donde están nuestros datos y que mostraremos en los ejes <code>x</code> e <code>y</code><br>
 </li>
-<li>añadir la o las geometrias (<code>geoms</code>) que queramos</li>
+<li>añadir la o las geometrías (<code>geoms</code>) que queramos</li>
 </ul>
 <p>Usaremos <code>+</code> para sumar instrucciones, con una lógica de capas superpuestas.</p>
 <p>Por ejemplo:</p>
@@ -711,7 +725,10 @@ Ingredientes esenciales de una gráfica
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geoms-example-01-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geoms-example-01-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <hr></section></section><section id="aesthetic-mappings" class="level3" data-number="1.3.2"><h3 data-number="1.3.2" class="anchored" data-anchor-id="aesthetic-mappings">
@@ -753,45 +770,58 @@ Parámetros estéticos
 <section id="x-y" class="level4" data-number="1.3.2.1"><h4 data-number="1.3.2.1" class="anchored" data-anchor-id="x-y">
 <span class="header-section-number">1.3.2.1</span> x-y</h4>
 <p>Algo esencial es decirle a ggplot que queremos que aparezca en el eje <code>x</code> y en el eje <code>y</code> de nuestra gráfica.</p>
-<p>Empezaremos usando los datos de gapminder. A ver que variables tenemos en el data-frame <code>gapminder</code>:</p>
+<p>Empezaremos usando los datos de gapminder. A ver que variables tenemos en el data frame <code>gapminder</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="va">gapminder</span></span>
-<span><span class="co">#&gt; # A tibble: 1,704 × 6</span></span>
-<span><span class="co">#&gt;   country     continent  year lifeExp      pop gdpPercap</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Afghanistan Asia       1952    28.8  8425333      779.</span></span>
-<span><span class="co">#&gt; 2 Afghanistan Asia       1957    30.3  9240934      821.</span></span>
-<span><span class="co">#&gt; 3 Afghanistan Asia       1962    32.0 10267083      853.</span></span>
-<span><span class="co">#&gt; 4 Afghanistan Asia       1967    34.0 11537966      836.</span></span>
-<span><span class="co">#&gt; 5 Afghanistan Asia       1972    36.1 13079460      740.</span></span>
-<span><span class="co">#&gt; 6 Afghanistan Asia       1977    38.4 14880372      786.</span></span>
-<span><span class="co">#&gt; # ℹ 1,698 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gapminder</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,704 × 6
+   country     continent  year lifeExp      pop gdpPercap
+   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+ 1 Afghanistan Asia       1952    28.8  8425333      779.
+ 2 Afghanistan Asia       1957    30.3  9240934      821.
+ 3 Afghanistan Asia       1962    32.0 10267083      853.
+ 4 Afghanistan Asia       1967    34.0 11537966      836.
+ 5 Afghanistan Asia       1972    36.1 13079460      740.
+ 6 Afghanistan Asia       1977    38.4 14880372      786.
+ 7 Afghanistan Asia       1982    39.9 12881816      978.
+ 8 Afghanistan Asia       1987    40.8 13867957      852.
+ 9 Afghanistan Asia       1992    41.7 16317921      649.
+10 Afghanistan Asia       1997    41.8 22227415      635.
+# ℹ 1,694 more rows</code></pre>
+</div>
 </div>
 <p>Visualizamos la relación entre gdpPercap (eje x), y lifeExp (eje y):</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">gapminder</span>, </span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">gapminder</span>, </span>
 <span>         mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">gdpPercap</span>, y <span class="op">=</span> <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/aes-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/aes-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Si respetamos el orden de las variables, podemos simplificar nuestro código, evitando el <code>data =</code> y <code>mapping =</code>.</p>
 <p>Por ejemplo, podemos ver de nuevo la relación entre lifeExp y gdpPercap, invirtiendo los ejes.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">gdpPercap</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">gdpPercap</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/aes2-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/aes2-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="ejercicio" class="level4 ejercicio unnumbered"><h4 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio">Ejercicio</h4>
 <p>Usando <code>gapminder</code>, ¿podrías crear un gráfico de gdp per cápita por población como éste?</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_xy-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_xy-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="color-alpha-size" class="level4" data-number="1.3.2.2"><h4 data-number="1.3.2.2" class="anchored" data-anchor-id="color-alpha-size">
@@ -804,53 +834,61 @@ Parámetros estéticos
 <hr>
 <p>Empecemos a cambiar parámetros de nuestro gráfico inicial:</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="co"># Gráfico inicial</span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># Gráfico inicial</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/color_1-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/color_1-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Color “rojo” para los puntos con <code>color = "red"</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/color_2-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/color_2-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Color en función de la variable ‘continent’. Al usar la variable continent, tenemos que ponerlo dentro de <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span>, color <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span>, color <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/color_3-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/color_3-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Color en función de la variable ‘continent’. Cambiamos el tamaño de los puntos a 2.</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span>, color <span class="op">=</span> <span class="va">continent</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span>, color <span class="op">=</span> <span class="va">continent</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/color_4-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/color_4-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Color en función de la variable ‘continent’. Cambiamos el tamaño de los puntos a 2. Añadimos transparencia usando el parámetro ‘alpha’.</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span>, </span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span>, </span>
 <span>                        color <span class="op">=</span> <span class="va">continent</span>, </span>
 <span>                        size <span class="op">=</span> <span class="fl">2</span>, </span>
 <span>                        alpha <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/color_5-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/color_5-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="ejercicios" class="level4 ejercicio unnumbered"><h4 class="ejercicio unnumbered anchored" data-anchor-id="ejercicios">Ejercicios</h4>
@@ -865,10 +903,13 @@ Parámetros estéticos
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_point1-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_point1-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
 </div>
 </div>
-<p>Cada uno de los siguientes gráficos tiene un error. ¿Sabrias corregirlos?</p>
+</div>
+<p>Cada uno de los siguientes gráficos tiene un error. ¿Sabrías corregirlos?</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -886,10 +927,13 @@ Solucion
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">pop</span><span class="op">)</span>, color <span class="op">=</span> <span class="va">continent</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">pop</span><span class="op">)</span>, color <span class="op">=</span> <span class="va">continent</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span>, alpha <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_point2-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_point2-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -909,10 +953,13 @@ Solucion
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">pop</span>, color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">pop</span>, color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span>, alpha <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_point3-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_point3-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><br></p>
@@ -930,17 +977,19 @@ Códigos para las distintas formas
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="../data/images/shapes-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">SOURCE: https://r4ds.had.co.nz/data-visualisation.html#aesthetic-mappings</figcaption></figure>
+<figcaption>SOURCE: https://r4ds.had.co.nz/data-visualisation.html#aesthetic-mappings</figcaption></figure>
 </div>
 </div>
 </div>
 <p>En este ejemplo usamos la variable <code>continent</code> para que cada asignar una forma diferente a cada uno de los continentes.</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span>, shape <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span>, shape <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/shape-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/shape-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="linetype" class="level4" data-number="1.3.2.4"><h4 data-number="1.3.2.4" class="anchored" data-anchor-id="linetype">
@@ -957,26 +1006,30 @@ Códigos para los distintos estilos de linea
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="../data/images/ggplot2-linetype-identity.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">SOURCE: http://sape.inf.usi.ch/quick-reference/ggplot2/linetype</figcaption></figure>
+<figcaption>SOURCE: http://sape.inf.usi.ch/quick-reference/ggplot2/linetype</figcaption></figure>
 </div>
 </div>
 </div>
 <p>Podemos definir directamente el tipo de línea que queremos en <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">lifeExp</span>, color <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">lifeExp</span>, color <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, geom <span class="op">=</span> <span class="st">"line"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/linetype-1-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/linetype-1-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>O que el tipo de línea dependa de una variable:</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">lifeExp</span>, linetype <span class="op">=</span> <span class="va">continent</span>, color <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">lifeExp</span>, linetype <span class="op">=</span> <span class="va">continent</span>, color <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/linetype-2-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/linetype-2-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section></section><section id="geoms" class="level3" data-number="1.3.3"><h3 data-number="1.3.3" class="anchored" data-anchor-id="geoms">
@@ -996,7 +1049,7 @@ Algunos tipos de geoms
 <p>Para una lista exhaustiva ver el <a href="https://ggplot2.tidyverse.org/reference/#geoms">manual de ggplot2</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="../data/images/geoms.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">SOURCE: https://nbisweden.github.io/RaukR-2019/ggplot/presentation/ggplot_presentation_assets/geoms.png</figcaption></figure>
+<figcaption>SOURCE: https://nbisweden.github.io/RaukR-2019/ggplot/presentation/ggplot_presentation_assets/geoms.png</figcaption></figure>
 </div>
 <!-- `geom_abline()`, `geom_area()`, `geom_bar()`, `geom_bin2d()`, `geom_blank()`, `geom_boxplot()`, `geom_col()`, `geom_contour()`, `geom_contour_filled()`, `geom_count()`, `geom_crossbar()`, `geom_curve()`, `geom_density()`, `geom_density2d()`, `geom_density2d_filled()`, `geom_density_2d()`, `geom_density_2d_filled()`, `geom_dotplot()`, `geom_errorbar()`, `geom_errorbarh()`, `geom_freqpoly()`, `geom_function()`, `geom_hex()`, `geom_histogram()`, `geom_hline()`, `geom_jitter()`, `geom_label()`, `geom_line()`, `geom_linerange()`, `geom_map()`, `geom_path()`, `geom_point()`, `geom_pointrange()`, `geom_polygon()`, `geom_qq()`, `geom_qq_line()`, `geom_quantile()`, `geom_raster()`, `geom_rect()`, `geom_ribbon()`, `geom_rug()`, `geom_segment()`, `geom_sf()`, `geom_sf_label()`, `geom_sf_text()`, `geom_smooth()`, `geom_spoke()`, `geom_step()`, `geom_text()`, `geom_tile()`, `geom_violin()`, `geom_vline()`   -->
 </div>
@@ -1005,67 +1058,76 @@ Algunos tipos de geoms
 <span class="header-section-number">1.3.3.1</span> geom_point y geom_jitter</h4>
 <p>Si queremos un gráfico de dispersión o scatterplot, podemos usar el <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code></p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geoms-point-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geoms-point-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>En algunos casos, tenemos muchos puntos que se superponen. Si usamos <code><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter()</a></code> la posición de los puntos cambia levemente de manera aleatoria para evitar superposiciones. Con las propiedades ´width´ y ´height´ podemos controlar cuando desplazamiento queremos horizontal y verticalmente.</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geoms-jitter-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geoms-jitter-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="geom_smooth" class="level4" data-number="1.3.3.2"><h4 data-number="1.3.3.2" class="anchored" data-anchor-id="geom_smooth">
 <span class="header-section-number">1.3.3.2</span> geom_smooth</h4>
 <p>Podemos usar líneas de tendencia con <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code>. El <code>method</code> por defecto es <a href="https://en.wikipedia.org/wiki/Local_regression">loess</a>, pero podemos usar otros métodos (e.g.&nbsp;<code>geom_smooth(method = "lm")</code> para usar una regresión lineal).</p>
-<p>Recuerda que las funciones que usamos (todo lo que contiene <code>()</code> e.g.&nbsp;<code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code>) tienen parámetros, que son instrucciones addicionales que nos permiten modificar como se comportan. Para ver que opciones tenemos, podemos ver la ayuda de las funciones : <code>?geom_smooth()</code>, o poner el cursor encima y presionar F1 (ayuda).</p>
+<p>Recuerda que las funciones que usamos (todo lo que contiene <code>()</code> e.g.&nbsp;<code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code>) tienen parámetros, que son instrucciones adicionales que nos permiten modificar como se comportan. Para ver que opciones tenemos, podemos ver la ayuda de las funciones : <code>?geom_smooth()</code>, o poner el cursor encima y presionar F1 (ayuda).</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  </span>
-<span>  <span class="co"># Linea de tendencia (default loess)</span></span>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># Linea de tendencia (default loess)</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geom-smooth_1-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geom-smooth_1-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Usamos “lm”.</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span></span>
-<span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geom-smooth_2-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geom-smooth_2-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Un smooth por cada color (<code>continent</code>).</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span>, color <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span>, color <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span><span class="op">)</span></span>
-<span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geom-smooth_3-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geom-smooth_3-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Coloreamos puntos pero mantenemos un solo smooth introduciendo el parámetro <code>aes(color = continent)</code> dentro de <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gdpPercap</span>, <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geom-smooth_4-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geom-smooth_4-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="ejercicios-1" class="level4 ejercicio unnumbered"><h4 class="ejercicio unnumbered anchored" data-anchor-id="ejercicios-1">Ejercicios</h4>
@@ -1080,18 +1142,23 @@ Algunos tipos de geoms
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_smooth-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_smooth-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
 </div>
 </div>
-<p>Ahora usando el data-frame <code>mpg</code>, intenta crear los 6 plots que se pueden ver más abajo.</p>
+</div>
+<p>Ahora usando el data frame <code>mpg</code>, intenta crear los 6 plots que se pueden ver más abajo.</p>
 <p>Aquí tienes el plot base, para hacer mas fácil la tarea:</p>
 <div class="cell">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_grey</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geoms-ejercicios-0-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geoms-ejercicios-0-1.png" class="img-fluid figure-img" width="3600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Además de generar uno a uno los 6 plots, serías capaz de generar la figura que se ve abajo? Esto es, un plot que incluye los 6 plots juntos.</p>
@@ -1107,13 +1174,16 @@ Solucion para combinar plots
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><span style="color: orange;">En la sección <a href="02-visualizacion-avanzada.html#combinando-graficas">Combinando gráficas</a> veras un ejemplo del uso de la función cowplot::plot_grid()</span></p>
+<p><span style="color: orange;">En la sección <a href="02-visualizacion-avanzada.html#combinando-graficas">Combinando gráficas</a> verás un ejemplo del uso de la función cowplot::plot_grid()</span></p>
 </div>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geoms-ejercicios-1.png" class="img-fluid" width="1152"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geoms-ejercicios-1.png" class="img-fluid figure-img" width="7200"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="section" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="section"></h4>
@@ -1122,64 +1192,78 @@ Solucion para combinar plots
 <p>Podemos crear diagramas de cajas (boxplots) con <code>geom_boxplot</code> o violines con <code>geom_violin</code> para visualizar como cambian los datos por grupo.</p>
 <p>Boxplot con fill.</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">continent</span>, <span class="va">lifeExp</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">continent</span>, <span class="va">lifeExp</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geoms-boxplot-violin_1-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geoms-boxplot-violin_1-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Violins.</p>
 <div class="cell">
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">continent</span>, <span class="va">lifeExp</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">continent</span>, <span class="va">lifeExp</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geoms-boxplot-violin_2-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geoms-boxplot-violin_2-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Combinando ambos.</p>
 <div class="cell">
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">continent</span>, <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">continent</span>, <span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geoms-boxplot-violin_3-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geoms-boxplot-violin_3-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="histogramas" class="level4" data-number="1.3.3.4"><h4 data-number="1.3.3.4" class="anchored" data-anchor-id="histogramas">
 <span class="header-section-number">1.3.3.4</span> geom_histogram y geom_bar</h4>
 <p>Podemos usar histogramas <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> con variables continuas. Como puedes ver, ahora solo le pasamos una variable a <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code></p>
 <div class="cell">
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geom-histogram-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geom-histogram-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>O si tenemos variables categóricas, <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geom-bar-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geom-bar-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="geom_density" class="level4" data-number="1.3.3.5"><h4 data-number="1.3.3.5" class="anchored" data-anchor-id="geom_density">
 <span class="header-section-number">1.3.3.5</span> geom_density</h4>
 <p>Para visualizar distribuciones (cuando tenemos muchos datos), podemos usar <code><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  </span>
-<span>  <span class="co"># Density with fill and alpha</span></span>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># Density with fill and alpha</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geom-density-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geom-density-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="ejercicio-1" class="level4 ejercicio unnumbered"><h4 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-1">Ejercicio</h4>
-<p>Añadiendo un parámetro a la gráfica de arriba, podemos transformarla en las versiones de abajo. ¿Podrías hacerlo? (recuerda que poníendote encima de <code><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density()</a></code> y tecleando <code>F1</code> puedes ver la ayuda de la función).</p>
+<p>Añadiendo un parámetro a la gráfica de arriba, podemos transformarla en las versiones de abajo. ¿Podrías hacerlo? (recuerda que poniéndote encima de <code><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density()</a></code> y tecleando <code>F1</code> puedes ver la ayuda de la función).</p>
 <pre><code>ggplot(gapminder, aes(lifeExp, fill = continent)) + 
       geom_density(alpha = .2)</code></pre>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -1200,26 +1284,35 @@ Solucion
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio-density-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio-density-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio-density-2.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio-density-2.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="geom_density_ridges" class="level4" data-number="1.3.3.6"><h4 data-number="1.3.3.6" class="anchored" data-anchor-id="geom_density_ridges">
 <span class="header-section-number">1.3.3.6</span> geom_density_ridges</h4>
 <p>Uno de mis geoms favoritos para comparar distribuciones es <code>geom_density_ridges</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># geom_density_ridges</span></span>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># geom_density_ridges</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">.2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geom-density_ridges-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geom-density_ridges-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Especialmente porque podemos incluir en el mismo gráfico información sobre distribuciones y puntos individuales.</p>
 <div class="cell">
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># geom_density_ridges junto con raincloud points y histograma</span></span>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># geom_density_ridges junto con raincloud points y histograma</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gapminder</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">lifeExp</span>, <span class="va">continent</span>, fill <span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span></span>
 <span>    stat <span class="op">=</span> <span class="st">"binline"</span>,</span>
@@ -1239,16 +1332,19 @@ Solucion
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>n.breaks <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"vertical lines represent the mean lifeExp per continent"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geom-density_ridges2-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geom-density_ridges2-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="ejercicios-2" class="level4 ejercicio unnumbered"><h4 class="ejercicio unnumbered anchored" data-anchor-id="ejercicios-2">Ejercicios</h4>
-<p>Usando como base el plot de la seccion <a href="#histogramas">geom_histogram()</a>:</p>
+<p>Usando como base el plot de la sección <a href="#histogramas">geom_histogram()</a>:</p>
 <pre><code>  ggplot(gapminder, aes(lifeExp)) + 
     geom_histogram()</code></pre>
 <ul>
 <li>Colorea los histogramas por continente</li>
-<li>Sabrias hacer que no se amontonen unos continentes sobre otros? Necesitarás añadir transparencia para ver todos los datos</li>
+<li>Sabrías hacer que no se amontonen unos continentes sobre otros? Necesitarás añadir transparencia para ver todos los datos</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
@@ -1268,10 +1364,16 @@ Solucion
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_histogram-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_histogram-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_histogram-2.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_histogram-2.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Con el DF <code>diamonds</code>, crea el siguiente plot:</p>
@@ -1294,7 +1396,10 @@ Pista
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/geoms-ejercicios-02-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/geoms-ejercicios-02-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="section-1" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="section-1"></h4>
@@ -1319,7 +1424,7 @@ Pista
 </ul>
 <p>En el siguiente ejemplo, vamos a personalizar la gráfica del ejercicio anterior:</p>
 <div class="cell">
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">diamonds</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">cut</span>, fill <span class="op">=</span> <span class="va">clarity</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">diamonds</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">cut</span>, fill <span class="op">=</span> <span class="va">clarity</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"How many diamons do we have?"</span>,</span>
 <span>       subtitle <span class="op">=</span> <span class="st">"A lot"</span>, </span>
@@ -1330,21 +1435,27 @@ Pista
 <span>       alt <span class="op">=</span> <span class="st">"Alt text for the plot. Very useful for blind people"</span></span>
 <span>       <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/personalizacion-basica-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/personalizacion-basica-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
 </div>
 </div>
 <section id="ejercicio-2" class="level4 ejercicio unnumbered"><h4 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-2">Ejercicio</h4>
 <p>Usando como base este plot:</p>
 <div class="cell">
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_grey</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_personalizacion_basica-1.png" class="img-fluid" width="576"></p>
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_personalizacion_basica-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
 </div>
 </div>
-<p>Personalizalo añadiendo y modificando:</p>
+</div>
+<p>Personalízalo añadiendo y modificando:</p>
 <ul>
 <li>título<br>
 </li>
@@ -1353,7 +1464,17 @@ Pista
 <li>caption<br>
 </li>
 <li>ejes x e y</li>
-</ul></section><section id="section-2" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="section-2"></h4>
+</ul>
+<p>Para conseguir esto:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="01-introduccion_visualizacion_files/figure-html/ejercicio_personalizacion_basica2-1.png" class="img-fluid figure-img" width="9600"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="section-2" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="section-2"></h4>
 </section></section></section><section id="bibliografía" class="level2 bibliografia unnumbered"><h2 class="bibliografia unnumbered anchored" data-anchor-id="bibliografía">Bibliografía</h2>
 <ul>
 <li><p>Matejka, J., &amp; Fitzmaurice, G. (2017, May). Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing. In Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (pp.&nbsp;1290-1294). ACM.</p></li>
@@ -1409,18 +1530,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1452,11 +1562,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/gorkang\.github\.io\/R_preparacion_visualizacion_datos\/index\.html");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1466,8 +1615,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1479,7 +1637,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1523,6 +1804,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1548,6 +1830,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1607,19 +1915,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../qmd/00-configuracion-sistema.html" class="pagination-link">
+      <a href="../qmd/00-configuracion-sistema.html" class="pagination-link" aria-label="Preparando nuestro sistema">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preparando nuestro sistema</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../qmd/02-visualizacion-avanzada.html" class="pagination-link">
+      <a href="../qmd/02-visualizacion-avanzada.html" class="pagination-link" aria-label="Visualización avanzada">
         <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Visualización avanzada</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left"><a href="http://orcid.org/0000-0001-7678-8656">Gorka Navarrete</a></div>   
+    <div class="nav-footer-left">
+<p><a href="http://orcid.org/0000-0001-7678-8656">Gorka Navarrete</a></p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>

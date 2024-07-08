@@ -103,7 +103,7 @@ Aprovechando la potencia de estas herramientas, algunas personas han creado paqu
 
 ## Sintaxis, chunks de código, tipos de archivo  
 
-La sintáxis básica de Quarto / RMarkdown es sorprendentemente sencilla, como se puede ver más abajo.  Eso si, lo que hay detrás es toda la potencia de latex, así que el cielo es el límite.  
+La sintaxis básica de Quarto / RMarkdown es sorprendentemente sencilla, como se puede ver más abajo.  Eso si, lo que hay detrás es toda la potencia de latex, así que el cielo es el límite.  
 
 
 ![](../data/images/rmarkdown.png)  
@@ -181,7 +181,7 @@ En su cabecera puedes añadir opciones. Hay una [cantidad apabullante de opcione
 
 * `echo=FALSE`: Esconde el código pero este sigue corriendo
 * `eval=TRUE`: Evalúa el código
-* `include=TRUE`: Incluye el codigo
+* `include=TRUE`: Incluye el código
 * `fig.height=10`: altura de los plots (en inches)
 * `fig.width=12`: ancho de los plots (en inches)
 * `message=FALSE`: NO muestres mensajes
@@ -197,7 +197,7 @@ En su cabecera puedes añadir opciones. Hay una [cantidad apabullante de opcione
 
 **TRUCO:**
 
-* Si tienes un chunk llamado `setup` al principio de tu documento .qmd / .Rmd, cada vez que reinicies RStudio y ejecutes código en cualquier parte de tu documento, ese bloque se ejecutara automaticamente. Esto es ideal para poner tus librerias, lectura de datos...  
+* Si tienes un chunk llamado `setup` al principio de tu documento .qmd / .Rmd, cada vez que reinicies RStudio y ejecutes código en cualquier parte de tu documento, ese bloque se ejecutara automáticamente. Esto es ideal para poner tus librerías, lectura de datos...  
 
 
 ---  
@@ -282,7 +282,7 @@ De nuevo, si el botón `Render` no funciona, puedes renderizar el pdf usando: `q
 
 ## Avanzado   
 
-Puedes crear artículos en formato APA, añadir bibliografía a tus documentos facilmente, citar los paquetes de R que usas, etc.  
+Puedes crear artículos en formato APA, añadir bibliografía a tus documentos fácilmente, citar los paquetes de R que usas, etc.  
 
 
 
@@ -316,7 +316,7 @@ Y no olvidemos el paquete {rticles}, que contiene [plantillas de decenas de edit
 
 ### Usar bibliografía 
 
-Puedes incluir citas en tu documento facilmente con [Rmarkdown](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) o [Quarto](https://quarto.org/docs/authoring/footnotes-and-citations.html#sec-citations).  
+Puedes incluir citas en tu documento fácilmente con [Rmarkdown](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) o [Quarto](https://quarto.org/docs/authoring/footnotes-and-citations.html#sec-citations).  
 
 Necesitaras un archivo .bib e incluirlo en el yaml inicial, por ejemplo: `bibliography: name_file.bib`.  
 
@@ -360,7 +360,7 @@ grateful::cite_packages(
 
 ### Manejo de dependencias  
 
-Usando un sistema de manejo de dependencias [renv](https://github.com/rstudio/renv)  creamos un snapshot de las librerías usadas actualmente. Es muy importante para garantizar que nuestros scripts correran en el futuro.  
+Usando un sistema de manejo de dependencias [renv](https://github.com/rstudio/renv)  creamos un snapshot de las librerías usadas actualmente. Es muy importante para garantizar que nuestros scripts correrán en el futuro.  
 
 ::: {.callout-note}
 

@@ -37,6 +37,7 @@ if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
 if (!require('geomtextpath')) install.packages('geomtextpath'); library('geomtextpath')
 if (!require('gghighlight')) install.packages('gghighlight'); library('gghighlight')
 if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('ggrain')) install.packages('ggrain'); library('ggrain')
 if (!require('ggthemes')) install.packages('ggthemes'); library('ggthemes')
 if (!require('ggridges')) install.packages('ggridges'); library('ggridges')
 if (!require('knitr')) install.packages('knitr'); library('knitr')
@@ -46,14 +47,12 @@ if (!require('readr')) install.packages('readr'); library('readr')
 if (!require('sjPlot')) install.packages('sjPlot'); library('sjPlot')
 if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
 
-if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
-
 ```  
 
 
 ---  
 
-## Introducción: porque la visualización de datos es importante
+## Introducción: ¿por qué la visualización de datos es importante?
 
 
 *"These 13 datasets (the Datasaurus, plus 12 others) each have the same summary statistics (x/y mean, x/y standard deviation, and Pearson's correlation) to two decimal places, while being drastically different in appearance."* (Matejka, J., & Fitzmaurice, G., 2017).    
@@ -214,7 +213,7 @@ DF |>
 ---  
 
 
-Es curioso que la desviación estandard sea mayor en el grupo con menos error promedio... Visualicemos las respuestas de todos los participantes, junto con la distribución de los datos.  
+Es curioso que la desviación estándar sea mayor en el grupo con menos error promedio... Visualicemos las respuestas de todos los participantes, junto con la distribución de los datos.  
 
 ```{r visualizacion-importante-04, echo=FALSE}
 
@@ -263,13 +262,18 @@ cowplot::plot_grid(plot_inicial, plot_final, labels = c("Antes", "Después"))
 
 ---  
 
-## Por qué R? 
+## ¿Por qué R? 
 
 <div style= "float:left;position: relative; margin:0px 30px 0px 0px;">![](../data/images/R_logo.png)</div>
 
 R es [uno de los programas para data science mas populares](http://r4stats.com/articles/popularity/), especialmente usado en la academia. El numero de paquetes que ofrecen funcionalidades de todo tipo no ha dejado de crecer. En `r format(Sys.Date(), "%Y")` el numero de paquetes en [R-cran](https://cran.r-project.org/web/packages/index.html) ha superado los 25,000, y el ritmo de crecimiento nos acerca a la singularidad... ;)  
 
 ```{r, echo=FALSE, eval=FALSE}
+
+# Plot generated from:
+# https://gist.githubusercontent.com/daroczig/3cf06d6db4be2bbe3368/raw/b66b0531fb1b86d3e04a003b2e105ad4f147900e/number-of-submitted-packages-to-CRAN.png
+
+# See code in dev/R_packages.R 
 
 # Get packages available now
 R_packages_now = rvest::read_html("https://cran.r-project.org/web/packages/available_packages_by_date.html") |> 
@@ -283,8 +287,6 @@ R_packages_now = rvest::read_html("https://cran.r-project.org/web/packages/avail
 <div style="clear: both;"></div>
 
 ![SOURCE: https://gist.github.com/daroczig/3cf06d6db4be2bbe3368](../data/images/number-of-submitted-packages-to-CRAN.png)
-
-<!-- (https://gist.githubusercontent.com/daroczig/3cf06d6db4be2bbe3368/raw/b66b0531fb1b86d3e04a003b2e105ad4f147900e/number-of-submitted-packages-to-CRAN.png)   -->
 
 <BR> 
 
@@ -383,11 +385,12 @@ Y otros recursos que resultan muy útiles:
 
 * [Comunidad de usuarios de Rstudio](https://community.rstudio.com/)  
 
-* [Twitter!](https://twitter.com/home) Por ejemplo:  
-    + [![](../data/images/twitter_small.png) \@thomas_mock](https://twitter.com/thomas_mock) (#TidyTuesday)  
-    + [![](../data/images/twitter_small.png) \@dataandme](https://twitter.com/dataandme)  
-    + [![](../data/images/twitter_small.png) \@rivaquiroga](https://twitter.com/rivaquiroga)  
-    + [![](../data/images/twitter_small.png) \@RLadiesSantiago](https://twitter.com/RLadiesSantiago)  
+* [Mastodon!](https://joinmastodon.org/) Por ejemplo:  
+    + [![](../data/images/logo-mastodon.png) \@thomas_mock](https://fosstodon.org/@thomas_mock) (#TidyTuesday)  
+    + [![](../data/images/logo-mastodon.png) \@rivaquiroga](https://fosstodon.org/@rivaquiroga@mastodon.social)  
+    + [![](../data/images/logo-mastodon.png) \@RLadiesGlobal](https://fosstodon.org/@RLadiesGlobal@hachyderm.io)  
+    + [![](../data/images/logo-mastodon.png) \@coolbutuseless](https://fosstodon.org/@coolbutuseless)  
+    
     
   
 * Webs como [R bloggers](https://www.r-bloggers.com/)  
@@ -432,7 +435,7 @@ La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquiss
 
 #### Aprendamos con Garrick 
 
-[Garrick Aden-Buie](https://www.garrickadenbuie.com/) ([![](../data/images/twitter_small.png) \@grrrck](https://twitter.com/grrrck)) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28). Os recomiendo revisarla para familiarizaros con las funcionalidades de ggplot.  
+[Garrick Aden-Buie](https://www.garrickadenbuie.com/) ([![](../data/images/logo-mastodon.png) \@grrrck](https://fosstodon.org/@grrrck)) ha creado una excelente [introducción a ggplot2 y la gramática de gráficos](https://pkg.garrickadenbuie.com/gentle-ggplot2/#28). Os recomiendo revisarla para familiarizaros con las funcionalidades de ggplot.  
 <!-- https://github.com/gadenbuie/gentle-ggplot2  -->
 
 
@@ -465,7 +468,7 @@ En esta sección vamos a ver algunos de los componentes que usaremos cuando visu
 Para crear una gráfica con ggplot, tenemos que:  
 
 - indicar donde están nuestros datos y que mostraremos en los ejes `x` e `y`  
-- añadir la o las geometrias (`geoms`) que queramos  
+- añadir la o las geometrías (`geoms`) que queramos  
 
 Usaremos `+` para sumar instrucciones, con una lógica de capas superpuestas.  
 
@@ -532,7 +535,7 @@ En **aes()** vamos a indicar las variables que queremos en los ejes x e y, el co
 
 Algo esencial es decirle a ggplot que queremos que aparezca en el eje `x` y en el eje `y` de nuestra gráfica.  
 
-Empezaremos usando los datos de gapminder. A ver que variables tenemos en el data-frame `gapminder`:   
+Empezaremos usando los datos de gapminder. A ver que variables tenemos en el data frame `gapminder`:   
 
 
 ```{r datos-gapminder}
@@ -659,7 +662,7 @@ ggplot(gapminder, aes(gdpPercap, pop, color = continent)) +
 ```
 
 
-Cada uno de los siguientes gráficos tiene un error. ¿Sabrias corregirlos?
+Cada uno de los siguientes gráficos tiene un error. ¿Sabrías corregirlos?
 
 ::: {.callout-tip collapse="true"}
 
@@ -790,7 +793,7 @@ En algunos casos, tenemos muchos puntos que se superponen. Si usamos `geom_jitte
 
 Podemos usar líneas de tendencia con `geom_smooth()`. El `method` por defecto es [loess](https://en.wikipedia.org/wiki/Local_regression), pero podemos usar otros métodos (e.g. `geom_smooth(method = "lm")` para usar una regresión lineal).  
 
-Recuerda que las funciones que usamos (todo lo que contiene `()` e.g. `geom_smooth()`) tienen parámetros, que son instrucciones addicionales que nos permiten modificar como se comportan. Para ver que opciones tenemos, podemos ver la ayuda de las funciones : `?geom_smooth()`, o poner el cursor encima y presionar F1 (ayuda).  
+Recuerda que las funciones que usamos (todo lo que contiene `()` e.g. `geom_smooth()`) tienen parámetros, que son instrucciones adicionales que nos permiten modificar como se comportan. Para ver que opciones tenemos, podemos ver la ayuda de las funciones : `?geom_smooth()`, o poner el cursor encima y presionar F1 (ayuda).  
 
 ```{r geom-smooth_1}
   
@@ -859,7 +862,7 @@ Usando como base el siguiente plot:
 ```
 
 
-Ahora usando el data-frame `mpg`, intenta crear los 6 plots que se pueden ver más abajo.  
+Ahora usando el data frame `mpg`, intenta crear los 6 plots que se pueden ver más abajo.  
 
 Aquí tienes el plot base, para hacer mas fácil la tarea:   
 
@@ -879,7 +882,7 @@ Además de generar uno a uno los 6 plots, serías capaz de generar la figura que
 
 ### Solucion para combinar plots
 
-<span style="color: orange;">En la sección [Combinando gráficas](02-visualizacion-avanzada.html#combinando-graficas) veras un ejemplo del uso de la función cowplot::plot_grid()</span>
+<span style="color: orange;">En la sección [Combinando gráficas](02-visualizacion-avanzada.html#combinando-graficas) verás un ejemplo del uso de la función cowplot::plot_grid()</span>
 
 :::
 
@@ -993,7 +996,7 @@ Para visualizar distribuciones (cuando tenemos muchos datos), podemos usar `geom
 
 #### Ejercicio {.ejercicio -}
 
-Añadiendo un parámetro a la gráfica de arriba, podemos transformarla en las versiones de abajo. ¿Podrías hacerlo? (recuerda que poníendote encima de `geom_density()` y tecleando `F1` puedes ver la ayuda de la función).  
+Añadiendo un parámetro a la gráfica de arriba, podemos transformarla en las versiones de abajo. ¿Podrías hacerlo? (recuerda que poniéndote encima de `geom_density()` y tecleando `F1` puedes ver la ayuda de la función).  
 
 ```
 ggplot(gapminder, aes(lifeExp, fill = continent)) + 
@@ -1061,7 +1064,7 @@ ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
 
 #### Ejercicios {.ejercicio -}
 
-Usando como base el plot de la seccion [geom_histogram()](#histogramas):  
+Usando como base el plot de la sección [geom_histogram()](#histogramas):  
 
 ```
   ggplot(gapminder, aes(lifeExp)) + 
@@ -1069,7 +1072,7 @@ Usando como base el plot de la seccion [geom_histogram()](#histogramas):
 ```
 
 - Colorea los histogramas por continente
-- Sabrias hacer que no se amontonen unos continentes sobre otros? Necesitarás añadir transparencia para ver todos los datos
+- Sabrías hacer que no se amontonen unos continentes sobre otros? Necesitarás añadir transparencia para ver todos los datos
 
 ::: {.callout-tip collapse="true"}
 
@@ -1157,12 +1160,27 @@ Usando como base este plot:
     theme_grey()
 ```
 
-Personalizalo añadiendo y modificando: 
+Personalízalo añadiendo y modificando: 
 
 - título  
 - subtítulo  
 - caption  
 - ejes x e y
+
+
+Para conseguir esto:  
+
+```{r ejercicio_personalizacion_basica2, echo=FALSE}
+   ggplot(mpg, aes(displ, hwy)) + 
+    geom_point() +
+    geom_smooth(se = FALSE) +
+    theme_grey() +
+    labs(title = "My beautiful plot",
+         subtitle = "with the mpg data",
+         caption = "By myself",
+         x = "engine displacement, in litres",
+         y = "highway miles per gallon")
+```
 
 
 
