@@ -36,17 +36,19 @@ book:
 
   chapters:
     - "index.qmd"
+    # - "qmd/xxx-test.qmd"
     - "qmd/00-configuracion-sistema.qmd"
-    - "qmd/01-introduccion_visualizacion.qmd"
-    - "qmd/02-visualizacion-avanzada.qmd"
-    - "qmd/03-preparacion_transformacion.qmd"
-    - "qmd/04-combinar-datos.qmd"
-    - "qmd/05-analisis-datos-exploratorio.qmd"
-    - "qmd/06-analisis-datos-inferencial.qmd"
-    - "qmd/07-quarto.qmd"
-    - "qmd/08-git.qmd"
-    - "qmd/09-experimentos-reproducibles.qmd"
-    - "qmd/10-ejercicios.qmd"
+    - "qmd/01-introduccion.qmd"
+    - "qmd/02-visualizacion-basica.qmd"
+    - "qmd/03-visualizacion-avanzada.qmd"
+    - "qmd/04-preparacion-transformacion.qmd"
+    - "qmd/05-combinar-datos.qmd"
+    - "qmd/06-analisis-datos-exploratorio.qmd"
+    - "qmd/07-analisis-datos-inferencial.qmd"
+    - "qmd/08-quarto.qmd"
+    - "qmd/09-git.qmd"
+    - "qmd/10-experimentos-reproducibles.qmd"
+    - "qmd/11-ejercicios.qmd"
     - "qmd/refs.qmd"
 
 bibliography: data/bib/grateful-refs.bib
@@ -62,7 +64,7 @@ format:
     fig-width: 16
     fig-height: 8
     fig-align: center
-    fig-dpi: 600
+    fig-dpi: 300
     toc-depth: 5
   pdf:
     documentclass: scrreprt

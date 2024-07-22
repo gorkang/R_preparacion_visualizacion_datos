@@ -1,8 +1,12 @@
 # Preparando nuestro sistema {#preparando-sistema .unnumbered}
 
+Antes de empezar, si tienes dificultades o curiosidad sobre el manejo básico de R, te recomiendo que veas algún tutorial de R y RStudio para principiantes como [éste](https://www.youtube.com/watch?v=BvKETZ6kr9Q), o [éste](https://www.youtube.com/watch?v=yZ0bV2Afkjc).  
+
+
 ## Empezando en A-B-C {-}
 
 Para poder iniciar el workshop necesitamos tener R y RStudio instalados, además de algunas librerías. **Para tener un sistema funcional, completa los pasos A, B y C**. Si ya tienes R y Rstudio instalados (recientemente), puedes pasar directamente al paso **(C)**.
+
 
 ### **(A)** Instalar R {.unnumbered}
 
@@ -85,24 +89,19 @@ pak::pak(
 
 ```
 
-
 :::
 
 
-
-
-
-Otros paquetes que necesitaremos Para que corran estas lineas tenemos que haber completado el paso previo.  
+Otros paquetes que necesitaremos. Para que corran estas líneas tenemos que haber completado el paso previo.  
 
 ```{r install_workshop_packages2, message=FALSE, warning=FALSE, include=TRUE}
 
 if (!require('remotes')) install.packages('remotes'); remotes::install_github('gorkang/jsPsychAdmin')
 if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
-# if (!require('raincloudplots')) remotes::install_github('jorvlan/raincloudplots'); library('raincloudplots')
 
 ```
 
-Usaremos un buen número de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (_en algunos sistemas puede llegar a 1 hora_). Si tienes alguna dificultad en este punto, te recomiendo que veas algún [tutorial básico de R o RStudio](https://www.youtube.com/watch?v=BvKETZ6kr9Q).  
+Usaremos un buen número de paquetes en el workshop. El proceso de instalación requiere Internet y tardará un buen rato (_en algunos sistemas puede llegar a 1 hora_). 
 
 Hay algunos meta-paquetes que simplifican la instalación de múltiples paquetes (e.g. pacman, pak, renv, ...), pero dejaremos eso para más adelante.   
 
@@ -131,7 +130,8 @@ tinytex::install_tinytex() # Llevará un buen rato
 
 Necesitaremos [Docker](https://www.docker.com/) para simular datos de participantes online.
 
-Instala Docker en:
+Instala Docker en:  
+
   -   [Linux](https://docs.docker.com/desktop/install/linux-install/)  
   -   [Mac](https://docs.docker.com/desktop/install/mac-install/)  
   -   [Windows](https://docs.docker.com/desktop/install/windows-install/)  
@@ -196,7 +196,7 @@ El siguiente código simplifica lo anterior. Comprueba que el paquete esta insta
 if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')  
 ```
 
-Para instalar múltiples paquetes, podemos repetir la linea de mas arriba tantas veces como sea necesario, o usar una versión algo mas sofisticada como el código del apartado **(C)**:
+Para instalar múltiples paquetes, podemos repetir la linea de mas arriba tantas veces como sea necesario, o usar una versión algo más sofisticada como el código del apartado **(C)**:
 
 ```{r install_packages, message=FALSE, warning=FALSE, eval=FALSE}
 if (!require('tidyverse')) install.packages('tidyverse'); library('tidyverse')
@@ -214,7 +214,7 @@ En ocasiones querremos instalar directamente la versión en desarrollo del paque
 
 ```{r install_packages_github, message=FALSE, warning=FALSE, eval=FALSE}
 if (!require('remotes')) install.packages('remotes'); library('remotes')
-remotes::install_github("gorkang/BayesianReasoning")
+remotes::install_github("gorkang/jsPsychMaker")
 ```
 
 ------------------------------------------------------------------------

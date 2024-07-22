@@ -2,7 +2,7 @@
 
 set.seed(2023)
 
-library(ggplot2); ggplot2::theme_set(ggplot2::theme_minimal(10))
+library(ggplot2); ggplot2::theme_set(ggplot2::theme_minimal(6))
 
 # Chunks options for html output
 if (!knitr::is_latex_output()) {

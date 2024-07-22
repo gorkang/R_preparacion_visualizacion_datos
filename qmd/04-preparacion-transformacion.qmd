@@ -1,0 +1,1543 @@
+# Preparación y transformación de datos
+
+```{r}
+#| results: "asis"
+#| echo: false
+source("../_common.R")
+```
+
+En este capítulo vamos a aprender a importar y exportar todo tipo de archivos. También transformaremos base de datos a formatos que hagan más fácil trabajar con los datos.
+
+---  
+
+#### Paquetes para este capítulo {-}
+
+Como en cada capítulo, crea un nuevo script de R (CNTRL+ SHIFT + N), guárdalo con el nombre/número del capítulo (i.e. `capitulo4.R`), copia y pega las líneas de abajo y ejecútalas.  
+
+```{r}
+#| label: setup
+#| echo: true
+
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+if (!require("DT")) install.packages("DT"); library("DT")
+if (!require("ggplot2")) install.packages("ggplot2"); library("ggplot2")
+if (!require("googlesheets4")) install.packages("googlesheets4"); library("googlesheets4")
+if (!require("haven")) install.packages("haven"); library("haven")
+if (!require("here")) install.packages("here"); library("here")
+if (!require("janitor")) install.packages("janitor"); library("janitor")
+if (!require("purrr")) install.packages("purrr"); library("purrr")
+if (!require('readr')) install.packages('readr'); library('readr')
+if (!require("readxl")) install.packages("readxl"); library("readxl")
+if (!require("readODS")) install.packages("readODS"); library("readODS")
+if (!require("tidyr")) install.packages("tidyr"); library("tidyr")
+if (!require("waldo")) install.packages("waldo"); library("waldo")
+if (!require("writexl")) install.packages("writexl"); library("writexl")
+
+if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); library('regexplain')
+
+```  
+
+---  
+
+## Importar y exportar datos
+
+Hasta ahora hemos trabajado con data frames como `mpg` o `gaminder`, que forman parte de la instalación por defecto de R, o alguno de sus paquetes. Pero habitualmente trabajaremos con datos propios, por lo que necesitaremos leer uno o varios archivos. RStudio tiene un menú para ayudar a importar datos ![](../data/images/import-data.png), pero aquí aprenderemos a hacerlo todo en código, para que nuestros scripts sean auto-contenidos.    
+
+Podemos ver algunas de las funciones de esta sección y cómo usarlas en la [Cheatsheet importar datos](https://github.com/rstudio/cheatsheets/raw/main/data-import.pdf)  
+
+
+### Importar un solo archivo
+
+Empezaremos por la situación básica más común, cómo importar un solo archivo. Vamos a ver con más detalle los archivos CSV (*comma separated values*). Las funciones para importar archivos Excel, Libreoffice, SPSS, etc. tienen parámetros similares.    
+
+
+#### Archivos CSV
+
+Usaremos las siguientes funciones del paquete `readr`:    
+
+::: {.callout-note}
+
+### Funciones para leer archivos csv
+
+* `readr::read_csv()`: valores separados por coma (",")  
+* `readr::read_csv2()`: valores separados por punto y coma (";"), típicamente usado en países de habla Hispana  
+* `readr::read_delim( , delim = "|")`: valores separados por un delimitador arbitrario  
+
+:::
+
+Leemos el archivo `02-read-csv.csv` de la carpeta `data/files/`: 
+
+```{r read-csv-01, eval=FALSE}
+
+DF_name = read_csv("data/files/02-read-csv.csv")
+
+```
+
+Si estamos usando rmarkdown, o similar, es recomendable usar `here::here()` para evitar problemas con los paths a los archivos.  
+
+```{r read-csv-02}
+  
+# En name_of_file almacenamos la ruta completa al archivo
+name_of_file = here::here("data/files/02-read-csv.csv")
+
+# Leemos el archivo que esta en name_of_file
+DF_name = read_csv(name_of_file)
+
+DF_name
+
+```
+
+Si usamos un [repositorio online para almacenar los archivos](https://github.com/gorkang/R_preparacion_visualizacion_datos), podemos leer directamente de una URL.  
+
+```{r read-csv-URL, eval=FALSE}
+
+URL = "https://raw.githubusercontent.com/gorkang/R_preparacion_visualizacion_datos/master/data/files/02-read-csv.csv"
+read_csv(URL)
+
+```
+
+La función `read_csv()` tiene varios parámetros muy útiles como `skip` o `col_types`. Con `skip` podemos saltarnos líneas del inicio del archivo. Con `col_types` podemos especificar el tipo de datos que contiene cada columna (texto, números, factores...). Al ser explícitos con el tipo de datos evitamos sorpresas, y de paso reducimos el output de la Consola.    
+
+```{r read-csv-params}
+  
+# En name_of_file almacenamos la ruta completa al archivo
+name_of_file = here::here("data/files/02-read-csv.csv")
+
+# Leemos el archivo que esta en name_of_file
+read_csv(name_of_file,
+         col_types = cols(
+           .default = col_double(),
+           condition = col_character(),
+           condition2 = col_character()
+           )
+         )
+
+```
+
+
+#### Otros tipos de archivos
+
+Para otros tipos de archivos simplemente usaremos otras funciones. Por ejemplo, para leer archivos Excel podemos usar `read_excel` del paquete `{readxl}`.  
+
+
+##### Archivos excel {-}
+
+```{r read-others-xls, eval=FALSE}
+
+name_of_file = here::here("data/files/02-read-xlsx.xlsx")
+readxl::read_excel(name_of_file)
+
+```
+
+
+##### Archivos SPSS {-}
+
+```{r read-others-spss, eval=FALSE}
+
+name_of_file = here::here("data/files/02-read-sav.sav")
+haven::read_sav(name_of_file)
+
+```
+
+
+##### Archivos Libreoffice {-}
+
+```{r read-others-libreoffice, eval=FALSE}
+
+name_of_file = here::here("data/files/02-read-ods.ods")
+df_ODS = readODS::read_ods(name_of_file)
+
+# Vemos las primeras filas
+head(df_ODS)
+
+```
+
+##### Google sheets {-}
+
+Para poder leer una gsheet debemos: 
+
+1) Crear un enlace para compartirla: `"Share" -> "General access" -> "Anyone with the link"`   
+2) Extraemos el identificador de la google sheet:  
+  + De `https://docs.google.com/spreadsheets/d/1v3cCKaQ3akGEH8Z2Plu7qpq93GNk6Y6v337iI4KyZ2I/edit?usp=sharing`  
+  + Usaremos: `1v3cCKaQ3akGEH8Z2Plu7qpq93GNk6Y6v337iI4KyZ2I`  
+
+```{r google-sheets, eval=FALSE}
+
+if (!require("googlesheets4")) install.packages("googlesheets4"); library("googlesheets4")
+name_of_sheet = "1v3cCKaQ3akGEH8Z2Plu7qpq93GNk6Y6v337iI4KyZ2I"
+googlesheets4::read_sheet(name_of_sheet)   
+
+```
+
+
+
+### Ejercicios - Importar datos {.ejercicio -} 
+
+
+En el repositorio [R para preparación y visualización de datos - DNSC - UAI](https://osf.io/jdn37/) de la Open Science Foundation podrás ver una carpeta llamada `Capitulo 3`. Si no tenéis conexión a Internet, podéis encontrar los archivos en `data/files/OSF_files`.  
+
+Descarga e importa los archivos que ahí aparecen, asegurándote que los nombres de columna se leen adecuadamente:  
+
+::: {.callout-tip collapse="true"}
+
+### Solución
+
+<span style="color: orange;">La función `read_excel()` tiene parámetros como `skip`, que permite no leer las primeras n lineas, o `sheet`, con la que puedes indicar que pestaña leer.</span>
+
+:::
+
+
++ 02-extralines-1.xlsx
++ 02-extralines-2.xlsx
++ 02-extralines-3.xlsx
++ 02-spanish.csv
+
+
+```{r ejercicios-importar-datos, eval=FALSE, include=FALSE}
+
+  read_excel("../data/files/OSF_files/02-extralines-1.xlsx")
+  read_excel("../data/files/OSF_files/02-extralines-2.xlsx", skip = 2)
+  read_excel("../data/files/OSF_files/02-extralines-3.xlsx", skip = 2, sheet = 2)
+  read_csv2("../data/files/OSF_files/02-spanish.csv", skip = 2)
+
+```
+
+
+
+### Importar múltiples archivos
+
+En ocasiones tenemos múltiples archivos en una carpeta (e.g. uno por participante) y queremos combinarlos todos en un solo DF.  
+
+Por suerte, las funciones como `read_csv()` admiten un vector con varios archivos.  
+
+Para importar todos los archivos que están en la carpeta `data/files/02-CSVs`:  
+
+
+```{r importar-multiples-archivos}
+
+# Directorio donde se encuentran los archivos
+name_of_folder = here::here("data/files/02-CSVs")
+
+# Listamos los archivos a leer
+files <- list.files(name_of_folder, full.names = TRUE)
+
+# Leemos todos los archivos, combinándolos en un data frame
+full <- read_csv(files)
+
+full
+
+```
+
+Lamentablemente, cuando leamos otro tipo de archivos, como archivos `.xlsx`, no podemos usar la función `read_csv()`. Veamos una manera de hacer lo mismo, con la que se puede usar cualquier función para leer datos.  
+
+Usaremos `map_df()`, que aplica la función que queramos a cada uno de los archivos que le indiquemos, de uno en uno: 
+
+```{r importar-multiples-archivos-map_df}
+
+# Directorio donde se encuentran los archivos
+name_of_folder = here::here("data/files/02-CSVs")
+
+# Listamos los archivos a leer
+files <- list.files(name_of_folder, full.names = TRUE)
+
+# Leemos todos los archivos de uno en uno, combinándolos en un data frame
+full <- purrr::map_df(files, read_csv)
+
+# Mostramos lo que contiene full
+full
+
+```
+
+
+
+#### Incluir nombres de archivos
+
+Habitualmente será importante saber a que archivo pertenecen los datos que hemos leído.  
+
+Podemos incluir los nombres de archivo en una columna:  
+
+```{r importar-multiples-archivos-nombres}
+
+# Nombre de la carpeta
+name_of_folder = here::here("data/files/02-CSVs")
+
+# Listamos los archivos dentro de esa carpeta
+files_simple <- list.files(name_of_folder, full.names = TRUE)
+
+# Asignamos nombres a los elementos del vector
+files = files_simple |> set_names(basename(files_simple))
+
+# Con el parámetro .id, almacenamos los nombres en la columna "file"
+full2 <- map_df(files, read_csv, .id = "file")
+
+
+```
+
+
+#### Con parametros
+
+Añadimos parámetros a la función de lectura. En este caso, definimos el tipo de columna esperado con la función `col_types()`. Con esto nos aseguraremos que si alguno de los archivos tiene el tipo de datos "incorrecto", aparecerán warnings en la importación:  
+
+```{r importar-multiples-archivos-parametros}
+
+name_of_folder = here::here("data/files/02-CSVs")
+files <- list.files(name_of_folder, full.names = TRUE)
+full <- map_df(files, read_csv,
+               # Ponemos los parámetros separados por comas, después de la función
+               col_types = cols(
+                 .default = col_character(), 
+                 Sex = col_factor(),
+                 trialN = col_integer(),
+                 Valence = col_factor(),
+                 rT = col_double()
+                 )
+               )
+
+full
+
+```
+
+Otra manera de hacer exactamente lo mismo con `map_df()`. El código es algo más complejo, pero nos da más flexibilidad, y podemos usar las funciones del mismo modo que habitualmente.  
+
+```{r importar-multiples-archivos-parametros2}
+
+name_of_folder = here::here("data/files/02-CSVs")
+files <- list.files(name_of_folder, full.names = TRUE)
+full2 <- 1:length(files) |> 
+  purrr::map_df(~ {
+    
+    cli::cli_alert_info("Reading file {basename(files[.x])}")
+    read_csv(files[.x], col_types =  cols(.default = col_character(), 
+                                          Sex = col_factor(),
+                                          trialN = col_integer(),
+                                          Valence = col_factor(),
+                                          rT = col_double()
+                                          )
+             )
+  })
+
+
+# Comprobamos que no hay diferencias
+waldo::compare(full, full2)
+
+```
+
+
+### Ejercicios - Importar múltiples archivos {.ejercicio -}
+
+
+1. Cuando más arriba importamos los archivos que están en la carpeta `data/files/02-CSVs`:  
+
+- ¿Qué archivos importamos exactamente?  
+
+::: {.callout-tip collapse="true"}
+
+### ¿Ves algún problema en lo que hicimos?
+
+<span style="color: orange;">Revisa el número de filas y el contenido de la variable `files`.</span>
+
+::: 
+
+
+El resultado final debería ser así:  
+
+
+```{r ejercicios-importar-multiples-1, echo=FALSE}
+
+# Directorio donde se encuentran los archivos
+name_of_folder = here::here("data/files/02-CSVs")
+
+# Listamos los archivos a leer
+files <- list.files(name_of_folder, pattern = "csv", full.names = TRUE)
+
+# Leemos todos los archivos, combinándolos en un data frame
+full <- map_df(files, read_csv)
+
+full
+
+```
+
+
+2. Leed los archivos .xlsx de la carpeta `data/files/02-XLSs`, combinándolos en un único DF. El resultado final debería ser como se ve a continuación:  
+
+::: {.callout-tip collapse="true"}
+
+### Pista
+
+Tendréis que usar `list.files()` usando el parámetro `pattern` 
+
+- Te recomiendo abrir los archivos excel para ver su estructura, las pestañas que tienen... ahí te darás cuenta de que necesitas otros parámetros de `read_xlsx()` como `sheet` o `skip`
+
+:::  
+
+
+```{r ejercicios-importar-multiples-2, echo=FALSE}
+
+name_of_folder = here::here("data/files/02-XLSs")
+
+# Listamos los archivos a leer
+files <- list.files(name_of_folder, pattern = "xls", full.names = TRUE)
+DF_all = map_df(files, read_xlsx, sheet = 2, skip = 5)
+DF_all
+```
+
+
+
+### Limpiar nombres de columnas
+
+El paquete {janitor} tiene una función muy útil llamada `clean_names()` que aplica algunas reglas sencillas para estandarizar los nombres de columnas:  
+
+```{r janitor_clean_names}
+
+DF_name = read_csv(here::here("data/files/02-read-csv.csv"))
+names(DF_name)
+
+DF_names_clean = DF_name |> janitor::clean_names()
+names(DF_names_clean)
+
+```
+
+
+
+
+### Exportar datos
+
+Muchas veces guardaremos los datos una vez procesados. Esto se puede hacer con la familia de funciones `write_*`.  
+
+Siguiendo el ejercicio anterior, después de leer los archivos excel de una carpeta y limpiar los nombres de columna, queremos guardar el data frame resultante en la carpeta `data_clean` (¡es importante asegurarnos que esa carpeta existe!).   
+
+#### Archivos CSV
+
+Si queremos que el archivo guardado sea un `csv`, usaremos `write_csv()` del paquete {`readr`}.  
+
+```{r write-csv, eval = FALSE}
+
+# Lo que hicimos antes, leemos todos los archivos excel de un directorio
+name_of_folder = here::here("data/files/02-XLSs")
+files <- list.files(name_of_folder, pattern = "xls", full.names = TRUE)
+DF_all = map_df(files, read_xlsx, sheet = 2, skip = 5) |> janitor::clean_names()
+
+readr::write_csv(DF_all, "data_clean/DF_all.csv")
+
+```
+
+#### Otros Archivos
+
+La función a usar cambiará en función del formato que queramos:
+
+- `xlsx`: `writexl::write_xlsx()`  
+- `sav`: `haven::write_sav()`  
+- `ods`: `readODS::write_ods()`
+- `rds`: `readr::write_rds()`  
+
+```{r write-otros, eval = FALSE}
+
+writexl::write_xlsx(DF_all, "data_clean/DF_all.xlsx")
+
+haven::write_sav(DF_all, "data_clean/DF_all.sav")
+
+readODS::write_ods(DF_all, "data_clean/DF_all.ods")
+
+readr::write_rds(DF_all, "data_clean/DF_all.rds")
+
+```
+
+
+
+## Preparación y transformación de datos
+
+Para la preparación y transformación de datos usaremos fundamentalmente `dplyr`. Hay otros paquetes [más rápidos](https://h2oai.github.io/db-benchmark/) como `data.table`. Si trabajas con datos gigantescos (millones de filas), sin duda notarás la diferencia. La desventaja es que la sintaxis es (habitualmente) menos intuitiva.      
+
+
+### Tidy data
+
+Existen tres sencillas reglas que definen la *Tidy data*:
+
+1. Cada variable tiene su columna propia
+2. Cada observación tiene su fila propia
+3. Cada valor tiene su celda propia
+    
+    
+Las ventajas fundamentales son:
+
+* Uso de una manera consistente de trabajar, que se alinea con el tidyverse  
+* Facilidad para trabajar con la lógica vectorizada  
+
+---  
+
+Por ejemplo. De manera muy sencilla y rápida podemos crear una nueva columna realizando algún cómputo arbitrario con los valores de otra columna.  
+
+```{r tidy_vector-1}
+
+# Computa ratio por 100,000
+table1 |> 
+  mutate(rate_per_100K = cases / population * 100000)
+
+```
+
+O contar el número de casos por valor de una variable.  
+
+```{r tidy_vector-2}
+
+# Cuenta cuantos registros tenemos por año
+table1 |> 
+  count(year)
+
+# Cuenta cuantos registros tenemos por año y país
+table1 |> 
+  count(year, country)
+
+
+```
+
+
+También podemos hacer cosas algo más complejas, por ejemplo, aplicar funciones como `across` o `where(is.numeric)` para sumar todas las columnas de tipo numérico.  
+
+```{r tidy_vector-1b}
+
+table1 |> 
+  mutate(suma_absurda =  rowSums(across(where(is.numeric))))
+
+```
+
+
+```{r tidy_vector-1c, echo=FALSE}
+# table1 |> 
+#   mutate(suma_absurda =  year + cases)
+# 
+# table1 |> 
+#   mutate(suma_absurda =  rowSums(across(2:3)))
+# 
+# table1 |> 
+#   mutate(suma_absurda =  rowSums(across(c("year", "cases"))))
+
+```
+
+
+Y, como no, `ggplot` funciona con datos `tidy`, en formato long.   
+
+
+### Verbos dplyr
+
+Usaremos [{dplyr}](https://dplyr.tidyverse.org/), un paquete muy potente para la manipulación de datos. Su sintaxis, además, es bastante intuitiva (¡son verbos en inglés!).   
+
+Usando pipes **|>**  (CONTROL + SHIFT + M) podemos enlazar operaciones de transformación de datos de manera muy sencilla (una vez nos aprendamos los verbos).  
+
+Podemos ver más detalle y ejemplos en la [Cheatsheet de dplyr](https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf).   
+
+En general usaremos la pipe nativa de R (desde la versión 4.1.0) **|>**, pero en alguna ocasión usaremos **%>%** (requiere el paquete `magrittr`).
+
+
+::: {.callout-note}
+
+### Verbos esenciales
+
+* filter(): filtrar filas  
+* arrange(): ordenar filas  
+* select(): seleccionar columnas  
+* rename(): renombrar columnas  
+* mutate(): crear columnas, modificar columnas, etc.   
+
+:::
+
+
+#### Tabla resumen dplyr {-}  
+
+```{r tabla-dp, echo=FALSE}
+
+DF = data.frame(
+  tarea = c("Filtrar", "Ordenar", "Seleccionar/eliminar variables", "Renombrar variables", "Separar contenidos de variable", 
+            "Extraer valores únicos", "Crear/modificar variables", "Omitir NAs", "Wide to long", "Long to wide", "Combinar bases de datos", "Recodificar valores", "Recodificar valores"),
+  funcion = c("filter()", "arrange()", "select()", "rename()", "separate()", "distinct()", "mutate()", "drop_na()", "pivot_longer()", "pivot_wider()", "left_join()", "ifelse()", "case_when()"),
+  ejemplo = c("datos |> filter(Sexo == 1)", "datos |> arrange(Sexo)", "datos |> select(-Sexo)", "datos |> rename(Genero = Sexo)", 
+              "datos |> separate(var_name, c('First', 'Second'), sep = '_')", "datos |> distinct(Edad, .keep_all = T)", "datos |> mutate(Viejo = Edad > 30)", 
+              "datos |> drop_na(Sexo)", "datos |> pivot_longer(4:6, names_to = 'Condition', values_to = 'VD')", "datos |> pivot_wider(names_from = Condition, values_from = VD)", "left_join(datos1, datos2, by = 'ID')", 
+              "datos |>  mutate(Edad = ifelse(Edad > 30, 'Viejo', 'Joven'))", "datos |>  mutate(Edad = case_when(Edad > 30 ~ 'Viejo', 'Joven')"))
+
+DT::datatable(DF, options = list(pageLength = 20, dom = 't'))
+
+```
+
+#### Filtrar y ordenar filas
+
+A partir de los siguientes datos:  
+
+```{r filtrando-ordenando}
+
+name_of_file = here::here("data/files/02-read-csv.csv")
+DF_name = read_csv(name_of_file)
+DF_name
+
+```
+
+Podemos usar el verbo `filter()` para mostrar las filas que cumplan cualquier regla lógica o combinación de reglas (e.g. Genero == 1 & Edad >= 30). 
+
+En el ejemplo siguiente, nos quedamos con las filas donde el valor de Educación sea mayor de 8:  
+
+```{r filtrando-ordenando2}
+DF_name |> 
+  filter(Educacion > 8)
+```
+
+Si queremos usar varias condiciones lógicas, las reparamos de `&` (AND).
+
+Aquí nos quedamos con las filas donde el valor de Educación sea mayor de 8 **Y** el Genero sea igual a 1 (fíjate que usamos `==` para indicar la condición lógica de igualdad):  
+
+```{r filtrando-ordenando2b}
+
+DF_name |> 
+  filter(Educacion > 8 & Genero == 1)
+
+```
+
+También podemos ordenar las filas usando `arrange()` solo o en combinación con `desc()`. 
+
+Por ejemplo, ordenamos a partir de Educación, de menor a mayor:
+
+```{r filtrando-ordenando3}
+
+DF_name |> 
+  arrange(Educacion, desc(Genero))
+
+```
+
+Si queremos ordenar a partir de dos o más criterios, simplemente los separamos por coma. Además, si queremos que alguno de ellos sea de manera descendente (por defecto es ascendente), envolvemos el nombre de columna en `desc()`. 
+
+Abajo, ordenamos educación de manera ascendente, y de Género descendente:  
+
+```{r filtrando-ordenando3a}
+
+DF_name |> 
+  arrange(Educacion, desc(Genero))
+
+```
+
+
+#### Seleccionar, ordenar y renombrar columnas
+
+Seleccionamos las columnas que queremos listando las variables en el orden deseado dentro del verbo `select()`:  
+
+```{r seleccionando-ordenando-columnas}
+
+DF_name |> 
+  select(Genero, Edad)
+
+```
+
+Eliminamos columnas precediendo las variables a eliminar con `-` dentro de `select()`:  
+
+```{r seleccionando-ordenando-columnas2}
+
+DF_name |> 
+  select(-...1)
+
+```
+
+Ordenamos y eliminamos columnas listando las variables en el orden deseado dentro del verbo `select()` y precediendo las variables a eliminar con `-`:  
+
+```{r seleccionando-ordenando-columnas3}
+
+DF_name |> 
+  select(ID, Edad, Genero, everything(), -...1) 
+
+```
+
+
+Para renombrar variables usamos el verbo `rename()`. Es importante recordar que en hay que indicar `rename(NOMBRE_NUEVO = NOMBRE_ANTIGUO)`:  
+
+```{r renombrando}
+
+DF_name |> 
+  rename(Identificador = ID,
+         Sexo = Genero)
+
+```
+
+
+#### Ejercicios - verbos dplyr simples {.ejercicio -} 
+
+- Cuenta los registros por año en el data frame `mpg`  
+- Filtra los datos para quedarnos solo con los del año 1999
+- Renombra la variable displ para que se llame "engine displacement"
+  + Si aparece el error `Error: unexpected symbol in ...`, puedes ver la ayuda de la función ?make.names, o [este post](https://stackoverflow.com/questions/22842232/dplyr-nonstandard-column-names-white-space-punctuation-starts-with-numbers)
+- Ordena los datos (no las columnas) por consumo en ciudad `cty` y clase de vehículo `class`
+- Crea un data frame que no contenga la variable `model`
+
+
+::: {.callout-tip collapse="true"}
+
+### Soluciones 
+
+<span style="color: orange;">
+- `mpg |> count(year)`  
+- `mpg |> filter(year == 1999)`  
+- `mpg |> rename(engine displacement = displ)` #ERROR  
+- `mpg |> rename(engine_displacement = displ)` #SOLUCION1  
+- mpg |> rename(\`engine displacement\` = displ) #SOLUCION2  
+- `mpg |> arrange(cty, class)`  
+- `mpg |> select(-model)`
+</span>
+
+:::
+
+```{r verbos-simples-ej, eval=FALSE, include=FALSE}
+mpg |> count(year)
+
+mpg |> filter(year == 1999)
+
+mpg |> rename(engine displacement = displ) # ERROR
+mpg |> rename(engine_displacement = displ) # Solución 1
+mpg |> rename(`engine displacement` = displ) # solución 2
+
+mpg |> arrange(cty, class)
+
+mpg |> select(-model)
+
+
+```
+
+
+#### Selección avanzada con select_helpers()  
+
+El `everything()` que usamos dentro de `select()` más arriba es uno de los `select_helpers()` existentes. Estos nos ayudan a realizar operaciones de selección de variables sin necesidad de escribir a mano todas las variables.  
+
+::: {.callout-note}
+
+### select_helpers()
+
+* starts_with(): Empieza con un prefijo (e.g. starts_with("CI_"))  
+* ends_with(): Acaba con un sufijo  
+* contains(): Contiene una cadena de texto específica  
+* matches(): Matches a regular expression   
+* num_range(): Matches a numerical range like x01, x02, x03  
+* one_of(): Matches variable names in a character vector  
+* everything(): Matches all variables  
+* last_col(): Select last variable  
+
+
+:::
+
+
+Trabajaremos con los datos del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al. Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base RAW en formato wide. Leemos la base y mostramos los títulos de las 291 columnas:     
+
+```{r seleccion-avanzada}
+
+  df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")  
+  cat(names(df_wide))
+
+```
+
+Con `contains()` seleccionamos variables que contienen la cadena de texto `dem`:  
+  
+```{r seleccion-avanzada2}
+
+  df_wide |> 
+    select(contains("dem"))
+
+```
+
+Usando `ends_with()` seleccionamos variables que acaban con la cadena de texto `cod`:  
+
+```{r seleccion-avanzada3}
+
+  df_wide |> 
+    select(ID, ends_with("cod"))
+
+```
+
+Finalmente, `matches()` nos permite usar todo la potencia de las [expresiones regulares](03-preparacion_transformacion.html#regular-expressions). En este caso, también le pedimos variables que acaban con la cadena de texto `cod`:  
+
+```{r seleccion-avanzada4}
+
+  df_wide |> 
+    select(ID, matches("cod$")) # $: fin de la cadena de texto
+  
+```
+
+
+#### Modificar y añadir variables
+
+Seguimos usando verbos de {dplyr}. Para crear nuevas variables o modificarlas reemplazando los valores usaremos `mutate()`. Dentro de mutate podemos hacer cualquier operación con una o más variables.      
+
+Primero leemos nuestra base:  
+
+```{r modificar-anadir-variables1}
+
+name_of_file = here::here("data/files/02-read-csv.csv")
+DF_name = read_csv(name_of_file)
+DF_name
+
+```
+
+Si usamos una variable ya existente, en este caso `PPV_DECLARED`, sus valores se sobrescriben:  
+
+```{r modificar-anadir-variables2}
+
+DF_name |> 
+  mutate(PPV_DECLARED = PPV_DECLARED/100)
+  
+```
+
+Si usamos una variable no existente (`PPV_DECLARED_PCT`), la creamos:  
+
+```{r modificar-anadir-variables3}
+
+DF_name |> 
+  mutate(PPV_DECLARED_PCT = PPV_DECLARED/100)
+
+```
+
+
+#### Resúmenes agrupados
+
+La combinación de verbos `group_by()` y `summarise()` es una de las más usadas. Con esta podemos calcular promedios, medianas, etc. por condición de manera sencilla.  
+
+
+`summarise()` nos permite 'resumir' datos, calculando promedios, medianas, o cualquier otro estadístico de interés. En este caso, vemos el promedio de la variable `PPV_DECLARED` usando `mean(PPV_DECLARED, na.rm = TRUE)`. El parámetro `na.rm = TRUE` ignora los valores `NA` que pueda haber en la base:  
+
+```{r resumenes-agrupados}
+
+DF_name |> 
+  summarise(Promedio_PPV = mean(PPV_DECLARED, na.rm = TRUE), 
+            N = n())
+
+```
+
+
+Si incluimos `group_by()` en la pipeline, esos 'resúmenes' se mostraran para cada valor de la variable por la que agrupamos:  
+
+```{r resumenes-agrupados2}
+
+DF_name |> 
+  group_by(Genero) |> 
+  summarise(Promedio_PPV = mean(PPV_DECLARED, na.rm = TRUE), 
+            N = n())
+
+
+```
+
+Podemos agrupar por múltiples variables, y calcular tantas cosas como queramos. En ese caso la media, mediana, desviación estándar y el numero de observaciones:   
+
+```{r resumenes-agrupados3}
+
+DF_name |> 
+  group_by(Genero, condition) |> 
+  summarise(promedio_PPV = mean(PPV_DECLARED, na.rm = TRUE),
+            mediana_PPV = median(PPV_DECLARED, na.rm = TRUE),
+            SD = sd(PPV_DECLARED, na.rm = TRUE),
+            N = n())
+
+```
+
+
+### Ejercicios - verbos dplyr {.ejercicio -} 
+
+
+1. Usando la base df_wide (puedes usar el código de abajo), haz las siguientes cosas, una a una:  
+
+```
+df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")  
+
+```
+
+* Filtra el DF para quedarnos solo con edades entre 18 y 50 años  
+* Ordena los datos por genero y edad, esta última decreciente  
+* Selecciona las columnas para quedarnos solo con ID, variables demográficas, y respuestas crudas (raw)  
+* Crea una nueva variable llamada `niv_edu_porc`, en la que calcules el nivel educativo al que han llegado dividido por el máximo de la base de datos, pero en porcentaje (nivel educativo persona / nivel educativo máximo; en porcentaje)  
+
+2. Ahora combina el resultado de todas las operaciones anteriores en un DF  
+
+3. Calcula el promedio y desviación típica de edad para cada género  
+
+
+::: {.callout-tip collapse="true"}
+
+### Pistas
+
+1. Paso a paso:  
+
+    + `filter(CONDICION1 & CONDICION2)` o `filter(CONDICION1, CONDICION2)`
+    + `arrange()` o `arrange(desc())`
+    + `select(starts_with("ALGUN_PATRON"))` o `select(ends_with("ALGUN_PATRON"))`
+    + `mutate()` usando también `max()`
+
+2. `DF_resultado = df_wide |> operacion1 |> operation2 |> ...`
+
+3. `group_by() |> summarize()`
+
+:::
+
+
+
+```{r ejercicios-dplyr-soluciones, eval=FALSE, include=FALSE}
+
+# 1. Usando la base df_wide, haz las siguientes cosas, una a una:  
+ df_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")  
+
+# * Filtra el DF para quedarnos solo con edades entre 18 y 50 años  
+  
+  # Método paso a paso
+  df_wide |> 
+    filter(dem_edad >= 18) |> 
+    filter(dem_edad <= 50)
+
+  # Método condensado
+  df_wide |> 
+    filter(dem_edad >= 18 & dem_edad <= 50)
+
+  # * Ordena los datos por genero y edad, esta última decreciente  
+  df_wide |> 
+    arrange(dem_genero, desc(dem_edad))
+  
+  # * Selecciona las columnas para quedarnos solo con ID, variables demográficas, y respuestas crudas (raw)  
+  df_wide |> 
+    select(ID, contains("dem_"), contains("raw"))
+  
+  # * Crea una nueva variable que sea niv_edu_porc, en la que calcules cual es el porcentaje de nivel educativo al que han llegado relativo al máximo de la base de datos (nivel educativo persona / nivel educativo máximo; en porcentaje)  
+
+  df_wide |> 
+    mutate(niv_edu_porc = dem_nivedu / max(dem_nivedu) * 100)
+
+
+# 2. Ahora combina el resultado de todas las operaciones anteriores en un DF  
+
+  df_final = df_wide |> 
+    filter(dem_edad >= 18 & dem_edad <= 50) |>
+    arrange(dem_genero, desc(dem_edad)) |>
+    select(ID, starts_with("dem_"), ends_with("raw")) |>
+    mutate(niv_edu_porc = dem_nivedu / max(dem_nivedu) * 100)
+
+
+# 3. Calcula el promedio y desviación típica de edad para cada género  
+  
+  df_final |>
+    group_by(dem_genero) |>
+    summarize(edad_media = mean(dem_edad), SD = sd(dem_edad))
+
+```
+
+
+
+## Verbos avanzados y otras criaturas indómitas
+
+
+### Wide to long simple
+
+Empecemos con un ejemplo muy sencillo. 2 participantes, cada uno en una condición, y 2 ítems.  
+
+```{r wide-to-long}
+
+df_simple_wide = 
+  tibble(
+    ID = c("Participante1", "Participante2"),
+    condition = c("calor", "frio"),
+    Item1 = c(22, 33),
+    Item2 = c(88, 99)
+    )
+
+df_simple_wide
+
+```
+
+Pasamos esta base de datos 'ancha' (una fila por participante), a una base en formato 'largo' (una fila por observación) usando la función `pivot_longer()`. Solo tenemos que indicar el rango de columnas, asignar nombre a la columna donde enviaremos los nombres de las columnas, y asignar nombre a la columna donde estarán los valores:  
+
+```{r wide-to-long2}
+
+df_simple_long = df_simple_wide |>
+  pivot_longer(cols = Item1:Item2,
+               names_to = "Item",
+               values_to = "Response")
+
+
+df_simple_long
+
+```
+
+
+
+### Long to wide simple
+
+Siguiendo con el ejemplo anterior, podemos devolver la base en formato 'largo' a 'ancho' de nuevo usando `pivot_wider()`:  
+
+```{r long-to-wide}
+
+df_simple_long |> 
+  pivot_wider(names_from = Item, values_from = Response)
+
+```
+
+
+
+#### ¿Para que sirve tener los datos en formato long?  
+
+Hay algunos análisis para los que necesitamos formato long (e.g. anovas, modelos mixtos...), muchas gráficas con `ggplot` asumen formato long, y varias cosas se simplifican cuando los datos están en formato largo.  
+
+Por ejemplo, si queremos usar resúmenes agrupados para obtener la media, mediana, desviación estándar... por ítem, con el formato WIDE necesitaremos 3 lineas de código para cada ítem que tenga nuestra base (imagina con 100 ítems...). Con el formato long, el código de abajo es suficiente.  
+
+```{r long-wide-plots}
+# En formato wide podríamos usar cosas como:  
+  # skimr::skim(df_simple_wide)
+
+# Añadir para cada ítem 3 líneas
+df_simple_wide |>
+  summarise(mean_Item1 = mean(Item1),
+            mean_Item2 = mean(Item2),
+            # ...
+            median_Item1 = median(Item1),
+            median_Item2 = median(Item2),
+            # ...
+            sd_Item1 = sd(Item1),
+            sd_Item2 = sd(Item2),
+            # ...
+            N = n()
+            # NO aparece N por ítem
+            )
+
+# Sirve para 1 ítem o para 10 millones de ítems
+df_simple_long |>
+  group_by(Item) |>
+  summarise(MEAN = mean(Response),
+            MEDIAN = median(Response),
+            SD = sd(Response),
+            N = n())
+
+```
+
+
+
+
+### Wide to long complex
+
+Ahora pasemos a un ejemplo mas complejo. Leemos la base de datos y seleccionamos las puntuaciones a los 11 ítems de la lipkus numeracy scale de 232 participantes, ademas de datos demográficos. Usamos `DT::datatable()` para visualizar la base de manera interactiva.  
+
+```{r wide-to-long2a}
+
+# Leemos documento en formato WIDE
+df_wide_complex = read_csv(
+  "https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv"
+) |>
+  # Seleccionamos solo algunas de las filas
+  select(ID,
+         dem_genero,
+         dem_edad,
+         dem_nivedu,
+         matches("lkns_[0-9]{2}_raw"))
+
+DT::datatable(df_wide_complex)
+
+```
+
+De nuevo, para pasar de formato 'ancho' a 'largo' completamos los mismos parámetros que antes. Lo único que añadimos es `values_transform = list(Response = as.character)` para poder incluir en la columna `Response` tanto valores numéricos como caracteres.  
+
+```{r wide-to-long2b}
+
+df_long_complex =
+  df_wide_complex |>
+  pivot_longer(
+    cols = lkns_01_raw:lkns_11_raw,
+    names_to = "Item",
+    values_to = "Response",
+    values_transform = list(Response = as.character)
+  )
+
+# Podemos usar select_helpers!
+  # Reemplaza lkns_01_raw:lkns_11_raw por matches("lkns")
+
+
+DT::datatable(df_long_complex)
+
+```
+
+
+### Long to wide complex
+
+Nos sirve el mismo código que con el ejemplo más simple: 
+
+```{r long-to-wide-2}
+
+df_long_complex |>  
+  pivot_wider(names_from = Item, values_from = Response)
+
+```
+
+
+
+## Ejercicios - wide to long {.ejercicio -} 
+
+De nuevo trabajaremos con datos del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al., pero esta vez van a ser los datos *procesados*. Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base final en formato wide (Dentro de https://osf.io/egxy5/, ver archivo: `/outputs/data/sa-prepared.csv`).  
+
+Para simplificar el proceso, puedes importar los datos y limpiar los nombres de variables así:  
+
+```{r ejercicios-dplyr-avanzado-1-2-import, echo=TRUE}
+
+DF_wide = read_csv(
+  "https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"
+) |>
+  janitor::clean_names()
+
+```
+
+
+1. Cambia el orden de las variables para que ID sea la primera columna.  
+
+2. Transforma la base a formato long (eso sí, mantén las variables demográficas en formato wide).  
+
+3. Aprovechando que tenemos la base en formato long, sabrías hacer una gráfica con un histograma o densidad para cada una de las variables no demográficas?    
+
+::: {.callout-tip collapse="true"}
+
+### Pistas
+
+1. Tendrás que usar la función `select()` y el select helper `everything()` 
+
+2. `pivot_longer(primera_variable:ultima_variable)`
+
+3. `facet_wrap(~name, scales = "free") te ayudara a crear paneles para cada nombre, donde las escalas x/y pueden variar libremente.`
+
+:::
+
+
+El gráfico final se debería ver así:  
+
+```{r ejercicios-dplyr-avanzado-1-2, echo=FALSE}
+
+DF_wide = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv") |> 
+  janitor::clean_names()
+  # mutate(anxious_attachment = round(anxious_attachment, 2))
+
+
+  # 1. Cambia el orden de las variables para que ID sea la primera columna.  
+    DF_wide = DF_wide |> select(id, everything())
+  
+  
+  # 2. Transforma la base a formato long (eso sí, mantén las variables demográficas en formato wide).   
+    DF_long = DF_wide |> pivot_longer(fluid_intelligence:working_memory)
+    
+  
+    # 3. Aprovechando que tenemos la base en formato long, sabrías hacer una gráfica con un histograma o densidad para cada una de las variables no demográficas?    
+    DF_long |> 
+      ggplot(aes(value)) +
+      geom_density() + 
+      facet_wrap(~name, scales = "free")
+    
+```
+
+
+
+## Separate, omit, ifelse, case_when, tipos de variables...
+
+Para transformaciones algo más complejas, pero muy habituales, usaremos algunos verbos del paquete {tidyr}, y variaciones con {dplyr}  
+
+```{r separate-omit-ifelse-casewhen0}
+# Base original
+DF_name = read_csv("../data/files/02-read-csv.csv") |> 
+  select(-...1, -Educacion, -Edad, -condition2)
+
+DT::datatable(DF_name)
+```
+
+---  
+
+Podemos separar la columna de condición usando la función `separate()` y un separador (`sep = "_"`). La separación puede ser en columnas o en filas. En este primer caso, separamos enviando cada parte de `condition` a una columna distinta:  
+
+```{r separates1}
+# Separate
+DF_separated = DF_name |> 
+  separate(condition, c("primer_chunk", "segundo_chunk"), sep = "_")
+
+DF_separated
+
+
+```
+
+También podemos enviar cada parte de `condition` a una fila distinta:  
+
+```{r separates2}
+
+DF_name |> 
+  separate_rows(condition, sep = "_")
+
+```
+
+Con `unite()` podemos hacer lo contrario, unir columnas con un separador definido:  
+
+```{r unite}
+
+# Unite: inversa de separate
+DF_separated |> 
+  unite(condition, c(primer_chunk, segundo_chunk), sep = "_")
+
+```
+
+
+Si necesitamos recodificar variables, cambiar valores condicionalmente,... podemos usar `ifelse()`, `case_when()` o `recode()`:    
+
+`ifelse()`, si se cumple la condición `Genero == 1`, asigna el valor "Hombre", de lo contrario, "Mujer":  
+
+```{r ifelse-casewhen}
+
+DF_name |>
+  mutate(Genero = ifelse(Genero == 1, "Hombre", "Mujer"))
+
+```
+
+Con `case_when()` podemos establecer varias condiciones lógicas simultáneamente, ademas de un valor por defecto si no se cumple ninguna de ellas. Las condiciones lógicas pueden ser arbitrariamente complejas:  
+
+```{r ifelse-casewhen2}
+
+DF_name |>
+  mutate(Genero = 
+           case_when(
+             Genero == 1 ~ "Hombre",
+             Genero == 2 ~ "Mujer",
+             Genero == 3 ~ "No binario",
+             TRUE ~ NA_character_)
+         )
+
+```
+
+Finalmente podemos usar `recode()`, con una sintaxis tal vez algo más sencilla:  
+
+```{r ifelse-casewhen3}
+
+  DF_name |> 
+  select(Genero) |> 
+    
+    # De número a texto
+    mutate(Genero2 = recode(
+      Genero,
+      `1` = "Hombre",
+      `2` = "Mujer",
+      .default = "No definido"
+    )) |>
+    
+    # De texto a número
+    mutate(Genero3 = recode(
+      Genero2,
+      "Hombre" = 1,
+      "Mujer" = 0,
+      .default = 999
+    ))
+
+```
+
+Otras funciones útiles, extraer los valores de una columna con `pull()` o descartar los `NA` de una columna con `drop_na()`.  
+
+Usamos `pull()` para extraer los valores de una columna.  
+
+```{r omit-ifelse-casewhen}
+DF_name |> pull(PPV_DECLARED)
+```
+
+
+Calculamos el promedio de una columna (con pipes).  
+
+```{r pull_mean}
+ 
+DF_name |> pull(PPV_DECLARED) |> mean()
+
+```
+
+
+Calculamos el promedio usando `na.rm = TRUE` para que la función `mean()` ignore los NA's:  
+
+```{r pull_mean_na}
+
+DF_name |> pull(PPV_DECLARED) |> mean(na.rm = TRUE)
+
+```
+
+Calculamos la media de manera más sencilla, en este caso usando base R. No siempre son necesarias las pipes. Si escribes `DF_name$` y presionas el tabulador, aparecerán todas las columnas de esa base:  
+
+```{r mean_simple}
+mean(DF_name$PPV_DECLARED, na.rm = TRUE)
+```
+
+Eliminamos las filas que tienen valores perdidos en la variable indicada. En este caso pasamos de 103 a 100 observaciones:  
+
+```{r drop_na}
+DF_name |>  drop_na(PPV_DECLARED)
+```
+
+
+
+## Ejercicios - verbos avanzados dplyr {.ejercicio -} 
+
+1. Importa los datos y limpia los nombres de columna: 
+
+::: {.callout-tip collapse="true"}
+
+### Para limpiar nombres de columnas automáticamente: 
+
+<span style="color: orange;">[`clean_names()`](#modificar-y-añadir-variables)</span>
+
+:::
+
+
+```{r ejercicios-dplyr-avanzado-import}
+
+# Leemos los datos y usamos janitor::clean_names() para limpiar los nombres de las columnas
+ DF_wide = 
+  read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv")
+
+```
+
+2. En un nuevo DF (`DF_split`), crea una variable llamada `social_adaptation_split` con la median split para la variable social_adaptation. La mitad superior se llamará `high_social_adaptation` y la mitad inferior `low_social_adaptation`. 
+
+::: {.callout-tip collapse="true"}
+
+### Suele ser más facil si dividimos la tarea en varios pasos 
+
+<span style="color: orange;">1. Calculamos mediana <BR><BR>2. Usamos `case_when()`</span>
+
+:::
+
+
+3. Asegúrate que no hay valores NA. 
+
+::: {.callout-tip collapse="true"}
+
+### Pista
+
+<span style="color: orange;">La función `drop_na()` .</span>
+
+:::
+
+---  
+
+El resultado final debería ser:    
+
+```{r ejercicios-dplyr-avanzado-3, echo=FALSE}
+
+DF_wide = read_csv(
+  "https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/outputs/data/sa-prepared.csv"
+) |>
+  janitor::clean_names()
+
+median_social_adaptation = DF_wide |> pull(social_adaptation) |> median(., na.rm = TRUE)
+
+DF_split = DF_wide |>
+  mutate(social_adaptation_split =
+           as.factor(
+             case_when(
+               social_adaptation >= median_social_adaptation ~ "high_social_adaptation",
+               social_adaptation < median_social_adaptation ~ "low_social_adaptation",
+               TRUE ~ NA_character_
+             )
+           )) |>
+  select(id, social_adaptation, social_adaptation_split) |>
+  drop_na(social_adaptation_split)
+
+DT::datatable(DF_split)
+    
+    # DF_split |> summary(.)
+  
+```
+
+
+## Regular expressions
+
+Las expresiones regulares son una herramienta tan potente como difícil de utilizar. Eso si, podemos hacer algunas cosas básicas muy útiles, sin demasiado esfuerzo. Hay cheatsheets ([Basic Regular Expressions Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/regex.pdf)) y libros ([introduction to Regular Expressions](https://tobyhodges.gitbooks.io/introduction-to-regular-expressions/content/)) que nos pueden ayudar a familiarizarnos con ellas.  
+
+---  
+
+
+![SOURCE: https://xkcd.com/208/](../data/images/regular_expressions.png)
+
+--- 
+
+
+Imagina que tenemos que trabajar con la columna `condition2`, donde están codificadas 3 variables importantes:  
+
+```{r regular-expressions}
+
+DF_regexp = read_csv(here::here("data/files/02-read-csv.csv")) |> 
+  select(-...1, -Educacion, -Edad, -condition)
+
+DF_regexp
+
+```
+
+
+Cuando no tenemos separadores explícitos como vimos antes con `separate()`, podemos usar `mutate()` junto a `gsub()` y expresiones regulares para extraer, una a una, las condiciones. 
+
+La función `gsub()` nos sirve para eliminar partes de una cadena de texto, para extraer un número, etc.:  
+
+
+```{r separate2}
+
+DF_regexp |> 
+  mutate(cond_NM = gsub("([0-9]{2,3}).*", "\\1", condition2),
+         cond_LR = gsub("[0-9]{2,3}([LR]).*", "\\1", condition2),
+         cond_IA = gsub("[0-9]{2,3}[LR](.*)", "\\1", condition2))
+
+```
+
+Extraemos la misma información, de una manera ligeramente distinta, siendo mucho más explícitos sobre la estructura esperada de la columna condition2:  
+
+```{r regular-expressions-1}
+
+DF_regexp |> 
+  mutate(cond_NM = gsub("^([0-9]{2,3})([LR])(.*)$", "\\1", condition2),
+         cond_LR = gsub("^([0-9]{2,3})([LR])(.*)$", "\\2", condition2),
+         cond_IA = gsub("^([0-9]{2,3})([LR])(.*)$", "\\3", condition2))
+
+```
+
+Con `select()` y `matches()` seleccionamos columnas usando la siguiente regular expression `lkns_[0-9]{2}_raw`:
+
+- `lkns_` contiene esta cadena de texto  
+- `[0-9]{2}` a continuación, contiene cualquier dígito del 0 al 9, dos veces.
+- `_raw`a continuación, contiene esta cadena de texto  
+
+```{r regular-expressions-2}
+
+read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv") |> 
+  # Seleccionamos solo algunas de las filas
+  select(ID, dem_genero, dem_edad, dem_nivedu, matches("lkns_[0-9]{2}_raw"))
+
+```
+
+
+---  
+
+### Ayuda con regular expressions
+
+Es muy fácil cometer errores cuando usamos expresiones regulares. Algunas recomendaciones:  
+
+1) Solo usar expresiones regulares cuando sea necesario
+
+2) Usar expresiones regulares lo más explícitas y definidas posible
+
+3) Verificar que están funcionando bien!  
+
+
+![SOURCE: https://xkcd.com/1171/](../data/images/perl_problems.png)
+
+Hay una aplicación Shiny muy útil que nos ayudará a construir Regular Expressions:  
+
+```{r regular-expressions-gadget, eval=FALSE}
+
+regexplain::regexplain_gadget()
+
+```
+
+
+--- 
+
+
+
+## Ejercicios - Calcular puntajes de escalas usando regular expressions {.ejercicio -} 
+
+Ahora volvemos a usar con los datos brutos (`sa-raw-anonymised.csv`) del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al.      
+
+En estos datos tenemos las puntuaciones crudas (e.g. WMAT_01_raw) y ya codificadas/corregidas (WMAT_01_cod) para los ítems de varias escalas Para preparar los datos de cara al análisis final, necesitamos calcular el puntaje para cada participante y escala. Empezaremos con la prueba de Matrices de WAIS (`WMAT_`). 
+
+1. Calcula el puntaje para cada participante en la prueba de Matrices de WAIS (ítems WMAT_[NUMEROS]_cod)  
+  
+  Hay al menos dos estrategias posibles:
+  
+  A) Selecciona las columnas relevantes y haz la suma de columnas  
+  
+  B) Convierte a long, filtra para quedarte con las filas correspondientes a la prueba relevante, y haz una suma agrupada  
+
+::: {.callout-tip collapse="true"}
+
+### Pista para seleccionar o filtrar columnas: 
+
+<span style="color: orange;">Recuerda que usamos `select()` para seleccionar columnas, o `filter()` para filtrar.</span>
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+### Pista para seleccionar columnas: 
+
+<span style="color: orange;">Podemos usar `matches("WMAT_[0-9]{2}_cod")` para seleccionar o filtrar todas las columnas o ítems que contienen: `WMAT_`, 2 números del 0 al 9, y acaban en `_cod`.</span>
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+### Pista para suma de columnas: 
+
+<span style="color: orange;">`rowSums()` es la función que podemos usar, pero su sintaxis es algo complicada.</span>
+
+:::
+
+::: {.callout-tip collapse="true"}
+
+### Pista para suma agrupada:
+
+<span style="color: orange;">Usamos `group_by() |> summarise()` poniendo parámetros dentro de cada función.</span>
+
+:::
+  
+---  
+
+Importar datos:  
+
+```{r ejercicios-dplyr-avanzado-4datos}
+
+df_wide_raw = read_csv("https://raw.githubusercontent.com/gorkang/cognitive-and-socio-affective-predictors-of-social-adaptation/master/data-raw/sa-raw-anonymised.csv")
+
+```
+
+
+```{r ejercicios-dplyr-avanzado-4solucion, eval=FALSE, include=FALSE}
+
+# Estrategia A - wide
+DF_A = 
+  df_wide_raw |> 
+  select(ID, matches("WMAT_[0-9]{2}_cod")) |>
+  # Cuidado con usar la posición de las variables
+  mutate(WMAT_sum = rowSums(across(2:27))) |>
+  select(ID, WMAT_sum)
+
+
+# Estrategia A2 - wide con intervalos entre nombres de variables
+DF_A2 = 
+  df_wide_raw |> 
+  mutate(WMAT_sum = rowSums(across(matches("WMAT_[0-9]{2}_cod")))) |> 
+  select(ID, WMAT_sum)
+
+
+# Estrategia B - long
+DF_B = 
+  df_wide_raw |> 
+  select(ID, matches("WMAT_[0-9]{2}_cod")) |> 
+  pivot_longer(starts_with("WMAT")) |> 
+  group_by(ID) |> 
+  summarise(WMAT_sum = sum(value, na.rm = FALSE))
+
+
+# Estrategia C - long
+DF_C = 
+  df_wide_raw |> 
+  pivot_longer(WVOC_01_cod:bayes_text_quantitative_accuracy, values_transform =  as.character) |> 
+               
+  filter(grepl("WMAT_[0-9]{2}_cod", name)) |> 
+  mutate(value = as.numeric(value)) |>  
+  group_by(ID) |> 
+  summarise(WMAT_sum = sum(value, na.rm = FALSE))
+   
+
+
+# Todas las versiones dan resultados idénticos
+ waldo::compare(DF_A, DF_A2)
+ waldo::compare(DF_A, DF_B)
+ waldo::compare(DF_A, DF_C)
+ waldo::compare(DF_B, DF_C)
+
+```
+
+##  {-} 
+
+
+## Bibliografía {.bibliografia -}
+
+[Cheatsheets RStudio](https://github.com/rstudio/cheatsheets)
+
+[Cheatsheet dplyr](https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf)
+
+[Tidyexplain](https://github.com/gadenbuie/tidyexplain)

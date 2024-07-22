@@ -1,0 +1,424 @@
+# Introducción a R
+
+```{r}
+#| results: "asis"
+#| echo: false
+source("../_common.R")
+```
+
+
+```{r}
+#| label: setup
+#| echo: false
+
+if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+if (!require('esquisse')) install.packages('esquisse'); library('esquisse') 
+if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
+if (!require('geomtextpath')) install.packages('geomtextpath'); library('geomtextpath')
+if (!require('gghighlight')) install.packages('gghighlight'); library('gghighlight')
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('ggrain')) install.packages('ggrain'); library('ggrain')
+if (!require('ggthemes')) install.packages('ggthemes'); library('ggthemes')
+if (!require('ggridges')) install.packages('ggridges'); library('ggridges')
+if (!require('knitr')) install.packages('knitr'); library('knitr')
+if (!require('plotly')) install.packages('plotly'); library('plotly')
+if (!require('purrr')) install.packages('purrr'); library('purrr')
+if (!require('readr')) install.packages('readr'); library('readr')
+if (!require('sjPlot')) install.packages('sjPlot'); library('sjPlot')
+if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
+
+```  
+
+
+## Introducción: ¿por qué la visualización de datos es importante?
+
+
+*"These 13 datasets (the Datasaurus, plus 12 others) each have the same summary statistics (x/y mean, x/y standard deviation, and Pearson's correlation) to two decimal places, while being drastically different in appearance."* (Matejka, J., & Fitzmaurice, G., 2017).    
+
+::: {.content-visible when-format="html"}
+![SOURCE: https://www.research.autodesk.com/publications/same-stats-different-graphs/](../data/images/DinoSequentialSmaller.gif)
+:::
+
+::: {.content-visible when-format="pdf"}
+[See Datasaurus](https://www.research.autodesk.com/publications/same-stats-different-graphs/)
+:::
+
+
+### Ejemplo del mundo real: ¿cuantos temas deberia estudiar?
+
+Este ejemplo viene de un experimento que realizamos junto con [Carlos Santamaría](https://scholar.google.es/citations?user=fUHQA3gAAAAJ&hl=es) hace algún tiempo. Presentamos una tarea sobre cálculo de probabilidades a personas que estaban entrando a un examen para convertirse en trabajadores del estado.  
+
+Simplificando algo, digamos que la materia para el examen eran 80 temas. No es posible estudiar con profundidad todos los temas, así que los opositores se concentraban en un subconjunto de esos temas (e.g. 30 de 80). Al empezar el examen, se seleccionaban al azar 5 de los 80 temas, y cada persona elegía uno de ellos para desarrollar.  
+
+Abajo se puede ver como cambia la probabilidad de que uno de los temas estudiados aparezca dentro de los 5 seleccionados al azar. Con 30 de los 80 temas estudiados, la probabilidad de que uno de ellos salga en la prueba es del 91%. Si estudiáramos 47, subiríamos a una probabilidad del 99%.    
+
+```{r opositores-plot, echo=FALSE, fig.height=4, fig.width=4}
+
+hipergeometric_formula <- function(temas_totales = 80,
+                 temas_estudiados = 30,
+                 temas_seleccionados = 5,
+                 temas_estudiados_salen = 1:5) {
+
+  temas_NO_estudiados = temas_totales - temas_estudiados # Temas NO estudiados
+
+  if (temas_estudiados > temas_totales) {
+    NA
+  } else {
+    sum(
+      ((factorial(temas_estudiados) / (factorial(temas_estudiados_salen) * (factorial(temas_estudiados - temas_estudiados_salen)))) *
+         (factorial(temas_NO_estudiados) / ((factorial(temas_seleccionados - temas_estudiados_salen)) * (factorial(temas_NO_estudiados - (temas_seleccionados - temas_estudiados_salen))))))
+      /
+      (factorial(temas_estudiados + temas_NO_estudiados) / (factorial(temas_seleccionados) * factorial(temas_estudiados + temas_NO_estudiados - temas_seleccionados))),
+      na.rm = TRUE)
+  }
+
+}
+
+temas_totales = 80
+data_plot = 1:temas_totales |> 
+  purrr::map_dfr(~ hipergeometric_formula(temas_totales = temas_totales, temas_estudiados = .x) |> 
+                   tibble::as_tibble()  |> 
+                   dplyr::mutate(N = .x))
+
+plotly::ggplotly(
+  ggplot2::ggplot(data_plot, ggplot2::aes(N, value)) +
+    ggplot2::geom_line() +
+    ggplot2::geom_vline(xintercept = 30, linetype = "dashed") +
+    ggplot2::geom_hline(yintercept = 1, linetype = "dashed") +
+    ggplot2::scale_x_continuous(n.breaks = 10) +
+    ggplot2::scale_y_continuous(breaks = seq(0, 1, .1), labels = scales::percent(x = seq(0, 1, .1), accuracy = 1)) +
+    ggplot2::labs(title = "Probabilidad de que uno de los temas estudiados aparezca",
+         x = "Temas estudiados",
+         y = "Probabilidad"))
+  
+```
+
+La esencia del dilema al que se enfrentan los opositores se puede condensar en este gráfico. La ganancia (en probabilidad de que salga un tema estudiado) va disminuyendo con cada tema adicional, hasta llegar a un punto en el que es negligible. El problema es que esto es muy poco intuitivo...  
+
+```{r opositores-plot2, echo=FALSE, fig.height=4, fig.width=4}
+plotly::ggplotly(
+  data_plot |> 
+    mutate(Ganancia = value - lag(value)) |> 
+    drop_na() |> 
+    ggplot(aes(N, Ganancia)) +
+    geom_line() +
+    scale_y_continuous(n.breaks = 10, labels = scales::percent_format()) +
+    scale_x_continuous(n.breaks = 10)
+)
+```
+
+
+<BR>
+En el experimento le preguntamos a los participantes por la probabilidad de que les apareciera alguno de los temas estudiados en la prueba. Comparamos las siguientes dos preguntas:  
+
++ ¿Cuál es la probabilidad de que **salga uno** de los temas que has estudiado?  
++ ¿Cuál es la probabilidad de que **no salga ninguno** de los temas que has estudiado?  
+
+Miramos el error promedio en función de la pregunta (cuanto se han alejado de la probabilidad correcta), y vimos que nuestra manipulación había tenido un efecto considerable:  
+
+```{r visualizacion-importante-01, echo=FALSE}
+
+# Leemos datos
+DF = read_csv(
+  here::here("data/files/01-visualizacion-importante.csv")) |> 
+  mutate(Question = as.factor(
+    case_when(Question_p_of == 1 ~ "p (salga uno)",
+              Question_p_of == 0 ~ "p (no salga ninguno)")))
+
+# Promedio por condición
+DF |> 
+  group_by(Question) |> 
+  summarise(Error_promedio = mean(Error),
+            SD = sd(Error, na.rm = TRUE),
+            N = n()) |> 
+  arrange(Error_promedio) |> 
+  knitr::kable()
+
+```
+
+<BR>
+
+Hay una diferencia notable entre condiciones. Pasamos de un error promedio del -30.7% a tan solo 4%, simplemente cambiando la pregunta. Hagamos un sencillo análisis de regresión para ver si la diferencia es significativa, y cuanta varianza explica nuestro modelo.   
+
+
+```{r visualizacion-importante-01b, echo=FALSE}
+# Modelo de regresión
+modelo_regresion = lm(Error ~ Question, DF)
+
+# Resultados
+sjPlot::tab_model(modelo_regresion)
+# summary(modelo_regresion)
+```
+
+
+```{r visualizacion-importante-01c, echo=FALSE}
+# Histograma de los residuos
+# modelo_regresion$residuals |> as_data_frame() |> 
+# ggplot(aes(value)) +
+#   geom_histogram()
+hist(modelo_regresion$residuals)
+
+# Supuesto de normalidad de residuales
+shapiro.test(modelo_regresion$residuals)
+```
+
+<BR>
+
+Todo es hermoso. Tenemos un efecto claramente significativo de la pregunta (y con un R2-ajustado de .258, no está nada mal), y además, nuestro modelo no incumple el supuesto de normalidad de residuos (¡por los pelos!).  
+
+::: {.callout-tip collapse="true"}
+
+### Nota importante sobre las pruebas de normalidad.  _Hack click para leerme_.
+
+<span style="color: orange;">[Las pruebas de normalidad son muy sensibles al tamaño de la muestra](https://stats.stackexchange.com/questions/2492/is-normality-testing-essentially-useless). Como el tamaño de la muestra es pequeño en este caso, no es esperable que el resultado sea significativo.</span>
+
+:::
+Preparamos un plot con promedios y barras con error standard para nuestro paper.
+
+```{r visualizacion-importante-01d, echo=FALSE}
+
+# Plot para publicación
+plot_inicial = ggplot(DF, aes(Question, Error, fill = Question)) +
+  stat_summary(
+    fun = mean,
+    geom = "point",
+    size = 4,
+    color = "darkgrey") +
+  stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge", color = "black", width = .2) +
+  scale_y_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +
+  # theme_minimal(base_size = 12) +
+  labs(x = "What is the probability of x?") +
+  theme(legend.position = "none")
+
+plot_inicial
+
+```
+
+Estamos listos para escribir el paper.  Preparemos la tabla con descriptivos...
+
+```{r visualizacion-importante-03, echo=FALSE}
+
+# Promedio y mediana por condición
+DF |> 
+  group_by(Question) |> 
+  summarise(Error_promedio = mean(Error),
+            # Error_mediana = median(Error),
+            SD = sd(Error, na.rm = TRUE),
+            N = n()) |> 
+  arrange(Error_promedio) |> 
+  knitr::kable()
+
+```
+
+---  
+
+
+Es curioso que la desviación estándar sea mayor en el grupo con menos error promedio... Visualicemos las respuestas de todos los participantes, junto con la distribución de los datos.  
+
+```{r visualizacion-importante-04, echo=FALSE}
+
+plot_final = ggplot(DF, aes(Error, Question, fill = Question, color = Question)) + 
+  ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.8, draw_baseline = FALSE, alpha = .6) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.7, scale = 0.9) +
+  # theme_minimal() +
+  theme(legend.position = "none") +
+  # scale_x_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +
+  labs(y = "What is the probability of x?") +
+  coord_flip()
+
+plot_final
+
+```
+
+Como se puede apreciar en la gráfica, cuando usamos la pregunta `¿Cuál es la probabilidad de que no salga ninguno de los temas que has estudiado?` no estamos reduciendo el error, sino **convirtiendo una distribución de respuestas unimodal en bimodal**.  
+
+---  
+
+**TLDR**: La manera en la visualizamos la información determina las conclusiones a las que llegamos. En una sola gráfica:     
+
+```{r visualizacion-importante-05, fig.width=12, echo=FALSE}
+
+
+# Visualizamos el gráfico inicial y el final, uno al lado del otro
+cowplot::plot_grid(plot_inicial, plot_final, labels = c("Antes", "Después"))
+
+```
+
+#### Moraleja: es importante mostrar los datos individuales y/o la distribución de los datos {-}
+
+
+::: {.content-visible when-format="html"}
+![SOURCE: https://www.research.autodesk.com/publications/same-stats-different-graphs/](../data/images/BoxViolinSmaller.gif)
+:::
+
+::: {.content-visible when-format="pdf"}
+[See Datasaurus](https://www.research.autodesk.com/publications/same-stats-different-graphs/)
+:::
+
+
+---  
+
+<!-- [@riedel2022cs]: https://doi.org/10.1042/CS20220287 -->
+
+---  
+
+## ¿Por qué R? 
+
+<div style= "float:left;position: relative; margin:0px 30px 0px 0px;">![](../data/images/R_logo.png)</div>
+
+R es [uno de los programas para data science mas populares](http://r4stats.com/articles/popularity/), especialmente usado en la academia. El numero de paquetes que ofrecen funcionalidades de todo tipo no ha dejado de crecer. En `r format(Sys.Date(), "%Y")` el numero de paquetes en [R-cran](https://cran.r-project.org/web/packages/index.html) ha superado los 25,000, y el ritmo de crecimiento nos acerca a la singularidad... ;)  
+
+```{r, echo=FALSE, eval=FALSE}
+
+# Plot generated from:
+# https://gist.githubusercontent.com/daroczig/3cf06d6db4be2bbe3368/raw/b66b0531fb1b86d3e04a003b2e105ad4f147900e/number-of-submitted-packages-to-CRAN.png
+
+# See code in dev/R_packages.R 
+
+# Get packages available now
+R_packages_now = rvest::read_html("https://cran.r-project.org/web/packages/available_packages_by_date.html") |> 
+  rvest::html_element("table") |> 
+  rvest::html_table()
+```
+
+
+<BR>  
+
+<div style="clear: both;"></div>
+
+![SOURCE: https://gist.github.com/daroczig/3cf06d6db4be2bbe3368](../data/images/number-of-submitted-packages-to-CRAN.png)
+
+<BR> 
+
+Además de lo anterior, R es un programa de [código abierto](https://en.wikipedia.org/wiki/Open_source) (algo esencial para poder hacer ciencia reproducible), con una [comunidad de usuarios](https://community.rstudio.com/) muy acogedora, y con un importante foco en la [inclusividad](https://qz.com/work/1661486/r-ladies-made-data-science-inclusive/).  
+
+La importancia de la comunidad es difícil de apreciar. Por ejemplo, es relativamente habitual que uno abra un issue en Github pidiendo una nueva característica en un paquete, y que los creadores la implementen (e.g. [correlation](https://github.com/easystats/correlation/issues/145), [gtsummary](https://github.com/ddsjoberg/gtsummary/issues/677), [rorcid](https://github.com/ropensci/rorcid/issues/44)), que uno reporte un error y lo corrijan (e.g. [sjPlot](https://github.com/strengejacke/sjPlot/issues/725), [gtsummary](https://github.com/ddsjoberg/gtsummary/issues/686)), recibir correcciones y mejoras en tus repositorios (e.g. [html2latex](https://github.com/gorkang/html2latex/pull/1), [2019-Chile](https://github.com/gorkang/2019-Chile/pull/1)), o poder contribuir a repositorios de otros (e.g. [jsPsych](https://github.com/jspsych/jsPsych/pull/1212), [gtsummary](https://github.com/ddsjoberg/gtsummary/pull/683)).  
+
+Sus funciones de visualización son muy potentes (ver la [r-graph-gallery](https://www.r-graph-gallery.com/) para algunos ejemplos), siendo usadas como herramienta principal en medios como la [BBC](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535).  
+
+
+![SOURCE: [BBC](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535)](../data/images/BBC.png)
+
+<BR> 
+
+No menos importante, hay una gran cantidad de cursos, tutoriales, presentaciones y libros de una calidad excelente, con los que podemos aprender de manera autónoma. Por ejemplo:
+
+- [psyTeachR team at the University of Glasgow](https://psyteachr.github.io/)
+- [A Gentle Guide to the Grammar of Graphics with ggplot2](https://pkg.garrickadenbuie.com/gentle-ggplot2/)
+- [resulumit.com Rmd workshop](https://resulumit.com/teaching/rmd_workshop.htm)
+- [R for Data Science](https://r4ds.had.co.nz/)
+- [Advanced R](https://adv-r.hadley.nz/)
+
+<BR>    
+
+Para ver una compilación de libros disponibles (> 300): [Big Book of R](https://www.bigbookofr.com/index.html)  
+
+
+## ¿Para qué sirve R? 
+
+Con R puedes recoger datos interactivamente con [shiny](https://shiny.rstudio.com/), preparar datos (o extraerlos de paginas web con [rvest](https://github.com/tidyverse/rvest) o [RSelenium](https://github.com/ropensci/RSelenium)), visualizar datos estáticos con [ggplot](https://ggplot2.tidyverse.org/), animarlos con [gganimate](https://github.com/thomasp85/gganimate), visualizarlos con interactivamente con [plotly](https://github.com/ropensci/plotly/) o [shiny](https://shiny.rstudio.com/).  
+
+Puedes también analizar los datos con todas las técnicas imaginables, desde anovas con [afex](https://github.com/singmann/afex) a modelos mixtos con [lmer](https://github.com/lme4/lme4) y/o [afex](https://github.com/singmann/afex), pasando por meta-análisis con [metafor](http://www.metafor-project.org/doku.php), SEM, Path analysis, mediación, con [lavaan](http://lavaan.ugent.be/tutorial/sem.html), análisis Bayesianos con [brms](https://github.com/paul-buerkner/brms) o [bayesfactor](http://bayesfactor.blogspot.com/), y un larguísimo etc.  
+
+Puedes llevar tus visualizaciones y análisis a reportes automáticos en múltiples formatos (pdf, html, docx) con [Rmarkdown](https://rmarkdown.rstudio.com/), o [quarto](https://quarto.org/), crear libros como este con [bookdown](https://bookdown.org/), páginas web con [blogdown](https://bookdown.org/yihui/blogdown/) o [distill](https://rstudio.github.io/distill/), e incluso papers completamente reproducibles (preparación y análisis de datos) en formato APA con [papaja](https://github.com/crsh/papaja).  
+
+<BR>   
+
+
+### Bienvenida al tidyverse
+
+<div style= "float:left;position: relative; margin:0px 30px 0px 0px;">
+![](../data/images/tidyverse-logo.png)
+</div>
+
+El [tidyverse](https://www.tidyverse.org/) es un conjunto de paquetes que nos permitirán hacer de manera (habitualmente) intuitiva muchas tareas de preparación y visualización de datos.    
+
+
+
+#### Tidyverse vs Base R
+
+Muchas de las funciones que existen en el Tidyverse tienen un [equivalente en base-R](https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html) (la instalación por defecto de R). El Tidyverse tiene ventajas y desventajas. La ventaja fundamental es que el código resulta (habitualmente) más fácil de leer, los nombres de las funciones son más intuitivos, y la forma de hacer las cosas tiene a ser consistente. La desventaja fundamental es que [incrementamos el numero de dependencias](http://www.tinyverse.org/) (paquetes) de nuestro código.  
+
+
+Veamos un ejemplo extraído de [aquí](https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html).  
+
+<BR>  
+
+La misma operación con base-R o con tidyverse:    
+
+*Filter rows with conditions evaluated within groups: iris flowers with maximum “Petal.Width” for each “Species”*  
+
+**Tidyverse**  
+```{r tidyverse-vs-base-R-01, eval=TRUE}
+  result1 = iris |> 
+    group_by(Species) |> 
+    filter(Petal.Width == max(Petal.Width))
+
+```
+
+**Base-R**
+```{r tidyverse-vs-base-R-02, eval=TRUE}
+  # First operate in the data.frame by group (split-apply)
+  widest_petals <- by(iris, 
+                      INDICES = iris$Species, 
+                      FUN = function(x){
+                        x[x$Petal.Width == max(x$Petal.Width), ] 
+                      })
+  
+  # Then combine the results into a data.frame
+  result2 = do.call(rbind, widest_petals)
+```
+
+```{r tidyverse-vs-base-R-03, eval=TRUE}
+
+waldo::compare(result1, result2, ignore_attr = TRUE)
+
+result1
+
+```
+
+### Antes de empezar
+
+Programar es como tener un superpoder. Pero llegar adquirir ese superpoder es **muy difícil**. Todos necesitamos ayuda. Contar con una comunidad robusta con la que compartir, preguntar, contribuir, hace el proceso más agradable, y aumenta tus probabilidades de éxito.
+
+Inicialmente "programaremos" usando la técnica conocida como [Copy and paste programming](https://en.wikipedia.org/wiki/Copy-and-paste_programming), y poco a poco aprenderemos a descomponer el código, adaptarlo a nuestras necesidades, hasta que en algún momento lleguemos a escribir código propio. Este manual os debería servir de referencia para las primeras fases. Familiarizaros con su estructura, y acostumbraros a copiar, pegar y correr el código que aparece en los recuadros grises.  
+
+![SOURCE: http://www.keywordbasket.com/ZWZlY3RvIGR1bm5pbmcta3J1Z2Vy/](../data/images/dunning-kruger.jpg)  
+
+<BR> 
+
+### Recursos adicionales
+
+Hay algunos recursos que son **imprescindibles**. Nadie sabe como *los antiguos* podían programar antes de la llegada de Stackoverflow:  
+
+* [**Stack overflow**](https://stackoverflow.com/questions/tagged/r)   
+
+* [Google: avoid scientific notation R](https://www.google.com/search?q=avoid+scientific+notation+R&oq=avoid+scientific+notation+R&aqs=chrome..69i57j0i22i30l9.5946j0j7&sourceid=chrome&ie=UTF-8): `options(scipen=999)`
+
+
+Y otros recursos que resultan muy útiles:
+
+* [Comunidad de usuarios de Rstudio](https://community.rstudio.com/)  
+
+* [Mastodon!](https://joinmastodon.org/) Por ejemplo:  
+    + [![](../data/images/logo-mastodon.png) \@thomas_mock](https://fosstodon.org/@thomas_mock) (#TidyTuesday)  
+    + [![](../data/images/logo-mastodon.png) \@rivaquiroga](https://fosstodon.org/@rivaquiroga@mastodon.social)  
+    + [![](../data/images/logo-mastodon.png) \@RLadiesGlobal](https://fosstodon.org/@RLadiesGlobal@hachyderm.io)  
+    + [![](../data/images/logo-mastodon.png) \@coolbutuseless](https://fosstodon.org/@coolbutuseless)  
+    
+    
+* Webs como [R bloggers](https://www.r-bloggers.com/)  
+
+
+
+
+## Bibliografía {.bibliografia -}
+
++ Matejka, J., & Fitzmaurice, G. (2017, May). Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing. In Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (pp. 1290-1294). ACM.
+
++ https://bbc.github.io/rcookbook/  
+
++ https://github.com/bbc/bbplot  
+
++ Big Book or R : https://www.bigbookofr.com/index.html
