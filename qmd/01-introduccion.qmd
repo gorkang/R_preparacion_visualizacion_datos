@@ -220,7 +220,7 @@ Es curioso que la desviación estándar sea mayor en el grupo con menos error pr
 
 plot_final = ggplot(DF, aes(Error, Question, fill = Question, color = Question)) + 
   ggridges::geom_density_ridges(stat = "binline", bins = 20, scale = 0.8, draw_baseline = FALSE, alpha = .6) +
-  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.7, scale = 0.9) +
+  ggridges::geom_density_ridges(jittered_points = TRUE, position = "raincloud", alpha = 0.7, scale = 0.9, color = "black") +
   # theme_minimal() +
   theme(legend.position = "none") +
   # scale_x_continuous(limits = c(-50, 50), breaks = seq(-50, 50, 10)) +

@@ -353,8 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sudo apt install libssl-dev libcurl4-openssl-dev libxml2-dev  --><hr>
 <p><strong>Para lanzar monos localmente:</strong></p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="co"># Un solo mono</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Un solo mono</span></span>
 <span><span class="fu">jsPsychMonkeys</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsPsychMonkeys/man/release_the_monkeys.html">release_the_monkeys</a></span><span class="op">(</span></span>
 <span>  <span class="co"># Lanza un monos con el user id 1</span></span>
 <span>  uid <span class="op">=</span> <span class="st">"1"</span>,</span>
@@ -385,23 +384,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>En el nuevo proyecto, tendremos que correr la preparación de datos. Puedes abrir el archivo <code>run.R</code>, donde encontrarás algunas instrucciones básicas.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span><span class="co"># Corremos el pipeline de preparación de datos</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Corremos el pipeline de preparación de datos</span></span>
 <span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_make.html">tar_make</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <p>Para ver el data frame final listo para el análisis</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
-<span>  <span class="co"># List available objects</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="co"># List available objects</span></span>
 <span>  <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_objects.html">tar_objects</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># Load DF_analysis file</span></span>
 <span>  <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_load.html">tar_load</a></span><span class="op">(</span><span class="va">DF_analysis</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># See DF_analysis data frame</span></span>
-<span>  <span class="va">DF_analysis</span></span>
-<span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="va">DF_analysis</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <section id="como-crear-un-reporte-dentro-del-jspsychhelper" class="level3" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="como-crear-un-reporte-dentro-del-jspsychhelper">

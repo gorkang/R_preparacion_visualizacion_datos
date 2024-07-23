@@ -6,6 +6,7 @@ execute:
   cache: false
   warning: false
   message: false
+  freeze: auto  # re-render only when source changes
 
 editor_options:
   chunk_output_type: console
@@ -26,7 +27,7 @@ book:
     search: true
     right:
       - icon: mastodon
-        href: https://fosstodon.org/@gorkang
+        href: "https://fosstodon.org/@gorkang"
         aria-label: Mastodon
   page-footer:
     border: false

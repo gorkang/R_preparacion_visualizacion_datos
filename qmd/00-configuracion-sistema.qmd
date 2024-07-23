@@ -38,6 +38,14 @@ knitr::include_graphics(here::here("data/images/empezando.png"))
     + `sudo dpkg -i rstudio-[VERSION_NUMBER]-amd64.deb`
     + `sudo apt --fix-broken install`
 
+#### Configuración básica de RStudio
+
+Una vez abierto RStudio, puedes ir a `Tools -> Global options`, y dejar la configuración del **Workspace** como se ve abajo. Esto facilita trabajar con entornos limpios, lo que hace más probable que nuestros scripts funcionen.  
+
+```{r image_1b, echo=FALSE, message=FALSE, warning=FALSE, out.width="75%"}
+knitr::include_graphics(here::here("data/images/configuracion_rstudio.png"))
+```
+
 ### **(C)** Paquetes para el workshop {.unnumbered}
 
 Para instalar los paquetes del workshop, ejecuta el código de más abajo (sección sombreada en gris claro) en la consola de RStudio.  

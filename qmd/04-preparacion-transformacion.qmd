@@ -6,7 +6,7 @@
 source("../_common.R")
 ```
 
-En este capítulo vamos a aprender a importar y exportar todo tipo de archivos. También transformaremos base de datos a formatos que hagan más fácil trabajar con los datos.
+En este capítulo vamos a aprender a importar y exportar todo tipo de archivos. También veremos como, filtrar, crear nuevas variables, seleccionar columnas, transformar bases de datos, etc.
 
 ---  
 
@@ -39,6 +39,26 @@ if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); lib
 
 ---  
 
+## The pipe
+
+Con ggplot enlazábamos instrucciones (capas) usando `+`. Cuando trabajemos con datos, usaremos "tuberias" (pipes) `|>`.
+
+Las pipes `|>` o `%>%` (CONTROL + SHIFT + M) nos permiten enlazar operaciones de transformación de datos de manera sencilla. Simplemente encadenamos instrucciones, poniendo una pipe para que cada instrucción llegue a la siguiente linea. 
+
+Imaginad que queremos realizar una serie de operaciones sobre unos datos, y guardarlos en un data frame llamado DATOS_limpios. Partimos de unos DATOS_originales, seleccionamos las columnas que nos interesan y filtramos los datos.  
+
+De manera esquemática:
+
+
+```
+DATOS_limpios = 
+  DATOS_originales |> 
+  seleccionamos_columnas(parámetros) |> 
+  filtramos_datos(parámetros)
+
+```
+
+
 ## Importar y exportar datos
 
 Hasta ahora hemos trabajado con data frames como `mpg` o `gaminder`, que forman parte de la instalación por defecto de R, o alguno de sus paquetes. Pero habitualmente trabajaremos con datos propios, por lo que necesitaremos leer uno o varios archivos. RStudio tiene un menú para ayudar a importar datos ![](../data/images/import-data.png), pero aquí aprenderemos a hacerlo todo en código, para que nuestros scripts sean auto-contenidos.    
@@ -68,16 +88,24 @@ Usaremos las siguientes funciones del paquete `readr`:
 Leemos el archivo `02-read-csv.csv` de la carpeta `data/files/`: 
 
 ```{r read-csv-01, eval=FALSE}
-
 DF_name = read_csv("data/files/02-read-csv.csv")
+```
+
+Generalmente haremos esto en dos pasos. Primero guardaremos la ubicación del archivo en una variable, y después usaremos esa variable como parámetro de la función que lee los datos:  
+
+```{r read-csv-01b, eval=FALSE}
+# Guardamos en la variable `name_of_file` la ubicación del archivo
+name_of_file = "data/files/02-read-csv.csv"
+
+# Usamos la función read_csv() para leer el archivo
+DF_name = read_csv(name_of_file)
 
 ```
 
-Si estamos usando rmarkdown, o similar, es recomendable usar `here::here()` para evitar problemas con los paths a los archivos.  
+En este manual verás que usamos `name_of_file =  here::here("mi/archivo.csv")`. La función `here::here` nos ayuda a  evitar problemas con la ruta a los archivos (nos devuelve la [ruta absoluta](https://stackoverflow.com/a/10288252/1873521)). Esto suele ser importante cuando trabajamos con quarto or rmarkdown, pero normalmente lo podemos ignorar.    
 
 ```{r read-csv-02}
-  
-# En name_of_file almacenamos la ruta completa al archivo
+# En name_of_file almacenamos la ruta absoluta al archivo
 name_of_file = here::here("data/files/02-read-csv.csv")
 
 # Leemos el archivo que esta en name_of_file
@@ -96,7 +124,12 @@ read_csv(URL)
 
 ```
 
-La función `read_csv()` tiene varios parámetros muy útiles como `skip` o `col_types`. Con `skip` podemos saltarnos líneas del inicio del archivo. Con `col_types` podemos especificar el tipo de datos que contiene cada columna (texto, números, factores...). Al ser explícitos con el tipo de datos evitamos sorpresas, y de paso reducimos el output de la Consola.    
+La función `read_csv()` tiene varios parámetros muy útiles como `skip` o `col_types` (si el cursor está encima de la función, F1 os llevará a la ayuda). 
+
+- Con `skip` podemos saltarnos líneas del inicio del archivo. Muy útil cuando las hojas de datos no empiezan en la primera fila.      
+
+- Con `col_types` podemos especificar el tipo de datos que contiene cada columna (texto, números, factores...). Al ser explícitos con el tipo de datos evitamos sorpresas, y de paso reducimos el output de la Consola.  
+
 
 ```{r read-csv-params}
   
@@ -104,7 +137,8 @@ La función `read_csv()` tiene varios parámetros muy útiles como `skip` o `col
 name_of_file = here::here("data/files/02-read-csv.csv")
 
 # Leemos el archivo que esta en name_of_file
-read_csv(name_of_file,
+read_csv(name_of_file, 
+         skip = 0,
          col_types = cols(
            .default = col_double(),
            condition = col_character(),
@@ -117,20 +151,24 @@ read_csv(name_of_file,
 
 #### Otros tipos de archivos
 
-Para otros tipos de archivos simplemente usaremos otras funciones. Por ejemplo, para leer archivos Excel podemos usar `read_excel` del paquete `{readxl}`.  
+Para otros tipos de archivos usaremos otras funciones.  
 
 
 ##### Archivos excel {-}
 
+Para leer archivos Excel podemos usar `read_excel()` del paquete `{readxl}`. Cada una de estas funciones tiene parámetros que nos pueden resultar muy útiles. Por ejemplo, `read_excel()` tiene el parámetro `sheet`, que nos permite seleccionar qué hoja del archivo excel leer.   
+
 ```{r read-others-xls, eval=FALSE}
 
 name_of_file = here::here("data/files/02-read-xlsx.xlsx")
-readxl::read_excel(name_of_file)
+readxl::read_excel(name_of_file, sheet = 1)
 
 ```
 
 
 ##### Archivos SPSS {-}
+
+Para archivos .sav usamos `haven::read_sav()`.  
 
 ```{r read-others-spss, eval=FALSE}
 
@@ -141,6 +179,8 @@ haven::read_sav(name_of_file)
 
 
 ##### Archivos Libreoffice {-}
+
+Para archivos .ods usamos `readODS::read_ods()`.  
 
 ```{r read-others-libreoffice, eval=FALSE}
 
@@ -173,8 +213,7 @@ googlesheets4::read_sheet(name_of_sheet)
 
 ### Ejercicios - Importar datos {.ejercicio -} 
 
-
-En el repositorio [R para preparación y visualización de datos - DNSC - UAI](https://osf.io/jdn37/) de la Open Science Foundation podrás ver una carpeta llamada `Capitulo 3`. Si no tenéis conexión a Internet, podéis encontrar los archivos en `data/files/OSF_files`.  
+En el repositorio [R para preparación y visualización de datos - DNSC - UAI](https://osf.io/jdn37/) de la Open Science Foundation podrás ver una carpeta llamada `OSF_files`. Si no tenéis conexión a Internet, podéis encontrar los archivos en `data/files/OSF_files`.  
 
 Descarga e importa los archivos que ahí aparecen, asegurándote que los nombres de columna se leen adecuadamente:  
 
@@ -206,7 +245,7 @@ Descarga e importa los archivos que ahí aparecen, asegurándote que los nombres
 
 ### Importar múltiples archivos
 
-En ocasiones tenemos múltiples archivos en una carpeta (e.g. uno por participante) y queremos combinarlos todos en un solo DF.  
+En ocasiones tenemos múltiples archivos en una carpeta (e.g. uno por participante) y queremos combinarlos todos en un solo data frame.  
 
 Por suerte, las funciones como `read_csv()` admiten un vector con varios archivos.  
 
@@ -228,9 +267,9 @@ full
 
 ```
 
-Lamentablemente, cuando leamos otro tipo de archivos, como archivos `.xlsx`, no podemos usar la función `read_csv()`. Veamos una manera de hacer lo mismo, con la que se puede usar cualquier función para leer datos.  
+Lamentablemente, cuando leamos otro tipo de archivos, como archivos `.xlsx`, no podemos usar la función `read_csv()`.  Veamos una manera de hacer leer múltiples archivos que se puede usar con cualquier función para leer datos.  
 
-Usaremos `map_df()`, que aplica la función que queramos a cada uno de los archivos que le indiquemos, de uno en uno: 
+Usaremos `map_df()` del paquete `{purrr}`, que aplica la función que queramos a cada uno de los archivos que le indiquemos, uno a uno: 
 
 ```{r importar-multiples-archivos-map_df}
 
@@ -521,11 +560,8 @@ Y, como no, `ggplot` funciona con datos `tidy`, en formato long.
 
 Usaremos [{dplyr}](https://dplyr.tidyverse.org/), un paquete muy potente para la manipulación de datos. Su sintaxis, además, es bastante intuitiva (¡son verbos en inglés!).   
 
-Usando pipes **|>**  (CONTROL + SHIFT + M) podemos enlazar operaciones de transformación de datos de manera muy sencilla (una vez nos aprendamos los verbos).  
-
 Podemos ver más detalle y ejemplos en la [Cheatsheet de dplyr](https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf).   
 
-En general usaremos la pipe nativa de R (desde la versión 4.1.0) **|>**, pero en alguna ocasión usaremos **%>%** (requiere el paquete `magrittr`).
 
 
 ::: {.callout-note}
