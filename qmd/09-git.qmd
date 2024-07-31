@@ -197,7 +197,7 @@ Vamos a poner a prueba lo anterior, creando un repositorio en Github llamado `Gi
 
 Ahora podemos usar el método inverso. Si tenemos un proyecto de RStudio, vamos a crear un repositorio de Github asociado.    
 
-1. [Crea un nuevo repositorio de RStudio](07-rmarkdown.html#proyectos-de-r-studio). Si marcas la pestaña `Create a git repository` te ahorrarás uno de los pasos (`usethis::use_git()`)  
+1. [Crea un nuevo repositorio de RStudio](08-quarto.html#proyectos-de-r-studio). Si marcas la pestaña `Create a git repository` te ahorrarás uno de los pasos (`usethis::use_git()`)  
 
 2. Crea un script donde hagas algo muy sencillo (puedes copiar algún fragmento de código de temas anteriores)  
 

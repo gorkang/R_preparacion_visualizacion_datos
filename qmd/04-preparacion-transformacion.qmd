@@ -39,29 +39,22 @@ if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); lib
 
 ---  
 
-## The pipe
+#### Proyecto de RStudio del curso {-}
 
-Con ggplot enlazábamos instrucciones (capas) usando `+`. Cuando trabajemos con datos, usaremos "tuberias" (pipes) `|>`.
+En [como empezar](index.html#como-empezar) se mostró como tener un proyecto de RStudio con todos los materiales del curso. Si no lo tienes, este es el momento de hacerlo, ya que vamos a necesitar varios de los archivos del proyecto:  
 
-Las pipes `|>` o `%>%` (CONTROL + SHIFT + M) nos permiten enlazar operaciones de transformación de datos de manera sencilla. Simplemente encadenamos instrucciones, poniendo una pipe para que cada instrucción llegue a la siguiente linea. 
-
-Imaginad que queremos realizar una serie de operaciones sobre unos datos, y guardarlos en un data frame llamado DATOS_limpios. Partimos de unos DATOS_originales, seleccionamos las columnas que nos interesan y filtramos los datos.  
-
-De manera esquemática:
-
-
+```{r use_course1, eval=FALSE}
+if (!require('usethis')) install.packages('usethis'); library('usethis')
+usethis::use_course("gorkang/R_preparacion_visualizacion_datos")
 ```
-DATOS_limpios = 
-  DATOS_originales |> 
-  seleccionamos_columnas(parámetros) |> 
-  filtramos_datos(parámetros)
 
-```
 
 
 ## Importar y exportar datos
 
-Hasta ahora hemos trabajado con data frames como `mpg` o `gaminder`, que forman parte de la instalación por defecto de R, o alguno de sus paquetes. Pero habitualmente trabajaremos con datos propios, por lo que necesitaremos leer uno o varios archivos. RStudio tiene un menú para ayudar a importar datos ![](../data/images/import-data.png), pero aquí aprenderemos a hacerlo todo en código, para que nuestros scripts sean auto-contenidos.    
+Hasta ahora hemos trabajado con data frames como `mpg` o `gaminder`, que forman parte de la instalación de alguno de los paquetes de R. Pero habitualmente trabajaremos con datos propios, por lo que necesitaremos leer uno o varios archivos.  
+
+RStudio tiene un menú para ayudar a importar datos ![](../data/images/import-data.png). No obstante, aquí aprenderemos a hacerlo todo en código, para que nuestros scripts sean auto-contenidos.    
 
 Podemos ver algunas de las funciones de esta sección y cómo usarlas en la [Cheatsheet importar datos](https://github.com/rstudio/cheatsheets/raw/main/data-import.pdf)  
 
@@ -217,20 +210,21 @@ En el repositorio [R para preparación y visualización de datos - DNSC - UAI](h
 
 Descarga e importa los archivos que ahí aparecen, asegurándote que los nombres de columna se leen adecuadamente:  
 
-::: {.callout-tip collapse="true"}
-
-### Solución
-
-<span style="color: orange;">La función `read_excel()` tiene parámetros como `skip`, que permite no leer las primeras n lineas, o `sheet`, con la que puedes indicar que pestaña leer.</span>
-
-:::
-
-
 + 02-extralines-1.xlsx
 + 02-extralines-2.xlsx
 + 02-extralines-3.xlsx
 + 02-spanish.csv
 
+
+::: {.callout-tip collapse="true"}
+
+### Solución
+
+<span style="color: orange;">La función `read_excel()` tiene parámetros como `skip`, que permite no leer las primeras n lineas, o `sheet`, con la que puedes indicar que pestaña leer.
+
+Recuerda que estás leyendo archivos excel o csv, por lo que puedes verlos en Libreoffice o Excel para saber como son.</span>
+
+:::
 
 ```{r ejercicios-importar-datos, eval=FALSE, include=FALSE}
 
@@ -267,7 +261,7 @@ full
 
 ```
 
-Lamentablemente, cuando leamos otro tipo de archivos, como archivos `.xlsx`, no podemos usar la función `read_csv()`.  Veamos una manera de hacer leer múltiples archivos que se puede usar con cualquier función para leer datos.  
+Lamentablemente, cuando leamos otro tipo de archivos (e.g. `.xlsx`), no podemos usar la función `read_csv()`.  Veamos una manera de hacer leer múltiples archivos que se puede usar con cualquier función para leer datos.  
 
 Usaremos `map_df()` del paquete `{purrr}`, que aplica la función que queramos a cada uno de los archivos que le indiquemos, uno a uno: 
 
@@ -304,7 +298,7 @@ name_of_folder = here::here("data/files/02-CSVs")
 files_simple <- list.files(name_of_folder, full.names = TRUE)
 
 # Asignamos nombres a los elementos del vector
-files = files_simple |> set_names(basename(files_simple))
+files = set_names(files_simple, basename(files_simple))
 
 # Con el parámetro .id, almacenamos los nombres en la columna "file"
 full2 <- map_df(files, read_csv, .id = "file")
@@ -342,17 +336,15 @@ Otra manera de hacer exactamente lo mismo con `map_df()`. El código es algo má
 
 name_of_folder = here::here("data/files/02-CSVs")
 files <- list.files(name_of_folder, full.names = TRUE)
-full2 <- 1:length(files) |> 
-  purrr::map_df(~ {
-    
-    cli::cli_alert_info("Reading file {basename(files[.x])}")
-    read_csv(files[.x], col_types =  cols(.default = col_character(), 
-                                          Sex = col_factor(),
-                                          trialN = col_integer(),
-                                          Valence = col_factor(),
-                                          rT = col_double()
-                                          )
-             )
+full2 <- purrr::map_df(1:length(files), ~ {
+  cli::cli_alert_info("Reading file {basename(files[.x])}")
+  read_csv(files[.x], col_types =  cols(.default = col_character(), 
+                                        Sex = col_factor(),
+                                        trialN = col_integer(),
+                                        Valence = col_factor(),
+                                        rT = col_double()
+                                        )
+           )
   })
 
 
@@ -431,7 +423,7 @@ El paquete {janitor} tiene una función muy útil llamada `clean_names()` que ap
 DF_name = read_csv(here::here("data/files/02-read-csv.csv"))
 names(DF_name)
 
-DF_names_clean = DF_name |> janitor::clean_names()
+DF_names_clean = janitor::clean_names(DF_name)
 names(DF_names_clean)
 
 ```
@@ -454,7 +446,7 @@ Si queremos que el archivo guardado sea un `csv`, usaremos `write_csv()` del paq
 # Lo que hicimos antes, leemos todos los archivos excel de un directorio
 name_of_folder = here::here("data/files/02-XLSs")
 files <- list.files(name_of_folder, pattern = "xls", full.names = TRUE)
-DF_all = map_df(files, read_xlsx, sheet = 2, skip = 5) |> janitor::clean_names()
+DF_all = janitor::clean_names(map_df(files, read_xlsx, sheet = 2, skip = 5))
 
 readr::write_csv(DF_all, "data_clean/DF_all.csv")
 
@@ -487,6 +479,25 @@ readr::write_rds(DF_all, "data_clean/DF_all.rds")
 
 Para la preparación y transformación de datos usaremos fundamentalmente `dplyr`. Hay otros paquetes [más rápidos](https://h2oai.github.io/db-benchmark/) como `data.table`. Si trabajas con datos gigantescos (millones de filas), sin duda notarás la diferencia. La desventaja es que la sintaxis es (habitualmente) menos intuitiva.      
 
+
+### The pipe
+
+Con ggplot enlazábamos instrucciones (capas) usando `+`. Cuando trabajemos con datos, usaremos "tuberias" (pipes) `|>`.
+
+Las pipes `|>` o `%>%` (CONTROL + SHIFT + M) nos permiten enlazar operaciones de transformación de datos de manera sencilla. Simplemente encadenamos instrucciones, poniendo una pipe para que cada instrucción llegue a la siguiente linea. 
+
+Imaginad que queremos realizar una serie de operaciones sobre unos datos, y guardarlos en un data frame llamado DATOS_limpios. Partimos de unos DATOS_originales, seleccionamos las columnas que nos interesan y filtramos los datos.  
+
+De manera esquemática:
+
+
+```
+DATOS_limpios = 
+  DATOS_originales |> 
+  seleccionamos_columnas(parámetros) |> 
+  filtramos_datos(parámetros)
+
+```
 
 ### Tidy data
 
@@ -733,6 +744,7 @@ mpg |> select(-model)
 ```
 
 
+
 #### Selección avanzada con select_helpers()  
 
 El `everything()` que usamos dentro de `select()` más arriba es uno de los `select_helpers()` existentes. Estos nos ayudan a realizar operaciones de selección de variables sin necesidad de escribir a mano todas las variables.  
@@ -781,7 +793,7 @@ Usando `ends_with()` seleccionamos variables que acaban con la cadena de texto `
 
 ```
 
-Finalmente, `matches()` nos permite usar todo la potencia de las [expresiones regulares](03-preparacion_transformacion.html#regular-expressions). En este caso, también le pedimos variables que acaban con la cadena de texto `cod`:  
+Finalmente, `matches()` nos permite usar todo la potencia de las [expresiones regulares](04-preparacion-transformacion.html#regular-expressions). En este caso, también le pedimos variables que acaban con la cadena de texto `cod`:  
 
 ```{r seleccion-avanzada4}
 
@@ -866,7 +878,7 @@ DF_name |>
 ```
 
 
-### Ejercicios - verbos dplyr {.ejercicio -} 
+#### Ejercicios - verbos dplyr {.ejercicio -} 
 
 
 1. Usando la base df_wide (puedes usar el código de abajo), haz las siguientes cosas, una a una:  
@@ -1098,7 +1110,7 @@ df_long_complex |>
 
 
 
-## Ejercicios - wide to long {.ejercicio -} 
+### Ejercicios - wide to long {.ejercicio -} 
 
 De nuevo trabajaremos con datos del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al., pero esta vez van a ser los datos *procesados*. Estos se pueden encontrar en un repositorio público de la OSF. Empezaremos con la base final en formato wide (Dentro de https://osf.io/egxy5/, ver archivo: `/outputs/data/sa-prepared.csv`).  
 
@@ -1297,7 +1309,7 @@ DF_name |>  drop_na(PPV_DECLARED)
 
 
 
-## Ejercicios - verbos avanzados dplyr {.ejercicio -} 
+### Ejercicios - verbos avanzados dplyr {.ejercicio -} 
 
 1. Importa los datos y limpia los nombres de columna: 
 
@@ -1463,7 +1475,7 @@ regexplain::regexplain_gadget()
 
 
 
-## Ejercicios - Calcular puntajes de escalas usando regular expressions {.ejercicio -} 
+### Ejercicios - Calcular puntajes de escalas usando regular expressions {.ejercicio -} 
 
 Ahora volvemos a usar con los datos brutos (`sa-raw-anonymised.csv`) del paper [Cognitive and Socio-affective Predictors of Social Adaptation](https://osf.io/egxy5/), de Neely et al.      
 

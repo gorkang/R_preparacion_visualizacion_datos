@@ -3,7 +3,7 @@
 ```{r}
 #| results: "asis"
 #| echo: false
-source("../_common.R")
+source(here::here("_common.R"))
 ```
 
 ---  
@@ -61,7 +61,7 @@ if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
 
 ### Primeros pasos - con training wheels
 
-Para empezar a trabajar con ggplot sin tener que preocuparnos de su complejidad, podemos usar la función `esquisse:::esquisser()` del paquete [esquisse](https://www.williamrchase.com/). Esta nos permite usar la potencia de ggplot para explorar una base de datos de manera muy sencilla.   
+Para empezar a trabajar con ggplot sin tener que preocuparnos de su complejidad, podemos usar la función `esquisse::esquisser()` del paquete [esquisse](https://www.williamrchase.com/). Esta nos permite usar la potencia de ggplot para explorar una base de datos de manera muy sencilla.   
 
 
 ::: {.content-visible when-format="html"}
@@ -83,7 +83,7 @@ La manera fácil (1, 2, 3), usando [esquisse](https://github.com/dreamRs/esquiss
   if (!require('esquisse')) install.packages('esquisse'); library('esquisse')
 
 # 2) Lanza el wizard esquisser  
-  esquisse:::esquisser(iris)
+  esquisse::esquisser(iris)
 
 # 3) Crea el gráfico que quieras, exporta el código...
 
@@ -195,7 +195,7 @@ En **aes()** vamos a indicar las variables que queremos en los ejes `x` e `y`, e
 * **fill**: fill = continent; fill = "red"; fill = "#FAA627"
 * **alpha**: alpha = continent; alpha = 0.2
 * **size**: size = continent; size = 5
-* **shape**:  shape = continent; shape = 0 [ver codigo de las distintas formas](01-introduccion_visualizacion.html#shape)
+* **shape**:  shape = continent; shape = 0 [ver codigo de las distintas formas](02-visualizacion-basica.html#shape)
 * **linetype**: linetype = continent; linetype = "dashed"
 * **group**: group = continent
 
@@ -309,18 +309,17 @@ Color en función de la variable 'continent'. Al usar un nombre de variable, ten
 Color en función de la variable 'continent'. Cambiamos el tamaño de los puntos a 2.  
 
 ```{r color_4}
-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent, size = 2)) + 
-    geom_point()
+  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + 
+    geom_point(size = .5)
 ```
 
 Color en función de la variable 'continent'. Cambiamos el tamaño de los puntos a 2. Añadimos transparencia usando el parámetro 'alpha'.  
   
 ```{r color_5}
   ggplot(gapminder, aes(gdpPercap, lifeExp, 
-                        color = continent, 
-                        size = 2, 
+                        color = continent,
                         alpha = .1)) + 
-    geom_point()
+    geom_point(size = .5)
 ```
 
 
@@ -482,40 +481,53 @@ En algunos casos, tenemos muchos puntos que se superponen. Si usamos `geom_jitte
 
 #### geom_smooth
 
-Podemos añadir líneas de tendencia con `geom_smooth()`. El `method` por defecto es [loess](https://en.wikipedia.org/wiki/Local_regression), pero podemos usar otros métodos (e.g. `geom_smooth(method = "lm")` para usar una regresión lineal).  
+Podemos añadir líneas de tendencia con `geom_smooth()`. El `method` por defecto depende de los datos. Comúnmente se usa [loess](https://en.wikipedia.org/wiki/Local_regression), pero podemos definir explicitamente el método que queremos (e.g. `geom_smooth(method = "lm")` para usar una regresión lineal).  
 
 Recuerda que las funciones que usamos (todo lo que contiene `()` e.g. `geom_smooth()`) tienen parámetros, que son instrucciones adicionales que nos permiten modificar como se comportan. Para ver que opciones tenemos, podemos ver la ayuda de las funciones : `?geom_smooth()`, o poner el cursor encima y presionar F1 (ayuda).  
 
 ```{r geom-smooth_1}
-  
-  # Linea de tendencia (default loess)
   ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
     geom_point() +
     geom_smooth()
-    
+
 ```
 
-Usamos "lm".  
+Le quitamos el intervalo de confianza con el parámetro `se`.  
 
+```{r geom-smooth_1b}
+  ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
+    geom_point() +
+    geom_smooth(se = FALSE)
+```
+
+Usamos como método `lm`. En este caso, por la distribución de los datos, no parece una buena idea...  
 ```{r geom-smooth_2}
-
   ggplot(gapminder, aes(gdpPercap, lifeExp)) + 
     geom_point() +
     geom_smooth(method = "lm")
  
 ```
 
-Un smooth por cada color (`continent`).  
+Usamos un color para cada `continent`. Al indicarlo en el `aes()` general, esto se aplica a todos los geoms (geometrías).    
 
 ```{r geom-smooth_3}
-
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) + 
     geom_point() +
     geom_smooth()
  
 ```
 
-Coloreamos puntos pero mantenemos un solo smooth introduciendo el parámetro `aes(color = continent)` dentro de `geom_point()`.  
+Un smooth por cada continente (group = `continent`). Dado que agrupar los puntos por continente no tiene efecto, solo se ven las múltiples líneas de tendencia.     
+
+```{r geom-smooth_3b}
+
+  ggplot(gapminder, aes(gdpPercap, lifeExp, group = continent)) + 
+    geom_point() +
+    geom_smooth()
+ 
+```
+
+Coloreamos puntos pero mantenemos un solo smooth introduciendo el parámetro `aes(color = continent)` dentro de `geom_point()`. El lugar donde ponemos `aes(color = continent)` determina a que geometrías afecta.  
 
 ```{r geom-smooth_4}
 
@@ -574,8 +586,7 @@ Ahora vamos a usar el data frame `mpg`. Empieza con este plot:
 ```{r geoms-ejercicios-0, fig.height=4, fig.width=6}
 
 ggplot(mpg, aes(displ, hwy)) + 
-  geom_point() +
-  theme_grey()
+  geom_point()
 
 ```
 
@@ -588,33 +599,27 @@ Para conseguirlo vamos a tener que usar parámetros como `group`, `color` o `lin
 
 plot1 = ggplot(mpg, aes(displ, hwy)) + 
     geom_point() +
-    geom_smooth(se = FALSE) +
-    theme_grey()
+    geom_smooth(se = FALSE)
 
-plot2 = ggplot(mpg, aes(displ, hwy, group = drv)) + 
+plot2 = ggplot(mpg, aes(displ, hwy, color = drv)) + 
     geom_point() +
-    geom_smooth(se = FALSE) +
-    theme_grey()
+    geom_smooth(se = FALSE)
 
-plot3 = ggplot(mpg, aes(displ, hwy, color = drv)) + 
+plot3 = ggplot(mpg, aes(displ, hwy, group = drv)) + 
     geom_point() +
-    geom_smooth(se = FALSE) +
-    theme_grey()
+    geom_smooth(se = FALSE)
 
 plot4 = ggplot(mpg, aes(displ, hwy)) + 
     geom_point(aes(color = drv)) +
-    geom_smooth(se = FALSE) +
-    theme_grey()
+    geom_smooth(se = FALSE)
 
 plot5 = ggplot(mpg, aes(displ, hwy, linetype = drv)) + 
     geom_point(aes(color = drv)) +
-    geom_smooth(se = FALSE) +
-    theme_grey()
+    geom_smooth(se = FALSE)
 
 plot6 = ggplot(mpg, aes(displ, hwy)) + 
     geom_point(color = "white", size = 6) +
-    geom_point(aes(color = drv), size = 2) +
-    theme_grey()
+    geom_point(aes(color = drv), size = 2)
 
 
 cowplot::plot_grid(plot1, plot2, plot3, plot4, plot5, plot6,
@@ -699,110 +704,50 @@ Si tenemos variables categóricas, usamos `geom_bar()`. Podemos usar `guides(fil
 
 Para visualizar distribuciones cuando tenemos muchos datos, podemos usar `geom_density()`. Eso sí, recuerda que con pocos datos, los gráficos de densidad nos dan una falsa seguridad sobre la forma de nuestra distribución. 
 
-Usamos el parámetro `alpha = .2` para añadir transparencia y ver todas las distribuciones. Puedes probar cambiando su valor a 1, para ver que ocurre (`alpha` puede tener valores de 0 a 1).  
+```{r geom-density1}
+  ggplot(gapminder, aes(lifeExp)) + 
+      geom_density(alpha = .2, fill = "blue")
+```
 
-```{r geom-density}
+Si queremos ver la distribución por continente, usamos el parámetro `fill`.  
+
+Con `alpha = .2` podemos añadir transparencia y ver todas las distribuciones. Puedes probar cambiando su valor a 1, para ver que ocurre (`alpha` puede tener valores de 0 a 1).  
+
+```{r geom-density2}
   ggplot(gapminder, aes(lifeExp, fill = continent)) + 
       geom_density(alpha = .2)
 ```
-
-
-#### Ejercicio {.ejercicio -}
-
-Añadiendo un parámetro a la gráfica de arriba, podemos transformarla en las versiones de abajo. ¿Podrías hacerlo? (recuerda que poniéndote encima de `geom_density()` y tecleando `F1` puedes ver la ayuda de la función).  
-
-```
-ggplot(gapminder, aes(lifeExp, fill = continent)) + 
-      geom_density(alpha = .2)
-```
-
-
-::: {.callout-tip collapse="true"}
-
-### Solución
-
-<span style="color: orange;">`position = "stack"` y `position = "fill"`.</span>
-
-:::
-
-
-```{r ejercicio-density, echo=FALSE}
-
-  # Density - position stack
-  ggplot(gapminder, aes(lifeExp, fill = continent)) + 
-      geom_density(position = "stack", alpha = .2)
-  
-  # Density - position fill
-  ggplot(gapminder, aes(lifeExp, fill = continent)) + 
-      geom_density(position = "fill", alpha = .2)
-  
-```
-
-
-#### geom_density_ridges
-
-Uno de mis `geoms` favoritos para comparar distribuciones es `geom_density_ridges`:   
-
-```{r geom-density_ridges}
-  ggplot(gapminder, aes(lifeExp, continent, fill = continent)) + 
-    ggridges::geom_density_ridges(alpha = .2)
-```
-
-Especialmente porque podemos incluir en el mismo gráfico información sobre distribuciones y puntos individuales.  
-
-```{r geom-density_ridges2}
-ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
-  ggridges::geom_density_ridges(
-    stat = "binline",
-    bins = 20,
-    scale = 0.95,
-    draw_baseline = FALSE
-  ) +
-  ggridges::geom_density_ridges(
-    jittered_points = TRUE,
-    position = "raincloud",
-    alpha = 0.7,
-    scale = 0.9,
-    quantile_lines = TRUE,
-    quantile_fun = mean
-  ) +
-  theme(legend.position = "none") +
-  scale_x_continuous(n.breaks = 10) +
-  labs(caption = "vertical lines represent the mean lifeExp per continent")
-```
-
 
 
 #### Ejercicios {.ejercicio -}
 
-Usando como base el plot de la sección [geom_histogram()](#histogramas):  
+En sección [geom_boxplot y geom_violin](#geom_boxplot-y-geom_violin) vimos este gráfico:  
 
+```{r ejercicio_geom_violin, echo=TRUE}
+ggplot(gapminder, aes(continent, lifeExp)) + 
+    geom_violin(alpha = .2, aes(fill = continent), draw_quantiles = .5) +
+    geom_jitter(alpha = .1, height = 0, width = .2)
 ```
-  ggplot(gapminder, aes(lifeExp)) + 
-    geom_histogram()
-```
 
-- Colorea los histogramas por continente  
+Como puedes ver, `aes(fill = continent)` está en `geom_violin()`, no en `ggplot()`.  
 
-- Sabrías hacer que no se amontonen unos continentes sobre otros? Necesitarás añadir transparencia para ver todos los datos  
-
+1. Que pasaría si lo pusieras en la linea `ggplot()`?  
+2. Afecta a los colores de `geom_jitter()`? ¿Por qué?  
+3. ¿Podrias reproducir el gráfico de abajo?
 
 ::: {.callout-tip collapse="true"}
 
 ### Solución
 
-<span style="color: orange;">`geom_histogram(position = "identity", alpha = .3)`.</span>
+<span style="color: orange;">`aes(color = continent)` debe ir en `geom_jitter()`. Si se colorean también las lineas de los violines, es que has puesto `color = continent` dentro de `ggplot()`.</span>
 
 :::
 
 
-```{r ejercicio_histogram, echo=FALSE}
-ggplot(gapminder, aes(lifeExp, fill = continent)) + 
-    geom_histogram()
-
-ggplot(gapminder, aes(lifeExp, fill = continent)) + 
-    geom_histogram(position = "identity", alpha = .3)
-
+```{r ejercicio_geom_violin2, echo=FALSE}
+ggplot(gapminder, aes(continent, lifeExp)) + 
+    geom_violin(alpha = .2, aes(fill = continent), draw_quantiles = .5) +
+    geom_jitter(alpha = .1, height = 0, width = .2, aes(color = continent))
 ```
 
 
@@ -828,15 +773,17 @@ Una gráfica necesita elementos como el título, ejes con nombres informativos, 
 En el siguiente ejemplo, vamos a personalizar la gráfica del ejercicio anterior:  
 
 ```{r, personalizacion-basica}
-ggplot(gapminder, aes(lifeExp, fill = continent)) + 
-  geom_histogram(position = "identity", alpha = .3) +
+ggplot(gapminder, aes(continent, lifeExp)) + 
+  geom_violin(alpha = .2, aes(fill = continent), draw_quantiles = .5) +
+  geom_jitter(alpha = .1, height = 0, width = .2, aes(color = continent)) +
   labs(title = "Distribution of life expectancy",
        subtitle = "by continent", 
        caption = "Source, the gapminder dataset",
        tag = "a)",
-       x = "Life expectancy (in years)",
-       y = "Number of observations (countries, years)", 
-       fill = "Continent",
+       x = "Continents",
+       y = "Life expectancy (in years)", 
+       fill = "Continents",
+       color = "Individual countries",
        alt = "Alt text for the plot. Very useful for blind people"
        )
 ```
@@ -852,8 +799,7 @@ Usando como base este plot:
 ```{r ejercicio_personalizacion_basica, echo=TRUE}
    ggplot(mpg, aes(displ, hwy)) + 
     geom_point() +
-    geom_smooth(se = FALSE) +
-    theme_grey()
+    geom_smooth(se = FALSE)
 ```
 
 Personalízalo añadiendo y modificando: 
@@ -870,7 +816,6 @@ Para conseguir esto:
    ggplot(mpg, aes(displ, hwy)) + 
     geom_point() +
     geom_smooth(se = FALSE) +
-    theme_grey() +
     labs(title = "My beautiful plot",
          subtitle = "with the mpg data",
          caption = "By @myself",

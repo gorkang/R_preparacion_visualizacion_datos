@@ -55,7 +55,7 @@ El output del sistema es estandarizado, lo que implica que los [nombres de las v
 
 En el [manual de jsPsychR](https://gorkang.github.io/jsPsychRmanual/qmd/03-jsPsychMaker.html#available-tasks) puedes ver las tareas disponibles junto con una breve descripción de cada una de ellas. Alternativamente, puedes ver [el documento con todos los detalles de las tareas disponibles](https://docs.google.com/spreadsheets/d/1Eo0F4GcmqWZ1cghTpQlA4aHsc8kTABss-HAeimE2IqA/edit#gid=0), o simplemente ejecutar `jsPsychMaker::list_available_tasks()`.  
 
-Si quieres consultar los [scripts de las tareas](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks) puedes hacerlo en la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker). Si quieres crear una nueva tarea para añadir a tu protocolo, puedes seguir las [instrucciones de más abajo](09-experimentos-reproducibles.html#como-crear-una-nueva-tarea).  
+Si quieres consultar los [scripts de las tareas](https://github.com/gorkang/jsPsychMaker/tree/main/canonical_protocol/tasks) puedes hacerlo en la carpeta `canonical_protocol/` del repositorio de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker). Si quieres crear una nueva tarea para añadir a tu protocolo, puedes seguir las [instrucciones de más abajo](10-experimentos-reproducibles.html#como-crear-una-nueva-tarea).  
 
 
 ------------------------------------------------------------------------
@@ -116,7 +116,7 @@ Si no funciona, te, quedan las siguientes opciones:
 
 -   Correr un par de participantes manualmente\
 -   Usar un ordenador con Linux o crear una partición Linux\
--   Crear una máquina virtual linux desde la que simular participantes. Puedes usar [Virtualbox](https://www.virtualbox.org/wiki/Downloads) para instalar [Ubuntu](https://releases.ubuntu.com/20.04/). Una vez dentro, tendrás que seguir los pasos del [manual para prepara el sistema para correr R y RStudio](https://gorkang.github.io/R_preparacion_visualizacion_datos/preparando-sistema.html#empezando-en-a-b-c)
+-   Crear una máquina virtual linux desde la que simular participantes. Puedes usar [Virtualbox](https://www.virtualbox.org/wiki/Downloads) para instalar [Ubuntu](https://releases.ubuntu.com/20.04/). Una vez dentro, tendrás que seguir los pasos del [manual para prepara el sistema para correr R y RStudio](https://gorkang.github.io/R_preparacion_visualizacion_datos/qmd/00-configuracion-sistema.html#empezando-en-a-b-c)
 
 Errores comunes:  
 
@@ -235,7 +235,7 @@ Dentro del proyecto en el que has preparado los datos, simplemente tienes que:
 
 ## Ejercicio FINAL {.ejercicio -}
 
-Ya estáis listas/os para enfrentaros al  [ejercicio FINAL](10-ejercicios.html#ejercicio-final)  
+Ya estáis listas/os para enfrentaros al  [ejercicio FINAL](11-ejercicios.html#ejercicio-final)  
 
 
 
@@ -304,7 +304,7 @@ Crea la siguiente tarea en jsPsychMaker:
 
  **Notas**  
 
-(tareas jsPsychMaker): Ver instrucciones en [experimentos-reproducibles - como crear una nueva tarea](09-experimentos-reproducibles.html#como-crear-una-nueva-tarea)
+(tareas jsPsychMaker): Ver instrucciones en [experimentos-reproducibles - como crear una nueva tarea](10-experimentos-reproducibles.html#como-crear-una-nueva-tarea)
 
 Si prefieres puedes implementar una tarea distinta a The Brief Resilience Scale. Los únicos requisitos son que sea breve y sencilla.
 

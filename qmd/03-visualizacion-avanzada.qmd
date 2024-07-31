@@ -300,6 +300,45 @@ stat_summary(fun = median,
 
 ### Ejercicios {.ejercicio -}
 
+**Ejercicio básico**  
+
+Usando como base:
+
+```
+ggplot(gapminder, aes(country, lifeExp, color = continent)) +
+  stat_summary(...) +
+  facet_grid(...) +
+  theme(axis.text.x = element_blank(), # Eliminamos etiquetas de nombres de paises del eje x
+        legend.position = "none") # Elimina la leyenda
+
+```
+¿Podrías crear este gráfico? Mostramos mediana ± sd para cada país, organizado por continente.
+
+::: {.callout-tip collapse="true"}
+
+### Pista
+
+<span style="color: orange;">Tienes que encontrar los parámetros adecuados para `stat_summary()` y `facet_grid()`. Puedes ver ejemplos en: <BR> - [computaciones con ggplot: stat_summary()](03-visualizacion-avanzada.html#computaciones-con-ggplot-stat_summary)  <BR> - [Facet_grid](03-visualizacion-avanzada.html#facet_grid).</span>
+
+:::
+
+
+```{r ejercicio-8, echo=FALSE}
+
+ggplot(gapminder, aes(country, lifeExp, color = continent)) +
+  stat_summary(
+    fun.min = function(x) median(x) - sd(x),
+    fun.max = function(x) median(x) + sd(x),
+    fun = median) +
+facet_grid(~ continent) +
+theme(axis.text.x = element_blank(),
+      legend.position = "none")
+
+```
+
+
+**Ejercicio avanzado**  
+
 Cuando al plot **A** trato de añadirle líneas para cada `class`, me aparece algo como lo de **B**, porque tenemos varios puntos en cada nivel de `displ`.
 
 ```{r ejercicio-7a}
@@ -337,39 +376,6 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 
 
 
-2) Usando como base:
-
-```
-ggplot(gapminder, aes(country, lifeExp, color = continent)) +
-  stat_summary(...) +
-  facet_grid(...) +
-  theme(axis.text.x = element_blank(), # Eliminamos etiquetas de nombres de paises del eje x
-        legend.position = "none") # Elimina la leyenda
-
-```
-¿Podrías crear este gráfico? Mostramos mediana ± sd para cada país, organizado por continente.
-
-::: {.callout-tip collapse="true"}
-
-### Pista
-
-<span style="color: orange;">Tienes que encontrar los parámetros adecuados para `stat_summary()` y `facet_grid()`. Puedes ver ejemplos en: <BR> - [computaciones con ggplot: stat_summary()](02-visualizacion-avanzada.html#computaciones-con-ggplot-stat_summary)  <BR> - [Facet_grid](02-visualizacion-avanzada.html#facet_grid).</span>
-
-:::
-
-
-```{r ejercicio-8, echo=FALSE}
-
-ggplot(gapminder, aes(country, lifeExp, color = continent)) +
-  stat_summary(
-    fun.min = function(x) median(x) - sd(x),
-    fun.max = function(x) median(x) + sd(x),
-    fun = median) +
-facet_grid(~ continent) +
-theme(axis.text.x = element_blank(),
-      legend.position = "none")
-
-```
 ### {-}
 
 
@@ -423,7 +429,7 @@ plot_base
 
 ```
 
-Definimos cuantos breaks queremos en cada eje, y rotamos las etiquetas del eje x:  
+Definimos cuantos breaks queremos en cada eje (`n.breaks`), y rotamos las etiquetas del eje x (`guide = guide_axis(angle = 90)`):  
 
 ```{r personalizacion-graficas-axis2}
 plot_base +
@@ -432,7 +438,7 @@ plot_base +
 
 ```
 
-Separador de miles y breaks en x:  
+Separador de miles (`labels = scales::comma`) y breaks en x (`n.breaks`):  
 
 ```{r personalizacion-graficas-axis3}
 
@@ -615,7 +621,9 @@ ggplot(gapminder,
 ```
 
 
-### Ejercicio {.ejercicio -}
+### Ejercicios {.ejercicio -}
+
+**Ejercicio básico**  
 
 El plot del panel (A) tiene varios problemas:
 
@@ -668,13 +676,15 @@ cowplot::plot_grid(plot1, plot2,
 
 ```
 
+**Ejercicio avanzado**  
+
 Si te sobra tiempo, puedes tratar de reproducir la siguiente versión mejorada...
 
 ::: {.callout-tip collapse="true"}
 
 ### Soluciones
 
-<span style="color: orange;">Hemos visto como hacer esto en el primer ejemplo de [fancy pants legends](02-visualizacion-avanzada.html#fancy-pants-legends) </span>
+<span style="color: orange;">Hemos visto como hacer esto en el primer ejemplo de [fancy pants legends](03-visualizacion-avanzada.html#fancy-pants-legends) </span>
 
 :::
 
@@ -727,7 +737,7 @@ Podemos usar diferentes paletas de colores preexistentes. Una manera de consulta
                                    colorblindFriendly = TRUE)
 ```
 
-Podemos ver que el parámetro `type` nos permite seleccionar paletas secuenciales, divergentes y cualitativas. Por ejemplo, `type = "qual"` nos mostrará colores de paletas cualitativas.  
+Podemos ver que el parámetro `type` nos permite seleccionar paletas secuenciales, divergentes y cualitativas. Por ejemplo, `type = "qual"` nos mostrará colores de paletas cualitativas (¡pruébalo!).  
 
 
 Una vez elegía nuestra paleta, la podemos aplicar con `scale_fill_brewer()` para `fill` o con `scale_color_brewer_brewer()` para `color`. En este caso usamos la `palette = "Blues"`:   
@@ -768,9 +778,11 @@ O `scale_colour_gradientn()` con un número predeterminado de colores definido p
 
 ```
 
-### Ejercicio {.ejercicio -}
+### Ejercicios {.ejercicio -}
 
-1) Usando como base este plot, podrías cambiarle la paleta de color para usar una de las paletas cualitativas?
+**Ejercicio básico**  
+
+Usando como base este plot, podrías cambiarle la paleta de color para usar una de las paletas cualitativas?
 
 ::: {.callout-tip collapse="true"}
 
@@ -800,7 +812,10 @@ El gráfico final debería verse así:
 ```
 
 
-2) Ahora, usando el gráfico de abajo como base, puedes asignar manualmente colores a los continentes?  
+
+**Ejercicio avanzado**  
+
+Ahora, usando el gráfico de abajo como base, puedes asignar manualmente colores a los continentes?  
 
 ```{r color-01bx, echo=TRUE}
   ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
@@ -866,8 +881,7 @@ cowplot::plot_grid(plot2, plot1, rel_widths = c(.3, 0.7))
 
 
 
-
-##### Ejercicio {.ejercicio -}
+### Ejercicio {.ejercicio -}
 
 1) Combina los dos plots del ejercicio anterior, con las siguientes modificaciones:
 
@@ -903,48 +917,6 @@ cowplot::plot_grid(plot1, plot2, rel_widths = c(.3, 0.7))
 ##### {-}
 
 
-#### Combinando múltiples gráficas
-
-Podemos combinar múltiples gráficas y llegar a hacer cosas mucho más complejas como combinar un [scatteplot con un par de histogramas](https://stackoverflow.com/questions/8545035/scatterplot-with-marginal-histograms-in-ggplot2/56440634#56440634):
-
-```{r personalizando-combinando-avanzado}
-
-# Set up scatterplot
-scatterplot <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
-  geom_point(size = 3, alpha = 0.6) +
-  guides(color = "none") +
-  theme(plot.margin = margin())
-
-
-# Define marginal histogram
-marginal_distribution <- function(x, var, group) {
-  ggplot(x, aes_string(x = var, fill = group)) +
-    geom_histogram(bins = 30, alpha = 0.4, position = "identity") +
-    # geom_density(alpha = 0.4, size = 0.1) +
-    guides(fill = "none") +
-    theme_void() +
-    theme(plot.margin = margin())
-}
-
-# Set up marginal histograms
-x_hist <- marginal_distribution(iris, "Sepal.Length", "Species")
-y_hist <- marginal_distribution(iris, "Sepal.Width", "Species") +
-  coord_flip()
-
-# Align histograms with scatterplot
-aligned_x_hist <- align_plots(x_hist, scatterplot, align = "v")[[1]]
-aligned_y_hist <- align_plots(y_hist, scatterplot, align = "h")[[1]]
-
-
-# Arrange plots
-cowplot::plot_grid(
-  aligned_x_hist, NULL, scatterplot, aligned_y_hist,
-  ncol = 2, nrow = 2,
-  rel_heights = c(0.2, 1), rel_widths = c(1, 0.2)
-  )
-
-```
-
 
 ### Estilos
 
@@ -960,8 +932,7 @@ p <- ggplot(iris, aes(Petal.Width, Petal.Length, color = Species)) +
        subtitle = 'Simple tweaks to improve plots, or not',
        x = '',
        y = '',
-       caption = 'https://github.com/gorkang / @gorkang') +
-    theme_gray() # This is the default. Needed here because of the Bookdown theme
+       caption = 'https://github.com/gorkang / @gorkang')
 
 p
 
@@ -1099,9 +1070,44 @@ mtcars |>
 
 ## Otras gráficas
 
+
+#### geom_density_ridges
+
+Uno de mis `geoms` favoritos para comparar distribuciones es `geom_density_ridges`:   
+
+```{r geom-density_ridges}
+  ggplot(gapminder, aes(lifeExp, continent, fill = continent)) + 
+    ggridges::geom_density_ridges(alpha = .2)
+```
+
+Especialmente porque podemos incluir en el mismo gráfico información sobre distribuciones y puntos individuales.  
+
+```{r geom-density_ridges2}
+ggplot(gapminder, aes(lifeExp, continent, fill = continent)) +
+  ggridges::geom_density_ridges(
+    stat = "binline",
+    bins = 20,
+    scale = 0.95,
+    draw_baseline = FALSE
+  ) +
+  ggridges::geom_density_ridges(
+    jittered_points = TRUE,
+    position = "raincloud",
+    alpha = 0.7,
+    scale = 0.9,
+    quantile_lines = TRUE,
+    quantile_fun = mean
+  ) +
+  theme(legend.position = "none") +
+  scale_x_continuous(n.breaks = 10) +
+  labs(caption = "vertical lines represent the mean lifeExp per continent")
+```
+
+
+
 ### Raincloud plots  
 
-Un tipo de gráfica genial para mostrar simultáneamente observaciones individuales, distribuciones, y cambios, es el [raincloudplot](https://github.com/njudd/ggrain).
+Otra gráfica genial para mostrar simultáneamente observaciones individuales, distribuciones, y cambios, es el [raincloudplot](https://github.com/njudd/ggrain).
 
 Se pueden mostrar las distribuciones para todas las variables numéricas de una base de datos.
 
@@ -1133,6 +1139,52 @@ gapminder_min_max |>
 
 
 ```
+
+
+
+
+#### Combinando múltiples gráficas
+
+Podemos combinar múltiples gráficas y llegar a hacer cosas mucho más complejas como combinar un [scatteplot con un par de histogramas](https://stackoverflow.com/questions/8545035/scatterplot-with-marginal-histograms-in-ggplot2/56440634#56440634):
+
+```{r personalizando-combinando-avanzado}
+
+# Set up scatterplot
+scatterplot <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
+  geom_point(size = 3, alpha = 0.6) +
+  guides(color = "none") +
+  theme(plot.margin = margin())
+
+
+# Define marginal histogram
+marginal_distribution <- function(x, var, group) {
+  ggplot(x, aes(x = get(var), fill = get(group))) +
+    geom_histogram(bins = 30, alpha = 0.4, position = "identity") +
+    # geom_density(alpha = 0.4, size = 0.1) +
+    guides(fill = "none") +
+    theme_void() +
+    theme(plot.margin = margin())
+}
+
+# Set up marginal histograms
+x_hist <- marginal_distribution(iris, "Sepal.Length", "Species")
+y_hist <- marginal_distribution(iris, "Sepal.Width", "Species") +
+  coord_flip()
+
+# Align histograms with scatterplot
+aligned_x_hist <- align_plots(x_hist, scatterplot, align = "v")[[1]]
+aligned_y_hist <- align_plots(y_hist, scatterplot, align = "h")[[1]]
+
+
+# Arrange plots
+cowplot::plot_grid(
+  aligned_x_hist, NULL, scatterplot, aligned_y_hist,
+  ncol = 2, nrow = 2,
+  rel_heights = c(0.2, 1), rel_widths = c(1, 0.2)
+  )
+
+```
+
 
 
 

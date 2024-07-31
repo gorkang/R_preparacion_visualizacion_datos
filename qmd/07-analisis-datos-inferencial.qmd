@@ -243,7 +243,7 @@ Usando la misma base de datos del ejercicio anterior:
 
 ```{r ejercicios-tablas-inferenciales1, echo=TRUE}
 
-DF_dafina = haven::read_sav("../data/files/Dafina/Cancer screening risk literacy R1.sav") |>
+DF_dafina = haven::read_sav(here::here("data/files/Dafina/Cancer screening risk literacy R1.sav")) |>
   as_tibble() |>
   select(IDparticipante, resident, screenbeliefs, compR1, numeracy) |>
   rename(comprehension = compR1) 

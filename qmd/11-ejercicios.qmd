@@ -31,7 +31,7 @@ Para el ejercicio final (evaluable), usaremos el protocolo que has creado en el 
 
     -   Tabla/s con resultados de un análisis sencillo [ver ayuda](#tablas-resultados-inferenciales)
 
-    -   Una frase reportando resultados del análisis (usando [Texto inline de gtsummary](06-analisis-datos-inferencial.html#texto-inline))
+    -   Una frase reportando resultados del análisis (usando [Texto inline de gtsummary](07-analisis-datos-inferencial.html#texto-inline))
 
 El proyecto tiene que correr en cualquier computador.  
 
