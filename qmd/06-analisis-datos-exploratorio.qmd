@@ -158,9 +158,9 @@ ggplot(gapminder, aes(lifeExp, fill = continent)) +
 
 ::: {.callout-tip collapse="true"}
 
-### La solución está en el capítulo 1
+### La solución está en el capítulo 3
 
-<span style="color: orange;">El paquete [gghighlight](#gghighlight-y-facet_wrap) es justo lo que necesitas</span>
+<span style="color: orange;">El paquete [gghighlight](03-visualizacion-avanzada.html#gghighlight-con-facetas) es justo lo que necesitas</span>
 
 :::
 

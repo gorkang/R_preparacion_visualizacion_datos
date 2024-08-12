@@ -25,11 +25,11 @@ Para el ejercicio final (evaluable), usaremos el protocolo que has creado en el 
 
 -   [Crearemos un reporte en Rmd como parte del pipeline de jsPsychHelpeR](09-experimentos-reproducibles.html#como-crear-un-reporte-dentro-del-jspsychhelper) donde incluiremos:
 
-    -   Tabla/s con descriptivos [ver ayuda](#tablas-descriptivos)
+    -   Tabla/s con descriptivos [ver ayuda](07-analisis-datos-inferencial.html#tablas-descriptivos)
 
-    -   Gráfico/s con resultado [ver ayuda](01-introduccion_visualizacion.html#visualización-de-datos-con-ggplot2) [y ayuda](02-visualizacion-avanzada.html)
+    -   Gráfico/s con resultado [ver ayuda](01-introduccion_visualizacion.html#visualización-de-datos-con-ggplot2) [y ayuda](03-visualizacion-avanzada.html)
 
-    -   Tabla/s con resultados de un análisis sencillo [ver ayuda](#tablas-resultados-inferenciales)
+    -   Tabla/s con resultados de un análisis sencillo [ver ayuda](07-analisis-datos-inferencial.html#tablas-resultados-inferenciales)
 
     -   Una frase reportando resultados del análisis (usando [Texto inline de gtsummary](07-analisis-datos-inferencial.html#texto-inline))
 
@@ -45,7 +45,7 @@ Tendréis que compartir el proyecto completo con el profesor, y él deberá pode
 
 #### Notas {.ejercicio .unnumbered}
 
-(simulación datos): Sigue las instrucciones de [simulando datos](09-experimentos-reproducibles.html#jspsychmonkeys-como-simular-datos)\
+(simulación datos): Sigue las instrucciones de [simulando datos](10-experimentos-reproducibles.html#jspsychmonkeys-como-simular-datos)\
 
 (preparando datos): Ver [como preparar datos](09-experimentos-reproducibles.html#jspsychhelper-como-preparar-datos)\
 

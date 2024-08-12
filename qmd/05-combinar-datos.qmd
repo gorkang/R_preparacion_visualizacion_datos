@@ -289,19 +289,6 @@ DT::datatable(DF_semi_joined)
 ```
 
 
-### Nesting joins  
-
-
-```{r joins-nesting}
-
-DF_nest_joined = DF_IDs |> 
-  nest_join(DF_results, by = "ID")
-
-DT::datatable(DF_nest_joined)
-
-```
-
-
 ## Ejercicios JOINS {.ejercicio -}
 
 Con los DFs de abajo, haz las siguientes operaciones:

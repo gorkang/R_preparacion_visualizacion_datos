@@ -41,7 +41,7 @@ if (!require('regexplain')) remotes::install_github("gadenbuie/regexplain"); lib
 
 #### Proyecto de RStudio del curso {-}
 
-En [como empezar](index.html#como-empezar) se mostró como tener un proyecto de RStudio con todos los materiales del curso. Si no lo tienes, este es el momento de hacerlo, ya que vamos a necesitar varios de los archivos del proyecto:  
+En [como empezar](https://gorkang.github.io/R_preparacion_visualizacion_datos/#como-empezar) se mostró como tener un proyecto de RStudio con todos los materiales del curso. Si no lo tienes, este es el momento de hacerlo, ya que vamos a necesitar varios de los archivos del proyecto:  
 
 ```{r use_course1, eval=FALSE}
 if (!require('usethis')) install.packages('usethis'); library('usethis')
