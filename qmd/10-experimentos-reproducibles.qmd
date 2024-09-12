@@ -64,6 +64,8 @@ Si quieres consultar los [scripts de las tareas](https://github.com/gorkang/jsPs
 
 
 ```{r, eval=FALSE}
+if (!require('pak')) utils::install.packages('pak'); pak::pkg_install("gorkang/jsPsychMaker")
+
 jsPsychMaker::create_protocol(
   # Pruebas a incluir
   canonical_tasks = c("AIM", "EAR", "IRI"), 
@@ -131,23 +133,24 @@ Errores comunes:
 **Para lanzar monos localmente:**  
 
 ```{r, eval=FALSE}
+if (!require('pak')) utils::install.packages('pak'); pak::pkg_install("gorkang/jsPsychMonkeys")
 
-# Un solo mono
+# Un solo mono viendo su progreso
 jsPsychMonkeys::release_the_monkeys(
-  # Lanza un monos con el user id 1
-  uid = "1",
-  local_folder_tasks = "~/Downloads/protocol999")
+  # Lanza un mono con el user id 5
+  uid = "5",
+  local_folder_tasks = "~/Downloads/protocol999", 
+  open_VNC = TRUE)
 
 
-#  Monos del 1 al 5 simultaneamente
+#  Monos del 1 al 4 simultáneamente 
 jsPsychMonkeys::release_the_monkeys(
-  # Lanza monos desde el uid 1 hasta el 5
-  uid = "1:5",
+  uid = "1:4",
   local_folder_tasks = "~/Downloads/protocol999",
   # Lanza los monos en paralelo
   sequential_parallel = "parallel",
   # Usando este número de CPUs
-  number_of_cores = 5
+  number_of_cores = 4
 )
 ```
 
@@ -166,6 +169,9 @@ Cada tarea de [jsPsychMaker](https://github.com/gorkang/jsPsychMaker) debería t
 **Para crear y abrir un nuevo proyecto de RStudio con todo listo para correr la preparación de datos de tu protocolo:**  
 
 ```{r, eval=FALSE}
+
+if (!require('pak')) utils::install.packages('pak'); pak::pkg_install("gorkang/jsPsychHelpeR")
+
 jsPsychHelpeR::run_initial_setup(pid = '999', 
                                  data_location = "~/Downloads/protocol999/.data", 
                                  folder = "~/Downloads/jsPsychHelpeR999")

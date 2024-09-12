@@ -250,7 +250,7 @@ DF_dafina = haven::read_sav(here::here("data/files/Dafina/Cancer screening risk 
 
 ```
 
-Haz una regresión lineal prediciendo compresión a partir de las otras variables de la base.  
+Haz una regresión lineal prediciendo comprensión a partir de las otras variables de la base.  
 
 Finalmente, crea una tabla similar a la siguiente para reportar los resultados de tu análisis. Recuerda que en el [manual de gtsummary](https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) tienes ejemplos para todo lo que necesitarás. En concreto, `tbl_regression()` es tu amiga:  
 

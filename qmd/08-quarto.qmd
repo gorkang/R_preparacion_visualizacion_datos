@@ -197,7 +197,7 @@ En su cabecera puedes añadir opciones. Hay una [cantidad apabullante de opcione
 
 **TRUCO:**
 
-* Si tienes un chunk llamado `setup` al principio de tu documento .qmd / .Rmd, cada vez que reinicies RStudio y ejecutes código en cualquier parte de tu documento, ese bloque se ejecutara automáticamente. Esto es ideal para poner tus librerías, lectura de datos...  
+* Un chunk llamado `{r setup, include=FALSE}` al principio de tu documento .qmd / .Rmd, es ideal para poner tus librerías, lectura de datos inicial, etc.  
 
 
 ---  
@@ -205,10 +205,14 @@ En su cabecera puedes añadir opciones. Hay una [cantidad apabullante de opcione
 
 ## Ejercicio básico Quarto / RMarkdown {.ejercicio -}
 
-Vamos a crear un nuevo documento .qmd: 
+**Vamos a empezar creando un nuevo proyecto de RStudio**. En este proyecto crearemos un documento con la estructura de artículo científico, que acabará siendo la entrega final de el Workshop.  
+
+- `File -> New Project -> New directory -> New project`
+
+Crea un nuevo documento .qmd: 
 
   - `File -> New File -> Quarto document`
-  - Selecciona el formato de output que prefieras. Por ejemplo, PDF  
+  - Selecciona el formato de output `PDF`  
 
 
 Ahora hagamos lo siguiente:  
@@ -230,13 +234,14 @@ Ahora hagamos lo siguiente:
 
 ---  
 
-    \`\`\`{r, echo=FALSE, results='asis'}  
-    
-    cat(stringi::stri_rand_lipsum(n_paragraphs = 1))  
-    
-    \`\`\`  
+| ```{r, echo=FALSE, results='asis'}  
+|    
+|    cat(stringi::stri_rand_lipsum(n_paragraphs = 1))  
+|    
+| ```  
 
 ---  
+
 
 
 
@@ -258,14 +263,17 @@ Si el botón `Render` no funciona, puedes renderizar el pdf usando: `quarto::qua
 
 ## Ejercicio avanzado {.ejercicio -}
 
-Usando una base propia, incluye en el documento .qmd de antes:  
+Usando los datos de `gapminder`, incluye en el apartado Resultados del documento .qmd que has creado:  
 
 1. Una tabla de descriptivos.  
 
 2. Una tabla con los resultados de un análisis sencillo (e.g. una regresión lineal).  
 
-Podéis ver ejemplos de [tablas de descriptivos](#tablas-descriptivos) o [tablas de resultados inferenciales](#tablas-resultados-inferenciales) en el capítulo anterior.  
+3. Un gráfico mostrando la relación entre dos de las variables.  
 
+Podéis ver ejemplos de [tablas de descriptivos](#tablas-descriptivos) o [tablas de resultados inferenciales](#tablas-resultados-inferenciales) en el capítulo anterior, y de gráficas en los capítulos de [Introducción a la visualización](#visualización-de-datos-con-ggplot2) y [Visualización avanzada](#facets).  
+
+Recuerda empezar añadiendo el chunk de setup `{r setup, include=FALSE}` donde incluiras las llamadas a librerias necesarias (al menos `ggplot2`, `gtsummary`). 
 
 ## {-}
 
@@ -366,7 +374,7 @@ Usando un sistema de manejo de dependencias [renv](https://github.com/rstudio/re
 
 ### Funcionamiento básico `renv`
 
-0. Instalamos renv: 
+0. Si no lo hemos hecho, Instalamos renv: 
 `install.packages("renv")`  
 
 1. Inicializamos el entorno local de un nuevo proyecto, con una librería privada de R
@@ -382,6 +390,24 @@ Usando un sistema de manejo de dependencias [renv](https://github.com/rstudio/re
 
 :::
 
+
+
+
+
+## Ejercicio renv {.ejercicio -}
+
+Usando el proyecto RStudio del artículo científico que estamos creando:  
+
+1. Inicializa `renv`  
+
+2. Intenta usar una librería nueva (e.g. lee un archivo con `readr::read_csv`)
+
+3. Si el paso anterior da un error. ¿Cómo lo puedes solucionar?
+
+4. Borra la carpeta `renv` y restaura el estado de las librerías a partir del lockfile  
+
+
+## {-}
 
 
 ### Shortcuts!

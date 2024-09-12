@@ -252,7 +252,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#usar-bibliograf%C3%ADa" id="toc-usar-bibliografía" class="nav-link" data-scroll-target="#usar-bibliograf%C3%ADa"><span class="header-section-number">8.5.2</span> Usar bibliografía</a></li>
   <li><a href="#citar-los-paquetes-que-usamos" id="toc-citar-los-paquetes-que-usamos" class="nav-link" data-scroll-target="#citar-los-paquetes-que-usamos"><span class="header-section-number">8.5.3</span> Citar los paquetes que usamos</a></li>
   <li><a href="#manejo-de-dependencias" id="toc-manejo-de-dependencias" class="nav-link" data-scroll-target="#manejo-de-dependencias"><span class="header-section-number">8.5.4</span> Manejo de dependencias</a></li>
-  <li><a href="#shortcuts" id="toc-shortcuts" class="nav-link" data-scroll-target="#shortcuts"><span class="header-section-number">8.5.5</span> Shortcuts!</a></li>
+  </ul>
+</li>
+  <li><a href="#ejercicio-renv" id="toc-ejercicio-renv" class="nav-link" data-scroll-target="#ejercicio-renv">Ejercicio renv</a></li>
+  <li>
+<a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a>
+  <ul>
+<li><a href="#shortcuts" id="toc-shortcuts" class="nav-link" data-scroll-target="#shortcuts"><span class="header-section-number">8.5.5</span> Shortcuts!</a></li>
   <li><a href="#estilo" id="toc-estilo" class="nav-link" data-scroll-target="#estilo"><span class="header-section-number">8.5.6</span> Estilo</a></li>
   </ul>
 </li>
@@ -301,7 +307,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://strengejacke.github.io/sjPlot/">'sjPlot'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'sjPlot'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://strengejacke.github.io/sjPlot/">'sjPlot'</a></span><span class="op">)</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://stringi.gagolewski.com/">'stringi'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'stringi'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://stringi.gagolewski.com/">'stringi'</a></span><span class="op">)</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/tinytex">'tinytex'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tinytex'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/tinytex">'tinytex'</a></span><span class="op">)</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://usethis.r-lib.org">'usethis'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'usethis'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://usethis.r-lib.org">'usethis'</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://usethis.r-lib.org">'usethis'</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'usethis'</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://usethis.r-lib.org">'usethis'</a></span><span class="op">)</span></span>
+<span>  </span>
+<span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -402,7 +410,8 @@ Si algo no funciona
 <p><img src="../data/images/chunk-options.png" class="img-fluid"></p>
 <p>En su interior, puedes usar código R como si estuvieras en un script de R normal.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">myvariable</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -444,13 +453,18 @@ Parametros chunks
 <hr>
 <p><strong>TRUCO:</strong></p>
 <ul>
-<li>Si tienes un chunk llamado <code>setup</code> al principio de tu documento .qmd / .Rmd, cada vez que reinicies RStudio y ejecutes código en cualquier parte de tu documento, ese bloque se ejecutara automáticamente. Esto es ideal para poner tus librerías, lectura de datos…</li>
+<li>Un chunk llamado <code>{r setup, include=FALSE}</code> al principio de tu documento .qmd / .Rmd, es ideal para poner tus librerías, lectura de datos inicial, etc.</li>
 </ul>
 <hr></section></section><section id="ejercicio-básico-quarto-rmarkdown" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-básico-quarto-rmarkdown">Ejercicio básico Quarto / RMarkdown</h2>
-<p>Vamos a crear un nuevo documento .qmd:</p>
+<p><strong>Vamos a empezar creando un nuevo proyecto de RStudio</strong>. En este proyecto crearemos un documento con la estructura de artículo científico, que acabará siendo la entrega final de el Workshop.</p>
+<ul>
+<li><code>File -&gt; New Project -&gt; New directory -&gt; New project</code></li>
+</ul>
+<p>Crea un nuevo documento .qmd:</p>
 <ul>
 <li><code>File -&gt; New File -&gt; Quarto document</code></li>
-<li>Selecciona el formato de output que prefieras. Por ejemplo, PDF</li>
+<li>Selecciona el formato de output <code>PDF</code>
+</li>
 </ul>
 <p>Ahora hagamos lo siguiente:</p>
 <ol type="1">
@@ -479,11 +493,9 @@ Parametros chunks
 <li>Pon texto de relleno dentro de cada sección. Para ello puedes usar la función <code>stringi::stri_rand_lipsum(n_paragraphs = 1)</code> del paquete {stringi}. Los chunks de código deberán ser similares a este:</li>
 </ol>
 <hr>
-<pre><code>\`\`\`{r, echo=FALSE, results='asis'}  
-
-cat(stringi::stri_rand_lipsum(n_paragraphs = 1))  
-
-\`\`\`  </code></pre>
+<div class="line-block">```{r, echo=FALSE, results=‘asis’}<br><br>
+&nbsp;&nbsp;&nbsp;cat(stringi::stri_rand_lipsum(n_paragraphs = 1))<br><br>
+```</div>
 <hr>
 <ol start="3" type="1">
 <li>Renderiza tu documento en formato PDF.</li>
@@ -492,12 +504,14 @@ cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 <p>El resultado del ejercicio anterior deberá ser un archivo pdf con la estructura general de un artículo científico. Puedes ver el archivo qmd y su pdf resultante en <code>data/files/07-markdown/</code>.</p>
 <p>Si el botón <code>Render</code> no funciona, puedes renderizar el pdf usando: <code>quarto::quarto_render("data/files/07-rmarkdown/ejercicio-basico.Rmd", output_format = "pdf")</code></p>
 <hr></section><section id="ejercicio-avanzado" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-avanzado">Ejercicio avanzado</h2>
-<p>Usando una base propia, incluye en el documento .qmd de antes:</p>
+<p>Usando los datos de <code>gapminder</code>, incluye en el apartado Resultados del documento .qmd que has creado:</p>
 <ol type="1">
 <li><p>Una tabla de descriptivos.</p></li>
 <li><p>Una tabla con los resultados de un análisis sencillo (e.g.&nbsp;una regresión lineal).</p></li>
+<li><p>Un gráfico mostrando la relación entre dos de las variables.</p></li>
 </ol>
-<p>Podéis ver ejemplos de <a href="07-analisis-datos-inferencial.html#tablas-descriptivos">tablas de descriptivos</a> o <a href="07-analisis-datos-inferencial.html#tablas-resultados-inferenciales">tablas de resultados inferenciales</a> en el capítulo anterior.</p>
+<p>Podéis ver ejemplos de <a href="07-analisis-datos-inferencial.html#tablas-descriptivos">tablas de descriptivos</a> o <a href="07-analisis-datos-inferencial.html#tablas-resultados-inferenciales">tablas de resultados inferenciales</a> en el capítulo anterior, y de gráficas en los capítulos de <a href="#visualizaci%C3%B3n-de-datos-con-ggplot2">Introducción a la visualización</a> y <a href="03-visualizacion-avanzada.html#facets">Visualización avanzada</a>.</p>
+<p>Recuerda empezar añadiendo el chunk de setup <code>{r setup, include=FALSE}</code> donde incluiras las llamadas a librerias necesarias (al menos <code>ggplot2</code>, <code>gtsummary</code>).</p>
 </section><section id="section-1" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="section-1"></h2>
 <hr>
 <p>El resultado de este ejercicio deberá ser un archivo pdf como el que se puede ver en <code>data/files/07-markdown/</code>.</p>
@@ -511,7 +525,8 @@ cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 <li><a href="https://github.com/crsh/papaja">Preparar artículos en formato APA</a></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"papaja"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"papaja"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create new R Markdown file</span></span>
 <span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/draft.html">draft</a></span><span class="op">(</span></span>
@@ -550,7 +565,8 @@ cat(stringi::stri_rand_lipsum(n_paragraphs = 1))
 </ul>
 <p>Una manera muy sencilla de hacer esto es usando <a href="https://pakillo.github.io/grateful/">{grateful}</a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">grateful</span><span class="fu">::</span><span class="fu"><a href="https://pakillo.github.io/grateful/reference/cite_packages.html">cite_packages</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span></span>
+<span><span class="fu">grateful</span><span class="fu">::</span><span class="fu"><a href="https://pakillo.github.io/grateful/reference/cite_packages.html">cite_packages</a></span><span class="op">(</span></span>
 <span>  pkgs <span class="op">=</span> <span class="st">"All"</span>,</span>
 <span>  output <span class="op">=</span> <span class="st">"file"</span>,</span>
 <span>  out.format <span class="op">=</span> <span class="st">"Rmd"</span>,</span>
@@ -572,7 +588,7 @@ Funcionamiento básico <code>renv</code>
 </div>
 <div class="callout-body-container callout-body">
 <ol start="0" type="1">
-<li><p>Instalamos renv: <code>install.packages("renv")</code></p></li>
+<li><p>Si no lo hemos hecho, Instalamos renv: <code>install.packages("renv")</code></p></li>
 <li><p>Inicializamos el entorno local de un nuevo proyecto, con una librería privada de R <code><a href="https://rstudio.github.io/renv/reference/init.html">renv::init()</a></code></p></li>
 <li><p>Trabajamos en el proyecto, instalando los paquetes que necesitemos</p></li>
 <li><p>Guardamos el estado de las librerías usadas en el proyecto en un lockfile (llamado renv.lock), <code><a href="https://rstudio.github.io/renv/reference/snapshot.html">renv::snapshot()</a></code></p></li>
@@ -580,7 +596,15 @@ Funcionamiento básico <code>renv</code>
 </ol>
 </div>
 </div>
-</section><section id="shortcuts" class="level3" data-number="8.5.5"><h3 data-number="8.5.5" class="anchored" data-anchor-id="shortcuts">
+</section></section><section id="ejercicio-renv" class="level2 ejercicio unnumbered"><h2 class="ejercicio unnumbered anchored" data-anchor-id="ejercicio-renv">Ejercicio renv</h2>
+<p>Usando el proyecto RStudio del artículo científico que estamos creando:</p>
+<ol type="1">
+<li><p>Inicializa <code>renv</code></p></li>
+<li><p>Intenta usar una librería nueva (e.g.&nbsp;lee un archivo con <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv</a></code>)</p></li>
+<li><p>Si el paso anterior da un error. ¿Cómo lo puedes solucionar?</p></li>
+<li><p>Borra la carpeta <code>renv</code> y restaura el estado de las librerías a partir del lockfile</p></li>
+</ol></section><section id="section-2" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="section-2"></h2>
+<section id="shortcuts" class="level3" data-number="8.5.5"><h3 data-number="8.5.5" class="anchored" data-anchor-id="shortcuts">
 <span class="header-section-number">8.5.5</span> Shortcuts!</h3>
 <ul>
 <li>Alt+SHIFT+K: Ver shortcuts!<br>

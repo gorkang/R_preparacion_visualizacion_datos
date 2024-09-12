@@ -1178,7 +1178,7 @@ Para transformaciones algo más complejas, pero muy habituales, usaremos algunos
 
 ```{r separate-omit-ifelse-casewhen0}
 # Base original
-DF_name = read_csv("../data/files/02-read-csv.csv") |> 
+DF_name = read_csv(here::here("data/files/02-read-csv.csv")) |> 
   select(-...1, -Educacion, -Edad, -condition2)
 
 DT::datatable(DF_name)
