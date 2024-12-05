@@ -53,8 +53,19 @@ Ver instrucciones para [Windows](https://happygitwithr.com/install-git.html#inst
 
 <span style = "font-size: 11px;">Windows: en el paso *Adjusting your PATH environment*, selecciona `Git from the command line and also from 3rd-party software`</span>
 
+Una vez instalado Git, necesitamos hacer dos cosas:
+
+1. En el **Terminal** (cambiar you@example.com y Your Name):  
+
+`git config --global user.email "you@example.com"`  
+`git config --global user.name "Your Name"`
+
+2. En la **Consola** de R:  
+
+`gitcreds::gitcreds_set()`  
 
 :::
+
 
 
 ## Git
@@ -80,9 +91,9 @@ Algunas referencias útiles:
 ![SOURCE: [github.githubassets.com](https://github.githubassets.com/images/modules/open_graph/github-octocat.png)](../data/images/github-octocat.png)
 </div>
 
-[Github](https://github.com) es una plataforma web muy popular donde almacenar proyectos de programación que usa como motor. Muchos de los paquetes de R, el mismo [RStudio](https://github.com/rstudio), etc, tienen repositorios abiertos en Github. Una de las ventajas fundamentales de usar Github es que esta plataforma integra algunas herramientas para hacer más sencillo el control de versiones, como el [pull request](https://help.github.com/en/articles/creating-a-pull-request), que nos permite combinar ramas de proyectos sin apenas problemas.       
+[Github](https://github.com) es una plataforma web muy popular donde almacenar proyectos de programación. Github usa como motor Git. Muchos de los paquetes de R, el mismo [RStudio](https://github.com/rstudio), etc, tienen repositorios abiertos en Github. Una de las ventajas fundamentales de usar Github es que esta plataforma integra algunas herramientas para hacer más sencillo el control de versiones, como el [pull request](https://help.github.com/en/articles/creating-a-pull-request), que nos permite combinar ramas de proyectos de manera sencilla.       
 
-Github tiene un programa especial para estudiantes: https://education.github.com/  
+Github tiene un programa especial para estudiantes: [GitHub Education](https://education.github.com/)  
 
 
   
@@ -349,6 +360,23 @@ Después de hacer el push de arriba (paso 4), al entrar en nuestro repositorio d
 ![](../data/images/pull-request-3.png){ width=70% }  
 
 +  Borrar rama antigua  
+
+
+
+
+### Pull requests con Usethis
+
+Podemos trabajar con la lógica de una rama temporal para el desarrollo de alguna característica, análisis, etc., que será integrada en la rama `main` una vez comprobemos que funciona correctamente.
+
+Necesitaremos recordar únicamente estos tres comandos:  
+
+```
+
+usethis::pr_init(branch = "NameOfTemporalBranch")
+usethis::pr_push()
+usethis::pr_finish() # After merging in Github
+
+```
 
 ---  
 
