@@ -52,6 +52,20 @@ La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las
 
 :::
 
+
+## Sobre el uso de LLMs (ChatGPT, Gemini, and friends) {LLMs}
+
+Recomiendo **no utilizar** ChatGPT y otros modelos de lenguaje (LLMs) en esta clase. En su defecto, **recomiendo usarlos solo como último recurso**, después de haber intentado resolver los ejercicios, comentado con las compañeras/os, etc. El proceso de aprender a programar requiere construir modelos sobre como funcionan las cosas. Si externalizamos esa construcción a un LLM, nuestra comprensión será mucho más superficial.  
+
+Los LLMs pueden ser útiles para realizar tareas semi-automáticas, o cuando uno ya tiene conocimiento experto, y es capaz de comprender y revisar el output. Pero usarlos para aprender puede interferir en procesos que son esenciales para el aprendizaje. Esto se puede ver, especialmente, en estudiantes con dificultades [Prather et al. 2024](https://doi.org/10.1145/3632620.3671116).  
+
+Para más detalles os sugiero que leáis a Andrew Heiss y su  [política de uso de LLMs](https://compaf24.classes.andrewheiss.com/syllabus.html#ai-large-language-models-and-bullshit). O este artículo: [ChatGPT is bullshit](https://link.springer.com/article/10.1007/s10676-024-09775-5)
+
+<!-- https://doi.org/10.3390/app14104115 -->
+<!-- RQ1: The analysis directly answered the primary question concerning the overall impact of LLM usage on programming education outcomes. We identified a significant negative correlation between the average use of LLMs and students’ final grades (Spear-man’s rho = −0.347, p = 0.026), clearly suggesting that an increased general reliance on LLMs correlates with diminished academic performance in programming assignments. -->
+
+
+
 ---  
 
 

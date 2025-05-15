@@ -15,19 +15,19 @@ Para el ejercicio final (evaluable), usaremos el protocolo que has creado en el 
 
 1) El primer paso consiste en obtener datos de participantes virtuales.
 
-- Podéis intentarlo [simulando datos](09-experimentos-reproducibles.html#jspsychmonkeys-como-simular-datos)
+- Podéis intentarlo [simulando datos](10-experimentos-reproducibles.html#jspsychmonkeys-como-simular-datos)
 - Si no os funciona jsPsychMonkeys en vuestro sistema, el profesor os ayudará a simular datos para vuestro experimento.
 - Alternativamente, podéis correr el experimento un par de veces (abriendo el index.html)
 
 2) Una vez tengamos los datos:
 
--   Crearemos un proyecto que procesará los datos automáticamente usando [jsPsychHelpeR - como preparar datos](09-experimentos-reproducibles.html#jspsychhelper-como-preparar-datos)
+-   Crearemos un proyecto que procesará los datos automáticamente usando [jsPsychHelpeR - como preparar datos](10-experimentos-reproducibles.html#jspsychhelper-como-preparar-datos)
 
--   [Crearemos un reporte en Rmd como parte del pipeline de jsPsychHelpeR](09-experimentos-reproducibles.html#como-crear-un-reporte-dentro-del-jspsychhelper) donde incluiremos:
+-   [Crearemos un reporte en Rmd como parte del pipeline de jsPsychHelpeR](10-experimentos-reproducibles.html#como-crear-un-reporte-dentro-del-jspsychhelper) donde incluiremos:
 
     -   Tabla/s con descriptivos [ver ayuda](07-analisis-datos-inferencial.html#tablas-descriptivos)
 
-    -   Gráfico/s con resultado [ver ayuda](01-introduccion_visualizacion.html#visualización-de-datos-con-ggplot2) [y ayuda](03-visualizacion-avanzada.html)
+    -   Gráfico/s con resultado [ver ayuda](02-visualizacion-basica.html#visualización-de-datos-con-ggplot2) [y ayuda](03-visualizacion-avanzada.html)
 
     -   Tabla/s con resultados de un análisis sencillo [ver ayuda](07-analisis-datos-inferencial.html#tablas-resultados-inferenciales)
 
@@ -47,6 +47,6 @@ Tendréis que compartir el proyecto completo con el profesor, y él deberá pode
 
 (simulación datos): Sigue las instrucciones de [simulando datos](10-experimentos-reproducibles.html#jspsychmonkeys-como-simular-datos)\
 
-(preparando datos): Ver [como preparar datos](09-experimentos-reproducibles.html#jspsychhelper-como-preparar-datos)\
+(preparando datos): Ver [como preparar datos](10-experimentos-reproducibles.html#jspsychhelper-como-preparar-datos)\
 
 Para más información, ver [el manual de jsPsychR](https://gorkang.github.io/jsPsychRmanual/qmd/02-QuickGuide.html#QuickGuidejsPsychHelpeR)\

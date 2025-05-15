@@ -1,5 +1,7 @@
 # Preparando nuestro sistema {#preparando-sistema .unnumbered}
 
+## Manejo básico de R {-}
+
 Antes de empezar, si tienes dificultades o curiosidad sobre el manejo básico de R, te recomiendo que veas algún tutorial de R y RStudio para principiantes como [éste](https://www.youtube.com/watch?v=BvKETZ6kr9Q), o [éste](https://www.youtube.com/watch?v=yZ0bV2Afkjc).  
 
 
@@ -134,6 +136,16 @@ tinytex::install_tinytex() # Llevará un buen rato
 ```
 
 
+#### Git
+
+Ver instrucciones para [Windows](https://happygitwithr.com/install-git.html#install-git-windows), [Mac](https://happygitwithr.com/install-git.html#macos) y [Linux](https://happygitwithr.com/install-git.html#linux).  
+
+|   <span style = "font-size: 11px;">Importante: en el paso *Adjusting your PATH environment* en en Windows, selecciona *Git from the command line and also from 3rd-party software*</span>  
+
+
+### Otras dependencias NO esenciales  
+
+
 #### Docker
 
 Necesitaremos [Docker](https://www.docker.com/) para simular datos de participantes online.
@@ -154,15 +166,6 @@ Adicionalmente:
     + Si los monos hacen su trabajo pero no aparecen los csv's, asegúrate que el usuario `docker` tiene acceso al directorio ~/Downloads
 
 Para más detalles, puedes consultar [jsPsychMonkeys setup](https://gorkang.github.io/jsPsychRmanual/qmd/04-jsPsychMonkeys.html#setup)
-
-
-
-#### Git
-
-Ver instrucciones para [Windows](https://happygitwithr.com/install-git.html#install-git-windows), [Mac](https://happygitwithr.com/install-git.html#macos) y [Linux](https://happygitwithr.com/install-git.html#linux).  
-
-|   <span style = "font-size: 11px;">Importante: en el paso *Adjusting your PATH environment* en en Windows, selecciona *Git from the command line and also from 3rd-party software*</span>  
-
 
 
 

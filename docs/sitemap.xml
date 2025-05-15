@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/index.html</loc>
-    <lastmod>2024-07-18T10:11:17.851Z</lastmod>
+    <lastmod>2025-05-15T09:13:30.996Z</lastmod>
   </url>
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/qmd/00-configuracion-sistema.html</loc>
-    <lastmod>2024-07-23T10:34:21.951Z</lastmod>
+    <lastmod>2025-05-15T10:11:10.225Z</lastmod>
   </url>
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/qmd/01-introduccion.html</loc>
-    <lastmod>2024-07-30T12:14:05.579Z</lastmod>
+    <lastmod>2025-05-15T09:42:30.995Z</lastmod>
   </url>
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/qmd/02-visualizacion-basica.html</loc>
-    <lastmod>2024-07-31T11:42:47.293Z</lastmod>
+    <lastmod>2024-07-31T11:42:47.292Z</lastmod>
   </url>
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/qmd/03-visualizacion-avanzada.html</loc>
@@ -26,11 +26,11 @@
   </url>
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/qmd/05-combinar-datos.html</loc>
-    <lastmod>2024-07-31T12:34:12.405Z</lastmod>
+    <lastmod>2024-07-31T12:34:12.404Z</lastmod>
   </url>
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/qmd/06-analisis-datos-exploratorio.html</loc>
-    <lastmod>2024-07-31T12:36:56.678Z</lastmod>
+    <lastmod>2024-07-31T12:36:56.677Z</lastmod>
   </url>
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/qmd/07-analisis-datos-inferencial.html</loc>
@@ -46,11 +46,11 @@
   </url>
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/qmd/10-experimentos-reproducibles.html</loc>
-    <lastmod>2024-09-12T09:44:29.675Z</lastmod>
+    <lastmod>2024-09-12T09:44:29.674Z</lastmod>
   </url>
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/qmd/11-ejercicios.html</loc>
-    <lastmod>2024-07-31T12:24:57.067Z</lastmod>
+    <lastmod>2025-05-15T09:54:19.525Z</lastmod>
   </url>
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/qmd/refs.html</loc>
@@ -58,6 +58,6 @@
   </url>
   <url>
     <loc>https://gorkang.github.io/R_preparacion_visualizacion_datos/index.html/R-para-preparación-y-visualización-de-datos.pdf</loc>
-    <lastmod>2024-12-05T11:40:29.646Z</lastmod>
+    <lastmod>2025-05-15T10:10:00.969Z</lastmod>
   </url>
 </urlset>

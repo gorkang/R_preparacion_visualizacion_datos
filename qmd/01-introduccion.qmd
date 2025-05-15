@@ -30,6 +30,20 @@ if (!require('tidyr')) install.packages('tidyr'); library('tidyr')
 
 ```  
 
+::: {.callout-important collapse="true"}
+
+### Prerequisitos: Preparando nuestro sistema y Descargado los materiales del curso
+
+<span style="color: orange;">
+Si estas aquí, es porque ya has:
+
+- [Preparado tu sistema](00-configuracion-sistema.html)
+
+- [Descargado los materiales del curso](/#como-empezar)
+</span>
+
+:::
+
 
 ## Introducción: ¿por qué la visualización de datos es importante?
 
@@ -383,6 +397,9 @@ result1
 Programar es como tener un superpoder. Pero llegar adquirir ese superpoder es **muy difícil**. Todos necesitamos ayuda. Contar con una comunidad robusta con la que compartir, preguntar, contribuir, hace el proceso más agradable, y aumenta tus probabilidades de éxito.
 
 Inicialmente "programaremos" usando la técnica conocida como [Copy and paste programming](https://en.wikipedia.org/wiki/Copy-and-paste_programming), y poco a poco aprenderemos a descomponer el código, adaptarlo a nuestras necesidades, hasta que en algún momento lleguemos a escribir código propio. Este manual os debería servir de referencia para las primeras fases. Familiarizaros con su estructura, y acostumbraros a copiar, pegar y correr el código que aparece en los recuadros grises.  
+
+Como indico en la [introducción](/#sobre-el-uso-de-llms-chatgpt-gemini-and-friends-llms), recomiendo **no usar** LLMs, o hacerlo como último recurso. Si despues de intentar resolver un ejercicio un buen rato, googlear, buscar en Stack Overflow, consultarlo con las compañeras/os, ... seguimos sin conseguirlo, podemos usar LLMs para que nos de la solución. Pero esto será útil, únicamente si después dedicamos el esfuerzo necesario a entender ese código, y ser capaces de reproducirlo nosotros (lo mismo ocurre con soluciones que encontremos en Stack Overflow, etc.).  
+  
 
 ![SOURCE: http://www.keywordbasket.com/ZWZlY3RvIGR1bm5pbmcta3J1Z2Vy/](../data/images/dunning-kruger.jpg)  
 
