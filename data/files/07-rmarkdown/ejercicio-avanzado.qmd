@@ -3,7 +3,8 @@ title: "La vida nocturna del berberecho salvaje"
 author: "Gorka Navarrete"
 date: "`r Sys.Date()`"
 output: pdf_document
-bibliography: IMPORTED.bib  
+bibliography: IMPORTED.bib
+format: typst
 ---
 
 ```{r setup, include=FALSE}
@@ -12,7 +13,7 @@ library(stringi)
 library(haven)
 library(dplyr)
 library(gtsummary)
-
+library(cardx)
 
 # Read and prepare DF
 DF = haven::read_sav(here::here("data/files/Dafina/Cancer screening risk literacy R1.sav")) |>

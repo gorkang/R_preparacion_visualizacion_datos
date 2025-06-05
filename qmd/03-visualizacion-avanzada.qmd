@@ -32,7 +32,6 @@ Recuerda que cuando empecemos **cada capítulo**:
 
 if (!require('cowplot')) install.packages('cowplot'); library('cowplot')
 if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
-if (!require('esquisse')) install.packages('esquisse'); library('esquisse') 
 if (!require('gapminder')) install.packages('gapminder'); library('gapminder')
 if (!require('geomtextpath')) install.packages('geomtextpath'); library('geomtextpath')
 if (!require('gghighlight')) install.packages('gghighlight'); library('gghighlight')

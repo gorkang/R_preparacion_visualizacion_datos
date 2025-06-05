@@ -1,3 +1,5 @@
+lightbox: true
+
 project:
   type: book
   output-dir: docs

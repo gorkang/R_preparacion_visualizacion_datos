@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Introducción a la visualización de datos
 
 ```{r}
@@ -598,32 +603,37 @@ Para conseguirlo vamos a tener que usar parámetros como `group`, `color` o `lin
 ```{r geoms-ejercicios, echo=FALSE, fig.height=12, fig.width=12}
 
 plot1 = ggplot(mpg, aes(displ, hwy)) + 
-    geom_point() +
-    geom_smooth(se = FALSE)
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  theme_gray()
 
 plot2 = ggplot(mpg, aes(displ, hwy, color = drv)) + 
-    geom_point() +
-    geom_smooth(se = FALSE)
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  theme_gray()
 
 plot3 = ggplot(mpg, aes(displ, hwy, group = drv)) + 
-    geom_point() +
-    geom_smooth(se = FALSE)
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  theme_gray()
 
 plot4 = ggplot(mpg, aes(displ, hwy)) + 
-    geom_point(aes(color = drv)) +
-    geom_smooth(se = FALSE)
+  geom_point(aes(color = drv)) +
+  geom_smooth(se = FALSE) +
+  theme_gray()
 
 plot5 = ggplot(mpg, aes(displ, hwy, linetype = drv)) + 
-    geom_point(aes(color = drv)) +
-    geom_smooth(se = FALSE)
+  geom_point(aes(color = drv)) +
+  geom_smooth(se = FALSE) +
+  theme_gray()
 
 plot6 = ggplot(mpg, aes(displ, hwy)) + 
-    geom_point(color = "white", size = 6) +
-    geom_point(aes(color = drv), size = 2)
-
+  geom_point(color = "white", size = 6) +
+  geom_point(aes(color = drv), size = 2) +
+  theme_gray()
 
 cowplot::plot_grid(plot1, plot2, plot3, plot4, plot5, plot6,
-                   ncol = 2, labels = "auto")  
+                   ncol = 2, labels = "auto")
 
 ```
 

@@ -53,7 +53,7 @@ La carpeta `R_preparacion_visualizacion_datos-master` contiene varias cosas. Las
 :::
 
 
-## Sobre el uso de LLMs (ChatGPT, Gemini, and friends) {LLMs}
+## Sobre el uso de LLMs (ChatGPT, Gemini, and friends)
 
 Recomiendo **no utilizar** ChatGPT y otros modelos de lenguaje (LLMs) en esta clase. En su defecto, **recomiendo usarlos solo como último recurso**, después de haber intentado resolver los ejercicios, comentado con las compañeras/os, etc. El proceso de aprender a programar requiere construir modelos sobre como funcionan las cosas. Si externalizamos esa construcción a un LLM, nuestra comprensión será mucho más superficial.  
 
