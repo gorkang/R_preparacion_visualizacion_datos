@@ -49,8 +49,8 @@ book:
     - "qmd/06-analisis-datos-exploratorio.qmd"
     - "qmd/07-analisis-datos-inferencial.qmd"
     - "qmd/08-quarto.qmd"
-    - "qmd/09-git.qmd"
-    - "qmd/10-experimentos-reproducibles.qmd"
+    - "qmd/09-experimentos-reproducibles.qmd"
+    - "qmd/10-git.qmd"
     - "qmd/11-ejercicios.qmd"
     - "qmd/refs.qmd"
 

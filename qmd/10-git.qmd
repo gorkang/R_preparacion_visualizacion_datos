@@ -15,25 +15,6 @@ source("../_common.R")
 #| label: setup
 #| echo: true
 
-  if (!require('afex')) install.packages('afex'); library('afex')
-  if (!require('correlation')) install.packages("correlation"); library('correlation')
-  if (!require('corrr')) install.packages('corrr'); library('corrr')
-  if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
-  if (!require('DT')) install.packages('DT'); library('DT')
-  if (!require('ggraph')) install.packages('ggraph'); library('ggraph')
-  if (!require('here')) install.packages('here'); library('here')
-  if (!require('gtsummary')) install.packages('gtsummary'); library('gtsummary')
-  if (!require('knitr')) install.packages('knitr'); library('knitr')
-  if (!require('papaja')) install.packages("papaja"); library('papaja')
-  if (!require('parameters')) install.packages('parameters'); library('parameters')
-  if (!require('remotes')) install.packages('remotes'); library('remotes')
-  if (!require('renv')) install.packages("renv"); library('renv')
-  if (!require('report')) install.packages("report"); library('report')
-  if (!require('rticles')) install.packages('rticles'); library('rticles')
-  if (!require('see')) install.packages("see"); library('see')
-  if (!require('sjPlot')) install.packages('sjPlot'); library('sjPlot')
-  if (!require('stringi')) install.packages('stringi'); library('stringi')
-  if (!require('tinytex')) install.packages('tinytex'); library('tinytex')
   if (!require('usethis')) install.packages('usethis'); library('usethis')
   
 ```
@@ -43,9 +24,11 @@ source("../_common.R")
 
 ::: {.callout-important}
 
-### Dependencias
+### Dependencias NECESARIAS
 
-Vamos a necesitar [Git](https://git-scm.com/) para poder trabajar:  
+Usaremos Github. Si no tienes una cuenta, puedes crearla aquí: https://github.com/
+
+También vamos a necesitar [Git](https://git-scm.com/) para poder trabajar:  
 
 **Instalar Git**  
 
