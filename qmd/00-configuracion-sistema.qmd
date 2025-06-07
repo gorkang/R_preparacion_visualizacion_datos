@@ -143,6 +143,18 @@ Ver instrucciones para [Windows](https://happygitwithr.com/install-git.html#inst
 |   <span style = "font-size: 11px;">Importante: en el paso *Adjusting your PATH environment* en en Windows, selecciona *Git from the command line and also from 3rd-party software*</span>  
 
 
+Una vez instalado Git, necesitamos hacer dos cosas:
+
+1. En el **Terminal** (cambiar you@example.com por tu email, y Your Name por tu nombre):  
+
+`git config --global user.email "you@example.com"`  
+`git config --global user.name "Your Name"`
+
+2. En la **Consola** de R:  
+
+`gitcreds::gitcreds_set()`  
+
+
 ### Otras dependencias NO esenciales  
 
 

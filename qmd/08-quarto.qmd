@@ -271,7 +271,7 @@ Usando los datos de `gapminder`, incluye en el apartado Resultados del documento
 
 3. Un gráfico mostrando la relación entre dos de las variables.  
 
-Podéis ver ejemplos de [tablas de descriptivos](#tablas-descriptivos) o [tablas de resultados inferenciales](#tablas-resultados-inferenciales) en el capítulo anterior, y de gráficas en los capítulos de [Introducción a la visualización](#visualización-de-datos-con-ggplot2) y [Visualización avanzada](#facets).  
+Podéis ver ejemplos de [tablas de descriptivos](#tablas-descriptivos) o [tablas de resultados inferenciales](#tablas-resultados-inferenciales) en el capítulo anterior, y de gráficas en los capítulos de [Introducción a la visualización](#geoms) y [Visualización avanzada](#facets).  
 
 Recuerda empezar añadiendo el chunk de setup `{r setup, include=FALSE}` donde incluiras las llamadas a librerias necesarias (al menos `ggplot2`, `gtsummary`). 
 

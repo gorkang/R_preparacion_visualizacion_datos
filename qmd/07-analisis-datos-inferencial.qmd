@@ -90,8 +90,8 @@ El parámetro `statistic` nos permite controlar que estadísticos mostrar en fun
 gapminder |> 
   select(-country) |> 
   gtsummary::tbl_summary(by = continent,
-                         statistic = list(all_continuous() ~ "{mean} ({sd})",
-                                          all_categorical() ~ "{n} ({p}%)"),
+                         statistic = list(gtsummary::all_continuous() ~ "{mean} ({sd})",
+                                          gtsummary::all_categorical() ~ "{n} ({p}%)"),
                        missing = "ifany") |> 
   gtsummary::add_n() |> 
   gtsummary::modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4", "stat_5") ~ "**Continent**")
